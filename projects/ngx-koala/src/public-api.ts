@@ -2,6 +2,10 @@
  * Public API Surface of ngx-koala
  */
 
+//#region [KOALA PAGE]
+export * from './lib/shared/components/page/page.component';
+//#endregion
+
 //#region [KOALA FORM]
 export * from './lib/shared/components/form/show-invalid-fields/show-invalid-fields';
 export * from './lib/shared/components/form/btn-submit/btn-submit.component.js';
