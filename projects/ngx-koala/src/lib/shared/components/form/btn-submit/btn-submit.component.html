@@ -1,4 +1,8 @@
-<button [color]="color" [disabled]="fg.invalid || fg.pending || btnSubmitDisabled" mat-raised-button type="submit">
+<button
+  [color]="color"
+  [disabled]="fg.invalid || fg.pending || btnSubmitDisabled"
+  mat-raised-button
+  type="submit">
   <span>{{btnLabel}}</span>
-  <mat-spinner class="loader"></mat-spinner>
+  <mat-spinner *ngIf="loader" diameter="20"></mat-spinner>
 </button>

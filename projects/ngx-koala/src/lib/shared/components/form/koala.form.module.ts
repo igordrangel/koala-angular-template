@@ -9,6 +9,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { BtnSubmitComponent } from './btn-submit/btn-submit.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -24,9 +25,12 @@ import { BtnSubmitComponent } from './btn-submit/btn-submit.component';
     MatCheckboxModule,
     MatAutocompleteModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule
   ],
   exports: [
+    ReactiveFormsModule,
+    FormsModule,
     BtnSubmitComponent
   ]
 })
