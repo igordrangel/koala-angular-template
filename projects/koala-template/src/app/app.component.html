@@ -1,0 +1,9 @@
+<form (ngSubmit)="submit()" [formGroup]="formTest">
+  <koala-submit
+    [btnLabel]="btnLabel"
+    [btnSubmitDisabled]="btnSubmitDisabled"
+    [fg]="formTest"
+    [loader]="loader"
+    color="primary">
+  </koala-submit>
+</form>
