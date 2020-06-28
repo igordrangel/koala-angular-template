@@ -8,7 +8,11 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ngcc",
+    "version": "git add -A src",
+    "postversion": "git push && git push --tags",
+    "deploy": "npm version patch && cd projects/ngx-koala && npm version patch && cd ../../ && ng build NgxKoala && cd dist/ngx-koala && npm publish --ignore-scripts"
   },
   "private": true,
   "dependencies": {
