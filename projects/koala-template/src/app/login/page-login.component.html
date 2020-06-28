@@ -1,0 +1,25 @@
+<section>
+  <article>
+    <img alt="Logo Cia do Crédito" id="logo" src="favicon.ico"/>
+    <div class="text-center" id="div-aviso">
+      <h1>Login</h1>
+      <small>Acesse sua Conta <strong>Koala</strong></small>
+    </div>
+    <koala-dynamic-form
+      (dynamicForm)="formTest = $event"
+      (formSubmit)="submit($event)"
+      [formConfig]="formConfig"
+      [getData]="getData">
+      <div align="end" btn-submit>
+        <koala-submit
+          (click)="btnClickGetData()"
+          [btnLabel]="btnLabel"
+          [btnSubmitDisabled]="btnSubmitDisabled"
+          [fg]="formTest"
+          [loader]="loader"
+          color="primary">
+        </koala-submit>
+      </div>
+    </koala-dynamic-form>
+  </article>
+</section>

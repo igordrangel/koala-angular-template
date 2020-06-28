@@ -1,0 +1,103 @@
+body {background: #EEE;margin: 0;}
+pre {border-radius: 0;text-align: left !important;}
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {-webkit-appearance: none !important;}
+a:hover,
+a:active,
+a:focus {text-decoration: none !important;}
+button:focus {outline: none !important;}
+.p-relative {position: relative !important;}
+.d-none {display: none !important;}
+.d-block {display: block !important;}
+.d-inline {display: inline !important;}
+.align-center {margin: 0 auto;}
+.text-left {text-align: left !important;}
+.text-center {text-align: center !important;}
+.text-right {text-align: right !important;}
+.float-left {float: left !important;}
+.float-none {float: inherit !important;}
+.float-right {float: right !important;}
+.w-100 {width: 100%;}
+.w-50 {width: 50%;}
+.w-40 {width: 40%;}
+.w-5 {width: 5%;}
+.mt-0 {margin-top: 0 !important;}
+.mt-5 {margin-top: 5px !important;}
+.mt-10 {margin-top: 10px !important;}
+.mt-15 {margin-top: 15px !important;}
+.mt-20 {margin-top: 20px !important;}
+.mt-25 {margin-top: 25px !important;}
+.mt-30 {margin-top: 30px !important;}
+.mt-35 {margin-top: 35px !important;}
+.mt-40 {margin-top: 40px !important;}
+.mt-45 {margin-top: 45px !important;}
+.mb-5 {margin-bottom: 5px !important;}
+.mb-10 {margin-bottom: 10px !important;}
+.mb-15 {margin-bottom: 15px !important;}
+.mb-20 {margin-bottom: 20px !important;}
+.mb-25 {margin-bottom: 25px !important;}
+.mr-8 {margin-right: 8px !important;}
+.padding-none {padding: 0 !important;}
+.button-size-24 {font-size: 24px;height: 24px;line-height: 24px;width: 24px;}
+.button-size-26 {font-size: 26px;height: 26px;line-height: 26px;width: 26px;}
+.button-size-28 {font-size: 28px;height: 28px;line-height: 28px;width: 28px;}
+.group-buttons {margin: 20px auto;}
+.inline-buttons button {margin-right: 8px;}
+.inline-buttons button:last-child {margin-right: 0;}
+input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hover {-webkit-box-shadow: 0 0 0 1000px white inset !important;}
+.mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+.mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element {background-color: #FFC107;}
+.mat-checkbox-checkmark-path {stroke: #01579B !important;}
+.mat-checkbox-checkmark {fill: #01579B !important;}
+.mat-checkbox-mixedmark {background-color: #01579B;}
+.line-checkbox .mat-checkbox {margin: 0 10px 0 0;}
+.mat-radio-outer-circle {border-color: #01579B !important;}
+.mat-radio-ripple .mat-ripple-element, .mat-radio-inner-circle {background-color: #01579B !important;}
+.mat-form-field-suffix {margin: 0 10px;}
+.mat-form-field-suffix .mat-spinner,
+.mat-form-field-suffix .mat-spinner svg {height: 20px !important;width: 20px !important;}
+.mat-progress-negative .mat-progress-bar-fill::after {background-color: #FFF;}
+.mat-progress-negative .mat-progress-bar-element {background-color: #929292;}
+.mat-option {height: auto !important;line-height: normal !important;padding: 10px 16px !important;white-space: normal !important;}
+.mat-expansion-panel-body {padding: 0 24px 5px !important;}
+.text-obs {background: #EEE;border-radius: 5px;height: 150px;margin: 0 auto 10px;overflow-y: auto;padding: 10px;position: relative;width: calc(100% - 27px);font-family: OpenSansLight, sans-serif;color: #212121;}
+.btn-green {background: #43A047;color: #FFF;}
+.fa-dropdown-list {margin-right: 20px;}
+.link {color: #1565C0;font-family: 'Josefin Sans', sans-serif;font-weight: bold;text-decoration: none;}
+.mat-chip.mat-primary {background: #014B84;color: #FFF;}
+.mat-chip.mat-warn {background: #B71C1C;color: #FFF;}
+.mat-chip.mat-primary .mat-icon.mat-chip-remove,
+.mat-chip.mat-warn .mat-icon.mat-chip-remove {color: rgba(255, 255, 255, .87);}
+.home-list-cards .list .mat-list-item-content .mat-icon {color: #01579B;}
+.home-list-cards .list button .mat-badge-content {background: #01579B;font-size: 12px;height: 27px;line-height: 27px;right: 20px !important;top: 9px;width: 27px;}
+p {margin: 0 !important;}
+/****************************************
+ ***************** GRID *****************
+ ****************************************/
+[class*="col-"] {box-sizing: border-box;display: inline-block;padding: 2.5px;position: relative;width: 100%;}
+.col-md-1 {flex: 0 0 calc(((100% - 40px) * 1) / 12);max-width: calc(((100% - 40px) * 1) / 12);}
+.col-md-2 {flex: 0 0 calc(((100% - 40px) * 2) / 12);max-width: calc(((100% - 40px) * 2) / 12);}
+.col-md-3 {flex: 0 0 calc(((100% - 40px) * 3) / 12);max-width: calc(((100% - 40px) * 3) / 12);}
+.col-md-4 {flex: 0 0 calc(((100% - 40px) * 4) / 12);max-width: calc(((100% - 40px) * 4) / 12);}
+.col-md-5 {flex: 0 0 calc(((100% - 40px) * 5) / 12);max-width: calc(((100% - 40px) * 5) / 12);}
+.col-md-6 {flex: 0 0 calc(((100% - 40px) * 6) / 12);max-width: calc(((100% - 40px) * 6) / 12);}
+.col-md-7 {flex: 0 0 calc(((100% - 40px) * 7) / 12);max-width: calc(((100% - 40px) * 7) / 12);}
+.col-md-8 {flex: 0 0 calc(((100% - 40px) * 8) / 12);max-width: calc(((100% - 40px) * 8) / 12);}
+.col-md-9 {flex: 0 0 calc(((100% - 40px) * 9) / 12);max-width: calc(((100% - 40px) * 9) / 12);}
+.col-md-10 {flex: 0 0 calc(((100% - 40px) * 10) / 12);max-width: calc(((100% - 40px) * 10) / 12);}
+.col-md-11 {flex: 0 0 calc(((100% - 40px) * 11) / 12);max-width: calc(((100% - 40px) * 11) / 12);}
+.col-md-12 {flex: 0 0 calc(100% - 40px);max-width: calc(100% - 40px);}
+.col-1 {flex: 0 0 calc((100% * 1) / 12);max-width: calc((100% * 1) / 12);}
+.col-2 {flex: 0 0 calc((100% * 2) / 12);max-width: calc((100% * 2) / 12);}
+.col-3 {flex: 0 0 calc((100% * 3) / 12);max-width: calc((100% * 3) / 12);}
+.col-4 {flex: 0 0 calc((100% * 4) / 12);max-width: calc((100% * 4) / 12);}
+.col-5 {flex: 0 0 calc((100% * 5) / 12);max-width: calc((100% * 5) / 12);}
+.col-6 {flex: 0 0 calc((100% * 6) / 12);max-width: calc((100% * 6) / 12);}
+.col-7 {flex: 0 0 calc((100% * 7) / 12);max-width: calc((100% * 7) / 12);}
+.col-8 {flex: 0 0 calc((100% * 8) / 12);max-width: calc((100% * 8) / 12);}
+.col-9 {flex: 0 0 calc((100% * 9) / 12);max-width: calc((100% * 9) / 12);}
+.col-10 {flex: 0 0 calc((100% * 10) / 12);max-width: calc((100% * 10) / 12);}
+.col-11 {flex: 0 0 calc((100% * 11) / 12);max-width: calc((100% * 11) / 12);}
+.col-12 {flex: 0 0 100%;max-width: 100%;}

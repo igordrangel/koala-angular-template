@@ -10,15 +10,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { BtnSubmitComponent } from './btn-submit/btn-submit.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
+import { NgxMaskModule } from 'ngx-mask';
+import { maskOptions } from '../../../mask-options';
 
 @NgModule({
   declarations: [
-    BtnSubmitComponent
+    BtnSubmitComponent,
+    DynamicFormComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxMaskModule.forRoot(maskOptions),
     MatInputModule,
     MatSelectModule,
     MatRadioModule,
@@ -31,7 +36,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   exports: [
     ReactiveFormsModule,
     FormsModule,
-    BtnSubmitComponent
+    NgxMaskModule,
+    BtnSubmitComponent,
+    DynamicFormComponent
   ]
 })
 export class KoalaFormModule {

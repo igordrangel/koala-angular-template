@@ -1,9 +1,11 @@
-<form (ngSubmit)="submit()" [formGroup]="formTest">
-  <koala-submit
-    [btnLabel]="btnLabel"
-    [btnSubmitDisabled]="btnSubmitDisabled"
-    [fg]="formTest"
-    [loader]="loader"
-    color="primary">
-  </koala-submit>
-</form>
+<koala-page color="primary">
+  <div menu-options>
+    <mat-action-list>
+      <h3 mat-subheader>Páginas de Exemplo</h3>
+      <mat-list-item routerLink="login">Login</mat-list-item>
+    </mat-action-list>
+  </div>
+  <div page-content>
+    <router-outlet></router-outlet>
+  </div>
+</koala-page>

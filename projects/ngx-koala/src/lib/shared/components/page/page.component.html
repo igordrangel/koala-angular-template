@@ -1,0 +1,22 @@
+<mat-drawer-container autosize class="menu-container">
+  <mat-drawer #drawer [opened]="startMenuOpened" class="menu-options" mode="side">
+    <ng-content select="[menu-options]"></ng-content>
+  </mat-drawer>
+
+  <mat-toolbar [color]="color">
+    <button (click)="drawer.toggle()" class="example-icon" mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Koala</span>
+    <span class="spacer"></span>
+    <button class="btn-toolbar" mat-icon-button>
+      <mat-icon>notifications</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>person</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <ng-content class="page-content" select="[page-content]"></ng-content>
+
+</mat-drawer-container>

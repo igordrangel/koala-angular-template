@@ -7,7 +7,7 @@
       "projectType": "library",
       "root": "projects/ngx-koala",
       "sourceRoot": "projects/ngx-koala/src",
-      "prefix": "lib",
+      "prefix": "koala",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -65,7 +65,7 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "projects/koala-template/src/styles.css"
+              "projects/ngx-koala/src/lib/shared/theme/koala.theme.css"
             ],
             "scripts": []
           },

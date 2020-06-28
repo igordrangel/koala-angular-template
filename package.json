@@ -22,6 +22,7 @@
     "@angular/platform-browser": "~9.1.6",
     "@angular/platform-browser-dynamic": "~9.1.6",
     "@angular/router": "~9.1.6",
+    "ngx-mask": "^9.1.2",
     "rxjs": "~6.5.4",
     "tskoala-helpers": "^1.0.2",
     "tslib": "^1.10.0",

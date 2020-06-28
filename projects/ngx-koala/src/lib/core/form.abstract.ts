@@ -1,13 +1,15 @@
 import { ShowInvalidFields } from '../shared/components/form/show-invalid-fields/show-invalid-fields';
 import { FormGroup } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 
 export abstract class FormAbstract {
   public showInvalidFields: ShowInvalidFields;
-  public btnLabel: string = "Enviar";
-  public loader: boolean = false;
-  public btnSubmitDisabled: boolean = false;
+  public btnLabel = 'Enviar';
+  public loader = false;
+  public btnSubmitDisabled = false;
+  public getData = new BehaviorSubject<boolean>(false);
 
-  protected constructor(private _form: () => FormGroup) {
+  protected constructor(private formAbstract: () => FormGroup) {
   }
 
   public selecionarAutocomplete(controlName: string, obj: any, indexName?: string) {
@@ -20,10 +22,14 @@ export abstract class FormAbstract {
         });
       }
 
-      this._form().get(controlName).setValue(value);
+      this.formAbstract().get(controlName).setValue(value);
     } else {
-      this._form().get(controlName).setValue('');
+      this.formAbstract().get(controlName).setValue('');
     }
+  }
+
+  public btnClickGetData() {
+    this.getData.next(true);
   }
 
   protected enableShowInvalidFields() {
@@ -35,11 +41,11 @@ export abstract class FormAbstract {
     this.loader = show;
 
     if (show) {
-      this.btnLabel = btnLabel ? btnLabel : "Enviando Dados...";
-      //LoaderController.create({typeLoader: "indeterminate"});
+      this.btnLabel = btnLabel ? btnLabel : 'Enviando Dados...';
+      // LoaderController.create({typeLoader: "indeterminate"});
     } else {
-      this.btnLabel = btnLabel ? btnLabel : "Enviar";
-      //LoaderController.dismiss();
+      this.btnLabel = btnLabel ? btnLabel : 'Enviar';
+      // LoaderController.dismiss();
     }
   }
 }

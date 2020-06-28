@@ -10,7 +10,7 @@ import { ThemePalette } from '@angular/material/core';
 export class BtnSubmitComponent {
   @Input() fg: FormGroup;
   @Input() color: ThemePalette = 'primary';
-  @Input() btnLabel: string = 'Enviar';
-  @Input() btnSubmitDisabled: boolean = false;
-  @Input() loader: boolean = false;
+  @Input() btnLabel = 'Enviar';
+  @Input() btnSubmitDisabled = false;
+  @Input() loader = false;
 }

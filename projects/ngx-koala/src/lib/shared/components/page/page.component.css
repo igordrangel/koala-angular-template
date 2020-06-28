@@ -1,0 +1,5 @@
+.menu-container {width: 100vw;height: 100vh;}
+.menu-options {padding: 20px;width: 300px;}
+.page-content {display: flex;height: 100%;align-items: center;justify-content: center;}
+.spacer {flex: 1 1 auto;}
+.btn-toolbar {position: relative;display: inline-block;margin-right: 10px;}
