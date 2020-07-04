@@ -1,7 +1,7 @@
 form {margin: 0 auto 80px !important;}
 section {padding: 20px 0;}
-section article {position: relative;margin: 0 auto;width: 350px;height: 100%;padding: 50px;background: #FFF;border: 1px solid #DDD;border-radius: 10px;}
-section article img#logo {position: relative;display: block;margin: 0 auto;padding: 5px;width: 60px;height: auto;}
+section article {position: relative;margin: 0 auto;width: 350px;height: 100%;padding: 50px;background: #FFF;border: 1px solid #DDD;}
+section article img#logo {position: relative;display: block;margin: 0 auto;padding: 5px;width: 100px;height: auto;}
 section article #div-aviso {font-family: OpenSans, sans-serif;color: #616161;}
 section article #div-aviso label {font-size: 1.2em;}
 section article #div-aviso small {position: relative;display: block;margin-bottom: 25px;font-size: .9em;}

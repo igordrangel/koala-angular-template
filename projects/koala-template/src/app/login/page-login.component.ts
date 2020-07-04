@@ -3,6 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { DynamicFormFieldInterface } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/dynamic-form-field.interface';
 import { DynamicFormTypeFieldEnum } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/enums/dynamic-form-type-field.enum';
 import { FormAbstract } from '../../../../ngx-koala/src/lib/core/form.abstract';
+import { TokenService } from '../../../../ngx-koala/src/lib/shared/components/token/token.service';
+import * as jwtEncode from 'jwt-encode';
 
 @Component({
   templateUrl: 'page-login.component.html',
@@ -13,7 +15,9 @@ export class PageLoginComponent extends FormAbstract {
   public formConfig: DynamicFormFieldInterface[];
   public btnLabel = 'Entrar';
 
-  constructor() {
+  constructor(
+    private tokenService: TokenService
+  ) {
     super(() => this.formTest);
     this.formConfig = [
       {label: 'Login', name: 'login', type: DynamicFormTypeFieldEnum.text, required: true},
@@ -24,8 +28,11 @@ export class PageLoginComponent extends FormAbstract {
   public submit(data: any) {
     this.loading(true, 'Autenticando...');
     setTimeout(() => {
+      this.tokenService.setToken(jwtEncode({
+        id: 1,
+        login: data.login
+      }, 'secret'));
       this.loading(false, 'Entrar');
-      console.log(data);
     }, 2000);
   }
 }

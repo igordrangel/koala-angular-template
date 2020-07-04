@@ -3,3 +3,5 @@
 .page-content {display: flex;height: 100%;align-items: center;justify-content: center;}
 .spacer {flex: 1 1 auto;}
 .btn-toolbar {position: relative;display: inline-block;margin-right: 10px;}
+img#logotipo {position: relative;display: block;margin: 0 auto 20px;width: 120px;height: auto;}
+

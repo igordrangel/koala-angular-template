@@ -6,12 +6,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
     PageComponent
   ],
   imports: [
+    CommonModule,
     KoalaFormModule,
     MatToolbarModule,
     MatButtonModule,

@@ -1,13 +1,13 @@
 <mat-drawer-container autosize class="menu-container">
-  <mat-drawer #drawer [opened]="startMenuOpened" class="menu-options" mode="side">
+  <mat-drawer #drawer [opened]="startMenuOpened && !!logged" class="menu-options" mode="side">
+    <img [src]="logotipo" alt="Logotipo" id="logotipo"/>
     <ng-content select="[menu-options]"></ng-content>
   </mat-drawer>
 
-  <mat-toolbar [color]="color">
+  <mat-toolbar *ngIf="!!logged" [color]="color">
     <button (click)="drawer.toggle()" class="example-icon" mat-icon-button>
       <mat-icon>menu</mat-icon>
     </button>
-    <span>Koala</span>
     <span class="spacer"></span>
     <button class="btn-toolbar" mat-icon-button>
       <mat-icon>notifications</mat-icon>
