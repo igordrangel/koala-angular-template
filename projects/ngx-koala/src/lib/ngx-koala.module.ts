@@ -7,14 +7,20 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { LoaderBarPageComponent } from './shared/components/loader/loader-bar-page.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
-    PageComponent
+    PageComponent,
+    LoaderBarPageComponent
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     KoalaFormModule,
+    MatProgressBarModule,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
@@ -23,6 +29,7 @@ import { CommonModule } from '@angular/common';
   ],
   exports: [
     PageComponent,
+    HttpClientModule,
     KoalaFormModule,
     MatToolbarModule,
     MatButtonModule,

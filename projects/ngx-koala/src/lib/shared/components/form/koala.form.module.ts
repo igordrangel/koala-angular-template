@@ -37,6 +37,14 @@ import { maskOptions } from '../../../mask-options';
     ReactiveFormsModule,
     FormsModule,
     NgxMaskModule,
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
     BtnSubmitComponent,
     DynamicFormComponent
   ]
