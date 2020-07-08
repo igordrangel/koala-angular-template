@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { ListModule } from '../../../../ngx-koala/src/lib/shared/components/list/list.module';
 import { PageListComponent } from './page-list.component';
 import { PageListRoutingModule } from './page-list-routing.module';
-import { MatButtonModule } from '@angular/material/button';
+import { KoalaButtonModule } from '../../../../ngx-koala/src/lib/shared/components/button/koala.button.module';
 
 @NgModule({
   declarations: [
@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
   ],
   imports: [
     ListModule,
-    MatButtonModule,
+    KoalaButtonModule,
     PageListRoutingModule
   ],
   exports: []

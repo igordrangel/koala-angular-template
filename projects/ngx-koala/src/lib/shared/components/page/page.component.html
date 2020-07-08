@@ -14,16 +14,17 @@
     <ng-content select="[menu-options]"></ng-content>
   </mat-drawer>
 
-  <mat-toolbar *ngIf="!!logged" [color]="color">
-    <button (click)="drawer.toggle()" class="example-icon" mat-icon-button>
+  <mat-toolbar *ngIf="!!logged" class="toolbar">
+    <button (click)="drawer.toggle()" [color]="color" mat-icon-button>
       <mat-icon>menu</mat-icon>
     </button>
     <span class="spacer"></span>
-    <button class="btn-toolbar" mat-icon-button>
+    <button [color]="color" class="btn-toolbar" mat-icon-button>
       <mat-icon>notifications</mat-icon>
     </button>
-    <button mat-icon-button>
-      <mat-icon>person</mat-icon>
+    <button [color]="color" class="btn-toolbar" mat-button>
+      <span>{{username}}</span>
+      <span class="icon-user">{{firstUserLetter}}</span>
     </button>
   </mat-toolbar>
 

@@ -1,0 +1,4 @@
+.koala-button {padding: 2px 8px;}
+.koala-icon-button {width: 25px;height: 25px;line-height: 25px;color: #FFF;}
+.koala-icon-button mat-icon {width: 20px;height: 20px;line-height: 20px;font-size: 20px;}
+.koala-icon-button.blue {background: #1976D2;}

@@ -24,6 +24,8 @@ export class PageComponent implements OnInit {
   @Input() openPages: string[];
   public logged: boolean;
   public loader: LoaderBarPageInterface;
+  public username: string;
+  public firstUserLetter: string;
 
   constructor(
     private tokenService: TokenService,
@@ -39,6 +41,10 @@ export class PageComponent implements OnInit {
   ngOnInit() {
     this.tokenService.getTokenSubject()?.subscribe(token => {
       this.logged = !!token;
+      if (this.logged) {
+        this.username = this.tokenService.getUser<{ login: string }>().login;
+        this.firstUserLetter = this.username.charAt(0).toUpperCase();
+      }
       if (this.logged && this.defaultPage) {
         this.router.navigate([this.defaultPage]).then();
       } else {

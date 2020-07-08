@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ListAbstract } from './list.abstract';
 import { ListItemInterface } from './list.item.interface';
 import { ListItemMenuOptionInterface } from './list.item-menu-option.interface';
@@ -10,10 +10,11 @@ import { Observable } from 'rxjs';
   templateUrl: 'list.component.html',
   styleUrls: ['list.component.css']
 })
-export class ListComponent extends ListAbstract implements OnChanges {
+export class ListComponent extends ListAbstract implements OnInit, OnChanges {
   @Input() titlePage: string = 'Title';
-  @Input() customFolderFontColor: string = '#f1f1f1';
-  @Input() customFolderBackgroudColor: string = '#212121';
+  @Input() titleIcon: string;
+  @Input() customFolderFontColor: string = '#212121';
+  @Input() customFolderBackgroudColor: string = '#fff';
   @Input() columnsToShowInList: string[];
   @Input() columnSort: string;
   @Input() itensMenuListOptions: ListItemMenuOptionInterface[];
@@ -23,6 +24,8 @@ export class ListComponent extends ListAbstract implements OnChanges {
   @Input() responseIndexName: string;
   @Input() responseQtdResultIndexName: (response: any) => number;
   @Input() typeRequest: 'all' | 'onDemand';
+  @Input() error = () => {
+  };
   @ViewChild('folder', {static: true}) private folder: ElementRef;
   @ViewChild('folderTitle', {static: true}) private folderTitle: ElementRef;
 
@@ -42,8 +45,9 @@ export class ListComponent extends ListAbstract implements OnChanges {
     );
   }
 
-  @Input() error: () => void = () => {
-  };
+  ngOnInit() {
+    this.setCustomBackgroundColor();
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.customBackgroudColor) {
@@ -55,9 +59,10 @@ export class ListComponent extends ListAbstract implements OnChanges {
     if (this.customFolderBackgroudColor) {
       const folder = this.folder.nativeElement as HTMLDivElement;
       folder.style.background = this.customFolderBackgroudColor;
-    } else if (this.customFolderFontColor) {
+    }
+    if (this.customFolderFontColor) {
       const folderTitle = this.folderTitle.nativeElement as HTMLDivElement;
-      folderTitle.style.background = this.customFolderFontColor;
+      folderTitle.style.color = this.customFolderFontColor;
     }
   }
 }

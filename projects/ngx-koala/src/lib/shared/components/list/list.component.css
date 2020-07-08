@@ -1,8 +1,9 @@
-.folder-list {position: relative;box-shadow: 4px 4px 6px rgba(0, 0, 0, .3);background-size: cover;width: 100%;height: 160px;}
-.folder-list h1 {padding: 0;margin: 0;position: absolute;top: 5px;left: 20px;font-size: 1.2em;font-family: OpenSans, sans-serif;}
-nav.menu-folder {position: absolute;right: 20px;top: 1px;z-index: 4;}
-.list-container {background: #FFF;display: block;height: calc(100vh - 105px);overflow-x: hidden;position: relative;width: 100%;top: 40px;}
-.list-container .list {display: block;height: calc(100vh - 145px);overflow-y: auto;position: relative;top: 40px;width: 100%;z-index: 1;}
+.folder-list {position: relative;background-size: cover;width: 100%;height: 160px;}
+.folder-list h1 {padding: 0;margin: 0;position: absolute;top: 5px;left: 20px;font-size: 1.2em;font-family: OpenSans, sans-serif;font-weight: bold;}
+.folder-list h1 mat-icon {position: relative;top: 5px;color: #1976D2;}
+nav.menu-folder {position: absolute;right: 0;top: 0;z-index: 4;padding: 7px 30px;}
+.list-container {background: #FFF;display: block;height: calc(100vh - 125px);overflow-x: hidden;position: relative;width: 90%;top: 50px;margin: 0 auto;border-radius: 10px;box-shadow: 0 1px 3px rgba(25, 118, 210, .4);}
+.list-container .list {display: block;height: calc(100vh - 165px);overflow-y: auto;position: relative;top: 40px;width: 100%;z-index: 1;}
 .list-container .list .spinner-container {position: absolute;height: 100%;top: 0;left: 0;bottom: 56px;right: 0;background: rgba(0, 0, 0, 0.15);z-index: 1;display: flex;align-items: center;justify-content: center;}
 .list-container .list table:not(.table-not-selection) .mat-header-cell:first-child,
 .list-container .list .mat-header-cell:last-child {width: 5%;}
@@ -24,7 +25,7 @@ nav.menu-folder {position: absolute;right: 20px;top: 1px;z-index: 4;}
 .list-container .list table td:last-child {padding: 0 20px 0 8px;}
 .list-container .list .mat-list-item-content,
 .list-container .list .mat-list-item-content .mat-list-text {padding: 0;}
-.list-container nav.menu-list {background: #FFF;color: #616161;border-top: 1px solid #DDD;border-bottom: 1px solid #DDD;height: 40px;left: 0;margin: 0;padding: 0;position: absolute;top: 0;transition: .2s;width: 100%;z-index: 2;}
+.list-container nav.menu-list {background: #FFF;color: rgba(25, 118, 210, .3);height: 40px;left: 0;margin: 0;padding: 0;position: absolute;top: 0;transition: .2s;width: 100%;z-index: 2;}
 .list-container mat-paginator {position: absolute;top: -8px;right: 0;background: transparent !important;z-index: 2;}
 .list-container mat-paginator .mat-paginator-container {height: 40px !important;min-height: 40px !important;}
 .list-container mat-paginator .mat-paginator-container .mat-paginator-page-size-select {height: 40px;margin-top: 0 !important;}
