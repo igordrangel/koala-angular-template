@@ -3,22 +3,17 @@ import { DynamicFormFieldInterface } from './interfaces/dynamic-form-field.inter
 import { DynamicFormTypeFieldEnum } from './enums/dynamic-form-type-field.enum';
 import { CpfValidator } from './validators/cpf.validator';
 import { CnpjValidator } from './validators/cnpj.validator';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormAbstract } from '../../../../core/form.abstract';
-import { KoalaStringHelper } from 'tskoala-helpers/dist/string/koala-string.helper';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'koala-dynamic-form',
   templateUrl: 'dynamic-form.component.html'
 })
 export class DynamicFormComponent extends FormAbstract implements OnInit {
+  @Input() form: FormGroup;
   @Input() formConfig: DynamicFormFieldInterface[];
-  @Input() getData: BehaviorSubject<boolean>;
-  @Output() formSubmit = new EventEmitter<any>();
-  @Output() dynamicForm = new EventEmitter<FormGroup>(null);
   public controls: FormArray;
-  public form: FormGroup;
   public typeField = DynamicFormTypeFieldEnum;
 
   constructor(
@@ -28,30 +23,11 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
   }
 
   ngOnInit() {
-    this.form = this.fb.group({});
     this.form.addControl('formData', this.fb.array([]));
     this.controls = this.form.get('formData') as FormArray;
     this.formConfig?.forEach(config => {
       this.controls.push(this.newControl(config));
     });
-    this.dynamicForm.emit(this.form);
-    this.getData?.subscribe(getData => {
-      if (getData) {
-        this.emitData();
-      }
-    });
-  }
-
-  public emitData() {
-    const data = {};
-    this.controls?.controls.forEach(control => {
-      let value: any = control.get('value').value;
-      if (control.get('type').value === DynamicFormTypeFieldEnum.valueList) {
-        value = KoalaStringHelper.split(value);
-      }
-      data[control.get('name').value] = value;
-    });
-    this.formSubmit.emit(data);
   }
 
   public passwordView(index: number) {
@@ -84,6 +60,10 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
       label: [config.label],
       name: [config.name],
       type: [config.type],
+      appearance: [config.appearance],
+      floatLabel: [config.floatLabel],
+      class: [config.class],
+      fieldClass: [config.fieldClass],
       textHint: [config.textHint],
       required: [config.required ?? false],
       opcoesSelect: [config.opcoesSelect ?? []],

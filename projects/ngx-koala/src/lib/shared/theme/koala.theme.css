@@ -12,6 +12,7 @@ button:focus {outline: none !important;}
 .d-none {display: none !important;}
 .d-block {display: block !important;}
 .d-inline {display: inline !important;}
+.d-inline-block {display: inline-block !important;}
 .align-center {margin: 0 auto;}
 .text-left {text-align: left !important;}
 .text-center {text-align: center !important;}
@@ -20,6 +21,11 @@ button:focus {outline: none !important;}
 .float-none {float: inherit !important;}
 .float-right {float: right !important;}
 .w-100 {width: 100%;}
+.w-99 {width: 99%;}
+.w-98 {width: 98%;}
+.w-97 {width: 97%;}
+.w-96 {width: 96%;}
+.w-95 {width: 95%;}
 .w-50 {width: 50%;}
 .w-40 {width: 40%;}
 .w-5 {width: 5%;}

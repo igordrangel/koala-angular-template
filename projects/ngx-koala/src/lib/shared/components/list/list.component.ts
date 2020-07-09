@@ -2,8 +2,10 @@ import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChi
 import { ListAbstract } from './list.abstract';
 import { ListItemInterface } from './list.item.interface';
 import { ListItemMenuOptionInterface } from './list.item-menu-option.interface';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { ListFilterInterface } from './list.filter.interface';
+import { DynamicFormService } from '../form/dynamic-form/dynamic-form.service';
 
 @Component({
   selector: 'koala-list',
@@ -24,12 +26,15 @@ export class ListComponent extends ListAbstract implements OnInit, OnChanges {
   @Input() responseIndexName: string;
   @Input() responseQtdResultIndexName: (response: any) => number;
   @Input() typeRequest: 'all' | 'onDemand';
+  @Input() filterFormConfig: ListFilterInterface;
   @Input() error = () => {
   };
   @ViewChild('folder', {static: true}) private folder: ElementRef;
   @ViewChild('folderTitle', {static: true}) private folderTitle: ElementRef;
 
-  constructor() {
+  constructor(
+    private dynamicFormService: DynamicFormService
+  ) {
     super(
       () => this.request,
       (response) => {
@@ -46,6 +51,16 @@ export class ListComponent extends ListAbstract implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    if (this.filterFormConfig) {
+      this.filterFormConfig?.main?.map(item => {
+        item.class = 'col-4 padding-none';
+        item.fieldClass = 'w-99';
+        return item;
+      });
+      if (this.filterFormConfig?.checkAndSearch) {
+        this.formSearch.addControl(this.filterFormConfig.checkAndSearch.formControlName, new FormControl(false));
+      }
+    }
     this.setCustomBackgroundColor();
   }
 
@@ -53,6 +68,14 @@ export class ListComponent extends ListAbstract implements OnInit, OnChanges {
     if (changes.customBackgroudColor) {
       this.setCustomBackgroundColor();
     }
+  }
+
+  public filterSubmit() {
+    const formArray = this.formSearch.get('formData') as FormArray;
+    super.search(this.dynamicFormService.emitData(formArray));
+  }
+
+  public toogleFilter() {
   }
 
   private setCustomBackgroundColor() {

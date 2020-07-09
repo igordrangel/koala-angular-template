@@ -13,4 +13,7 @@ export class BtnSubmitComponent {
   @Input() btnLabel = 'Enviar';
   @Input() btnSubmitDisabled = false;
   @Input() loader = false;
+  @Input() iconButton: boolean;
+  @Input() icon: string;
+  @Input() iconColor: 'blue' | 'red' | 'yellow' | 'black' | 'green';
 }

@@ -7,7 +7,43 @@
     <ng-content select="[menu-page]"></ng-content>
   </nav>
   <div class="list-container">
-    <ng-content select="[filter]"></ng-content>
+    <div *ngIf="filterFormConfig" class="list-filter">
+      <form (ngSubmit)="filterSubmit()" [formGroup]="formSearch">
+        <div class="main">
+          <koala-dynamic-form
+            [formConfig]="filterFormConfig.main"
+            [form]="formSearch">
+          </koala-dynamic-form>
+          <ul>
+            <li *ngIf="filterFormConfig.advanced" class="option js_btn_more">
+              <button (click)="toogleFilter()" mat-icon-button type="button">
+                <mat-icon>expand_more</mat-icon>
+              </button>
+            </li>
+            <li *ngIf="filterFormConfig.checkAndSearch" class="checkbox-filter">
+              <mat-checkbox [formControlName]="filterFormConfig.checkAndSearch.formControlName">
+                {{filterFormConfig.checkAndSearch.label}}
+              </mat-checkbox>
+            </li>
+            <li class="option">
+              <koala-submit
+                [btnSubmitDisabled]="btnSubmitDisabled"
+                [fg]="formSearch"
+                [iconButton]="true"
+                [loader]="loader"
+                icon="search">
+              </koala-submit>
+            </li>
+          </ul>
+        </div>
+        <div *ngIf="filterFormConfig.advanced" class="advanced">
+          <koala-dynamic-form
+            [formConfig]="filterFormConfig.advanced"
+            [form]="formSearch">
+          </koala-dynamic-form>
+        </div>
+      </form>
+    </div>
     <nav class="menu-list">
       <mat-paginator
         [length]="qtdListResult"

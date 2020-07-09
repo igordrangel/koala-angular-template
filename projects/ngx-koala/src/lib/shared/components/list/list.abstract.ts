@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { AfterViewInit, EventEmitter, ViewChild } from '@angular/core';
+import { AfterViewInit, EventEmitter, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, Observable } from 'rxjs';
@@ -18,12 +18,13 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
   public dataSource = new MatTableDataSource<any>([]);
   public typeRequest: 'all' | 'onDemand' = 'onDemand';
 
+  @Output() filterParams = new EventEmitter<any>(null);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   private searchEmmiter = new EventEmitter<boolean>(null);
 
   protected constructor(
-    private requestFunction: () => Observable<any> | Promise<any>,
+    private requestFunction: <F>(filter?: F) => Observable<any> | Promise<any>,
     private requestResponseFunction: <T>(results: T[]) => void,
     private requestErrorFunction: () => any,
     formSearch: () => FormGroup
@@ -66,42 +67,41 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
     }, 50);
   }
 
-  private prepareSearch() {
-    if (this.typeRequest === 'onDemand') {
-      this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-
-      merge(this.sort.sortChange, this.paginator.page).pipe(
-        startWith({}),
-        switchMap(this.search()),
-        map((response) => {
-          this.loading(false);
-          return this.requestResponseFunction(response);
-        }),
-        catchError(this.requestErrorFunction)
-      ).subscribe();
-    } else {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      this.searchEmmiter.pipe(
-        startWith({}),
-        switchMap(this.search()),
-        map((response) => {
-          this.loading(false);
-          return this.requestResponseFunction(response);
-        }),
-        catchError(this.requestErrorFunction)
-      ).subscribe();
-    }
-  }
-
-  private search() {
+  public search(filter?: any) {
     this.loading(true);
     this.selection.clear();
     if (this.paginator) {
       this.paginator.firstPage();
     }
+    this.filterParams.emit(filter);
+  }
 
-    return this.requestFunction;
+  private prepareSearch() {
+    if (this.typeRequest === 'onDemand') {
+      this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+
+      merge(this.sort.sortChange, this.paginator.page, this.filterParams).pipe(
+        startWith({}),
+        switchMap(this.requestFunction),
+        map((response) => {
+          this.loading(false);
+          return this.requestResponseFunction(response);
+        }),
+        catchError(this.requestErrorFunction)
+      ).subscribe(() => this.loading(false));
+    } else {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.filterParams.pipe(
+        startWith({}),
+        switchMap(this.requestFunction),
+        map((response) => {
+          this.loading(false);
+          return this.requestResponseFunction(response);
+        }),
+        catchError(this.requestErrorFunction)
+      ).subscribe();
+    }
   }
 
   private isAllSelected() {

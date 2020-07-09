@@ -1,5 +1,7 @@
-<div (ngSubmit)="emitData()" [formGroup]="form" class="p-relative w-100 mt-15">
-  <div *ngFor="let propriedade of controls?.controls; let i = index;" formArrayName="formData">
+<div (ngSubmit)="emitData()" [formGroup]="form" class="p-relative w-100">
+  <div *ngFor="let propriedade of controls?.controls; let i = index;"
+       [ngClass]="propriedade.get('class').value"
+       formArrayName="formData">
     <mat-form-field
       *ngIf="propriedade.get('type').value == typeField.text ||
              propriedade.get('type').value == typeField.password ||
@@ -11,9 +13,9 @@
              propriedade.get('type').value == typeField.time ||
              propriedade.get('type').value == typeField.phone"
       [formGroupName]="i"
-      appearance="legacy"
-      class="col-12"
-      floatLabel="always">
+      [appearance]="propriedade.get('appearance').value"
+      [floatLabel]="propriedade.get('floatLabel').value"
+      [ngClass]="propriedade.get('fieldClass').value">
       <mat-label>{{propriedade.get('label').value}}</mat-label>
       <input
         [dropSpecialCharacters]="false"
@@ -74,9 +76,9 @@
       *ngIf="propriedade.get('type').value == typeField.valueList ||
              propriedade.get('type').value == typeField.textarea"
       [formGroupName]="i"
-      appearance="fill"
-      class="col-12"
-      floatLabel="always">
+      [appearance]="propriedade.get('appearance').value"
+      [floatLabel]="propriedade.get('floatLabel').value"
+      [ngClass]="propriedade.get('fieldClass').value">
       <mat-label>{{propriedade.get('label').value}}</mat-label>
       <textarea
         [mat-autosize]="true"
@@ -98,9 +100,9 @@
     <mat-form-field
       *ngIf="propriedade.get('type').value == typeField.select"
       [formGroupName]="i"
-      appearance="legacy"
-      class="col-12"
-      floatLabel="always">
+      [appearance]="propriedade.get('appearance').value"
+      [floatLabel]="propriedade.get('floatLabel').value"
+      [ngClass]="propriedade.get('fieldClass').value">
       <mat-label>{{propriedade.get('label').value}}</mat-label>
       <mat-select [required]="propriedade.get('required').value" formControlName="value">
         <mat-option *ngFor="let options of propriedade.get('opcoesSelect').value" [value]="options.value">
@@ -110,7 +112,8 @@
     </mat-form-field>
     <div
       *ngIf="propriedade.get('type').value == typeField.checkbox"
-      [formGroupName]="i">
+      [formGroupName]="i"
+      [ngClass]="propriedade.get('fieldClass').value">
       <mat-checkbox
         formControlName="value"
         value="true">

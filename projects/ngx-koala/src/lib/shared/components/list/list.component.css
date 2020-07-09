@@ -3,7 +3,7 @@
 .folder-list h1 mat-icon {position: relative;top: 5px;color: #1976D2;}
 nav.menu-folder {position: absolute;right: 0;top: 0;z-index: 4;padding: 7px 30px;}
 .list-container {background: #FFF;display: block;height: calc(100vh - 125px);overflow-x: hidden;position: relative;width: 90%;top: 50px;margin: 0 auto;border-radius: 10px;box-shadow: 0 1px 3px rgba(25, 118, 210, .4);}
-.list-container .list {display: block;height: calc(100vh - 165px);overflow-y: auto;position: relative;top: 40px;width: 100%;z-index: 1;}
+.list-container .list {display: block;height: calc(100vh - 225px);overflow-y: auto;position: relative;top: 0;width: 100%;z-index: 1;}
 .list-container .list .spinner-container {position: absolute;height: 100%;top: 0;left: 0;bottom: 56px;right: 0;background: rgba(0, 0, 0, 0.15);z-index: 1;display: flex;align-items: center;justify-content: center;}
 .list-container .list table:not(.table-not-selection) .mat-header-cell:first-child,
 .list-container .list .mat-header-cell:last-child {width: 5%;}
@@ -25,7 +25,27 @@ nav.menu-folder {position: absolute;right: 0;top: 0;z-index: 4;padding: 7px 30px
 .list-container .list table td:last-child {padding: 0 20px 0 8px;}
 .list-container .list .mat-list-item-content,
 .list-container .list .mat-list-item-content .mat-list-text {padding: 0;}
-.list-container nav.menu-list {background: #FFF;color: rgba(25, 118, 210, .3);height: 40px;left: 0;margin: 0;padding: 0;position: absolute;top: 0;transition: .2s;width: 100%;z-index: 2;}
+.list-container .list-filter {position: relative;z-index: 3;background: #FFF;box-shadow: 0 1px 3px rgba(0, 0, 0, .3);color: #616161;height: 60px;}
+.list-container .list-filter .main {display: inline-block;padding-left: 2.5px;position: relative;width: 100%;font-size: 1.05em;}
+.list-container .list-filter .main koala-dynamic-form {display: inline-block;width: calc(100% - 270px);}
+.list-container .list-filter .main mat-form-field {display: inline-block;}
+.list-container .list-filter .main .mat-form-field-appearance-fill .mat-form-field-flex {background: transparent;}
+.list-container .list-filter .main .mat-form-field .mat-form-field-wrapper {padding-bottom: 0;}
+.list-container .list-filter .main .mat-form-field-underline {display: none;}
+.list-container .list-filter .main .mat-form-field-appearance-legacy .mat-form-field-subscript-wrapper {display: none}
+.list-container .list-filter .main .mat-form-field-wrapper .mat-form-field-subscript-wrapper {display: none;}
+.list-container .list-filter ul {display: inline-block;font-size: 0;list-style: none;margin: 0;padding: 0 15px;position: relative;text-align: right;top: 5px;width: 240px;float: right;}
+.list-container .list-filter ul li {display: inline-block;font-size: 14px;padding: 5px;position: relative;}
+.list-container .list-filter ul li.option button {transition: .2s;}
+.list-container .list-filter ul li.option button:hover {background: rgba(0, 0, 0, .1);}
+.list-container .list-filter ul li.checkbox-filter {text-align: center;}
+.list-container .list-filter ul li.checkbox-filter .checkbox-inline {top: -5px;}
+.list-container .list-filter ul li.checkbox-filter input[type=checkbox] {margin-left: 0;}
+.list-container .list-filter ul li.checkbox-filter label {padding: 0 !important;width: auto;}
+.filter .more-options-filter {background: #FFF;box-shadow: 0 3px 10px rgba(0, 0, 0, .3);height: 0;overflow-x: hidden;overflow-y: auto;position: absolute;transition: .2s;width: 100%;z-index: 1;}
+.filter .more-options-filter .container-filter {padding: 15px;}
+.filter .more-options-filter.show {height: 360px;}
+.list-container nav.menu-list {background: #FFF;color: rgba(25, 118, 210, .3);height: 40px;margin: 0;padding: 0;position: relative;transition: .2s;width: 100%;z-index: 2;}
 .list-container mat-paginator {position: absolute;top: -8px;right: 0;background: transparent !important;z-index: 2;}
 .list-container mat-paginator .mat-paginator-container {height: 40px !important;min-height: 40px !important;}
 .list-container mat-paginator .mat-paginator-container .mat-paginator-page-size-select {height: 40px;margin-top: 0 !important;}
