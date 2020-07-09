@@ -26,7 +26,7 @@ nav.menu-folder {position: absolute;right: 0;top: 0;z-index: 4;padding: 7px 30px
 .list-container .list .mat-list-item-content,
 .list-container .list .mat-list-item-content .mat-list-text {padding: 0;}
 .list-container .list-filter {position: relative;z-index: 3;background: #FFF;box-shadow: 0 1px 3px rgba(0, 0, 0, .3);color: #616161;height: 60px;}
-.list-container .list-filter .main {display: inline-block;padding-left: 2.5px;position: relative;width: 100%;font-size: 1.05em;}
+.list-container .list-filter .main {display: inline-block;padding-left: 2.5px;position: relative;width: 100%;height: 60px;font-size: 1.05em;}
 .list-container .list-filter .main koala-dynamic-form {display: inline-block;width: calc(100% - 270px);}
 .list-container .list-filter .main mat-form-field {display: inline-block;}
 .list-container .list-filter .main .mat-form-field-appearance-fill .mat-form-field-flex {background: transparent;}
@@ -42,9 +42,9 @@ nav.menu-folder {position: absolute;right: 0;top: 0;z-index: 4;padding: 7px 30px
 .list-container .list-filter ul li.checkbox-filter .checkbox-inline {top: -5px;}
 .list-container .list-filter ul li.checkbox-filter input[type=checkbox] {margin-left: 0;}
 .list-container .list-filter ul li.checkbox-filter label {padding: 0 !important;width: auto;}
-.filter .more-options-filter {background: #FFF;box-shadow: 0 3px 10px rgba(0, 0, 0, .3);height: 0;overflow-x: hidden;overflow-y: auto;position: absolute;transition: .2s;width: 100%;z-index: 1;}
-.filter .more-options-filter .container-filter {padding: 15px;}
-.filter .more-options-filter.show {height: 360px;}
+.list-container .list-filter .advanced {background: #FFF;box-shadow: 0 3px 10px rgba(0, 0, 0, .3);height: 0;overflow-x: hidden;overflow-y: auto;position: absolute;transition: .2s;width: 100%;z-index: 1;}
+.list-container .list-filter .advanced .container-filter {padding: 15px;}
+.list-container .list-filter .advanced.show {height: 360px;}
 .list-container nav.menu-list {background: #FFF;color: rgba(25, 118, 210, .3);height: 40px;margin: 0;padding: 0;position: relative;transition: .2s;width: 100%;z-index: 2;}
 .list-container mat-paginator {position: absolute;top: -8px;right: 0;background: transparent !important;z-index: 2;}
 .list-container mat-paginator .mat-paginator-container {height: 40px !important;min-height: 40px !important;}

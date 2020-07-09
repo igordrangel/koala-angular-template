@@ -5,22 +5,20 @@
       <h1>Login</h1>
       <small>Acesse sua Conta <strong>Koala</strong></small>
     </div>
-    <koala-dynamic-form
-      (dynamicForm)="formTest = $event"
-      (formSubmit)="submit($event)"
-      [formConfig]="formConfig"
-      [getData]="getData"
-      class="mt-15">
-      <div align="end" btn-submit>
+    <form (ngSubmit)="submit()" [formGroup]="formLogin">
+      <koala-dynamic-form
+        [formConfig]="formConfig"
+        [form]="formLogin">
+      </koala-dynamic-form>
+      <div align="end" class="mt-15">
         <koala-submit
-          (click)="btnClickGetData()"
           [btnLabel]="btnLabel"
           [btnSubmitDisabled]="btnSubmitDisabled"
-          [fg]="formTest"
+          [fg]="formLogin"
           [loader]="loader"
           color="primary">
         </koala-submit>
       </div>
-    </koala-dynamic-form>
+    </form>
   </article>
 </section>

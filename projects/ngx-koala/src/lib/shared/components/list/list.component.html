@@ -15,13 +15,14 @@
             [form]="formSearch">
           </koala-dynamic-form>
           <ul>
-            <li *ngIf="filterFormConfig.advanced" class="option js_btn_more">
-              <button (click)="toogleFilter()" mat-icon-button type="button">
-                <mat-icon>expand_more</mat-icon>
+            <li *ngIf="filterFormConfig.advanced" class="option">
+              <button (click)="toogleFilter()" color="primary" mat-icon-button type="button">
+                <mat-icon>{{showAdvancedFilter ? 'expand_less' : 'expand_more'}}</mat-icon>
               </button>
             </li>
             <li *ngIf="filterFormConfig.checkAndSearch" class="checkbox-filter">
-              <mat-checkbox [formControlName]="filterFormConfig.checkAndSearch.formControlName">
+              <mat-checkbox (click)="filterSubmit()"
+                            [formControlName]="filterFormConfig.checkAndSearch.formControlName">
                 {{filterFormConfig.checkAndSearch.label}}
               </mat-checkbox>
             </li>
@@ -36,11 +37,13 @@
             </li>
           </ul>
         </div>
-        <div *ngIf="filterFormConfig.advanced" class="advanced">
-          <koala-dynamic-form
-            [formConfig]="filterFormConfig.advanced"
-            [form]="formSearch">
-          </koala-dynamic-form>
+        <div *ngIf="filterFormConfig.advanced" [ngClass]="{'show': showAdvancedFilter}" class="advanced">
+          <div class="container-filter">
+            <koala-dynamic-form
+              [formConfig]="filterFormConfig.advanced"
+              [form]="formAdvancedSearch">
+            </koala-dynamic-form>
+          </div>
         </div>
       </form>
     </div>

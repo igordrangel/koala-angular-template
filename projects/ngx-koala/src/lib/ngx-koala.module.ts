@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { LoaderBarPageComponent } from './shared/components/loader/loader-bar-page.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatButtonModule,
     MatIconModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatMenuModule
   ],
   exports: [
     PageComponent,

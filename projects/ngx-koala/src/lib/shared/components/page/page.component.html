@@ -22,10 +22,16 @@
     <button [color]="color" class="btn-toolbar" mat-icon-button>
       <mat-icon>notifications</mat-icon>
     </button>
-    <button [color]="color" class="btn-toolbar" mat-button>
+    <button [color]="color" [matMenuTriggerFor]="userOptions" class="btn-toolbar" mat-button>
       <span>{{username}}</span>
       <span class="icon-user">{{firstUserLetter}}</span>
     </button>
+    <mat-menu #userOptions="matMenu" class="menu-list" yPosition="below">
+      <button (click)="logout()" mat-menu-item>
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Sair</span>
+      </button>
+    </mat-menu>
   </mat-toolbar>
 
   <ng-content class="page-content" select="[page-content]"></ng-content>

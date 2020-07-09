@@ -2,10 +2,12 @@ import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChi
 import { ListAbstract } from './list.abstract';
 import { ListItemInterface } from './list.item.interface';
 import { ListItemMenuOptionInterface } from './list.item-menu-option.interface';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ListFilterInterface } from './list.filter.interface';
 import { DynamicFormService } from '../form/dynamic-form/dynamic-form.service';
+import { KoalaObjectHelper } from 'tskoala-helpers/dist/object/koala-object.helper';
+import { KoalaDelayHelper } from 'tskoala-helpers/dist/delay/koala-delay.helper';
 
 @Component({
   selector: 'koala-list',
@@ -21,7 +23,6 @@ export class ListComponent extends ListAbstract implements OnInit, OnChanges {
   @Input() columnSort: string;
   @Input() itensMenuListOptions: ListItemMenuOptionInterface[];
   @Input() itemsList: ListItemInterface[];
-  @Input() formSearch: FormGroup;
   @Input() request: Observable<any> | Promise<any>;
   @Input() responseIndexName: string;
   @Input() responseQtdResultIndexName: (response: any) => number;
@@ -32,7 +33,12 @@ export class ListComponent extends ListAbstract implements OnInit, OnChanges {
   @ViewChild('folder', {static: true}) private folder: ElementRef;
   @ViewChild('folderTitle', {static: true}) private folderTitle: ElementRef;
 
+  public formSearch: FormGroup;
+  public formAdvancedSearch: FormGroup;
+  public showAdvancedFilter: boolean = false;
+
   constructor(
+    private fb: FormBuilder,
     private dynamicFormService: DynamicFormService
   ) {
     super(
@@ -51,8 +57,15 @@ export class ListComponent extends ListAbstract implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    this.formSearch = this.fb.group({});
+    this.formAdvancedSearch = this.fb.group({});
     if (this.filterFormConfig) {
       this.filterFormConfig?.main?.map(item => {
+        item.class = 'col-4 padding-none';
+        item.fieldClass = 'w-99';
+        return item;
+      });
+      this.filterFormConfig?.advanced?.map(item => {
         item.class = 'col-4 padding-none';
         item.fieldClass = 'w-99';
         return item;
@@ -70,12 +83,24 @@ export class ListComponent extends ListAbstract implements OnInit, OnChanges {
     }
   }
 
-  public filterSubmit() {
+  public async filterSubmit() {
+    this.showAdvancedFilter = false;
+    await KoalaDelayHelper.waitFor(1);
     const formArray = this.formSearch.get('formData') as FormArray;
-    super.search(this.dynamicFormService.emitData(formArray));
+    const formArrayAdvanced = this.formAdvancedSearch.get('formData') as FormArray;
+    let dados = KoalaObjectHelper.merge(
+      this.dynamicFormService.emitData(formArray),
+      this.dynamicFormService.emitData(formArrayAdvanced)
+    );
+    if (this.filterFormConfig?.checkAndSearch) {
+      const controlName = this.filterFormConfig.checkAndSearch.formControlName;
+      dados[controlName] = this.formSearch.get(controlName).value;
+    }
+    super.search(dados);
   }
 
   public toogleFilter() {
+    this.showAdvancedFilter = !this.showAdvancedFilter;
   }
 
   private setCustomBackgroundColor() {

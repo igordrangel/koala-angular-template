@@ -23,7 +23,9 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
   }
 
   ngOnInit() {
-    this.form.addControl('formData', this.fb.array([]));
+    if (!this.form.get('formData')) {
+      this.form.addControl('formData', this.fb.array([]));
+    }
     this.controls = this.form.get('formData') as FormArray;
     this.formConfig?.forEach(config => {
       this.controls.push(this.newControl(config));

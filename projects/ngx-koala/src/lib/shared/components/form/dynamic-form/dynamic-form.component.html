@@ -1,4 +1,4 @@
-<div (ngSubmit)="emitData()" [formGroup]="form" class="p-relative w-100">
+<div [formGroup]="form" class="p-relative w-100">
   <div *ngFor="let propriedade of controls?.controls; let i = index;"
        [ngClass]="propriedade.get('class').value"
        formArrayName="formData">

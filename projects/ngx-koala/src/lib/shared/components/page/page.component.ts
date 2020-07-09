@@ -10,9 +10,7 @@ import { BehaviorSubject } from 'rxjs';
   selector: 'koala-page',
   templateUrl: 'page.component.html',
   styleUrls: ['page.component.css'],
-  providers: [
-    TokenService
-  ]
+  providers: [TokenService]
 })
 export class PageComponent implements OnInit {
   @Input() color: ThemePalette;
@@ -73,5 +71,10 @@ export class PageComponent implements OnInit {
         }
       }
     });
+  }
+
+  public logout() {
+    this.tokenService.removeToken();
+    this.tokenService.getTokenSubject().next(null);
   }
 }
