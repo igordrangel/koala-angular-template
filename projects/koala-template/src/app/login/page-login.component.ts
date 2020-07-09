@@ -6,10 +6,12 @@ import { FormAbstract } from '../../../../ngx-koala/src/lib/core/form.abstract';
 import { TokenService } from '../../../../ngx-koala/src/lib/shared/components/token/token.service';
 import * as jwtEncode from 'jwt-encode';
 import { DynamicFormService } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/dynamic-form.service';
+import { PageAnimation } from '../../../../ngx-koala/src/lib/shared/components/page/animations/page.animation';
 
 @Component({
   templateUrl: 'page-login.component.html',
-  styleUrls: ['page-login.component.css']
+  styleUrls: ['page-login.component.css'],
+  animations: [PageAnimation]
 })
 export class PageLoginComponent extends FormAbstract implements OnInit {
   public formLogin: FormGroup;

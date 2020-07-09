@@ -6,9 +6,11 @@ import { CountriesInterface } from './countries.interface';
 import { ListItemMenuOptionInterface } from '../../../../ngx-koala/src/lib/shared/components/list/list.item-menu-option.interface';
 import { ListFilterInterface } from '../../../../ngx-koala/src/lib/shared/components/list/list.filter.interface';
 import { DynamicFormTypeFieldEnum } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/enums/dynamic-form-type-field.enum';
+import { PageAnimation } from '../../../../ngx-koala/src/lib/shared/components/page/animations/page.animation';
 
 @Component({
-  templateUrl: 'page-list.component.html'
+  templateUrl: 'page-list.component.html',
+  animations: [PageAnimation]
 })
 export class PageListComponent implements OnInit {
   public formData: FormGroup;
