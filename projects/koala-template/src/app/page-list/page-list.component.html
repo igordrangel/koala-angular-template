@@ -2,7 +2,7 @@
   [columnsToShowInList]="collumns"
   [itemsList]="itensList"
   [itensMenuListOptions]="itensMenuListOptions"
-  (filterParams)="filter = $event"
+  [filterParams]="filter"
   [request]="buscar()"
   [filterFormConfig]="filterConfig"
   customFolderFontColor="#1976D2"
@@ -10,6 +10,6 @@
   titlePage="List"
   typeRequest="all">
   <div menu-page>
-    <koala-button color="blue" icon="add" tooltip="Inserir"></koala-button>
+    <koala-button (click)="dialogList()" color="blue" icon="add" tooltip="Inserir"></koala-button>
   </div>
 </koala-list>

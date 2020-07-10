@@ -7,7 +7,9 @@ export class PageListService {
   constructor(private http: HttpClient) {
   }
 
-  public get() {
-    return this.http.get('https://restcountries.eu/rest/v2/all');
+  public get(params?: any) {
+    return this.http.get('https://restcountries.eu/rest/v2/all', {
+      params
+    });
   }
 }

@@ -2,12 +2,12 @@ import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChi
 import { ListAbstract } from './list.abstract';
 import { ListItemInterface } from './list.item.interface';
 import { ListItemMenuOptionInterface } from './list.item-menu-option.interface';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ListFilterInterface } from './list.filter.interface';
-import { DynamicFormService } from '../form/dynamic-form/dynamic-form.service';
 import { KoalaObjectHelper } from 'tskoala-helpers/dist/object/koala-object.helper';
 import { KoalaDelayHelper } from 'tskoala-helpers/dist/delay/koala-delay.helper';
+import { KoalaDynamicFormService } from '../../services/dynamic-forms/koala.dynamic-form.service';
 
 @Component({
   selector: 'koala-list',
@@ -23,7 +23,7 @@ export class ListComponent extends ListAbstract implements OnInit, OnChanges {
   @Input() columnSort: string;
   @Input() itensMenuListOptions: ListItemMenuOptionInterface[];
   @Input() itemsList: ListItemInterface[];
-  @Input() request: Observable<any> | Promise<any>;
+  @Input() request: Observable<any>;
   @Input() responseIndexName: string;
   @Input() responseQtdResultIndexName: (response: any) => number;
   @Input() typeRequest: 'all' | 'onDemand';
@@ -39,7 +39,7 @@ export class ListComponent extends ListAbstract implements OnInit, OnChanges {
 
   constructor(
     private fb: FormBuilder,
-    private dynamicFormService: DynamicFormService
+    private dynamicFormService: KoalaDynamicFormService
   ) {
     super(
       () => this.request,
@@ -86,17 +86,15 @@ export class ListComponent extends ListAbstract implements OnInit, OnChanges {
   public async filterSubmit() {
     this.showAdvancedFilter = false;
     await KoalaDelayHelper.waitFor(1);
-    const formArray = this.formSearch.get('formData') as FormArray;
-    const formArrayAdvanced = this.formAdvancedSearch.get('formData') as FormArray;
     let dados = KoalaObjectHelper.merge(
-      this.dynamicFormService.emitData(formArray),
-      this.dynamicFormService.emitData(formArrayAdvanced)
+      this.dynamicFormService.emitData(this.formSearch),
+      this.dynamicFormService.emitData(this.formAdvancedSearch)
     );
     if (this.filterFormConfig?.checkAndSearch) {
       const controlName = this.filterFormConfig.checkAndSearch.formControlName;
       dados[controlName] = this.formSearch.get(controlName).value;
     }
-    super.search(dados);
+    await super.search(dados);
   }
 
   public toogleFilter() {

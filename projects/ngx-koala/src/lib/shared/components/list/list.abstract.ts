@@ -1,13 +1,14 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { AfterViewInit, EventEmitter, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Input, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { merge, Observable } from 'rxjs';
+import { BehaviorSubject, merge, Observable } from 'rxjs';
 import { FormAbstract } from '../../../core/form.abstract';
 import { FormGroup } from '@angular/forms';
 import { KoalaDelayHelper } from 'tskoala-helpers/dist/delay/koala-delay.helper';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
+import { ListFormFilterInterface } from './list.form-filter.interface';
 
 export abstract class ListAbstract extends FormAbstract implements AfterViewInit {
   public selection = new SelectionModel<object>(true, []);
@@ -17,14 +18,13 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
   public qtdListResult = 0;
   public dataSource = new MatTableDataSource<any>([]);
   public typeRequest: 'all' | 'onDemand' = 'onDemand';
+  @Input() filterParams = new BehaviorSubject<ListFormFilterInterface>(null);
 
-  @Output() filterParams = new EventEmitter<any>(null);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  private searchEmmiter = new EventEmitter<boolean>(null);
 
   protected constructor(
-    private requestFunction: <F>(filter?: F) => Observable<any> | Promise<any>,
+    private requestFunction: () => Observable<any>,
     private requestResponseFunction: <T>(results: T[]) => void,
     private requestErrorFunction: () => any,
     formSearch: () => FormGroup
@@ -67,13 +67,18 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
     }, 50);
   }
 
-  public search(filter?: any) {
+  public async search(filter?: any) {
     this.loading(true);
     this.selection.clear();
     if (this.paginator) {
       this.paginator.firstPage();
     }
-    this.filterParams.emit(filter);
+    this.filterParams.next({
+      params: filter,
+      sort: this.sort.active,
+      order: this.sort.direction,
+      page: this.paginator.pageIndex
+    });
   }
 
   private prepareSearch() {
@@ -82,18 +87,20 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
 
       merge(this.sort.sortChange, this.paginator.page, this.filterParams).pipe(
         startWith({}),
+        debounceTime(300),
         switchMap(this.requestFunction),
         map((response) => {
           this.loading(false);
           return this.requestResponseFunction(response);
         }),
         catchError(this.requestErrorFunction)
-      ).subscribe(() => this.loading(false));
+      ).subscribe();
     } else {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.filterParams.pipe(
         startWith({}),
+        debounceTime(300),
         switchMap(this.requestFunction),
         map((response) => {
           this.loading(false);

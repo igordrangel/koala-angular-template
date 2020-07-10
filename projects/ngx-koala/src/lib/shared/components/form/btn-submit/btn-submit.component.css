@@ -1,2 +1,3 @@
 .mat-spinner {display: inline-block;margin-left: 8px;}
 .koala-button {padding: 2px 8px;}
+.koala-icon-button mat-spinner {position: relative;display: inline-flex;margin: 0;}

@@ -6,11 +6,13 @@ import { CountriesInterface } from './countries.interface';
 import { ListItemMenuOptionInterface } from '../../../../ngx-koala/src/lib/shared/components/list/list.item-menu-option.interface';
 import { ListFilterInterface } from '../../../../ngx-koala/src/lib/shared/components/list/list.filter.interface';
 import { DynamicFormTypeFieldEnum } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/enums/dynamic-form-type-field.enum';
-import { PageAnimation } from '../../../../ngx-koala/src/lib/shared/components/page/animations/page.animation';
+import { BehaviorSubject } from 'rxjs';
+import { ListFormFilterInterface } from '../../../../ngx-koala/src/lib/shared/components/list/list.form-filter.interface';
+import { KoalaDialogService } from '../../../../ngx-koala/src/lib/shared/services/dialog/koala.dialog.service';
+import { DialogPageListComponent } from './forms/insert/dialog-page-list.component';
 
 @Component({
-  templateUrl: 'page-list.component.html',
-  animations: [PageAnimation]
+  templateUrl: 'page-list.component.html'
 })
 export class PageListComponent implements OnInit {
   public formData: FormGroup;
@@ -18,34 +20,40 @@ export class PageListComponent implements OnInit {
   public itensList: ListItemInterface[];
   public itensMenuListOptions: ListItemMenuOptionInterface[];
   public filterConfig: ListFilterInterface;
-  public filter: any;
+  public filter = new BehaviorSubject<ListFormFilterInterface>(null);
 
   constructor(
     private fb: FormBuilder,
-    private pageListService: PageListService
+    private pageListService: PageListService,
+    private dialogService: KoalaDialogService
   ) {
     this.itensList = [
       {
         label: 'Name',
         columnDef: 'name',
         itemNameProperty: (countrie: CountriesInterface) => countrie.name,
-        dblClick: this.editar
+        dblClick: <CountriesInterface>(countrie) => this.dialogList(countrie)
       },
       {
         label: 'Capital',
         columnDef: 'capital',
         itemNameProperty: (countrie: CountriesInterface) => countrie.capital,
-        dblClick: this.editar
+        dblClick: <CountriesInterface>(countrie) => this.dialogList(countrie)
       },
       {
         label: 'Region',
         columnDef: 'region',
         itemNameProperty: (countrie: CountriesInterface) => countrie.region,
-        dblClick: this.editar
+        dblClick: <CountriesInterface>(countrie) => this.dialogList(countrie)
       }
     ];
     this.itensMenuListOptions = [
-      {icon: 'edit', name: 'Editar', action: this.editar, havePermission: true}
+      {
+        icon: 'edit',
+        name: 'Editar',
+        action: <CountriesInterface>(countrie) => this.dialogList(countrie),
+        havePermission: true
+      }
     ]
     this.filterConfig = {
       main: [
@@ -67,11 +75,17 @@ export class PageListComponent implements OnInit {
   }
 
   public buscar() {
-    console.log(this.filter);
-    return this.pageListService.get();
+    const filter = this.filter?.value;
+    return this.pageListService.get(filter?.params);
   }
 
-  public editar(countrie: CountriesInterface) {
-    console.log(countrie);
+  public dialogList(countrie?: CountriesInterface) {
+    this.dialogService.open(
+      DialogPageListComponent,
+      'small',
+      countrie,
+      'reloadList',
+      () => this.buscar()
+    );
   }
 }

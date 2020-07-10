@@ -4,7 +4,7 @@ import * as jwt from 'jwt-decode';
 import { environment } from '../../../../../../koala-template/src/environments/environment.prod';
 
 @Injectable()
-export class TokenService {
+export class KoalaTokenService {
   readonly storageName: string;
   private tokenSubject = new BehaviorSubject<string>(null);
 

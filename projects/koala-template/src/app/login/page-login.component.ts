@@ -1,17 +1,16 @@
+import * as jwtEncode from 'jwt-encode';
+
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { DynamicFormFieldInterface } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/dynamic-form-field.interface';
 import { DynamicFormTypeFieldEnum } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/enums/dynamic-form-type-field.enum';
 import { FormAbstract } from '../../../../ngx-koala/src/lib/core/form.abstract';
-import { TokenService } from '../../../../ngx-koala/src/lib/shared/components/token/token.service';
-import * as jwtEncode from 'jwt-encode';
-import { DynamicFormService } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/dynamic-form.service';
-import { PageAnimation } from '../../../../ngx-koala/src/lib/shared/components/page/animations/page.animation';
+import { KoalaTokenService } from '../../../../ngx-koala/src/lib/shared/services/token/koala.token.service';
+import { KoalaDynamicFormService } from '../../../../ngx-koala/src/lib/shared/services/dynamic-forms/koala.dynamic-form.service';
 
 @Component({
   templateUrl: 'page-login.component.html',
-  styleUrls: ['page-login.component.css'],
-  animations: [PageAnimation]
+  styleUrls: ['page-login.component.css']
 })
 export class PageLoginComponent extends FormAbstract implements OnInit {
   public formLogin: FormGroup;
@@ -20,8 +19,8 @@ export class PageLoginComponent extends FormAbstract implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private tokenService: TokenService,
-    private dynamicFormService: DynamicFormService
+    private tokenService: KoalaTokenService,
+    private dynamicFormService: KoalaDynamicFormService
   ) {
     super(() => this.formLogin);
   }
@@ -50,7 +49,7 @@ export class PageLoginComponent extends FormAbstract implements OnInit {
 
   public submit() {
     this.loading(true, 'Autenticando...');
-    const data = this.dynamicFormService.emitData(this.formLogin.get('formData') as FormArray) as any;
+    const data = this.dynamicFormService.emitData(this.formLogin) as any;
     setTimeout(() => {
       this.tokenService.setToken(jwtEncode({
         id: 1,
