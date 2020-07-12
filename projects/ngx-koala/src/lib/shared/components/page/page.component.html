@@ -19,14 +19,36 @@
       <mat-icon>menu</mat-icon>
     </button>
     <span class="spacer"></span>
-    <button [color]="color" class="btn-toolbar" mat-icon-button>
-      <mat-icon>notifications</mat-icon>
-    </button>
+    <div *ngIf="(notifications | async) as notificationList">
+      <button *ngIf="notifications" [color]="color" [matMenuTriggerFor]="notificationsMenu" class="btn-toolbar"
+              mat-icon-button>
+        <mat-icon
+          [matBadgeHidden]="notificationList.length === 0"
+          [matBadge]="notificationList.length.toString()"
+          matBadgeColor="warn">notifications
+        </mat-icon>
+      </button>
+      <mat-menu #notificationsMenu="matMenu" class="menu-list" yPosition="below">
+        <koala-notification-list
+          (delete)="deleteNotification.emit($event)"
+          (deleteAll)="deleteAllNotifications.emit($event)"
+          [notifications]="notificationList">
+        </koala-notification-list>
+      </mat-menu>
+    </div>
     <button [color]="color" [matMenuTriggerFor]="userOptions" class="btn-toolbar" mat-button>
       <span>{{username}}</span>
       <span class="icon-user">{{firstUserLetter}}</span>
     </button>
-    <mat-menu #userOptions="matMenu" class="menu-list" yPosition="below">
+    <mat-menu #userOptions="matMenu" class="user-menu menu-list" yPosition="below">
+      <div class="user-presentation">
+        <span class="icon-user">{{firstUserLetter}}</span><br/>
+        <span class="username">{{username}}</span>
+      </div>
+      <button (click)="btn.action" *ngFor="let btn of userMenuOptions" mat-menu-item>
+        <mat-icon>{{btn.icon}}</mat-icon>
+        <span>{{btn.name}}</span>
+      </button>
       <button (click)="logout()" mat-menu-item>
         <mat-icon>exit_to_app</mat-icon>
         <span>Sair</span>

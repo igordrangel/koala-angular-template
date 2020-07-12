@@ -1,0 +1,27 @@
+<div (click)="$event.stopPropagation()" class="notifications-content">
+  <div class="title">
+    <mat-icon>info</mat-icon>
+    <h2>Notificações</h2>
+    <span class="spacer"></span>
+    <button (click)="deleteAllNotifications()" *ngIf="notifications.length > 0" class="btn-delete-all" mat-icon-button>
+      <mat-icon>delete_sweep</mat-icon>
+    </button>
+  </div>
+  <mat-action-list *ngIf="notifications.length > 0 else noNotifications">
+    <mat-list-item *ngFor="let notification of notifications" [routerLink]="notification.redirectTo">
+      <button (click)="deleteNotification(notification)" class="delete-notification" color="warn" mat-icon-button
+              mat-list-icon>
+        <mat-icon>delete</mat-icon>
+      </button>
+      <mat-icon class="iconList" mat-list-icon>announcement</mat-icon>
+      <h4 class="titleList" mat-line>{{notification.title}}</h4>
+      <p [innerHTML]="notification.text" class="textList" mat-line></p>
+    </mat-list-item>
+  </mat-action-list>
+  <ng-template #noNotifications>
+    <div class="empty">
+      <mat-icon>mood</mat-icon>
+      <p>Tudo certo por aqui!</p>
+    </div>
+  </ng-template>
+</div>

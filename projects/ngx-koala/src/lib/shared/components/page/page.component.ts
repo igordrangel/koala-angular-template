@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { LoaderBarPageInterface } from '../loader/loader-bar-page.interface';
 import { BehaviorSubject } from 'rxjs';
 import { KoalaTokenService } from '../../services/token/koala.token.service';
 import { KoalaLoaderService } from '../../services/loader/koala.loader.service';
+import { KoalaNotificationInterface } from '../notifications/koala.notification.interface';
+import { KoalaUserMenuOptionsInterface } from './koala.user-menu-options.interface';
 
 @Component({
   selector: 'koala-page',
@@ -20,6 +22,10 @@ export class PageComponent implements OnInit {
   @Input() messageLoaderPage: BehaviorSubject<string>;
   @Input() defaultPage: string;
   @Input() openPages: string[];
+  @Input() notifications: BehaviorSubject<KoalaNotificationInterface[]>;
+  @Input() userMenuOptions: KoalaUserMenuOptionsInterface[] = [];
+  @Output() deleteAllNotifications = new EventEmitter<boolean>(false);
+  @Output() deleteNotification = new EventEmitter<KoalaNotificationInterface>(null);
   public logged: boolean;
   public loader: LoaderBarPageInterface;
   public username: string;

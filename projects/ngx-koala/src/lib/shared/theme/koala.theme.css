@@ -111,6 +111,10 @@ p {margin: 0 !important;}
 .col-11 {flex: 0 0 calc((100% * 11) / 12);max-width: calc((100% * 11) / 12);}
 .col-12 {flex: 0 0 100%;max-width: 100%;}
 /*****************************************
+ ************** MENU USER ****************
+ *****************************************/
+.user-menu .mat-menu-content {padding-top: 0 !important;}
+/*****************************************
  **************** DIALOG *****************
  *****************************************/
 .koala-dialog {height: auto;max-width: 100% !important;width: 100%;}

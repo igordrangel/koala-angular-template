@@ -11,16 +11,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoaderBarPageComponent } from './shared/components/loader/loader-bar-page.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatMenuModule } from '@angular/material/menu';
+import { NotificationComponent } from './shared/components/notifications/notification.component';
+import { MatBadgeModule } from '@angular/material/badge';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     PageComponent,
+    NotificationComponent,
     LoaderBarPageComponent
   ],
   imports: [
     CommonModule,
+    RouterModule,
     HttpClientModule,
     KoalaFormModule,
+    MatBadgeModule,
     MatProgressBarModule,
     MatToolbarModule,
     MatButtonModule,

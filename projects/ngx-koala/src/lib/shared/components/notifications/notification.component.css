@@ -1,0 +1,14 @@
+.notifications-content {}
+.title {color: #616161;padding: 5px 20px 15px;}
+.title h2 {vertical-align: middle;display: inline-flex;padding: 0 10px;margin: 0;font-family: OpenSans, sans-serif;font-size: .8em;}
+.title mat-icon {vertical-align: middle;display: inline-flex;width: 22px;height: 22px;font-size: 22px;line-height: 22px;}
+.title .btn-delete-all {position: absolute;right: 20px;top: 5px;}
+.iconList {color: #1976D2;}
+.titleList {font-family: OpenSansLight, sans-serif;font-size: .7em !important;color: #616161;}
+.textList {font-family: OpenSans, sans-serif;font-size: .9em !important;color: #212121;white-space: unset !important;}
+.delete-notification {position: relative;margin-left: -42px;margin-right: 10px;transition: .3s;}
+.delete-notification mat-icon {vertical-align: top;}
+mat-list-item:hover .delete-notification {margin-left: 0;}
+.empty {padding: 50px;text-align: center;color: #616161;}
+.empty mat-icon {width: 40px;height: 40px;font-size: 40px;line-height: 40px;}
+.empty p {text-align: center;font-family: OpenSansLight, sans-serif;font-size: 1em;}
