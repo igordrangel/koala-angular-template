@@ -49,6 +49,8 @@ button:focus {outline: none !important;}
 .button-size-24 {font-size: 24px;height: 24px;line-height: 24px;width: 24px;}
 .button-size-26 {font-size: 26px;height: 26px;line-height: 26px;width: 26px;}
 .button-size-28 {font-size: 28px;height: 28px;line-height: 28px;width: 28px;}
+.mat-raised-button {border-radius: 0 !important;box-shadow: none !important;}
+.mat-raised-button.mat-primary {background: #1976D2;}
 .group-buttons {margin: 20px auto;}
 .inline-buttons button {margin-right: 8px;}
 .inline-buttons button:last-child {margin-right: 0;}
@@ -60,8 +62,8 @@ input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hov
 .mat-checkbox-mixedmark {background-color: #FFF;}
 .mat-checkbox-frame {border-color: #1976D2;}
 .line-checkbox .mat-checkbox {margin: 0 10px 0 0;}
-.mat-radio-outer-circle {border-color: #01579B !important;}
-.mat-radio-ripple .mat-ripple-element, .mat-radio-inner-circle {background-color: #01579B !important;}
+.mat-radio-outer-circle {border-color: #1976D2 !important;}
+.mat-radio-ripple .mat-ripple-element, .mat-radio-inner-circle {background-color: #1976D2 !important;}
 .mat-form-field-suffix {margin: 0 10px;}
 .mat-form-field-suffix .mat-spinner,
 .mat-form-field-suffix .mat-spinner svg {height: 20px !important;width: 20px !important;}
@@ -73,12 +75,12 @@ input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hov
 .btn-green {background: #43A047;color: #FFF;}
 .fa-dropdown-list {margin-right: 20px;}
 .link {color: #1565C0;font-family: 'Josefin Sans', sans-serif;font-weight: bold;text-decoration: none;}
-.mat-chip.mat-primary {background: #014B84;color: #FFF;}
+.mat-chip.mat-primary {background: #1976D2;color: #FFF;}
 .mat-chip.mat-warn {background: #B71C1C;color: #FFF;}
 .mat-chip.mat-primary .mat-icon.mat-chip-remove,
 .mat-chip.mat-warn .mat-icon.mat-chip-remove {color: rgba(255, 255, 255, .87);}
-.home-list-cards .list .mat-list-item-content .mat-icon {color: #01579B;}
-.home-list-cards .list button .mat-badge-content {background: #01579B;font-size: 12px;height: 27px;line-height: 27px;right: 20px !important;top: 9px;width: 27px;}
+.home-list-cards .list .mat-list-item-content .mat-icon {color: #1976D2;}
+.home-list-cards .list button .mat-badge-content {background: #1976D2;font-size: 12px;height: 27px;line-height: 27px;right: 20px !important;top: 9px;width: 27px;}
 p {margin: 0 !important;}
 /****************************************
  ***************** GRID *****************
@@ -124,5 +126,5 @@ p {margin: 0 !important;}
 /*****************************************
  ************** MENU LIST ****************
  *****************************************/
-.list-container nav.menu-list ul.menu li button.koala-icon-button {width: 20px;height: 20px;line-height: 20px;}
-.list-container nav.menu-list ul.menu li button.koala-icon-button mat-icon {width: 21px;height: 18px;line-height: 17px;font-size: 18px;}
+.list-container nav.menu-list ul.menu li button.koala-icon-button {width: 30px;height: 30px;line-height: 30px;}
+.list-container nav.menu-list ul.menu li button.koala-icon-button mat-icon {width: 22px;height: 22px;line-height: 22px;font-size: 22px;vertical-align: middle;}

@@ -11,11 +11,11 @@ export const KOALA_LOADER_SUBJECT = new BehaviorSubject<LoaderBarPageInterface>(
 @Injectable({providedIn: "root"})
 export class KoalaLoaderService {
 
-  public static getLoaderSubject() {
+  public getLoaderSubject() {
     return KOALA_LOADER_SUBJECT;
   }
 
-  public static create(loaderConfig?: {
+  public create(loaderConfig?: {
     progress?: number;
     typeLoader?: "buffer" | "determinate" | "query" | "indeterminate"
   }) {
@@ -26,7 +26,7 @@ export class KoalaLoaderService {
     });
   }
 
-  public static dismiss() {
+  public dismiss() {
     KOALA_LOADER_SUBJECT.next({
       show: false,
       progress: 0,

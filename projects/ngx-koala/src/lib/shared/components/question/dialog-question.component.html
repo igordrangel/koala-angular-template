@@ -1,0 +1,10 @@
+<div mat-dialog-content>
+  <div class="question">
+    <mat-icon>help</mat-icon>
+    <p [innerHTML]="message" class="alert-message text-center"></p>
+  </div>
+</div>
+<div align="center" mat-dialog-actions>
+  <button [mat-dialog-close]="{question: true}" color="primary" mat-raised-button>Sim</button>
+  <button [mat-dialog-close]="{question: false}" color="warn" mat-raised-button>Não</button>
+</div>

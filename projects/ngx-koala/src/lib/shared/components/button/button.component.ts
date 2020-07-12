@@ -6,7 +6,8 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['button.component.css']
 })
 export class ButtonComponent {
-  @Input() color: 'blue' | 'red' | 'yellow' | 'black' | 'green';
+  @Input() color: 'blue' | 'red' | 'gray' | 'white' = 'white';
+  @Input() backgroundColor: 'blue' | 'red' | 'gray' | 'white' | 'transparent' = 'blue';
   @Input() icon: string;
   @Input() text: string;
   @Input() tooltip: string;

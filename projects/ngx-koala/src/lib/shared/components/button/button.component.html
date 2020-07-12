@@ -13,7 +13,10 @@
   <button
     [matTooltipDisabled]="!tooltip"
     [matTooltip]="tooltip"
-    [ngClass]="color"
+    [ngClass]="[
+      'c-'+color,
+      'b-'+backgroundColor
+    ]"
     class="koala-icon-button"
     mat-icon-button
     matTooltipPosition="before"

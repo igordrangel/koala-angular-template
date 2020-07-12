@@ -7,6 +7,10 @@ import { KoalaDialogModule } from '../../../../ngx-koala/src/lib/shared/componen
 import { KoalaDialogService } from '../../../../ngx-koala/src/lib/shared/services/dialog/koala.dialog.service';
 import { KoalaFormModule } from '../../../../ngx-koala/src/lib/shared/components/form/koala.form.module';
 import { DialogPageListComponent } from './forms/insert/dialog-page-list.component';
+import { KoalaQuestionModule } from '../../../../ngx-koala/src/lib/shared/components/question/koala.question.module';
+import { KoalaQuestionService } from '../../../../ngx-koala/src/lib/shared/services/question/koala.question.service';
+import { KoalaAlertService } from '../../../../ngx-koala/src/lib/shared/services/alert/koala.alert.service';
+import { KoalaAlertModule } from '../../../../ngx-koala/src/lib/shared/components/alert/koala.alert.module';
 
 @NgModule({
   declarations: [
@@ -17,12 +21,16 @@ import { DialogPageListComponent } from './forms/insert/dialog-page-list.compone
     ListModule,
     KoalaFormModule,
     KoalaDialogModule,
+    KoalaQuestionModule,
+    KoalaAlertModule,
     KoalaButtonModule,
     PageListRoutingModule
   ],
   exports: [],
   providers: [
-    KoalaDialogService
+    KoalaDialogService,
+    KoalaAlertService,
+    KoalaQuestionService
   ]
 })
 export class PageListModule {

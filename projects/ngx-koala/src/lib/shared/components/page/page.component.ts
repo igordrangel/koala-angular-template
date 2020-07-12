@@ -27,9 +27,10 @@ export class PageComponent implements OnInit {
 
   constructor(
     private tokenService: KoalaTokenService,
-    private router: Router
+    private router: Router,
+    private loaderService: KoalaLoaderService
   ) {
-    KoalaLoaderService.getLoaderSubject().subscribe(loader => {
+    loaderService.getLoaderSubject().subscribe(loader => {
       if (loader) {
         this.loader = loader
       }
@@ -52,14 +53,14 @@ export class PageComponent implements OnInit {
     this.router.events.subscribe(event => {
       switch (true) {
         case event instanceof NavigationStart: {
-          KoalaLoaderService.create({typeLoader: "indeterminate"});
+          this.loaderService.create({typeLoader: "indeterminate"});
           break;
         }
 
         case event instanceof NavigationEnd:
         case event instanceof NavigationCancel:
         case event instanceof NavigationError: {
-          KoalaLoaderService.dismiss();
+          this.loaderService.dismiss();
           if (this.logged && this.defaultPage && this.openPages?.indexOf(this.router.url) >= 0) {
             this.router.navigate([this.defaultPage]).then();
             return false;

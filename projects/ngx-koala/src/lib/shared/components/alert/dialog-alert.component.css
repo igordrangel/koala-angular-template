@@ -1,0 +1,8 @@
+.content {color: #616161;}
+.content .alert-message {display: inline-block;margin: 15px auto;font-family: OpenSans, sans-serif;font-weight: bold;}
+.content mat-icon {position: relative;display: block;margin: 15px auto;width: 60px;height: 60px;font-size: 60px;}
+.content mat-icon.success {color: #4CAF50;}
+.content mat-icon.notFound {color: #2196F3;}
+.content mat-icon.error {color: #E53935;}
+.content mat-icon.badRequest {color: #FFC107;}
+.content mat-icon.unhautorized {color: #FF9800;}

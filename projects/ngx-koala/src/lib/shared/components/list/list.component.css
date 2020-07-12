@@ -47,7 +47,7 @@ nav.menu-folder {position: absolute;right: 0;top: 0;z-index: 4;padding: 7px 30px
 .list-container .list-filter .advanced.show {height: 360px;}
 .list-container nav.menu-list {background: #FFF;color: rgba(25, 118, 210, .3);height: 40px;margin: 0;padding: 0;position: relative;transition: .2s;width: 100%;z-index: 2;}
 .list-container nav.menu-list ul.menu {float: left;font-size: 0;list-style: none;margin: 0;padding: 5px 10px;position: relative;text-align: left;}
-.list-container nav.menu-list ul.menu li {display: inline-block;font-size: 16px;color: #DDD;padding: 5px 8px;}
+.list-container nav.menu-list ul.menu li {display: inline-block;font-size: 16px;color: #DDD;padding: 0 4px;}
 .list-container nav.menu-list ul.menu li button.mat-button,
 .list-container nav.menu-list ul.menu li button.koala-icon-button {display: inline-block;}
 .list-container mat-paginator {position: absolute;top: -8px;right: 0;background: transparent !important;z-index: 2;}

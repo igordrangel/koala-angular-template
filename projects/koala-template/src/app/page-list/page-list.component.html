@@ -5,18 +5,31 @@
   [filterParams]="filter"
   [request]="buscar()"
   [filterFormConfig]="filterConfig"
+  (getDataSource)="countries = $event"
+  (getSelection)="selection = $event"
   customFolderFontColor="#1976D2"
   titleIcon="list_alt"
   titlePage="List"
   typeRequest="all">
   <div menu-page>
-    <koala-button (click)="dialogList()" color="blue" icon="add" tooltip="Inserir"></koala-button>
+    <koala-button (click)="dialogList()" color="white" icon="add" tooltip="Inserir"></koala-button>
   </div>
   <div itemsSelectList>
     <koala-button
+      (click)="actionList()"
+      backgroundColor="white"
       color="blue"
-      icon="add"
-      tooltip="Add">
+      icon="delete_forever"
+      tooltip="Delete Forever">
+    </koala-button>
+  </div>
+  <div itemsList>
+    <koala-button
+      (click)="downloadList()"
+      backgroundColor="white"
+      color="blue"
+      icon="assignment_returned"
+      tooltip="Download List (CSV)">
     </koala-button>
   </div>
 </koala-list>

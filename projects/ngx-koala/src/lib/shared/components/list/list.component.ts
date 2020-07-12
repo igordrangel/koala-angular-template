@@ -1,4 +1,14 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import { ListAbstract } from './list.abstract';
 import { ListItemInterface } from './list.item.interface';
 import { ListItemMenuOptionInterface } from './list.item-menu-option.interface';
@@ -8,6 +18,7 @@ import { ListFilterInterface } from './list.filter.interface';
 import { KoalaObjectHelper } from 'tskoala-helpers/dist/object/koala-object.helper';
 import { KoalaDelayHelper } from 'tskoala-helpers/dist/delay/koala-delay.helper';
 import { KoalaDynamicFormService } from '../../services/dynamic-forms/koala.dynamic-form.service';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'koala-list',
@@ -30,6 +41,8 @@ export class ListComponent extends ListAbstract implements OnInit, OnChanges {
   @Input() filterFormConfig: ListFilterInterface;
   @Input() error = () => {
   };
+  @Output() getSelection = new EventEmitter<SelectionModel<object>>(null);
+  @Output() getDataSource = new EventEmitter<any[]>(null);
   @ViewChild('folder', {static: true}) private folder: ElementRef;
   @ViewChild('folderTitle', {static: true}) private folderTitle: ElementRef;
 
@@ -47,6 +60,7 @@ export class ListComponent extends ListAbstract implements OnInit, OnChanges {
         this.dataSource.data = this.responseIndexName ?
           response[this.responseIndexName] :
           response;
+        this.getDataSource.emit(this.dataSource.data);
         this.qtdListResult = this.responseQtdResultIndexName ?
           this.responseQtdResultIndexName(response) :
           this.dataSource.data.length;
@@ -75,6 +89,7 @@ export class ListComponent extends ListAbstract implements OnInit, OnChanges {
       }
     }
     this.setCustomBackgroundColor();
+    this.getSelection.emit(this.selection);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
