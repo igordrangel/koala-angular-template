@@ -6,7 +6,8 @@ import { ThemePalette } from '@angular/material/core';
   templateUrl: 'dialog.component.html'
 })
 export class DialogComponent {
-  @Input() title: string;
+  @Input() titleDialog: string;
+  @Input() iconTitleDialog: string;
   @Input() triggerDialogClose: string;
   @Input() btnCloseLabel: string;
   @Input() btnCloseColor: ThemePalette;

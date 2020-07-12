@@ -1,5 +1,12 @@
-<h1 mat-dialog-title>{{title}}</h1>
-<ng-content mat-dialog-content select="[dialog-content]"></ng-content>
+<div *ngIf="titleDialog" mat-dialog-title>
+  <mat-icon *ngIf="iconTitleDialog">{{iconTitleDialog}}</mat-icon>
+  <h2>
+    {{titleDialog}}
+  </h2>
+</div>
+<mat-dialog-content>
+  <ng-content select="[dialog-content]"></ng-content>
+</mat-dialog-content>
 <div align="end" mat-dialog-actions>
   <button [color]="btnCloseColor" [mat-dialog-close]="triggerDialogClose" class="mr-8" mat-button>
     {{btnCloseLabel}}

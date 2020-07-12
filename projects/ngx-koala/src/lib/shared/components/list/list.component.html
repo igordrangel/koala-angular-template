@@ -48,6 +48,15 @@
       </form>
     </div>
     <nav class="menu-list">
+      <ul class="menu">
+        <li *ngIf="selection.hasValue()">
+          <ng-content select="[itemsSelectList]"></ng-content>
+        </li>
+        <li *ngIf="selection.hasValue()" class="text-center">|</li>
+        <li>
+          <ng-content select="[itemsList]"></ng-content>
+        </li>
+      </ul>
       <mat-paginator
         [length]="qtdListResult"
         [pageSizeOptions]="limitOptions"

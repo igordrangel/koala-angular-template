@@ -108,3 +108,21 @@ p {margin: 0 !important;}
 .col-10 {flex: 0 0 calc((100% * 10) / 12);max-width: calc((100% * 10) / 12);}
 .col-11 {flex: 0 0 calc((100% * 11) / 12);max-width: calc((100% * 11) / 12);}
 .col-12 {flex: 0 0 100%;max-width: 100%;}
+/*****************************************
+ **************** DIALOG *****************
+ *****************************************/
+.koala-dialog {height: auto;max-width: 100% !important;width: 100%;}
+.koala-dialog.small {width: 35%;}
+.koala-dialog.normal {width: 50%;}
+.koala-dialog.big {width: 75%;}
+.koala-dialog .mat-dialog-container {overflow: hidden;padding: 0;border-radius: 0;}
+.koala-dialog .mat-dialog-title {height: 20px;margin: 0;padding: 10px 20px 0;z-index: 2}
+.koala-dialog .mat-dialog-title h2 {display: inline-block;color: #1976D2;font-family: OpenSansLight, sans-serif;font-size: .7em;margin: 0;padding: 0 8px;position: relative;text-align: left;top: -5px;}
+.koala-dialog .mat-dialog-title mat-icon {position: relative;display: inline-block;top: 1px;width: 22px;height: 22px;line-height: 22px;font-size: 22px;color: #1976D2;}
+.koala-dialog .mat-dialog-content {margin: 0;padding: 20px;}
+.koala-dialog .mat-dialog-actions {padding: 0 20px 20px;margin: 0;}
+/*****************************************
+ ************** MENU LIST ****************
+ *****************************************/
+.list-container nav.menu-list ul.menu li button.koala-icon-button {width: 20px;height: 20px;line-height: 20px;}
+.list-container nav.menu-list ul.menu li button.koala-icon-button mat-icon {width: 21px;height: 18px;line-height: 17px;font-size: 18px;}
