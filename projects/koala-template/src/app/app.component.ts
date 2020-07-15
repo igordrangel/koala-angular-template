@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { KoalaNotificationInterface } from '../../../ngx-koala/src/lib/shared/components/notifications/koala.notification.interface';
 import { KoalaUserMenuOptionsInterface } from '../../../ngx-koala/src/lib/shared/components/page/koala.user-menu-options.interface';
+import { KoalaMenuModuleInterface } from '../../../ngx-koala/src/lib/shared/components/menu/koala.menu-module.interface';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,26 @@ export class AppComponent implements OnInit {
     {name: 'Alterar Senha', icon: 'vpn_key', action: this.alterarSenha}
   ]
   public notifications = new BehaviorSubject<KoalaNotificationInterface[]>([]);
+  public menuOptions: KoalaMenuModuleInterface[] = [
+    {
+      icon: 'extension',
+      name: 'Componentes',
+      expanded: false,
+      tools: [
+        {name: 'KoalaPage', routerLink: '/page'},
+        {name: 'KoalaList', routerLink: '/list'}
+      ]
+    },
+    {
+      icon: 'room_service',
+      name: 'Services',
+      expanded: false,
+      tools: [
+        {name: 'KoalaLoaderService', routerLink: '/loader-service'},
+        {name: 'KoalaDynamicFormService', routerLink: '/dynamic-form-service'}
+      ]
+    }
+  ];
 
   ngOnInit() {
     this.getNotifications();

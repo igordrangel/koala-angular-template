@@ -1,0 +1,24 @@
+<nav>
+  <ul>
+    <li
+      (click)="toogle(module)"
+      *ngFor="let module of options"
+      [ngClass]="{
+        expanded: module.expanded,
+        active: module.active
+      }"
+      [routerLink]="module.routerLink">
+      <mat-icon>{{module.icon}}</mat-icon>
+      <h3>{{module.name}}</h3>
+      <mat-icon class="state-module"></mat-icon>
+      <ul>
+        <li
+          *ngFor="let tool of module.tools"
+          [routerLink]="tool.routerLink"
+          routerLinkActive="active">
+          <h4>{{tool.name}}</h4>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>

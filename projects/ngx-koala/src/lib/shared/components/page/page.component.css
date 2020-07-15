@@ -1,7 +1,7 @@
 .menu-container {width: 100vw;height: 100vh;background: #FFF;}
-.menu-options {padding: 20px;width: 250px;background: #FAFAFA;border: none;}
+.menu-options {padding: 20px 0 0;width: 250px;background: #FAFAFA;border: none;}
 .page-content {display: flex;height: 100%;align-items: center;justify-content: center;}
-img#logotipo {position: relative;display: block;margin: 0 auto 20px;width: 120px;height: auto;}
+img#logotipo {position: relative;display: block;margin: 0 auto 40px;width: 120px;height: auto;}
 .toolbar {background: #FFF;box-shadow: none;padding: 0 7px 0 13px;}
 .spacer {flex: 1 1 auto;}
 .btn-toolbar {position: relative;display: inline-block;margin-right: 10px;}

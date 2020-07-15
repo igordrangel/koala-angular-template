@@ -7,6 +7,7 @@ import { KoalaFormModule } from '../../../ngx-koala/src/lib/shared/components/fo
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxKoalaModule } from '../../../ngx-koala/src/lib/ngx-koala.module';
 import { PageLoginComponent } from './login/page-login.component';
+import { KoalaMenuModule } from '../../../ngx-koala/src/lib/shared/components/menu/koala.menu.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { PageLoginComponent } from './login/page-login.component';
     BrowserAnimationsModule,
     NgxKoalaModule,
     KoalaFormModule,
+    KoalaMenuModule,
     AppRoutingModule
   ],
   providers: [],
