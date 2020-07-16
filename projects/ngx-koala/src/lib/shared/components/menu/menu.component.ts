@@ -8,6 +8,7 @@ import { NavigationEnd, Router } from '@angular/router';
   styleUrls: ['menu.component.css']
 })
 export class MenuComponent implements OnInit {
+  @Input() titleMenu: string;
   @Input() options: KoalaMenuModuleInterface[];
 
   constructor(private router: Router) {

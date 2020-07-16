@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { KoalaNotificationInterface } from '../../../ngx-koala/src/lib/shared/components/notifications/koala.notification.interface';
 import { KoalaUserMenuOptionsInterface } from '../../../ngx-koala/src/lib/shared/components/page/koala.user-menu-options.interface';
@@ -22,27 +21,14 @@ export class AppComponent implements OnInit {
       name: 'Componentes',
       expanded: false,
       tools: [
-        {name: 'KoalaPage', routerLink: '/page'},
+        {name: 'Login', routerLink: '/login'},
         {name: 'KoalaList', routerLink: '/list'}
-      ]
-    },
-    {
-      icon: 'room_service',
-      name: 'Services',
-      expanded: false,
-      tools: [
-        {name: 'KoalaLoaderService', routerLink: '/loader-service'},
-        {name: 'KoalaDynamicFormService', routerLink: '/dynamic-form-service'}
       ]
     }
   ];
 
   ngOnInit() {
     this.getNotifications();
-  }
-
-  public prepareRoute(outlet: RouterOutlet) {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 
   public deleteAllNotifications(action: boolean) {

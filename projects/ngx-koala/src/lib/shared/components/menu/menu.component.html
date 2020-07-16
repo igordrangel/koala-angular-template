@@ -1,5 +1,6 @@
 <nav>
-  <ul>
+  <h2 class="title">{{titleMenu}}</h2>
+  <ul class="list-menu">
     <li
       (click)="toogle(module)"
       *ngFor="let module of options"
@@ -10,7 +11,8 @@
       [routerLink]="module.routerLink">
       <mat-icon>{{module.icon}}</mat-icon>
       <h3>{{module.name}}</h3>
-      <mat-icon class="state-module"></mat-icon>
+      <mat-icon
+        class="state-module">{{module.expanded || module.active ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}}</mat-icon>
       <ul>
         <li
           *ngFor="let tool of module.tools"

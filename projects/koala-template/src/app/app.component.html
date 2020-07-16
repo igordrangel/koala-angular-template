@@ -8,9 +8,9 @@
   defaultPage="list"
   logotipo="assets/angular-logotipo.png">
   <div menu-options>
-    <koala-menu [options]="menuOptions"></koala-menu>
+    <koala-menu [options]="menuOptions" titleMenu="Ferramentas"></koala-menu>
   </div>
-  <div [@routeAnimations]="prepareRoute(outlet)" page-content>
-    <router-outlet #outlet="outlet"></router-outlet>
+  <div page-content>
+    <router-outlet></router-outlet>
   </div>
 </koala-page>

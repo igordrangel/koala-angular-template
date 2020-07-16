@@ -14,7 +14,7 @@
     <ng-content select="[menu-options]"></ng-content>
   </mat-drawer>
 
-  <mat-toolbar *ngIf="!!logged" class="toolbar">
+  <mat-toolbar *ngIf="!!logged && username" class="toolbar">
     <button (click)="drawer.toggle()" [color]="color" mat-icon-button>
       <mat-icon>menu</mat-icon>
     </button>
