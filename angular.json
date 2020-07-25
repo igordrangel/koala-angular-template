@@ -65,7 +65,7 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "projects/ngx-koala/src/lib/shared/theme/koala.theme.css"
+              "projects/ngx-koala/theme/koala.theme.css"
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
