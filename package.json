@@ -30,7 +30,7 @@
     "jwt-encode": "^1.0.1",
     "ngx-mask": "^9.1.2",
     "ngx-papaparse": "^4.0.4",
-    "rxjs": "~6.5.4",
+    "rxjs": "~6.6.0",
     "tskoala-helpers": "^1.0.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
