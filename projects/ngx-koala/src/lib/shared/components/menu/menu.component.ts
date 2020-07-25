@@ -22,7 +22,9 @@ export class MenuComponent implements OnInit {
             switch (true) {
               case event instanceof NavigationEnd:
                 this.options.map(module => {
-                  module.active = !!module.tools.find(tool => this.router.url === tool.routerLink);
+                  module.active = module.tools ?
+                    !!module.tools.find(tool => this.router.url === tool.routerLink) :
+                    this.router.url === module.routerLink;
                   return module;
                 });
             }

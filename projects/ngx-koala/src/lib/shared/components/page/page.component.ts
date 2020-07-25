@@ -52,7 +52,7 @@ export class PageComponent implements OnInit {
       }
       if (this.logged && this.defaultPage) {
         this.router.navigate([this.defaultPage]).then();
-      } else {
+      } else if (!this.logged && this.openPages.indexOf(this.router.url) < 0) {
         this.router.navigate(['login']).then();
       }
     });
