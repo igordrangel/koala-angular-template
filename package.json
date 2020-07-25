@@ -1,6 +1,6 @@
 {
   "name": "koala-angular-template",
-  "version": "0.0.3",
+  "version": "1.0.1",
   "description": "Template angular using Angular and Material Angular",
   "scripts": {
     "ng": "ng",
@@ -14,7 +14,7 @@
     "postversion": "git push && git push --tags",
     "deploy": "npm version patch && cd projects/ngx-koala && npm version patch && cd ../../ && ng build ngx-koala && cd dist/ngx-koala && npm publish --ignore-scripts"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "~9.1.6",
     "@angular/cdk": "^9.2.4",

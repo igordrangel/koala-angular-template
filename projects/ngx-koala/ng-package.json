@@ -4,7 +4,11 @@
   "lib": {
     "entryFile": "src/public-api.ts",
     "umdModuleIds": {
+      "tskoala-helpers/dist/delay/koala-delay.helper": "tskoala-helpers/dist/delay/koala-delay.helper",
+      "tskoala-helpers/dist/object/koala-object.helper": "tskoala-helpers/dist/object/koala-object.helper",
       "tskoala-helpers/dist/string/koala-string.helper": "tskoala-helpers/dist/string/koala-string.helper",
+      "jwt-decode": "jwt-decode",
+      "ngx-papaparse": "ngx-papaparse",
       "ngx-mask": "ngx-mask"
     }
   }

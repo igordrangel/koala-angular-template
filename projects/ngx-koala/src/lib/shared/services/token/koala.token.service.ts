@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import * as jwt from 'jwt-decode';
-import { environment } from '../../../../../../koala-template/src/environments/environment.prod';
+import jwt from 'jwt-decode';
+import { koalaEnviroment } from '../../../environments/koala.environment';
 
 @Injectable()
 export class KoalaTokenService {
@@ -9,7 +9,7 @@ export class KoalaTokenService {
   private tokenSubject = new BehaviorSubject<string>(null);
 
   constructor() {
-    this.storageName = environment.storageTokenName;
+    this.storageName = koalaEnviroment.storageTokenName;
     this.verifySession();
   }
 
