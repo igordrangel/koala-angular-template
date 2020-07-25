@@ -67,7 +67,15 @@
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "projects/ngx-koala/src/lib/shared/theme/koala.theme.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "tskoala-helpers",
+              "lodash",
+              "b64-to-blob",
+              "papaparse",
+              "jwt-encode",
+              "jwt-decode"
+            ]
           },
           "configurations": {
             "production": {
