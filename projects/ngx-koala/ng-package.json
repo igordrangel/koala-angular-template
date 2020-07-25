@@ -2,7 +2,7 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/ngx-koala",
   "assets": [
-    "src/lib/shared/theme/koala.theme.css"
+    "theme/koala.theme.css"
   ],
   "lib": {
     "entryFile": "src/public-api.ts",
