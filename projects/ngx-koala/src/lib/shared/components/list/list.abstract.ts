@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { AfterViewInit, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Directive, Input, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { BehaviorSubject, merge, Observable } from 'rxjs';
@@ -10,6 +10,7 @@ import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operat
 import { MatTableDataSource } from '@angular/material/table';
 import { ListFormFilterInterface } from './list.form-filter.interface';
 
+@Directive()
 export abstract class ListAbstract extends FormAbstract implements AfterViewInit {
   public selection = new SelectionModel<object>(true, []);
   public limitOptions: number[] = [10, 20, 30, 50, 100];
