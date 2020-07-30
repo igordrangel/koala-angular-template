@@ -2,7 +2,7 @@ import { KoalaAlertEnum } from './koala.alert.enum';
 
 export class KoalaRequestCodeToAlertEnumTranslate {
 
-  public translate(statusCode: number): KoalaAlertEnum {
+  public static translate(statusCode: number): KoalaAlertEnum {
     switch (statusCode) {
       case 405:
         return KoalaAlertEnum.badRequest;
