@@ -8,6 +8,7 @@
 export * from './lib/shared/components/alert/dialog-alert.component';
 export * from './lib/shared/components/alert/koala.alert-config.interface';
 export * from './lib/shared/components/alert/koala.alert.enum';
+export * from './lib/shared/components/alert/koala.request-code-to-alert-enum.translate';
 export * from './lib/shared/components/alert/koala.alert.module';
 //#endregion
 
