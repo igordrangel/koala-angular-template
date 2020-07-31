@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import jwt from 'jwt-decode';
 import { koalaEnviroment } from '../../../environments/koala.environment';
 
-@Injectable({providedIn: 'root'})
+@Injectable()
 export class KoalaTokenService {
   readonly storageName: string;
   private tokenSubject = new BehaviorSubject<string>(null);

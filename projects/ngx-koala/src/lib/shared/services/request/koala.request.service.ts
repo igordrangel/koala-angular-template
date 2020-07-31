@@ -3,7 +3,7 @@ import { KoalaRequestCodeToAlertEnumTranslate } from '../../components/alert/koa
 import { KoalaAlertService } from '../alert/koala.alert.service';
 import { KoalaAlertEnum } from '../../components/alert/koala.alert.enum';
 
-@Injectable({providedIn: 'root'})
+@Injectable()
 export class KoalaRequestService {
 
   constructor(private koalaAlertService: KoalaAlertService) {
