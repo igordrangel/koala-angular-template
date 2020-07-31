@@ -4,7 +4,7 @@ import { KoalaDialogTemplateInterface } from './koala.dialog-template.interface'
 import { KoalaStringHelper } from 'tskoala-helpers/dist/string/koala-string.helper';
 import { ComponentType } from '@angular/cdk/overlay';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class KoalaDialogService {
 
   constructor(private dialog: MatDialog) {

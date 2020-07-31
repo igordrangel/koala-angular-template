@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { DialogQuestionComponent } from '../../components/question/dialog-question.component';
 import { KoalaDialogService } from '../dialog/koala.dialog.service';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class KoalaQuestionService {
 
   constructor(private dialogService: KoalaDialogService) {
