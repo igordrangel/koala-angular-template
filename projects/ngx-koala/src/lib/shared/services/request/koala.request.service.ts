@@ -11,13 +11,17 @@ export class KoalaRequestService {
 
   public request<T>(
     request: Promise<T>,
-    success: (response: T) => void,
-    error: (error: T) => void
+    success?: (response: T) => void,
+    error?: (error: T) => void
   ) {
     request.then((response) => {
-      success(response);
+      if (success) {
+        success(response);
+      }
     }).catch(e => {
-      error(e);
+      if (error) {
+        error(e);
+      }
       const alertEnum = KoalaRequestCodeToAlertEnumTranslate.translate(e.statusCode);
       this.koalaAlertService.create({
         alertEnum,
