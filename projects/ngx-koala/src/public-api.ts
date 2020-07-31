@@ -106,6 +106,10 @@ export * from './lib/shared/services/loader/koala.loader.service';
 export * from './lib/shared/services/question/koala.question.service';
 //#endregion
 
+//#region [KOALA REQUEST]
+export * from './lib/shared/services/request/koala.request.service';
+//#endregion
+
 //#region [KOALA TOKEN]
 export * from './lib/shared/services/token/koala.token.service';
 //#endregion
