@@ -19,6 +19,10 @@
       "ngx-koala": [
         "dist/ngx-koala/ngx-koala",
         "dist/ngx-koala"
+      ],
+      "ngx-multidesk-service": [
+        "dist/ngx-multidesk-service/ngx-multidesk-service",
+        "dist/ngx-multidesk-service"
       ]
     }
   },

@@ -12,7 +12,8 @@
     "postinstall": "ngcc",
     "version": "git add -A projects",
     "postversion": "git push && git push --tags",
-    "deploy": "npm version patch && cd projects/ngx-koala && npm version patch && cd ../../ && ng build ngx-koala && cd dist/ngx-koala && npm publish --ignore-scripts"
+    "deploy-koala": "npm version patch && cd projects/ngx-koala && npm version patch && cd ../../ && ng build ngx-koala && cd dist/ngx-koala && npm publish --ignore-scripts",
+    "deploy-multidesk-service": "npm version patch && cd projects/ngx-multidesk-service && npm version patch && cd ../../ && ng build ngx-multidesk-service && cd dist/ngx-multidesk-service && npm publish --ignore-scripts"
   },
   "private": false,
   "dependencies": {
