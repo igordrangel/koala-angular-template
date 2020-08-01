@@ -12,6 +12,7 @@
       <mat-icon>{{module.icon}}</mat-icon>
       <h3>{{module.name}}</h3>
       <mat-icon
+        *ngIf="module.tools?.length > 0"
         class="state-module">{{module.expanded || module.active ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}}</mat-icon>
       <ul *ngIf="module.tools?.length > 0">
         <li
