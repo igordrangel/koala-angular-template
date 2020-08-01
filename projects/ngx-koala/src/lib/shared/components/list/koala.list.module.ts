@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { KoalaFormModule } from '../form/koala.form.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { PaginationProvider } from '../../providers/pagination/pagination.provider';
+import { KoalaFolderPageModule } from '../folder-page/koala.folder-page.module';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { PaginationProvider } from '../../providers/pagination/pagination.provid
   ],
   imports: [
     CommonModule,
+    KoalaFolderPageModule,
     KoalaFormModule,
     MatMenuModule,
     MatTableModule,

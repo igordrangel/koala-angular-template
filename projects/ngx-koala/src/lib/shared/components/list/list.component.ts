@@ -1,14 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-  ViewChild
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ListAbstract } from './list.abstract';
 import { ListItemInterface } from './list.item.interface';
 import { ListItemMenuOptionInterface } from './list.item-menu-option.interface';
@@ -25,11 +15,7 @@ import { SelectionModel } from '@angular/cdk/collections';
   templateUrl: 'list.component.html',
   styleUrls: ['list.component.css']
 })
-export class ListComponent extends ListAbstract implements OnInit, OnChanges {
-  @Input() titlePage: string = 'Title';
-  @Input() titleIcon: string;
-  @Input() customFolderFontColor: string = '#212121';
-  @Input() customFolderBackgroudColor: string = '#fff';
+export class ListComponent extends ListAbstract implements OnInit {
   @Input() columnsToShowInList: string[];
   @Input() columnSort: string;
   @Input() itensMenuListOptions: ListItemMenuOptionInterface[];
@@ -43,8 +29,6 @@ export class ListComponent extends ListAbstract implements OnInit, OnChanges {
   };
   @Output() getSelection = new EventEmitter<SelectionModel<object>>(null);
   @Output() getDataSource = new EventEmitter<any[]>(null);
-  @ViewChild('folder', {static: true}) private folder: ElementRef;
-  @ViewChild('folderTitle', {static: true}) private folderTitle: ElementRef;
 
   public formSearch: FormGroup;
   public formAdvancedSearch: FormGroup;
@@ -88,14 +72,7 @@ export class ListComponent extends ListAbstract implements OnInit, OnChanges {
         this.formSearch.addControl(this.filterFormConfig.checkAndSearch.formControlName, new FormControl(false));
       }
     }
-    this.setCustomBackgroundColor();
     this.getSelection.emit(this.selection);
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.customBackgroudColor) {
-      this.setCustomBackgroundColor();
-    }
   }
 
   public async filterSubmit() {
@@ -114,16 +91,5 @@ export class ListComponent extends ListAbstract implements OnInit, OnChanges {
 
   public toogleFilter() {
     this.showAdvancedFilter = !this.showAdvancedFilter;
-  }
-
-  private setCustomBackgroundColor() {
-    if (this.customFolderBackgroudColor) {
-      const folder = this.folder.nativeElement as HTMLDivElement;
-      folder.style.background = this.customFolderBackgroudColor;
-    }
-    if (this.customFolderFontColor) {
-      const folderTitle = this.folderTitle.nativeElement as HTMLDivElement;
-      folderTitle.style.color = this.customFolderFontColor;
-    }
   }
 }

@@ -11,6 +11,7 @@ import { KoalaQuestionModule } from '../../../../ngx-koala/src/lib/shared/compon
 import { KoalaQuestionService } from '../../../../ngx-koala/src/lib/shared/services/question/koala.question.service';
 import { KoalaAlertService } from '../../../../ngx-koala/src/lib/shared/services/alert/koala.alert.service';
 import { KoalaAlertModule } from '../../../../ngx-koala/src/lib/shared/components/alert/koala.alert.module';
+import { KoalaFolderPageModule } from '../../../../ngx-koala/src/lib/shared/components/folder-page/koala.folder-page.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { KoalaAlertModule } from '../../../../ngx-koala/src/lib/shared/component
     DialogPageListComponent
   ],
   imports: [
+    KoalaFolderPageModule,
     KoalaListModule,
     KoalaFormModule,
     KoalaDialogModule,

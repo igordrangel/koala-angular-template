@@ -1,125 +1,116 @@
-<div #folder class="folder-list">
-  <h1 #folderTitle>
-    <mat-icon *ngIf="titleIcon">{{titleIcon}}</mat-icon>
-    {{titlePage}}
-  </h1>
-  <nav class="menu-folder">
-    <ng-content select="[menu-page]"></ng-content>
-  </nav>
-  <div class="list-container">
-    <div *ngIf="filterFormConfig" class="list-filter">
-      <form (ngSubmit)="filterSubmit()" [formGroup]="formSearch">
-        <div class="main">
-          <koala-dynamic-form
-            [formConfig]="filterFormConfig.main"
-            [form]="formSearch">
-          </koala-dynamic-form>
-          <ul>
-            <li *ngIf="filterFormConfig.advanced" class="option">
-              <button (click)="toogleFilter()" color="primary" mat-icon-button type="button">
-                <mat-icon>{{showAdvancedFilter ? 'expand_less' : 'expand_more'}}</mat-icon>
-              </button>
-            </li>
-            <li *ngIf="filterFormConfig.checkAndSearch" class="checkbox-filter">
-              <mat-checkbox (click)="filterSubmit()"
-                            [formControlName]="filterFormConfig.checkAndSearch.formControlName">
-                {{filterFormConfig.checkAndSearch.label}}
-              </mat-checkbox>
-            </li>
-            <li class="option">
-              <koala-submit
-                [btnSubmitDisabled]="btnSubmitDisabled"
-                [fg]="formSearch"
-                [iconButton]="true"
-                [loader]="loader"
-                icon="search">
-              </koala-submit>
-            </li>
-          </ul>
-        </div>
-        <div *ngIf="filterFormConfig.advanced" [ngClass]="{'show': showAdvancedFilter}" class="advanced">
-          <div class="container-filter">
-            <koala-dynamic-form
-              [formConfig]="filterFormConfig.advanced"
-              [form]="formAdvancedSearch">
-            </koala-dynamic-form>
-          </div>
-        </div>
-      </form>
-    </div>
-    <nav class="menu-list">
-      <ul class="menu">
-        <li *ngIf="selection.hasValue()">
-          <ng-content select="[itemsSelectList]"></ng-content>
-        </li>
-        <li *ngIf="selection.hasValue()" class="text-center">|</li>
-        <li>
-          <ng-content select="[itemsList]"></ng-content>
-        </li>
-      </ul>
-      <mat-paginator
-        [length]="qtdListResult"
-        [pageSizeOptions]="limitOptions"
-        [pageSize]="30"
-        showFirstLastButtons>
-      </mat-paginator>
-    </nav>
-    <div class="list">
-      <div *ngIf="loader" class="spinner-container">
-        <mat-spinner diameter="40"></mat-spinner>
+<div class="list-container">
+  <div *ngIf="filterFormConfig" class="list-filter">
+    <form (ngSubmit)="filterSubmit()" [formGroup]="formSearch">
+      <div class="main">
+        <koala-dynamic-form
+          [formConfig]="filterFormConfig.main"
+          [form]="formSearch">
+        </koala-dynamic-form>
+        <ul>
+          <li *ngIf="filterFormConfig.advanced" class="option">
+            <button (click)="toogleFilter()" color="primary" mat-icon-button type="button">
+              <mat-icon>{{showAdvancedFilter ? 'expand_less' : 'expand_more'}}</mat-icon>
+            </button>
+          </li>
+          <li *ngIf="filterFormConfig.checkAndSearch" class="checkbox-filter">
+            <mat-checkbox (click)="filterSubmit()"
+                          [formControlName]="filterFormConfig.checkAndSearch.formControlName">
+              {{filterFormConfig.checkAndSearch.label}}
+            </mat-checkbox>
+          </li>
+          <li class="option">
+            <koala-submit
+              [btnSubmitDisabled]="btnSubmitDisabled"
+              [fg]="formSearch"
+              [iconButton]="true"
+              [loader]="loader"
+              icon="search">
+            </koala-submit>
+          </li>
+        </ul>
       </div>
-      <table
-        [dataSource]="dataSource"
-        [matSortActive]="columnSort"
-        class="table-hover"
-        mat-table
-        matSort
-        matSortDirection="asc" matSortDisableClear>
-        <ng-container matColumnDef="select">
-          <th *matHeaderCellDef mat-header-cell>
-            <mat-checkbox (change)="$event ? selectAll() : null"
-                          [checked]="selection.hasValue() && allSelected"
-                          [indeterminate]="selection.hasValue() && !allSelected">
-            </mat-checkbox>
-          </th>
-          <td *matCellDef="let item" mat-cell>
-            <mat-checkbox (change)="$event ? selection.toggle(item) : null"
-                          (click)="$event.stopPropagation(); selectItem();"
-                          [checked]="selection.isSelected(item)">
-            </mat-checkbox>
-          </td>
-        </ng-container>
-
-        <ng-container *ngFor="let itemList of itemsList" [matColumnDef]="itemList.columnDef">
-          <th *matHeaderCellDef [mat-sort-header]="itemList.sortHeader" mat-header-cell>{{itemList.label}}</th>
-          <td (dblclick)="itemList.dblClick(item)" *matCellDef="let item" mat-cell>
-            {{itemList.itemNameProperty(item)}}
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="options">
-          <th *matHeaderCellDef mat-header-cell></th>
-          <td *matCellDef="let item" mat-cell>
-            <div *ngIf="itensMenuListOptions">
-              <button [matMenuTriggerFor]="options" mat-icon-button type="button">
-                <i class='material-icons'>more_vert</i>
-              </button>
-              <mat-menu #options="matMenu" class="menu-list" yPosition="below">
-                <button
-                  (click)="option.action(item)"
-                  *ngFor="let option of itensMenuListOptions"
-                  [disabled]="!option.havePermission"
-                  mat-menu-item>
-                  <mat-icon>{{option.icon}}</mat-icon>
-                  <span>{{option.name}}</span>
-                </button>
-              </mat-menu>
-            </div>
-          </td>
-        </ng-container>
-        <tr *matHeaderRowDef="columnsToShowInList; sticky: true" mat-header-row></tr>
-        <tr *matRowDef="let item; columns: columnsToShowInList;" mat-row></tr>
-      </table>
+      <div *ngIf="filterFormConfig.advanced" [ngClass]="{'show': showAdvancedFilter}" class="advanced">
+        <div class="container-filter">
+          <koala-dynamic-form
+            [formConfig]="filterFormConfig.advanced"
+            [form]="formAdvancedSearch">
+          </koala-dynamic-form>
+        </div>
+      </div>
+    </form>
+  </div>
+  <nav class="menu-list">
+    <ul class="menu">
+      <li *ngIf="selection.hasValue()">
+        <ng-content select="[itemsSelectList]"></ng-content>
+      </li>
+      <li *ngIf="selection.hasValue()" class="text-center">|</li>
+      <li>
+        <ng-content select="[itemsList]"></ng-content>
+      </li>
+    </ul>
+    <mat-paginator
+      [length]="qtdListResult"
+      [pageSizeOptions]="limitOptions"
+      [pageSize]="30"
+      showFirstLastButtons>
+    </mat-paginator>
+  </nav>
+  <div class="list">
+    <div *ngIf="loader" class="spinner-container">
+      <mat-spinner diameter="40"></mat-spinner>
     </div>
+    <table
+      [dataSource]="dataSource"
+      [matSortActive]="columnSort"
+      class="table-hover"
+      mat-table
+      matSort
+      matSortDirection="asc" matSortDisableClear>
+      <ng-container matColumnDef="select">
+        <th *matHeaderCellDef mat-header-cell>
+          <mat-checkbox (change)="$event ? selectAll() : null"
+                        [checked]="selection.hasValue() && allSelected"
+                        [indeterminate]="selection.hasValue() && !allSelected">
+          </mat-checkbox>
+        </th>
+        <td *matCellDef="let item" mat-cell>
+          <mat-checkbox (change)="$event ? selection.toggle(item) : null"
+                        (click)="$event.stopPropagation(); selectItem();"
+                        [checked]="selection.isSelected(item)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container *ngFor="let itemList of itemsList" [matColumnDef]="itemList.columnDef">
+        <th *matHeaderCellDef [mat-sort-header]="itemList.sortHeader" mat-header-cell>{{itemList.label}}</th>
+        <td (dblclick)="itemList.dblClick(item)" *matCellDef="let item" mat-cell>
+          {{itemList.itemNameProperty(item)}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="options">
+        <th *matHeaderCellDef mat-header-cell></th>
+        <td *matCellDef="let item" mat-cell>
+          <div *ngIf="itensMenuListOptions">
+            <button [matMenuTriggerFor]="options" mat-icon-button type="button">
+              <i class='material-icons'>more_vert</i>
+            </button>
+            <mat-menu #options="matMenu" class="menu-list" yPosition="below">
+              <button
+                (click)="option.action(item)"
+                *ngFor="let option of itensMenuListOptions"
+                [disabled]="!option.havePermission"
+                mat-menu-item>
+                <mat-icon>{{option.icon}}</mat-icon>
+                <span>{{option.name}}</span>
+              </button>
+            </mat-menu>
+          </div>
+        </td>
+      </ng-container>
+      <tr *matHeaderRowDef="columnsToShowInList; sticky: true" mat-header-row></tr>
+      <tr *matRowDef="let item; columns: columnsToShowInList;" mat-row></tr>
+    </table>
   </div>
 </div>
