@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { MultideskController } from './controllers/multidesk.controller';
 import { ApiHelper } from './helpers/service/api.helper';
@@ -77,14 +77,20 @@ export class MultideskService {
 
   private async postPut(method: ApiMethodEnum, url: string, data: any): Promise<MultideskResponseInterface> {
     return new Promise<MultideskResponseInterface>(async (resolve, reject) => {
-      const req =
-              method === ApiMethodEnum.post
-                ? this.http.post<MultideskResponseInterface>(this._apiUrl + '/' + url, data, {
-                  headers: RequestHeaderHelper.add(),
-                })
-                : this.http.put<MultideskResponseInterface>(this._apiUrl + '/' + url, data, {
-                  headers: RequestHeaderHelper.add(),
-                });
+      let req: Observable<MultideskResponseInterface>;
+      if (method === ApiMethodEnum.post) {
+        req = this.http.post<MultideskResponseInterface>(this._apiUrl + '/' + url, data, {
+          headers: RequestHeaderHelper.add(),
+        });
+      } else if (method === ApiMethodEnum.put) {
+        req = this.http.put<MultideskResponseInterface>(this._apiUrl + '/' + url, data, {
+          headers: RequestHeaderHelper.add(),
+        });
+      } else {
+        req = this.http.patch<MultideskResponseInterface>(this._apiUrl + '/' + url, data, {
+          headers: RequestHeaderHelper.add(),
+        });
+      }
 
       this._subscriptions.push(
         req.subscribe(
