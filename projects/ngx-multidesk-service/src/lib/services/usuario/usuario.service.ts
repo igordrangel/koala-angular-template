@@ -13,6 +13,7 @@ import { UserActivateInterface } from './interfaces/user-activate.interface';
 import { ForgotMyPasswordInterface } from './interfaces/forgot-my-password.interface';
 import { ForgotMyPasswordValidateInterface } from './interfaces/forgot-my-password-validate.interface';
 import { ForgotMyPasswordUpdateInterface } from './interfaces/forgot-my-password-update.interface';
+import { ChangePasswordInterface } from './interfaces/change-password.interface';
 
 @Injectable({providedIn: 'root'})
 export class UsuarioService extends AbstractMultideskApi {
@@ -66,6 +67,14 @@ export class UsuarioService extends AbstractMultideskApi {
     return this._multideskService.request<ResponseInterface>(
       ApiMethodEnum.patch,
       'usuario/esqueci-minha-senha/alterar',
+      data,
+    );
+  }
+
+  public changePassword(data: ChangePasswordInterface) {
+    return this._multideskService.request<ResponseInterface>(
+      ApiMethodEnum.patch,
+      'usuario/alterar-senha',
       data,
     );
   }
