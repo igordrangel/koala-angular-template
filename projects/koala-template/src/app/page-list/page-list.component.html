@@ -7,38 +7,39 @@
     <koala-button (click)="dialogList()" color="white" icon="add" tooltip="Inserir"></koala-button>
   </div>
 
-  <koala-list
-    (getDataSource)="countries = $event"
-    (getSelection)="selection = $event"
-    [columnsToShowInList]="collumns"
-    [filterFormConfig]="filterConfig"
-    [filterParams]="filter"
-    [itemsList]="itensList"
-    [itensMenuListOptions]="itensMenuListOptions"
-    [request]="buscar()"
-    content
-    typeRequest="all">
+  <div content>
+    <koala-list
+      (getDataSource)="countries = $event"
+      (getSelection)="selection = $event"
+      [columnsToShowInList]="collumns"
+      [filterFormConfig]="filterConfig"
+      [filterParams]="filter"
+      [itemsList]="itensList"
+      [itensMenuListOptions]="itensMenuListOptions"
+      [request]="buscar()"
+      typeRequest="all">
 
-    <div itemsSelectList>
-      <koala-button
-        (click)="actionList()"
-        backgroundColor="white"
-        color="blue"
-        icon="delete_forever"
-        tooltip="Delete Forever">
-      </koala-button>
-    </div>
+      <div itemsSelectList>
+        <koala-button
+          (click)="actionList()"
+          backgroundColor="white"
+          color="blue"
+          icon="delete_forever"
+          tooltip="Delete Forever">
+        </koala-button>
+      </div>
 
-    <div itemsList>
-      <koala-button
-        (click)="downloadList()"
-        backgroundColor="white"
-        color="blue"
-        icon="assignment_returned"
-        tooltip="Download List (CSV)">
-      </koala-button>
-    </div>
+      <div itemsList>
+        <koala-button
+          (click)="downloadList()"
+          backgroundColor="white"
+          color="blue"
+          icon="assignment_returned"
+          tooltip="Download List (CSV)">
+        </koala-button>
+      </div>
 
-  </koala-list>
+    </koala-list>
+  </div>
 
 </koala-folder-page>

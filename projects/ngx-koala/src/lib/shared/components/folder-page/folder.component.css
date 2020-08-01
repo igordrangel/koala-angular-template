@@ -2,3 +2,4 @@
 .folder-list h1 {padding: 0;margin: 0;position: absolute;top: 5px;left: 20px;font-size: 1.2em;font-family: OpenSans, sans-serif;font-weight: bold;}
 .folder-list h1 mat-icon {position: relative;top: 5px;color: #1976D2;}
 nav.menu-folder {position: absolute;right: 0;top: 0;z-index: 4;padding: 7px 30px;}
+.content {position: relative;background: #FFF;display: block;height: calc(100vh - 120px);overflow-x: hidden;top: 50px;margin: 0 auto;padding: 3px 0;}

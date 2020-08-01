@@ -1,4 +1,4 @@
-.list-container {background: #FFF;display: block;height: calc(100vh - 125px);overflow-x: hidden;position: relative;width: 90%;top: 50px;margin: 0 auto;border-radius: 10px;box-shadow: 0 1px 3px rgba(25, 118, 210, .4);}
+.list-container {overflow-x: hidden;width: 90%;margin: 0 auto;border-radius: 10px;box-shadow: 0 1px 3px rgba(25, 118, 210, .4);}
 .list-container .list {display: block;height: calc(100vh - 225px);overflow-y: auto;position: relative;top: 0;width: 100%;z-index: 1;}
 .list-container .list .spinner-container {position: absolute;height: 100%;top: 0;left: 0;bottom: 56px;right: 0;background: rgba(0, 0, 0, 0.15);z-index: 1;display: flex;align-items: center;justify-content: center;}
 .list-container .list table:not(.table-not-selection) .mat-header-cell:first-child,
