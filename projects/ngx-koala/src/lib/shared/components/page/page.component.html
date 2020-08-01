@@ -45,7 +45,7 @@
         <span class="icon-user">{{firstUserLetter}}</span><br/>
         <span class="username">{{username}}</span>
       </div>
-      <button (click)="btn.action" *ngFor="let btn of userMenuOptions" mat-menu-item>
+      <button (click)="btn.action()" *ngFor="let btn of userMenuOptions" mat-menu-item>
         <mat-icon>{{btn.icon}}</mat-icon>
         <span>{{btn.name}}</span>
       </button>
