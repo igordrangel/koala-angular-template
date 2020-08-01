@@ -52,7 +52,7 @@ export class PageComponent implements OnInit {
       }
       if (this.logged && this.defaultPage) {
         this.router.navigate([this.defaultPage]).then();
-      } else if (!this.logged && this.openPages.indexOf(this.router.url) < 0) {
+      } else if (!this.logged && this.openPages.indexOf(this.router.url.split('?')[0]) < 0) {
         this.router.navigate(['login']).then();
       }
     });
@@ -67,7 +67,7 @@ export class PageComponent implements OnInit {
         case event instanceof NavigationCancel:
         case event instanceof NavigationError: {
           this.loaderService.dismiss();
-          if (this.logged && this.defaultPage && this.openPages?.indexOf(this.router.url) >= 0) {
+          if (this.logged && this.defaultPage && this.openPages?.indexOf(this.router.url.split('?')[0]) >= 0) {
             this.router.navigate([this.defaultPage]).then();
             return false;
           }
