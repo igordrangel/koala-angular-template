@@ -4,6 +4,7 @@ export class KoalaRequestCodeToAlertEnumTranslate {
 
   public static translate(statusCode: number): KoalaAlertEnum {
     switch (statusCode) {
+      case 422:
       case 405:
         return KoalaAlertEnum.badRequest;
       case 404:
