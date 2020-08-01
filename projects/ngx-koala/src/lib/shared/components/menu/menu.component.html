@@ -13,7 +13,7 @@
       <h3>{{module.name}}</h3>
       <mat-icon
         class="state-module">{{module.expanded || module.active ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}}</mat-icon>
-      <ul>
+      <ul *ngIf="module.tools?.length > 0">
         <li
           *ngFor="let tool of module.tools"
           [routerLink]="tool.routerLink"
