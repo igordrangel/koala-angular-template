@@ -1,4 +1,4 @@
-import { ForgotMyPasswordInterface } from './fotgot-my-password.interface';
+import { ForgotMyPasswordInterface } from './forgot-my-password.interface';
 
 export interface ForgotMyPasswordValidateInterface extends ForgotMyPasswordInterface {
   codigo: string;

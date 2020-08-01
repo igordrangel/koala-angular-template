@@ -30,7 +30,7 @@ export * from './lib/interfaces/service/response.interface';
 export * from './lib/services/usuario/interfaces/auth.interface';
 export * from './lib/services/usuario/interfaces/forgot-my-password-update.interface';
 export * from './lib/services/usuario/interfaces/forgot-my-password-validate.interface';
-export * from './lib/services/usuario/interfaces/fotgot-my-password.interface';
+export * from './lib/services/usuario/interfaces/forgot-my-password.interface';
 export * from './lib/services/usuario/interfaces/login.interface';
 export * from './lib/services/usuario/interfaces/singup.interface';
 export * from './lib/services/usuario/interfaces/user.interface';

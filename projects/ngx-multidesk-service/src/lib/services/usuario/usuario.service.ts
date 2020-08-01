@@ -10,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 import { UserInterface } from './interfaces/user.interface';
 import { SingupInterface } from './interfaces/singup.interface';
 import { UserActivateInterface } from './interfaces/user-activate.interface';
-import { ForgotMyPasswordInterface } from './interfaces/fotgot-my-password.interface';
+import { ForgotMyPasswordInterface } from './interfaces/forgot-my-password.interface';
 import { ForgotMyPasswordValidateInterface } from './interfaces/forgot-my-password-validate.interface';
 import { ForgotMyPasswordUpdateInterface } from './interfaces/forgot-my-password-update.interface';
 
