@@ -22,6 +22,11 @@ export * from './lib/shared/components/dialog/dialog.component';
 export * from './lib/shared/components/dialog/koala.dialog.module';
 //#endregion
 
+//#region [KOALA FOLDER PAGE]
+export * from './lib/shared/components/folder-page/folder.component';
+export * from './lib/shared/components/folder-page/koala.folder-page.module';
+//#endregion
+
 //#region [KOALA FORM]
 export * from './lib/shared/components/form/btn-submit/btn-submit.component.js';
 export * from './lib/shared/components/form/dynamic-form/enums/dynamic-form-type-field.enum';
