@@ -10,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 import { UserInterface } from './interfaces/user.interface';
 import { SingupInterface } from './interfaces/singup.interface';
 import { UserActivateInterface } from './interfaces/user-activate.interface';
-import { FotgotMyPasswordInterface } from './interfaces/fotgot-my-password.interface';
+import { ForgotMyPasswordInterface } from './interfaces/fotgot-my-password.interface';
 import { ForgotMyPasswordValidateInterface } from './interfaces/forgot-my-password-validate.interface';
 import { ForgotMyPasswordUpdateInterface } from './interfaces/forgot-my-password-update.interface';
 
@@ -51,7 +51,7 @@ export class UsuarioService extends AbstractMultideskApi {
     return this._multideskService.request<ResponseInterface>(ApiMethodEnum.patch, 'usuario/ativar', data);
   }
 
-  public forgotMyPassword(data: FotgotMyPasswordInterface) {
+  public forgotMyPassword(data: ForgotMyPasswordInterface) {
     return this._multideskService.request<ResponseInterface>(ApiMethodEnum.post, 'usuario/esqueci-minha-senha', data);
   }
 
