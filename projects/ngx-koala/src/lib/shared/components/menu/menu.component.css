@@ -13,5 +13,5 @@ ul li li:hover {color: #1976D2 !important;}
 ul li li.active {color: #1565C0 !important;height: fit-content !important;}
 ul li h3,
 ul li h4,
-ul li mat-icon {display: inline-flex;vertical-align: middle;margin: 0;}
+ul li mat-icon {display: inline-flex;vertical-align: middle;margin: 0;line-height: 1.1em;}
 ul li mat-icon {width: 22px;height: 22px;font-size: 22px;line-height: 22px;margin-right: 5px;}
