@@ -1,5 +1,5 @@
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DynamicFormFieldInterface } from './interfaces/dynamic-form-field.interface';
+import { KoalaDynamicFormFieldInterface } from './interfaces/koala.dynamic-form-field.interface';
 import { DynamicFormTypeFieldEnum } from './enums/dynamic-form-type-field.enum';
 import { CpfValidator } from './validators/cpf.validator';
 import { CnpjValidator } from './validators/cnpj.validator';
@@ -12,7 +12,7 @@ import { FormAbstract } from '../../../../core/form.abstract';
 })
 export class DynamicFormComponent extends FormAbstract implements OnInit {
   @Input() form: FormGroup;
-  @Input() formConfig: DynamicFormFieldInterface[];
+  @Input() formConfig: KoalaDynamicFormFieldInterface[];
   public controls: FormArray;
   public typeField = DynamicFormTypeFieldEnum;
 
@@ -42,7 +42,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
     );
   }
 
-  private newControl(config: DynamicFormFieldInterface): FormGroup {
+  private newControl(config: KoalaDynamicFormFieldInterface): FormGroup {
     const validators = [];
     let value: any = config.value ?? '';
     if (config.required) {

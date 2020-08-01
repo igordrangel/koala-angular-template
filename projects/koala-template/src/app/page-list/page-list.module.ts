@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ListModule } from '../../../../ngx-koala/src/lib/shared/components/list/list.module';
+import { KoalaListModule } from '../../../../ngx-koala/src/lib/shared/components/list/koala.list.module';
 import { PageListComponent } from './page-list.component';
 import { PageListRoutingModule } from './page-list-routing.module';
 import { KoalaButtonModule } from '../../../../ngx-koala/src/lib/shared/components/button/koala.button.module';
@@ -18,7 +18,7 @@ import { KoalaAlertModule } from '../../../../ngx-koala/src/lib/shared/component
     DialogPageListComponent
   ],
   imports: [
-    ListModule,
+    KoalaListModule,
     KoalaFormModule,
     KoalaDialogModule,
     KoalaQuestionModule,

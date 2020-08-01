@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { DynamicFormFieldInterface } from '../../../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/dynamic-form-field.interface';
+import { KoalaDynamicFormFieldInterface } from '../../../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-form-field.interface';
 import { FormAbstract } from '../../../../../../ngx-koala/src/lib/core/form.abstract';
 import { DynamicFormTypeFieldEnum } from '../../../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/enums/dynamic-form-type-field.enum';
 import { KoalaDynamicFormService } from '../../../../../../ngx-koala/src/lib/shared/services/dynamic-forms/koala.dynamic-form.service';
@@ -12,7 +12,7 @@ import { CountriesInterface } from '../../countries.interface';
 })
 export class DialogPageListComponent extends FormAbstract implements OnInit {
   public formInsert: FormGroup;
-  public formConfig: DynamicFormFieldInterface[];
+  public formConfig: KoalaDynamicFormFieldInterface[];
 
   constructor(
     private fb: FormBuilder,

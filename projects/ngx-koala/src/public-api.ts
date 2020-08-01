@@ -25,7 +25,7 @@ export * from './lib/shared/components/dialog/koala.dialog.module';
 //#region [KOALA FORM]
 export * from './lib/shared/components/form/btn-submit/btn-submit.component.js';
 export * from './lib/shared/components/form/dynamic-form/enums/dynamic-form-type-field.enum';
-export * from './lib/shared/components/form/dynamic-form/interfaces/dynamic-form-field.interface';
+export * from './lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-form-field.interface';
 export * from './lib/shared/components/form/dynamic-form/validators/validation.helper';
 export * from './lib/shared/components/form/dynamic-form/validators/cpf.validator';
 export * from './lib/shared/components/form/dynamic-form/validators/cnpj.validator';
@@ -42,7 +42,7 @@ export * from './lib/shared/components/list/list.filter.interface';
 export * from './lib/shared/components/list/list.form-filter.interface';
 export * from './lib/shared/components/list/list.item.interface';
 export * from './lib/shared/components/list/list.item-menu-option.interface';
-export * from './lib/shared/components/list/list.module';
+export * from './lib/shared/components/list/koala.list.module';
 //#endregion
 
 //#region [KOALA LOADER]

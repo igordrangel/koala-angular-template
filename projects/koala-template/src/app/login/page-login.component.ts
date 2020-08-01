@@ -2,7 +2,7 @@ import * as jwtEncode from 'jwt-encode';
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { DynamicFormFieldInterface } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/dynamic-form-field.interface';
+import { KoalaDynamicFormFieldInterface } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-form-field.interface';
 import { DynamicFormTypeFieldEnum } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/enums/dynamic-form-type-field.enum';
 import { FormAbstract } from '../../../../ngx-koala/src/lib/core/form.abstract';
 import { KoalaTokenService } from '../../../../ngx-koala/src/lib/shared/services/token/koala.token.service';
@@ -14,7 +14,7 @@ import { KoalaDynamicFormService } from '../../../../ngx-koala/src/lib/shared/se
 })
 export class PageLoginComponent extends FormAbstract implements OnInit {
   public formLogin: FormGroup;
-  public formConfig: DynamicFormFieldInterface[];
+  public formConfig: KoalaDynamicFormFieldInterface[];
   public btnLabel = 'Entrar';
 
   constructor(

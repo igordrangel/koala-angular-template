@@ -28,5 +28,5 @@ import { PaginationProvider } from '../../providers/pagination/pagination.provid
     useClass: PaginationProvider
   }]
 })
-export class ListModule {
+export class KoalaListModule {
 }
