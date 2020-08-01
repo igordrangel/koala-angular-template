@@ -25,10 +25,9 @@ export class UsuarioService extends AbstractMultideskApi {
   public auth(credentials: AuthInterface) {
     return new Promise((resolve, reject) => {
       this._multideskService
-          .request<ResponseInterface>(ApiMethodEnum.post, 'login', credentials)
+          .request<LoginInterface>(ApiMethodEnum.post, 'login', credentials)
           .then((response) => {
-            const dados = response.data as LoginInterface;
-            TokenHelper.setToken(dados.token);
+            TokenHelper.setToken(response.token);
             resolve(response);
           })
           .catch((error) => reject(error));
