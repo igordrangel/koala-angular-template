@@ -35,6 +35,18 @@ export class UsuarioService extends AbstractMultideskApi {
     });
   }
 
+  public auth2(sessionId: string) {
+    return new Promise((resolve, reject) => {
+      this._multideskService
+          .request<LoginInterface>(ApiMethodEnum.post, 'login/sessionId', {sessionId})
+          .then((response) => {
+            TokenHelper.setToken(response.token);
+            resolve(response);
+          })
+          .catch((error) => reject(error));
+    });
+  }
+
   public logout() {
     return new Promise<boolean>((resolve) => {
       TokenHelper.removeToken();
