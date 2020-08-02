@@ -1,4 +1,4 @@
-const TOKEN_KEY = 'multideskAuthToken';
+const TOKEN_KEY = 'koalaStorageToken';
 
 export class TokenHelper {
   public static hasToken(): boolean {
