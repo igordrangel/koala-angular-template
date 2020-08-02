@@ -30,6 +30,7 @@ export class PageComponent implements OnInit {
   public loader: LoaderBarPageInterface;
   public username: string;
   public firstUserLetter: string;
+  public currentUrl: string;
 
   constructor(
     private tokenService: KoalaTokenService,
@@ -52,6 +53,9 @@ export class PageComponent implements OnInit {
       }
       if (this.logged && this.defaultPage) {
         this.router.navigate([this.defaultPage]).then();
+      } else if (!this.logged && this.openPages?.indexOf(this.currentUrl) < 0) {
+        this.router.navigate(['login']).then();
+        return false;
       }
     });
     this.router.events.subscribe(event => {
@@ -66,11 +70,11 @@ export class PageComponent implements OnInit {
         case event instanceof NavigationError: {
           this.loaderService.dismiss();
           if (event instanceof NavigationEnd) {
-            const currentUrl = event.url.split('?')[0];
-            if (this.logged && this.defaultPage && this.openPages?.indexOf(currentUrl) >= 0) {
+            this.currentUrl = event.url.split('?')[0];
+            if (this.logged && this.defaultPage && this.openPages?.indexOf(this.currentUrl) >= 0) {
               this.router.navigate([this.defaultPage]).then();
               return false;
-            } else if (!this.logged && this.openPages?.indexOf(currentUrl) < 0) {
+            } else if (!this.logged && this.openPages?.indexOf(this.currentUrl) < 0) {
               this.router.navigate(['login']).then();
               return false;
             }
