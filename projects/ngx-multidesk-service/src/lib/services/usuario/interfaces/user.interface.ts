@@ -7,4 +7,6 @@ export interface UserInterface {
   nome: string;
   email: string;
   status: UserStatusEnum;
+  sessionId: string;
+  sessionValidate: Date;
 }
