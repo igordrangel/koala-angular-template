@@ -52,8 +52,6 @@ export class PageComponent implements OnInit {
       }
       if (this.logged && this.defaultPage) {
         this.router.navigate([this.defaultPage]).then();
-      } else if (!this.logged && this.openPages.indexOf(this.router.url.split('?')[0]) < 0) {
-        this.router.navigate(['login']).then();
       }
     });
     this.router.events.subscribe(event => {
@@ -67,9 +65,15 @@ export class PageComponent implements OnInit {
         case event instanceof NavigationCancel:
         case event instanceof NavigationError: {
           this.loaderService.dismiss();
-          if (this.logged && this.defaultPage && this.openPages?.indexOf(this.router.url.split('?')[0]) >= 0) {
-            this.router.navigate([this.defaultPage]).then();
-            return false;
+          if (event instanceof NavigationEnd) {
+            const currentUrl = event.url.split('?')[0];
+            if (this.logged && this.defaultPage && this.openPages?.indexOf(currentUrl) >= 0) {
+              this.router.navigate([this.defaultPage]).then();
+              return false;
+            } else if (!this.logged && this.openPages?.indexOf(currentUrl) < 0) {
+              this.router.navigate(['login']).then();
+              return false;
+            }
           }
           break;
         }
