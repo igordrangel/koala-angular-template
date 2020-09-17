@@ -22,7 +22,8 @@ export class AppComponent implements OnInit {
       expanded: false,
       tools: [
         {name: 'Login', routerLink: '/login'},
-        {name: 'KoalaList', routerLink: '/list'}
+        {name: 'KoalaList', routerLink: '/list'},
+        {name: 'KoalaForm', routerLink: '/forms'}
       ]
     }
   ];

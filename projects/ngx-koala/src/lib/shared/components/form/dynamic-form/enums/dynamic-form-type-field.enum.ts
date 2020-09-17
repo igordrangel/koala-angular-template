@@ -12,5 +12,8 @@ export enum DynamicFormTypeFieldEnum {
   time,
   checkbox,
   select,
-  autocomplete
+  autocomplete,
+  coin,
+  percent,
+  moreItens
 }

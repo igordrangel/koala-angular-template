@@ -13,6 +13,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { maskOptions } from '../../../mask-options';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { maskOptions } from '../../../mask-options';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    CurrencyMaskModule,
     NgxMaskModule.forRoot(maskOptions),
     MatInputModule,
     MatSelectModule,

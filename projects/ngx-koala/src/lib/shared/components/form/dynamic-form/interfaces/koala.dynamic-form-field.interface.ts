@@ -16,4 +16,5 @@ export interface KoalaDynamicFormFieldInterface {
   }[];
   class?: string;
   fieldClass?: string;
+  valueChanges?: (value: any) => void;
 }

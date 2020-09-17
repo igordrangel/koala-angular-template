@@ -11,7 +11,8 @@
              propriedade.get('type').value == typeField.email ||
              propriedade.get('type').value == typeField.number ||
              propriedade.get('type').value == typeField.time ||
-             propriedade.get('type').value == typeField.phone"
+             propriedade.get('type').value == typeField.phone ||
+             propriedade.get('type').value == typeField.percent"
       [formGroupName]="i"
       [appearance]="propriedade.get('appearance').value"
       [floatLabel]="propriedade.get('floatLabel').value"
@@ -23,12 +24,14 @@
         [mask]="
                     ((propriedade.get('type').value == typeField.phone) ? '(00)0000-0000?0' : null) ||
                     ((propriedade.get('type').value == typeField.cpf) ? '000.000.000-00' : null) ||
-                    ((propriedade.get('type').value == typeField.cnpj) ? '00.000.000/0000-00' : null)"
+                    ((propriedade.get('type').value == typeField.cnpj) ? '00.000.000/0000-00' : null) ||
+                    ((propriedade.get('type').value == typeField.percent) ? 'percent' : null)"
         [required]="propriedade.get('required').value"
         [type]="
                     ((propriedade.get('type').value == typeField.cpf ||
                       propriedade.get('type').value == typeField.cnpj ||
-                      propriedade.get('type').value == typeField.phone
+                      propriedade.get('type').value == typeField.phone ||
+                      propriedade.get('type').value == typeField.percent
                     )) ? 'tel' : (
                       propriedade.get('type').value == typeField.datetime ?
                       'date' : (
@@ -74,12 +77,35 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field
-      *ngIf="propriedade.get('type').value == typeField.valueList ||
+            *ngIf="propriedade.get('type').value == typeField.coin"
+            [appearance]="propriedade.get('appearance').value"
+            [floatLabel]="propriedade.get('floatLabel').value"
+            [formGroupName]="i"
+            [ngClass]="propriedade.get('fieldClass').value">
+      <mat-label>{{propriedade.get('label').value}}</mat-label>
+      <input
+              [required]="propriedade.get('required').value"
+              [tabIndex]="i"
+              currencyMask
+              formControlName="value"
+              matInput
+              type="tel"/>
+      <mat-hint *ngIf="propriedade.get('textHint').value">
+        <mat-icon>info</mat-icon>
+        {{propriedade.get('textHint').value}}
+      </mat-hint>
+      <mat-error *ngIf="propriedade.get('value').errors?.required">
+        <mat-icon>error</mat-icon>
+        {{propriedade.get('label').value}} não informado(a).
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field
+            *ngIf="propriedade.get('type').value == typeField.valueList ||
              propriedade.get('type').value == typeField.textarea"
-      [formGroupName]="i"
-      [appearance]="propriedade.get('appearance').value"
-      [floatLabel]="propriedade.get('floatLabel').value"
-      [ngClass]="propriedade.get('fieldClass').value">
+            [formGroupName]="i"
+            [appearance]="propriedade.get('appearance').value"
+            [floatLabel]="propriedade.get('floatLabel').value"
+            [ngClass]="propriedade.get('fieldClass').value">
       <mat-label>{{propriedade.get('label').value}}</mat-label>
       <textarea
         [tabIndex]="i"

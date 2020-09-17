@@ -1,0 +1,23 @@
+<koala-folder-page
+		customFolderFontColor="#1976D2"
+		titleIcon="description"
+		titlePage="Koala Forms">
+	
+	<div class="content" content>
+		<mat-accordion class="forms">
+			<mat-expansion-panel>
+				<mat-expansion-panel-header>
+					<mat-panel-title class="titleForm">Endereço</mat-panel-title>
+					<mat-panel-description class="titleForm">
+						Formulário com integração ao ViaCep
+						<mat-icon>location_on</mat-icon>
+					</mat-panel-description>
+				</mat-expansion-panel-header>
+				
+				<koala-location-form [formGroup]="formLocation"></koala-location-form>
+			
+			</mat-expansion-panel>
+		</mat-accordion>
+	</div>
+
+</koala-folder-page>

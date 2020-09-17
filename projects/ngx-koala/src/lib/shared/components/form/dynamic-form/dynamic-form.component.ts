@@ -5,6 +5,7 @@ import { CpfValidator } from './validators/cpf.validator';
 import { CnpjValidator } from './validators/cnpj.validator';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormAbstract } from '../../../../core/form.abstract';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'koala-dynamic-form',
@@ -28,7 +29,14 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
     }
     this.controls = this.form.get('formData') as FormArray;
     this.formConfig?.forEach(config => {
-      this.controls.push(this.newControl(config));
+      const newFormGroup = this.newControl(config);
+      if (config.valueChanges) {
+        newFormGroup.get('value')
+                    .valueChanges
+                    .pipe(debounceTime(300))
+                    .subscribe(value => config.valueChanges(value));
+      }
+      this.controls.push(newFormGroup);
     });
   }
 

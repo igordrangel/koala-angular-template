@@ -4,7 +4,8 @@ import { PageLoginComponent } from './login/page-login.component';
 
 const routes: Routes = [
   {path: 'login', component: PageLoginComponent},
-  {path: 'list', loadChildren: () => import('./page-list/page-list.module').then(m => m.PageListModule)}
+  {path: 'list', loadChildren: () => import('./page-list/page-list.module').then(m => m.PageListModule)},
+  {path: 'forms', loadChildren: () => import('./forms/page-forms.module').then(m => m.PageFormsModule)}
 ];
 
 @NgModule({
