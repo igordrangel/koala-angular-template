@@ -4,6 +4,8 @@ import { KoalaDynamicFormFieldInterface } from '../dynamic-form/interfaces/koala
 import { DynamicFormTypeFieldEnum } from '../dynamic-form/enums/dynamic-form-type-field.enum';
 import { ViacepService } from '../../../services/viacep/viacep.service';
 import { ViacepInterface } from '../../../services/viacep/viacep.interface';
+import { BehaviorSubject } from 'rxjs';
+import { KoalaDynamicSetValueInterface } from '../dynamic-form/interfaces/koala.dynamic-set-value.interface';
 
 @Component({
   selector: 'koala-location-form',
@@ -12,7 +14,7 @@ import { ViacepInterface } from '../../../services/viacep/viacep.interface';
 export class LocationFormComponent implements OnInit {
   @Input() formGroup: FormGroup;
   public formLocationConfig: KoalaDynamicFormFieldInterface[];
-  private localization: ViacepInterface;
+  public locationSubject: BehaviorSubject<KoalaDynamicSetValueInterface[]> = new BehaviorSubject<KoalaDynamicSetValueInterface[]>(null);
   
   constructor(
     private fb: FormBuilder,
@@ -27,28 +29,89 @@ export class LocationFormComponent implements OnInit {
       {
         label: 'Cep',
         name: 'cep',
-        fieldClass: 'col-3',
+        class: 'w-100',
+        fieldClass: 'col-4',
         type: DynamicFormTypeFieldEnum.text,
-        appearance: 'outline',
+        appearance: 'fill',
         floatLabel: 'always',
         required: true,
+        textHint: 'Informe o CEP para preenchimento automático',
         valueChanges: async (value: string) => {
           if (value && value.length >= 8) {
             const cep = Number(value.replace(/^0-9/g, ''));
-            this.viacepService.get(cep).subscribe(localization => this.localization = localization);
+            this.viacepService.get(cep).subscribe(location => this.setLocation(location));
           }
         }
       },
       {
+        label: 'Estado',
+        name: 'estado',
+        class: 'col-2',
+        fieldClass: 'w-100',
+        type: DynamicFormTypeFieldEnum.text,
+        appearance: 'fill',
+        floatLabel: 'always',
+        required: true
+      },
+      {
         label: 'Cidade',
         name: 'cidade',
-        fieldClass: 'col-3',
+        class: 'col-5',
+        fieldClass: 'w-100',
         type: DynamicFormTypeFieldEnum.text,
-        appearance: 'outline',
+        appearance: 'fill',
         floatLabel: 'always',
-        required: true,
-        value: this.localization?.localidade
+        required: true
+      },
+      {
+        label: 'Bairro',
+        name: 'bairro',
+        class: 'col-5',
+        fieldClass: 'w-100',
+        type: DynamicFormTypeFieldEnum.text,
+        appearance: 'fill',
+        floatLabel: 'always',
+        required: true
+      },
+      {
+        label: 'Endereço',
+        name: 'endereco',
+        class: 'col-5',
+        fieldClass: 'w-100',
+        type: DynamicFormTypeFieldEnum.text,
+        appearance: 'fill',
+        floatLabel: 'always',
+        required: true
+      },
+      {
+        label: 'Complemento',
+        name: 'complemento',
+        class: 'col-5',
+        fieldClass: 'w-100',
+        type: DynamicFormTypeFieldEnum.text,
+        appearance: 'fill',
+        floatLabel: 'always'
+      },
+      {
+        label: 'Número',
+        name: 'numero',
+        class: 'col-2',
+        fieldClass: 'w-100',
+        type: DynamicFormTypeFieldEnum.text,
+        appearance: 'fill',
+        floatLabel: 'always'
       }
     ];
+  }
+  
+  private setLocation(location: ViacepInterface) {
+    this.locationSubject.next([
+      {name: 'cidade', value: location.localidade},
+      {name: 'estado', value: location.uf},
+      {name: 'bairro', value: location.bairro},
+      {name: 'endereco', value: location.logradouro},
+      {name: 'complemento', value: location.complemento},
+      {name: 'numero', value: location.unidade}
+    ]);
   }
 }

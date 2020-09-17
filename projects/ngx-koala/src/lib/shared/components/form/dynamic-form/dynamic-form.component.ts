@@ -6,6 +6,8 @@ import { CnpjValidator } from './validators/cnpj.validator';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormAbstract } from '../../../../core/form.abstract';
 import { debounceTime } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { KoalaDynamicSetValueInterface } from './interfaces/koala.dynamic-set-value.interface';
 
 @Component({
   selector: 'koala-dynamic-form',
@@ -14,6 +16,7 @@ import { debounceTime } from 'rxjs/operators';
 export class DynamicFormComponent extends FormAbstract implements OnInit {
   @Input() form: FormGroup;
   @Input() formConfig: KoalaDynamicFormFieldInterface[];
+  @Input() setValues: BehaviorSubject<KoalaDynamicSetValueInterface[]>;
   public controls: FormArray;
   public typeField = DynamicFormTypeFieldEnum;
 
@@ -38,6 +41,22 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
       }
       this.controls.push(newFormGroup);
     });
+    if (this.setValues) {
+      this.setValues
+          .subscribe(item => {
+            if (item) {
+              const formArray = this.form.get('formData') as FormArray;
+              for (const prop of item.values()) {
+                for (const control of formArray.controls.values()) {
+                  if (control.get('name').value === prop.name) {
+                    control.get('value').setValue(prop.value);
+                    break;
+                  }
+                }
+              }
+            }
+          });
+    }
   }
 
   public passwordView(index: number) {

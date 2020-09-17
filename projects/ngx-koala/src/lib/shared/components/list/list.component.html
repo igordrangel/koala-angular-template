@@ -8,8 +8,9 @@
         </koala-dynamic-form>
         <ul>
           <li *ngIf="filterFormConfig.advanced" class="option">
-            <button (click)="toogleFilter()" color="primary" mat-icon-button type="button">
-              <mat-icon>{{showAdvancedFilter ? 'expand_less' : 'expand_more'}}</mat-icon>
+            <button (click)="toogleFilter()" color="primary" mat-icon-button matTooltip="Filtro Avançado"
+                    matTooltipPosition="below" type="button">
+              <mat-icon>tune</mat-icon>
             </button>
           </li>
           <li *ngIf="filterFormConfig.checkAndSearch" class="checkbox-filter">
