@@ -6,6 +6,7 @@ import { ViacepService } from '../../../services/viacep/viacep.service';
 import { ViacepInterface } from '../../../services/viacep/viacep.interface';
 import { BehaviorSubject } from 'rxjs';
 import { KoalaDynamicSetValueInterface } from '../dynamic-form/interfaces/koala.dynamic-set-value.interface';
+import { FloatLabelType, MatFormFieldAppearance } from '@angular/material/form-field';
 
 @Component({
   selector: 'koala-location-form',
@@ -13,6 +14,8 @@ import { KoalaDynamicSetValueInterface } from '../dynamic-form/interfaces/koala.
 })
 export class LocationFormComponent implements OnInit {
   @Input() formGroup: FormGroup;
+  @Input() appereance: MatFormFieldAppearance = 'fill';
+  @Input() floatLabel: FloatLabelType = 'always';
   public formLocationConfig: KoalaDynamicFormFieldInterface[];
   public locationSubject: BehaviorSubject<KoalaDynamicSetValueInterface[]> = new BehaviorSubject<KoalaDynamicSetValueInterface[]>(null);
   
@@ -32,8 +35,8 @@ export class LocationFormComponent implements OnInit {
         class: 'w-100',
         fieldClass: 'col-4',
         type: DynamicFormTypeFieldEnum.text,
-        appearance: 'fill',
-        floatLabel: 'always',
+        appearance: this.appereance,
+        floatLabel: this.floatLabel,
         required: true,
         textHint: 'Informe o CEP para preenchimento automático',
         valueChanges: async (value: string) => {
@@ -49,8 +52,8 @@ export class LocationFormComponent implements OnInit {
         class: 'col-2',
         fieldClass: 'w-100',
         type: DynamicFormTypeFieldEnum.text,
-        appearance: 'fill',
-        floatLabel: 'always',
+        appearance: this.appereance,
+        floatLabel: this.floatLabel,
         required: true
       },
       {
@@ -59,8 +62,8 @@ export class LocationFormComponent implements OnInit {
         class: 'col-5',
         fieldClass: 'w-100',
         type: DynamicFormTypeFieldEnum.text,
-        appearance: 'fill',
-        floatLabel: 'always',
+        appearance: this.appereance,
+        floatLabel: this.floatLabel,
         required: true
       },
       {
@@ -69,8 +72,8 @@ export class LocationFormComponent implements OnInit {
         class: 'col-5',
         fieldClass: 'w-100',
         type: DynamicFormTypeFieldEnum.text,
-        appearance: 'fill',
-        floatLabel: 'always',
+        appearance: this.appereance,
+        floatLabel: this.floatLabel,
         required: true
       },
       {
@@ -79,8 +82,8 @@ export class LocationFormComponent implements OnInit {
         class: 'col-5',
         fieldClass: 'w-100',
         type: DynamicFormTypeFieldEnum.text,
-        appearance: 'fill',
-        floatLabel: 'always',
+        appearance: this.appereance,
+        floatLabel: this.floatLabel,
         required: true
       },
       {
@@ -89,8 +92,8 @@ export class LocationFormComponent implements OnInit {
         class: 'col-5',
         fieldClass: 'w-100',
         type: DynamicFormTypeFieldEnum.text,
-        appearance: 'fill',
-        floatLabel: 'always'
+        appearance: this.appereance,
+        floatLabel: this.floatLabel
       },
       {
         label: 'Número',
@@ -98,8 +101,8 @@ export class LocationFormComponent implements OnInit {
         class: 'col-2',
         fieldClass: 'w-100',
         type: DynamicFormTypeFieldEnum.text,
-        appearance: 'fill',
-        floatLabel: 'always'
+        appearance: this.appereance,
+        floatLabel: this.floatLabel
       }
     ];
   }

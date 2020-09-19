@@ -37,9 +37,12 @@ export class PageComponent implements OnInit {
     private router: Router,
     private loaderService: KoalaLoaderService
   ) {
+    this.openPages ?
+      this.openPages.push('login') :
+      this.openPages = ['login'];
     loaderService.getLoaderSubject().subscribe(loader => {
       if (loader) {
-        this.loader = loader
+        this.loader = loader;
       }
     });
   }
@@ -51,7 +54,7 @@ export class PageComponent implements OnInit {
         this.username = this.tokenService.getUser<{ login: string }>().login;
         this.firstUserLetter = this.username.charAt(0).toUpperCase();
       }
-      if (this.logged && this.defaultPage) {
+      if (this.logged && this.openPages?.indexOf(this.currentUrl) >= 0 && this.defaultPage) {
         this.router.navigate([this.defaultPage]).then();
       } else if (!this.logged && this.currentUrl && this.openPages?.indexOf(this.currentUrl) < 0) {
         this.router.navigate(['login']).then();
@@ -61,7 +64,7 @@ export class PageComponent implements OnInit {
     this.router.events.subscribe(event => {
       switch (true) {
         case event instanceof NavigationStart: {
-          this.loaderService.create({typeLoader: "indeterminate"});
+          this.loaderService.create({typeLoader: 'indeterminate'});
           break;
         }
 
