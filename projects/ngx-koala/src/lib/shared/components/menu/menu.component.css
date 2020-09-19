@@ -2,8 +2,25 @@
 ul {list-style: none;margin: 0;padding: 0;font-size: 0;}
 ul.list-menu {overflow: auto;height: calc(100vh - 107px);}
 ul ul {height: 0;overflow: hidden;transition: .2s;}
-ul li {position: relative;font-size: 14px;display: block;padding: 5px 20px;outline: none;cursor: pointer;color: #A5A5A5;transition: .2s;}
-ul li li {border: none !important;padding: 2px 15px !important;}
+ul li {
+	position: relative;
+	font-size: 14px;
+	display: block;
+	padding: 5px 20px;
+	outline: none;
+	cursor: pointer;
+	color: #A5A5A5;
+	transition: .2s;
+}
+
+.module {
+	outline: none;
+}
+
+ul li li {
+	border: none !important;
+	padding: 2px 15px !important;
+}
 .state-module {position: absolute;right: 10px;top: 7px;}
 ul li:hover {color: #1976D2;}
 ul li.active {color: #1565C0;border-left: 4px solid #1565C0;background: #F1F1F1;}
