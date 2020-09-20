@@ -1,6 +1,7 @@
 export interface KoalaPagePalletColorsInterface {
   userPresentationBackground?: string;
   userPresentationUserBackground?: string;
+  userPresentationUserFontColor?: string;
   firstColor?: string;
   secondColor?: string;
   bodyBackground?: string;
