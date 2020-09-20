@@ -48,7 +48,7 @@ export class AppComponent implements OnInit {
     listItemActive: 'rgba(0,0,0,.3)',
     shadowColorTableList: 'rgba(255, 255, 255, .4)'
   };
-  
+
   ngOnInit() {
     this.getNotifications();
   }
@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
       this.notifications.next([
         {id: 1, title: 'Demo 1', text: 'Esta é uma notificação de demonstração.'},
         {id: 2, title: 'Demo 2', text: 'Esta é uma notificação de demonstração.'}
-      ])
+      ]);
     }, 5000);
   }
 

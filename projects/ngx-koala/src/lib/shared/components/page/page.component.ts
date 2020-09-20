@@ -36,7 +36,7 @@ export class PageComponent implements OnInit {
     menuTitleBackground: 'rgba(0,0,0,.1)',
     menuTitleColor: 'rgba(0,0,0,.3)',
     menuBackground: '#fafafa',
-    menuOptionsBackground: '#A5A5A5',
+    menuOptionsBackground: '#eaeaea',
     menuOptionsColor: '#1976D2',
     menuOptionsColorHover: '#1976D2',
     menuOptionsColorActive: '#1565C0',
