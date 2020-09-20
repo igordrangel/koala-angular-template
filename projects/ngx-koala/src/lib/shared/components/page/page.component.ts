@@ -34,7 +34,7 @@ export class PageComponent implements OnInit {
   public firstUserLetter: string;
   public currentUrl: string;
   private defaultPalletColors: KoalaPagePalletColorsInterface = {
-    userPresentationBackground: '#fff',
+    userPresentationBackground: '#f1f1f1',
     userPresentationUserBackground: '#1976D2',
     firstColor: '#fff',
     secondColor: '#F1F1F1',
