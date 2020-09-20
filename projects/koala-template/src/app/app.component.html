@@ -1,12 +1,13 @@
 <koala-page
-  color="primary"
-  [openPages]="openPages"
-  (deleteAllNotifications)="deleteAllNotifications($event)"
-  (deleteNotification)="deleteNotification($event)"
-  [notifications]="notifications"
-  [userMenuOptions]="userMenuOptions"
-  defaultPage="list"
-  logotipo="assets/angular-logotipo.png">
+		color="primary"
+		[openPages]="openPages"
+		(deleteAllNotifications)="deleteAllNotifications($event)"
+		(deleteNotification)="deleteNotification($event)"
+		[notifications]="notifications"
+		[userMenuOptions]="userMenuOptions"
+		[palletColors]="palletColors"
+		defaultPage="list"
+		logotipo="assets/angular-logotipo.png">
   <div menu-options>
     <koala-menu [options]="menuOptions" titleMenu="Ferramentas"></koala-menu>
   </div>

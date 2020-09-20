@@ -1,15 +1,16 @@
 <koala-folder-page
-  customFolderFontColor="#1976D2"
-  titleIcon="list_alt"
-  titlePage="List">
-
+        customFolderBackgroudColor="#424242"
+        customFolderFontColor="#f1f1f1"
+        titleIcon="list_alt"
+        titlePage="List">
+  
   <div menu-page>
     <koala-button (click)="dialogList()" color="white" icon="add" tooltip="Inserir"></koala-button>
   </div>
-
+  
   <div content>
     <koala-list
-      (getDataSource)="countries = $event"
+            (getDataSource)="countries = $event"
       (getSelection)="selection = $event"
       [columnsToShowInList]="collumns"
       [filterFormConfig]="filterConfig"
@@ -21,21 +22,21 @@
 
       <div itemsSelectList>
         <koala-button
-          (click)="actionList()"
-          backgroundColor="white"
-          color="blue"
-          icon="delete_forever"
-          tooltip="Delete Forever">
+                (click)="actionList()"
+                backgroundColor="transparent"
+                color="white"
+                icon="delete_forever"
+                tooltip="Delete Forever">
         </koala-button>
       </div>
 
       <div itemsList>
         <koala-button
-          (click)="downloadList()"
-          backgroundColor="white"
-          color="blue"
-          icon="assignment_returned"
-          tooltip="Download List (CSV)">
+                (click)="downloadList()"
+                backgroundColor="transparent"
+                color="white"
+                icon="assignment_returned"
+                tooltip="Download List (CSV)">
         </koala-button>
       </div>
 

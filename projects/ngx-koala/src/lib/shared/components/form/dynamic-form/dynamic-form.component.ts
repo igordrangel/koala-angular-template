@@ -96,7 +96,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
       textHint: [config.textHint],
       required: [config.required ?? false],
       opcoesSelect: [config.opcoesSelect ?? []],
-      hidePassword: [config.type === DynamicFormTypeFieldEnum.password],
+      hidePassword: config.type === DynamicFormTypeFieldEnum.password ? true : null,
       value: [value, validators]
     });
   }
