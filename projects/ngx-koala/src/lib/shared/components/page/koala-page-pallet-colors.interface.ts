@@ -8,6 +8,8 @@ export interface KoalaPagePalletColorsInterface {
   fontColor?: string;
   fontHoverColor?: string;
   fontActiveColor?: string;
+  checkboxBackground?: string;
+  checkboxColor?: string;
   menuBackground?: string;
   menuOptionsBackground?: string;
   menuOptionsColor?: string;
@@ -20,6 +22,10 @@ export interface KoalaPagePalletColorsInterface {
   toolbarColor?: string;
   listBackground?: string;
   listContentBackground?: string;
-  listItemHover?: string;
-  listItemActive?: string;
+  listTitleItemColor?: string;
+  listItemColor?: string;
+  listItemBackgroudHover?: string;
+  listItemBackgroundActive?: string;
+  scrollbarColor?: string;
+  scrollbarColorHover?: string;
 }

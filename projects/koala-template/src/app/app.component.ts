@@ -29,24 +29,14 @@ export class AppComponent implements OnInit {
     }
   ];
   public palletColors: KoalaPagePalletColorsInterface = {
-    userPresentationBackground: '#212121',
-    firstColor: '#212121',
-    secondColor: '#424242',
-    bodyBackground: '#424242',
-    fontColor: '#f1f1f1',
-    fontHoverColor: '#fff',
-    fontActiveColor: '#eee',
+    toolbarBackground: '#fff',
     menuTitleBackground: 'rgba(255,255,255,.1)',
     menuTitleColor: 'rgba(255,255,255,.3)',
     menuBackground: '#212121',
     menuOptionsBackground: '#292929',
     menuOptionsColor: '#f1f1f1',
     menuOptionsColorHover: '#fff',
-    menuOptionsColorActive: '#eee',
-    listBackground: '#424242',
-    listItemHover: 'rgba(0,0,0,.1)',
-    listItemActive: 'rgba(0,0,0,.3)',
-    shadowColorTableList: 'rgba(255, 255, 255, .4)'
+    menuOptionsColorActive: '#eee'
   };
 
   ngOnInit() {

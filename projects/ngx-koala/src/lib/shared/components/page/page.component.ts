@@ -34,12 +34,16 @@ export class PageComponent implements OnInit {
   public firstUserLetter: string;
   public currentUrl: string;
   private defaultPalletColors: KoalaPagePalletColorsInterface = {
+    scrollbarColor: '#1976D2',
+    scrollbarColorHover: '#1565C0',
     userPresentationBackground: '#f1f1f1',
     userPresentationUserBackground: '#1976D2',
     userPresentationUserFontColor: '#fff',
     firstColor: '#fff',
     secondColor: '#F1F1F1',
     bodyBackground: '#eee',
+    checkboxBackground: '#1976D2',
+    checkboxColor: '#fff',
     fontColor: '#1976D2',
     fontHoverColor: '#1976D2',
     fontActiveColor: '#1565C0',
@@ -50,12 +54,14 @@ export class PageComponent implements OnInit {
     menuOptionsColor: '#1976D2',
     menuOptionsColorHover: '#1976D2',
     menuOptionsColorActive: '#1565C0',
-    toolbarBackground: '#f1f1f1',
+    toolbarBackground: '#fff',
     toolbarColor: '#1976D2',
     listBackground: '#fff',
     listContentBackground: '#fff',
-    listItemHover: '#F1F1F1',
-    listItemActive: '#EEE',
+    listTitleItemColor: '#838383',
+    listItemColor: '#3e3e3e',
+    listItemBackgroudHover: '#F1F1F1',
+    listItemBackgroundActive: '#EEE',
     shadowColorTableList: 'rgba(25, 118, 210, .4)'
   };
 
@@ -135,21 +141,21 @@ export class PageComponent implements OnInit {
     this.tokenService.removeToken();
     this.tokenService.getTokenSubject().next(null);
   }
-  
+
   public defineColor() {
     const css = `
 body {background: ${this.palletColors.bodyBackground}!important;}
-*::-webkit-scrollbar-thumb {background: ${this.palletColors.fontColor};width: 2px;}
-*::-webkit-scrollbar-thumb:hover {background: ${this.palletColors.fontHoverColor};}
+*::-webkit-scrollbar-thumb {background: ${this.palletColors.scrollbarColor};width: 2px;}
+*::-webkit-scrollbar-thumb:hover {background: ${this.palletColors.scrollbarColorHover};}
 input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hover {-webkit-box-shadow: 0 0 0 1000px ${this.palletColors.firstColor} inset !important;}
 .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
-.mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element {background-color: ${this.palletColors.fontColor} !important;}
-.mat-checkbox-checkmark-path {stroke: ${this.palletColors.firstColor} !important;}
-.mat-checkbox-checkmark {fill: ${this.palletColors.firstColor} !important;}
-.mat-checkbox-mixedmark {background-color: ${this.palletColors.firstColor} !important;}
-.mat-checkbox-frame {border-color: ${this.palletColors.fontColor} !important;}
-.mat-radio-outer-circle {border-color: ${this.palletColors.fontColor}!important;}
-.mat-radio-ripple .mat-ripple-element, .mat-radio-inner-circle {background-color: ${this.palletColors.fontColor} !important;}
+.mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element {background-color: ${this.palletColors.checkboxBackground} !important;}
+.mat-checkbox-checkmark-path {stroke: ${this.palletColors.checkboxColor} !important;}
+.mat-checkbox-checkmark {fill: ${this.palletColors.checkboxColor} !important;}
+.mat-checkbox-mixedmark {background-color: ${this.palletColors.checkboxColor} !important;}
+.mat-checkbox-frame {border-color: ${this.palletColors.checkboxBackground} !important;}
+.mat-radio-outer-circle {border-color: ${this.palletColors.checkboxBackground}!important;}
+.mat-radio-ripple .mat-ripple-element, .mat-radio-inner-circle {background-color: ${this.palletColors.checkboxBackground} !important;}
 .home-list-cards .list .mat-list-item-content .mat-icon {color: ${this.palletColors.fontColor};}
 .home-list-cards .list button .mat-badge-content {background: ${this.palletColors.fontColor};}
 .koala-dialog .mat-dialog-title h2 {color: ${this.palletColors.fontColor};}
@@ -163,35 +169,22 @@ koala-page .btn-toolbar span{color: ${this.palletColors.toolbarColor};}
 koala-page .btn-toolbar span.icon-user,
 .user-presentation span.icon-user {background: ${this.palletColors.userPresentationUserBackground};color: ${this.palletColors.userPresentationUserFontColor};}
 .user-presentation {background: ${this.palletColors.userPresentationBackground};}
-.user-presentation span.username {color: ${this.palletColors.userPresentationUserFontColor};}
+.user-presentation span.username {color: ${this.palletColors.toolbarColor};}
 koala-menu .title {background: ${this.palletColors.menuTitleBackground};color: ${this.palletColors.menuTitleColor};}
 koala-menu ul li:hover {color: ${this.palletColors.menuOptionsColorHover} !important;}
 koala-menu ul li.active {color: ${this.palletColors.menuOptionsColorActive} !important;border-left: 4px solid ${this.palletColors.menuOptionsColorActive} !important;background: ${this.palletColors.menuOptionsBackground} !important;}
 koala-menu ul li li:hover {color: ${this.palletColors.menuOptionsColorHover} !important;}
 koala-menu ul li li.active {color: ${this.palletColors.menuOptionsColorActive} !important;}
 .list-container {box-shadow: 0 1px 3px ${this.palletColors.shadowColorTableList};}
-.list-container .list table.table-hover tr:hover {background: ${this.palletColors.listItemHover};}
-.list-container .list table.table-hover tr:active {background: ${this.palletColors.listItemActive};}
-.list-container .list-filter {background: ${this.palletColors.firstColor};color: ${this.palletColors.fontColor};}
-.list-container .list-filter mat-icon {color: ${this.palletColors.fontColor};}
-.mat-form-field-label,
-.mat-form-field-appearance-outline .mat-form-field-outline,
-.mat-form-field.mat-focused .mat-form-field-label {color: ${this.palletColors.fontColor};}
-.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {color: ${this.palletColors.fontActiveColor};}
-.mat-input-element {caret-color: ${this.palletColors.fontColor};color: ${this.palletColors.fontColor}!important;}
-.list-container .list-filter .advanced {border-top: 1px solid ${this.palletColors.fontColor};background: ${this.palletColors.firstColor};}
+.list-container .list table.table-hover tr:hover {background: ${this.palletColors.listItemBackgroudHover};}
+.list-container .list table.table-hover tr:active {background: ${this.palletColors.listItemBackgroundActive};}
+.list-container .list-filter .advanced {background: ${this.palletColors.firstColor};}
 .list-container nav.menu-list {background: ${this.palletColors.firstColor};color: rgba(25, 118, 210, .3);}
-mat-paginator {color: ${this.palletColors.fontColor}!important;}
-mat-paginator .mat-button-disabled {color: ${this.palletColors.menuTitleColor}!important}
-.mat-select-value,
-.mat-select-arrow {color: ${this.palletColors.fontColor}!important;}
-.mat-form-field-underline {background-color: ${this.palletColors.fontColor}!important;}
-.mat-form-field.mat-focused .mat-form-field-ripple {background-color: ${this.palletColors.fontActiveColor}!important;}
 .content {background: ${this.palletColors.listContentBackground};}
 .mat-table {background: ${this.palletColors.listBackground};color: ${this.palletColors.fontColor};}
-.mat-table th {color: ${this.palletColors.fontColor}!important;}
-.mat-sort-header-arrow {color: ${this.palletColors.fontColor}!important;}
-.mat-table td {color: ${this.palletColors.fontColor}!important;}`;
+.mat-table th {color: ${this.palletColors.listTitleItemColor}!important;}
+.mat-sort-header-arrow {color: ${this.palletColors.listItemColor}!important;}
+.mat-table td {color: ${this.palletColors.listItemColor}!important;}`;
     const head = document.head || document.getElementsByTagName('head')[0];
     const style = document.createElement('style');
     head.appendChild(style);
