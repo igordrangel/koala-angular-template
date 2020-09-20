@@ -162,7 +162,6 @@ input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hov
 .koala-dialog .mat-dialog-title mat-icon {color: ${this.palletColors.fontColor}!important;}
 .koala-dialog .mat-dialog-container {background: ${this.palletColors.firstColor}}
 koala-page .menu-options {background: ${this.palletColors.menuBackground};}
-koala-page .menu-container,
 koala-page .toolbar {background: ${this.palletColors.toolbarBackground};}
 koala-page .toolbar .btn-collapse-menu,
 koala-page .btn-toolbar span{color: ${this.palletColors.toolbarColor};}
