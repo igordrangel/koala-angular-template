@@ -1,6 +1,8 @@
 import { DynamicFormTypeFieldEnum } from '../enums/dynamic-form-type-field.enum';
 import { FloatLabelType, MatFormFieldAppearance } from '@angular/material/form-field';
 import { BehaviorSubject } from 'rxjs';
+import { FormGroup } from '@angular/forms';
+import { KoalaDynamicSetValueInterface } from './koala.dynamic-set-value.interface';
 
 export interface KoalaDynamicFormFieldInterface {
   label: string;
@@ -18,5 +20,12 @@ export interface KoalaDynamicFormFieldInterface {
   }[];
   class?: string;
   fieldClass?: string;
+  moreItemsButtonIconAddlabel?: string;
+  moreItemsIcon?: string;
+  moreItemsConfig?: {
+    form: FormGroup;
+    formConfig: KoalaDynamicFormFieldInterface[];
+    setValues?: BehaviorSubject<BehaviorSubject<KoalaDynamicSetValueInterface[]>[]>;
+  };
   valueChanges?: (value: any) => void;
 }

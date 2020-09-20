@@ -15,5 +15,5 @@ export enum DynamicFormTypeFieldEnum {
   autocomplete,
   coin,
   percent,
-  moreItens
+  moreItems
 }

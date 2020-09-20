@@ -14,6 +14,8 @@ import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { maskOptions } from '../../../mask-options';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { KoalaButtonModule } from '../button/koala.button.module';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
     MatAutocompleteModule,
     MatButtonModule,
     MatIconModule,
+    MatExpansionModule,
+    KoalaButtonModule,
     MatProgressSpinnerModule
   ],
   exports: [

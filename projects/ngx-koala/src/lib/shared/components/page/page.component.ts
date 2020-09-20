@@ -70,9 +70,6 @@ export class PageComponent implements OnInit {
     private router: Router,
     private loaderService: KoalaLoaderService
   ) {
-    this.openPages ?
-      this.openPages.push('login') :
-      this.openPages = ['login'];
     loaderService.getLoaderSubject().subscribe(loader => {
       if (loader) {
         this.loader = loader;
@@ -81,6 +78,19 @@ export class PageComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.openPages) {
+      if (this.openPages.indexOf('/') < 0) {
+        this.openPages.push('/');
+      }
+      if (this.openPages.indexOf('/login') < 0) {
+        this.openPages.push('/login');
+      }
+    } else {
+      this.openPages = [
+        '/',
+        '/login'
+      ];
+    }
     this.tokenService.getTokenSubject()?.subscribe(token => {
       this.logged = !!token;
       if (this.logged) {

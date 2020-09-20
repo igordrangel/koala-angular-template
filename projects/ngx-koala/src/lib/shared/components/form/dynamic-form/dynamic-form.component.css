@@ -1,0 +1,7 @@
+.more-items-content fieldset {border: 1px solid #cccccc;padding: 16px;}
+.more-items-content fieldset legend {font-family: 'Josefin Sans', sans-serif;font-size: 11px;font-weight: bold;padding: 0 8px;}
+.more-items-content .items .titleForm {color: #616161;}
+.more-items-content .items .mat-expansion-panel-header-title,
+.more-items-content .items .mat-expansion-panel-header-description {flex-basis: 0;}
+.more-items-content .items .mat-expansion-panel-header-description {align-items: center;justify-content: space-between;}
+.more-items-content .items .mat-form-field + .mat-form-field {margin-left: 8px;}

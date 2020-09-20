@@ -1,21 +1,6 @@
-.content {
-	padding: 0 50px;
-}
-
-.forms .titleForm {
-	color: #616161;
-}
-
+.content {padding: 0 50px;}
+.forms .titleForm {color: #616161;}
 .forms .mat-expansion-panel-header-title,
-.forms .mat-expansion-panel-header-description {
-	flex-basis: 0;
-}
-
-.forms .mat-expansion-panel-header-description {
-	justify-content: space-between;
-	align-items: center;
-}
-
-.forms .mat-form-field + .mat-form-field {
-	margin-left: 8px;
-}
+.forms .mat-expansion-panel-header-description {flex-basis: 0;}
+.forms .mat-expansion-panel-header-description {align-items: center;justify-content: space-between;}
+.forms .mat-form-field + .mat-form-field {margin-left: 8px;}

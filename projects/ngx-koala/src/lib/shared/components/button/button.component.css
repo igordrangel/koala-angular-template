@@ -1,21 +1,8 @@
-.koala-button {
-	padding: 2px 8px;
-}
-
-.koala-icon-button {
-	width: 25px;
-	height: 25px;
-	line-height: 25px;
-}
-
-.koala-icon-button mat-icon {
-	width: 20px;
-	height: 20px;
-	line-height: 20px;
-	font-size: 20px;
-}
-.koala-icon-button.c-white {color: #FFF;}
-.koala-icon-button.c-blue {color: #1976D2;}
-.koala-icon-button.b-white {background: #FFF;}
-.koala-icon-button.b-blue {background: #1976D2;}
+.koala-button {padding: 2px 8px;}
+.koala-icon-button {height: 25px;line-height: 25px;width: 25px;}
+.koala-icon-button mat-icon {font-size: 20px;height: 20px;line-height: 20px;position: relative;width: 20px;}
+.koala-icon-button.c-white {color: #ffffff;}
+.koala-icon-button.c-blue {color: #1976d2;}
+.koala-icon-button.b-white {background: #ffffff;}
+.koala-icon-button.b-blue {background: #1976d2;}
 .koala-icon-button.b-transparent {background: transparent;}

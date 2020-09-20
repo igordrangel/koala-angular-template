@@ -18,7 +18,7 @@ export class LocationFormComponent implements OnInit {
   @Input() floatLabel: FloatLabelType = 'always';
   public formLocationConfig: KoalaDynamicFormFieldInterface[];
   public locationSubject: BehaviorSubject<KoalaDynamicSetValueInterface[]> = new BehaviorSubject<KoalaDynamicSetValueInterface[]>(null);
-  
+
   constructor(
     private fb: FormBuilder,
     private viacepService: ViacepService
@@ -33,7 +33,7 @@ export class LocationFormComponent implements OnInit {
         label: 'Cep',
         name: 'cep',
         class: 'w-100',
-        fieldClass: 'col-4',
+        fieldClass: 'w-50',
         type: DynamicFormTypeFieldEnum.text,
         appearance: this.appereance,
         floatLabel: this.floatLabel,

@@ -3,7 +3,7 @@
        [ngClass]="propriedade.get('class').value"
        formArrayName="formData">
     <mat-form-field
-      *ngIf="propriedade.get('type').value == typeField.text ||
+	    *ngIf="propriedade.get('type').value == typeField.text ||
              propriedade.get('type').value == typeField.password ||
              propriedade.get('type').value == typeField.cpf ||
              propriedade.get('type').value == typeField.cnpj ||
@@ -13,21 +13,21 @@
              propriedade.get('type').value == typeField.time ||
              propriedade.get('type').value == typeField.phone ||
              propriedade.get('type').value == typeField.percent"
-      [formGroupName]="i"
-      [appearance]="propriedade.get('appearance').value"
-      [floatLabel]="propriedade.get('floatLabel').value"
-      [ngClass]="propriedade.get('fieldClass').value">
+	    [appearance]="propriedade.get('appearance').value"
+	    [floatLabel]="propriedade.get('floatLabel').value"
+	    [formGroupName]="i"
+	    [ngClass]="propriedade.get('fieldClass').value">
       <mat-label>{{propriedade.get('label').value}}</mat-label>
       <input
-        [tabIndex]="i"
-        [dropSpecialCharacters]="false"
-        [mask]="
+	      [dropSpecialCharacters]="false"
+	      [mask]="
                     ((propriedade.get('type').value == typeField.phone) ? '(00)0000-0000?0' : null) ||
                     ((propriedade.get('type').value == typeField.cpf) ? '000.000.000-00' : null) ||
                     ((propriedade.get('type').value == typeField.cnpj) ? '00.000.000/0000-00' : null) ||
                     ((propriedade.get('type').value == typeField.percent) ? 'percent' : null)"
-        [required]="propriedade.get('required').value"
-        [type]="
+	      [required]="propriedade.get('required').value"
+	      [tabIndex]="i"
+	      [type]="
                     ((propriedade.get('type').value == typeField.cpf ||
                       propriedade.get('type').value == typeField.cnpj ||
                       propriedade.get('type').value == typeField.phone ||
@@ -43,25 +43,25 @@
                       'time' : (
                       propriedade.get('type').value == typeField.password ?
                       'password' : 'text')))))"
-        [validation]="
+	      [validation]="
                     (propriedade.get('type').value == typeField.cpf && propriedade.get('value').errors?.cpfInvalid) ||
                     (propriedade.get('type').value == typeField.cnpj && propriedade.get('value').errors?.cnpjInvalid)"
-        formControlName="value"
-        matInput/>
+	      formControlName="value"
+	      matInput/>
       <button
-        (click)="passwordView(i)"
-        *ngIf="propriedade.get('hidePassword').value !== null"
-        [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="propriedade.get('hidePassword').value" mat-icon-button matSuffix type="button">
+	      (click)="passwordView(i)"
+	      *ngIf="propriedade.get('hidePassword').value !== null"
+	      [attr.aria-label]="'Hide password'"
+	      [attr.aria-pressed]="propriedade.get('hidePassword').value" mat-icon-button matSuffix type="button">
         <mat-icon>{{propriedade.get('hidePassword').value ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
       <mat-hint *ngIf="propriedade.get('textHint').value">
         <mat-icon>info</mat-icon>
-        {{propriedade.get('textHint').value}}
+	      {{propriedade.get('textHint').value}}
       </mat-hint>
       <mat-error *ngIf="propriedade.get('value').errors?.required">
         <mat-icon>error</mat-icon>
-        {{propriedade.get('label').value}} não informado(a).
+	      {{propriedade.get('label').value}} não informado(a).
       </mat-error>
       <mat-error *ngIf="propriedade.get('value').errors?.cpfInvalid">
         <mat-icon>error</mat-icon>
@@ -77,60 +77,60 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field
-            *ngIf="propriedade.get('type').value == typeField.coin"
-            [appearance]="propriedade.get('appearance').value"
-            [floatLabel]="propriedade.get('floatLabel').value"
-            [formGroupName]="i"
-            [ngClass]="propriedade.get('fieldClass').value">
+	    *ngIf="propriedade.get('type').value == typeField.coin"
+	    [appearance]="propriedade.get('appearance').value"
+	    [floatLabel]="propriedade.get('floatLabel').value"
+	    [formGroupName]="i"
+	    [ngClass]="propriedade.get('fieldClass').value">
       <mat-label>{{propriedade.get('label').value}}</mat-label>
       <input
-              [required]="propriedade.get('required').value"
-              [tabIndex]="i"
-              currencyMask
-              formControlName="value"
-              matInput
-              type="tel"/>
+	      [required]="propriedade.get('required').value"
+	      [tabIndex]="i"
+	      currencyMask
+	      formControlName="value"
+	      matInput
+	      type="tel"/>
       <mat-hint *ngIf="propriedade.get('textHint').value">
         <mat-icon>info</mat-icon>
-        {{propriedade.get('textHint').value}}
+	      {{propriedade.get('textHint').value}}
       </mat-hint>
       <mat-error *ngIf="propriedade.get('value').errors?.required">
         <mat-icon>error</mat-icon>
-        {{propriedade.get('label').value}} não informado(a).
+	      {{propriedade.get('label').value}} não informado(a).
       </mat-error>
     </mat-form-field>
     <mat-form-field
-            *ngIf="propriedade.get('type').value == typeField.valueList ||
+	    *ngIf="propriedade.get('type').value == typeField.valueList ||
              propriedade.get('type').value == typeField.textarea"
-            [formGroupName]="i"
-            [appearance]="propriedade.get('appearance').value"
-            [floatLabel]="propriedade.get('floatLabel').value"
-            [ngClass]="propriedade.get('fieldClass').value">
+	    [appearance]="propriedade.get('appearance').value"
+	    [floatLabel]="propriedade.get('floatLabel').value"
+	    [formGroupName]="i"
+	    [ngClass]="propriedade.get('fieldClass').value">
       <mat-label>{{propriedade.get('label').value}}</mat-label>
       <textarea
-        [tabIndex]="i"
-        [mat-autosize]="true"
-        [matAutosizeMaxRows]="8"
-        [matAutosizeMinRows]="3"
-        [required]="propriedade.get('required').value"
-        formControlName="value"
-        matInput>
+	      [mat-autosize]="true"
+	      [matAutosizeMaxRows]="8"
+	      [matAutosizeMinRows]="3"
+	      [required]="propriedade.get('required').value"
+	      [tabIndex]="i"
+	      formControlName="value"
+	      matInput>
             </textarea>
       <mat-hint *ngIf="propriedade.get('textHint').value">
         <mat-icon>info</mat-icon>
-        {{propriedade.get('textHint').value}}
+	      {{propriedade.get('textHint').value}}
       </mat-hint>
       <mat-error *ngIf="propriedade.get('value').errors?.required">
         <mat-icon>error</mat-icon>
-        {{propriedade.get('label').value}} não informado(a).
+	      {{propriedade.get('label').value}} não informado(a).
       </mat-error>
     </mat-form-field>
     <mat-form-field
-      *ngIf="propriedade.get('type').value == typeField.select"
-      [formGroupName]="i"
-      [appearance]="propriedade.get('appearance').value"
-      [floatLabel]="propriedade.get('floatLabel').value"
-      [ngClass]="propriedade.get('fieldClass').value">
+	    *ngIf="propriedade.get('type').value == typeField.select"
+	    [appearance]="propriedade.get('appearance').value"
+	    [floatLabel]="propriedade.get('floatLabel').value"
+	    [formGroupName]="i"
+	    [ngClass]="propriedade.get('fieldClass').value">
       <mat-label>{{propriedade.get('label').value}}</mat-label>
       <mat-select [required]="propriedade.get('required').value" [tabIndex]="i" formControlName="value">
         <mat-option *ngFor="let options of propriedade.get('opcoesSelect').value" [value]="options.value">
@@ -139,16 +139,60 @@
       </mat-select>
     </mat-form-field>
     <div
-      *ngIf="propriedade.get('type').value == typeField.checkbox"
-      [formGroupName]="i"
-      [ngClass]="propriedade.get('fieldClass').value">
+	    *ngIf="propriedade.get('type').value == typeField.checkbox"
+	    [formGroupName]="i"
+	    [ngClass]="propriedade.get('fieldClass').value">
       <mat-checkbox
-        [tabIndex]="i"
-        formControlName="value"
-        value="true">
+	      [tabIndex]="i"
+	      formControlName="value"
+	      value="true">
         {{propriedade.get('label').value}}
       </mat-checkbox>
     </div>
+	  <div
+		  *ngIf="propriedade.get('type').value == typeField.moreItems"
+		  [formControlName]="i"
+		  [ngClass]="propriedade.get('fieldClass').value"
+		  class="more-items-content">
+		  <fieldset>
+			  <legend>
+				  <koala-button
+					  (click)="addMoreItem(i)"
+					  [tooltip]="propriedade.get('moreItemsButtonIconAddlabel').value"
+					  backgroundColor="blue"
+					  class="btn-add-more-items"
+					  color="white"
+					  icon="add">
+				  </koala-button>
+				  {{propriedade.get('label').value}}
+			  </legend>
+			  <mat-accordion class="items">
+				  <mat-expansion-panel
+					  *ngFor="let item of propriedade.get('moreItemsConfig').value.slice().reverse(); index as indexMoreItems"
+					  [expanded]="(propriedade.get('moreItemsConfig').value.length - 1 - indexMoreItems) ===
+					  propriedade.get('moreItemsExpanded').value">
+					  <mat-expansion-panel-header>
+							<mat-panel-title class="titleForm">#
+								{{propriedade.get('moreItemsConfig').value.length - 1 - indexMoreItems + 1}}</mat-panel-title>
+							<mat-panel-description class="titleForm">
+								{{propriedade.get('label').value}}
+								<mat-icon>{{propriedade.get('moreItemsIcon').value}}</mat-icon>
+							</mat-panel-description>
+						</mat-expansion-panel-header>
+					  <koala-dynamic-form
+						  [formConfig]="item.formConfig"
+						  [form]="item.form">
+					  </koala-dynamic-form>
+				    <mat-action-row>
+				      <button (click)="removeMoreItem(i, propriedade.get('moreItemsConfig').value.length - 1 - indexMoreItems)"
+				              mat-icon-button>
+					      <mat-icon>delete</mat-icon>
+				      </button>
+				    </mat-action-row>
+				  </mat-expansion-panel>
+			  </mat-accordion>
+		  </fieldset>
+	  </div>
   </div>
   <ng-content select="[btn-submit]"></ng-content>
 </div>

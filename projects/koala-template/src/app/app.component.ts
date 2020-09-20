@@ -3,7 +3,6 @@ import { BehaviorSubject } from 'rxjs';
 import { KoalaNotificationInterface } from '../../../ngx-koala/src/lib/shared/components/notifications/koala.notification.interface';
 import { KoalaUserMenuOptionsInterface } from '../../../ngx-koala/src/lib/shared/components/page/koala.user-menu-options.interface';
 import { KoalaMenuModuleInterface } from '../../../ngx-koala/src/lib/shared/components/menu/koala.menu-module.interface';
-import { KoalaPagePalletColorsInterface } from '../../../ngx-koala/src/lib/shared/components/page/koala-page-pallet-colors.interface';
 
 @Component({
   selector: 'app-root',
@@ -28,16 +27,6 @@ export class AppComponent implements OnInit {
       ]
     }
   ];
-  public palletColors: KoalaPagePalletColorsInterface = {
-    toolbarBackground: '#fff',
-    menuTitleBackground: 'rgba(255,255,255,.1)',
-    menuTitleColor: 'rgba(255,255,255,.3)',
-    menuBackground: '#212121',
-    menuOptionsBackground: '#292929',
-    menuOptionsColor: '#f1f1f1',
-    menuOptionsColorHover: '#fff',
-    menuOptionsColorActive: '#eee'
-  };
 
   ngOnInit() {
     this.getNotifications();
