@@ -35,6 +35,7 @@ export class PageComponent implements OnInit {
   public currentUrl: string;
   private defaultPalletColors: KoalaPagePalletColorsInterface = {
     userPresentationBackground: '#fff',
+    userPresentationUserBackground: '#1976D2',
     firstColor: '#fff',
     secondColor: '#F1F1F1',
     bodyBackground: '#eee',
@@ -159,7 +160,7 @@ koala-page .toolbar {background: ${this.palletColors.toolbarBackground};}
 koala-page .toolbar .btn-collapse-menu,
 koala-page .btn-toolbar span{color: ${this.palletColors.toolbarColor};}
 koala-page .btn-toolbar span.icon-user,
-.user-presentation span.icon-user {background: ${this.palletColors.toolbarBackground};color: ${this.palletColors.toolbarColor};}
+.user-presentation span.icon-user {background: ${this.palletColors.userPresentationUserBackground};color: ${this.palletColors.toolbarColor};}
 .user-presentation {background: ${this.palletColors.userPresentationBackground};}
 .user-presentation span.username {color: ${this.palletColors.toolbarColor};}
 koala-menu .title {background: ${this.palletColors.menuTitleBackground};color: ${this.palletColors.menuTitleColor};}
