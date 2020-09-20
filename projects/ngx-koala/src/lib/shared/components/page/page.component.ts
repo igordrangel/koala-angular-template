@@ -48,6 +48,8 @@ export class PageComponent implements OnInit {
     menuOptionsColor: '#1976D2',
     menuOptionsColorHover: '#1976D2',
     menuOptionsColorActive: '#1565C0',
+    toolbarBackground: '#f1f1f1',
+    toolbarColor: '#1976D2',
     listBackground: '#fff',
     listContentBackground: '#fff',
     listItemHover: '#F1F1F1',
@@ -153,13 +155,13 @@ input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hov
 .koala-dialog .mat-dialog-container {background: ${this.palletColors.firstColor}}
 koala-page .menu-options {background: ${this.palletColors.menuBackground};}
 koala-page .menu-container,
-koala-page .toolbar {background: ${this.palletColors.firstColor};}
+koala-page .toolbar {background: ${this.palletColors.toolbarBackground};}
 koala-page .toolbar .btn-collapse-menu,
-koala-page .btn-toolbar span{color: ${this.palletColors.fontColor};}
+koala-page .btn-toolbar span{color: ${this.palletColors.toolbarColor};}
 koala-page .btn-toolbar span.icon-user,
-.user-presentation span.icon-user {background: ${this.palletColors.fontColor};color: ${this.palletColors.firstColor};}
+.user-presentation span.icon-user {background: ${this.palletColors.toolbarBackground};color: ${this.palletColors.toolbarColor};}
 .user-presentation {background: ${this.palletColors.userPresentationBackground};}
-.user-presentation span.username {color: ${this.palletColors.fontColor};}
+.user-presentation span.username {color: ${this.palletColors.toolbarColor};}
 koala-menu .title {background: ${this.palletColors.menuTitleBackground};color: ${this.palletColors.menuTitleColor};}
 koala-menu ul li:hover {color: ${this.palletColors.menuOptionsColorHover} !important;}
 koala-menu ul li.active {color: ${this.palletColors.menuOptionsColorActive} !important;border-left: 4px solid ${this.palletColors.menuOptionsColorActive} !important;background: ${this.palletColors.menuOptionsBackground} !important;}
