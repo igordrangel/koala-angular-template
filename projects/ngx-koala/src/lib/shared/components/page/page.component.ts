@@ -25,7 +25,15 @@ export class PageComponent implements OnInit {
   @Input() openPages: string[];
   @Input() notifications: BehaviorSubject<KoalaNotificationInterface[]>;
   @Input() userMenuOptions: KoalaUserMenuOptionsInterface[] = [];
-  @Input() palletColors: KoalaPagePalletColorsInterface = {
+  @Input() palletColors: KoalaPagePalletColorsInterface;
+  @Output() deleteAllNotifications = new EventEmitter<boolean>(false);
+  @Output() deleteNotification = new EventEmitter<KoalaNotificationInterface>(null);
+  public logged: boolean;
+  public loader: LoaderBarPageInterface;
+  public username: string;
+  public firstUserLetter: string;
+  public currentUrl: string;
+  private defaultPalletColors: KoalaPagePalletColorsInterface = {
     userPresentationBackground: '#fff',
     firstColor: '#fff',
     secondColor: '#F1F1F1',
@@ -45,13 +53,6 @@ export class PageComponent implements OnInit {
     listItemActive: '#EEE',
     shadowColorTableList: 'rgba(25, 118, 210, .4)'
   };
-  @Output() deleteAllNotifications = new EventEmitter<boolean>(false);
-  @Output() deleteNotification = new EventEmitter<KoalaNotificationInterface>(null);
-  public logged: boolean;
-  public loader: LoaderBarPageInterface;
-  public username: string;
-  public firstUserLetter: string;
-  public currentUrl: string;
   
   constructor(
     private tokenService: KoalaTokenService,
@@ -111,8 +112,18 @@ export class PageComponent implements OnInit {
       }
     });
     if (this.palletColors) {
-      this.defineColor();
+      Object.keys(this.defaultPalletColors).forEach(indexName => {
+        if (
+          !this.palletColors.hasOwnProperty(indexName) ||
+          !this.palletColors[indexName]
+        ) {
+          this.palletColors[indexName] = this.defaultPalletColors[indexName];
+        }
+      });
+    } else {
+      this.palletColors = this.defaultPalletColors;
     }
+    this.defineColor();
   }
   
   public logout() {
