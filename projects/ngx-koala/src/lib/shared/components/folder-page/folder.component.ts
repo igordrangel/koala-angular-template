@@ -13,6 +13,7 @@ export class FolderComponent implements OnInit, OnChanges {
 
   @ViewChild('folder', {static: true}) private folder: ElementRef;
   @ViewChild('folderTitle', {static: true}) private folderTitle: ElementRef;
+  @ViewChild('folderIconTitle', {static: true}) private folderIconTitle: ElementRef;
 
   ngOnInit() {
     this.setCustomBackgroundColor();
@@ -32,6 +33,8 @@ export class FolderComponent implements OnInit, OnChanges {
     if (this.customFolderFontColor) {
       const folderTitle = this.folderTitle.nativeElement as HTMLDivElement;
       folderTitle.style.color = this.customFolderFontColor;
+      const folderIconTitle = this.folderTitle.nativeElement as HTMLDivElement;
+      folderIconTitle.style.color = this.customFolderFontColor;
     }
   }
 }

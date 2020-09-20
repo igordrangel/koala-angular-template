@@ -167,7 +167,6 @@ koala-menu ul li:hover {color: ${this.palletColors.menuOptionsColorHover} !impor
 koala-menu ul li.active {color: ${this.palletColors.menuOptionsColorActive} !important;border-left: 4px solid ${this.palletColors.menuOptionsColorActive} !important;background: ${this.palletColors.menuOptionsBackground} !important;}
 koala-menu ul li li:hover {color: ${this.palletColors.menuOptionsColorHover} !important;}
 koala-menu ul li li.active {color: ${this.palletColors.menuOptionsColorActive} !important;}
-.folder-list h1 mat-icon {color: ${this.palletColors.fontColor};}
 .list-container {box-shadow: 0 1px 3px ${this.palletColors.shadowColorTableList};}
 .list-container .list table.table-hover tr:hover {background: ${this.palletColors.listItemHover};}
 .list-container .list table.table-hover tr:active {background: ${this.palletColors.listItemActive};}
