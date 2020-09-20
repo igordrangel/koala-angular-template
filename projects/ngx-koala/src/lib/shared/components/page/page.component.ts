@@ -49,11 +49,12 @@ export class PageComponent implements OnInit {
     menuOptionsColorHover: '#1976D2',
     menuOptionsColorActive: '#1565C0',
     listBackground: '#fff',
+    listContentBackground: '#fff',
     listItemHover: '#F1F1F1',
     listItemActive: '#EEE',
     shadowColorTableList: 'rgba(25, 118, 210, .4)'
   };
-  
+
   constructor(
     private tokenService: KoalaTokenService,
     private router: Router,
@@ -183,7 +184,7 @@ mat-paginator .mat-button-disabled {color: ${this.palletColors.menuTitleColor}!i
 .mat-select-arrow {color: ${this.palletColors.fontColor}!important;}
 .mat-form-field-underline {background-color: ${this.palletColors.fontColor}!important;}
 .mat-form-field.mat-focused .mat-form-field-ripple {background-color: ${this.palletColors.fontActiveColor}!important;}
-.content {background: ${this.palletColors.secondColor};}
+.content {background: ${this.palletColors.listContentBackground};}
 .mat-table {background: ${this.palletColors.listBackground};color: ${this.palletColors.fontColor};}
 .mat-table th {color: ${this.palletColors.fontColor}!important;}
 .mat-sort-header-arrow {color: ${this.palletColors.fontColor}!important;}

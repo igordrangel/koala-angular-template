@@ -15,6 +15,7 @@ export interface KoalaPagePalletColorsInterface {
   menuTitleColor?: string;
   shadowColorTableList?: string;
   listBackground?: string;
+  listContentBackground?: string;
   listItemHover?: string;
   listItemActive?: string;
 }
