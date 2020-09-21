@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ListAbstract } from './list.abstract';
-import { ListItemInterface } from './list.item.interface';
 import { ListItemMenuOptionInterface } from './list.item-menu-option.interface';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -9,6 +8,7 @@ import { KoalaObjectHelper } from 'tskoala-helpers/dist/object/koala-object.help
 import { KoalaDelayHelper } from 'tskoala-helpers/dist/delay/koala-delay.helper';
 import { KoalaDynamicFormService } from '../../services/dynamic-forms/koala.dynamic-form.service';
 import { SelectionModel } from '@angular/cdk/collections';
+import { KoalaListItemInterface } from './koala-list.item.interface';
 
 @Component({
   selector: 'koala-list',
@@ -19,7 +19,7 @@ export class ListComponent extends ListAbstract implements OnInit {
   @Input() columnsToShowInList: string[];
   @Input() columnSort: string;
   @Input() itensMenuListOptions: ListItemMenuOptionInterface[];
-  @Input() itemsList: ListItemInterface[];
+  @Input() itemsList: KoalaListItemInterface[];
   @Input() request: Observable<any>;
   @Input() responseIndexName: string;
   @Input() responseQtdResultIndexName: (response: any) => number;

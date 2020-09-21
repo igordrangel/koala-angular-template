@@ -12,13 +12,17 @@ import { KoalaQuestionService } from '../../../../ngx-koala/src/lib/shared/servi
 import { KoalaAlertService } from '../../../../ngx-koala/src/lib/shared/services/alert/koala.alert.service';
 import { KoalaAlertModule } from '../../../../ngx-koala/src/lib/shared/components/alert/koala.alert.module';
 import { KoalaFolderPageModule } from '../../../../ngx-koala/src/lib/shared/components/folder-page/koala.folder-page.module';
+import { CountryComponent } from './country/country-component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
     PageListComponent,
+    CountryComponent,
     DialogPageListComponent
   ],
   imports: [
+    CommonModule,
     KoalaFolderPageModule,
     KoalaListModule,
     KoalaFormModule,

@@ -85,8 +85,13 @@
 
       <ng-container *ngFor="let itemList of itemsList" [matColumnDef]="itemList.columnDef">
         <th *matHeaderCellDef [mat-sort-header]="itemList.sortHeader" mat-header-cell>{{itemList.label}}</th>
-        <td (dblclick)="itemList.dblClick(item)" *matCellDef="let item" [innerHTML]="itemList.itemNameProperty(item)"
-            mat-cell></td>
+        <td (dblclick)="itemList.dblClick(item)" *matCellDef="let item" mat-cell>
+	        <koala-list-item *ngIf="itemList.itemComponent else itemText"
+	                         [itemList]="itemList.itemComponent(item)"></koala-list-item>
+	        <ng-template #itemText>
+	          {{itemList.itemNameProperty(item)}}
+	        </ng-template>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="options">

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ListItemInterface } from '../../../../ngx-koala/src/lib/shared/components/list/list.item.interface';
 import { PageListService } from './page-list.service';
 import { CountriesInterface } from './countries.interface';
 import { ListItemMenuOptionInterface } from '../../../../ngx-koala/src/lib/shared/components/list/list.item-menu-option.interface';
@@ -16,20 +15,23 @@ import { KoalaQuestionService } from '../../../../ngx-koala/src/lib/shared/servi
 import { KoalaLoaderService } from '../../../../ngx-koala/src/lib/shared/services/loader/koala.loader.service';
 import { KoalaAlertService } from '../../../../ngx-koala/src/lib/shared/services/alert/koala.alert.service';
 import { KoalaAlertEnum } from '../../../../ngx-koala/src/lib/shared/components/alert/koala.alert.enum';
+import { CountryComponent } from './country/country-component';
+import { KoalaListItem } from '../../../../ngx-koala/src/lib/shared/components/list/koala-list-item';
+import { KoalaListItemInterface } from '../../../../ngx-koala/src/lib/shared/components/list/koala-list.item.interface';
 
 @Component({
   templateUrl: 'page-list.component.html'
 })
 export class PageListComponent implements OnInit {
   public formData: FormGroup;
-  public collumns = ['select', 'name', 'capital', 'region', 'options'];
-  public itensList: ListItemInterface[];
+  public collumns = ['select', 'country', 'options'];
+  public itensList: KoalaListItemInterface[];
   public itensMenuListOptions: ListItemMenuOptionInterface[];
   public filterConfig: ListFilterInterface;
   public filter = new BehaviorSubject<ListFormFilterInterface>(null);
   public selection: SelectionModel<object>;
   public countries: CountriesInterface[];
-
+  
   constructor(
     private fb: FormBuilder,
     private pageListService: PageListService,
@@ -41,29 +43,17 @@ export class PageListComponent implements OnInit {
   ) {
     this.itensList = [
       {
-        label: 'Name',
-        columnDef: 'name',
-        itemNameProperty: (countrie: CountriesInterface) => countrie.name,
-        dblClick: <CountriesInterface>(countrie) => this.dialogList(countrie)
-      },
-      {
-        label: 'Capital',
-        columnDef: 'capital',
-        itemNameProperty: (countrie: CountriesInterface) => countrie.capital,
-        dblClick: <CountriesInterface>(countrie) => this.dialogList(countrie)
-      },
-      {
-        label: 'Region',
-        columnDef: 'region',
-        itemNameProperty: (countrie: CountriesInterface) => countrie.region,
-        dblClick: <CountriesInterface>(countrie) => this.dialogList(countrie)
+        label: 'Country',
+        columnDef: 'country',
+        itemComponent: (country: CountriesInterface) => new KoalaListItem(CountryComponent, country),
+        dblClick: <CountriesInterface>(country) => this.dialogList(country)
       }
     ];
     this.itensMenuListOptions = [
       {
         icon: 'edit',
         name: 'Editar',
-        action: <CountriesInterface>(countrie) => this.dialogList(countrie),
+        action: <CountriesInterface>(country) => this.dialogList(country),
         havePermission: true
       }
     ]
