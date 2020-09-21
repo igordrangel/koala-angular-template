@@ -34,18 +34,6 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		this.controls = this.form.get('formData') as FormArray;
 		this.formConfig?.forEach((config, indexConfig) => {
 			const newFormGroup = this.newControl(config);
-			if (config.moreItemsConfig && config.moreItemsConfig.setValues) {
-				config.moreItemsConfig.setValues.subscribe(values => {
-					if (values.length > 0) {
-						values.forEach((itemValue, indexValue) => {
-							this.addMoreItem(indexConfig);
-							setTimeout(() => {
-								this.setValuesOnFields(itemValue, this.controls.controls[indexConfig].get('moreItemsConfig').value[indexValue].form);
-							}, 301);
-						});
-					}
-				});
-			}
 			if (config.valueChanges) {
 				newFormGroup.get('value')
 				            .valueChanges
@@ -53,6 +41,26 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 				            .subscribe(value => config.valueChanges(value));
 			}
 			this.controls.push(newFormGroup);
+			if (config.moreItemsConfig && config.moreItemsConfig.setValues) {
+				config.moreItemsConfig.setValues.subscribe(values => {
+					if (values.length > 0) {
+						values.forEach((itemValue, indexValue) => {
+							if (!this.controls.controls[indexConfig].get('moreItemsConfig').value[indexValue]) {
+								this.addMoreItem(indexConfig);
+							}
+							setTimeout(() => {
+								this.setValuesOnFields(itemValue, this.controls.controls[indexConfig].get('moreItemsConfig').value[indexValue].form);
+							}, 301);
+						});
+					}
+				});
+			}
+			
+			if (config.moreItemsConfig && config.moreItemsConfig.setValues?.value.length < config.moreItemsMinItems) {
+				for (let minItem = config.moreItemsConfig.setValues.value.length; minItem < config.moreItemsMinItems; minItem++) {
+					this.addMoreItem(indexConfig);
+				}
+			}
 		});
 		if (this.setValues) {
 			this.setValuesOnFields(this.setValues, this.form);
@@ -70,19 +78,23 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 	}
 	
 	public addMoreItem(propIndex: number) {
-		this.controls.controls[propIndex].get('moreItemsConfig').value.push({
-			form: this.fb.group({}),
-			formConfig: this.formConfig[propIndex].moreItemsConfig.formConfig
-		});
-		this.controls.controls[propIndex].get('moreItemsExpanded').setValue(
-			this.controls.controls[propIndex].get('moreItemsConfig').value.length - 1
-		);
+		if (this.controls.controls[propIndex].get('moreItemsConfig').value.length < this.controls.controls[propIndex].get('moreItemsMaxItems').value) {
+			this.controls.controls[propIndex].get('moreItemsConfig').value.push({
+				form: this.fb.group({}),
+				formConfig: this.formConfig[propIndex].moreItemsConfig.formConfig
+			});
+			this.controls.controls[propIndex].get('moreItemsExpanded').setValue(
+				this.controls.controls[propIndex].get('moreItemsConfig').value.length - 1
+			);
+		}
 	}
 	
 	public removeMoreItem(propIndex: number, removeIndex) {
 		const expandedItemIndex = removeIndex - 1;
-		this.controls.controls[propIndex].get('moreItemsExpanded').setValue((expandedItemIndex < 0) ? 0 : expandedItemIndex);
 		this.controls.controls[propIndex].get('moreItemsConfig').value.splice(removeIndex, 1);
+		setTimeout(() => {
+			this.controls.controls[propIndex].get('moreItemsExpanded').setValue((expandedItemIndex < 0) ? 0 : expandedItemIndex);
+		}, 50);
 	}
 	
 	private newControl(config: KoalaDynamicFormFieldInterface): FormGroup {
@@ -114,6 +126,8 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			opcoesSelect: [config.opcoesSelect ?? []],
 			hidePassword: config.type === DynamicFormTypeFieldEnum.password ? true : null,
 			moreItemsButtonIconAddlabel: [config.moreItemsButtonIconAddlabel],
+			moreItemsMinItems: [config.moreItemsMinItems ?? 0],
+			moreItemsMaxItems: [config.moreItemsMaxItems ?? 100],
 			moreItemsIcon: [config.moreItemsIcon],
 			moreItemsExpanded: [''],
 			moreItemsConfig: [[]],

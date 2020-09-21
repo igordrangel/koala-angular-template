@@ -159,12 +159,14 @@
 				  <koala-button
 					  (click)="addMoreItem(i)"
 					  [tooltip]="propriedade.get('moreItemsButtonIconAddlabel').value"
+					  [disabled]="propriedade.get('moreItemsConfig').value.length === propriedade.get('moreItemsMaxItems').value"
 					  backgroundColor="blue"
 					  class="btn-add-more-items"
 					  color="white"
 					  icon="add">
 				  </koala-button>
-				  {{propriedade.get('label').value}}
+				  {{propriedade.get('label').value}} (Min.: {{propriedade.get('moreItemsMinItems').value}}
+				                                     | Máx.: {{propriedade.get('moreItemsMaxItems').value}})
 			  </legend>
 			  <mat-accordion class="items">
 				  <mat-expansion-panel
@@ -183,9 +185,11 @@
 						  [formConfig]="item.formConfig"
 						  [form]="item.form">
 					  </koala-dynamic-form>
-				    <mat-action-row>
-				      <button (click)="removeMoreItem(i, propriedade.get('moreItemsConfig').value.length - 1 - indexMoreItems)"
-				              mat-icon-button>
+				    <mat-action-row
+					    *ngIf="propriedade.get('moreItemsConfig').value.length > propriedade.get('moreItemsMinItems').value">
+				      <button
+					      (click)="removeMoreItem(i, propriedade.get('moreItemsConfig').value.length - 1 - indexMoreItems)"
+					      mat-icon-button>
 					      <mat-icon>delete</mat-icon>
 				      </button>
 				    </mat-action-row>

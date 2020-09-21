@@ -21,6 +21,8 @@ export interface KoalaDynamicFormFieldInterface {
   class?: string;
   fieldClass?: string;
   moreItemsButtonIconAddlabel?: string;
+  moreItemsMinItems?: number;
+  moreItemsMaxItems?: number;
   moreItemsIcon?: string;
   moreItemsConfig?: {
     form: FormGroup;

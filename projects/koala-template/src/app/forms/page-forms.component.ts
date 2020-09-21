@@ -31,6 +31,8 @@ export class PageFormsComponent implements OnInit {
 				type: DynamicFormTypeFieldEnum.moreItems,
 				moreItemsButtonIconAddlabel: 'Adicionar novo item',
 				moreItemsIcon: 'receipt_long',
+				moreItemsMinItems: 1,
+				moreItemsMaxItems: 2,
 				moreItemsConfig: {
 					form: this.fb.group({}),
 					setValues: this.formMoreItensValuesSubject,

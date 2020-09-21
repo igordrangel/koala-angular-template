@@ -11,4 +11,5 @@ export class ButtonComponent {
   @Input() icon: string;
   @Input() text: string;
   @Input() tooltip: string;
+  @Input() disabled: boolean;
 }

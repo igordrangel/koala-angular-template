@@ -1,4 +1,6 @@
 .koala-button {padding: 2px 8px;}
+.koala-icon-button:disabled,
+.koala-button:disabled {background: #cccccc !important;color: #616161 !important;cursor: not-allowed;}
 .koala-icon-button {height: 25px;line-height: 25px;width: 25px;}
 .koala-icon-button mat-icon {font-size: 20px;height: 20px;line-height: 20px;position: relative;width: 20px;}
 .koala-icon-button.c-white {color: #ffffff;}

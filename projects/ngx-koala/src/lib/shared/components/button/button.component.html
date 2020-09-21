@@ -1,26 +1,28 @@
 <button
-  *ngIf="!icon else iconButton"
-  [matTooltipDisabled]="!tooltip"
-  [matTooltip]="tooltip"
-  [ngClass]="color"
-  class="koala-button"
-  mat-button
-  matTooltipPosition="above"
-  type="button">
+	*ngIf="!icon else iconButton"
+	[matTooltipDisabled]="!tooltip"
+	[matTooltip]="tooltip"
+	[ngClass]="color"
+	[disabled]="disabled"
+	class="koala-button"
+	mat-button
+	matTooltipPosition="above"
+	type="button">
   {{text}}
 </button>
 <ng-template #iconButton>
   <button
-    [matTooltipDisabled]="!tooltip"
-    [matTooltip]="tooltip"
-    [ngClass]="[
+	  [matTooltipDisabled]="!tooltip"
+	  [matTooltip]="tooltip"
+	  [ngClass]="[
       'c-'+color,
       'b-'+backgroundColor
     ]"
-    class="koala-icon-button"
-    mat-icon-button
-    matTooltipPosition="before"
-    type="button">
+	  [disabled]="disabled"
+	  class="koala-icon-button"
+	  mat-icon-button
+	  matTooltipPosition="before"
+	  type="button">
     <mat-icon>{{icon}}</mat-icon>
     <span *ngIf="text">{{text}}</span>
   </button>
