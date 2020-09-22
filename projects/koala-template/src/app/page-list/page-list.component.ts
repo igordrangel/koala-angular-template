@@ -17,7 +17,7 @@ import { KoalaAlertService } from '../../../../ngx-koala/src/lib/shared/services
 import { KoalaAlertEnum } from '../../../../ngx-koala/src/lib/shared/components/alert/koala.alert.enum';
 import { CountryComponent } from './country/country-component';
 import { KoalaListItem } from '../../../../ngx-koala/src/lib/shared/components/list/koala-list-item';
-import { KoalaListItemInterface } from '../../../../ngx-koala/src/lib/shared/components/list/koala-list.item.interface';
+import { KoalaListItemInterface } from '../../../../ngx-koala/src/lib/shared/components/list/koala-list-item.interface';
 
 @Component({
   templateUrl: 'page-list.component.html'

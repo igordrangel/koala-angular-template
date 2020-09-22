@@ -48,9 +48,11 @@ export * from './lib/shared/components/list/list.abstract';
 export * from './lib/shared/components/list/list.component';
 export * from './lib/shared/components/list/list.filter.interface';
 export * from './lib/shared/components/list/list.form-filter.interface';
-export * from './lib/shared/components/list/list.item.interface';
 export * from './lib/shared/components/list/list.item-menu-option.interface';
 export * from './lib/shared/components/list/koala.list.module';
+export * from './lib/shared/components/list/koala-list-item.interface';
+export * from './lib/shared/components/list/koala-list-item.component';
+export * from './lib/shared/components/list/koala-list-item';
 //#endregion
 
 //#region [KOALA LOADER]
