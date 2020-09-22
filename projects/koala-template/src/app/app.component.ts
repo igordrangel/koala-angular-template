@@ -45,8 +45,8 @@ export class AppComponent implements OnInit {
   public getNotifications() {
     setTimeout(() => {
       this.notifications.next([
-        {id: 1, title: 'Demo 1', text: 'Esta é uma notificação de demonstração.'},
-        {id: 2, title: 'Demo 2', text: 'Esta é uma notificação de demonstração.'}
+        {id: 1, title: 'KoalaList', text: 'Esta notificação irá redirecionar para a página de Listas.', redirectTo: '/list'},
+        {id: 2, title: 'KoalaForm', text: 'Esta notificação irá redirecionar para a página de Formulários.', redirectTo: '/forms'}
       ]);
     }, 5000);
   }

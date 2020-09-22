@@ -14,6 +14,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { NotificationComponent } from './shared/components/notifications/notification.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { RouterModule } from '@angular/router';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { RouterModule } from '@angular/router';
     MatBadgeModule,
     MatProgressBarModule,
     MatToolbarModule,
+    MatTooltipModule,
     MatButtonModule,
     MatIconModule,
     MatSidenavModule,

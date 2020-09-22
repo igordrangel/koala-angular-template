@@ -3,13 +3,15 @@
     <mat-icon>info</mat-icon>
     <h2>Notificações</h2>
     <span class="spacer"></span>
-    <button (click)="deleteAllNotifications()" *ngIf="notifications.length > 0" class="btn-delete-all" mat-icon-button>
+    <button (click)="deleteAllNotifications()" *ngIf="notifications.length > 0" class="btn-delete-all" mat-icon-button
+            matTooltip="Excluir Todas" matTooltipPosition="above">
       <mat-icon>delete_sweep</mat-icon>
     </button>
   </div>
   <mat-action-list *ngIf="notifications.length > 0 else noNotifications">
-    <mat-list-item *ngFor="let notification of notifications" [routerLink]="notification.redirectTo">
+    <mat-list-item *ngFor="let notification of notifications" [routerLink]="notification.redirectTo" class="itemList">
       <button (click)="deleteNotification(notification)" class="delete-notification" color="warn" mat-icon-button
+              matTooltip="Excluir" matTooltipPosition="above"
               mat-list-icon>
         <mat-icon>delete</mat-icon>
       </button>
