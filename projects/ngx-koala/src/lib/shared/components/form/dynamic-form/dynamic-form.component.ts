@@ -119,6 +119,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			type: [config.type],
 			appearance: [config.appearance],
 			floatLabel: [config.floatLabel],
+			placeholder: [config.placeholder],
 			class: [config.class],
 			fieldClass: [config.fieldClass],
 			textHint: [config.textHint],

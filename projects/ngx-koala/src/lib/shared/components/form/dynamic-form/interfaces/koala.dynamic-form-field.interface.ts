@@ -14,6 +14,7 @@ export interface KoalaDynamicFormFieldInterface {
   value?: string;
   valueSubject?: BehaviorSubject<any>;
   textHint?: string;
+  placeholder?: string;
   opcoesSelect?: {
     value: string;
     name: string;
