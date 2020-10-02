@@ -43,6 +43,14 @@ export * from './lib/shared/components/form/location-form/koala.location-form.mo
 export * from './lib/shared/components/form/koala.form.module';
 //#endregion
 
+//#region [KOALA DYNAMIC COMPONENT]
+export * from './lib/shared/components/dynamic-component/koala-dynamic-component.component';
+export * from './lib/shared/components/dynamic-component/koala-dynamic-component.directive';
+export * from './lib/shared/components/dynamic-component/koala-dynamic-component.factory';
+export * from './lib/shared/components/dynamic-component/koala-dynamic-component.module';
+export * from './lib/shared/components/dynamic-component/koala-dynamic-component';
+//#endregion
+
 //#region [KOALA LIST]
 export * from './lib/shared/components/list/list.abstract';
 export * from './lib/shared/components/list/list.component';
@@ -51,8 +59,6 @@ export * from './lib/shared/components/list/list.form-filter.interface';
 export * from './lib/shared/components/list/list.item-menu-option.interface';
 export * from './lib/shared/components/list/koala.list.module';
 export * from './lib/shared/components/list/koala-list-item.interface';
-export * from './lib/shared/components/list/koala-list-item.component';
-export * from './lib/shared/components/list/koala-list-item';
 //#endregion
 
 //#region [KOALA LOADER]
@@ -81,6 +87,7 @@ export * from './lib/shared/components/page/page.component';
 //#region [KOALA QUESTION]
 export * from './lib/shared/components/question/dialog-question.component';
 export * from './lib/shared/components/question/koala.question.module';
+export * from './lib/shared/components/question/koala-question-config.interface';
 //#endregion
 
 //#endregion

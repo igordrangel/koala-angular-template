@@ -1,4 +1,5 @@
 export interface KoalaMenuToolInterface {
-  name: string;
-  routerLink: string;
+	icon?: string;
+	name: string;
+	routerLink: string;
 }

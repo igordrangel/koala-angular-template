@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxKoalaModule } from '../../../ngx-koala/src/lib/ngx-koala.module';
 import { PageLoginComponent } from './login/page-login.component';
 import { KoalaMenuModule } from '../../../ngx-koala/src/lib/shared/components/menu/koala.menu.module';
+import { QuestionAvatarModule } from './shared/components/question-avatar/question-avatar.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { KoalaMenuModule } from '../../../ngx-koala/src/lib/shared/components/me
     NgxKoalaModule,
     KoalaFormModule,
     KoalaMenuModule,
+    QuestionAvatarModule,
     AppRoutingModule
   ],
   providers: [],

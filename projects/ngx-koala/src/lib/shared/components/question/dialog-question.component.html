@@ -1,7 +1,13 @@
 <div mat-dialog-content>
   <div class="question">
-    <mat-icon>help</mat-icon>
-    <p [innerHTML]="message" class="alert-message text-center"></p>
+	  <koala-dynamic-component
+		  *ngIf="config.avatar else notHaveAvatar"
+		  [dynamicComponent]="config.avatar">
+	  </koala-dynamic-component>
+	  <ng-template #notHaveAvatar>
+      <mat-icon>help</mat-icon>
+	  </ng-template>
+    <p [innerHTML]="config.message" class="alert-message text-center"></p>
   </div>
 </div>
 <div align="center" mat-dialog-actions>

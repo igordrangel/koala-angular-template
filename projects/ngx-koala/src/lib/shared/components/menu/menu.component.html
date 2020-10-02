@@ -2,33 +2,34 @@
   <h2 class="title">{{titleMenu}}</h2>
   <ul class="list-menu">
     <li
-            (click)="toogle(module)"
-            *ngFor="let module of options"
-            [ngClass]="{
+	    (click)="toogle(module)"
+	    *ngFor="let module of options"
+	    [ngClass]="{
         expanded: module.expanded,
         active: module.active
       }">
       <div *ngIf="!!module.routerLink else moduleWithoutLink" [routerLink]="module.routerLink" class="module">
-        <mat-icon>{{module.icon}}</mat-icon>
+        <mat-icon *ngIf="module.icon">{{module.icon}}</mat-icon>
         <h3>{{module.name}}</h3>
         <mat-icon
-                *ngIf="module.tools?.length > 0"
-                class="state-module">{{module.expanded || module.active ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}}</mat-icon>
+	        *ngIf="module.tools?.length > 0"
+	        class="state-module">{{module.expanded || module.active ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}}</mat-icon>
       </div>
       <ng-template #moduleWithoutLink>
         <div class="module">
-          <mat-icon>{{module.icon}}</mat-icon>
+          <mat-icon *ngIf="module.icon">{{module.icon}}</mat-icon>
           <h3>{{module.name}}</h3>
           <mat-icon
-                  *ngIf="module.tools?.length > 0"
-                  class="state-module">{{module.expanded || module.active ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}}</mat-icon>
+	          *ngIf="module.tools?.length > 0"
+	          class="state-module">{{module.expanded || module.active ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}}</mat-icon>
         </div>
       </ng-template>
       <ul *ngIf="module.tools?.length > 0">
         <li
-                *ngFor="let tool of module.tools"
-                [routerLink]="tool.routerLink"
-                routerLinkActive="active">
+	        *ngFor="let tool of module.tools"
+	        [routerLink]="tool.routerLink"
+	        routerLinkActive="active">
+          <mat-icon *ngIf="tool.icon">{{tool.icon}}</mat-icon>
           <h4>{{tool.name}}</h4>
         </li>
       </ul>

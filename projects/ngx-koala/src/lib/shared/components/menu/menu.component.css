@@ -1,79 +1,18 @@
-.title {
-	margin: 0;
-	padding: 8px 15px;
-	font-family: OpenSans, sans-serif;
-	font-weight: bold;
-	font-size: .8em;
-	line-height: .8em;
-}
-
-ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	font-size: 0;
-}
-
-ul.list-menu {
-	overflow: auto;
-	height: calc(100vh - 107px);
-}
-
-ul ul {
-	height: 0;
-	overflow: hidden;
-	transition: .2s;
-}
-
-ul li {
-	position: relative;
-	font-size: 14px;
-	display: block;
-	padding: 5px 20px;
-	outline: none;
-	cursor: pointer;
-	color: #A5A5A5;
-	transition: .2s;
-}
-
-.module {
-	outline: none;
-}
-
-ul li li {
-	border: none !important;
-	padding: 2px 15px !important;
-}
-
-.state-module {
-	position: absolute;
-	right: 10px;
-	top: 7px;
-}
-
+.title {font-family: OpenSans, sans-serif;font-size: .8em;font-weight: bold;line-height: .8em;margin: 0;padding: 8px 15px;}
+ul {font-size: 0;list-style: none;margin: 0;padding: 0;}
+ul.list-menu {height: calc(100vh - 107px);overflow: auto;}
+ul ul {height: 0;overflow: hidden;transition: .2s;}
+ul li {color: #a5a5a5;cursor: pointer;display: block;font-size: 14px;outline: none;padding: 0;position: relative;transition: .2s;}
+.module {outline: none;padding: 5px 20px;}
+ul li li {border: none !important;padding: 5px 20px !important;}
+.state-module {position: absolute;right: 10px;top: 4px;}
 ul li.active ul,
-ul li.expanded ul {
-	padding: 15px 0;
-	height: fit-content !important;
-}
-
-ul li li.active {
-	height: fit-content !important;
-}
-
+ul li.expanded ul {border-bottom: 1px solid rgba(0, 0, 0, .1);box-shadow: 0 1px 3px rgba(0, 0, 0, .5);height: fit-content !important;padding: 15px 0;}
+ul li li.active {background: rgba(0, 0, 0, .1) !important;cursor: default;height: fit-content !important;}
 ul li h3,
 ul li h4,
-ul li mat-icon {
-	display: inline-flex;
-	vertical-align: middle;
-	margin: 0;
-	line-height: 1.1em;
-}
-
-ul li mat-icon {
-	width: 22px;
-	height: 22px;
-	font-size: 22px;
-	line-height: 22px;
-	margin-right: 5px;
-}
+ul li mat-icon {display: inline-flex;line-height: 1.5em;margin: 0;vertical-align: middle;}
+ul li mat-icon,
+ul li li mat-icon {font-size: 22px;height: 22px;line-height: 22px;margin-right: 5px;width: 22px;}
+ul li li:hover {background: rgba(0, 0, 0, .1);}
+ul li li.active:hover {background: transparent;}

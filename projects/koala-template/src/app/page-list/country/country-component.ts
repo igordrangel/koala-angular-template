@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { CountriesInterface } from '../countries.interface';
-import { KoalaListItemComponent } from '../../../../../ngx-koala/src/lib/shared/components/list/koala-list-item.component';
+import { KoalaDynamicComponentComponent } from '../../../../../ngx-koala/src/lib/shared/components/dynamic-component/koala-dynamic-component.component';
 
 @Component({
 	templateUrl: 'country-component.html'
 })
-export class CountryComponent implements KoalaListItemComponent {
+export class CountryComponent implements KoalaDynamicComponentComponent {
 	@Input() data: CountriesInterface;
 }

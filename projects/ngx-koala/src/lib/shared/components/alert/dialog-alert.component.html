@@ -3,5 +3,15 @@
   <p [innerHTML]="alert.message" class="w-100 alert-message text-center"></p>
 </div>
 <div align="center" mat-dialog-actions>
+	<div *ngFor="let action of alert?.actions">
+	  <button
+		  (click)="action.action()"
+		  *ngIf="action.show"
+		  [color]="action.color"
+		  mat-dialog-close
+		  mat-raised-button>
+	    {{action.text}}
+	  </button>
+	</div>
   <button color="primary" mat-button mat-dialog-close>Ok</button>
 </div>

@@ -1,8 +1,8 @@
 import { Directive, ViewContainerRef } from '@angular/core';
 
 @Directive({
-	selector: '[itemHost]',
+	selector: '[koalaDynamicComponent]',
 })
-export class ListItemDirective {
+export class KoalaDynamicComponentDirective {
 	constructor(public viewContainerRef: ViewContainerRef) { }
 }

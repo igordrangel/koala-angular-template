@@ -16,100 +16,105 @@ import { KoalaLoaderService } from '../../../../ngx-koala/src/lib/shared/service
 import { KoalaAlertService } from '../../../../ngx-koala/src/lib/shared/services/alert/koala.alert.service';
 import { KoalaAlertEnum } from '../../../../ngx-koala/src/lib/shared/components/alert/koala.alert.enum';
 import { CountryComponent } from './country/country-component';
-import { KoalaListItem } from '../../../../ngx-koala/src/lib/shared/components/list/koala-list-item';
 import { KoalaListItemInterface } from '../../../../ngx-koala/src/lib/shared/components/list/koala-list-item.interface';
+import { KoalaDynamicComponent } from '../../../../ngx-koala/src/lib/shared/components/dynamic-component/koala-dynamic-component';
 
 @Component({
-  templateUrl: 'page-list.component.html'
+	templateUrl: 'page-list.component.html'
 })
 export class PageListComponent implements OnInit {
-  public formData: FormGroup;
-  public collumns = ['select', 'country', 'options'];
-  public itensList: KoalaListItemInterface[];
-  public itensMenuListOptions: ListItemMenuOptionInterface[];
-  public filterConfig: ListFilterInterface;
-  public filter = new BehaviorSubject<ListFormFilterInterface>(null);
-  public selection: SelectionModel<object>;
-  public countries: CountriesInterface[];
-  
-  constructor(
-    private fb: FormBuilder,
-    private pageListService: PageListService,
-    private dialogService: KoalaDialogService,
-    private questionService: KoalaQuestionService,
-    private loaderService: KoalaLoaderService,
-    private alertService: KoalaAlertService,
-    private csvService: KoalaCsvService
-  ) {
-    this.itensList = [
-      {
-        label: 'Country',
-        columnDef: 'country',
-        itemComponent: (country: CountriesInterface) => new KoalaListItem(CountryComponent, country),
-        dblClick: <CountriesInterface>(country) => this.dialogList(country)
-      }
-    ];
-    this.itensMenuListOptions = [
-      {
-        icon: 'edit',
-        name: 'Editar',
-        action: <CountriesInterface>(country) => this.dialogList(country),
-        havePermission: true
-      }
-    ]
-    this.filterConfig = {
-      main: [
-        {label: 'Name', name: 'name', type: DynamicFormTypeFieldEnum.text, appearance: 'outline'},
-        {label: 'Capital', name: 'capital', type: DynamicFormTypeFieldEnum.text, appearance: 'outline'}
-      ],
-      advanced: [
-        {label: 'Region', name: 'region', type: DynamicFormTypeFieldEnum.text, appearance: 'outline'}
-      ],
-      checkAndSearch: {
-        formControlName: 'trash',
-        label: 'Lixeira'
-      }
-    }
-  }
-
-  ngOnInit() {
-    this.formData = this.fb.group({});
-  }
-
-  public buscar() {
-    const filter = this.filter?.value;
-    return this.pageListService.get(filter?.params);
-  }
-
-  public dialogList(countrie?: CountriesInterface) {
-    this.dialogService.open(
-      DialogPageListComponent,
-      'small',
-      countrie,
-      'reloadList',
-      () => this.buscar()
-    );
-  }
-
-  public actionList() {
-    this.questionService.open("Você realmente deseja excluir os itens selecionados?", () => {
-      this.loaderService.create({typeLoader: 'indeterminate'});
-      console.log(this.selection?.selected);
-      setTimeout(() => {
-        this.selection?.clear();
-        this.loaderService.dismiss();
-        this.alertService.create({
-          alertEnum: KoalaAlertEnum.success,
-          message: 'Itens excluídos com sucesso!'
-        });
-      }, 2000);
-    });
-  }
-
-  public downloadList() {
-    this.csvService.convertJsonToCsv(
-      this.countries,
-      'countries'
-    )
-  }
+	public formData: FormGroup;
+	public collumns = ['select', 'countryComponent', 'country', 'options'];
+	public itensList: KoalaListItemInterface[];
+	public itensMenuListOptions: ListItemMenuOptionInterface[];
+	public filterConfig: ListFilterInterface;
+	public filter = new BehaviorSubject<ListFormFilterInterface>(null);
+	public selection: SelectionModel<object>;
+	public countries: CountriesInterface[];
+	
+	constructor(
+		private fb: FormBuilder,
+		private pageListService: PageListService,
+		private dialogService: KoalaDialogService,
+		private questionService: KoalaQuestionService,
+		private loaderService: KoalaLoaderService,
+		private alertService: KoalaAlertService,
+		private csvService: KoalaCsvService
+	) {
+		this.itensList = [{
+			label: 'Country Component Mode',
+			columnDef: 'countryComponent',
+			itemComponent: (country: CountriesInterface) => new KoalaDynamicComponent(CountryComponent, country),
+			dblClick: <CountriesInterface>(country) => this.dialogList(country)
+		}, {
+			label: 'Country Text Mode',
+			columnDef: 'country',
+			itemNameProperty: (country: CountriesInterface) => country.name,
+			dblClick: <CountriesInterface>(country) => this.dialogList(country)
+		}];
+		this.itensMenuListOptions = [
+			{
+				icon: 'edit',
+				name: 'Editar',
+				action: <CountriesInterface>(country) => this.dialogList(country),
+				havePermission: true
+			}
+		];
+		this.filterConfig = {
+			main: [
+				{label: 'Name', name: 'name', type: DynamicFormTypeFieldEnum.text, appearance: 'outline'},
+				{label: 'Capital', name: 'capital', type: DynamicFormTypeFieldEnum.text, appearance: 'outline'}
+			],
+			advanced: [
+				{label: 'Region', name: 'region', type: DynamicFormTypeFieldEnum.text, appearance: 'outline'}
+			],
+			checkAndSearch: {
+				formControlName: 'trash',
+				label: 'Lixeira'
+			}
+		};
+	}
+	
+	ngOnInit() {
+		this.formData = this.fb.group({});
+	}
+	
+	public buscar() {
+		const filter = this.filter?.value;
+		return this.pageListService.get(filter?.params);
+	}
+	
+	public dialogList(countrie?: CountriesInterface) {
+		this.dialogService.open(
+			DialogPageListComponent,
+			'small',
+			countrie,
+			'reloadList',
+			() => this.buscar()
+		);
+	}
+	
+	public actionList() {
+		this.questionService.open({
+			message: 'Você realmente deseja excluir os itens selecionados?'
+		}, () => {
+			this.loaderService.create({typeLoader: 'indeterminate'});
+			console.log(this.selection?.selected);
+			setTimeout(() => {
+				this.selection?.clear();
+				this.loaderService.dismiss();
+				this.alertService.create({
+					alertEnum: KoalaAlertEnum.success,
+					message: 'Itens excluídos com sucesso!'
+				});
+			}, 2000);
+		});
+	}
+	
+	public downloadList() {
+		this.csvService.convertJsonToCsv(
+			this.countries,
+			'countries'
+		);
+	}
 }

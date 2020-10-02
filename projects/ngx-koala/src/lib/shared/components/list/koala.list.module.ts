@@ -9,19 +9,17 @@ import { MatMenuModule } from '@angular/material/menu';
 import { PaginationProvider } from '../../providers/pagination/pagination.provider';
 import { KoalaFolderPageModule } from '../folder-page/koala.folder-page.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ListItemDirective } from './list-item.directive';
-import { ListItemFactory } from './list-item.factory';
+import { KoalaDynamicComponentModule } from '../dynamic-component/koala-dynamic-component.module';
 
 @NgModule({
   declarations: [
-    ListComponent,
-    ListItemDirective,
-    ListItemFactory
+    ListComponent
   ],
   imports: [
     CommonModule,
     KoalaFolderPageModule,
     KoalaFormModule,
+    KoalaDynamicComponentModule,
     MatMenuModule,
     MatTableModule,
     MatSortModule,
