@@ -161,7 +161,6 @@ input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hov
 .mat-checkbox-checkmark-path {stroke: ${this.palletColors.checkboxColor} !important;}
 .mat-checkbox-checkmark {fill: ${this.palletColors.checkboxColor} !important;}
 .mat-checkbox-mixedmark {background-color: ${this.palletColors.checkboxColor} !important;}
-.mat-checkbox-frame {border-color: ${this.palletColors.checkboxBackground} !important;}
 .mat-radio-outer-circle {border-color: ${this.palletColors.checkboxBackground}!important;}
 .mat-radio-ripple .mat-ripple-element, .mat-radio-inner-circle {background-color: ${this.palletColors.checkboxBackground} !important;}
 .home-list-cards .list .mat-list-item-content .mat-icon {color: ${this.palletColors.fontColor};}

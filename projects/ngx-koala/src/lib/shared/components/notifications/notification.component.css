@@ -6,7 +6,7 @@
 .iconList {color: #1976D2;}
 .titleList {font-family: OpenSansLight, sans-serif;font-size: .7em !important;color: #616161;}
 .textList {font-family: OpenSans, sans-serif;font-size: .9em !important;color: #212121;white-space: unset !important;}
-.itemList {padding: 8px 0 !important;}
+.itemList {height: fit-content !important;padding: 8px 0 !important;}
 .delete-notification {position: relative;margin-left: -42px;margin-right: 10px;transition: .3s;}
 .delete-notification mat-icon {vertical-align: top;}
 mat-list-item:hover .delete-notification {margin-left: 0;}
