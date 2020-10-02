@@ -41,9 +41,9 @@ export class PageComponent implements OnInit {
     userPresentationUserFontColor: '#fff',
     firstColor: '#fff',
     secondColor: '#F1F1F1',
-    bodyBackground: '#eee',
-    checkboxBackground: '#1976D2',
-    checkboxColor: '#fff',
+    bodyBackground: '#eeeeee',
+    checkboxBackground: '#1976d2',
+    checkboxColor: '#ffffff',
     fontColor: '#1976D2',
     fontHoverColor: '#1976D2',
     fontActiveColor: '#1565C0',
@@ -51,11 +51,11 @@ export class PageComponent implements OnInit {
     menuTitleColor: 'rgba(0,0,0,.3)',
     menuBackground: '#fafafa',
     menuOptionsBackground: '#eaeaea',
-    menuOptionsColor: '#1976D2',
+    menuOptionsColor: '#a5a5a5',
     menuOptionsColorHover: '#1976D2',
-    menuOptionsColorActive: '#1565C0',
+    menuOptionsColorActive: '#1565c0',
     toolbarBackground: '#fff',
-    toolbarColor: '#1976D2',
+    toolbarColor: '#1976d2',
     listBackground: '#fff',
     listContentBackground: '#fff',
     listTitleItemColor: '#838383',
@@ -155,8 +155,6 @@ export class PageComponent implements OnInit {
   public defineColor() {
     const css = `
 body {background: ${this.palletColors.bodyBackground}!important;}
-*::-webkit-scrollbar-thumb {background: ${this.palletColors.scrollbarColor};width: 2px;}
-*::-webkit-scrollbar-thumb:hover {background: ${this.palletColors.scrollbarColorHover};}
 input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hover {-webkit-box-shadow: 0 0 0 1000px ${this.palletColors.firstColor} inset !important;}
 .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
 .mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element {background-color: ${this.palletColors.checkboxBackground} !important;}
@@ -180,8 +178,10 @@ koala-page .btn-toolbar span.icon-user,
 .user-presentation {background: ${this.palletColors.userPresentationBackground};}
 .user-presentation span.username {color: ${this.palletColors.toolbarColor};}
 koala-menu .title {background: ${this.palletColors.menuTitleBackground};color: ${this.palletColors.menuTitleColor};}
+koala-menu ul li {color: ${this.palletColors.menuOptionsColor};}
 koala-menu ul li:hover {color: ${this.palletColors.menuOptionsColorHover} !important;}
-koala-menu ul li.active {color: ${this.palletColors.menuOptionsColorActive} !important;border-left: 4px solid ${this.palletColors.menuOptionsColorActive} !important;background: ${this.palletColors.menuOptionsBackground} !important;}
+koala-menu ul li.active,
+koala-menu ul li.expanded {color: ${this.palletColors.menuOptionsColorActive} !important;border-left: 4px solid ${this.palletColors.menuOptionsColorActive} !important;background: ${this.palletColors.menuOptionsBackground} !important;}
 koala-menu ul li li:hover {color: ${this.palletColors.menuOptionsColorHover} !important;}
 koala-menu ul li li.active {color: ${this.palletColors.menuOptionsColorActive} !important;}
 .list-container {box-shadow: 0 1px 3px ${this.palletColors.shadowColorTableList};}

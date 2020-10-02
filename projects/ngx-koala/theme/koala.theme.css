@@ -8,9 +8,6 @@ a:hover,
 a:active,
 a:focus {text-decoration: none !important;}
 button:focus {outline: none !important;}
-*::-webkit-scrollbar {width: 2px;border-radius: 8px;background-clip: padding-box;}
-*:hover::-webkit-scrollbar {width: 8px;}
-*::-webkit-scrollbar-track {background: transparent;}
 .p-relative {position: relative !important;}
 .d-none {display: none !important;}
 .d-block {display: block !important;}

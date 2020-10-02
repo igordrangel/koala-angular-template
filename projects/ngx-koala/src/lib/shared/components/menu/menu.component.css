@@ -2,7 +2,7 @@
 ul {font-size: 0;list-style: none;margin: 0;padding: 0;}
 ul.list-menu {height: calc(100vh - 107px);overflow: auto;}
 ul ul {height: 0;overflow: hidden;transition: .2s;}
-ul li {color: #a5a5a5;cursor: pointer;display: block;font-size: 14px;outline: none;padding: 0;position: relative;transition: .2s;}
+ul li {cursor: pointer;display: block;font-size: 14px;outline: none;padding: 0;position: relative;transition: .2s;}
 .module {outline: none;padding: 5px 20px;}
 ul li li {border: none !important;padding: 5px 20px !important;}
 .state-module {position: absolute;right: 10px;top: 4px;}
@@ -12,6 +12,8 @@ ul li li.active {background: rgba(0, 0, 0, .1) !important;cursor: default;height
 ul li h3,
 ul li h4,
 ul li mat-icon {display: inline-flex;line-height: 1.5em;margin: 0;vertical-align: middle;}
+ul li h3,
+ul li h4 {font-size: 1em;}
 ul li mat-icon,
 ul li li mat-icon {font-size: 22px;height: 22px;line-height: 22px;margin-right: 5px;width: 22px;}
 ul li li:hover {background: rgba(0, 0, 0, .1);}
