@@ -26,7 +26,7 @@
                     ((propriedade.get('type').value == typeField.cnpj) ? '00.000.000/0000-00' : null) ||
                     ((propriedade.get('type').value == typeField.percent) ? 'percent' : null)"
 	      [required]="propriedade.get('required').value"
-	      [tabIndex]="i"
+	      [koalaAutoFocus]="propriedade.get('focus').value"
 	      [type]="
                     ((propriedade.get('type').value == typeField.cpf ||
                       propriedade.get('type').value == typeField.cnpj ||
@@ -46,9 +46,11 @@
 	      [validation]="
                     (propriedade.get('type').value == typeField.cpf && propriedade.get('value').errors?.cpfInvalid) ||
                     (propriedade.get('type').value == typeField.cnpj && propriedade.get('value').errors?.cnpjInvalid)"
+	      [tabIndex]="i + 1"
 	      formControlName="value"
 	      matInput/>
       <button
+	      tabindex="-1"
 	      (click)="passwordView(i)"
 	      *ngIf="propriedade.get('hidePassword').value !== null"
 	      [attr.aria-label]="'Hide password'"
@@ -85,7 +87,8 @@
       <mat-label>{{propriedade.get('label').value}}</mat-label>
       <input
 	      [required]="propriedade.get('required').value"
-	      [tabIndex]="i"
+	      [koalaAutoFocus]="propriedade.get('focus').value"
+	      [tabIndex]="i + 1"
 	      currencyMask
 	      formControlName="value"
 	      matInput
@@ -112,7 +115,8 @@
 	      [matAutosizeMaxRows]="8"
 	      [matAutosizeMinRows]="3"
 	      [required]="propriedade.get('required').value"
-	      [tabIndex]="i"
+	      [koalaAutoFocus]="propriedade.get('focus').value"
+	      [tabIndex]="i + 1"
 	      formControlName="value"
 	      matInput>
             </textarea>
@@ -132,7 +136,7 @@
 	    [formGroupName]="i"
 	    [ngClass]="propriedade.get('fieldClass').value">
       <mat-label>{{propriedade.get('label').value}}</mat-label>
-      <mat-select [required]="propriedade.get('required').value" [tabIndex]="i" formControlName="value">
+      <mat-select [required]="propriedade.get('required').value" [tabIndex]="i + 1" formControlName="value">
         <mat-option *ngFor="let options of propriedade.get('opcoesSelect').value" [value]="options.value">
           {{options.name}}
         </mat-option>
@@ -143,7 +147,7 @@
 	    [formGroupName]="i"
 	    [ngClass]="propriedade.get('fieldClass').value">
       <mat-checkbox
-	      [tabIndex]="i"
+	      [tabIndex]="i + 1"
 	      formControlName="value"
 	      value="true">
         {{propriedade.get('label').value}}

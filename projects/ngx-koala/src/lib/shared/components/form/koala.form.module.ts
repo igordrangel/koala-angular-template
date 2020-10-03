@@ -16,11 +16,13 @@ import { maskOptions } from '../../../mask-options';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { KoalaButtonModule } from '../button/koala.button.module';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { KoalaAutofocusDirective } from '../../directives/koala-autofocus.directive';
 
 @NgModule({
   declarations: [
     BtnSubmitComponent,
-    DynamicFormComponent
+    DynamicFormComponent,
+    KoalaAutofocusDirective
   ],
   imports: [
     CommonModule,
@@ -42,6 +44,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
   exports: [
     ReactiveFormsModule,
     FormsModule,
+    KoalaAutofocusDirective,
     NgxMaskModule,
     MatInputModule,
     MatSelectModule,

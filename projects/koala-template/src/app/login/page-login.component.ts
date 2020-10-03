@@ -34,7 +34,8 @@ export class PageLoginComponent extends FormAbstract implements OnInit {
         type: DynamicFormTypeFieldEnum.text,
         required: true,
         appearance: 'outline',
-        fieldClass: 'w-100'
+        fieldClass: 'w-100',
+        focus: true
       },
       {
         label: 'Senha',
