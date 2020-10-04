@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ListAbstract } from './list.abstract';
 import { ListItemMenuOptionInterface } from './list.item-menu-option.interface';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ListFilterInterface } from './list.filter.interface';
 import { KoalaObjectHelper } from 'tskoala-helpers/dist/object/koala-object.helper';
 import { KoalaDelayHelper } from 'tskoala-helpers/dist/delay/koala-delay.helper';
@@ -27,6 +27,7 @@ export class ListComponent extends ListAbstract implements OnInit {
   @Input() filterFormConfig: ListFilterInterface;
   @Input() error = () => {
   };
+  @Input() reload: BehaviorSubject<boolean>;
   @Output() getSelection = new EventEmitter<SelectionModel<object>>(null);
   @Output() getDataSource = new EventEmitter<any[]>(null);
 
@@ -73,6 +74,14 @@ export class ListComponent extends ListAbstract implements OnInit {
       }
     }
     this.getSelection.emit(this.selection);
+  
+    if (this.reload) {
+      this.reload.subscribe(async reload => {
+        if (reload) {
+          await this.filterSubmit();
+        }
+      });
+    }
   }
 
   public async filterSubmit() {
