@@ -110,7 +110,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		} else if (config.type === DynamicFormTypeFieldEnum.email) {
 			validators.push(Validators.email);
 		} else if (config.type === DynamicFormTypeFieldEnum.checkbox) {
-			value = false;
+			value = config.value ?? false;
 		}
 		
 		return this.fb.group({
