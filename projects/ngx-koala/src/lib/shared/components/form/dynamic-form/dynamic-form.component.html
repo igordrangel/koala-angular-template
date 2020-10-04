@@ -136,7 +136,8 @@
 	    [formGroupName]="i"
 	    [ngClass]="propriedade.get('fieldClass').value">
       <mat-label>{{propriedade.get('label').value}}</mat-label>
-      <mat-select [required]="propriedade.get('required').value" [tabIndex]="i + 1" formControlName="value">
+      <mat-select [multiple]="propriedade.get('multiple').value" [required]="propriedade.get('required').value"
+                  [tabIndex]="i + 1" formControlName="value">
         <mat-option *ngFor="let options of propriedade.get('opcoesSelect').value" [value]="options.value">
           {{options.name}}
         </mat-option>

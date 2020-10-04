@@ -125,6 +125,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			textHint: [config.textHint],
 			required: [config.required ?? false],
 			focus: [config.focus ?? false],
+			multiple: [config.multiple ?? false],
 			opcoesSelect: [config.opcoesSelect ?? []],
 			hidePassword: config.type === DynamicFormTypeFieldEnum.password ? true : null,
 			moreItemsButtonIconAddlabel: [config.moreItemsButtonIconAddlabel],
