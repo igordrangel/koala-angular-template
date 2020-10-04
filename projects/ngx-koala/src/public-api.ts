@@ -92,6 +92,10 @@ export * from './lib/shared/components/question/koala-question-config.interface'
 
 //#endregion
 
+//#region [DIRECTIVES]
+export * from './lib/shared/directives/koala-autofocus.directive';
+//#endregion
+
 //#region [PROVIDERS]
 export * from './lib/shared/providers/pagination/pagination.provider';
 //#endregion
