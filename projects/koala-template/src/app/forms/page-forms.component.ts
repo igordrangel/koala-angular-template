@@ -24,18 +24,17 @@ export class PageFormsComponent implements OnInit {
 	ngOnInit(): void {
 		this.formLocation = this.fb.group({});
 		this.formMoreItens = this.fb.group({});
-		this.formMoreItensConfig = [
-			{
-				label: 'Itens por Demanda',
-				name: 'itensPorDemanda',
-				type: DynamicFormTypeFieldEnum.moreItems,
-				moreItemsButtonIconAddlabel: 'Adicionar novo item',
-				moreItemsIcon: 'receipt_long',
-				moreItemsMinItems: 1,
-				moreItemsMaxItems: 2,
-				moreItemsConfig: {
-					form: this.fb.group({}),
-					setValues: this.formMoreItensValuesSubject,
+		this.formMoreItensConfig = [{
+			label: 'Itens por Demanda',
+			name: 'itensPorDemanda',
+			type: DynamicFormTypeFieldEnum.moreItems,
+			moreItemsButtonIconAddlabel: 'Adicionar novo item',
+			moreItemsIcon: 'receipt_long',
+			moreItemsMinItems: 1,
+			moreItemsMaxItems: 2,
+			moreItemsConfig: {
+				form: this.fb.group({}),
+				setValues: this.formMoreItensValuesSubject,
 					formConfig: [
 						{
 							label: 'Nome',

@@ -10,6 +10,7 @@ export interface KoalaDynamicFormFieldInterface {
   required?: boolean;
   focus?: boolean;
   type: DynamicFormTypeFieldEnum;
+  textObs?: string;
   appearance?: MatFormFieldAppearance;
   floatLabel?: FloatLabelType;
   value?: any;

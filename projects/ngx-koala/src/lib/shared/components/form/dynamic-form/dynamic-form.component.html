@@ -129,6 +129,33 @@
 	      {{propriedade.get('label').value}} não informado(a).
       </mat-error>
     </mat-form-field>
+	  <mat-form-field
+		  *ngIf="propriedade.get('type').value == typeField.textLogs"
+		  [appearance]="propriedade.get('appearance').value"
+		  [floatLabel]="propriedade.get('floatLabel').value"
+		  [formGroupName]="i"
+		  [ngClass]="propriedade.get('fieldClass').value">
+      <mat-label>{{propriedade.get('label').value}}</mat-label>
+      <div [innerHTML]="propriedade.get('textLogs').value" class="text-obs"></div>
+      <textarea
+	      [koalaAutoFocus]="propriedade.get('focus').value"
+	      [mat-autosize]="true"
+	      [matAutosizeMaxRows]="8"
+	      [matAutosizeMinRows]="3"
+	      [required]="propriedade.get('required').value"
+	      [tabIndex]="i + 1"
+	      formControlName="value"
+	      matInput>
+      </textarea>
+      <mat-hint *ngIf="propriedade.get('textHint').value">
+        <mat-icon>info</mat-icon>
+	      {{propriedade.get('textHint').value}}
+      </mat-hint>
+      <mat-error *ngIf="propriedade.get('value').errors?.required">
+        <mat-icon>error</mat-icon>
+	      {{propriedade.get('label').value}} não informado(a).
+      </mat-error>
+    </mat-form-field>
     <mat-form-field
 	    *ngIf="propriedade.get('type').value == typeField.select"
 	    [appearance]="propriedade.get('appearance').value"

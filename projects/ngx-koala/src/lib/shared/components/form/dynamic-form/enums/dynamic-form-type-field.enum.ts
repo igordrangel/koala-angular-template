@@ -15,5 +15,6 @@ export enum DynamicFormTypeFieldEnum {
   coin,
   percent,
   moreItems,
-  id
+  id,
+  textLogs
 }
