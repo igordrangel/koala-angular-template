@@ -56,7 +56,7 @@ export class KoalaTokenService {
     }
     setInterval(() => {
       token = localStorage.getItem(this.storageName);
-      if (!token) {
+      if (!token && this.tokenSubject.value !== null) {
         this.tokenSubject.next(null);
       }
     }, 1000);
