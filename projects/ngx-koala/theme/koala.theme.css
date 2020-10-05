@@ -115,11 +115,11 @@ p {margin: 0 !important;}
 .koala-dialog.normal {width: 50%;}
 .koala-dialog.big {width: 75%;}
 .koala-dialog .mat-dialog-container {border-radius: 0;overflow: hidden;padding: 0;}
-.koala-dialog .mat-dialog-title {height: 20px;margin: 0;padding: 10px 20px 0;z-index: 2}
+.koala-dialog .mat-dialog-title {height: 20px;margin: 0;padding: 10px 20px;z-index: 2}
 .koala-dialog .mat-dialog-title h2 {display: inline-block;font-family: OpenSansLight, sans-serif;font-size: .7em;margin: 0;padding: 0 8px;position: relative;text-align: left;top: -5px;}
 .koala-dialog .mat-dialog-title mat-icon {display: inline-block;font-size: 22px;height: 22px;line-height: 22px;position: relative;top: 1px;width: 22px;}
 .koala-dialog .mat-dialog-content {margin: 0;padding: 20px;}
-.koala-dialog .mat-dialog-actions {margin: 0;padding: 0 20px 20px;}
+.koala-dialog .mat-dialog-actions {margin: 0;padding: 10px 20px 10px;}
 /*****************************************
  ************** MENU LIST ****************
  *****************************************/

@@ -134,7 +134,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			moreItemsIcon: [config.moreItemsIcon],
 			moreItemsExpanded: [''],
 			moreItemsConfig: [[]],
-			value: [value, validators]
+			value: [value, validators, config?.asyncValidators]
 		});
 	}
 	

@@ -14,5 +14,6 @@ export enum DynamicFormTypeFieldEnum {
   select,
   coin,
   percent,
-  moreItems
+  moreItems,
+  id
 }

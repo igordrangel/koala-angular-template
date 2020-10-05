@@ -27,6 +27,12 @@ export class DialogPageListComponent extends FormAbstract implements OnInit {
     this.formInsert = this.fb.group({});
     this.formConfig = [
       {
+        name: 'id',
+        type: DynamicFormTypeFieldEnum.id,
+        required: true,
+        value: 1
+      },
+      {
         label: 'Name',
         name: 'name',
         type: DynamicFormTypeFieldEnum.text,
