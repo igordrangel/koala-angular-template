@@ -24,14 +24,12 @@ export class KoalaTokenService {
   }
 
   public getTokenSubject(): BehaviorSubject<string> {
-    if (this.tokenSubject.value === null) {
-      this.tokenSubject.next(this.getToken());
-    }
     return this.tokenSubject;
   }
 
   public getUser<U>(): U {
-    return jwt(localStorage.getItem(this.storageName));
+    const token = this.getToken();
+    return (token ? jwt(token) : null);
   }
 
   public removeToken() {
