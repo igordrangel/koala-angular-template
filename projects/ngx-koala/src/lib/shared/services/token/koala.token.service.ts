@@ -24,6 +24,9 @@ export class KoalaTokenService {
   }
 
   public getTokenSubject(): BehaviorSubject<string> {
+    if (this.tokenSubject.value === null) {
+      this.tokenSubject.next(this.getToken());
+    }
     return this.tokenSubject;
   }
 
@@ -50,7 +53,7 @@ export class KoalaTokenService {
   }
 
   private verifySession() {
-    let token = localStorage.getItem(this.storageName);
+    let token = this.getToken();
     if (token) {
       this.tokenSubject.next(token);
     }
@@ -60,5 +63,9 @@ export class KoalaTokenService {
         this.tokenSubject.next(null);
       }
     }, 1000);
+  }
+  
+  private getToken() {
+    return localStorage.getItem(this.storageName);
   }
 }

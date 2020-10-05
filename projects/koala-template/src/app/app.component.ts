@@ -12,7 +12,7 @@ import { KoalaMenuModuleInterface } from '../../../ngx-koala/src/lib/shared/comp
 export class AppComponent implements OnInit {
   public openPages = ['/login'];
   public userMenuOptions: KoalaUserMenuOptionsInterface[] = [
-    {name: 'Alterar Senha', icon: 'vpn_key', action: this.alterarSenha}
+    {name: 'Alterar Senha', icon: 'vpn_key', action: () => this.alterarSenha()}
   ];
   public notifications = new BehaviorSubject<KoalaNotificationInterface[]>([]);
   public menuOptions: KoalaMenuModuleInterface[] = [{
