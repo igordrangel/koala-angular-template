@@ -16,5 +16,7 @@ export enum DynamicFormTypeFieldEnum {
   percent,
   moreItems,
   id,
-  textLogs
+  textLogs,
+  file,
+  autocomplete
 }

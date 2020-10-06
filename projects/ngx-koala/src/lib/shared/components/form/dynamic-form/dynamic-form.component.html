@@ -169,6 +169,14 @@
           {{options.name}}
         </mat-option>
       </mat-select>
+      <mat-hint *ngIf="propriedade.get('textHint').value">
+        <mat-icon>info</mat-icon>
+	      {{propriedade.get('textHint').value}}
+      </mat-hint>
+      <mat-error *ngIf="propriedade.get('value').errors?.required">
+        <mat-icon>error</mat-icon>
+	      {{propriedade.get('label').value}} não informado(a).
+      </mat-error>
     </mat-form-field>
     <div
 	    *ngIf="propriedade.get('type').value == typeField.checkbox"
@@ -229,6 +237,51 @@
 			  </mat-accordion>
 		  </fieldset>
 	  </div>
+	  <mat-form-field
+		  *ngIf="propriedade.get('type').value == typeField.autocomplete"
+		  [appearance]="propriedade.get('appearance').value"
+		  [floatLabel]="propriedade.get('floatLabel').value"
+		  [formGroupName]="i"
+		  [ngClass]="propriedade.get('fieldClass').value">
+      <mat-label>{{propriedade.get('label').value}}</mat-label>
+      <input
+	      [matAutocomplete]="auto"
+	      [readonly]="propriedade.get('disabled').value"
+	      [required]="propriedade.get('required').value"
+	      formControlName="value"
+	      matInput
+	      placeholder="Selecione uma opção..."
+	      type="text">
+      <mat-spinner *ngIf="propriedade.get('autocompleteLoading').value | async" color="primary" matSuffix></mat-spinner>
+      <button
+	      (click)="clearAutocomplete(i)"
+	      *ngIf="
+          !(propriedade.get('autocompleteLoading').value | async) &&
+          !propriedade.get('disabled').value"
+	      color="warn"
+	      mat-icon-button
+	      matSuffix
+	      type="button">
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-hint *ngIf="propriedade.get('textHint').value">
+        <mat-icon>info</mat-icon>
+	      {{propriedade.get('textHint').value}}
+      </mat-hint>
+      <mat-error *ngIf="propriedade.get('value').errors?.required">
+        <mat-icon>error</mat-icon>
+	      {{propriedade.get('label').value}} não informado(a).
+      </mat-error>
+      <mat-error *ngIf="propriedade.get('value').errors?.autocompleteSelected">
+        <mat-icon>error</mat-icon>
+        Você deve selecionar um {{propriedade.get('label').value}}
+      </mat-error>
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="display" autoActiveFirstOption>
+        <mat-option *ngFor="let option of propriedade.get('autocompleteOptionsFiltered').value" [value]="option.value">
+          {{option.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
   </div>
   <ng-content select="[btn-submit]"></ng-content>
 </div>

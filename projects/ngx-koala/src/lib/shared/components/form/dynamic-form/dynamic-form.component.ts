@@ -8,6 +8,8 @@ import { FormAbstract } from '../../../../core/form.abstract';
 import { debounceTime } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { KoalaDynamicSetValueInterface } from './interfaces/koala.dynamic-set-value.interface';
+import { AutocompleteSelectedValidator } from './validators/autocomplete-selected.validator';
+import { KoalaDynamicAutocompleteOptionsInterface } from './interfaces/koala.dynamic-autocomplete-options.interface';
 
 @Component({
 	selector: 'koala-dynamic-form',
@@ -34,11 +36,37 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		this.controls = this.form.get('formData') as FormArray;
 		this.formConfig?.forEach((config, indexConfig) => {
 			const newFormGroup = this.newControl(config);
-			if (config.valueChanges) {
+			if (config.valueChanges || config.type === DynamicFormTypeFieldEnum.autocomplete) {
+				if (config.type === DynamicFormTypeFieldEnum.autocomplete) {
+					const autocompleteOptionsSubject = newFormGroup.get('autocompleteOptions').value as BehaviorSubject<KoalaDynamicAutocompleteOptionsInterface[]>;
+					if (autocompleteOptionsSubject) {
+						autocompleteOptionsSubject.subscribe(options => newFormGroup.get('autocompleteOptionsFiltered').setValue(options));
+					}
+				}
 				newFormGroup.get('value')
 				            .valueChanges
 				            .pipe(debounceTime(300))
-				            .subscribe(value => config.valueChanges(value));
+				            .subscribe(value => {
+					            if (config.type === DynamicFormTypeFieldEnum.autocomplete) {
+						            if (config.autocompleteType === 'all') {
+							            const autocompleteOptionsSubject = newFormGroup.get('autocompleteOptions').value as BehaviorSubject<KoalaDynamicAutocompleteOptionsInterface[]>;
+							            newFormGroup.get('autocompleteOptionsFiltered').setValue(this.autocompleteFilter(
+								            autocompleteOptionsSubject.value,
+								            value
+							            ));
+						            } else {
+							            const loader = newFormGroup.get('autocompleteLoading').value as BehaviorSubject<boolean>;
+							            loader.next(true);
+							            config.autocompleteFilter(value).subscribe(options => {
+								            newFormGroup.get('autocompleteOptionsFiltered').setValue(options);
+								            loader.next(false);
+							            });
+						            }
+					            }
+					            if (config.valueChanges) {
+						            config.valueChanges(value);
+					            }
+				            });
 			}
 			this.controls.push(newFormGroup);
 			if (config.moreItemsConfig && config.moreItemsConfig.setValues) {
@@ -97,6 +125,14 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		}, 50);
 	}
 	
+	public clearAutocomplete(propIndex: number) {
+		this.controls.controls[propIndex].get('value').setValue(null);
+	}
+	
+	public display(option?: KoalaDynamicAutocompleteOptionsInterface): string | undefined {
+		return option ? option.name : undefined;
+	}
+	
 	private newControl(config: KoalaDynamicFormFieldInterface): FormGroup {
 		const validators = [];
 		let value: any = config.value ?? '';
@@ -109,6 +145,8 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			validators.push(CnpjValidator);
 		} else if (config.type === DynamicFormTypeFieldEnum.email) {
 			validators.push(Validators.email);
+		} else if (config.type === DynamicFormTypeFieldEnum.autocomplete) {
+			validators.push(AutocompleteSelectedValidator);
 		} else if (config.type === DynamicFormTypeFieldEnum.checkbox) {
 			value = config.value ?? false;
 		}
@@ -124,6 +162,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			fieldClass: [config.fieldClass],
 			textHint: [config.textHint],
 			required: [config.required ?? false],
+			disabled: [config.disabled ?? false],
 			focus: [config.focus ?? false],
 			multiple: [config.multiple ?? false],
 			opcoesSelect: [config.opcoesSelect ?? []],
@@ -134,6 +173,9 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			moreItemsIcon: [config.moreItemsIcon],
 			moreItemsExpanded: [''],
 			moreItemsConfig: [[]],
+			autocompleteLoading: [new BehaviorSubject<boolean>(false)],
+			autocompleteOptions: [config.autocompleteOptions],
+			autocompleteOptionsFiltered: [[]],
 			textLogs: [config?.textObs],
 			value: [value, validators, config?.asyncValidators]
 		});
@@ -151,6 +193,28 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 						}
 					}
 				}
+			}
+		});
+	}
+	
+	private autocompleteFilter(arr: KoalaDynamicAutocompleteOptionsInterface[], value: string): KoalaDynamicAutocompleteOptionsInterface[] {
+		return arr.filter(filter => {
+			if (typeof value === 'string') {
+				if (filter) {
+					let find = true;
+					value.toLowerCase()
+					     .split(' ')
+					     .forEach(part => {
+						     if (filter.name.toLowerCase().indexOf(part) < 0) {
+							     find = false;
+							     return false;
+						     }
+					     });
+					
+					return find;
+				}
+			} else {
+				return true;
 			}
 		});
 	}

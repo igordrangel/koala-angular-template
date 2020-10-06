@@ -3,7 +3,9 @@ import { DynamicFormTypeFieldEnum } from '../../components/form/dynamic-form/enu
 import { KoalaStringHelper } from 'tskoala-helpers/dist/string/koala-string.helper';
 import { FormArray, FormGroup } from '@angular/forms';
 import { KoalaDynamicSetValueInterface } from '../../components/form/dynamic-form/interfaces/koala.dynamic-set-value.interface';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { KoalaDynamicAutocompleteOptionsInterface } from '../../components/form/dynamic-form/interfaces/koala.dynamic-autocomplete-options.interface';
+import { KoalaObjectHelper } from 'tskoala-helpers/dist/object/koala-object.helper';
 
 @Injectable({providedIn: 'root'})
 export class KoalaDynamicFormService {
@@ -37,5 +39,31 @@ export class KoalaDynamicFormService {
       valuesMoreItems.push(new BehaviorSubject<KoalaDynamicSetValueInterface[]>(itemValue));
     });
     subject.next(valuesMoreItems);
+  }
+  
+  public autocompleteFilterOnServer(
+    request: () => Promise<any[]>,
+    nameConfig: {
+      propsByName: string[];
+      delimiter: string;
+    }
+  ) {
+    return new Observable<KoalaDynamicAutocompleteOptionsInterface[]>(observe => {
+      request().then(response => {
+        const options: KoalaDynamicAutocompleteOptionsInterface[] = [];
+        response.forEach(item => {
+          options.push({
+            name: KoalaObjectHelper.toString(
+              [item],
+              nameConfig.propsByName,
+              ';',
+              (nameConfig.delimiter ?? ' ')
+            ),
+            value: item
+          });
+        });
+        observe.next(options);
+      });
+    });
   }
 }

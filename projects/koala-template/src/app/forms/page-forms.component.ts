@@ -5,6 +5,8 @@ import { DynamicFormTypeFieldEnum } from '../../../../ngx-koala/src/lib/shared/c
 import { KoalaDynamicFormService } from '../../../../ngx-koala/src/lib/shared/services/dynamic-forms/koala.dynamic-form.service';
 import { BehaviorSubject } from 'rxjs';
 import { KoalaDynamicSetValueInterface } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-set-value.interface';
+import { KoalaDynamicAutocompleteOptionsInterface } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-autocomplete-options.interface';
+import { PageListService } from '../page-list/page-list.service';
 
 @Component({
 	templateUrl: 'page-forms.component.html',
@@ -12,13 +14,19 @@ import { KoalaDynamicSetValueInterface } from '../../../../ngx-koala/src/lib/sha
 })
 export class PageFormsComponent implements OnInit {
 	public formLocation: FormGroup;
+	
 	public formMoreItens: FormGroup;
 	public formMoreItensConfig: KoalaDynamicFormFieldInterface[];
 	public formMoreItensValuesSubject = new BehaviorSubject<BehaviorSubject<KoalaDynamicSetValueInterface[]>[]>([]);
 	
+	public formAutocomplete: FormGroup;
+	public formAutocompleteConfig: KoalaDynamicFormFieldInterface[];
+	public countriesSubject = new BehaviorSubject<KoalaDynamicAutocompleteOptionsInterface[]>([]);
+	
 	constructor(
 		private fb: FormBuilder,
-		private dynamicFormService: KoalaDynamicFormService
+		private dynamicFormService: KoalaDynamicFormService,
+		private countryService: PageListService
 	) {}
 	
 	ngOnInit(): void {
@@ -55,9 +63,48 @@ export class PageFormsComponent implements OnInit {
 							fieldClass: 'w-100'
 						}
 					]
-				}
 			}
-		];
+		}];
+		
+		this.formAutocomplete = this.fb.group({});
+		this.formAutocompleteConfig = [{
+			label: 'Country (All)',
+			name: 'country',
+			type: DynamicFormTypeFieldEnum.autocomplete,
+			floatLabel: 'always',
+			appearance: 'fill',
+			class: 'col-12',
+			fieldClass: 'w-100',
+			autocompleteOptions: this.countriesSubject,
+			autocompleteType: 'all'
+		}, {
+			label: 'Country (On Demand)',
+			name: 'country',
+			type: DynamicFormTypeFieldEnum.autocomplete,
+			floatLabel: 'always',
+			appearance: 'fill',
+			class: 'col-12',
+			fieldClass: 'w-100',
+			autocompleteFilter: (filter) => this.dynamicFormService.autocompleteFilterOnServer(() => {
+				return new Promise<any[]>(resolve => {
+					this.countryService.get({name: filter}).subscribe(countries => resolve(countries));
+				});
+			}, {
+				propsByName: ['name', 'region'],
+				delimiter: ' - '
+			}),
+			autocompleteType: 'onDemand'
+		}];
+		this.countryService.get().subscribe(countries => {
+			const options: KoalaDynamicAutocompleteOptionsInterface[] = [];
+			countries.forEach(country => {
+				options.push({
+					name: country.name,
+					value: country
+				});
+			});
+			this.countriesSubject.next(options);
+		});
 	}
 	
 	public simulateDataFromServer() {
@@ -73,6 +120,9 @@ export class PageFormsComponent implements OnInit {
 	}
 	
 	public sendToConsole() {
+		console.log('----- MORE ITENS -----');
 		console.log(this.dynamicFormService.emitData(this.formMoreItens));
+		console.log('----- AUTOCOMPLETE -----');
+		console.log(this.dynamicFormService.emitData(this.formAutocomplete));
 	}
 }
