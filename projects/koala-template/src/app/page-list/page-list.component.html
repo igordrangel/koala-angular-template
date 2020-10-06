@@ -10,15 +10,15 @@
   
   <div content>
     <koala-list
-            (getDataSource)="countries = $event"
-            (getSelection)="selection = $event"
-      [columnsToShowInList]="collumns"
-      [filterFormConfig]="filterConfig"
-      [filterParams]="filter"
-      [itemsList]="itensList"
-      [itensMenuListOptions]="itensMenuListOptions"
-      [request]="buscar()"
-      typeRequest="all">
+	    (getDataSource)="countries = $event"
+	    (getSelection)="selection = $event"
+	    [columnsToShowInList]="collumns"
+	    [filterFormConfig]="filterConfig"
+	    [filterParams]="filter"
+	    [itemsList]="itensList"
+	    [itensMenuListOptions]="itensMenuListOptions"
+	    [request]="buscar()"
+	    typeRequest="all">
 
       <div itemsSelectList>
         <koala-button

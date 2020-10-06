@@ -19,13 +19,16 @@
       <mat-icon>menu</mat-icon>
     </button>
     <span class="spacer"></span>
+	  <div class="menu-toolbar">
+		  <ng-content select="[menu-toolbar]"></ng-content>
+	  </div>
     <div *ngIf="(notifications | async) as notificationList">
       <button *ngIf="notifications" [color]="color" [matMenuTriggerFor]="notificationsMenu" class="btn-toolbar"
               mat-icon-button>
         <mat-icon
-          [matBadgeHidden]="notificationList.length === 0"
-          [matBadge]="notificationList.length.toString()"
-          matBadgeColor="warn">notifications
+	        [matBadgeHidden]="notificationList.length === 0"
+	        [matBadge]="notificationList.length.toString()"
+	        matBadgeColor="warn">notifications
         </mat-icon>
       </button>
       <mat-menu #notificationsMenu="matMenu" class="menu-list" yPosition="below">

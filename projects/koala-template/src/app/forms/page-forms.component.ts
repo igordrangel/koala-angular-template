@@ -43,26 +43,26 @@ export class PageFormsComponent implements OnInit {
 			moreItemsConfig: {
 				form: this.fb.group({}),
 				setValues: this.formMoreItensValuesSubject,
-					formConfig: [
-						{
-							label: 'Nome',
-							name: 'name',
-							type: DynamicFormTypeFieldEnum.text,
-							appearance: 'fill',
-							floatLabel: 'always',
-							class: 'col-6',
-							fieldClass: 'w-100'
-						},
-						{
-							label: 'Sobrenome',
-							name: 'lastname',
-							type: DynamicFormTypeFieldEnum.text,
-							appearance: 'fill',
-							floatLabel: 'always',
-							class: 'col-6',
-							fieldClass: 'w-100'
-						}
-					]
+				formConfig: [
+					{
+						label: 'Nome',
+						name: 'name',
+						type: DynamicFormTypeFieldEnum.text,
+						appearance: 'fill',
+						floatLabel: 'always',
+						class: 'col-6',
+						fieldClass: 'w-100'
+					},
+					{
+						label: 'Sobrenome',
+						name: 'lastname',
+						type: DynamicFormTypeFieldEnum.text,
+						appearance: 'fill',
+						floatLabel: 'always',
+						class: 'col-6',
+						fieldClass: 'w-100'
+					}
+				]
 			}
 		}];
 		
@@ -79,7 +79,7 @@ export class PageFormsComponent implements OnInit {
 			autocompleteType: 'all'
 		}, {
 			label: 'Country (On Demand)',
-			name: 'country',
+			name: 'countryOnDemand',
 			type: DynamicFormTypeFieldEnum.autocomplete,
 			floatLabel: 'always',
 			appearance: 'fill',

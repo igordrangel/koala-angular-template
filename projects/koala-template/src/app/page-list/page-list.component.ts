@@ -65,6 +65,9 @@ export class PageListComponent implements OnInit {
 				{label: 'Name', name: 'name', type: DynamicFormTypeFieldEnum.text, appearance: 'outline'},
 				{label: 'Capital', name: 'capital', type: DynamicFormTypeFieldEnum.text, appearance: 'outline'}
 			],
+			advanced: [
+				{label: 'Region', name: 'region', type: DynamicFormTypeFieldEnum.text, appearance: 'outline'}
+			],
 			checkAndSearch: {
 				formControlName: 'trash',
 				label: 'Lixeira'
