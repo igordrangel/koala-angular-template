@@ -36,6 +36,9 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		this.controls = this.form.get('formData') as FormArray;
 		this.formConfig?.forEach((config, indexConfig) => {
 			const newFormGroup = this.newControl(config);
+			if (config.asyncValidators) {
+				newFormGroup.setAsyncValidators(config.asyncValidators);
+			}
 			if (config.valueChanges || config.type === DynamicFormTypeFieldEnum.autocomplete) {
 				if (config.type === DynamicFormTypeFieldEnum.autocomplete) {
 					const autocompleteOptionsSubject = newFormGroup.get('autocompleteOptions').value as BehaviorSubject<KoalaDynamicAutocompleteOptionsInterface[]>;
@@ -177,7 +180,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			autocompleteOptions: [config.autocompleteOptions],
 			autocompleteOptionsFiltered: [[]],
 			textLogs: [config?.textObs],
-			value: [value, validators, config?.asyncValidators]
+			value: [value, validators]
 		});
 	}
 	
