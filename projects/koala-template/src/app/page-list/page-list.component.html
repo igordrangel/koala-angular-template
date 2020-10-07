@@ -1,11 +1,12 @@
 <koala-folder-page
-        customFolderBackgroudColor="#fff"
-        customFolderFontColor="#1976D2"
-        titleIcon="list_alt"
-        titlePage="List">
+	customFolderBackgroudColor="#012d51"
+	customFolderFontColor="#fff"
+	titleIcon="list_alt"
+	titlePage="List">
   
   <div menu-page>
-    <koala-button (click)="dialogList()" color="white" icon="add" tooltip="Inserir"></koala-button>
+    <koala-button (click)="dialogList()" backgroundColor="white" color="blue" icon="add"
+                  tooltip="Inserir"></koala-button>
   </div>
   
   <div content>
@@ -22,21 +23,21 @@
 
       <div itemsSelectList>
         <koala-button
-                (click)="actionList()"
-                backgroundColor="transparent"
-                color="blue"
-                icon="delete_forever"
-                tooltip="Delete Forever">
+	        (click)="actionList()"
+	        backgroundColor="transparent"
+	        color="white"
+	        icon="delete_forever"
+	        tooltip="Delete Forever">
         </koala-button>
       </div>
 
       <div itemsList>
         <koala-button
-                (click)="downloadList()"
-                backgroundColor="transparent"
-                color="blue"
-                icon="assignment_returned"
-                tooltip="Download List (CSV)">
+	        (click)="downloadList()"
+	        backgroundColor="transparent"
+	        color="white"
+	        icon="assignment_returned"
+	        tooltip="Download List (CSV)">
         </koala-button>
       </div>
 

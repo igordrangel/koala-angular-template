@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { KoalaNotificationInterface } from '../../../ngx-koala/src/lib/shared/components/notifications/koala.notification.interface';
 import { KoalaUserMenuOptionsInterface } from '../../../ngx-koala/src/lib/shared/components/page/koala.user-menu-options.interface';
 import { KoalaMenuModuleInterface } from '../../../ngx-koala/src/lib/shared/components/menu/koala.menu-module.interface';
+import { KoalaPagePalletColorsInterface } from '../../../ngx-koala/src/lib/shared/components/page/koala-page-pallet-colors.interface';
 
 @Component({
   selector: 'app-root',
@@ -33,6 +34,41 @@ export class AppComponent implements OnInit {
       {icon: 'description', name: 'KoalaForm', routerLink: '/forms'}
     ]
   }];
+  public palletCollors: KoalaPagePalletColorsInterface = {
+    userPresentationUserFontColor: '#01579B',
+    userPresentationUserBackground: '#fff',
+    userPresentationBackground: 'url(\'./assets/wallpappers/folder-cia.png\') no-repeat 100% 0%',
+    toolbarBackground: '#012d51',
+    toolbarColor: '#fff',
+    menuTitleBackground: 'rgba(0,0,0,.3)',
+    menuTitleColor: '#fff',
+    menuBackground: '#013966',
+    menuOptionsBackground: '#012d51',
+    menuOptionsColor: 'rgba(255,255,255,.8)',
+    menuOptionsColorHover: 'rgba(255,255,255,.9)',
+    menuOptionsColorActive: '#fff',
+    checkboxBackground: '#FFB300',
+    checkboxColor: '#01579B',
+    checkboxOutlineColor: '#fff',
+    firstColor: '#012d51',
+    secondColor: '#012d51',
+    fontColor: '#fff',
+    bodyBackground: '#012d51',
+    notificationTitleColor: '#fff',
+    notificationContentTitleColor: 'rgba(255,255,255,.8)',
+    notificationContentColor: '#fff',
+    notificationContentIconColor: '#fff',
+    filterIconColor: '#fff',
+    listItemColor: '#fff',
+    listTitleItemColor: '#f1f1f1',
+    listBackground: '#013966',
+    listItemBackgroudHover: '#012d51',
+    listItemBackgroundActive: '#012441',
+    listContentBackground: '#012d51',
+    shadowColorTableList: 'rgba(255,255,255,.2)',
+    scrollbarColor: 'rgba(255,255,255,.8)',
+    scrollbarColorHover: '#fff'
+  };
   
   ngOnInit() {
     this.getNotifications();

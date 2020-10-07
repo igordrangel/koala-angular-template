@@ -154,13 +154,30 @@ export class PageComponent implements OnInit {
 
   public defineColor() {
     const css = `
+*::-webkit-scrollbar-thumb {background: ${this.palletColors.scrollbarColor};width: 2px;}
+*::-webkit-scrollbar-thumb:hover {background: ${this.palletColors.scrollbarColorHover};}
 body {background: ${this.palletColors.bodyBackground}!important;}
 input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hover {-webkit-box-shadow: 0 0 0 1000px ${this.palletColors.firstColor} inset !important;}
+.mat-button-disabled {color: ${this.palletColors.fontColor}!important;opacity: .6;}
+.mat-paginator-container {color: ${this.palletColors.fontColor}!important;}
+.mat-menu-panel {background: ${this.palletColors.firstColor}}
+.mat-menu-item,
+.mat-menu-item mat-icon {color: ${this.palletColors.fontColor}!important}
+.mat-select-value,
+.mat-select-arrow,
+.mat-form-field input,
+.mat-form-field-appearance-outline:not(.mat-form-field-invalid) .mat-form-field-outline-thick,
+.mat-form-field label {color: ${this.palletColors.fontColor}!important;caret-color: ${this.palletColors.fontColor}!important;}
+.mat-form-field-underline,
+.mat-form-field-appearance-fill .mat-form-field-underline::before,
+.mat-form-field-ripple {background: ${this.palletColors.fontColor}!important;}
 .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
 .mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element {background-color: ${this.palletColors.checkboxBackground} !important;}
 .mat-checkbox-checkmark-path {stroke: ${this.palletColors.checkboxColor} !important;}
 .mat-checkbox-checkmark {fill: ${this.palletColors.checkboxColor} !important;}
 .mat-checkbox-mixedmark {background-color: ${this.palletColors.checkboxColor} !important;}
+.mat-checkbox-frame {border-color: ${this.palletColors.checkboxOutlineColor}!important;}
+.mat-checkbox-label {color: ${this.palletColors.fontColor}!important;}
 .mat-radio-outer-circle {border-color: ${this.palletColors.checkboxBackground}!important;}
 .mat-radio-ripple .mat-ripple-element, .mat-radio-inner-circle {background-color: ${this.palletColors.checkboxBackground} !important;}
 .home-list-cards .list .mat-list-item-content .mat-icon {color: ${this.palletColors.fontColor};}
@@ -168,6 +185,7 @@ input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hov
 .koala-dialog .mat-dialog-title h2 {color: ${this.palletColors.fontColor};}
 .koala-dialog .mat-dialog-title mat-icon {color: ${this.palletColors.fontColor}!important;}
 .koala-dialog .mat-dialog-container {background: ${this.palletColors.firstColor}}
+.list-filter mat-icon {color: ${this.palletColors.filterIconColor}!important;}
 koala-page .menu-options {background: ${this.palletColors.menuBackground};}
 koala-page .toolbar {background: ${this.palletColors.toolbarBackground};}
 koala-page .toolbar .btn-collapse-menu,
@@ -183,6 +201,11 @@ koala-menu ul li.active,
 koala-menu ul li.expanded {color: ${this.palletColors.menuOptionsColorActive} !important;border-left: 4px solid ${this.palletColors.menuOptionsColorActive} !important;background: ${this.palletColors.menuOptionsBackground} !important;}
 koala-menu ul li li:hover {color: ${this.palletColors.menuOptionsColorHover} !important;}
 koala-menu ul li li.active {color: ${this.palletColors.menuOptionsColorActive} !important;}
+.notifications-content .title {color: ${this.palletColors.notificationTitleColor}!important;}
+.notifications-content .empty,
+.notifications-content .titleList {color: ${this.palletColors.notificationContentTitleColor}!important;}
+.notifications-content .iconList {color: ${this.palletColors.notificationContentIconColor}!important;}
+.notifications-content .textList {color: ${this.palletColors.notificationTitleColor}!important;}
 .list-container {box-shadow: 0 1px 3px ${this.palletColors.shadowColorTableList};}
 .list-container .list table.table-hover tr:hover {background: ${this.palletColors.listItemBackgroudHover};}
 .list-container .list table.table-hover tr:active {background: ${this.palletColors.listItemBackgroundActive};}

@@ -2,6 +2,7 @@ export interface KoalaPagePalletColorsInterface {
   userPresentationBackground?: string;
   userPresentationUserBackground?: string;
   userPresentationUserFontColor?: string;
+  userPresentationButtonColor?: string;
   firstColor?: string;
   secondColor?: string;
   bodyBackground?: string;
@@ -9,6 +10,7 @@ export interface KoalaPagePalletColorsInterface {
   fontHoverColor?: string;
   fontActiveColor?: string;
   checkboxBackground?: string;
+  checkboxOutlineColor?: string;
   checkboxColor?: string;
   menuBackground?: string;
   menuOptionsBackground?: string;
@@ -26,6 +28,11 @@ export interface KoalaPagePalletColorsInterface {
   listItemColor?: string;
   listItemBackgroudHover?: string;
   listItemBackgroundActive?: string;
+  filterIconColor?: string;
   scrollbarColor?: string;
   scrollbarColorHover?: string;
+  notificationTitleColor?: string;
+  notificationContentTitleColor?: string;
+  notificationContentColor?: string;
+  notificationContentIconColor?: string;
 }
