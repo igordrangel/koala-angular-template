@@ -51,6 +51,13 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 				            .pipe(debounceTime(300))
 				            .subscribe(value => {
 					            if (config.type === DynamicFormTypeFieldEnum.autocomplete) {
+						            if (
+							            value.hasOwnProperty('value') &&
+							            value.hasOwnProperty('name') &&
+							            value?.length === 2
+						            ) {
+							            newFormGroup.get('value').setValue(value.value);
+						            }
 						            if (config.autocompleteType === 'all') {
 							            const autocompleteOptionsSubject = newFormGroup.get('autocompleteOptions').value as BehaviorSubject<KoalaDynamicAutocompleteOptionsInterface[]>;
 							            newFormGroup.get('autocompleteOptionsFiltered').setValue(this.autocompleteFilter(

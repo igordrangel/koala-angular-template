@@ -277,7 +277,7 @@
         Você deve selecionar um {{propriedade.get('label').value}}
       </mat-error>
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="display" autoActiveFirstOption>
-        <mat-option *ngFor="let option of propriedade.get('autocompleteOptionsFiltered').value" [value]="option.value">
+        <mat-option *ngFor="let option of propriedade.get('autocompleteOptionsFiltered').value" [value]="option">
           {{option.name}}
         </mat-option>
       </mat-autocomplete>
