@@ -156,12 +156,22 @@ export class PageComponent implements OnInit {
     const css = `
 *::-webkit-scrollbar-thumb {background: ${this.palletColors.scrollbarColor};width: 2px;}
 *::-webkit-scrollbar-thumb:hover {background: ${this.palletColors.scrollbarColorHover};}
+.menu-container,
 body {background: ${this.palletColors.bodyBackground}!important;}
 input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hover {-webkit-box-shadow: 0 0 0 1000px ${this.palletColors.firstColor} inset !important;}
 .mat-button-disabled,
+input::placeholder,
 .mat-form-field-appearance-outline .mat-form-field-outline {color: ${this.palletColors.fontColor}!important;opacity: .6;}
+.mat-hint,
+.mat-expansion-indicator::after,
+.more-items-content .items .titleForm,
+fieldset legend,
 .mat-paginator-container {color: ${this.palletColors.fontColor}!important;}
+.mat-expansion-panel,
+.mat-select-panel,
+.mat-autocomplete-panel,
 .mat-menu-panel {background: ${this.palletColors.firstColor}}
+.mat-option,
 .mat-menu-item,
 .mat-menu-item mat-icon {color: ${this.palletColors.fontColor}!important}
 .mat-select-value,
