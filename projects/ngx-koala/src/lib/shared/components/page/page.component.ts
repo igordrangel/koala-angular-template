@@ -173,6 +173,7 @@ fieldset legend,
 .mat-select-panel,
 .mat-autocomplete-panel,
 .mat-menu-panel {background: ${this.palletColors.firstColor}}
+.mat-action-row,
 .mat-option,
 .mat-menu-item,
 .mat-menu-item mat-icon {color: ${this.palletColors.fontColor}!important}
