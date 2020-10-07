@@ -77,6 +77,8 @@ p {margin: 0 !important;}
 .menu-container {background: #ffffff;}
 .more-items-content .koala-icon-button mat-icon {top: -1px;}
 .mat-action-row {padding-right: 24px !important;}
+.mat-menu-panel {max-width: max-content !important;}
+.notifications-content .mat-list-text {padding-bottom: 5px !important;}
 /****************************************
  ***************** GRID *****************
  ****************************************/

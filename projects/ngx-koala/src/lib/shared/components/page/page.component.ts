@@ -156,6 +156,7 @@ export class PageComponent implements OnInit {
     const css = `
 *::-webkit-scrollbar-thumb {background: ${this.palletColors.scrollbarColor};width: 2px;}
 *::-webkit-scrollbar-thumb:hover {background: ${this.palletColors.scrollbarColorHover};}
+input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hover {color: ${this.palletColors.fontColor}!important;}
 .menu-container,
 body {background: ${this.palletColors.bodyBackground}!important;}
 input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hover {-webkit-box-shadow: 0 0 0 1000px ${this.palletColors.firstColor} inset !important;}
