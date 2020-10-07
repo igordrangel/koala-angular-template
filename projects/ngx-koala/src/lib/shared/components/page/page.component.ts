@@ -158,7 +158,8 @@ export class PageComponent implements OnInit {
 *::-webkit-scrollbar-thumb:hover {background: ${this.palletColors.scrollbarColorHover};}
 body {background: ${this.palletColors.bodyBackground}!important;}
 input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hover {-webkit-box-shadow: 0 0 0 1000px ${this.palletColors.firstColor} inset !important;}
-.mat-button-disabled {color: ${this.palletColors.fontColor}!important;opacity: .6;}
+.mat-button-disabled,
+.mat-form-field-appearance-outline .mat-form-field-outline {color: ${this.palletColors.fontColor}!important;opacity: .6;}
 .mat-paginator-container {color: ${this.palletColors.fontColor}!important;}
 .mat-menu-panel {background: ${this.palletColors.firstColor}}
 .mat-menu-item,
@@ -166,6 +167,7 @@ input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hov
 .mat-select-value,
 .mat-select-arrow,
 .mat-form-field input,
+.mat-form-field textarea,
 .mat-form-field-appearance-outline:not(.mat-form-field-invalid) .mat-form-field-outline-thick,
 .mat-form-field label {color: ${this.palletColors.fontColor}!important;caret-color: ${this.palletColors.fontColor}!important;}
 .mat-form-field-underline,
