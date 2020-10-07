@@ -167,6 +167,7 @@ input::placeholder,
 .more-items-content .items .titleForm,
 fieldset legend,
 .mat-paginator-container {color: ${this.palletColors.fontColor}!important;}
+.mat-card,
 .mat-expansion-panel,
 .mat-select-panel,
 .mat-autocomplete-panel,
