@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ListAbstract } from './list.abstract';
 import { ListItemMenuOptionInterface } from './list.item-menu-option.interface';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -13,7 +13,8 @@ import { KoalaListItemInterface } from './koala-list-item.interface';
 @Component({
   selector: 'koala-list',
   templateUrl: 'list.component.html',
-  styleUrls: ['list.component.css']
+  styleUrls: ['list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListComponent extends ListAbstract implements OnInit {
   @Input() columnsToShowInList: string[];
@@ -34,6 +35,7 @@ export class ListComponent extends ListAbstract implements OnInit {
   public formSearch: FormGroup;
   public formAdvancedSearch: FormGroup;
   public showAdvancedFilter: boolean = false;
+  public qtdListResult = 0;
 
   constructor(
     private fb: FormBuilder,

@@ -16,7 +16,6 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
   public limitOptions: number[] = [10, 20, 30, 50, 100];
   public showMenuList: boolean = false;
   public allSelected = false;
-  public qtdListResult = 0;
   public dataSource = new MatTableDataSource<any>([]);
   public typeRequest: 'all' | 'onDemand' = 'onDemand';
   @Input() filterParams = new BehaviorSubject<ListFormFilterInterface>(null);
@@ -88,6 +87,14 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
 
       merge(this.sort.sortChange, this.paginator.page, this.filterParams).pipe(
         startWith({}),
+        switchMap(() => new Observable(observe => {
+          this.loading(true);
+          this.selection.clear();
+          if (this.filterParams.value) {
+            this.filterParams.value.page = this.paginator.pageIndex;
+          }
+          observe.next(true);
+        })),
         debounceTime(300),
         switchMap(this.requestFunction),
         map((response) => {

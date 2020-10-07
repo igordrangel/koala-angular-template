@@ -18,6 +18,7 @@ import { KoalaAlertEnum } from '../../../../ngx-koala/src/lib/shared/components/
 import { CountryComponent } from './country/country-component';
 import { KoalaListItemInterface } from '../../../../ngx-koala/src/lib/shared/components/list/koala-list-item.interface';
 import { KoalaDynamicComponent } from '../../../../ngx-koala/src/lib/shared/components/dynamic-component/koala-dynamic-component';
+import { KoalaListService } from '../../../../ngx-koala/src/lib/shared/services/list/koala.list.service';
 
 @Component({
 	templateUrl: 'page-list.component.html'
@@ -28,7 +29,12 @@ export class PageListComponent implements OnInit {
 	public itensList: KoalaListItemInterface[];
 	public itensMenuListOptions: ListItemMenuOptionInterface[];
 	public filterConfig: ListFilterInterface;
-	public filter = new BehaviorSubject<ListFormFilterInterface>(null);
+	public filter = new BehaviorSubject<ListFormFilterInterface>({
+		params: {},
+		sort: '',
+		order: 'asc',
+		page: 1
+	});
 	public selection: SelectionModel<object>;
 	public countries: CountriesInterface[];
 	
@@ -39,7 +45,8 @@ export class PageListComponent implements OnInit {
 		private questionService: KoalaQuestionService,
 		private loaderService: KoalaLoaderService,
 		private alertService: KoalaAlertService,
-		private csvService: KoalaCsvService
+		private csvService: KoalaCsvService,
+		private listService: KoalaListService
 	) {
 		this.itensList = [{
 			label: 'Country Component Mode',
@@ -80,8 +87,10 @@ export class PageListComponent implements OnInit {
 	}
 	
 	public buscar() {
-		const filter = this.filter?.value;
-		return this.pageListService.get(filter?.params);
+		return this.listService.createListRequest(() => {
+			const filter = this.filter?.value;
+			return this.pageListService.get(filter?.params);
+		});
 	}
 	
 	public dialogList(countrie?: CountriesInterface) {

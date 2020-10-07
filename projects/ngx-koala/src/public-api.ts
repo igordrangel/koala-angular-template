@@ -115,6 +115,10 @@ export * from './lib/shared/services/dialog/koala.dialog.service';
 export * from './lib/shared/services/dialog/koala.dialog-template.interface';
 //#endregion
 
+//#region [KOALA LIST]
+export * from './lib/shared/services/list/koala.list.service';
+//#endregion
+
 //#region [KOALA DYNAMIC FORMS]
 export * from './lib/shared/services/dynamic-forms/koala.dynamic-form.service';
 //#endregion
