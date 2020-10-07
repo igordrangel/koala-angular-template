@@ -35,6 +35,7 @@ export interface KoalaDynamicFormFieldInterface {
     formConfig: KoalaDynamicFormFieldInterface[];
     setValues?: BehaviorSubject<BehaviorSubject<KoalaDynamicSetValueInterface[]>[]>;
   };
+  autocompleteDefaultValueOnClear?: any;
   autocompleteFilter?: (filter: string) => Observable<KoalaDynamicAutocompleteOptionsInterface[]>;
   autocompleteOptions?: BehaviorSubject<KoalaDynamicAutocompleteOptionsInterface[]>;
   autocompleteType?: 'all' | 'onDemand';
