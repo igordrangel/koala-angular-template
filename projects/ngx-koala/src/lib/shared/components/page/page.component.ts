@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { LoaderBarPageInterface } from '../loader/loader-bar-page.interface';
@@ -8,6 +8,8 @@ import { KoalaLoaderService } from '../../services/loader/koala.loader.service';
 import { KoalaNotificationInterface } from '../notifications/koala.notification.interface';
 import { KoalaUserMenuOptionsInterface } from './koala.user-menu-options.interface';
 import { KoalaPagePalletColorsInterface } from './koala-page-pallet-colors.interface';
+import { MatDrawer } from '@angular/material/sidenav';
+import { KoalaMenuService } from '../../services/menu/koala.menu.service';
 
 @Component({
   selector: 'koala-page',
@@ -54,7 +56,7 @@ export class PageComponent implements OnInit {
     menuOptionsColor: '#a5a5a5',
     menuOptionsColorHover: '#1976D2',
     menuOptionsColorActive: '#1565c0',
-    toolbarBackground: '#fff',
+    toolbarBackground: '#ffffff',
     toolbarColor: '#1976d2',
     listBackground: '#fff',
     listContentBackground: '#fff',
@@ -64,11 +66,14 @@ export class PageComponent implements OnInit {
     listItemBackgroundActive: '#EEE',
     shadowColorTableList: 'rgba(25, 118, 210, .4)'
   };
-
+  
+  @ViewChild('drawer', {static: true}) private menu: MatDrawer;
+  
   constructor(
     private tokenService: KoalaTokenService,
     private router: Router,
-    private loaderService: KoalaLoaderService
+    private loaderService: KoalaLoaderService,
+    private menuService: KoalaMenuService
   ) {
     loaderService.getLoaderSubject().subscribe(loader => {
       if (loader) {
@@ -145,6 +150,17 @@ export class PageComponent implements OnInit {
       this.palletColors = this.defaultPalletColors;
     }
     this.defineColor();
+    setInterval(async () => {
+      if (this.menuService.getMenuState() === 'close') {
+        if (this.menu.opened) {
+          await this.menu.close();
+        }
+      } else {
+        if (!this.menu.opened) {
+          await this.menu.open();
+        }
+      }
+    });
   }
 
   public logout() {

@@ -127,6 +127,10 @@ export * from './lib/shared/services/dynamic-forms/koala.dynamic-form.service';
 export * from './lib/shared/services/loader/koala.loader.service';
 //#endregion
 
+//#region [KOALA MENU]
+export * from './lib/shared/services/menu/koala.menu.service';
+//#endregion
+
 //#region [KOALA QUESTION]
 export * from './lib/shared/services/question/koala.question.service';
 //#endregion
