@@ -75,7 +75,13 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 						            }
 					            }
 					            if (config.valueChanges) {
-						            config.valueChanges(value);
+						            if (config.type === DynamicFormTypeFieldEnum.autocomplete) {
+							            if (newFormGroup.get('autocompleteSelectedValue').value) {
+								            config.valueChanges(newFormGroup.get('autocompleteSelectedValue').value);
+							            }
+						            } else {
+							            config.valueChanges(value);
+						            }
 					            }
 				            });
 			}
