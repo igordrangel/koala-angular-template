@@ -197,7 +197,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			autocompleteLoading: [new BehaviorSubject<boolean>(false)],
 			autocompleteOptions: [config.autocompleteOptions],
 			autocompleteOptionsFiltered: [[]],
-			autocompleteSelectedValue: [''],
+			autocompleteSelectedValue: [value?.value ?? ''],
 			textLogs: [config?.textObs],
 			value: [value, validators]
 		});
