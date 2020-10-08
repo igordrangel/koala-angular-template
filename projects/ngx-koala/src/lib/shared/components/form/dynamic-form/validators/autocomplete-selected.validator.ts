@@ -1,8 +1,14 @@
 import { AbstractControl } from '@angular/forms';
 
 export function AutocompleteSelectedValidator(control: AbstractControl) {
-  if (control.value !== '' && typeof control.value !== 'object') {
-    return {autocompleteSelected: true};
+  if (
+    control.value &&
+    control.value.hasOwnProperty('value') &&
+    control.value.hasOwnProperty('name') &&
+    Object.keys(control.value).length === 2
+  ) {
+    return null;
   }
-  return null;
+  
+  return {autocompleteSelected: true};
 }
