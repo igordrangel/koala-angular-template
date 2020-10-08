@@ -157,7 +157,10 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			validators.push(CnpjValidator);
 		} else if (config.type === DynamicFormTypeFieldEnum.email) {
 			validators.push(Validators.email);
-		} else if (config.type === DynamicFormTypeFieldEnum.autocomplete) {
+		} else if (
+			config.required &&
+			config.type === DynamicFormTypeFieldEnum.autocomplete
+		) {
 			validators.push(AutocompleteSelectedValidator);
 		} else if (config.type === DynamicFormTypeFieldEnum.checkbox) {
 			value = config.value ?? false;
