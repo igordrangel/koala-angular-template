@@ -5,4 +5,5 @@ export interface ListFormFilterInterface {
   sort: string;
   order: SortDirection;
   page: number;
+  limit: number;
 }

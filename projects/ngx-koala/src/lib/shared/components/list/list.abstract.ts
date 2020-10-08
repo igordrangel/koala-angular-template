@@ -77,7 +77,8 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
       params: filter,
       sort: this.sort.active,
       order: this.sort.direction,
-      page: this.paginator.pageIndex
+      page: this.paginator.pageIndex,
+      limit: this.paginator.pageSize
     });
   }
 
@@ -92,6 +93,7 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
           this.selection.clear();
           if (this.filterParams.value) {
             this.filterParams.value.page = this.paginator.pageIndex;
+            this.filterParams.value.limit = this.paginator.pageSize;
           }
           observe.next(true);
         })),
