@@ -48,7 +48,8 @@ export class KoalaDynamicFormService {
     nameConfig: {
       propsByName: string[];
       delimiter: string;
-    }
+    },
+    indexNameByValue?: string
   ) {
     return new Observable<KoalaDynamicAutocompleteOptionsInterface[]>(observe => {
       request().then(response => {
@@ -61,7 +62,7 @@ export class KoalaDynamicFormService {
               ';',
               (nameConfig.delimiter ?? ' ')
             ),
-            value: item
+            value: (indexNameByValue ? item[indexNameByValue] : item)
           });
         });
         observe.next(options);
