@@ -69,8 +69,8 @@ export class PageListComponent implements OnInit {
 		];
 		this.filterConfig = {
 			main: [
-				{label: 'Name', name: 'name', type: DynamicFormTypeFieldEnum.text, appearance: 'outline'},
-				{label: 'Capital', name: 'capital', type: DynamicFormTypeFieldEnum.text, appearance: 'outline'}
+				{label: 'Name', name: 'name', type: DynamicFormTypeFieldEnum.text, appearance: 'outline', class: 'col-4'},
+				{label: 'Capital', name: 'capital', type: DynamicFormTypeFieldEnum.text, appearance: 'outline', class: 'col-4'}
 			],
 			advanced: [
 				{label: 'Region', name: 'region', type: DynamicFormTypeFieldEnum.text, appearance: 'outline'}

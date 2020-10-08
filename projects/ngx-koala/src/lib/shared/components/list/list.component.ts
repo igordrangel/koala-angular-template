@@ -62,12 +62,12 @@ export class ListComponent extends ListAbstract implements OnInit {
     this.formAdvancedSearch = this.fb.group({});
     if (this.filterFormConfig) {
       this.filterFormConfig?.main?.map(item => {
-        item.class = 'col-4 padding-none';
+        item.class = item.class + ' padding-none';
         item.fieldClass = 'w-99';
         return item;
       });
       this.filterFormConfig?.advanced?.map(item => {
-        item.class = 'col-4 padding-none';
+        item.class = item.class + ' padding-none';
         item.fieldClass = 'w-99';
         return item;
       });
