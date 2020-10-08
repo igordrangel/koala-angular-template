@@ -137,7 +137,8 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 	}
 	
 	public clearAutocomplete(propIndex: number) {
-		this.controls.controls[propIndex].get('value').setValue(this.formConfig[propIndex].autocompleteDefaultValueOnClear ?? null);
+		this.controls.controls[propIndex].get('autocompleteSelectedValue').setValue(this.formConfig[propIndex].autocompleteDefaultValueOnClear ?? null);
+		this.controls.controls[propIndex].get('value').setValue(null);
 	}
 	
 	public display(option?: KoalaDynamicAutocompleteOptionsInterface): string | undefined {
