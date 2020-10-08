@@ -15,7 +15,7 @@
   </mat-drawer>
 
   <mat-toolbar *ngIf="!!logged && username" class="toolbar">
-    <button (click)="drawer.toggle()" [color]="color" class="btn-collapse-menu" mat-icon-button>
+    <button (click)="toogleMenu()" [color]="color" class="btn-collapse-menu" mat-icon-button>
       <mat-icon>menu</mat-icon>
     </button>
     <span class="spacer"></span>

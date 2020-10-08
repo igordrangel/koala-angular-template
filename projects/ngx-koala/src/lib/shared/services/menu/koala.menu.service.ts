@@ -15,4 +15,8 @@ export class KoalaMenuService {
 	public close() {
 		localStorage.setItem(this.storageMenuState, 'close');
 	}
+	
+	public clearConfig() {
+		localStorage.removeItem(this.storageMenuState);
+	}
 }

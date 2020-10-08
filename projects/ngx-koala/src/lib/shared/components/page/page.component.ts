@@ -155,19 +155,24 @@ export class PageComponent implements OnInit {
         if (this.menu.opened) {
           await this.menu.close();
         }
-      } else {
+      } else if (this.menuService.getMenuState() === 'open') {
         if (!this.menu.opened) {
           await this.menu.open();
         }
       }
     });
   }
-
+  
+  public async toogleMenu() {
+    this.menuService.clearConfig();
+    await this.menu.toggle();
+  }
+  
   public logout() {
     this.tokenService.removeToken();
     this.tokenService.getTokenSubject().next(null);
   }
-
+  
   public defineColor() {
     const css = `
 *::-webkit-scrollbar-thumb {background: ${this.palletColors.scrollbarColor};width: 2px;}
