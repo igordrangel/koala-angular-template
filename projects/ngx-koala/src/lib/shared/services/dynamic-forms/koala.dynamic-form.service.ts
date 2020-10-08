@@ -55,6 +55,12 @@ export class KoalaDynamicFormService {
       request().then(response => {
         const options: KoalaDynamicAutocompleteOptionsInterface[] = [];
         response.forEach(item => {
+          let value = '';
+          if (indexNameByValue.indexOf(' > ') >= 0) {
+            value = this.getValueByStringPath(indexNameByValue, item);
+          } else if (indexNameByValue) {
+            value = item[indexNameByValue];
+          }
           options.push({
             name: KoalaObjectHelper.toString(
               [item],
@@ -62,11 +68,27 @@ export class KoalaDynamicFormService {
               ';',
               (nameConfig.delimiter ?? ' ')
             ),
-            value: (indexNameByValue ? item[indexNameByValue] : item)
+            value
           });
         });
         observe.next(options);
       });
     });
+  }
+  
+  private getValueByStringPath(indexNameByValue: string, item: any) {
+    let value;
+    const partsIndex = indexNameByValue.split(' > ');
+    let partIndex = 0;
+    do {
+      if (!value) {
+        value = item[partsIndex[partIndex]];
+      } else {
+        value = value[partsIndex[partIndex]];
+      }
+      partIndex++;
+    } while (partIndex < partsIndex.length);
+    
+    return value;
   }
 }

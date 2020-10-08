@@ -92,7 +92,7 @@ export class PageFormsComponent implements OnInit {
 			}, {
 				propsByName: ['name', 'region'],
 				delimiter: ' - '
-			}),
+			}, 'currencies > 0 > code'),
 			autocompleteType: 'onDemand'
 		}];
 		this.countryService.get().subscribe(countries => {
