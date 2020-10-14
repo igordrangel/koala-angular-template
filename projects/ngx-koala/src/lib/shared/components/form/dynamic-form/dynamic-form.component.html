@@ -1,8 +1,7 @@
 <div [formGroup]="form" class="p-relative w-100">
   <div *ngFor="let propriedade of controls?.controls; let i = index;"
-       [ngClass]="propriedade.get('class').value"
        formArrayName="formData">
-	  <div *ngIf="propriedade.get('show').value">
+	  <div *ngIf="propriedade.get('show').value" [ngClass]="propriedade.get('class').value">
 	    <mat-form-field
 		    *ngIf="propriedade.get('type').value == typeField.text ||
 	             propriedade.get('type').value == typeField.password ||
