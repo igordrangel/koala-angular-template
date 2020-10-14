@@ -51,6 +51,12 @@ export * from './lib/shared/components/dynamic-component/koala-dynamic-component
 export * from './lib/shared/components/dynamic-component/koala-dynamic-component';
 //#endregion
 
+//#region [KOALA FILE BUTTON]
+export * from './lib/shared/components/file-button/file-button.component';
+export * from './lib/shared/components/file-button/koala.file-button.module';
+export * from './lib/shared/components/file-button/koala.file.interface';
+//#endregion
+
 //#region [KOALA LIST]
 export * from './lib/shared/components/list/list.abstract';
 export * from './lib/shared/components/list/list.component';
