@@ -88,24 +88,27 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 				            });
 			}
 			this.controls.push(newFormGroup);
-			if (config.moreItemsConfig && config.moreItemsConfig.setValues) {
-				config.moreItemsConfig.setValues.subscribe(values => {
-					if (values.length > 0) {
-						values.forEach((itemValue, indexValue) => {
-							if (!this.controls.controls[indexConfig].get('moreItemsConfig').value[indexValue]) {
-								this.addMoreItem(indexConfig);
-							}
-							setTimeout(() => {
-								this.setValuesOnFields(itemValue, this.controls.controls[indexConfig].get('moreItemsConfig').value[indexValue].form);
-							}, 301);
-						});
+			if (config.moreItemsConfig) {
+				if (config.moreItemsMinItems > 0) {
+					for (let min = 0; min < config.moreItemsMinItems; min++) {
+						if (min <= config.moreItemsMaxItems) {
+							this.addMoreItem(indexConfig);
+						}
 					}
-				});
-			}
-			
-			if (config.moreItemsConfig && config.moreItemsConfig.setValues?.value.length < config.moreItemsMinItems) {
-				for (let minItem = config.moreItemsConfig.setValues.value.length; minItem < config.moreItemsMinItems; minItem++) {
-					this.addMoreItem(indexConfig);
+				}
+				if (config.moreItemsConfig.setValues) {
+					config.moreItemsConfig.setValues.subscribe(values => {
+						if (values.length > 0) {
+							values.forEach((itemValue, indexValue) => {
+								if (!this.controls.controls[indexConfig].get('moreItemsConfig').value[indexValue]) {
+									this.addMoreItem(indexConfig);
+								}
+								setTimeout(() => {
+									this.setValuesOnFields(itemValue, this.controls.controls[indexConfig].get('moreItemsConfig').value[indexValue].form);
+								}, 301);
+							});
+						}
+					});
 				}
 			}
 		});

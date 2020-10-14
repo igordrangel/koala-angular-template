@@ -48,7 +48,6 @@ export class PageFormsComponent implements OnInit {
 			moreItemsMaxItems: 2,
 			moreItemsConfig: {
 				form: this.fb.group({}),
-				setValues: this.formMoreItensValuesSubject,
 				formConfig: [
 					{
 						label: 'Nome',
