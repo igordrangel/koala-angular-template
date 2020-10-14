@@ -33,7 +33,8 @@ export class PageListComponent implements OnInit {
 		params: {},
 		sort: '',
 		order: 'asc',
-		page: 1
+		page: 1,
+		limit: 0
 	});
 	public selection: SelectionModel<object>;
 	public countries: CountriesInterface[];

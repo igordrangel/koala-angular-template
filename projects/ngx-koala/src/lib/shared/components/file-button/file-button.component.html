@@ -1,0 +1,36 @@
+<input #file (change)="emitFiles(file.files)" [accept]="accept" [multiple]="multiple" style="display: none;"
+       type="file"/>
+<button
+	(click)="file.click()"
+	*ngIf="text else iconButton"
+	[disabled]="disabled"
+	[matTooltipDisabled]="!tooltip"
+	[matTooltip]="tooltip"
+	[ngClass]="[
+    'c-'+color,
+    'b-'+backgroundColor
+  ]"
+	class="koala-button"
+	mat-button
+	matTooltipPosition="above"
+	type="button">
+  <mat-icon *ngIf="icon">{{icon}}</mat-icon>
+	{{text}}
+</button>
+<ng-template #iconButton>
+  <button
+	  (click)="file.click()"
+	  [disabled]="disabled"
+	  [matTooltipDisabled]="!tooltip"
+	  [matTooltip]="tooltip"
+	  [ngClass]="[
+      'c-'+color,
+      'b-'+backgroundColor
+    ]"
+	  class="koala-icon-button"
+	  mat-icon-button
+	  matTooltipPosition="before"
+	  type="button">
+    <mat-icon>{{icon}}</mat-icon>
+  </button>
+</ng-template>

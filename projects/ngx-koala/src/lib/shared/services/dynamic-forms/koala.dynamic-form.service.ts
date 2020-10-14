@@ -6,6 +6,7 @@ import { KoalaDynamicSetValueInterface } from '../../components/form/dynamic-for
 import { BehaviorSubject, Observable } from 'rxjs';
 import { KoalaDynamicAutocompleteOptionsInterface } from '../../components/form/dynamic-form/interfaces/koala.dynamic-autocomplete-options.interface';
 import { KoalaObjectHelper } from 'tskoala-helpers/dist/object/koala-object.helper';
+import { KoalaDynamicFormShowFieldInterface } from '../../components/form/dynamic-form/interfaces/koala.dynamic-form-show-field.interface';
 
 @Injectable({providedIn: 'root'})
 export class KoalaDynamicFormService {
@@ -66,26 +67,41 @@ export class KoalaDynamicFormService {
               [item],
               nameConfig.propsByName,
               ';',
-              (nameConfig.delimiter ?? ' ')
+	            (nameConfig.delimiter ?? ' ')
             ),
-            value
+	          value
           });
         });
-        observe.next(options);
+	      observe.next(options);
       });
     });
   }
-  
-  private getValueByStringPath(indexNameByValue: string, item: any) {
-    let value;
-    const partsIndex = indexNameByValue.split(' > ');
-    let partIndex = 0;
-    do {
-      if (!value) {
-        value = item[partsIndex[partIndex]];
-      } else {
-        value = value[partsIndex[partIndex]];
-      }
+	
+	public showFields(
+		subject: BehaviorSubject<KoalaDynamicFormShowFieldInterface[]>,
+		names: string[],
+		show: boolean
+	) {
+		const fields: KoalaDynamicFormShowFieldInterface[] = [];
+		names.forEach(name => {
+			fields.push({
+				name,
+				show
+			});
+		});
+		subject.next(fields);
+	}
+	
+	private getValueByStringPath(indexNameByValue: string, item: any) {
+		let value;
+		const partsIndex = indexNameByValue.split(' > ');
+		let partIndex = 0;
+		do {
+			if (!value) {
+				value = item[partsIndex[partIndex]];
+			} else {
+				value = value[partsIndex[partIndex]];
+			}
       partIndex++;
     } while (partIndex < partsIndex.length);
     

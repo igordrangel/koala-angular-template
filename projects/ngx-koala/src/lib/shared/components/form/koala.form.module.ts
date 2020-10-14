@@ -17,6 +17,7 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { KoalaButtonModule } from '../button/koala.button.module';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { KoalaAutofocusDirective } from '../../directives/koala-autofocus.directive';
+import { KoalaFileButtonModule } from '../file-button/koala.file-button.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { KoalaAutofocusDirective } from '../../directives/koala-autofocus.direct
     FormsModule,
     CurrencyMaskModule,
     NgxMaskModule.forRoot(maskOptions),
+    KoalaFileButtonModule,
     MatInputModule,
     MatSelectModule,
     MatRadioModule,
@@ -46,6 +48,7 @@ import { KoalaAutofocusDirective } from '../../directives/koala-autofocus.direct
     FormsModule,
     KoalaAutofocusDirective,
     NgxMaskModule,
+    KoalaFileButtonModule,
     MatInputModule,
     MatSelectModule,
     MatRadioModule,

@@ -2,286 +2,301 @@
   <div *ngFor="let propriedade of controls?.controls; let i = index;"
        [ngClass]="propriedade.get('class').value"
        formArrayName="formData">
-    <mat-form-field
-	    *ngIf="propriedade.get('type').value == typeField.text ||
-             propriedade.get('type').value == typeField.password ||
-             propriedade.get('type').value == typeField.cpf ||
-             propriedade.get('type').value == typeField.cnpj ||
-             propriedade.get('type').value == typeField.datetime ||
-             propriedade.get('type').value == typeField.email ||
-             propriedade.get('type').value == typeField.number ||
-             propriedade.get('type').value == typeField.time ||
-             propriedade.get('type').value == typeField.phone ||
-             propriedade.get('type').value == typeField.percent"
-	    [appearance]="propriedade.get('appearance').value"
-	    [floatLabel]="propriedade.get('floatLabel').value"
-	    [formGroupName]="i"
-	    [ngClass]="propriedade.get('fieldClass').value">
-      <mat-label>{{propriedade.get('label').value}}</mat-label>
-      <input
-	      [dropSpecialCharacters]="false"
-	      [mask]="
-                    ((propriedade.get('type').value == typeField.phone) ? '(00)0000-0000?0' : null) ||
-                    ((propriedade.get('type').value == typeField.cpf) ? '000.000.000-00' : null) ||
-                    ((propriedade.get('type').value == typeField.cnpj) ? '00.000.000/0000-00' : null) ||
-                    ((propriedade.get('type').value == typeField.percent) ? 'percent' : null)"
-	      [required]="propriedade.get('required').value"
-	      [koalaAutoFocus]="propriedade.get('focus').value"
-	      [type]="
-                    ((propriedade.get('type').value == typeField.cpf ||
-                      propriedade.get('type').value == typeField.cnpj ||
-                      propriedade.get('type').value == typeField.phone ||
-                      propriedade.get('type').value == typeField.percent
-                    )) ? 'tel' : (
-                      propriedade.get('type').value == typeField.datetime ?
-                      'date' : (
-                      propriedade.get('type').value == typeField.email ?
-                      'email' : (
-                      propriedade.get('type').value == typeField.number ?
-                      'number' : (
-                      propriedade.get('type').value == typeField.time ?
-                      'time' : (
-                      propriedade.get('type').value == typeField.password ?
-                      'password' : 'text')))))"
-	      [validation]="
-                    (propriedade.get('type').value == typeField.cpf && propriedade.get('value').errors?.cpfInvalid) ||
-                    (propriedade.get('type').value == typeField.cnpj && propriedade.get('value').errors?.cnpjInvalid)"
-	      [tabIndex]="i + 1"
-	      formControlName="value"
-	      matInput/>
-      <button
-	      tabindex="-1"
-	      (click)="passwordView(i)"
-	      *ngIf="propriedade.get('hidePassword').value !== null"
-	      [attr.aria-label]="'Hide password'"
-	      [attr.aria-pressed]="propriedade.get('hidePassword').value" mat-icon-button matSuffix type="button">
-        <mat-icon>{{propriedade.get('hidePassword').value ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-      <mat-hint *ngIf="propriedade.get('textHint').value">
-        <mat-icon>info</mat-icon>
-	      {{propriedade.get('textHint').value}}
-      </mat-hint>
-      <mat-error *ngIf="propriedade.get('value').errors?.required">
-        <mat-icon>error</mat-icon>
-	      {{propriedade.get('label').value}} não informado(a).
-      </mat-error>
-      <mat-error *ngIf="propriedade.get('value').errors?.cpfInvalid">
-        <mat-icon>error</mat-icon>
-        CPF inválido.
-      </mat-error>
-      <mat-error *ngIf="propriedade.get('value').errors?.cnpjInvalid">
-        <mat-icon>error</mat-icon>
-        CNPJ inválido.
-      </mat-error>
-      <mat-error *ngIf="propriedade.get('value').errors?.email">
-        <mat-icon>error</mat-icon>
-        E-mail inválido.
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field
-	    *ngIf="propriedade.get('type').value == typeField.coin"
-	    [appearance]="propriedade.get('appearance').value"
-	    [floatLabel]="propriedade.get('floatLabel').value"
-	    [formGroupName]="i"
-	    [ngClass]="propriedade.get('fieldClass').value">
-      <mat-label>{{propriedade.get('label').value}}</mat-label>
-      <input
-	      [required]="propriedade.get('required').value"
-	      [koalaAutoFocus]="propriedade.get('focus').value"
-	      [tabIndex]="i + 1"
-	      currencyMask
-	      formControlName="value"
-	      matInput
-	      type="tel"/>
-      <mat-hint *ngIf="propriedade.get('textHint').value">
-        <mat-icon>info</mat-icon>
-	      {{propriedade.get('textHint').value}}
-      </mat-hint>
-      <mat-error *ngIf="propriedade.get('value').errors?.required">
-        <mat-icon>error</mat-icon>
-	      {{propriedade.get('label').value}} não informado(a).
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field
-	    *ngIf="propriedade.get('type').value == typeField.valueList ||
-             propriedade.get('type').value == typeField.textarea"
-	    [appearance]="propriedade.get('appearance').value"
-	    [floatLabel]="propriedade.get('floatLabel').value"
-	    [formGroupName]="i"
-	    [ngClass]="propriedade.get('fieldClass').value">
-      <mat-label>{{propriedade.get('label').value}}</mat-label>
-      <textarea
-	      [mat-autosize]="true"
-	      [matAutosizeMaxRows]="8"
-	      [matAutosizeMinRows]="3"
-	      [required]="propriedade.get('required').value"
-	      [koalaAutoFocus]="propriedade.get('focus').value"
-	      [tabIndex]="i + 1"
-	      formControlName="value"
-	      matInput>
-            </textarea>
-      <mat-hint *ngIf="propriedade.get('textHint').value">
-        <mat-icon>info</mat-icon>
-	      {{propriedade.get('textHint').value}}
-      </mat-hint>
-      <mat-error *ngIf="propriedade.get('value').errors?.required">
-        <mat-icon>error</mat-icon>
-	      {{propriedade.get('label').value}} não informado(a).
-      </mat-error>
-    </mat-form-field>
-	  <mat-form-field
-		  *ngIf="propriedade.get('type').value == typeField.textLogs"
-		  [appearance]="propriedade.get('appearance').value"
-		  [floatLabel]="propriedade.get('floatLabel').value"
-		  [formGroupName]="i"
-		  [ngClass]="propriedade.get('fieldClass').value">
-      <mat-label>{{propriedade.get('label').value}}</mat-label>
-      <div [innerHTML]="propriedade.get('textLogs').value" class="text-obs"></div>
-      <textarea
-	      [koalaAutoFocus]="propriedade.get('focus').value"
-	      [mat-autosize]="true"
-	      [matAutosizeMaxRows]="8"
-	      [matAutosizeMinRows]="3"
-	      [required]="propriedade.get('required').value"
-	      [tabIndex]="i + 1"
-	      formControlName="value"
-	      matInput>
-      </textarea>
-      <mat-hint *ngIf="propriedade.get('textHint').value">
-        <mat-icon>info</mat-icon>
-	      {{propriedade.get('textHint').value}}
-      </mat-hint>
-      <mat-error *ngIf="propriedade.get('value').errors?.required">
-        <mat-icon>error</mat-icon>
-	      {{propriedade.get('label').value}} não informado(a).
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field
-	    *ngIf="propriedade.get('type').value == typeField.select"
-	    [appearance]="propriedade.get('appearance').value"
-	    [floatLabel]="propriedade.get('floatLabel').value"
-	    [formGroupName]="i"
-	    [ngClass]="propriedade.get('fieldClass').value">
-      <mat-label>{{propriedade.get('label').value}}</mat-label>
-      <mat-select [multiple]="propriedade.get('multiple').value" [required]="propriedade.get('required').value"
-                  [tabIndex]="i + 1" formControlName="value">
-        <mat-option *ngFor="let options of propriedade.get('opcoesSelect').value" [value]="options.value">
-          {{options.name}}
-        </mat-option>
-      </mat-select>
-      <mat-hint *ngIf="propriedade.get('textHint').value">
-        <mat-icon>info</mat-icon>
-	      {{propriedade.get('textHint').value}}
-      </mat-hint>
-      <mat-error *ngIf="propriedade.get('value').errors?.required">
-        <mat-icon>error</mat-icon>
-	      {{propriedade.get('label').value}} não informado(a).
-      </mat-error>
-    </mat-form-field>
-    <div
-	    *ngIf="propriedade.get('type').value == typeField.checkbox"
-	    [formGroupName]="i"
-	    [ngClass]="propriedade.get('fieldClass').value">
-      <mat-checkbox
-	      [tabIndex]="i + 1"
-	      formControlName="value"
-	      value="true">
-        {{propriedade.get('label').value}}
-      </mat-checkbox>
-    </div>
-	  <div
-		  *ngIf="propriedade.get('type').value == typeField.moreItems"
-		  [formGroupName]="i"
-		  [ngClass]="propriedade.get('fieldClass').value"
-		  class="more-items-content">
-		  <fieldset>
-			  <legend>
-				  <koala-button
-					  (click)="addMoreItem(i)"
-					  [tooltip]="propriedade.get('moreItemsButtonIconAddlabel').value"
-					  [disabled]="propriedade.get('moreItemsConfig').value.length === propriedade.get('moreItemsMaxItems').value"
-					  backgroundColor="blue"
-					  class="btn-add-more-items"
-					  color="white"
-					  icon="add">
-				  </koala-button>
-				  {{propriedade.get('label').value}} (Min.: {{propriedade.get('moreItemsMinItems').value}}
-				                                     | Máx.: {{propriedade.get('moreItemsMaxItems').value}})
-			  </legend>
-			  <mat-accordion class="items">
-				  <mat-expansion-panel
-					  *ngFor="let item of propriedade.get('moreItemsConfig').value.slice().reverse(); index as indexMoreItems"
-					  [expanded]="(propriedade.get('moreItemsConfig').value.length - 1 - indexMoreItems) ===
-					  propriedade.get('moreItemsExpanded').value">
-					  <mat-expansion-panel-header>
-							<mat-panel-title class="titleForm">#
-								{{propriedade.get('moreItemsConfig').value.length - 1 - indexMoreItems + 1}}</mat-panel-title>
-							<mat-panel-description class="titleForm">
-								{{propriedade.get('label').value}}
-								<mat-icon>{{propriedade.get('moreItemsIcon').value}}</mat-icon>
-							</mat-panel-description>
-						</mat-expansion-panel-header>
-					  <koala-dynamic-form
-						  [formConfig]="item.formConfig"
-						  [form]="item.form">
-					  </koala-dynamic-form>
-				    <mat-action-row
-					    *ngIf="propriedade.get('moreItemsConfig').value.length > propriedade.get('moreItemsMinItems').value">
-				      <button
-					      (click)="removeMoreItem(i, propriedade.get('moreItemsConfig').value.length - 1 - indexMoreItems)"
-					      mat-icon-button>
-					      <mat-icon>delete</mat-icon>
-				      </button>
-				    </mat-action-row>
-				  </mat-expansion-panel>
-			  </mat-accordion>
-		  </fieldset>
+	  <div *ngIf="propriedade.get('show').value">
+	    <mat-form-field
+		    *ngIf="propriedade.get('type').value == typeField.text ||
+	             propriedade.get('type').value == typeField.password ||
+	             propriedade.get('type').value == typeField.cpf ||
+	             propriedade.get('type').value == typeField.cnpj ||
+	             propriedade.get('type').value == typeField.datetime ||
+	             propriedade.get('type').value == typeField.email ||
+	             propriedade.get('type').value == typeField.number ||
+	             propriedade.get('type').value == typeField.time ||
+	             propriedade.get('type').value == typeField.phone ||
+	             propriedade.get('type').value == typeField.percent"
+		    [appearance]="propriedade.get('appearance').value"
+		    [floatLabel]="propriedade.get('floatLabel').value"
+		    [formGroupName]="i"
+		    [ngClass]="propriedade.get('fieldClass').value">
+	      <mat-label>{{propriedade.get('label').value}}</mat-label>
+	      <input
+		      [dropSpecialCharacters]="false"
+		      [koalaAutoFocus]="propriedade.get('focus').value"
+		      [mask]="
+	                    ((propriedade.get('type').value == typeField.phone) ? '(00)0000-0000?0' : null) ||
+	                    ((propriedade.get('type').value == typeField.cpf) ? '000.000.000-00' : null) ||
+	                    ((propriedade.get('type').value == typeField.cnpj) ? '00.000.000/0000-00' : null) ||
+	                    ((propriedade.get('type').value == typeField.percent) ? 'percent' : null)"
+		      [required]="propriedade.get('required').value"
+		      [tabIndex]="i + 1"
+		      [type]="
+	                    ((propriedade.get('type').value == typeField.cpf ||
+	                      propriedade.get('type').value == typeField.cnpj ||
+	                      propriedade.get('type').value == typeField.phone ||
+	                      propriedade.get('type').value == typeField.percent
+	                    )) ? 'tel' : (
+	                      propriedade.get('type').value == typeField.datetime ?
+	                      'date' : (
+	                      propriedade.get('type').value == typeField.email ?
+	                      'email' : (
+	                      propriedade.get('type').value == typeField.number ?
+	                      'number' : (
+	                      propriedade.get('type').value == typeField.time ?
+	                      'time' : (
+	                      propriedade.get('type').value == typeField.password ?
+	                      'password' : 'text')))))"
+		      [validation]="
+	                    (propriedade.get('type').value == typeField.cpf && propriedade.get('value').errors?.cpfInvalid) ||
+	                    (propriedade.get('type').value == typeField.cnpj && propriedade.get('value').errors?.cnpjInvalid)"
+		      formControlName="value"
+		      matInput/>
+	      <button
+		      (click)="passwordView(i)"
+		      *ngIf="propriedade.get('hidePassword').value !== null"
+		      [attr.aria-label]="'Hide password'"
+		      [attr.aria-pressed]="propriedade.get('hidePassword').value"
+		      mat-icon-button matSuffix tabindex="-1" type="button">
+	        <mat-icon>{{propriedade.get('hidePassword').value ? 'visibility_off' : 'visibility'}}</mat-icon>
+	      </button>
+	      <mat-hint *ngIf="propriedade.get('textHint').value">
+	        <mat-icon>info</mat-icon>
+		      {{propriedade.get('textHint').value}}
+	      </mat-hint>
+	      <mat-error *ngIf="propriedade.get('value').errors?.required">
+	        <mat-icon>error</mat-icon>
+		      {{propriedade.get('label').value}} não informado(a).
+	      </mat-error>
+	      <mat-error *ngIf="propriedade.get('value').errors?.cpfInvalid">
+	        <mat-icon>error</mat-icon>
+	        CPF inválido.
+	      </mat-error>
+	      <mat-error *ngIf="propriedade.get('value').errors?.cnpjInvalid">
+	        <mat-icon>error</mat-icon>
+	        CNPJ inválido.
+	      </mat-error>
+	      <mat-error *ngIf="propriedade.get('value').errors?.email">
+	        <mat-icon>error</mat-icon>
+	        E-mail inválido.
+	      </mat-error>
+	    </mat-form-field>
+	    <mat-form-field
+		    *ngIf="propriedade.get('type').value == typeField.coin"
+		    [appearance]="propriedade.get('appearance').value"
+		    [floatLabel]="propriedade.get('floatLabel').value"
+		    [formGroupName]="i"
+		    [ngClass]="propriedade.get('fieldClass').value">
+	      <mat-label>{{propriedade.get('label').value}}</mat-label>
+	      <input
+		      [koalaAutoFocus]="propriedade.get('focus').value"
+		      [required]="propriedade.get('required').value"
+		      [tabIndex]="i + 1"
+		      currencyMask
+		      formControlName="value"
+		      matInput
+		      type="tel"/>
+	      <mat-hint *ngIf="propriedade.get('textHint').value">
+	        <mat-icon>info</mat-icon>
+		      {{propriedade.get('textHint').value}}
+	      </mat-hint>
+	      <mat-error *ngIf="propriedade.get('value').errors?.required">
+	        <mat-icon>error</mat-icon>
+		      {{propriedade.get('label').value}} não informado(a).
+	      </mat-error>
+	    </mat-form-field>
+	    <mat-form-field
+		    *ngIf="propriedade.get('type').value == typeField.valueList ||
+	             propriedade.get('type').value == typeField.textarea"
+		    [appearance]="propriedade.get('appearance').value"
+		    [floatLabel]="propriedade.get('floatLabel').value"
+		    [formGroupName]="i"
+		    [ngClass]="propriedade.get('fieldClass').value">
+	      <mat-label>{{propriedade.get('label').value}}</mat-label>
+	      <textarea
+		      [koalaAutoFocus]="propriedade.get('focus').value"
+		      [mat-autosize]="true"
+		      [matAutosizeMaxRows]="8"
+		      [matAutosizeMinRows]="3"
+		      [required]="propriedade.get('required').value"
+		      [tabIndex]="i + 1"
+		      formControlName="value"
+		      matInput>
+	            </textarea>
+	      <mat-hint *ngIf="propriedade.get('textHint').value">
+	        <mat-icon>info</mat-icon>
+		      {{propriedade.get('textHint').value}}
+	      </mat-hint>
+	      <mat-error *ngIf="propriedade.get('value').errors?.required">
+	        <mat-icon>error</mat-icon>
+		      {{propriedade.get('label').value}} não informado(a).
+	      </mat-error>
+	    </mat-form-field>
+		  <mat-form-field
+			  *ngIf="propriedade.get('type').value == typeField.textLogs"
+			  [appearance]="propriedade.get('appearance').value"
+			  [floatLabel]="propriedade.get('floatLabel').value"
+			  [formGroupName]="i"
+			  [ngClass]="propriedade.get('fieldClass').value">
+	      <mat-label>{{propriedade.get('label').value}}</mat-label>
+	      <div [innerHTML]="propriedade.get('textLogs').value" class="text-obs"></div>
+	      <textarea
+		      [koalaAutoFocus]="propriedade.get('focus').value"
+		      [mat-autosize]="true"
+		      [matAutosizeMaxRows]="8"
+		      [matAutosizeMinRows]="3"
+		      [required]="propriedade.get('required').value"
+		      [tabIndex]="i + 1"
+		      formControlName="value"
+		      matInput>
+	      </textarea>
+	      <mat-hint *ngIf="propriedade.get('textHint').value">
+	        <mat-icon>info</mat-icon>
+		      {{propriedade.get('textHint').value}}
+	      </mat-hint>
+	      <mat-error *ngIf="propriedade.get('value').errors?.required">
+	        <mat-icon>error</mat-icon>
+		      {{propriedade.get('label').value}} não informado(a).
+	      </mat-error>
+	    </mat-form-field>
+	    <mat-form-field
+		    *ngIf="propriedade.get('type').value == typeField.select"
+		    [appearance]="propriedade.get('appearance').value"
+		    [floatLabel]="propriedade.get('floatLabel').value"
+		    [formGroupName]="i"
+		    [ngClass]="propriedade.get('fieldClass').value">
+	      <mat-label>{{propriedade.get('label').value}}</mat-label>
+	      <mat-select [multiple]="propriedade.get('multiple').value" [required]="propriedade.get('required').value"
+	                  [tabIndex]="i + 1" formControlName="value">
+	        <mat-option *ngFor="let options of propriedade.get('opcoesSelect').value" [value]="options.value">
+	          {{options.name}}
+	        </mat-option>
+	      </mat-select>
+	      <mat-hint *ngIf="propriedade.get('textHint').value">
+	        <mat-icon>info</mat-icon>
+		      {{propriedade.get('textHint').value}}
+	      </mat-hint>
+	      <mat-error *ngIf="propriedade.get('value').errors?.required">
+	        <mat-icon>error</mat-icon>
+		      {{propriedade.get('label').value}} não informado(a).
+	      </mat-error>
+	    </mat-form-field>
+	    <div
+		    *ngIf="propriedade.get('type').value == typeField.checkbox"
+		    [formGroupName]="i"
+		    [ngClass]="propriedade.get('fieldClass').value">
+	      <mat-checkbox
+		      [tabIndex]="i + 1"
+		      formControlName="value"
+		      value="true">
+	        {{propriedade.get('label').value}}
+	      </mat-checkbox>
+	    </div>
+		  <div
+			  *ngIf="propriedade.get('type').value == typeField.moreItems"
+			  [formGroupName]="i"
+			  [ngClass]="propriedade.get('fieldClass').value"
+			  class="more-items-content">
+			  <fieldset>
+				  <legend>
+					  <koala-button
+						  (click)="addMoreItem(i)"
+						  [disabled]="propriedade.get('moreItemsConfig').value.length === propriedade.get('moreItemsMaxItems').value"
+						  [tooltip]="propriedade.get('moreItemsButtonIconAddlabel').value"
+						  backgroundColor="blue"
+						  class="btn-add-more-items"
+						  color="white"
+						  icon="add">
+					  </koala-button>
+					  {{propriedade.get('label').value}} (Min.: {{propriedade.get('moreItemsMinItems').value}}
+					                                     | Máx.: {{propriedade.get('moreItemsMaxItems').value}})
+				  </legend>
+				  <mat-accordion class="items">
+					  <mat-expansion-panel
+						  *ngFor="let item of propriedade.get('moreItemsConfig').value.slice().reverse(); index as indexMoreItems"
+						  [expanded]="(propriedade.get('moreItemsConfig').value.length - 1 - indexMoreItems) ===
+						  propriedade.get('moreItemsExpanded').value">
+						  <mat-expansion-panel-header>
+								<mat-panel-title class="titleForm">#
+									{{propriedade.get('moreItemsConfig').value.length - 1 - indexMoreItems + 1}}</mat-panel-title>
+								<mat-panel-description class="titleForm">
+									{{propriedade.get('label').value}}
+									<mat-icon>{{propriedade.get('moreItemsIcon').value}}</mat-icon>
+								</mat-panel-description>
+							</mat-expansion-panel-header>
+						  <koala-dynamic-form
+							  [formConfig]="item.formConfig"
+							  [form]="item.form">
+						  </koala-dynamic-form>
+					    <mat-action-row
+						    *ngIf="propriedade.get('moreItemsConfig').value.length > propriedade.get('moreItemsMinItems').value">
+					      <button
+						      (click)="removeMoreItem(i, propriedade.get('moreItemsConfig').value.length - 1 - indexMoreItems)"
+						      mat-icon-button>
+						      <mat-icon>delete</mat-icon>
+					      </button>
+					    </mat-action-row>
+					  </mat-expansion-panel>
+				  </mat-accordion>
+			  </fieldset>
+		  </div>
+		  <mat-form-field
+			  *ngIf="propriedade.get('type').value == typeField.autocomplete"
+			  [appearance]="propriedade.get('appearance').value"
+			  [floatLabel]="propriedade.get('floatLabel').value"
+			  [formGroupName]="i"
+			  [ngClass]="propriedade.get('fieldClass').value">
+	      <mat-label>{{propriedade.get('label').value}}</mat-label>
+	      <input
+		      [matAutocomplete]="auto"
+		      [readonly]="propriedade.get('disabled').value"
+		      [required]="propriedade.get('required').value"
+		      formControlName="value"
+		      matInput
+		      placeholder="Selecione uma opção..."
+		      type="text">
+	      <mat-spinner *ngIf="propriedade.get('autocompleteLoading').value | async" color="primary"
+	                   matSuffix></mat-spinner>
+	      <button
+		      (click)="clearAutocomplete(i)"
+		      *ngIf="
+	          !(propriedade.get('autocompleteLoading').value | async) &&
+	          !propriedade.get('disabled').value"
+		      color="warn"
+		      mat-icon-button
+		      matSuffix
+		      type="button">
+	        <mat-icon>close</mat-icon>
+	      </button>
+	      <mat-hint *ngIf="propriedade.get('textHint').value">
+	        <mat-icon>info</mat-icon>
+		      {{propriedade.get('textHint').value}}
+	      </mat-hint>
+	      <mat-error *ngIf="propriedade.get('value').errors?.required">
+	        <mat-icon>error</mat-icon>
+		      {{propriedade.get('label').value}} não informado(a).
+	      </mat-error>
+	      <mat-error *ngIf="propriedade.get('value').errors?.autocompleteSelected">
+	        <mat-icon>error</mat-icon>
+	        Você deve selecionar um {{propriedade.get('label').value}}
+	      </mat-error>
+	      <mat-autocomplete #auto="matAutocomplete" [displayWith]="display" autoActiveFirstOption>
+	        <mat-option *ngFor="let option of propriedade.get('autocompleteOptionsFiltered').value" [value]="option">
+	          {{option.name}}
+	        </mat-option>
+	      </mat-autocomplete>
+	    </mat-form-field>
+		  <div *ngIf="propriedade.get('type').value == typeField.file">
+			  <koala-file-button
+				  (getFiles)="propriedade.get('value').setValue($event)"
+				  [accept]="propriedade.get('fileButtonConfig').value.accept"
+				  [backgroundColor]="propriedade.get('fileButtonConfig').value.backgroundColor"
+				  [color]="propriedade.get('fileButtonConfig').value.color"
+				  [disabled]="propriedade.get('disabled').value"
+				  [icon]="propriedade.get('fileButtonConfig').value.icon"
+				  [multiple]="propriedade.get('multiple').value"
+				  [text]="propriedade.get('fileButtonConfig').value.text">
+			  </koala-file-button>
+		  </div>
 	  </div>
-	  <mat-form-field
-		  *ngIf="propriedade.get('type').value == typeField.autocomplete"
-		  [appearance]="propriedade.get('appearance').value"
-		  [floatLabel]="propriedade.get('floatLabel').value"
-		  [formGroupName]="i"
-		  [ngClass]="propriedade.get('fieldClass').value">
-      <mat-label>{{propriedade.get('label').value}}</mat-label>
-      <input
-	      [matAutocomplete]="auto"
-	      [readonly]="propriedade.get('disabled').value"
-	      [required]="propriedade.get('required').value"
-	      formControlName="value"
-	      matInput
-	      placeholder="Selecione uma opção..."
-	      type="text">
-      <mat-spinner *ngIf="propriedade.get('autocompleteLoading').value | async" color="primary" matSuffix></mat-spinner>
-      <button
-	      (click)="clearAutocomplete(i)"
-	      *ngIf="
-          !(propriedade.get('autocompleteLoading').value | async) &&
-          !propriedade.get('disabled').value"
-	      color="warn"
-	      mat-icon-button
-	      matSuffix
-	      type="button">
-        <mat-icon>close</mat-icon>
-      </button>
-      <mat-hint *ngIf="propriedade.get('textHint').value">
-        <mat-icon>info</mat-icon>
-	      {{propriedade.get('textHint').value}}
-      </mat-hint>
-      <mat-error *ngIf="propriedade.get('value').errors?.required">
-        <mat-icon>error</mat-icon>
-	      {{propriedade.get('label').value}} não informado(a).
-      </mat-error>
-      <mat-error *ngIf="propriedade.get('value').errors?.autocompleteSelected">
-        <mat-icon>error</mat-icon>
-        Você deve selecionar um {{propriedade.get('label').value}}
-      </mat-error>
-      <mat-autocomplete #auto="matAutocomplete" [displayWith]="display" autoActiveFirstOption>
-        <mat-option *ngFor="let option of propriedade.get('autocompleteOptionsFiltered').value" [value]="option">
-          {{option.name}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
   </div>
   <ng-content select="[btn-submit]"></ng-content>
 </div>

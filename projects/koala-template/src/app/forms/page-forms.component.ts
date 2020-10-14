@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 import { KoalaDynamicSetValueInterface } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-set-value.interface';
 import { KoalaDynamicAutocompleteOptionsInterface } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-autocomplete-options.interface';
 import { PageListService } from '../page-list/page-list.service';
+import { KoalaDynamicFormShowFieldInterface } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-form-show-field.interface';
 
 @Component({
 	templateUrl: 'page-forms.component.html',
@@ -23,6 +24,10 @@ export class PageFormsComponent implements OnInit {
 	public formAutocompleteConfig: KoalaDynamicFormFieldInterface[];
 	public countriesSubject = new BehaviorSubject<KoalaDynamicAutocompleteOptionsInterface[]>([]);
 	
+	public formCamposDinamicos: FormGroup;
+	public formCamposDinamicosConfig: KoalaDynamicFormFieldInterface[];
+	public showFieldsSubject = new BehaviorSubject<KoalaDynamicFormShowFieldInterface[]>([]);
+	
 	constructor(
 		private fb: FormBuilder,
 		private dynamicFormService: KoalaDynamicFormService,
@@ -31,6 +36,7 @@ export class PageFormsComponent implements OnInit {
 	
 	ngOnInit(): void {
 		this.formLocation = this.fb.group({});
+		
 		this.formMoreItens = this.fb.group({});
 		this.formMoreItensConfig = [{
 			label: 'Itens por Demanda',
@@ -95,6 +101,39 @@ export class PageFormsComponent implements OnInit {
 			}, 'currencies > 0 > code'),
 			autocompleteType: 'onDemand'
 		}];
+		
+		this.formCamposDinamicos = this.fb.group({});
+		this.formCamposDinamicosConfig = [{
+			label: 'Exibir Campos',
+			name: 'exibirCampo',
+			appearance: 'fill',
+			floatLabel: 'always',
+			fieldClass: 'w-100',
+			class: 'col-12',
+			type: DynamicFormTypeFieldEnum.select,
+			opcoesSelect: [
+				{value: true, name: 'Sim'},
+				{value: false, name: 'Não'}
+			],
+			valueChanges: (value => {
+				this.dynamicFormService.showFields(this.showFieldsSubject, [
+					'attachment'
+				], value === true);
+			}),
+			value: false,
+			required: true
+		}, {
+			show: false,
+			name: 'attachment',
+			type: DynamicFormTypeFieldEnum.file,
+			multiple: true,
+			value: [],
+			fileButtonConfig: {
+				accept: '.txt'
+			},
+			required: true
+		}];
+		
 		this.countryService.get().subscribe(countries => {
 			const options: KoalaDynamicAutocompleteOptionsInterface[] = [];
 			countries.forEach(country => {
@@ -124,5 +163,7 @@ export class PageFormsComponent implements OnInit {
 		console.log(this.dynamicFormService.emitData(this.formMoreItens));
 		console.log('----- AUTOCOMPLETE -----');
 		console.log(this.dynamicFormService.emitData(this.formAutocomplete));
+		console.log('----- CAMPOS DINAMICOS -----');
+		console.log(this.dynamicFormService.emitData(this.formCamposDinamicos));
 	}
 }

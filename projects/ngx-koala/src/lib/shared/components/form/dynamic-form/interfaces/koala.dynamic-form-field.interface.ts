@@ -6,6 +6,7 @@ import { KoalaDynamicSetValueInterface } from './koala.dynamic-set-value.interfa
 import { KoalaDynamicAutocompleteOptionsInterface } from './koala.dynamic-autocomplete-options.interface';
 
 export interface KoalaDynamicFormFieldInterface {
+  show?: boolean;
   label?: string;
   name: string;
   required?: boolean;
@@ -41,4 +42,11 @@ export interface KoalaDynamicFormFieldInterface {
   autocompleteType?: 'all' | 'onDemand';
   valueChanges?: (value: any) => void;
   asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[];
+  fileButtonConfig?: {
+    icon?: string;
+    text?: string;
+    color?: 'blue' | 'white';
+    backgroundColor?: 'blue' | 'white' | 'transparent';
+    accept?: string;
+  }
 }

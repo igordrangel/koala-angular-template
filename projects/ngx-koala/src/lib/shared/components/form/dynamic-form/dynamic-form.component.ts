@@ -10,6 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 import { KoalaDynamicSetValueInterface } from './interfaces/koala.dynamic-set-value.interface';
 import { AutocompleteSelectedValidator } from './validators/autocomplete-selected.validator';
 import { KoalaDynamicAutocompleteOptionsInterface } from './interfaces/koala.dynamic-autocomplete-options.interface';
+import { KoalaDynamicFormShowFieldInterface } from './interfaces/koala.dynamic-form-show-field.interface';
 
 @Component({
 	selector: 'koala-dynamic-form',
@@ -19,6 +20,7 @@ import { KoalaDynamicAutocompleteOptionsInterface } from './interfaces/koala.dyn
 export class DynamicFormComponent extends FormAbstract implements OnInit {
 	@Input() form: FormGroup;
 	@Input() formConfig: KoalaDynamicFormFieldInterface[];
+	@Input() showFields: BehaviorSubject<KoalaDynamicFormShowFieldInterface[]>;
 	@Input() setValues: BehaviorSubject<KoalaDynamicSetValueInterface[]>;
 	public controls: FormArray;
 	public typeField = DynamicFormTypeFieldEnum;
@@ -110,6 +112,9 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		if (this.setValues) {
 			this.setValuesOnFields(this.setValues, this.form);
 		}
+		if (this.showFields) {
+			this.changeVisibilityFields(this.showFields, this.form);
+		}
 	}
 	
 	public passwordView(index: number) {
@@ -173,9 +178,17 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		}
 		
 		return this.fb.group({
+			show: [config.show ?? true],
 			label: [config.label],
 			name: [config.name],
 			type: [config.type],
+			fileButtonConfig: [{
+				icon: config?.fileButtonConfig?.icon ?? 'attach_file',
+				text: config?.fileButtonConfig?.text ?? 'Clique para anexar arquivos',
+				backgroundColor: config?.fileButtonConfig?.backgroundColor ?? 'white',
+				color: config?.fileButtonConfig?.color ?? 'blue',
+				accept: config?.fileButtonConfig?.accept ?? '*'
+			}],
 			appearance: [config.appearance],
 			floatLabel: [config.floatLabel],
 			placeholder: [config.placeholder],
@@ -211,6 +224,46 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 					for (const control of formArray.controls.values()) {
 						if (control.get('name').value === prop.name) {
 							control.get('value').setValue(prop.value);
+							break;
+						}
+					}
+				}
+			}
+		});
+	}
+	
+	private changeVisibilityFields(subject: BehaviorSubject<KoalaDynamicFormShowFieldInterface[]>, form: FormGroup) {
+		subject.subscribe(item => {
+			if (item) {
+				const formArray = form.get('formData') as FormArray;
+				for (const [index, prop] of item.entries()) {
+					for (const control of formArray.controls.values()) {
+						if (control.get('name').value === prop.name) {
+							control.get('show').setValue(prop.show);
+							if (prop.show) {
+								const validators = [];
+								const config: any = this.formConfig[index].value ?? '';
+								if (config.required) {
+									validators.push(Validators.required);
+								}
+								if (config.type === DynamicFormTypeFieldEnum.cpf) {
+									validators.push(CpfValidator);
+								} else if (config.type === DynamicFormTypeFieldEnum.cnpj) {
+									validators.push(CnpjValidator);
+								} else if (config.type === DynamicFormTypeFieldEnum.email) {
+									validators.push(Validators.email);
+								} else if (
+									config.required &&
+									config.type === DynamicFormTypeFieldEnum.autocomplete
+								) {
+									validators.push(AutocompleteSelectedValidator);
+								}
+								control.get('value').setValidators(validators);
+							} else {
+								control.get('value').clearValidators();
+								control.get('value').clearAsyncValidators();
+								control.setErrors(null);
+							}
 							break;
 						}
 					}
