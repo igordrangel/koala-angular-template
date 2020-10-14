@@ -1,5 +1,5 @@
 <button
-	*ngIf="!icon else iconButton"
+	*ngIf="text else iconButton"
 	[matTooltipDisabled]="!tooltip"
 	[matTooltip]="tooltip"
 	[ngClass]="color"
@@ -8,7 +8,8 @@
 	mat-button
 	matTooltipPosition="above"
 	type="button">
-  {{text}}
+  <mat-icon *ngIf="icon">{{icon}}</mat-icon>
+	{{text}}
 </button>
 <ng-template #iconButton>
   <button
@@ -24,6 +25,5 @@
 	  matTooltipPosition="before"
 	  type="button">
     <mat-icon>{{icon}}</mat-icon>
-    <span *ngIf="text">{{text}}</span>
   </button>
 </ng-template>
