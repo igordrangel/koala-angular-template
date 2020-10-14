@@ -263,6 +263,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 								}
 								control.get('value').setValidators(validators);
 							} else {
+								control.get('value').setValue(null);
 								control.get('value').clearValidators();
 								control.get('value').clearAsyncValidators();
 								control.setErrors(null);
