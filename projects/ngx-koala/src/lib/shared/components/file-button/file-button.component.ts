@@ -59,7 +59,6 @@ export class FileButtonComponent implements OnInit {
 		} else {
 			this.getFiles.emit(null);
 		}
-		this.btnFile.nativeElement.files = null;
 		this.generateTextButton();
 	}
 	
