@@ -112,6 +112,10 @@ export * from './lib/shared/providers/pagination/pagination.provider';
 export * from './lib/shared/services/alert/koala.alert.service';
 //#endregion
 
+//#region [KOALA BTN FILE]
+export * from './lib/shared/services/btn-file/koala.btn-file.service';
+//#endregion
+
 //#region [KOALA CSV]
 export * from './lib/shared/services/csv/koala.csv.service';
 //#endregion
