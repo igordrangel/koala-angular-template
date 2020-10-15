@@ -88,6 +88,51 @@
 		    </mat-action-row>
 			
 			</mat-expansion-panel>
+			
+			<mat-expansion-panel expanded>
+				<mat-expansion-panel-header>
+					<mat-panel-title class="titleForm">File Button</mat-panel-title>
+					<mat-panel-description class="titleForm">
+						Botão para anexo de arquivos.
+						<mat-icon>file</mat-icon>
+					</mat-panel-description>
+				</mat-expansion-panel-header>
+				
+				<mat-form-field appearance="outline" class="col-12" floatLabel="always">
+					<mat-label>Cole anexos aqui</mat-label>
+					<textarea (paste)="paste($event)" matInput></textarea>
+				</mat-form-field>
+				<koala-file-button
+					(getFiles)="showFileList($event)"
+					[multiple]="true"
+					[setFile]="fileService.setFileSubject"
+					[updateFileList]="fileService.fileListSubject"
+					backgroundColor="transparent"
+					color="white"
+					icon="attach_file"
+					text="Clique para anexar">
+				</koala-file-button>
+				
+				<mat-list>
+					<mat-list-item *ngFor="let file of files; let index = i;">
+						<button
+							(click)="fileService.removeFile(files, index)"
+							color="warn"
+							mat-icon-button
+							mat-list-icon>
+							<mat-icon>delete</mat-icon>
+						</button>
+						<p mat-line>{{file.filename}}</p>
+					</mat-list-item>
+				</mat-list>
+				
+		    <mat-action-row>
+		      <button (click)="sendToConsole()" color="primary" mat-raised-button>
+			      Visualizar Dados no Console
+		      </button>
+		    </mat-action-row>
+			
+			</mat-expansion-panel>
 		</mat-accordion>
 	</div>
 

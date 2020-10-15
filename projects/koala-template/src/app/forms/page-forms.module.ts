@@ -6,6 +6,7 @@ import { KoalaFormModule } from '../../../../ngx-koala/src/lib/shared/components
 import { KoalaFolderPageModule } from '../../../../ngx-koala/src/lib/shared/components/folder-page/koala.folder-page.module';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { KoalaLocationFormModule } from '../../../../ngx-koala/src/lib/shared/components/form/location-form/koala.location-form.module';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { KoalaLocationFormModule } from '../../../../ngx-koala/src/lib/shared/co
     KoalaFolderPageModule,
     KoalaFormModule,
     KoalaLocationFormModule,
+    MatListModule,
     MatExpansionModule,
     PageFormsRoutingModule
   ]

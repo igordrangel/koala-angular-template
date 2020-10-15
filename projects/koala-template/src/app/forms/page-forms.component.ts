@@ -8,10 +8,13 @@ import { KoalaDynamicSetValueInterface } from '../../../../ngx-koala/src/lib/sha
 import { KoalaDynamicAutocompleteOptionsInterface } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-autocomplete-options.interface';
 import { PageListService } from '../page-list/page-list.service';
 import { KoalaDynamicFormShowFieldInterface } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-form-show-field.interface';
+import { KoalaBtnFileService } from '../../../../ngx-koala/src/lib/shared/services/btn-file/koala.btn-file.service';
+import { KoalaFileInterface } from '../../../../ngx-koala/src/lib/shared/components/file-button/koala.file.interface';
 
 @Component({
 	templateUrl: 'page-forms.component.html',
-	styleUrls: ['page-forms.component.css']
+	styleUrls: ['page-forms.component.css'],
+	providers: [KoalaBtnFileService]
 })
 export class PageFormsComponent implements OnInit {
 	public formLocation: FormGroup;
@@ -28,9 +31,12 @@ export class PageFormsComponent implements OnInit {
 	public formCamposDinamicosConfig: KoalaDynamicFormFieldInterface[];
 	public showFieldsSubject = new BehaviorSubject<KoalaDynamicFormShowFieldInterface[]>([]);
 	
+	public files: KoalaFileInterface[] = [];
+	
 	constructor(
 		private fb: FormBuilder,
 		private dynamicFormService: KoalaDynamicFormService,
+		public fileService: KoalaBtnFileService,
 		private countryService: PageListService
 	) {}
 	
@@ -145,6 +151,16 @@ export class PageFormsComponent implements OnInit {
 		});
 	}
 	
+	public async paste(event: ClipboardEvent) {
+		let files = event.clipboardData.files;
+		if (files?.length) {
+			for (let f = 0; f <= files.length; f++) {
+				const file = files.item(f);
+				await this.fileService.setFile(file);
+			}
+		}
+	}
+	
 	public simulateDataFromServer() {
 		this.dynamicFormService.setValuesInMoreItemsForm(this.formMoreItensValuesSubject, [
 			[
@@ -164,5 +180,9 @@ export class PageFormsComponent implements OnInit {
 		console.log(this.dynamicFormService.emitData(this.formAutocomplete));
 		console.log('----- CAMPOS DINAMICOS -----');
 		console.log(this.dynamicFormService.emitData(this.formCamposDinamicos));
+	}
+	
+	public showFileList(files: KoalaFileInterface[]) {
+		this.files = files;
 	}
 }
