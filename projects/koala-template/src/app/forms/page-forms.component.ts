@@ -155,8 +155,7 @@ export class PageFormsComponent implements OnInit {
 		let files = event.clipboardData.files;
 		if (files?.length) {
 			for (let f = 0; f <= files.length; f++) {
-				const file = files.item(f);
-				await this.fileService.setFile(file);
+				await this.fileService.setFile(files.item(f));
 			}
 		}
 	}
