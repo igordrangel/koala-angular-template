@@ -136,6 +136,7 @@ export class PageFormsComponent implements OnInit {
 			label: 'Horas e Minutos',
 			name: 'horasMinutos',
 			type: DynamicFormTypeFieldEnum.hoursAndMinutes,
+			value: '48:00',
 			required: true
 		}];
 		
