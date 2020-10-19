@@ -129,7 +129,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			if (event.key == 'Backspace' && value.length < 6) {
 				setTimeout(() => {
 					this.hoursAndMinutesMask = '00:000';
-				});
+				}, 1);
 			} else if (event.key != 'Backspace' && value.length >= 6) {
 				this.hoursAndMinutesMask = '000:00';
 			}
