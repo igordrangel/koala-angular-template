@@ -26,31 +26,30 @@
 		      (keyup)="hoursAndMinutesApplyMask(i, $event)"
 		      [required]="propriedade.get('required').value"
 		      [tabIndex]="i + 1"
-		      [type]="
-	                    ((propriedade.get('type').value == typeField.cpf ||
-	                      propriedade.get('type').value == typeField.cnpj ||
-	                      propriedade.get('type').value == typeField.phone ||
-	                      propriedade.get('type').value == typeField.percent
-	                    )) ? 'tel' : (
-	                      propriedade.get('type').value == typeField.datetime ?
-	                      'date' : (
-	                      propriedade.get('type').value == typeField.email ?
-	                      'email' : (
-	                      propriedade.get('type').value == typeField.number ?
-	                      'number' : (
-	                      propriedade.get('type').value == typeField.time ?
-	                      'time' : (
-	                      propriedade.get('type').value == typeField.password ?
-	                      'password' : 'text')))))"
-		      [validation]="
-	                    (propriedade.get('type').value == typeField.cpf && propriedade.get('value').errors?.cpfInvalid) ||
-	                    (propriedade.get('type').value == typeField.cnpj && propriedade.get('value').errors?.cnpjInvalid)"
-		      [mask]="
-                  ((propriedade.get('type').value == typeField.phone) ? '(00)0000-0000?0' : null) ||
+		      [mask]="((propriedade.get('type').value == typeField.phone) ? '(00)0000-0000?0' : null) ||
                   ((propriedade.get('type').value == typeField.cpf) ? '000.000.000-00' : null) ||
                   ((propriedade.get('type').value == typeField.cnpj) ? '00.000.000/0000-00' : null) ||
                   ((propriedade.get('type').value == typeField.percent) ? 'percent' : null) ||
 									((propriedade.get('type').value == typeField.hoursAndMinutes) ? hoursAndMinutesMask : null)"
+		      [validation]="
+	                    (propriedade.get('type').value == typeField.cpf && propriedade.get('value').errors?.cpfInvalid) ||
+	                    (propriedade.get('type').value == typeField.cnpj && propriedade.get('value').errors?.cnpjInvalid)"
+		      [type]="((propriedade.get('type').value == typeField.cpf ||
+                    propriedade.get('type').value == typeField.cnpj ||
+                    propriedade.get('type').value == typeField.phone ||
+                    propriedade.get('type').value == typeField.percent
+                  )) ? 'tel' : (
+                    propriedade.get('type').value == typeField.datetime ?
+                    'date' : (
+                    propriedade.get('type').value == typeField.email ?
+                    'email' : (
+                    propriedade.get('type').value == typeField.number ?
+                    'number' : (
+                    propriedade.get('type').value == typeField.time ?
+                    'time' : (
+                    propriedade.get('type').value == typeField.password ?
+                    'password' : 'text')))))"
+		      showMaskTyped
 		      formControlName="value"
 		      matInput/>
 	      <button

@@ -1,3 +1,5 @@
 import { IConfig } from 'ngx-mask';
 
-export const maskOptions: Partial<IConfig> | (() => Partial<IConfig>) = {};
+export const maskOptions: Partial<IConfig> | (() => Partial<IConfig>) = {
+	validation: false
+};
