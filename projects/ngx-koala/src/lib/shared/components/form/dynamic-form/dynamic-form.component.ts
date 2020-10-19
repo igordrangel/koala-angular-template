@@ -127,9 +127,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		if (type === DynamicFormTypeFieldEnum.hoursAndMinutes) {
 			const value = control?.get('value').value;
 			if (event.key == 'Backspace' && value.length < 6) {
-				setTimeout(() => {
-					this.hoursAndMinutesMask = '00:000';
-				}, 1);
+				this.hoursAndMinutesMask = '00:000';
 			} else if (event.key != 'Backspace' && value.length >= 6) {
 				this.hoursAndMinutesMask = '000:00';
 			}
@@ -194,6 +192,13 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			validators.push(AutocompleteSelectedValidator);
 		} else if (config.type === DynamicFormTypeFieldEnum.checkbox) {
 			value = config.value ?? false;
+		}
+		
+		if (
+			config.type === DynamicFormTypeFieldEnum.hoursAndMinutes &&
+			value.length >= 6
+		) {
+			this.hoursAndMinutesMask = '000:00';
 		}
 		
 		return this.fb.group({
