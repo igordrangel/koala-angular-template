@@ -12,6 +12,7 @@
 	             propriedade.get('type').value == typeField.email ||
 	             propriedade.get('type').value == typeField.number ||
 	             propriedade.get('type').value == typeField.time ||
+	             propriedade.get('type').value == typeField.hoursAndMinutes ||
 	             propriedade.get('type').value == typeField.phone ||
 	             propriedade.get('type').value == typeField.percent"
 		    [appearance]="propriedade.get('appearance').value"
@@ -22,11 +23,7 @@
 	      <input
 		      [dropSpecialCharacters]="false"
 		      [koalaAutoFocus]="propriedade.get('focus').value"
-		      [mask]="
-	                    ((propriedade.get('type').value == typeField.phone) ? '(00)0000-0000?0' : null) ||
-	                    ((propriedade.get('type').value == typeField.cpf) ? '000.000.000-00' : null) ||
-	                    ((propriedade.get('type').value == typeField.cnpj) ? '00.000.000/0000-00' : null) ||
-	                    ((propriedade.get('type').value == typeField.percent) ? 'percent' : null)"
+		      (keyup)="hoursAndMinutesApplyMask(i, $event)"
 		      [required]="propriedade.get('required').value"
 		      [tabIndex]="i + 1"
 		      [type]="
@@ -48,6 +45,12 @@
 		      [validation]="
 	                    (propriedade.get('type').value == typeField.cpf && propriedade.get('value').errors?.cpfInvalid) ||
 	                    (propriedade.get('type').value == typeField.cnpj && propriedade.get('value').errors?.cnpjInvalid)"
+		      [mask]="
+                  ((propriedade.get('type').value == typeField.phone) ? '(00)0000-0000?0' : null) ||
+                  ((propriedade.get('type').value == typeField.cpf) ? '000.000.000-00' : null) ||
+                  ((propriedade.get('type').value == typeField.cnpj) ? '00.000.000/0000-00' : null) ||
+                  ((propriedade.get('type').value == typeField.percent) ? 'percent' : null) ||
+									((propriedade.get('type').value == typeField.hoursAndMinutes) ? hoursAndMinutesMask : null)"
 		      formControlName="value"
 		      matInput/>
 	      <button

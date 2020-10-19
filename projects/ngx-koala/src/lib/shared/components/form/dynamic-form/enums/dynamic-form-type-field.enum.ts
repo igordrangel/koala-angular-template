@@ -10,6 +10,7 @@ export enum DynamicFormTypeFieldEnum {
   valueList,
   textarea,
   time,
+  hoursAndMinutes,
   checkbox,
   select,
   coin,

@@ -24,6 +24,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 	@Input() setValues: BehaviorSubject<KoalaDynamicSetValueInterface[]>;
 	public controls: FormArray;
 	public typeField = DynamicFormTypeFieldEnum;
+	public hoursAndMinutesMask = '00:00';
 	
 	constructor(
 		private fb: FormBuilder
@@ -117,6 +118,21 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		}
 		if (this.showFields) {
 			this.changeVisibilityFields(this.showFields, this.form);
+		}
+	}
+	
+	public hoursAndMinutesApplyMask(index: number, event: KeyboardEvent) {
+		const control = this.controls?.controls[index];
+		const type = control?.get('type').value as DynamicFormTypeFieldEnum;
+		if (type === DynamicFormTypeFieldEnum.hoursAndMinutes) {
+			const value = control?.get('value').value;
+			if (event.key == 'Backspace' && value.length < 5) {
+				setTimeout(() => {
+					this.hoursAndMinutesMask = '00:00';
+				}, 1);
+			} else if (event.key != 'Backspace' && value.length >= 5) {
+				this.hoursAndMinutesMask = '000:00';
+			}
 		}
 	}
 	

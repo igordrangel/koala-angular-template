@@ -122,20 +122,20 @@ export class PageFormsComponent implements OnInit {
 			],
 			valueChanges: (value => {
 				this.dynamicFormService.showFields(this.showFieldsSubject, [
-					'attachment'
+					'horasMinutos'
 				], value === true);
 			}),
 			value: false,
 			required: true
 		}, {
 			show: false,
-			name: 'attachment',
-			type: DynamicFormTypeFieldEnum.file,
-			multiple: true,
-			value: [],
-			fileButtonConfig: {
-				accept: '.txt'
-			},
+			appearance: 'fill',
+			floatLabel: 'always',
+			fieldClass: 'w-100',
+			class: 'col-12',
+			label: 'Horas e Minutos',
+			name: 'horasMinutos',
+			type: DynamicFormTypeFieldEnum.hoursAndMinutes,
 			required: true
 		}];
 		
