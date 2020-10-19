@@ -14,7 +14,8 @@
 	             propriedade.get('type').value == typeField.time ||
 	             propriedade.get('type').value == typeField.hoursAndMinutes ||
 	             propriedade.get('type').value == typeField.phone ||
-	             propriedade.get('type').value == typeField.percent"
+	             propriedade.get('type').value == typeField.percent ||
+	             propriedade.get('type').value == typeField.color"
 		    [appearance]="propriedade.get('appearance').value"
 		    [floatLabel]="propriedade.get('floatLabel').value"
 		    [formGroupName]="i"
@@ -48,7 +49,9 @@
                     propriedade.get('type').value == typeField.time ?
                     'time' : (
                     propriedade.get('type').value == typeField.password ?
-                    'password' : 'text')))))"
+                    'password' : (
+                    propriedade.get('type').value == typeField.color ?
+                    'color' : 'text'))))))"
 		      showMaskTyped
 		      formControlName="value"
 		      matInput/>

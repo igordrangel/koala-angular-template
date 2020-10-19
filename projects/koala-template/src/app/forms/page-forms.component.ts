@@ -138,6 +138,15 @@ export class PageFormsComponent implements OnInit {
 			type: DynamicFormTypeFieldEnum.hoursAndMinutes,
 			value: '48:00',
 			required: true
+		}, {
+			appearance: 'fill',
+			floatLabel: 'always',
+			fieldClass: 'w-100',
+			class: 'col-12',
+			label: 'Color',
+			name: 'color',
+			type: DynamicFormTypeFieldEnum.color,
+			required: true
 		}];
 		
 		this.countryService.get().subscribe(countries => {
