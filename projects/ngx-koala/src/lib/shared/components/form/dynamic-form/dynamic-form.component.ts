@@ -11,6 +11,8 @@ import { KoalaDynamicSetValueInterface } from './interfaces/koala.dynamic-set-va
 import { AutocompleteSelectedValidator } from './validators/autocomplete-selected.validator';
 import { KoalaDynamicAutocompleteOptionsInterface } from './interfaces/koala.dynamic-autocomplete-options.interface';
 import { KoalaDynamicFormShowFieldInterface } from './interfaces/koala.dynamic-form-show-field.interface';
+import { KoalaDynamicFormService } from '../../../services/dynamic-forms/koala.dynamic-form.service';
+import { KoalaDynamicFormMoreItensShowFieldConfigInterface } from './interfaces/koala.dynamic-form-more-itens-show-field-config.interface';
 
 @Component({
 	selector: 'koala-dynamic-form',
@@ -21,13 +23,15 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 	@Input() form: FormGroup;
 	@Input() formConfig: KoalaDynamicFormFieldInterface[];
 	@Input() showFields: BehaviorSubject<KoalaDynamicFormShowFieldInterface[]>;
+	@Input() showFieldsMoreItensConfig: KoalaDynamicFormMoreItensShowFieldConfigInterface[];
 	@Input() setValues: BehaviorSubject<KoalaDynamicSetValueInterface[]>;
 	public controls: FormArray;
 	public typeField = DynamicFormTypeFieldEnum;
 	public hoursAndMinutesMask = '00:000';
 	
 	constructor(
-		private fb: FormBuilder
+		private fb: FormBuilder,
+		private dynamicFormService: KoalaDynamicFormService
 	) {
 		super(() => this.form);
 	}
@@ -42,7 +46,11 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			if (config.asyncValidators) {
 				newFormGroup.get('value').setAsyncValidators(config.asyncValidators);
 			}
-			if (config.valueChanges || config.type === DynamicFormTypeFieldEnum.autocomplete) {
+			if (
+				config.valueChanges ||
+				config.type === DynamicFormTypeFieldEnum.autocomplete ||
+				this.showFieldsMoreItensConfig
+			) {
 				if (config.type === DynamicFormTypeFieldEnum.autocomplete) {
 					const autocompleteOptionsSubject = newFormGroup.get('autocompleteOptions').value as BehaviorSubject<KoalaDynamicAutocompleteOptionsInterface[]>;
 					if (autocompleteOptionsSubject) {
@@ -53,6 +61,17 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 				            .valueChanges
 				            .pipe(debounceTime(300))
 				            .subscribe(value => {
+					            if (this.showFieldsMoreItensConfig) {
+						            const config = this.showFieldsMoreItensConfig
+						                               .find(config => config.nameField === newFormGroup.get('name').value);
+						            if (config) {
+							            this.dynamicFormService.showFields(
+								            this.showFields,
+								            config.fieldsToShow,
+								            config.fnShow(value)
+							            );
+						            }
+					            }
 					            if (config.type === DynamicFormTypeFieldEnum.autocomplete) {
 						            if (
 							            value &&
@@ -148,7 +167,9 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		if (this.controls.controls[propIndex].get('moreItemsConfig').value.length < this.controls.controls[propIndex].get('moreItemsMaxItems').value) {
 			this.controls.controls[propIndex].get('moreItemsConfig').value.push({
 				form: this.fb.group({}),
-				formConfig: this.formConfig[propIndex].moreItemsConfig.formConfig
+				formConfig: this.formConfig[propIndex].moreItemsConfig.formConfig,
+				showFields: new BehaviorSubject<BehaviorSubject<KoalaDynamicSetValueInterface[]>[]>([]),
+				showFieldsMoreItensConfig: this.formConfig[propIndex].moreItemsConfig.showFieldsConfig
 			});
 			this.controls.controls[propIndex].get('moreItemsExpanded').setValue(
 				this.controls.controls[propIndex].get('moreItemsConfig').value.length - 1

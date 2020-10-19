@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { AsyncValidatorFn, FormGroup } from '@angular/forms';
 import { KoalaDynamicSetValueInterface } from './koala.dynamic-set-value.interface';
 import { KoalaDynamicAutocompleteOptionsInterface } from './koala.dynamic-autocomplete-options.interface';
+import { KoalaDynamicFormMoreItensShowFieldConfigInterface } from './koala.dynamic-form-more-itens-show-field-config.interface';
 
 export interface KoalaDynamicFormFieldInterface {
   show?: boolean;
@@ -35,6 +36,7 @@ export interface KoalaDynamicFormFieldInterface {
     form: FormGroup;
     formConfig: KoalaDynamicFormFieldInterface[];
     setValues?: BehaviorSubject<BehaviorSubject<KoalaDynamicSetValueInterface[]>[]>;
+    showFieldsConfig?: KoalaDynamicFormMoreItensShowFieldConfigInterface[];
   };
   autocompleteDefaultValueOnClear?: any;
   autocompleteFilter?: (filter: string) => Observable<KoalaDynamicAutocompleteOptionsInterface[]>;

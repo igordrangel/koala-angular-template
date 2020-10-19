@@ -54,25 +54,50 @@ export class PageFormsComponent implements OnInit {
 			moreItemsMaxItems: 2,
 			moreItemsConfig: {
 				form: this.fb.group({}),
-				formConfig: [
-					{
-						label: 'Nome',
-						name: 'name',
-						type: DynamicFormTypeFieldEnum.text,
-						appearance: 'fill',
-						floatLabel: 'always',
-						class: 'col-6',
-						fieldClass: 'w-100'
-					},
-					{
-						label: 'Sobrenome',
-						name: 'lastname',
-						type: DynamicFormTypeFieldEnum.text,
-						appearance: 'fill',
-						floatLabel: 'always',
-						class: 'col-6',
-						fieldClass: 'w-100'
-					}
+				formConfig: [{
+					label: 'Nome',
+					name: 'name',
+					type: DynamicFormTypeFieldEnum.text,
+					appearance: 'fill',
+					floatLabel: 'always',
+					class: 'col-6',
+					fieldClass: 'w-100'
+				}, {
+					label: 'Sobrenome',
+					name: 'lastname',
+					type: DynamicFormTypeFieldEnum.text,
+					appearance: 'fill',
+					floatLabel: 'always',
+					class: 'col-6',
+					fieldClass: 'w-100'
+				}, {
+					label: 'Exibir Campos',
+					name: 'exibirCampo',
+					appearance: 'fill',
+					floatLabel: 'always',
+					fieldClass: 'w-100',
+					class: 'col-12',
+					type: DynamicFormTypeFieldEnum.select,
+					opcoesSelect: [
+						{value: true, name: 'Sim'},
+						{value: false, name: 'Não'}
+					],
+					value: false,
+					required: true
+				}, {
+					show: false,
+					appearance: 'fill',
+					floatLabel: 'always',
+					fieldClass: 'w-100',
+					class: 'col-12',
+					label: 'Horas e Minutos',
+					name: 'horasMinutos',
+					type: DynamicFormTypeFieldEnum.hoursAndMinutes,
+					value: '48:00',
+					required: true
+				}],
+				showFieldsConfig: [
+					{nameField: 'exibirCampo', fieldsToShow: ['horasMinutos'], fnShow: value => value === true}
 				]
 			}
 		}];
