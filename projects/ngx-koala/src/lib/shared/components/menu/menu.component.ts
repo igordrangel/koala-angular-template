@@ -3,6 +3,8 @@ import { KoalaMenuModuleInterface } from './koala.menu-module.interface';
 import { NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
+export const menuStateSubject = new BehaviorSubject<'open' | 'close'>(null);
+
 @Component({
   selector: 'koala-menu',
   templateUrl: 'menu.component.html',

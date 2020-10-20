@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
+import { menuStateSubject } from '../../components/menu/menu.component';
 
 @Injectable({providedIn: 'root'})
 export class KoalaMenuService {
-	private storageMenuState = 'koalaStorageMenuState';
 	
 	public getMenuState(): 'open' | 'close' {
-		return localStorage.getItem(this.storageMenuState) as 'open' | 'close';
+		return menuStateSubject.getValue();
 	}
 	
 	public open() {
-		localStorage.setItem(this.storageMenuState, 'open');
+		menuStateSubject.next('open');
 	}
 	
 	public close() {
-		localStorage.setItem(this.storageMenuState, 'close');
+		menuStateSubject.next('close');
 	}
 	
 	public clearConfig() {
-		localStorage.removeItem(this.storageMenuState);
+		menuStateSubject.next(null);
 	}
 }

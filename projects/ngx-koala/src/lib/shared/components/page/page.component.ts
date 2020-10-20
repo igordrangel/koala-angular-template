@@ -10,6 +10,7 @@ import { KoalaUserMenuOptionsInterface } from './koala.user-menu-options.interfa
 import { KoalaPagePalletColorsInterface } from './koala-page-pallet-colors.interface';
 import { MatDrawer } from '@angular/material/sidenav';
 import { KoalaMenuService } from '../../services/menu/koala.menu.service';
+import { menuStateSubject } from '../menu/menu.component';
 
 @Component({
   selector: 'koala-page',
@@ -68,7 +69,7 @@ export class PageComponent implements OnInit {
     shadowColorTableList: 'rgba(25, 118, 210, .4)'
   };
   
-  @ViewChild('drawer', {static: false}) private menu: MatDrawer;
+  @ViewChild('drawer', {static: true}) private menu: MatDrawer;
   
   constructor(
     private tokenService: KoalaTokenService,
@@ -147,20 +148,21 @@ export class PageComponent implements OnInit {
       this.palletColors = this.defaultPalletColors;
     }
     this.defineColor();
-    if (this.startMenuOpened || !!this.logged) {
-      this.menuService.open();
-    }
-    setInterval(async () => {
-      if (this.menuService.getMenuState() === 'close') {
+  
+    menuStateSubject.subscribe(async (state) => {
+      if (state === 'close') {
         if (this.menu.opened) {
           await this.menu.close();
         }
-      } else if (this.menuService.getMenuState() === 'open') {
+      } else if (state === 'open') {
         if (!this.menu.opened) {
           await this.menu.open();
         }
       }
     });
+    if (this.startMenuOpened || !!this.logged) {
+      this.menuService.open();
+    }
   }
   
   public async toogleMenu() {
