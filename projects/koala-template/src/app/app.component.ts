@@ -5,7 +5,6 @@ import { KoalaUserMenuOptionsInterface } from '../../../ngx-koala/src/lib/shared
 import { KoalaMenuModuleInterface } from '../../../ngx-koala/src/lib/shared/components/menu/koala.menu-module.interface';
 import { KoalaPagePalletColorsInterface } from '../../../ngx-koala/src/lib/shared/components/page/koala-page-pallet-colors.interface';
 import { KoalaArrayHelper } from 'tskoala-helpers/dist/array/koala-array.helper';
-import { KoalaMenuService } from '../../../ngx-koala/src/lib/shared/services/menu/koala.menu.service';
 
 @Component({
   selector: 'app-root',
@@ -65,8 +64,6 @@ export class AppComponent implements OnInit {
     scrollbarColorHover: '#fff'
   };
   
-  constructor(private menuService: KoalaMenuService) {}
-  
   ngOnInit() {
     this.getNotifications();
     setTimeout(() => {
@@ -79,7 +76,6 @@ export class AppComponent implements OnInit {
           {icon: 'description', name: 'KoalaForm', routerLink: '/forms'}
         ]
       }], this.menuOptions.getValue()));
-      this.menuService.close();
     }, 3000);
   }
   
