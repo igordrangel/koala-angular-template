@@ -1,9 +1,10 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'koala-folder-page',
   templateUrl: 'folder.component.html',
-  styleUrls: ['folder.component.css']
+  styleUrls: ['folder.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FolderComponent implements OnInit, OnChanges {
   @Input() titlePage: string = 'Title';

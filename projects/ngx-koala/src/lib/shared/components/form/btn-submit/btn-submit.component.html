@@ -1,19 +1,19 @@
 <button
-  *ngIf="!iconButton else btnIcon"
-  [color]="color"
-  [disabled]="fg.invalid || fg.pending || btnSubmitDisabled"
-  mat-raised-button
-  type="submit">
+	*ngIf="!iconButton else btnIcon"
+	[color]="color"
+	[disabled]="disabled | async"
+	mat-raised-button
+	type="submit">
   <span>{{btnLabel}}</span>
-  <mat-spinner *ngIf="loader" diameter="20"></mat-spinner>
+  <mat-spinner *ngIf="loader | async" diameter="20"></mat-spinner>
 </button>
 <ng-template #btnIcon>
   <button
-    [color]="color"
-    class="koala-icon-button"
-    mat-icon-button
-    type="submit">
-    <mat-icon *ngIf="!loader">{{icon}}</mat-icon>
-    <mat-spinner *ngIf="loader" [color]="color" diameter="20"></mat-spinner>
+	  [color]="color"
+	  class="koala-icon-button"
+	  mat-icon-button
+	  type="submit">
+    <mat-spinner *ngIf="loader | async" [color]="color" diameter="20"></mat-spinner>
+    <mat-icon *ngIf="!(loader | async)">{{icon}}</mat-icon>
   </button>
 </ng-template>

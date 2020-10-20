@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { LoaderBarPageInterface } from '../loader/loader-bar-page.interface';
@@ -15,7 +15,8 @@ import { KoalaMenuService } from '../../services/menu/koala.menu.service';
   selector: 'koala-page',
   templateUrl: 'page.component.html',
   styleUrls: ['page.component.css'],
-  providers: [KoalaTokenService]
+  providers: [KoalaTokenService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PageComponent implements OnInit {
   @Input() color: ThemePalette;
@@ -31,7 +32,7 @@ export class PageComponent implements OnInit {
   @Output() deleteAllNotifications = new EventEmitter<boolean>(false);
   @Output() deleteNotification = new EventEmitter<KoalaNotificationInterface>(null);
   public logged: boolean;
-  public loader: LoaderBarPageInterface;
+  public loaderSubject: BehaviorSubject<LoaderBarPageInterface>;
   public username: string;
   public firstUserLetter: string;
   public currentUrl: string;
@@ -75,11 +76,7 @@ export class PageComponent implements OnInit {
     private loaderService: KoalaLoaderService,
     private menuService: KoalaMenuService
   ) {
-    loaderService.getLoaderSubject().subscribe(loader => {
-      if (loader) {
-        this.loader = loader;
-      }
-    });
+    this.loaderSubject = loaderService.getLoaderSubject();
   }
 
   ngOnInit() {

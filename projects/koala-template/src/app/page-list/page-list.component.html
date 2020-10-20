@@ -19,7 +19,8 @@
 	    [itemsList]="itensList"
 	    [itensMenuListOptions]="itensMenuListOptions"
 	    [request]="buscar()"
-	    typeRequest="all">
+	    [reload]="reloadListSubject"
+	    typeRequest="onDemand">
 
       <div itemsSelectList>
         <koala-button

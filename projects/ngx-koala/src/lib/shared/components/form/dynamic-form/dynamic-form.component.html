@@ -2,7 +2,7 @@
   <div *ngFor="let propriedade of controls?.controls; let i = index;"
        [ngClass]="propriedade.get('show').value ? propriedade.get('class').value : null"
        formArrayName="formData">
-	  <div *ngIf="propriedade.get('show').value">
+	  <div *ngIf="propriedade.get('show').value | async">
 	    <mat-form-field
 		    *ngIf="propriedade.get('type').value == typeField.text ||
 	             propriedade.get('type').value == typeField.password ||

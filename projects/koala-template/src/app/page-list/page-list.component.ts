@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PageListService } from './page-list.service';
 import { CountriesInterface } from './countries.interface';
@@ -21,7 +21,8 @@ import { KoalaDynamicComponent } from '../../../../ngx-koala/src/lib/shared/comp
 import { KoalaListService } from '../../../../ngx-koala/src/lib/shared/services/list/koala.list.service';
 
 @Component({
-	templateUrl: 'page-list.component.html'
+	templateUrl: 'page-list.component.html',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PageListComponent implements OnInit {
 	public formData: FormGroup;
@@ -38,6 +39,7 @@ export class PageListComponent implements OnInit {
 	});
 	public selection: SelectionModel<object>;
 	public countries: CountriesInterface[];
+	public reloadListSubject = new BehaviorSubject<boolean>(false);
 	
 	constructor(
 		private fb: FormBuilder,
@@ -94,6 +96,12 @@ export class PageListComponent implements OnInit {
 		});
 	}
 	
+	public reloadList(reload: boolean) {
+		if (reload) {
+			this.reloadListSubject.next(reload);
+		}
+	}
+	
 	public dialogList(countrie?: CountriesInterface) {
 		this.dialogService.open(
 			DialogPageListComponent,
@@ -109,9 +117,8 @@ export class PageListComponent implements OnInit {
 			message: 'Você realmente deseja excluir os itens selecionados?'
 		}, () => {
 			this.loaderService.create({typeLoader: 'indeterminate'});
-			console.log(this.selection?.selected);
 			setTimeout(() => {
-				this.selection?.clear();
+				this.reloadList(true);
 				this.loaderService.dismiss();
 				this.alertService.create({
 					alertEnum: KoalaAlertEnum.success,

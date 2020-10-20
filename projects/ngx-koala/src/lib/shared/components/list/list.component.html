@@ -58,7 +58,7 @@
     </mat-paginator>
   </nav>
   <div class="list">
-    <div *ngIf="loader" class="spinner-container">
+    <div *ngIf="loader | async" class="spinner-container">
       <mat-spinner diameter="40"></mat-spinner>
     </div>
     <table

@@ -1,11 +1,12 @@
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { KoalaAlertConfigInterface } from './koala.alert-config.interface';
 import { KoalaAlertEnum } from './koala.alert.enum';
 
 @Component({
   templateUrl: 'dialog-alert.component.html',
-  styleUrls: ['dialog-alert.component.css']
+  styleUrls: ['dialog-alert.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DialogAlertComponent {
   public icon: string;

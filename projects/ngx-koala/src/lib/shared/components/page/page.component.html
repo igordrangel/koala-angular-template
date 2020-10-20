@@ -7,7 +7,8 @@
     <mat-spinner></mat-spinner>
   </div>
 </div>
-<app-loader-page [progress]="loader.progress" [show]="loader.show" [typeLoader]="loader.typeLoader"></app-loader-page>
+<app-loader-page *ngIf="(loaderSubject | async) as loader" [progress]="loader.progress" [show]="loader.show"
+                 [typeLoader]="loader.typeLoader"></app-loader-page>
 <mat-drawer-container autosize class="menu-container">
   <mat-drawer #drawer [opened]="startMenuOpened && !!logged" class="menu-options" mode="side">
     <img [src]="logotipo" alt="Logotipo" id="logotipo"/>

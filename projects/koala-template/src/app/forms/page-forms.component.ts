@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { KoalaDynamicFormFieldInterface } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-form-field.interface';
 import { DynamicFormTypeFieldEnum } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/enums/dynamic-form-type-field.enum';
@@ -14,7 +14,8 @@ import { KoalaFileInterface } from '../../../../ngx-koala/src/lib/shared/compone
 @Component({
 	templateUrl: 'page-forms.component.html',
 	styleUrls: ['page-forms.component.css'],
-	providers: [KoalaBtnFileService]
+	providers: [KoalaBtnFileService],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PageFormsComponent implements OnInit {
 	public formLocation: FormGroup;
@@ -98,7 +99,8 @@ export class PageFormsComponent implements OnInit {
 				}],
 				showFieldsConfig: [
 					{nameField: 'exibirCampo', fieldsToShow: ['horasMinutos'], fnShow: value => value === true}
-				]
+				],
+				setValues: this.formMoreItensValuesSubject
 			}
 		}];
 		
@@ -199,7 +201,8 @@ export class PageFormsComponent implements OnInit {
 		this.dynamicFormService.setValuesInMoreItemsForm(this.formMoreItensValuesSubject, [
 			[
 				{name: 'name', value: 'Nome 1'},
-				{name: 'lastname', value: 'Sobrenome 1'}
+				{name: 'lastname', value: 'Sobrenome 1'},
+				{name: 'exibirCampo', value: true}
 			], [
 				{name: 'name', value: 'Nome 2'},
 				{name: 'lastname', value: 'Sobrenome 2'}

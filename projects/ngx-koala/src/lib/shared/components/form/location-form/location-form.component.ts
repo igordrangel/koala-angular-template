@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { KoalaDynamicFormFieldInterface } from '../dynamic-form/interfaces/koala.dynamic-form-field.interface';
 import { DynamicFormTypeFieldEnum } from '../dynamic-form/enums/dynamic-form-type-field.enum';
@@ -10,7 +10,8 @@ import { FloatLabelType, MatFormFieldAppearance } from '@angular/material/form-f
 
 @Component({
   selector: 'koala-location-form',
-  templateUrl: 'location-form.component.html'
+  templateUrl: 'location-form.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LocationFormComponent implements OnInit {
   @Input() formGroup: FormGroup;

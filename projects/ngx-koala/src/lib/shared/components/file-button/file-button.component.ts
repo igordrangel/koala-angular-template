@@ -1,11 +1,12 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { KoalaFileInterface } from './koala.file.interface';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
 	selector: 'koala-file-button',
 	templateUrl: 'file-button.component.html',
-	styleUrls: ['file-button.component.css']
+	styleUrls: ['file-button.component.css'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileButtonComponent implements OnInit {
 	@Input() color: 'blue' | 'red' | 'gray' | 'white' = 'white';
@@ -21,11 +22,11 @@ export class FileButtonComponent implements OnInit {
 	@Output() getFiles = new EventEmitter<KoalaFileInterface[]>(null);
 	public files: KoalaFileInterface[];
 	
-	public originalText: string;
+	public textSubject = new BehaviorSubject<string>(null);
 	@ViewChild('file', {static: true}) private btnFile: ElementRef<HTMLInputElement>;
 	
 	ngOnInit() {
-		this.originalText = this.text;
+		this.textSubject.next(this.text);
 		if (this.setFile) {
 			this.setFile
 			    .subscribe(async file => {
@@ -63,9 +64,9 @@ export class FileButtonComponent implements OnInit {
 	}
 	
 	private generateTextButton() {
-		this.text = (this.files.length > 0 ?
-				`${this.files.length} arquivo${this.files.length > 1 ? 's' : ''} selecionado` :
-				this.originalText
+		this.textSubject.next(this.files.length > 0 ?
+			`${this.files.length} arquivo${this.files.length > 1 ? 's' : ''} selecionado` :
+			this.text
 		);
 	}
 	

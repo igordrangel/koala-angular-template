@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 export abstract class FormAbstract {
   public showInvalidFields: ShowInvalidFields;
   public btnLabel = 'Enviar';
-  public loader = false;
+  public loader = new BehaviorSubject<boolean>(false);
   public btnSubmitDisabled = false;
   public getData = new BehaviorSubject<boolean>(false);
 
@@ -38,14 +38,12 @@ export abstract class FormAbstract {
 
   protected loading(show: boolean = true, btnLabel?: string) {
     this.btnSubmitDisabled = show;
-    this.loader = show;
+    this.loader.next(show);
 
     if (show) {
       this.btnLabel = btnLabel ? btnLabel : 'Enviando Dados...';
-      // LoaderController.create({typeLoader: "indeterminate"});
     } else {
       this.btnLabel = btnLabel ? btnLabel : 'Enviar';
-      // LoaderController.dismiss();
     }
   }
 }

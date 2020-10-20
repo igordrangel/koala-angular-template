@@ -15,7 +15,7 @@
 	matTooltipPosition="above"
 	type="button">
   <mat-icon *ngIf="icon">{{icon}}</mat-icon>
-	{{text}}
+	{{textSubject | async}}
 </button>
 <ng-template #iconButton>
   <button

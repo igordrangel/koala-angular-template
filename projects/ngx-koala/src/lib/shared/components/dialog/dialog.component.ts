@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 
 @Component({
   selector: 'koala-dialog',
-  templateUrl: 'dialog.component.html'
+  templateUrl: 'dialog.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DialogComponent {
   @Input() titleDialog: string;

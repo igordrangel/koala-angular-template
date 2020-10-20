@@ -15,19 +15,21 @@ export class KoalaDynamicFormService {
     const data = {};
     const formArray = form.get('formData') as FormArray;
     formArray?.controls.forEach(control => {
-      let value: any = control.get('value').value;
-      if (control.get('type').value === DynamicFormTypeFieldEnum.valueList) {
-        value = KoalaStringHelper.split(value);
-      } else if (control.get('type').value === DynamicFormTypeFieldEnum.moreItems) {
-        const moreItems = control.get('moreItemsConfig').value as { form: FormGroup }[];
-        value = [];
-        moreItems.forEach(item => {
-          value.push(this.emitData(item.form));
-        });
-      } else if (control.get('type').value === DynamicFormTypeFieldEnum.autocomplete) {
-        value = control.get('autocompleteSelectedValue').value;
-      }
-      data[control.get('name').value] = value;
+	    if (control.get('show').value !== false) {
+		    let value: any = control.get('value').value;
+		    if (control.get('type').value === DynamicFormTypeFieldEnum.valueList) {
+			    value = KoalaStringHelper.split(value);
+		    } else if (control.get('type').value === DynamicFormTypeFieldEnum.moreItems) {
+			    const moreItems = control.get('moreItemsConfig').value as { form: FormGroup }[];
+			    value = [];
+			    moreItems.forEach(item => {
+				    value.push(this.emitData(item.form));
+			    });
+		    } else if (control.get('type').value === DynamicFormTypeFieldEnum.autocomplete) {
+			    value = control.get('autocompleteSelectedValue').value;
+		    }
+		    data[control.get('name').value] = value;
+	    }
     });
     
     return data;

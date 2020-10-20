@@ -1,11 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { KoalaMenuModuleInterface } from './koala.menu-module.interface';
 import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'koala-menu',
   templateUrl: 'menu.component.html',
-  styleUrls: ['menu.component.css']
+  styleUrls: ['menu.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuComponent implements OnInit {
   @Input() titleMenu: string;

@@ -3,7 +3,7 @@ import { KoalaDynamicFormFieldInterface } from './interfaces/koala.dynamic-form-
 import { DynamicFormTypeFieldEnum } from './enums/dynamic-form-type-field.enum';
 import { CpfValidator } from './validators/cpf.validator';
 import { CnpjValidator } from './validators/cnpj.validator';
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormAbstract } from '../../../../core/form.abstract';
 import { debounceTime } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
@@ -17,7 +17,8 @@ import { KoalaDynamicFormMoreItensShowFieldConfigInterface } from './interfaces/
 @Component({
 	selector: 'koala-dynamic-form',
 	templateUrl: 'dynamic-form.component.html',
-	styleUrls: ['dynamic-form.component.css']
+	styleUrls: ['dynamic-form.component.css'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DynamicFormComponent extends FormAbstract implements OnInit {
 	@Input() form: FormGroup;
@@ -223,7 +224,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		}
 		
 		return this.fb.group({
-			show: [config.show ?? true],
+			show: [new BehaviorSubject<boolean>(config.show ?? true)],
 			label: [config.label],
 			name: [config.name],
 			type: [config.type],
@@ -284,7 +285,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 				for (const [index, prop] of item.entries()) {
 					for (const control of formArray.controls.values()) {
 						if (control.get('name').value === prop.name) {
-							control.get('show').setValue(prop.show);
+							control.get('show').value.next(prop.show);
 							if (prop.show) {
 								const validators = [];
 								const config: any = this.formConfig[index].value ?? '';

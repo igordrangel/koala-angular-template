@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'koala-button',
   templateUrl: 'button.component.html',
-  styleUrls: ['button.component.css']
+  styleUrls: ['button.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent {
   @Input() color: 'blue' | 'red' | 'gray' | 'white' = 'white';
