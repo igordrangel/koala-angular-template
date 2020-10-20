@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { KoalaMenuModuleInterface } from './koala.menu-module.interface';
 import { NavigationEnd, Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'koala-menu',
@@ -10,31 +11,32 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class MenuComponent implements OnInit {
   @Input() titleMenu: string;
-  @Input() options: KoalaMenuModuleInterface[];
-
+  @Input() optionsSubject: BehaviorSubject<KoalaMenuModuleInterface[]>;
+  
   constructor(private router: Router) {
   }
-
+  
   ngOnInit() {
-    if (this.options) {
+    if (this.optionsSubject) {
       this.router
           .events
           .subscribe(event => {
             switch (true) {
               case event instanceof NavigationEnd:
-                this.options.map(module => {
-                  module.active = module.tools ?
-                    (this.router.url === module.routerLink ||
-                      !!module.tools.find(tool => this.router.url === tool.routerLink)) :
-                    this.router.url === module.routerLink;
-                  return module;
+                this.optionsSubject.subscribe(options => {
+                  options.map(module => {
+                    module.active = module.tools ?
+                      (this.router.url === module.routerLink ||
+                        !!module.tools.find(tool => this.router.url === tool.routerLink)) :
+                      this.router.url === module.routerLink;
+                    return module;
+                  });
                 });
             }
           });
-
     }
   }
-
+  
   public toogle(module: KoalaMenuModuleInterface) {
     module.expanded = !module.expanded;
   }

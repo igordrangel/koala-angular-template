@@ -68,7 +68,7 @@ export class PageComponent implements OnInit {
     shadowColorTableList: 'rgba(25, 118, 210, .4)'
   };
   
-  @ViewChild('drawer', {static: true}) private menu: MatDrawer;
+  @ViewChild('drawer', {static: false}) private menu: MatDrawer;
   
   constructor(
     private tokenService: KoalaTokenService,
@@ -147,6 +147,9 @@ export class PageComponent implements OnInit {
       this.palletColors = this.defaultPalletColors;
     }
     this.defineColor();
+    if (this.startMenuOpened || !!this.logged) {
+      this.menuService.open();
+    }
     setInterval(async () => {
       if (this.menuService.getMenuState() === 'close') {
         if (this.menu.opened) {

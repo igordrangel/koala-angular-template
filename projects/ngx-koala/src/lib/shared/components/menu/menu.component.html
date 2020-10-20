@@ -1,6 +1,6 @@
 <nav>
   <h2 class="title">{{titleMenu}}</h2>
-  <ul class="list-menu">
+  <ul *ngIf="(optionsSubject | async) as options" class="list-menu">
     <li
 	    (click)="toogle(module)"
 	    *ngFor="let module of options"
