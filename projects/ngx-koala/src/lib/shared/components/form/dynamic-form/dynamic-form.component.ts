@@ -55,7 +55,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 				if (config.type === DynamicFormTypeFieldEnum.autocomplete) {
 					const autocompleteOptionsSubject = newFormGroup.get('autocompleteOptions').value as BehaviorSubject<KoalaDynamicAutocompleteOptionsInterface[]>;
 					if (autocompleteOptionsSubject) {
-						autocompleteOptionsSubject.subscribe(options => newFormGroup.get('autocompleteOptionsFiltered').setValue(options));
+						autocompleteOptionsSubject.subscribe(options => newFormGroup.get('autocompleteOptionsFiltered').value.next(options));
 					}
 				}
 				newFormGroup.get('value')
@@ -84,7 +84,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 						            }
 						            if (config.autocompleteType === 'all') {
 							            const autocompleteOptionsSubject = newFormGroup.get('autocompleteOptions').value as BehaviorSubject<KoalaDynamicAutocompleteOptionsInterface[]>;
-							            newFormGroup.get('autocompleteOptionsFiltered').setValue(this.autocompleteFilter(
+							            newFormGroup.get('autocompleteOptionsFiltered').value.next(this.autocompleteFilter(
 								            autocompleteOptionsSubject.value,
 								            value
 							            ));
@@ -92,7 +92,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 							            const loader = newFormGroup.get('autocompleteLoading').value as BehaviorSubject<boolean>;
 							            loader.next(true);
 							            config.autocompleteFilter(value).subscribe(options => {
-								            newFormGroup.get('autocompleteOptionsFiltered').setValue(options);
+								            newFormGroup.get('autocompleteOptionsFiltered').value.next(options);
 								            loader.next(false);
 							            });
 						            }
@@ -255,7 +255,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			moreItemsConfig: [[]],
 			autocompleteLoading: [new BehaviorSubject<boolean>(false)],
 			autocompleteOptions: [config.autocompleteOptions],
-			autocompleteOptionsFiltered: [[]],
+			autocompleteOptionsFiltered: [new BehaviorSubject<any>([])],
 			autocompleteSelectedValue: [value?.value ?? ''],
 			textLogs: [config?.textObs],
 			value: [value, validators]
