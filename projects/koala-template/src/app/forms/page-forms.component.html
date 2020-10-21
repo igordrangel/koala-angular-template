@@ -59,12 +59,9 @@
 				</koala-dynamic-form>
 				
 		    <mat-action-row>
-			    <koala-submit
-				    (click)="sendToConsole()"
-				    [fg]="formAutocomplete"
-				    btnLabel="Visualizar Dados no Console"
-				    color="primary">
-		      </koala-submit>
+		      <button (click)="sendToConsole()" color="primary" mat-raised-button>
+			      Visualizar Dados no Console
+		      </button>
 		    </mat-action-row>
 			
 			</mat-expansion-panel>
