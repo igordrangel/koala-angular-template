@@ -20,7 +20,7 @@ export class FileButtonComponent implements OnInit {
 	@Input() setFile: BehaviorSubject<File>;
 	@Input() updateFileList: BehaviorSubject<KoalaFileInterface[]>;
 	@Output() getFiles = new EventEmitter<KoalaFileInterface[]>(null);
-	public files: KoalaFileInterface[];
+	public files: KoalaFileInterface[] = [];
 	
 	public textSubject = new BehaviorSubject<string>(null);
 	@ViewChild('file', {static: true}) private btnFile: ElementRef<HTMLInputElement>;
