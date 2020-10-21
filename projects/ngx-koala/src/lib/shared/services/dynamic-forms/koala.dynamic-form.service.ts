@@ -28,9 +28,7 @@ export class KoalaDynamicFormService {
 		    } else if (control.get('type').value === DynamicFormTypeFieldEnum.autocomplete) {
 			    if (control.get('multiple').value) {
 				    const options = control.get('autocompleteSelectedValue').value as KoalaDynamicAutocompleteOptionsInterface[];
-				    if (options) {
-					    value = options.map(item => item?.value);
-				    }
+				    value = options.map(item => item?.value);
 			    } else {
 				    value = (control.get('autocompleteSelectedValue').value?.value ?
 						    control.get('autocompleteSelectedValue').value.value :
