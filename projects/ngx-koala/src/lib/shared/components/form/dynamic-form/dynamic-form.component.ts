@@ -252,8 +252,10 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			config.required &&
 			config.type === DynamicFormTypeFieldEnum.autocomplete
 		) {
-			valueSelectedAutocomplete = value;
-			value = (config.multiple ? valueSelectedAutocomplete[0] : value);
+			if (value) {
+				valueSelectedAutocomplete = value;
+				value = (config.multiple ? valueSelectedAutocomplete[0] : value);
+			}
 			validators.push(AutocompleteSelectedValidator);
 		} else if (config.type === DynamicFormTypeFieldEnum.checkbox) {
 			value = config.value ?? false;
