@@ -322,23 +322,25 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 							control.get('show').value.next(prop.show);
 							if (prop.show) {
 								const validators = [];
-								const config: any = this.formConfig[index].value;
-								if (config.required) {
-									validators.push(Validators.required);
+								const config: any = this.formConfig[index].value ?? null;
+								if (config) {
+									if (config.required) {
+										validators.push(Validators.required);
+									}
+									if (config.type === DynamicFormTypeFieldEnum.cpf) {
+										validators.push(CpfValidator);
+									} else if (config.type === DynamicFormTypeFieldEnum.cnpj) {
+										validators.push(CnpjValidator);
+									} else if (config.type === DynamicFormTypeFieldEnum.email) {
+										validators.push(Validators.email);
+									} else if (
+										config.required &&
+										config.type === DynamicFormTypeFieldEnum.autocomplete
+									) {
+										validators.push(AutocompleteSelectedValidator);
+									}
+									control.get('value').setValidators(validators);
 								}
-								if (config.type === DynamicFormTypeFieldEnum.cpf) {
-									validators.push(CpfValidator);
-								} else if (config.type === DynamicFormTypeFieldEnum.cnpj) {
-									validators.push(CnpjValidator);
-								} else if (config.type === DynamicFormTypeFieldEnum.email) {
-									validators.push(Validators.email);
-								} else if (
-									config.required &&
-									config.type === DynamicFormTypeFieldEnum.autocomplete
-								) {
-									validators.push(AutocompleteSelectedValidator);
-								}
-								control.get('value').setValidators(validators);
 							} else {
 								control.get('value').clearValidators();
 								control.get('value').clearAsyncValidators();
