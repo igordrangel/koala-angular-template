@@ -1,7 +1,7 @@
 <button
 	*ngIf="!iconButton else btnIcon"
 	[color]="color"
-	[disabled]="disabled | async"
+	[disabled]="(disabled | async) || fg.invalid || fg.pending"
 	mat-raised-button
 	type="submit">
   <span>{{btnLabel}}</span>
@@ -10,6 +10,7 @@
 <ng-template #btnIcon>
   <button
 	  [color]="color"
+	  [disabled]="(disabled | async) || fg.invalid || fg.pending"
 	  class="koala-icon-button"
 	  mat-icon-button
 	  type="submit">

@@ -1,6 +1,6 @@
 import * as jwtEncode from 'jwt-encode';
 
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { KoalaDynamicFormFieldInterface } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-form-field.interface';
 import { DynamicFormTypeFieldEnum } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/enums/dynamic-form-type-field.enum';
@@ -10,7 +10,8 @@ import { KoalaDynamicFormService } from '../../../../ngx-koala/src/lib/shared/se
 
 @Component({
   templateUrl: 'page-login.component.html',
-  styleUrls: ['page-login.component.css']
+  styleUrls: ['page-login.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PageLoginComponent extends FormAbstract implements OnInit {
   public formLogin: FormGroup;

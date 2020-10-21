@@ -1,16 +1,14 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { BehaviorSubject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'koala-submit',
   templateUrl: 'btn-submit.component.html',
-  styleUrls: ['btn-submit.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['btn-submit.component.css']
 })
-export class BtnSubmitComponent implements OnInit, OnChanges {
+export class BtnSubmitComponent implements OnChanges {
   @Input() fg: FormGroup;
   @Input() color: ThemePalette = 'primary';
   @Input() btnLabel = 'Enviar';
@@ -25,17 +23,5 @@ export class BtnSubmitComponent implements OnInit, OnChanges {
     if (changes.btnSubmitDisabled) {
       this.disabled.next(changes.btnSubmitDisabled.currentValue);
     }
-  }
-  
-  ngOnInit() {
-    this.disabled.next(this.fg.invalid || this.fg.pending || this.btnSubmitDisabled);
-    this.fg
-        .valueChanges
-        .pipe(debounceTime(300))
-        .subscribe(() => this.disabled.next(
-          this.fg.invalid ||
-          this.fg.pending ||
-          this.btnSubmitDisabled
-        ));
   }
 }

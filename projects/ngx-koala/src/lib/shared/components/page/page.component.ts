@@ -99,6 +99,7 @@ export class PageComponent implements OnInit {
       if (this.logged) {
         this.username = this.tokenService.getUser<{ login: string }>().login;
         this.firstUserLetter = this.username.charAt(0).toUpperCase();
+        this.menuService.open();
       }
       if (this.logged && this.openPages?.indexOf(this.currentUrl) >= 0 && this.defaultPage) {
         this.router.navigate([this.defaultPage]).then();
@@ -160,8 +161,10 @@ export class PageComponent implements OnInit {
         }
       }
     });
-    if (this.startMenuOpened || !!this.logged) {
+    if (this.startMenuOpened && !!this.logged) {
       this.menuService.open();
+    } else {
+      this.menuService.close();
     }
   }
   
@@ -171,6 +174,7 @@ export class PageComponent implements OnInit {
   }
   
   public logout() {
+    this.menuService.close();
     this.tokenService.removeToken();
     this.tokenService.getTokenSubject().next(null);
   }
