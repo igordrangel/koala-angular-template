@@ -139,7 +139,14 @@ export class PageFormsComponent implements OnInit {
 			autocompleteMultipleConfig: changeColorChip,
 			multiple: true,
 			required: true,
-			valueChanges: (value) => console.log(value)
+			valueChanges: (value) => console.log(value),
+			value: [{
+				name: 'teste',
+				value: 'teste'
+			}, {
+				name: 'teste2',
+				value: 'teste2'
+			}]
 		}];
 		changeColorChip.next({color: 'warn'});
 		

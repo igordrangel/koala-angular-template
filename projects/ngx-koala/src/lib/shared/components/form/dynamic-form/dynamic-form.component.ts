@@ -238,6 +238,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 	private newControl(config: KoalaDynamicFormFieldInterface): FormGroup {
 		const validators = [];
 		let value: any = config.value ?? '';
+		let valueSelectedAutocomplete: KoalaDynamicAutocompleteOptionsInterface | KoalaDynamicAutocompleteOptionsInterface[] = null;
 		if (config.required) {
 			validators.push(Validators.required);
 		}
@@ -251,6 +252,8 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			config.required &&
 			config.type === DynamicFormTypeFieldEnum.autocomplete
 		) {
+			valueSelectedAutocomplete = value;
+			value = (config.multiple ? valueSelectedAutocomplete[0] : value);
 			validators.push(AutocompleteSelectedValidator);
 		} else if (config.type === DynamicFormTypeFieldEnum.checkbox) {
 			value = config.value ?? false;
@@ -297,10 +300,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			autocompleteOptions: [config.autocompleteOptions],
 			autocompleteMultipleConfig: [config.autocompleteMultipleConfig],
 			autocompleteOptionsFiltered: [new BehaviorSubject<any>([])],
-			autocompleteSelectedValue: [(config.multiple ?
-					(value.value ? [value?.value] : []) :
-					(value?.value ?? config.autocompleteDefaultValueOnClear)
-			)],
+			autocompleteSelectedValue: [valueSelectedAutocomplete],
 			textLogs: [config?.textObs],
 			value: [value, validators]
 		});
