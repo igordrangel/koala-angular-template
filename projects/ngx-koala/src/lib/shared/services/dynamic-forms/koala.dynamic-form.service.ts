@@ -32,7 +32,7 @@ export class KoalaDynamicFormService {
 					    value = options.map(item => item?.value);
 				    }
 			    } else {
-				    value = (control.get('autocompleteSelectedValue').value.value ?
+				    value = (control.get('autocompleteSelectedValue').value?.value ?
 						    control.get('autocompleteSelectedValue').value.value :
 						    control.get('autocompleteSelectedValue').value
 				    );
