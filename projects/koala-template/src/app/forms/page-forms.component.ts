@@ -114,7 +114,8 @@ export class PageFormsComponent implements OnInit {
 			class: 'col-12',
 			fieldClass: 'w-100',
 			autocompleteOptions: this.countriesSubject,
-			autocompleteType: 'all'
+			autocompleteType: 'all',
+			valueChanges: (value) => console.log(value)
 		}, {
 			label: 'Country (On Demand)',
 			name: 'countryOnDemand',
@@ -135,7 +136,8 @@ export class PageFormsComponent implements OnInit {
 			autocompleteMultipleConfig: {
 				color: 'primary'
 			},
-			multiple: true
+			multiple: true,
+			valueChanges: (value) => console.log(value)
 		}];
 		
 		this.formCamposDinamicos = this.fb.group({});

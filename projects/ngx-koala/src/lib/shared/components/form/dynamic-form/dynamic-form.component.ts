@@ -84,10 +84,14 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 						            ) {
 							            if (newFormGroup.get('multiple').value) {
 								            newFormGroup.get('autocompleteSelectedValue').value.push(value);
-								            this.autocompleteInput.nativeElement.value = '';
+								            if (this.autocompleteInput.nativeElement) {
+									            this.autocompleteInput.nativeElement.value = '';
+								            }
 							            } else {
 								            newFormGroup.get('autocompleteSelectedValue').setValue(value);
 							            }
+						            } else if (!newFormGroup.get('multiple').value) {
+							            newFormGroup.get('autocompleteSelectedValue').setValue(null);
 						            }
 						            if (config.autocompleteType === 'all') {
 							            const autocompleteOptionsSubject = newFormGroup.get('autocompleteOptions').value as BehaviorSubject<KoalaDynamicAutocompleteOptionsInterface[]>;
@@ -106,9 +110,10 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 					            }
 					            if (config.valueChanges) {
 						            if (config.type === DynamicFormTypeFieldEnum.autocomplete) {
-							            if (newFormGroup.get('autocompleteSelectedValue').value) {
-								            config.valueChanges(newFormGroup.get('autocompleteSelectedValue').value);
-							            }
+							            config.valueChanges((newFormGroup.get('multiple').value ?
+									            newFormGroup.get('autocompleteSelectedValue').value.map(item => item.value) :
+									            newFormGroup.get('autocompleteSelectedValue').value?.value
+							            ));
 						            } else {
 							            config.valueChanges(value);
 						            }
@@ -195,10 +200,11 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 	
 	public clearAutocomplete(propIndex: number) {
 		if (this.controls.controls[propIndex].get('multiple').value) {
+			this.controls.controls[propIndex].get('autocompleteSelectedValue').setValue([]);
+			this.controls.controls[propIndex].get('value').setValue(null);
+		} else {
 			this.controls.controls[propIndex].get('autocompleteSelectedValue').setValue(this.formConfig[propIndex].autocompleteDefaultValueOnClear ?? null);
 			this.controls.controls[propIndex].get('value').setValue(this.formConfig[propIndex].autocompleteDefaultValueOnClear ?? null);
-		} else {
-			this.controls.controls[propIndex].get('autocompleteSelectedValue').setValue([]);
 		}
 	}
 	
@@ -210,6 +216,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		this.controls.controls[propIndex].get('autocompleteSelectedValue').setValue(
 			this.controls.controls[propIndex].get('autocompleteSelectedValue').value.filter(item => item !== option)
 		);
+		this.controls.controls[propIndex].get('value').setValue(null);
 	}
 	
 	private newControl(config: KoalaDynamicFormFieldInterface): FormGroup {
