@@ -251,7 +251,8 @@
 			  [floatLabel]="propriedade.get('floatLabel').value"
 			  [formGroupName]="i"
 			  [ngClass]="propriedade.get('fieldClass').value">
-	      <mat-label>{{propriedade.get('label').value}}</mat-label>
+	      <mat-label>{{propriedade.get('label').value}} {{propriedade.get('multiple').value &&
+	      propriedade.get('required').value ? '*' : ''}}</mat-label>
 			  <div *ngIf="propriedade.get('multiple').value else single">
 	        <mat-chip-list #chipList>
 	          <mat-chip
