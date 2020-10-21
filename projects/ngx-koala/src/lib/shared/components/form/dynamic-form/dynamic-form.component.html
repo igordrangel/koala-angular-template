@@ -252,14 +252,35 @@
 			  [formGroupName]="i"
 			  [ngClass]="propriedade.get('fieldClass').value">
 	      <mat-label>{{propriedade.get('label').value}}</mat-label>
-	      <input
-		      [matAutocomplete]="auto"
-		      [readonly]="propriedade.get('disabled').value"
-		      [required]="propriedade.get('required').value"
-		      formControlName="value"
-		      matInput
-		      placeholder="Selecione uma opção..."
-		      type="text">
+			  <div *ngIf="propriedade.get('multiple').value else single">
+	        <mat-chip-list #chipList>
+	          <mat-chip
+		          (removed)="removeOptionOnAutocomplete(i, option)"
+		          *ngFor="let option of propriedade.get('autocompleteSelectedValue').value"
+		          [color]="propriedade.get('autocompleteMultipleConfig').value.color"
+		          [removable]="true"
+		          [selectable]="true">
+	            {{display(option)}}
+		          <mat-icon matChipRemove>cancel</mat-icon>
+	          </mat-chip>
+	          <input
+		          #autocompleteInput
+		          [matAutocomplete]="auto"
+		          [matChipInputFor]="chipList"
+		          formControlName="value"
+		          placeholder="Selecione um ou mais opções...">
+	        </mat-chip-list>
+	      </div>
+	      <ng-template #single>
+		      <input
+			      [matAutocomplete]="auto"
+			      [readonly]="propriedade.get('disabled').value"
+			      [required]="propriedade.get('required').value"
+			      formControlName="value"
+			      matInput
+			      placeholder="Selecione uma opção..."
+			      type="text">
+	      </ng-template>
 	      <mat-spinner *ngIf="propriedade.get('autocompleteLoading').value | async" color="primary"
 	                   matSuffix></mat-spinner>
 	      <button

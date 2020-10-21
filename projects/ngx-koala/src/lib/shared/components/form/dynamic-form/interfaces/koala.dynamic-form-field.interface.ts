@@ -5,6 +5,7 @@ import { AsyncValidatorFn, FormGroup } from '@angular/forms';
 import { KoalaDynamicSetValueInterface } from './koala.dynamic-set-value.interface';
 import { KoalaDynamicAutocompleteOptionsInterface } from './koala.dynamic-autocomplete-options.interface';
 import { KoalaDynamicFormMoreItensShowFieldConfigInterface } from './koala.dynamic-form-more-itens-show-field-config.interface';
+import { KoalaDynamicFormAutocompleteMultipleConfigInterface } from './koala.dynamic-form-autocomplete-multiple-config.interface';
 
 export interface KoalaDynamicFormFieldInterface {
   show?: boolean;
@@ -41,6 +42,7 @@ export interface KoalaDynamicFormFieldInterface {
   autocompleteDefaultValueOnClear?: any;
   autocompleteFilter?: (filter: string) => Observable<KoalaDynamicAutocompleteOptionsInterface[]>;
   autocompleteOptions?: BehaviorSubject<KoalaDynamicAutocompleteOptionsInterface[]>;
+  autocompleteMultipleConfig?: KoalaDynamicFormAutocompleteMultipleConfigInterface;
   autocompleteType?: 'all' | 'onDemand';
   valueChanges?: (value: any) => void;
   asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[];

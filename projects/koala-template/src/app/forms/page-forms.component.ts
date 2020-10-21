@@ -131,7 +131,11 @@ export class PageFormsComponent implements OnInit {
 				propsByName: ['name', 'region'],
 				delimiter: ' - '
 			}, 'currencies > 0 > code'),
-			autocompleteType: 'onDemand'
+			autocompleteType: 'onDemand',
+			autocompleteMultipleConfig: {
+				color: 'primary'
+			},
+			multiple: true
 		}];
 		
 		this.formCamposDinamicos = this.fb.group({});

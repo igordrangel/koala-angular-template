@@ -26,7 +26,12 @@ export class KoalaDynamicFormService {
 				    value.push(this.emitData(item.form));
 			    });
 		    } else if (control.get('type').value === DynamicFormTypeFieldEnum.autocomplete) {
-			    value = control.get('autocompleteSelectedValue').value;
+			    if (control.get('multiple').value) {
+				    const options = control.get('autocompleteSelectedValue').value as KoalaDynamicAutocompleteOptionsInterface[];
+				    value = options.map(item => item.value);
+			    } else {
+				    value = control.get('autocompleteSelectedValue').value.value;
+			    }
 		    }
 		    data[control.get('name').value] = value;
 	    }

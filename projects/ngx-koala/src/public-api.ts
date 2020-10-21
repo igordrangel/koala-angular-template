@@ -32,6 +32,7 @@ export * from './lib/shared/components/form/btn-submit/btn-submit.component.js';
 export * from './lib/shared/components/form/dynamic-form/enums/dynamic-form-type-field.enum';
 export * from './lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-form-field.interface';
 export * from './lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-form-more-itens-show-field-config.interface';
+export * from './lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-form-autocomplete-multiple-config.interface';
 export * from './lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-set-value.interface';
 export * from './lib/shared/components/form/dynamic-form/validators/validation.helper';
 export * from './lib/shared/components/form/dynamic-form/validators/cpf.validator';

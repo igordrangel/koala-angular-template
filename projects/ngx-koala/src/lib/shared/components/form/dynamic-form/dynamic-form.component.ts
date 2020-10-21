@@ -3,7 +3,7 @@ import { KoalaDynamicFormFieldInterface } from './interfaces/koala.dynamic-form-
 import { DynamicFormTypeFieldEnum } from './enums/dynamic-form-type-field.enum';
 import { CpfValidator } from './validators/cpf.validator';
 import { CnpjValidator } from './validators/cnpj.validator';
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormAbstract } from '../../../../core/form.abstract';
 import { debounceTime } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
@@ -29,6 +29,8 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 	public controls: FormArray;
 	public typeField = DynamicFormTypeFieldEnum;
 	public hoursAndMinutesMask = '00:000';
+	
+	@ViewChild('autocompleteInput') autocompleteInput: ElementRef<HTMLInputElement>;
 	
 	constructor(
 		private fb: FormBuilder,
@@ -80,7 +82,12 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 							            value.hasOwnProperty('name') &&
 							            Object.keys(value).length === 2
 						            ) {
-							            newFormGroup.get('autocompleteSelectedValue').setValue(value.value);
+							            if (newFormGroup.get('multiple').value) {
+								            newFormGroup.get('autocompleteSelectedValue').value.push(value);
+								            this.autocompleteInput.nativeElement.value = '';
+							            } else {
+								            newFormGroup.get('autocompleteSelectedValue').setValue(value);
+							            }
 						            }
 						            if (config.autocompleteType === 'all') {
 							            const autocompleteOptionsSubject = newFormGroup.get('autocompleteOptions').value as BehaviorSubject<KoalaDynamicAutocompleteOptionsInterface[]>;
@@ -187,12 +194,22 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 	}
 	
 	public clearAutocomplete(propIndex: number) {
-		this.controls.controls[propIndex].get('autocompleteSelectedValue').setValue(this.formConfig[propIndex].autocompleteDefaultValueOnClear ?? null);
-		this.controls.controls[propIndex].get('value').setValue(this.formConfig[propIndex].autocompleteDefaultValueOnClear ?? null);
+		if (this.controls.controls[propIndex].get('multiple').value) {
+			this.controls.controls[propIndex].get('autocompleteSelectedValue').setValue(this.formConfig[propIndex].autocompleteDefaultValueOnClear ?? null);
+			this.controls.controls[propIndex].get('value').setValue(this.formConfig[propIndex].autocompleteDefaultValueOnClear ?? null);
+		} else {
+			this.controls.controls[propIndex].get('autocompleteSelectedValue').setValue([]);
+		}
 	}
 	
 	public display(option?: KoalaDynamicAutocompleteOptionsInterface): string | undefined {
 		return option ? option.name : undefined;
+	}
+	
+	public removeOptionOnAutocomplete(propIndex: number, option: KoalaDynamicAutocompleteOptionsInterface) {
+		this.controls.controls[propIndex].get('autocompleteSelectedValue').setValue(
+			this.controls.controls[propIndex].get('autocompleteSelectedValue').value.filter(item => item !== option)
+		);
 	}
 	
 	private newControl(config: KoalaDynamicFormFieldInterface): FormGroup {
@@ -255,8 +272,9 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			moreItemsConfig: [[]],
 			autocompleteLoading: [new BehaviorSubject<boolean>(false)],
 			autocompleteOptions: [config.autocompleteOptions],
+			autocompleteMultipleConfig: [config.autocompleteMultipleConfig],
 			autocompleteOptionsFiltered: [new BehaviorSubject<any>([])],
-			autocompleteSelectedValue: [value?.value ?? ''],
+			autocompleteSelectedValue: [(config.multiple ? (value.value ? [value?.value] : []) : value?.value ?? '')],
 			textLogs: [config?.textObs],
 			value: [value, validators]
 		});

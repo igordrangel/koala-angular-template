@@ -18,6 +18,7 @@ import { KoalaButtonModule } from '../button/koala.button.module';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { KoalaAutofocusDirective } from '../../directives/koala-autofocus.directive';
 import { KoalaFileButtonModule } from '../file-button/koala.file-button.module';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { KoalaFileButtonModule } from '../file-button/koala.file-button.module';
     MatButtonModule,
     MatIconModule,
     MatExpansionModule,
+    MatChipsModule,
     KoalaButtonModule,
     MatProgressSpinnerModule
   ],
