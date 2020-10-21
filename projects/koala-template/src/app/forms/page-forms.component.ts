@@ -141,6 +141,7 @@ export class PageFormsComponent implements OnInit {
 			required: true,
 			valueChanges: (value) => console.log(value)
 		}];
+		changeColorChip.next({color: 'warn'});
 		
 		this.formCamposDinamicos = this.fb.group({});
 		this.formCamposDinamicosConfig = [{

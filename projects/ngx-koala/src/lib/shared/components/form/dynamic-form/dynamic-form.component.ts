@@ -14,6 +14,8 @@ import { KoalaDynamicFormShowFieldInterface } from './interfaces/koala.dynamic-f
 import { KoalaDynamicFormService } from '../../../services/dynamic-forms/koala.dynamic-form.service';
 import { KoalaDynamicFormMoreItensShowFieldConfigInterface } from './interfaces/koala.dynamic-form-more-itens-show-field-config.interface';
 import { KoalaArrayHelper } from 'tskoala-helpers/dist/array/koala-array.helper';
+import { ThemePalette } from '@angular/material/core';
+import { KoalaDynamicFormAutocompleteMultipleConfigInterface } from './interfaces/koala.dynamic-form-autocomplete-multiple-config.interface';
 
 @Component({
 	selector: 'koala-dynamic-form',
@@ -227,6 +229,10 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		} else if (this.formConfig[propIndex].valueChanges) {
 			this.formConfig[propIndex].valueChanges(value.map(item => item.value));
 		}
+	}
+	
+	public getColorChip(config: KoalaDynamicFormAutocompleteMultipleConfigInterface): ThemePalette {
+		return config.color;
 	}
 	
 	private newControl(config: KoalaDynamicFormFieldInterface): FormGroup {
