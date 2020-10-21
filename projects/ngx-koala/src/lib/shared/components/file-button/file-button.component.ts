@@ -19,11 +19,13 @@ export class FileButtonComponent implements OnInit {
 	@Input() accept: string;
 	@Input() setFile: BehaviorSubject<File>;
 	@Input() updateFileList: BehaviorSubject<KoalaFileInterface[]>;
+	@Input() autoclear: boolean = true;
 	@Output() getFiles = new EventEmitter<KoalaFileInterface[]>(null);
 	public files: KoalaFileInterface[] = [];
 	
+	@ViewChild('file', {static: true}) private file: ElementRef<HTMLInputElement>;
+	
 	public textSubject = new BehaviorSubject<string>(null);
-	@ViewChild('file', {static: true}) private btnFile: ElementRef<HTMLInputElement>;
 	
 	ngOnInit() {
 		this.textSubject.next(this.text);
@@ -61,6 +63,16 @@ export class FileButtonComponent implements OnInit {
 			this.getFiles.emit(null);
 		}
 		this.generateTextButton();
+	}
+	
+	public open() {
+		this.file.nativeElement.value = null;
+		if (this.autoclear) {
+			this.files = [];
+			this.getFiles.emit(null);
+			this.generateTextButton();
+		}
+		this.file.nativeElement.click();
 	}
 	
 	private generateTextButton() {

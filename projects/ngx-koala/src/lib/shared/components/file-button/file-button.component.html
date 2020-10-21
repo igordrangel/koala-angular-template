@@ -1,7 +1,8 @@
-<input #file (change)="emitFiles(file.files)" [accept]="accept" [multiple]="multiple" style="display: none;"
+<input #file (change)="emitFiles(file.files)" [accept]="accept" [multiple]="multiple"
+       style="display: none;"
        type="file"/>
 <button
-	(click)="file.value = null;file.click()"
+	(click)="open()"
 	*ngIf="text else iconButton"
 	[disabled]="disabled"
 	[matTooltipDisabled]="!tooltip"
@@ -19,7 +20,7 @@
 </button>
 <ng-template #iconButton>
   <button
-	  (click)="file.value = null;file.click()"
+	  (click)="open()"
 	  [disabled]="disabled"
 	  [matTooltipDisabled]="!tooltip"
 	  [matTooltip]="tooltip"
