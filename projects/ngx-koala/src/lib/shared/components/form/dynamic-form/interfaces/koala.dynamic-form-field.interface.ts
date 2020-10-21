@@ -42,7 +42,7 @@ export interface KoalaDynamicFormFieldInterface {
   autocompleteDefaultValueOnClear?: any;
   autocompleteFilter?: (filter: string) => Observable<KoalaDynamicAutocompleteOptionsInterface[]>;
   autocompleteOptions?: BehaviorSubject<KoalaDynamicAutocompleteOptionsInterface[]>;
-  autocompleteMultipleConfig?: KoalaDynamicFormAutocompleteMultipleConfigInterface;
+  autocompleteMultipleConfig?: BehaviorSubject<KoalaDynamicFormAutocompleteMultipleConfigInterface>;
   autocompleteType?: 'all' | 'onDemand';
   valueChanges?: (value: any) => void;
   asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[];

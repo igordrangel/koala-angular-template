@@ -10,6 +10,7 @@ import { PageListService } from '../page-list/page-list.service';
 import { KoalaDynamicFormShowFieldInterface } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-form-show-field.interface';
 import { KoalaBtnFileService } from '../../../../ngx-koala/src/lib/shared/services/btn-file/koala.btn-file.service';
 import { KoalaFileInterface } from '../../../../ngx-koala/src/lib/shared/components/file-button/koala.file.interface';
+import { KoalaDynamicFormAutocompleteMultipleConfigInterface } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-form-autocomplete-multiple-config.interface';
 
 @Component({
 	templateUrl: 'page-forms.component.html',
@@ -104,6 +105,7 @@ export class PageFormsComponent implements OnInit {
 			}
 		}];
 		
+		const changeColorChip = new BehaviorSubject<KoalaDynamicFormAutocompleteMultipleConfigInterface>({color: 'primary'});
 		this.formAutocomplete = this.fb.group({});
 		this.formAutocompleteConfig = [{
 			label: 'Country (All)',
@@ -134,9 +136,7 @@ export class PageFormsComponent implements OnInit {
 				delimiter: ' - '
 			}, 'currencies > 0 > code'),
 			autocompleteType: 'onDemand',
-			autocompleteMultipleConfig: {
-				color: 'primary'
-			},
+			autocompleteMultipleConfig: changeColorChip,
 			multiple: true,
 			required: true,
 			valueChanges: (value) => console.log(value)

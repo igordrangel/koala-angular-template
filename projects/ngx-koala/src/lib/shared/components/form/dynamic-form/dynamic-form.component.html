@@ -258,7 +258,7 @@
 	          <mat-chip
 		          (removed)="removeOptionOnAutocomplete(i, option)"
 		          *ngFor="let option of propriedade.get('autocompleteSelectedValue').value"
-		          [color]="propriedade.get('autocompleteMultipleConfig').value.color"
+		          [color]="(propriedade.get('autocompleteMultipleConfig').value | async).color"
 		          [removable]="true"
 		          [selectable]="true">
 	            {{display(option)}}
