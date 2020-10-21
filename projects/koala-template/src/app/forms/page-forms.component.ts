@@ -115,6 +115,7 @@ export class PageFormsComponent implements OnInit {
 			fieldClass: 'w-100',
 			autocompleteOptions: this.countriesSubject,
 			autocompleteType: 'all',
+			required: true,
 			valueChanges: (value) => console.log(value)
 		}, {
 			label: 'Country (On Demand)',
@@ -137,6 +138,7 @@ export class PageFormsComponent implements OnInit {
 				color: 'primary'
 			},
 			multiple: true,
+			required: true,
 			valueChanges: (value) => console.log(value)
 		}];
 		

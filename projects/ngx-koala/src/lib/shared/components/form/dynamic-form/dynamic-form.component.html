@@ -265,9 +265,13 @@
 	          </mat-chip>
 	          <input
 		          #autocompleteInput
+		          [readonly]="propriedade.get('disabled').value"
+		          [required]="propriedade.get('required').value"
 		          [matAutocomplete]="auto"
 		          [matChipInputFor]="chipList"
 		          formControlName="value"
+		          matInput
+		          type="text"
 		          placeholder="Selecione um ou mais opções...">
 	        </mat-chip-list>
 	      </div>

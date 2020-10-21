@@ -34,7 +34,7 @@
 				</koala-dynamic-form>
 				
 		    <mat-action-row>
-			    <button (click)="simulateDataFromServer()" color="primary" mat-raised-button>
+		      <button (click)="simulateDataFromServer()" color="primary" mat-raised-button>
 			      Simular Preenchimento de Dados
 		      </button>
 		      <button (click)="sendToConsole()" color="primary" mat-raised-button>
@@ -59,9 +59,12 @@
 				</koala-dynamic-form>
 				
 		    <mat-action-row>
-		      <button (click)="sendToConsole()" color="primary" mat-raised-button>
-			      Visualizar Dados no Console
-		      </button>
+			    <koala-submit
+				    (click)="sendToConsole()"
+				    [fg]="formAutocomplete"
+				    btnLabel="Visualizar Dados no Console"
+				    color="primary">
+		      </koala-submit>
 		    </mat-action-row>
 			
 			</mat-expansion-panel>
@@ -82,9 +85,12 @@
 				</koala-dynamic-form>
 				
 		    <mat-action-row>
-		      <button (click)="sendToConsole()" color="primary" mat-raised-button>
-			      Visualizar Dados no Console
-		      </button>
+			    <koala-submit
+				    (click)="sendToConsole()"
+				    [fg]="formCamposDinamicos"
+				    btnLabel="Visualizar Dados no Console"
+				    color="primary">
+		      </koala-submit>
 		    </mat-action-row>
 			
 			</mat-expansion-panel>
