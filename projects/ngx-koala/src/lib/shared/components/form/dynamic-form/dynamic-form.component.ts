@@ -13,6 +13,7 @@ import { KoalaDynamicAutocompleteOptionsInterface } from './interfaces/koala.dyn
 import { KoalaDynamicFormShowFieldInterface } from './interfaces/koala.dynamic-form-show-field.interface';
 import { KoalaDynamicFormService } from '../../../services/dynamic-forms/koala.dynamic-form.service';
 import { KoalaDynamicFormMoreItensShowFieldConfigInterface } from './interfaces/koala.dynamic-form-more-itens-show-field-config.interface';
+import { KoalaArrayHelper } from 'tskoala-helpers/dist/array/koala-array.helper';
 
 @Component({
 	selector: 'koala-dynamic-form',
@@ -91,7 +92,12 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 								            newFormGroup.get('autocompleteSelectedValue').setValue(value);
 							            }
 						            } else if (!newFormGroup.get('multiple').value) {
-							            newFormGroup.get('autocompleteSelectedValue').setValue(null);
+							            newFormGroup.get('autocompleteSelectedValue').setValue(
+								            KoalaArrayHelper.filter<KoalaDynamicFormFieldInterface>(
+									            this.formConfig,
+									            newFormGroup.get('name').value,
+									            'name'
+								            )[0].autocompleteDefaultValueOnClear ?? null);
 						            }
 						            if (config.autocompleteType === 'all') {
 							            const autocompleteOptionsSubject = newFormGroup.get('autocompleteOptions').value as BehaviorSubject<KoalaDynamicAutocompleteOptionsInterface[]>;
@@ -281,7 +287,10 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			autocompleteOptions: [config.autocompleteOptions],
 			autocompleteMultipleConfig: [config.autocompleteMultipleConfig],
 			autocompleteOptionsFiltered: [new BehaviorSubject<any>([])],
-			autocompleteSelectedValue: [(config.multiple ? (value.value ? [value?.value] : []) : value?.value ?? '')],
+			autocompleteSelectedValue: [(config.multiple ?
+					(value.value ? [value?.value] : []) :
+					(value?.value ?? config.autocompleteDefaultValueOnClear)
+			)],
 			textLogs: [config?.textObs],
 			value: [value, validators]
 		});
