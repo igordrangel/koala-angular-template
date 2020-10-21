@@ -238,7 +238,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 	private newControl(config: KoalaDynamicFormFieldInterface): FormGroup {
 		const validators = [];
 		let value: any = config.value ?? '';
-		let valueSelectedAutocomplete: KoalaDynamicAutocompleteOptionsInterface | KoalaDynamicAutocompleteOptionsInterface[] = null;
+		let valueSelectedAutocomplete: KoalaDynamicAutocompleteOptionsInterface | KoalaDynamicAutocompleteOptionsInterface[] = (config.multiple ? [] : null);
 		if (config.required) {
 			validators.push(Validators.required);
 		}
@@ -248,15 +248,14 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			validators.push(CnpjValidator);
 		} else if (config.type === DynamicFormTypeFieldEnum.email) {
 			validators.push(Validators.email);
-		} else if (
-			config.required &&
-			config.type === DynamicFormTypeFieldEnum.autocomplete
-		) {
+		} else if (config.type === DynamicFormTypeFieldEnum.autocomplete) {
 			if (value) {
 				valueSelectedAutocomplete = value;
 				value = (config.multiple ? valueSelectedAutocomplete[0] : value);
 			}
-			validators.push(AutocompleteSelectedValidator);
+			if (config.required) {
+				validators.push(AutocompleteSelectedValidator);
+			}
 		} else if (config.type === DynamicFormTypeFieldEnum.checkbox) {
 			value = config.value ?? false;
 		}
