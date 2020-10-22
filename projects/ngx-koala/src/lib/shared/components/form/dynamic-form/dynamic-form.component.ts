@@ -236,9 +236,13 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 	}
 	
 	private newControl(config: KoalaDynamicFormFieldInterface): FormGroup {
-		const validators = [];
+		let validators = [];
 		let value: any = config.value ?? '';
-		let valueSelectedAutocomplete: KoalaDynamicAutocompleteOptionsInterface | KoalaDynamicAutocompleteOptionsInterface[] = (config.multiple ? [] : null);
+		let valueSelectedAutocomplete: KoalaDynamicAutocompleteOptionsInterface | KoalaDynamicAutocompleteOptionsInterface[] = (
+			config.multiple ?
+				[] :
+				(config.autocompleteDefaultValueOnClear ?? null)
+		);
 		if (config.required) {
 			validators.push(Validators.required);
 		}
@@ -265,6 +269,10 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			value.length >= 6
 		) {
 			this.hoursAndMinutesMask = '000:00';
+		}
+		
+		if (config.show !== true) {
+			validators = [];
 		}
 		
 		return this.fb.group({

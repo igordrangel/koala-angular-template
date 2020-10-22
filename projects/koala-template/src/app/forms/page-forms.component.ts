@@ -115,6 +115,7 @@ export class PageFormsComponent implements OnInit {
 			appearance: 'fill',
 			class: 'col-12',
 			fieldClass: 'w-100',
+			autocompleteDefaultValueOnClear: '',
 			autocompleteOptions: this.countriesSubject,
 			autocompleteType: 'all',
 			required: true,
@@ -189,6 +190,7 @@ export class PageFormsComponent implements OnInit {
 			label: 'Color',
 			name: 'color',
 			type: DynamicFormTypeFieldEnum.color,
+			value: '#000000',
 			required: true
 		}];
 		
