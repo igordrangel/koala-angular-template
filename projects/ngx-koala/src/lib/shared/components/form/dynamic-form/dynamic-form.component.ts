@@ -70,25 +70,27 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 				            .pipe(debounceTime(300))
 				            .subscribe(value => {
 					            if (this.showFieldsMoreItensConfig) {
-						            const config = this.showFieldsMoreItensConfig
-						                               .find(config => config.nameField === newFormGroup.get('name').value);
-						            if (config) {
-							            if (config.dynamicFormConfig) {
-								            const controlDynamicFormConfig = this.controls
-								                                                 .controls
-								                                                 .find(control =>
-									                                                 config.fieldsToShow.indexOf(control.get('name').value) >= 0
-								                                                 );
-								            const dynamicFormConfigSubject = controlDynamicFormConfig.get('dynamicFormConfig').value as BehaviorSubject<KoalaDynamicFormConfigInterface>;
-								            dynamicFormConfigSubject.next(null);
-								            setTimeout(() => dynamicFormConfigSubject.next(config.dynamicFormConfig(value)), 1);
+						            const configs = this.showFieldsMoreItensConfig
+						                                .filter(config => config.nameField === newFormGroup.get('name').value);
+						            configs.forEach(config => {
+							            if (config) {
+								            if (config.dynamicFormConfig) {
+									            const controlDynamicFormConfig = this.controls
+									                                                 .controls
+									                                                 .find(control =>
+										                                                 config.fieldsToShow.indexOf(control.get('name').value) >= 0
+									                                                 );
+									            const dynamicFormConfigSubject = controlDynamicFormConfig.get('dynamicFormConfig').value as BehaviorSubject<KoalaDynamicFormConfigInterface>;
+									            dynamicFormConfigSubject.next(null);
+									            setTimeout(() => dynamicFormConfigSubject.next(config.dynamicFormConfig(value)), 1);
+								            }
+								            this.dynamicFormService.showFields(
+									            this.showFields,
+									            config.fieldsToShow,
+									            config.fnShow(value)
+								            );
 							            }
-							            this.dynamicFormService.showFields(
-								            this.showFields,
-								            config.fieldsToShow,
-								            config.fnShow(value)
-							            );
-						            }
+						            });
 					            }
 					            if (config.type === DynamicFormTypeFieldEnum.autocomplete) {
 						            if (
