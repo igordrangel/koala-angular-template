@@ -67,6 +67,14 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 									const configs = this.showFieldsMoreItensConfig
 									                    .filter(config => config.nameField === newFormGroup.get('name').value);
 									configs.forEach(config => {
+										const controlDynamicFormConfig = this.controls
+										                                     .controls
+										                                     .find(control =>
+											                                     config.fieldsToShow.indexOf(control.get('name').value) >= 0
+										                                     );
+										const dynamicFormConfigSubject = controlDynamicFormConfig.get('dynamicFormConfig').value as BehaviorSubject<KoalaDynamicFormConfigInterface>;
+										dynamicFormConfigSubject.next(null);
+										setTimeout(() => dynamicFormConfigSubject.next(config.dynamicFormConfig(value)), 1);
 										this.dynamicFormService.showFields(
 											this.showFields,
 											config.fieldsToShow,
