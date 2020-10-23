@@ -35,6 +35,8 @@ export class KoalaDynamicFormService {
 						    control.get('autocompleteSelectedValue').value
 				    );
 			    }
+		    } else if (control.get('type').value === DynamicFormTypeFieldEnum.dynamicForm) {
+			    value = this.emitData(control.get('dynamicFormConfig').value.form);
 		    }
 		    data[control.get('name').value] = value;
 	    }

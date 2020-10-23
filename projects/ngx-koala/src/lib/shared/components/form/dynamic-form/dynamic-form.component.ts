@@ -287,6 +287,12 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 				color: config?.fileButtonConfig?.color ?? 'blue',
 				accept: config?.fileButtonConfig?.accept ?? '*'
 			}],
+			dynamicFormConfig: [{
+				form: this.fb.group({}),
+				formConfig: config.dynamicFormConfig?.config,
+				setValues: config.dynamicFormConfig?.setValues,
+				showFields: config.dynamicFormConfig?.showFields
+			}],
 			appearance: [config.appearance],
 			floatLabel: [config.floatLabel],
 			placeholder: [config.placeholder],

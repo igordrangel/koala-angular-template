@@ -88,18 +88,83 @@ export class PageFormsComponent implements OnInit {
 					required: true
 				}, {
 					show: false,
-					appearance: 'fill',
-					floatLabel: 'always',
 					fieldClass: 'w-100',
 					class: 'col-12',
-					label: 'Horas e Minutos',
-					name: 'horasMinutos',
-					type: DynamicFormTypeFieldEnum.hoursAndMinutes,
-					value: '48:00',
-					required: true
+					label: 'Campos Dinâmicos',
+					name: 'dynamicFields',
+					type: DynamicFormTypeFieldEnum.dynamicForm,
+					dynamicFormConfig: {
+						config: [{
+							label: 'Itens por Demanda',
+							name: 'itensPorDemanda',
+							type: DynamicFormTypeFieldEnum.moreItems,
+							moreItemsButtonIconAddlabel: 'Adicionar novo item',
+							moreItemsIcon: 'receipt_long',
+							moreItemsMinItems: 1,
+							moreItemsMaxItems: 2,
+							moreItemsConfig: {
+								form: this.fb.group({}),
+								formConfig: [{
+									label: 'Nome',
+									name: 'name',
+									type: DynamicFormTypeFieldEnum.text,
+									appearance: 'fill',
+									floatLabel: 'always',
+									class: 'col-6',
+									fieldClass: 'w-100'
+								}, {
+									label: 'Sobrenome',
+									name: 'lastname',
+									type: DynamicFormTypeFieldEnum.text,
+									appearance: 'fill',
+									floatLabel: 'always',
+									class: 'col-6',
+									fieldClass: 'w-100'
+								}, {
+									label: 'Exibir Campos',
+									name: 'exibirCampo',
+									appearance: 'fill',
+									floatLabel: 'always',
+									fieldClass: 'w-100',
+									class: 'col-12',
+									type: DynamicFormTypeFieldEnum.select,
+									opcoesSelect: [
+										{value: true, name: 'Sim'},
+										{value: false, name: 'Não'}
+									],
+									value: false,
+									required: true
+								}, {
+									show: false,
+									fieldClass: 'w-100',
+									class: 'col-12',
+									label: 'Campos Dinâmicos',
+									name: 'dynamicFields',
+									type: DynamicFormTypeFieldEnum.dynamicForm,
+									dynamicFormConfig: {
+										config: [{
+											appearance: 'fill',
+											floatLabel: 'always',
+											fieldClass: 'w-100',
+											class: 'w-100',
+											label: 'Horas e Minutos',
+											name: 'horasMinutos',
+											type: DynamicFormTypeFieldEnum.hoursAndMinutes,
+											value: '48:00',
+											required: true
+										}]
+									}
+								}],
+								showFieldsConfig: [
+									{nameField: 'exibirCampo', fieldsToShow: ['dynamicFields'], fnShow: value => value === true}
+								],
+								setValues: this.formMoreItensValuesSubject
+							}
+						}]
+					}
 				}],
 				showFieldsConfig: [
-					{nameField: 'exibirCampo', fieldsToShow: ['horasMinutos'], fnShow: value => value === true}
+					{nameField: 'exibirCampo', fieldsToShow: ['dynamicFields'], fnShow: value => value === true}
 				],
 				setValues: this.formMoreItensValuesSubject
 			}

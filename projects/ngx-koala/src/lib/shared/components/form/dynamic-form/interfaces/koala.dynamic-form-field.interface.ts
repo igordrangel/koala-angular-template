@@ -6,6 +6,7 @@ import { KoalaDynamicSetValueInterface } from './koala.dynamic-set-value.interfa
 import { KoalaDynamicAutocompleteOptionsInterface } from './koala.dynamic-autocomplete-options.interface';
 import { KoalaDynamicFormMoreItensShowFieldConfigInterface } from './koala.dynamic-form-more-itens-show-field-config.interface';
 import { KoalaDynamicFormAutocompleteMultipleConfigInterface } from './koala.dynamic-form-autocomplete-multiple-config.interface';
+import { KoalaDynamicFormShowFieldInterface } from './koala.dynamic-form-show-field.interface';
 
 export interface KoalaDynamicFormFieldInterface {
   show?: boolean;
@@ -52,5 +53,10 @@ export interface KoalaDynamicFormFieldInterface {
     color?: 'blue' | 'white';
     backgroundColor?: 'blue' | 'white' | 'transparent';
     accept?: string;
+  }
+  dynamicFormConfig?: {
+    config: KoalaDynamicFormFieldInterface[];
+    setValues?: BehaviorSubject<KoalaDynamicSetValueInterface[]>;
+    showFields?: BehaviorSubject<KoalaDynamicFormShowFieldInterface[]>;
   }
 }

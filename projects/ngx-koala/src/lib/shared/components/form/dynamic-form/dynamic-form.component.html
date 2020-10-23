@@ -333,6 +333,17 @@
 				  [text]="propriedade.get('fileButtonConfig').value.text">
 			  </koala-file-button>
 		  </div>
+		  <div *ngIf="propriedade.get('type').value == typeField.dynamicForm">
+			  <fieldset>
+				  <legend>{{propriedade.get('label').value}}</legend>
+				  <koala-dynamic-form
+					  [formConfig]="propriedade.get('dynamicFormConfig').value.formConfig"
+					  [form]="propriedade.get('dynamicFormConfig').value.form"
+					  [setValues]="propriedade.get('dynamicFormConfig').value.setValues"
+					  [showFields]="propriedade.get('dynamicFormConfig').value.showFields">
+				  </koala-dynamic-form>
+			  </fieldset>
+		  </div>
 	  </div>
   </div>
   <ng-content select="[btn-submit]"></ng-content>
