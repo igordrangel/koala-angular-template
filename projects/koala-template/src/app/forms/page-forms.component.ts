@@ -93,7 +93,8 @@ export class PageFormsComponent implements OnInit {
 					class: 'col-12',
 					label: 'Campos Dinâmicos',
 					name: 'dynamicFields',
-					type: DynamicFormTypeFieldEnum.dynamicForm
+					type: DynamicFormTypeFieldEnum.dynamicForm,
+					valueChanges: value => console.log(value)
 				}],
 				showFieldsConfig: [{
 					nameField: 'definirTempo',

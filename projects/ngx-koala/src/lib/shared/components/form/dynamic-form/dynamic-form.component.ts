@@ -53,6 +53,18 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			if (config.asyncValidators) {
 				newFormGroup.get('value').setAsyncValidators(config.asyncValidators);
 			}
+			if (config.type === DynamicFormTypeFieldEnum.dynamicForm) {
+				const formGroupDynamicFormsSubject = newFormGroup.get('dynamicFormConfig').value as BehaviorSubject<KoalaDynamicFormConfigInterface>;
+				formGroupDynamicFormsSubject.subscribe(formGroupConfig => {
+					if (formGroupConfig) {
+						formGroupConfig.form.valueChanges.subscribe(() => {
+							if (formGroupConfig.form.valid && config.valueChanges) {
+								config.valueChanges(this.dynamicFormService.emitData(formGroupConfig.form));
+							}
+						});
+					}
+				});
+			}
 			if (
 				config.valueChanges ||
 				config.type === DynamicFormTypeFieldEnum.autocomplete ||
