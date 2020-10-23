@@ -333,16 +333,26 @@
 				  [text]="propriedade.get('fileButtonConfig').value.text">
 			  </koala-file-button>
 		  </div>
-		  <div *ngIf="propriedade.get('type').value == typeField.dynamicForm">
-			  <fieldset>
+		  <div *ngIf="
+		    propriedade.get('type').value == typeField.dynamicForm &&
+				(propriedade.get('dynamicFormConfig').value | async) as dynamicFormConfig">
+			  <fieldset *ngIf="propriedade.get('label').value else dynamicFormWithoutLabel">
 				  <legend>{{propriedade.get('label').value}}</legend>
 				  <koala-dynamic-form
-					  [formConfig]="propriedade.get('dynamicFormConfig').value.formConfig"
-					  [form]="propriedade.get('dynamicFormConfig').value.form"
-					  [setValues]="propriedade.get('dynamicFormConfig').value.setValues"
-					  [showFields]="propriedade.get('dynamicFormConfig').value.showFields">
+					  [formConfig]="dynamicFormConfig.formConfig"
+					  [form]="dynamicFormConfig.form"
+					  [setValues]="dynamicFormConfig.setValues"
+					  [showFields]="dynamicFormConfig.showFields">
 				  </koala-dynamic-form>
 			  </fieldset>
+			  <ng-template #dynamicFormWithoutLabel>
+				  <koala-dynamic-form
+					  [formConfig]="dynamicFormConfig.formConfig"
+					  [form]="dynamicFormConfig.form"
+					  [setValues]="dynamicFormConfig.setValues"
+					  [showFields]="dynamicFormConfig.showFields">
+				  </koala-dynamic-form>
+			  </ng-template>
 		  </div>
 	  </div>
   </div>

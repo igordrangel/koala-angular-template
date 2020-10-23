@@ -16,6 +16,7 @@ import { KoalaDynamicFormMoreItensShowFieldConfigInterface } from './interfaces/
 import { KoalaArrayHelper } from 'tskoala-helpers/dist/array/koala-array.helper';
 import { ThemePalette } from '@angular/material/core';
 import { KoalaDynamicFormAutocompleteMultipleConfigInterface } from './interfaces/koala.dynamic-form-autocomplete-multiple-config.interface';
+import { KoalaDynamicFormConfigInterface } from './interfaces/koala.dynamic-form-config.interface';
 
 @Component({
 	selector: 'koala-dynamic-form',
@@ -55,6 +56,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			if (
 				config.valueChanges ||
 				config.type === DynamicFormTypeFieldEnum.autocomplete ||
+				config.type === DynamicFormTypeFieldEnum.dynamicForm ||
 				this.showFieldsMoreItensConfig
 			) {
 				if (config.type === DynamicFormTypeFieldEnum.autocomplete) {
@@ -71,6 +73,16 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 						            const config = this.showFieldsMoreItensConfig
 						                               .find(config => config.nameField === newFormGroup.get('name').value);
 						            if (config) {
+							            if (config.dynamicFormConfig) {
+								            const controlDynamicFormConfig = this.controls
+								                                                 .controls
+								                                                 .find(control =>
+									                                                 config.fieldsToShow.indexOf(control.get('name').value) >= 0
+								                                                 );
+								            const dynamicFormConfigSubject = controlDynamicFormConfig.get('dynamicFormConfig').value as BehaviorSubject<KoalaDynamicFormConfigInterface>;
+								            dynamicFormConfigSubject.next(null);
+								            setTimeout(() => dynamicFormConfigSubject.next(config.dynamicFormConfig(value)), 1);
+							            }
 							            this.dynamicFormService.showFields(
 								            this.showFields,
 								            config.fieldsToShow,
@@ -287,12 +299,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 				color: config?.fileButtonConfig?.color ?? 'blue',
 				accept: config?.fileButtonConfig?.accept ?? '*'
 			}],
-			dynamicFormConfig: [{
-				form: this.fb.group({}),
-				formConfig: config.dynamicFormConfig?.config,
-				setValues: config.dynamicFormConfig?.setValues,
-				showFields: config.dynamicFormConfig?.showFields
-			}],
+			dynamicFormConfig: [new BehaviorSubject<KoalaDynamicFormConfigInterface>(config.dynamicFormConfig)],
 			appearance: [config.appearance],
 			floatLabel: [config.floatLabel],
 			placeholder: [config.placeholder],
