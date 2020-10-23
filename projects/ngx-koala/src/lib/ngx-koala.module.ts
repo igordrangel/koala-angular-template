@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { KoalaFormModule } from './shared/components/form/koala.form.module';
 import { PageComponent } from './shared/components/page/page.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,6 +26,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     CommonModule,
     RouterModule,
     HttpClientModule,
+    KoalaFormModule,
     MatBadgeModule,
     MatProgressBarModule,
     MatToolbarModule,
@@ -38,6 +40,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   exports: [
     PageComponent,
     HttpClientModule,
+    KoalaFormModule,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
