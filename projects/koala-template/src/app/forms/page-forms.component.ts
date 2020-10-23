@@ -110,17 +110,23 @@ export class PageFormsComponent implements OnInit {
 						return {
 							form: this.fb.group({}),
 							formConfig: [{
-								appearance: 'fill',
-								floatLabel: 'always',
-								fieldClass: 'w-100',
-								class: 'col-12',
-								label: 'Horas e Minutos',
-								name: 'horasMinutos',
-								type: DynamicFormTypeFieldEnum.hoursAndMinutes,
-								value: value,
-								required: true
+								name: 'teste',
+								type: DynamicFormTypeFieldEnum.dynamicForm,
+								dynamicFormConfig: {
+									form: this.fb.group({}),
+									formConfig: [{
+										appearance: 'fill',
+										floatLabel: 'always',
+										fieldClass: 'w-100',
+										class: 'col-12',
+										label: 'Horas e Minutos',
+										name: 'teste',
+										type: DynamicFormTypeFieldEnum.hoursAndMinutes,
+										required: true
+									} as KoalaDynamicFormFieldInterface]
+								}
 							} as KoalaDynamicFormFieldInterface]
-						};
+						}
 					}
 				}],
 				setValues: this.formMoreItensValuesSubject

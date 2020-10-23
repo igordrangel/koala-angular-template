@@ -412,6 +412,10 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 									control.get('value').setValidators(validators);
 								}
 							} else {
+								const dynamicFormConfig = control.get('dynamicFormConfig').value as BehaviorSubject<KoalaDynamicFormConfigInterface>;
+								if (dynamicFormConfig.getValue()) {
+									dynamicFormConfig.next(null);
+								}
 								control.get('value').clearValidators();
 								control.get('value').clearAsyncValidators();
 								control.setErrors(null);
