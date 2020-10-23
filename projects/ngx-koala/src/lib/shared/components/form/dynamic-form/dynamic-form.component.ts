@@ -110,7 +110,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 						                                .filter(config => config.nameField === newFormGroup.get('name').value);
 						            configs.forEach(config => {
 							            if (config) {
-								            if (config.dynamicFormConfig) {
+								            if (config.dynamicFormConfig && config.fnShow(value)) {
 									            const controlDynamicFormConfig = this.controls
 									                                                 .controls
 									                                                 .find(control =>
@@ -120,11 +120,21 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 									            dynamicFormConfigSubject.next(null);
 									            setTimeout(() => dynamicFormConfigSubject.next(config.dynamicFormConfig(value)), 1);
 								            }
-								            this.dynamicFormService.showFields(
-									            this.showFields,
-									            config.fieldsToShow,
-									            config.fnShow(value)
+								            const tmpConfigs = KoalaArrayHelper.filter<KoalaDynamicFormMoreItensShowFieldConfigInterface>(
+									            configs,
+									            config.nameField,
+									            'nameField'
 								            );
+								            if (
+									            (!!tmpConfigs.find(tc => tc.fnShow(value) === true) && config.fnShow(value) === true) ||
+									            !tmpConfigs.find(tc => tc.fnShow(value) === true)
+								            ) {
+									            this.dynamicFormService.showFields(
+										            this.showFields,
+										            config.fieldsToShow,
+										            config.fnShow(value)
+									            );
+								            }
 							            }
 						            });
 					            }

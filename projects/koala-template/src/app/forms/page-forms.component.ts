@@ -81,7 +81,7 @@ export class PageFormsComponent implements OnInit {
 					class: 'col-12',
 					type: DynamicFormTypeFieldEnum.select,
 					opcoesSelect: [
-						{value: '24:00', name: '24:00'},
+						{value: 'teste', name: 'teste'},
 						{value: '48:00', name: '48:00'},
 						{value: '', name: 'Não'}
 					],
@@ -89,8 +89,6 @@ export class PageFormsComponent implements OnInit {
 					required: true
 				}, {
 					show: false,
-					fieldClass: 'w-100',
-					class: 'col-12',
 					label: 'Campos Dinâmicos',
 					name: 'dynamicFields',
 					type: DynamicFormTypeFieldEnum.dynamicForm,
@@ -103,22 +101,15 @@ export class PageFormsComponent implements OnInit {
 							class: 'col-12',
 							label: 'Horas e Minutos',
 							name: 'teste',
-							type: DynamicFormTypeFieldEnum.hoursAndMinutes,
+							type: DynamicFormTypeFieldEnum.text,
 							required: true
 						} as KoalaDynamicFormFieldInterface]
 					}
 				}],
 				showFieldsConfig: [{
-					nameField: 'dynamicFields',
-					fieldsToShow: [''],
-					fnShow: value => {
-						console.log(value);
-						return true;
-					},
-				}, {
 					nameField: 'definirTempo',
 					fieldsToShow: ['dynamicFields'],
-					fnShow: value => value !== ''
+					fnShow: value => value === 'teste'
 				}],
 				setValues: this.formMoreItensValuesSubject
 			}
