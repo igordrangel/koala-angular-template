@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { KoalaDynamicAutocompleteOptionsInterface } from '../../components/form/dynamic-form/interfaces/koala.dynamic-autocomplete-options.interface';
 import { KoalaObjectHelper } from 'tskoala-helpers/dist/object/koala-object.helper';
 import { KoalaDynamicFormShowFieldInterface } from '../../components/form/dynamic-form/interfaces/koala.dynamic-form-show-field.interface';
+import { KoalaDynamicFormConfigInterface } from '../../components/form/dynamic-form/interfaces/koala.dynamic-form-config.interface';
 
 @Injectable({providedIn: 'root'})
 export class KoalaDynamicFormService {
@@ -36,7 +37,8 @@ export class KoalaDynamicFormService {
 				    );
 			    }
 		    } else if (control.get('type').value === DynamicFormTypeFieldEnum.dynamicForm) {
-			    value = this.emitData(control.get('dynamicFormConfig').value.form);
+			    const dynamicFormConfig = control.get('dynamicFormConfig').value as BehaviorSubject<KoalaDynamicFormConfigInterface>;
+			    value = this.emitData(dynamicFormConfig.getValue().form);
 		    }
 		    data[control.get('name').value] = value;
 	    }
