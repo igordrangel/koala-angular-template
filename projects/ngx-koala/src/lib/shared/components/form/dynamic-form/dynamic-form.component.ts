@@ -411,11 +411,16 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 									}
 									control.get('value').setValidators(validators);
 								}
-							} else {
-								const dynamicFormConfig = control.get('dynamicFormConfig').value as BehaviorSubject<KoalaDynamicFormConfigInterface>;
-								if (dynamicFormConfig.getValue()) {
-									dynamicFormConfig.next(null);
+								const dynamicFormConfigSubject = control.get('dynamicFormConfig').value as BehaviorSubject<KoalaDynamicFormConfigInterface>;
+								if (dynamicFormConfigSubject.getValue()) {
+									const dynamicFormConfig = dynamicFormConfigSubject.getValue();
+									if (dynamicFormConfig.form.controls) {
+										dynamicFormConfigSubject.next(null);
+										dynamicFormConfig.form = this.fb.group({});
+										setTimeout(() => dynamicFormConfigSubject.next(dynamicFormConfig), 1);
+									}
 								}
+							} else {
 								control.get('value').clearValidators();
 								control.get('value').clearAsyncValidators();
 								control.setErrors(null);

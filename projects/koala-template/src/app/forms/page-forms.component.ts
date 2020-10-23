@@ -93,7 +93,20 @@ export class PageFormsComponent implements OnInit {
 					class: 'col-12',
 					label: 'Campos Dinâmicos',
 					name: 'dynamicFields',
-					type: DynamicFormTypeFieldEnum.dynamicForm
+					type: DynamicFormTypeFieldEnum.dynamicForm,
+					dynamicFormConfig: {
+						form: this.fb.group({}),
+						formConfig: [{
+							appearance: 'fill',
+							floatLabel: 'always',
+							fieldClass: 'w-100',
+							class: 'col-12',
+							label: 'Horas e Minutos',
+							name: 'teste',
+							type: DynamicFormTypeFieldEnum.hoursAndMinutes,
+							required: true
+						} as KoalaDynamicFormFieldInterface]
+					}
 				}],
 				showFieldsConfig: [{
 					nameField: 'dynamicFields',
@@ -105,29 +118,7 @@ export class PageFormsComponent implements OnInit {
 				}, {
 					nameField: 'definirTempo',
 					fieldsToShow: ['dynamicFields'],
-					fnShow: value => value !== '',
-					dynamicFormConfig: value => {
-						return {
-							form: this.fb.group({}),
-							formConfig: [{
-								name: 'teste',
-								type: DynamicFormTypeFieldEnum.dynamicForm,
-								dynamicFormConfig: {
-									form: this.fb.group({}),
-									formConfig: [{
-										appearance: 'fill',
-										floatLabel: 'always',
-										fieldClass: 'w-100',
-										class: 'col-12',
-										label: 'Horas e Minutos',
-										name: 'teste',
-										type: DynamicFormTypeFieldEnum.hoursAndMinutes,
-										required: true
-									} as KoalaDynamicFormFieldInterface]
-								}
-							} as KoalaDynamicFormFieldInterface]
-						}
-					}
+					fnShow: value => value !== ''
 				}],
 				setValues: this.formMoreItensValuesSubject
 			}
