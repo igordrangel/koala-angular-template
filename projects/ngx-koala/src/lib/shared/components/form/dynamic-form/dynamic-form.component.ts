@@ -116,7 +116,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 						                                });
 						            configs.forEach(config => {
 							            if (config) {
-								            if (config.dynamicFormConfig && config.fnShow(value)) {
+								            if (config.dynamicFormConfig && config.fnShow(value) && config.dynamicFormConfig) {
 									            const controlDynamicFormConfig = this.controls
 									                                                 .controls
 									                                                 .find(control =>
@@ -194,26 +194,32 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 					}
 				}
 				if (config.moreItemsConfig.setValues) {
-					config.moreItemsConfig.setValues.subscribe(values => {
-						if (values.length > 0) {
-							values.forEach((itemValue, indexValue) => {
-								if (!this.controls.controls[indexConfig].get('moreItemsConfig').value[indexValue]) {
-									this.addMoreItem(indexConfig);
-								}
-								setTimeout(() => {
-									this.setValuesOnFields(itemValue, this.controls.controls[indexConfig].get('moreItemsConfig').value[indexValue].form);
-								}, 301);
-							});
-						}
-					});
+					config.moreItemsConfig
+					      .setValues
+					      .pipe(debounceTime(500))
+					      .subscribe(async values => {
+						      if (values.length > 0) {
+							      values.forEach((itemValue, indexValue) => {
+								      if (!this.controls.controls[indexConfig].get('moreItemsConfig').value[indexValue]) {
+									      this.addMoreItem(indexConfig);
+								      }
+								      setTimeout(() => {
+									      this.setValuesOnFields(
+										      itemValue,
+										      this.controls.controls[indexConfig].get('moreItemsConfig').value[indexValue].form
+									      );
+								      }, 301);
+							      });
+						      }
+					      });
 				}
 			}
 		});
-		if (this.setValues) {
-			this.setValuesOnFields(this.setValues, this.form);
-		}
 		if (this.showFields) {
 			this.changeVisibilityFields(this.showFields, this.form);
+		}
+		if (this.setValues) {
+			this.setValuesOnFields(this.setValues, this.form);
 		}
 	}
 	
@@ -327,6 +333,13 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			this.hoursAndMinutesMask = '000:00';
 		}
 		
+		if (config.dynamicFormConfig) {
+			const cloneDynamicFormConfig = {} as KoalaDynamicFormConfigInterface;
+			Object.assign(cloneDynamicFormConfig, config.dynamicFormConfig);
+			cloneDynamicFormConfig.setValues = null;
+			config.dynamicFormConfig = cloneDynamicFormConfig;
+		}
+		
 		if (config.show !== true) {
 			validators = [];
 		}
@@ -377,12 +390,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			if (item) {
 				const formArray = form.get('formData') as FormArray;
 				for (const prop of item.values()) {
-					for (const control of formArray.controls.values()) {
-						if (control.get('name').value === prop.name) {
-							control.get('value').setValue(prop.value);
-							break;
-						}
-					}
+					this.setValueByProp(formArray, prop);
 				}
 			}
 		});
@@ -463,5 +471,45 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 				return true;
 			}
 		});
+	}
+	
+	private setValueByProp(formArray: FormArray, prop: KoalaDynamicSetValueInterface) {
+		if (formArray) {
+			if (prop.name.indexOf(' > ') >= 0) {
+				let dynamicFormSubject: BehaviorSubject<KoalaDynamicFormConfigInterface>;
+				const arrPropName = prop.name.split(' > ');
+				let indexPropName = 0;
+				do {
+					const control = formArray.controls.find(control => control.get('name').value === arrPropName[indexPropName]);
+					if (indexPropName === arrPropName.length - 2) {
+						dynamicFormSubject = control.get('dynamicFormConfig').value;
+						const dynamicForm = dynamicFormSubject.getValue();
+						if (dynamicForm.formConfig.find(fc => fc.name === arrPropName[arrPropName.length - 1])) {
+							if (dynamicForm.setValues) {
+								dynamicForm.setValues.next(KoalaArrayHelper.merge(
+									dynamicForm.setValues.getValue(), [{
+										name: arrPropName[arrPropName.length - 1],
+										value: prop.value
+									}]
+								));
+							} else {
+								dynamicForm.setValues = new BehaviorSubject<KoalaDynamicSetValueInterface[]>([{
+									name: arrPropName[arrPropName.length - 1],
+									value: prop.value
+								}]);
+							}
+						}
+					}
+					indexPropName++;
+				} while (indexPropName < arrPropName.length - 1);
+			} else {
+				for (const control of formArray.controls.values()) {
+					if (control.get('name').value === prop.name) {
+						control.get('value').setValue(prop.value);
+						break;
+					}
+				}
+			}
+		}
 	}
 }

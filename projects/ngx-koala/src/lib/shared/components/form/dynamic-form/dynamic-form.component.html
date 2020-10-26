@@ -214,11 +214,10 @@
 					  {{propriedade.get('label').value}} (Min.: {{propriedade.get('moreItemsMinItems').value}}
 					                                     | Máx.: {{propriedade.get('moreItemsMaxItems').value}})
 				  </legend>
-				  <mat-accordion class="items">
+				  <mat-accordion class="items" multi>
 					  <mat-expansion-panel
 						  *ngFor="let item of propriedade.get('moreItemsConfig').value.slice().reverse(); index as indexMoreItems"
-						  [expanded]="(propriedade.get('moreItemsConfig').value.length - 1 - indexMoreItems) ===
-						  propriedade.get('moreItemsExpanded').value">
+						  expanded>
 						  <mat-expansion-panel-header>
 								<mat-panel-title class="titleForm">#
 									{{propriedade.get('moreItemsConfig').value.length - 1 - indexMoreItems + 1}}</mat-panel-title>

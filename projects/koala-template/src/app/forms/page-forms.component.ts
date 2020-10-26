@@ -91,48 +91,38 @@ export class PageFormsComponent implements OnInit {
 					show: false,
 					label: 'Campos Dinâmicos',
 					name: 'dynamicFields',
-					type: DynamicFormTypeFieldEnum.dynamicForm
+					type: DynamicFormTypeFieldEnum.dynamicForm,
+					dynamicFormConfig: {
+						form: this.fb.group({}),
+						formConfig: [{
+							appearance: 'fill',
+							floatLabel: 'always',
+							fieldClass: 'w-100',
+							class: 'col-6',
+							label: 'Nome',
+							name: 'name',
+							type: DynamicFormTypeFieldEnum.text,
+							required: true
+						}, {
+							appearance: 'fill',
+							floatLabel: 'always',
+							fieldClass: 'w-100',
+							class: 'col-6',
+							label: 'Sobrenome',
+							name: 'lastname',
+							type: DynamicFormTypeFieldEnum.text,
+							required: true
+						}]
+					}
 				}],
 				showFieldsConfig: [{
 					nameField: 'definirTempo',
 					fieldsToShow: ['dynamicFields'],
-					fnShow: value => value === 'teste',
-					dynamicFormConfig: value => {
-						return {
-							form: this.fb.group({}),
-							formConfig: [{
-								appearance: 'fill',
-								floatLabel: 'always',
-								fieldClass: 'w-100',
-								class: 'col-12',
-								label: 'Horas e Minutos',
-								name: 'teste',
-								value,
-								type: DynamicFormTypeFieldEnum.text,
-								required: true
-							}]
-						};
-					}
+					fnShow: value => value === 'teste'
 				}, {
 					nameField: 'definirTempo',
 					fieldsToShow: ['dynamicFields'],
-					fnShow: value => value !== 'teste' && value !== '',
-					dynamicFormConfig: (value) => {
-						return {
-							form: this.fb.group({}),
-							formConfig: [{
-								appearance: 'fill',
-								floatLabel: 'always',
-								fieldClass: 'w-100',
-								class: 'col-12',
-								label: 'Horas e Minutos',
-								name: 'teste',
-								value,
-								type: DynamicFormTypeFieldEnum.text,
-								required: true
-							}]
-						};
-					}
+					fnShow: value => value !== 'teste' && value !== ''
 				}],
 				setValues: this.formMoreItensValuesSubject
 			}
@@ -253,10 +243,15 @@ export class PageFormsComponent implements OnInit {
 			[
 				{name: 'name', value: 'Nome 1'},
 				{name: 'lastname', value: 'Sobrenome 1'},
-				{name: 'exibirCampo', value: true}
+				{name: 'definirTempo', value: 'teste'},
+				{name: 'dynamicFields > name', value: 'Nome 1'},
+				{name: 'dynamicFields > lastname', value: 'Sobrenome 1'}
 			], [
 				{name: 'name', value: 'Nome 2'},
-				{name: 'lastname', value: 'Sobrenome 2'}
+				{name: 'lastname', value: 'Sobrenome 2'},
+				{name: 'definirTempo', value: 'teste'},
+				{name: 'dynamicFields > name', value: 'Nome 2'},
+				{name: 'dynamicFields > lastname', value: 'Sobrenome 2'}
 			]
 		]);
 	}
