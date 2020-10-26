@@ -91,25 +91,48 @@ export class PageFormsComponent implements OnInit {
 					show: false,
 					label: 'Campos Dinâmicos',
 					name: 'dynamicFields',
-					type: DynamicFormTypeFieldEnum.dynamicForm,
-					dynamicFormConfig: {
-						form: this.fb.group({}),
-						formConfig: [{
-							appearance: 'fill',
-							floatLabel: 'always',
-							fieldClass: 'w-100',
-							class: 'col-12',
-							label: 'Horas e Minutos',
-							name: 'teste',
-							type: DynamicFormTypeFieldEnum.text,
-							required: true
-						} as KoalaDynamicFormFieldInterface]
-					}
+					type: DynamicFormTypeFieldEnum.dynamicForm
 				}],
 				showFieldsConfig: [{
 					nameField: 'definirTempo',
 					fieldsToShow: ['dynamicFields'],
-					fnShow: value => value === 'teste'
+					fnShow: value => value === 'teste',
+					dynamicFormConfig: value => {
+						return {
+							form: this.fb.group({}),
+							formConfig: [{
+								appearance: 'fill',
+								floatLabel: 'always',
+								fieldClass: 'w-100',
+								class: 'col-12',
+								label: 'Horas e Minutos',
+								name: 'teste',
+								value,
+								type: DynamicFormTypeFieldEnum.text,
+								required: true
+							}]
+						};
+					}
+				}, {
+					nameField: 'definirTempo',
+					fieldsToShow: ['dynamicFields'],
+					fnShow: value => value !== 'teste' && value !== '',
+					dynamicFormConfig: (value) => {
+						return {
+							form: this.fb.group({}),
+							formConfig: [{
+								appearance: 'fill',
+								floatLabel: 'always',
+								fieldClass: 'w-100',
+								class: 'col-12',
+								label: 'Horas e Minutos',
+								name: 'teste',
+								value,
+								type: DynamicFormTypeFieldEnum.text,
+								required: true
+							}]
+						};
+					}
 				}],
 				setValues: this.formMoreItensValuesSubject
 			}
