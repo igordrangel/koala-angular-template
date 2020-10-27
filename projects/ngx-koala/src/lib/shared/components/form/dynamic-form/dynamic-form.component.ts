@@ -406,13 +406,13 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		subject.subscribe(item => {
 			if (item) {
 				const formArray = form.get('formData') as FormArray;
-				for (const [index, prop] of item.entries()) {
-					for (const control of formArray.controls.values()) {
+				for (const prop of item.values()) {
+					for (const [indexControl, control] of formArray.controls.entries()) {
 						if (control.get('name').value === prop.name) {
 							control.get('show').value.next(prop.show);
 							if (prop.show) {
 								const validators = [];
-								const config: KoalaDynamicFormFieldInterface = this.formConfig[index] ?? null;
+								const config: KoalaDynamicFormFieldInterface = this.formConfig[indexControl] ?? null;
 								if (config) {
 									if (config.required === true) {
 										validators.push(Validators.required);
