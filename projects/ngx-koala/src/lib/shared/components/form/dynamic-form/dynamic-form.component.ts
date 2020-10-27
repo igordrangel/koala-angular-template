@@ -311,7 +311,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 				[] :
 				(config.autocompleteDefaultValueOnClear ?? null)
 		);
-		if (config.required) {
+		if (config.required === true) {
 			validators.push(Validators.required);
 		}
 		if (config.type === DynamicFormTypeFieldEnum.cpf) {
@@ -325,7 +325,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 				valueSelectedAutocomplete = value;
 				value = (config.multiple ? valueSelectedAutocomplete[0] : value);
 			}
-			if (config.required) {
+			if (config.required === true) {
 				validators.push(AutocompleteSelectedValidator);
 			}
 		} else if (config.type === DynamicFormTypeFieldEnum.checkbox) {
@@ -414,7 +414,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 								const validators = [];
 								const config: KoalaDynamicFormFieldInterface = this.formConfig[index] ?? null;
 								if (config) {
-									if (config.required) {
+									if (config.required === true) {
 										validators.push(Validators.required);
 									}
 									if (config.type === DynamicFormTypeFieldEnum.cpf) {
@@ -424,7 +424,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 									} else if (config.type === DynamicFormTypeFieldEnum.email) {
 										validators.push(Validators.email);
 									} else if (
-										config.required &&
+										config.required === true &&
 										config.type === DynamicFormTypeFieldEnum.autocomplete
 									) {
 										validators.push(AutocompleteSelectedValidator);
