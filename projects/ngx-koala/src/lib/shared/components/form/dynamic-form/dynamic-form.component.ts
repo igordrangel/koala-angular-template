@@ -202,7 +202,6 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 				if (config.moreItemsConfig.setValues) {
 					config.moreItemsConfig
 					      .setValues
-					      .pipe(debounceTime(500))
 					      .subscribe(async values => {
 						      if (values.length > 0) {
 							      values.forEach((itemValue, indexValue) => {
@@ -214,7 +213,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 										      itemValue,
 										      this.controls.controls[indexConfig].get('moreItemsConfig').value[indexValue].form
 									      );
-								      }, 301);
+								      }, 1);
 							      });
 						      }
 					      });

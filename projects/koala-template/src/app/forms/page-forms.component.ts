@@ -24,6 +24,8 @@ export class PageFormsComponent implements OnInit {
 	public formMoreItens: FormGroup;
 	public formMoreItensConfig: KoalaDynamicFormFieldInterface[];
 	public formMoreItensValuesSubject = new BehaviorSubject<BehaviorSubject<KoalaDynamicSetValueInterface[]>[]>([]);
+	public formMoreItensSistemasSubject = new BehaviorSubject<BehaviorSubject<KoalaDynamicSetValueInterface[]>[]>([]);
+	public formMoreItensAcoesubject = new BehaviorSubject<BehaviorSubject<KoalaDynamicSetValueInterface[]>[]>([]);
 	
 	public formAutocomplete: FormGroup;
 	public formAutocompleteConfig: KoalaDynamicFormFieldInterface[];
@@ -68,61 +70,75 @@ export class PageFormsComponent implements OnInit {
 					show: false,
 					label: 'Modulos',
 					name: 'modulos',
-					type: DynamicFormTypeFieldEnum.dynamicForm,
-					dynamicFormConfig: {
-						form: this.fb.group({}),
-						formConfig: [{
-							label: 'Sistemas',
-							name: 'sistemas',
-							type: DynamicFormTypeFieldEnum.moreItems,
-							moreItemsButtonIconAddlabel: 'Adicionar novo item',
-							moreItemsIcon: 'receipt_long',
-							moreItemsMinItems: 1,
-							moreItemsMaxItems: 2,
-							moreItemsConfig: {
-								form: this.fb.group({}),
-								formConfig: [{
-									label: 'Ações',
-									name: 'acoes',
-									type: DynamicFormTypeFieldEnum.dynamicForm,
-									dynamicFormConfig: {
-										form: this.fb.group({}),
-										formConfig: [{
-											label: 'Dados',
-											name: 'dados',
-											type: DynamicFormTypeFieldEnum.moreItems,
-											moreItemsButtonIconAddlabel: 'Adicionar novo item',
-											moreItemsIcon: 'receipt_long',
-											moreItemsMinItems: 1,
-											moreItemsMaxItems: 2,
-											moreItemsConfig: {
-												form: this.fb.group({}),
-												formConfig: [{
-													label: 'Tipo de Ação',
-													name: 'tipo',
-													type: DynamicFormTypeFieldEnum.text,
-													appearance: 'fill',
-													floatLabel: 'always',
-													class: 'col-12',
-													fieldClass: 'w-100'
-												}],
-												showFieldsConfig: [{
-													nameField: 'tipo',
-													fieldsToShow: ['acoes'],
-													fnShow: value => value !== ''
-												}]
-											}
-										}]
-									}
-								}]
-							}
-						}]
-					}
+					type: DynamicFormTypeFieldEnum.dynamicForm
 				}],
 				showFieldsConfig: [{
 					nameField: 'nome',
 					fieldsToShow: ['modulos'],
-					fnShow: value => value !== ''
+					fnShow: value => value !== '',
+					dynamicFormConfig: () => {
+						return {
+							form: this.fb.group({}),
+							formConfig: [{
+								label: 'Sistemas',
+								name: 'sistemas',
+								type: DynamicFormTypeFieldEnum.moreItems,
+								moreItemsButtonIconAddlabel: 'Adicionar novo item',
+								moreItemsIcon: 'receipt_long',
+								moreItemsMinItems: 1,
+								moreItemsMaxItems: 2,
+								moreItemsConfig: {
+									form: this.fb.group({}),
+									formConfig: [{
+										label: 'Tipo de Sistema',
+										name: 'tipo',
+										type: DynamicFormTypeFieldEnum.text,
+										appearance: 'fill',
+										floatLabel: 'always',
+										class: 'col-12',
+										fieldClass: 'w-100'
+									}, {
+										show: false,
+										name: 'acoes',
+										type: DynamicFormTypeFieldEnum.dynamicForm
+									}],
+									showFieldsConfig: [{
+										nameField: 'tipo',
+										fieldsToShow: ['acoes'],
+										fnShow: value => value !== '',
+										dynamicFormConfig: () => {
+											return {
+												form: this.fb.group({}),
+												formConfig: [{
+													label: 'Ações',
+													name: 'itens',
+													type: DynamicFormTypeFieldEnum.moreItems,
+													moreItemsButtonIconAddlabel: 'Adicionar novo item',
+													moreItemsIcon: 'receipt_long',
+													moreItemsMinItems: 1,
+													moreItemsMaxItems: 2,
+													moreItemsConfig: {
+														form: this.fb.group({}),
+														formConfig: [{
+															label: 'Tipo de Ação',
+															name: 'tipo',
+															type: DynamicFormTypeFieldEnum.text,
+															appearance: 'fill',
+															floatLabel: 'always',
+															class: 'col-12',
+															fieldClass: 'w-100'
+														}],
+														setValues: this.formMoreItensAcoesubject
+													}
+												}]
+											};
+										}
+									}],
+									setValues: this.formMoreItensSistemasSubject
+								}
+							}]
+						};
+					}
 				}],
 				setValues: this.formMoreItensValuesSubject
 			}
@@ -239,21 +255,15 @@ export class PageFormsComponent implements OnInit {
 	}
 	
 	public simulateDataFromServer() {
-		this.dynamicFormService.setValuesInMoreItemsForm(this.formMoreItensValuesSubject, [
-			[
-				{name: 'name', value: 'Nome 1'},
-				{name: 'lastname', value: 'Sobrenome 1'},
-				{name: 'definirTempo', value: 'teste'},
-				{name: 'dynamicFields > name', value: 'Nome 1'},
-				{name: 'dynamicFields > lastname', value: 'Sobrenome 1'}
-			], [
-				{name: 'name', value: 'Nome 2'},
-				{name: 'lastname', value: 'Sobrenome 2'},
-				{name: 'definirTempo', value: 'teste'},
-				{name: 'dynamicFields > name', value: 'Nome 2'},
-				{name: 'dynamicFields > lastname', value: 'Sobrenome 2'}
-			]
-		]);
+		this.dynamicFormService.setValuesInMoreItemsForm(this.formMoreItensValuesSubject, [[
+			{name: 'nome', value: 'Módulo 1'}
+		]]);
+		this.dynamicFormService.setValuesInMoreItemsForm(this.formMoreItensSistemasSubject, [[
+			{name: 'tipo', value: 'Tipo 1'}
+		]]);
+		this.dynamicFormService.setValuesInMoreItemsForm(this.formMoreItensAcoesubject, [[
+			{name: 'tipo', value: 'Tipo 1'}
+		]]);
 	}
 	
 	public sendToConsole() {
