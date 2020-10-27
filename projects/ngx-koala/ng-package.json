@@ -10,6 +10,7 @@
       "tskoala-helpers/dist/delay/koala-delay.helper": "tskoala-helpers/dist/delay/koala-delay.helper",
       "tskoala-helpers/dist/object/koala-object.helper": "tskoala-helpers/dist/object/koala-object.helper",
       "tskoala-helpers/dist/string/koala-string.helper": "tskoala-helpers/dist/string/koala-string.helper",
+      "tskoala-helpers/dist/array/koala-array.helper": "tskoala-helpers/dist/array/koala-array.helper",
       "jwt-decode": "jwt-decode",
       "ngx-papaparse": "ngx-papaparse",
       "ng2-currency-mask": "ng2-currency-mask",
