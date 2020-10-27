@@ -16,7 +16,7 @@ export class KoalaDynamicFormService {
     const data = {};
     const formArray = form.get('formData') as FormArray;
     formArray?.controls.forEach(control => {
-	    if (control.get('show').value !== false) {
+	    if (control.get('show').value.getValue() !== false) {
 		    let value: any = control.get('value').value;
 		    if (control.get('type').value === DynamicFormTypeFieldEnum.valueList) {
 			    if (value === null || value === undefined) {
