@@ -439,7 +439,6 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 									}
 									if (dynamicFormConfig.form.controls) {
 										dynamicFormConfigSubject.next(null);
-										dynamicFormConfig.form = this.fb.group({});
 										setTimeout(() => dynamicFormConfigSubject.next(dynamicFormConfig), 1);
 									}
 								}
