@@ -19,6 +19,9 @@ export class KoalaDynamicFormService {
 	    if (control.get('show').value !== false) {
 		    let value: any = control.get('value').value;
 		    if (control.get('type').value === DynamicFormTypeFieldEnum.valueList) {
+			    if (value === null || value === undefined) {
+				    value = '';
+			    }
 			    value = KoalaStringHelper.split(value);
 		    } else if (control.get('type').value === DynamicFormTypeFieldEnum.moreItems) {
 			    const moreItems = control.get('moreItemsConfig').value as { form: FormGroup }[];
