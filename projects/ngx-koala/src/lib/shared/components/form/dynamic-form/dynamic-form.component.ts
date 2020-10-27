@@ -342,6 +342,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		if (config.dynamicFormConfig) {
 			const cloneDynamicFormConfig = {} as KoalaDynamicFormConfigInterface;
 			Object.assign(cloneDynamicFormConfig, config.dynamicFormConfig);
+			cloneDynamicFormConfig.form = config.dynamicFormConfig.form;
 			cloneDynamicFormConfig.setValues = null;
 			config.dynamicFormConfig = cloneDynamicFormConfig;
 		}
@@ -439,6 +440,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 									}
 									if (dynamicFormConfig.form.controls) {
 										dynamicFormConfigSubject.next(null);
+										dynamicFormConfig.form = this.fb.group({});
 										setTimeout(() => dynamicFormConfigSubject.next(dynamicFormConfig), 1);
 									}
 								}

@@ -58,71 +58,71 @@ export class PageFormsComponent implements OnInit {
 				form: this.fb.group({}),
 				formConfig: [{
 					label: 'Nome',
-					name: 'name',
+					name: 'nome',
 					type: DynamicFormTypeFieldEnum.text,
 					appearance: 'fill',
 					floatLabel: 'always',
-					class: 'col-6',
-					fieldClass: 'w-100'
-				}, {
-					label: 'Sobrenome',
-					name: 'lastname',
-					type: DynamicFormTypeFieldEnum.text,
-					appearance: 'fill',
-					floatLabel: 'always',
-					class: 'col-6',
-					fieldClass: 'w-100'
-				}, {
-					label: 'Definir Tempo',
-					name: 'definirTempo',
-					appearance: 'fill',
-					floatLabel: 'always',
-					fieldClass: 'w-100',
 					class: 'col-12',
-					type: DynamicFormTypeFieldEnum.select,
-					opcoesSelect: [
-						{value: 'teste', name: 'teste'},
-						{value: '48:00', name: '48:00'},
-						{value: '', name: 'Não'}
-					],
-					value: false,
-					required: true
+					fieldClass: 'w-100'
 				}, {
 					show: false,
-					label: 'Campos Dinâmicos',
-					name: 'dynamicFields',
+					label: 'Modulos',
+					name: 'modulos',
 					type: DynamicFormTypeFieldEnum.dynamicForm,
 					dynamicFormConfig: {
 						form: this.fb.group({}),
 						formConfig: [{
-							appearance: 'fill',
-							floatLabel: 'always',
-							fieldClass: 'w-100',
-							class: 'col-6',
-							label: 'Nome',
-							name: 'name',
-							type: DynamicFormTypeFieldEnum.text,
-							required: true
-						}, {
-							appearance: 'fill',
-							floatLabel: 'always',
-							fieldClass: 'w-100',
-							class: 'col-6',
-							label: 'Sobrenome',
-							name: 'lastname',
-							type: DynamicFormTypeFieldEnum.text,
-							required: true
+							label: 'Sistemas',
+							name: 'sistemas',
+							type: DynamicFormTypeFieldEnum.moreItems,
+							moreItemsButtonIconAddlabel: 'Adicionar novo item',
+							moreItemsIcon: 'receipt_long',
+							moreItemsMinItems: 1,
+							moreItemsMaxItems: 2,
+							moreItemsConfig: {
+								form: this.fb.group({}),
+								formConfig: [{
+									label: 'Ações',
+									name: 'acoes',
+									type: DynamicFormTypeFieldEnum.dynamicForm,
+									dynamicFormConfig: {
+										form: this.fb.group({}),
+										formConfig: [{
+											label: 'Dados',
+											name: 'dados',
+											type: DynamicFormTypeFieldEnum.moreItems,
+											moreItemsButtonIconAddlabel: 'Adicionar novo item',
+											moreItemsIcon: 'receipt_long',
+											moreItemsMinItems: 1,
+											moreItemsMaxItems: 2,
+											moreItemsConfig: {
+												form: this.fb.group({}),
+												formConfig: [{
+													label: 'Tipo de Ação',
+													name: 'tipo',
+													type: DynamicFormTypeFieldEnum.text,
+													appearance: 'fill',
+													floatLabel: 'always',
+													class: 'col-12',
+													fieldClass: 'w-100'
+												}],
+												showFieldsConfig: [{
+													nameField: 'tipo',
+													fieldsToShow: ['acoes'],
+													fnShow: value => value !== ''
+												}]
+											}
+										}]
+									}
+								}]
+							}
 						}]
 					}
 				}],
 				showFieldsConfig: [{
-					nameField: 'definirTempo',
-					fieldsToShow: ['dynamicFields'],
-					fnShow: value => value === 'teste'
-				}, {
-					nameField: 'definirTempo',
-					fieldsToShow: ['dynamicFields'],
-					fnShow: value => value !== 'teste' && value !== ''
+					nameField: 'nome',
+					fieldsToShow: ['modulos'],
+					fnShow: value => value !== ''
 				}],
 				setValues: this.formMoreItensValuesSubject
 			}
