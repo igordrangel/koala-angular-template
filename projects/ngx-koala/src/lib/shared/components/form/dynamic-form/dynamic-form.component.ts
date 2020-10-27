@@ -65,7 +65,13 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 								}
 								if (this.showFieldsMoreItensConfig) {
 									const configs = this.showFieldsMoreItensConfig
-									                    .filter(config => config.nameField === newFormGroup.get('name').value);
+									                    .filter(config => config.nameField === newFormGroup.get('name').value)
+									                    .sort(config => {
+										                    if (config.fnShow(value)) {
+											                    return 1;
+										                    }
+										                    return -1;
+									                    });
 									configs.forEach(config => {
 										if (config.dynamicFormConfig) {
 											const controlDynamicFormConfig = this.controls
