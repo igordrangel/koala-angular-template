@@ -60,10 +60,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 						formGroupConfig.form.valueChanges.subscribe(() => {
 							if (formGroupConfig.form.valid && (config.valueChanges || this.showFieldsMoreItensConfig)) {
 								const value = this.dynamicFormService.emitData(formGroupConfig.form);
-								if (config.valueChanges) {
-									config.valueChanges(value);
-								}
-								this.setConfigDynamicForm(newFormGroup);
+								newFormGroup.get('value').setValue(value);
 							}
 						});
 					}
