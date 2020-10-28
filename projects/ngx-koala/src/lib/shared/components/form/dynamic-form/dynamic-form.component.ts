@@ -347,7 +347,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 	}
 	
 	private changeVisibilityFields(subject: BehaviorSubject<KoalaDynamicFormShowFieldInterface[]>, form: FormGroup) {
-		subject.pipe(debounceTime(2)).subscribe(item => {
+		subject.pipe(debounceTime(5)).subscribe(item => {
 			if (item) {
 				const formArray = form.get('formData') as FormArray;
 				for (const prop of item.values()) {
