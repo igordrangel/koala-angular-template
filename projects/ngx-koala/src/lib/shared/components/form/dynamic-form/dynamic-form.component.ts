@@ -80,8 +80,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 												                                     config.fieldsToShow.indexOf(control.get('name').value) >= 0
 											                                     );
 											const dynamicFormConfigSubject = controlDynamicFormConfig.get('dynamicFormConfig').value as BehaviorSubject<KoalaDynamicFormConfigInterface>;
-											dynamicFormConfigSubject.next(null);
-											setTimeout(() => dynamicFormConfigSubject.next(config.dynamicFormConfig(value)), 1);
+											dynamicFormConfigSubject.next(config.dynamicFormConfig(value));
 										}
 										this.dynamicFormService.showFields(
 											this.showFields,
@@ -129,8 +128,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 										                                                 config.fieldsToShow.indexOf(control.get('name').value) >= 0
 									                                                 );
 									            const dynamicFormConfigSubject = controlDynamicFormConfig.get('dynamicFormConfig').value as BehaviorSubject<KoalaDynamicFormConfigInterface>;
-									            dynamicFormConfigSubject.next(null);
-									            setTimeout(() => dynamicFormConfigSubject.next(config.dynamicFormConfig(value)), 1);
+									            dynamicFormConfigSubject.next(config.dynamicFormConfig(value));
 								            }
 								            this.dynamicFormService.showFields(
 									            this.showFields,
