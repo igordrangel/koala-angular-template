@@ -17,6 +17,7 @@ import { KoalaArrayHelper } from 'tskoala-helpers/dist/array/koala-array.helper'
 import { ThemePalette } from '@angular/material/core';
 import { KoalaDynamicFormAutocompleteMultipleConfigInterface } from './interfaces/koala.dynamic-form-autocomplete-multiple-config.interface';
 import { KoalaDynamicFormConfigInterface } from './interfaces/koala.dynamic-form-config.interface';
+import { KoalaDelayHelper } from 'tskoala-helpers/dist/delay/koala-delay.helper';
 
 @Component({
 	selector: 'koala-dynamic-form',
@@ -81,8 +82,8 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 				newFormGroup.get('value')
 				            .valueChanges
 				            .pipe(debounceTime(300))
-				            .subscribe(value => {
-					            this.setConfigDynamicForm(newFormGroup);
+				            .subscribe(async value => {
+					            await this.setConfigDynamicForm(newFormGroup);
 					            if (config.type === DynamicFormTypeFieldEnum.autocomplete) {
 						            if (
 							            value &&
@@ -450,7 +451,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		}
 	}
 	
-	private setConfigDynamicForm(newFormGroup: FormGroup) {
+	private async setConfigDynamicForm(newFormGroup: FormGroup) {
 		if (this.showFieldsMoreItensConfig) {
 			const value = newFormGroup.get('value').value;
 			const configs = this.showFieldsMoreItensConfig
@@ -461,7 +462,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 				                    }
 				                    return -1;
 			                    });
-			configs.forEach(config => {
+			for (const config of configs) {
 				if (config) {
 					if (config.dynamicFormConfig && config.fnShow(value)) {
 						const controlDynamicFormConfig = this.controls
@@ -471,7 +472,8 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 						                                     );
 						const dynamicFormConfigSubject = controlDynamicFormConfig.get('dynamicFormConfig').value as BehaviorSubject<KoalaDynamicFormConfigInterface>;
 						dynamicFormConfigSubject.next(null);
-						setTimeout(() => dynamicFormConfigSubject.next(config.dynamicFormConfig(value)), 1);
+						await KoalaDelayHelper.waitFor(1);
+						dynamicFormConfigSubject.next(config.dynamicFormConfig(value));
 					}
 					this.dynamicFormService.showFields(
 						this.showFields,
@@ -479,7 +481,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 						config.fnShow(value)
 					);
 				}
-			});
+			}
 		}
 	}
 }
