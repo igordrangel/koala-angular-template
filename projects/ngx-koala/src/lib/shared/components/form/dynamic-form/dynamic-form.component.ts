@@ -63,32 +63,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 								if (config.valueChanges) {
 									config.valueChanges(value);
 								}
-								if (this.showFieldsMoreItensConfig) {
-									const configs = this.showFieldsMoreItensConfig
-									                    .filter(config => config.nameField === newFormGroup.get('name').value)
-									                    .sort(config => {
-										                    if (config.fnShow(value)) {
-											                    return 1;
-										                    }
-										                    return -1;
-									                    });
-									configs.forEach(config => {
-										if (config.dynamicFormConfig) {
-											const controlDynamicFormConfig = this.controls
-											                                     .controls
-											                                     .find(control =>
-												                                     config.fieldsToShow.indexOf(control.get('name').value) >= 0
-											                                     );
-											const dynamicFormConfigSubject = controlDynamicFormConfig.get('dynamicFormConfig').value as BehaviorSubject<KoalaDynamicFormConfigInterface>;
-											dynamicFormConfigSubject.next(config.dynamicFormConfig(value));
-										}
-										this.dynamicFormService.showFields(
-											this.showFields,
-											config.fieldsToShow,
-											config.fnShow(value)
-										);
-									});
-								}
+								this.setConfigDynamicForm(newFormGroup);
 							}
 						});
 					}
@@ -110,34 +85,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 				            .valueChanges
 				            .pipe(debounceTime(300))
 				            .subscribe(value => {
-					            if (this.showFieldsMoreItensConfig) {
-						            const configs = this.showFieldsMoreItensConfig
-						                                .filter(config => config.nameField === newFormGroup.get('name').value)
-						                                .sort(config => {
-							                                if (config.fnShow(value)) {
-								                                return 1;
-							                                }
-							                                return -1;
-						                                });
-						            configs.forEach(config => {
-							            if (config) {
-								            if (config.dynamicFormConfig && config.fnShow(value) && config.dynamicFormConfig) {
-									            const controlDynamicFormConfig = this.controls
-									                                                 .controls
-									                                                 .find(control =>
-										                                                 config.fieldsToShow.indexOf(control.get('name').value) >= 0
-									                                                 );
-									            const dynamicFormConfigSubject = controlDynamicFormConfig.get('dynamicFormConfig').value as BehaviorSubject<KoalaDynamicFormConfigInterface>;
-									            dynamicFormConfigSubject.next(config.dynamicFormConfig(value));
-								            }
-								            this.dynamicFormService.showFields(
-									            this.showFields,
-									            config.fieldsToShow,
-									            config.fnShow(value)
-								            );
-							            }
-						            });
-					            }
+					            this.setConfigDynamicForm(newFormGroup);
 					            if (config.type === DynamicFormTypeFieldEnum.autocomplete) {
 						            if (
 							            value &&
@@ -429,17 +377,6 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 									}
 									control.get('value').setValidators(validators);
 								}
-								const dynamicFormConfigSubject = control.get('dynamicFormConfig').value as BehaviorSubject<KoalaDynamicFormConfigInterface>;
-								if (dynamicFormConfigSubject.getValue()) {
-									let dynamicFormConfig = dynamicFormConfigSubject.getValue();
-									if (config && config.dynamicFormConfig) {
-										dynamicFormConfig = config.dynamicFormConfig;
-									}
-									if (dynamicFormConfig.form.controls) {
-										dynamicFormConfigSubject.next(null);
-										setTimeout(() => dynamicFormConfigSubject.next(dynamicFormConfig), 1);
-									}
-								}
 							} else {
 								control.get('value').clearValidators();
 								control.get('value').clearAsyncValidators();
@@ -513,6 +450,38 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 					}
 				}
 			}
+		}
+	}
+	
+	private setConfigDynamicForm(newFormGroup: FormGroup) {
+		if (this.showFieldsMoreItensConfig) {
+			const value = newFormGroup.get('value').value;
+			const configs = this.showFieldsMoreItensConfig
+			                    .filter(config => config.nameField === newFormGroup.get('name').value)
+			                    .sort(config => {
+				                    if (config.fnShow(value)) {
+					                    return 1;
+				                    }
+				                    return -1;
+			                    });
+			configs.forEach(config => {
+				if (config) {
+					if (config.dynamicFormConfig && config.fnShow(value) && config.dynamicFormConfig) {
+						const controlDynamicFormConfig = this.controls
+						                                     .controls
+						                                     .find(control =>
+							                                     config.fieldsToShow.indexOf(control.get('name').value) >= 0
+						                                     );
+						const dynamicFormConfigSubject = controlDynamicFormConfig.get('dynamicFormConfig').value as BehaviorSubject<KoalaDynamicFormConfigInterface>;
+						dynamicFormConfigSubject.next(config.dynamicFormConfig(value));
+					}
+					this.dynamicFormService.showFields(
+						this.showFields,
+						config.fieldsToShow,
+						config.fnShow(value)
+					);
+				}
+			});
 		}
 	}
 }
