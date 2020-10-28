@@ -466,7 +466,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			                    });
 			configs.forEach(config => {
 				if (config) {
-					if (config.dynamicFormConfig && config.fnShow(value) && config.dynamicFormConfig) {
+					if (config.dynamicFormConfig && config.fnShow(value)) {
 						const controlDynamicFormConfig = this.controls
 						                                     .controls
 						                                     .find(control =>
