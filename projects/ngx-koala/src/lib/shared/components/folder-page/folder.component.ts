@@ -21,7 +21,7 @@ export class FolderComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.customBackgroudColor) {
+    if (changes.customBackgroudColor || changes.customFolderFontColor) {
       this.setCustomBackgroundColor();
     }
   }
