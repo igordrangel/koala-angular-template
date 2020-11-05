@@ -86,13 +86,23 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 					            await this.setConfigDynamicForm(newFormGroup);
 					            if (config.type === DynamicFormTypeFieldEnum.autocomplete) {
 						            if (
-							            value &&
-							            value.hasOwnProperty('value') &&
-							            value.hasOwnProperty('name') &&
-							            Object.keys(value).length === 2
-						            ) {
+							            value && (
+								            value.hasOwnProperty('value') &&
+								            value.hasOwnProperty('name') &&
+								            Object.keys(value).length === 2
+							            ) || (
+								            Array.isArray(value) &&
+								            value.length > 0 &&
+								            newFormGroup.get('multiple').value
+							            )) {
 							            if (newFormGroup.get('multiple').value) {
-								            newFormGroup.get('autocompleteSelectedValue').value.push(value);
+								            if (Array.isArray(value)) {
+									            for (const itemValue of value.values()) {
+										            newFormGroup.get('autocompleteSelectedValue').value.push(itemValue);
+									            }
+								            } else {
+									            newFormGroup.get('autocompleteSelectedValue').value.push(value);
+								            }
 								            if (this.autocompleteInput?.nativeElement) {
 									            this.autocompleteInput.nativeElement.value = '';
 								            }
@@ -286,7 +296,6 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			const cloneDynamicFormConfig = {} as KoalaDynamicFormConfigInterface;
 			Object.assign(cloneDynamicFormConfig, config.dynamicFormConfig);
 			cloneDynamicFormConfig.form = config.dynamicFormConfig.form;
-			cloneDynamicFormConfig.setValues = null;
 			config.dynamicFormConfig = cloneDynamicFormConfig;
 		}
 		
