@@ -4,5 +4,6 @@ export interface KoalaDynamicFormMoreItensShowFieldConfigInterface {
 	nameField: string;
 	fieldsToShow: string[];
 	fnShow: (value) => boolean;
+	clearCurrentValue?: boolean;
 	dynamicFormConfig?: (value) => KoalaDynamicFormConfigInterface;
 }

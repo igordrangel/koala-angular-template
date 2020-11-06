@@ -97,13 +97,15 @@ export class KoalaDynamicFormService {
 	public showFields(
 		subject: BehaviorSubject<KoalaDynamicFormShowFieldInterface[]>,
 		names: string[],
-		show: boolean
+		show: boolean,
+		clearCurrentValue = false
 	) {
 		const fields: KoalaDynamicFormShowFieldInterface[] = [];
 		names.forEach(name => {
 			fields.push({
 				name,
-				show
+				show,
+				clearCurrentValue
 			});
 		});
 		subject.next(fields);

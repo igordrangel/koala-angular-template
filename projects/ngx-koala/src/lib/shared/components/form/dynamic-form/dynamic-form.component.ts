@@ -167,7 +167,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 										      itemValue,
 										      this.controls.controls[indexConfig].get('moreItemsConfig').value[indexValue].form
 									      );
-								      }, 1);
+								      }, 50);
 							      });
 						      }
 					      });
@@ -383,6 +383,9 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 										validators.push(AutocompleteSelectedValidator);
 									}
 									control.get('value').setValidators(validators);
+									if (prop.clearCurrentValue) {
+										control.get('value').setValue(null);
+									}
 								}
 							} else {
 								control.get('value').clearValidators();
@@ -487,7 +490,8 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 					this.dynamicFormService.showFields(
 						this.showFields,
 						config.fieldsToShow,
-						config.fnShow(value)
+						config.fnShow(value),
+						config.clearCurrentValue
 					);
 				}
 			}
