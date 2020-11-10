@@ -167,7 +167,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 										      itemValue,
 										      this.controls.controls[indexConfig].get('moreItemsConfig').value[indexValue].form
 									      );
-								      }, 50);
+								      }, 300);
 							      });
 						      }
 					      });

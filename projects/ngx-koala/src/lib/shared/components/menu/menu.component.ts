@@ -25,14 +25,12 @@ export class MenuComponent implements OnInit {
           .subscribe(event => {
             switch (true) {
               case event instanceof NavigationEnd:
+                const options = this.optionsSubject.getValue();
+                if (options?.length > 0) {
+                  this.defineMenuOptions(options);
+                }
                 this.optionsSubject.subscribe(options => {
-                  options.map(module => {
-                    module.active = module.tools ?
-                      (this.router.url === module.routerLink ||
-                        !!module.tools.find(tool => this.router.url === tool.routerLink)) :
-                      this.router.url === module.routerLink;
-                    return module;
-                  });
+                  this.defineMenuOptions(options);
                 });
             }
           });
@@ -41,5 +39,15 @@ export class MenuComponent implements OnInit {
   
   public toogle(module: KoalaMenuModuleInterface) {
     module.expanded = !module.expanded;
+  }
+  
+  private defineMenuOptions(options: KoalaMenuModuleInterface[]) {
+    options.map(module => {
+      module.active = module.tools ?
+        (this.router.url === module.routerLink ||
+          !!module.tools.find(tool => this.router.url === tool.routerLink)) :
+        this.router.url === module.routerLink;
+      return module;
+    });
   }
 }

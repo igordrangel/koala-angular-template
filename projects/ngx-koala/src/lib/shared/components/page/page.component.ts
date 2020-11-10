@@ -194,7 +194,8 @@ input::placeholder,
 .mat-expansion-indicator::after,
 .more-items-content .items .titleForm,
 fieldset legend,
-.mat-paginator-container {color: ${this.palletColors.fontColor}!important;}
+.mat-paginator-container,
+.mat-form-field-flex mat-icon {color: ${this.palletColors.fontColor}!important;}
 .mat-card,
 .mat-expansion-panel,
 .mat-select-panel,
