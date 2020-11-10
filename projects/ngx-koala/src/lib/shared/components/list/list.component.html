@@ -102,15 +102,18 @@
               <i class='material-icons'>more_vert</i>
             </button>
             <mat-menu #options="matMenu" class="menu-list" yPosition="below">
-	            <ng-template *ngFor="let option of itensMenuListOptions">
+	            <div *ngFor="let option of itensMenuListOptions">
 	              <button
 		              (click)="option.action(item)"
-		              *ngIf="option.havePermission || option.showByItemList(item)"
+		              *ngIf="option.havePermission && (
+		                !option.showByItemList ||
+		                option.showByItemList(item)
+	                )"
 		              mat-menu-item>
 	                <mat-icon>{{option.icon}}</mat-icon>
 	                <span>{{option.name}}</span>
 	              </button>
-	            </ng-template>
+	            </div>
             </mat-menu>
           </div>
         </td>
