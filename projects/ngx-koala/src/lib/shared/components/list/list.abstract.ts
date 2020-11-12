@@ -92,6 +92,8 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
           this.loading(true);
           this.selection.clear();
           if (this.filterParams.value) {
+            this.filterParams.value.sort = this.sort.active;
+            this.filterParams.value.order = this.sort.direction;
             this.filterParams.value.page = this.paginator.pageIndex;
             this.filterParams.value.limit = this.paginator.pageSize;
           }
