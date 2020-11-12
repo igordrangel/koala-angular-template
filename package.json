@@ -29,6 +29,7 @@
     "@angular/router": "~10.1.4",
     "jwt-decode": "^3.0.0",
     "jwt-encode": "^1.0.1",
+    "koala-utils": "^1.0.16",
     "ng2-currency-mask": "^9.0.2",
     "ngx-mask": "^10.0.4",
     "ngx-papaparse": "^5.0.0",
