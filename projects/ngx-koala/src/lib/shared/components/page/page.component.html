@@ -12,11 +12,12 @@
 <mat-drawer-container autosize class="menu-container">
   <mat-drawer #drawer class="menu-options" mode="side">
     <img [src]="logotipo" alt="Logotipo" id="logotipo"/>
-    <ng-content select="[menu-options]"></ng-content>
+    <ng-content *ngIf="showMenu" select="[menu-options]"></ng-content>
   </mat-drawer>
 
   <mat-toolbar *ngIf="!!logged && username" class="toolbar">
-    <button (click)="toogleMenu()" [color]="color" class="btn-collapse-menu" mat-icon-button>
+    <img *ngIf="!showMenu" [src]="logotipo" alt="Logotipo" id="logotipo"/>
+    <button (click)="toogleMenu()" *ngIf="showMenu" [color]="color" class="btn-collapse-menu" mat-icon-button>
       <mat-icon>menu</mat-icon>
     </button>
     <span class="spacer"></span>

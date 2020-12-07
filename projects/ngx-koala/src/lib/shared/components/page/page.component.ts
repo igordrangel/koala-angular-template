@@ -20,6 +20,7 @@ import { menuStateSubject } from '../menu/menu.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PageComponent implements OnInit {
+  @Input() showMenu: boolean = true;
   @Input() color: ThemePalette;
   @Input() logotipo: string;
   @Input() startMenuOpened = true;
@@ -150,19 +151,23 @@ export class PageComponent implements OnInit {
     }
     this.defineColor();
   
-    menuStateSubject.subscribe(async (state) => {
-      if (state === 'close') {
-        if (this.menu.opened) {
-          await this.menu.close();
+    if (this.showMenu) {
+      menuStateSubject.subscribe(async (state) => {
+        if (state === 'close') {
+          if (this.menu.opened) {
+            await this.menu.close();
+          }
+        } else if (state === 'open') {
+          if (!this.menu.opened) {
+            await this.menu.open();
+          }
         }
-      } else if (state === 'open') {
-        if (!this.menu.opened) {
-          await this.menu.open();
-        }
+      });
+      if (this.startMenuOpened && !!this.logged) {
+        this.menuService.open();
+      } else {
+        this.menuService.close();
       }
-    });
-    if (this.startMenuOpened && !!this.logged) {
-      this.menuService.open();
     } else {
       this.menuService.close();
     }
