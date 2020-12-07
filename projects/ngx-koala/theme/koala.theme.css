@@ -71,7 +71,7 @@ input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hov
 .mat-chip.mat-primary {background: #1976d2;color: #ffffff;}
 .mat-chip.mat-warn {background: #b71c1c;color: #ffffff;}
 .mat-chip.mat-primary .mat-icon.mat-chip-remove,
-.mat-chip.mat-warn .mat-icon.mat-chip-remove {color: rgba(255, 255, 255, .87);}
+.mat-chip.mat-warn .mat-icon.mat-chip-remove {color: rgba(255, 255, 255, .87) !important;}
 .home-list-cards .list button .mat-badge-content {font-size: 12px;height: 27px;line-height: 27px;right: 20px !important;top: 9px;width: 27px;}
 p {margin: 0 !important;}
 .menu-container {background: #ffffff;}
