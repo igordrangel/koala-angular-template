@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { KoalaMenuModuleInterface } from './koala.menu-module.interface';
 import { NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -9,8 +9,7 @@ export const menuStateSubject = new BehaviorSubject<'open' | 'close'>(null);
 @Component({
   selector: 'koala-menu',
   templateUrl: 'menu.component.html',
-  styleUrls: ['menu.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['menu.component.css']
 })
 export class MenuComponent implements OnInit {
   @Input() titleMenu: string;
@@ -21,18 +20,18 @@ export class MenuComponent implements OnInit {
   
   ngOnInit() {
     if (this.optionsSubject) {
-      const options = this.optionsSubject.getValue();
-      if (options?.length > 0) {
+      this.optionsSubject.subscribe(options => {
         this.defineMenuOptions(options);
-      }
+      });
       this.router
           .events
           .subscribe(event => {
             switch (true) {
               case event instanceof NavigationEnd:
-                this.optionsSubject.subscribe(options => {
+                const options = this.optionsSubject.getValue();
+                if (options?.length > 0) {
                   this.defineMenuOptions(options);
-                });
+                }
             }
           });
     }

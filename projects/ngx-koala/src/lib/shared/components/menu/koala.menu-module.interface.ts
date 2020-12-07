@@ -5,6 +5,6 @@ export interface KoalaMenuModuleInterface {
   name: string;
   tools?: KoalaMenuToolInterface[];
   routerLink?: string;
-  expanded: boolean;
+  expanded?: boolean;
   active?: boolean;
 }

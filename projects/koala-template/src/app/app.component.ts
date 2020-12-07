@@ -4,7 +4,6 @@ import { KoalaNotificationInterface } from '../../../ngx-koala/src/lib/shared/co
 import { KoalaUserMenuOptionsInterface } from '../../../ngx-koala/src/lib/shared/components/page/koala.user-menu-options.interface';
 import { KoalaMenuModuleInterface } from '../../../ngx-koala/src/lib/shared/components/menu/koala.menu-module.interface';
 import { KoalaPagePalletColorsInterface } from '../../../ngx-koala/src/lib/shared/components/page/koala-page-pallet-colors.interface';
-import { KoalaArrayHelper } from 'tskoala-helpers/dist/array/koala-array.helper';
 
 @Component({
   selector: 'app-root',
@@ -19,13 +18,19 @@ export class AppComponent implements OnInit {
   ];
   public notifications = new BehaviorSubject<KoalaNotificationInterface[]>([]);
   public menuOptions = new BehaviorSubject<KoalaMenuModuleInterface[]>([{
+    icon: 'login',
+    name: 'Login',
+    routerLink: '/login'
+  }, {
+    icon: 'list_alt',
+    name: 'KoalaList',
+    routerLink: '/list'
+  }, {
     icon: 'extension',
     name: 'Componentes',
     expanded: false,
     tools: [
-      {name: 'Login', routerLink: '/login'},
-      {name: 'KoalaList', routerLink: '/list'},
-      {name: 'KoalaForm', routerLink: '/forms'}
+      {icon: 'description', name: 'KoalaForm', routerLink: '/forms'}
     ]
   }]);
   public palletCollors: KoalaPagePalletColorsInterface = {
@@ -66,17 +71,6 @@ export class AppComponent implements OnInit {
   
   ngOnInit() {
     this.getNotifications();
-    setTimeout(() => {
-      this.menuOptions.next(KoalaArrayHelper.merge([{
-        name: 'Componentes',
-        expanded: false,
-        tools: [
-          {icon: 'login', name: 'Login', routerLink: '/login'},
-          {icon: 'list_alt', name: 'KoalaList', routerLink: '/list'},
-          {icon: 'description', name: 'KoalaForm', routerLink: '/forms'}
-        ]
-      }], this.menuOptions.getValue()));
-    }, 3000);
   }
   
   public deleteAllNotifications(action: boolean) {
