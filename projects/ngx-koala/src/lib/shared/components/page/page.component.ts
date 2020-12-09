@@ -246,7 +246,8 @@ koala-page .btn-toolbar span.icon-user,
 .user-presentation {background: ${this.palletColors.userPresentationBackground};}
 .user-presentation span.username {color: ${this.palletColors.toolbarColor};}
 koala-menu .title {background: ${this.palletColors.menuTitleBackground};color: ${this.palletColors.menuTitleColor};}
-koala-menu ul li {color: ${this.palletColors.menuOptionsColor};}
+koala-menu ul li,
+koala-menu ul li a {color: ${this.palletColors.menuOptionsColor};}
 koala-menu ul li:hover {color: ${this.palletColors.menuOptionsColorHover} !important;}
 koala-menu ul li.active,
 koala-menu ul li.expanded {color: ${this.palletColors.menuOptionsColorActive} !important;border-left: 4px solid ${this.palletColors.menuOptionsColorActive} !important;background: ${this.palletColors.menuOptionsBackground} !important;}
