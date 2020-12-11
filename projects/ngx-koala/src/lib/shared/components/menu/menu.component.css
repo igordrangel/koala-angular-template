@@ -4,7 +4,7 @@ ul.list-menu {height: calc(100vh - 107px);overflow: auto;}
 ul ul {height: 0;overflow: hidden;transition: .2s;}
 ul li {cursor: pointer;display: block;font-size: 14px;outline: none;padding: 0;position: relative;transition: .2s;}
 .module {outline: none;padding: 5px 15px;text-decoration: none;}
-a.module {cursor: pointer;display: block;width: 100%;}
+a.module {box-sizing: border-box;cursor: pointer;display: block;width: 100%;}
 ul li li {border: none !important;padding: 0 !important;}
 .state-module {position: absolute;right: 10px;top: 4px;}
 ul li.active ul,
