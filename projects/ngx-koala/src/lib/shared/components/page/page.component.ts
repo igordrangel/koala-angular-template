@@ -122,12 +122,14 @@ export class PageComponent implements OnInit {
           this.loaderService.dismiss();
           if (event instanceof NavigationEnd) {
             this.currentUrl = event.url.split('?')[0];
-            if (this.logged && this.defaultPage && this.openPages?.indexOf(this.currentUrl) >= 0) {
-              this.router.navigate([this.defaultPage]).then();
-              return false;
-            } else if (!this.logged && this.openPages?.indexOf(this.currentUrl) < 0) {
-              this.router.navigate(['login']).then();
-              return false;
+            if (event.url.indexOf('/login?clientId=') < 0) {
+              if (this.logged && this.defaultPage && this.openPages?.indexOf(this.currentUrl) >= 0) {
+                this.router.navigate([this.defaultPage]).then();
+                return false;
+              } else if (!this.logged && this.openPages?.indexOf(this.currentUrl) < 0) {
+                this.router.navigate(['login']).then();
+                return false;
+              }
             }
           }
           break;
