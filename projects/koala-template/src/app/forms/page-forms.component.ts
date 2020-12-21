@@ -160,6 +160,16 @@ export class PageFormsComponent implements OnInit {
 			required: true,
 			valueChanges: (value) => console.log(value)
 		}, {
+			label: 'Exception',
+			name: 'exception',
+			type: DynamicFormTypeFieldEnum.checkbox,
+			class: 'col-12',
+			valueChanges: exception => {
+				changeColorChip.next({
+					color: exception ? 'warn' : 'primary'
+				});
+			}
+		}, {
 			label: 'Country (On Demand)',
 			name: 'countryOnDemand',
 			type: DynamicFormTypeFieldEnum.autocomplete,
@@ -188,7 +198,6 @@ export class PageFormsComponent implements OnInit {
 				value: 'teste2'
 			}]
 		}];
-		changeColorChip.next({color: 'warn'});
 		
 		this.formCamposDinamicos = this.fb.group({});
 		this.formCamposDinamicosConfig = [{

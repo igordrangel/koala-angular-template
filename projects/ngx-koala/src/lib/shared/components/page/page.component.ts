@@ -250,11 +250,16 @@ koala-page .btn-toolbar span.icon-user,
 koala-menu .title {background: ${this.palletColors.menuTitleBackground};color: ${this.palletColors.menuTitleColor};}
 koala-menu ul li,
 koala-menu ul li a {color: ${this.palletColors.menuOptionsColor};}
-koala-menu ul li:hover {color: ${this.palletColors.menuOptionsColorHover} !important;}
+koala-menu ul li:hover,
+koala-menu ul li:hover a {color: ${this.palletColors.menuOptionsColorHover} !important;}
 koala-menu ul li.active,
-koala-menu ul li.expanded {color: ${this.palletColors.menuOptionsColorActive} !important;border-left: 4px solid ${this.palletColors.menuOptionsColorActive} !important;background: ${this.palletColors.menuOptionsBackground} !important;}
-koala-menu ul li li:hover {color: ${this.palletColors.menuOptionsColorHover} !important;}
-koala-menu ul li li.active {color: ${this.palletColors.menuOptionsColorActive} !important;}
+koala-menu ul li.active a,
+koala-menu ul li.expanded,
+koala-menu ul li.expanded a {color: ${this.palletColors.menuOptionsColorActive} !important;border-left: 4px solid ${this.palletColors.menuOptionsColorActive} !important;background: ${this.palletColors.menuOptionsBackground} !important;}
+koala-menu ul li li:hover,
+koala-menu ul li li:hover a {color: ${this.palletColors.menuOptionsColorHover} !important;}
+koala-menu ul li li.active,
+koala-menu ul li li.active a {color: ${this.palletColors.menuOptionsColorActive} !important;}
 .notifications-content .title {color: ${this.palletColors.notificationTitleColor}!important;}
 .notifications-content .empty,
 .notifications-content .titleList {color: ${this.palletColors.notificationContentTitleColor}!important;}

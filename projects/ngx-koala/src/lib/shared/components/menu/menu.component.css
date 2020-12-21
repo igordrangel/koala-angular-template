@@ -3,6 +3,7 @@ ul {font-size: 0;list-style: none;margin: 0;padding: 0;}
 ul.list-menu {height: calc(100vh - 107px);overflow: auto;}
 ul ul {height: 0;overflow: hidden;transition: .2s;}
 ul li {cursor: pointer;display: block;font-size: 14px;outline: none;padding: 0;position: relative;transition: .2s;}
+ul li a {transition: .2s;}
 .module {outline: none;padding: 5px 15px;text-decoration: none;}
 a.module {box-sizing: border-box;cursor: pointer;display: block;width: 100%;}
 ul li li {border: none !important;padding: 0 !important;}

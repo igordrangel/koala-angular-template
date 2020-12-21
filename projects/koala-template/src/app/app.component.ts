@@ -18,55 +18,47 @@ export class AppComponent implements OnInit {
   ];
   public notifications = new BehaviorSubject<KoalaNotificationInterface[]>([]);
   public menuOptions = new BehaviorSubject<KoalaMenuModuleInterface[]>([{
-    icon: 'login',
-    name: 'Login',
-    routerLink: '/login'
-  }, {
     icon: 'list_alt',
     name: 'KoalaList',
     routerLink: '/list'
   }, {
-    icon: 'extension',
-    name: 'Componentes',
-    expanded: false,
-    tools: [
-      {icon: 'description', name: 'KoalaForm', routerLink: '/forms'}
-    ]
+    icon: 'description',
+    name: 'KoalaForm',
+    routerLink: '/forms'
   }]);
   public palletCollors: KoalaPagePalletColorsInterface = {
-    userPresentationUserFontColor: '#01579B',
-    userPresentationUserBackground: '#fff',
-    userPresentationBackground: 'url(\'./assets/wallpappers/folder-cia.png\') no-repeat 100% 0%',
-    toolbarBackground: '#012d51',
-    toolbarColor: '#fff',
-    menuTitleBackground: 'rgba(0,0,0,.3)',
-    menuTitleColor: '#fff',
-    menuBackground: '#013966',
-    menuOptionsBackground: '#012d51',
-    menuOptionsColor: 'rgba(255,255,255,.8)',
-    menuOptionsColorHover: 'rgba(255,255,255,.9)',
-    menuOptionsColorActive: '#fff',
-    checkboxBackground: '#FFB300',
-    checkboxColor: '#01579B',
-    checkboxOutlineColor: '#fff',
-    firstColor: '#012d51',
-    secondColor: '#012d51',
-    fontColor: '#fff',
-    bodyBackground: '#012d51',
-    notificationTitleColor: '#fff',
-    notificationContentTitleColor: 'rgba(255,255,255,.8)',
-    notificationContentColor: '#fff',
-    notificationContentIconColor: '#fff',
-    filterIconColor: '#fff',
-    listItemColor: '#ffffff',
-    listTitleItemColor: '#f1f1f1',
-    listBackground: '#013966',
-    listItemBackgroudHover: '#012d51',
-    listItemBackgroundActive: '#012441',
-    listContentBackground: '#012d51',
-    shadowColorTableList: 'rgba(255,255,255,.2)',
-    scrollbarColor: 'rgba(255,255,255,.8)',
-    scrollbarColorHover: '#fff'
+    userPresentationUserFontColor: '#fafafa',
+    userPresentationUserBackground: '#e53935',
+    toolbarBackground: '#fafafa',
+    toolbarColor: '#e53935',
+    menuTitleBackground: 'rgba(143,0,0,.3)',
+    menuTitleColor: '#ffffff',
+    menuBackground: '#ffebee',
+    menuOptionsBackground: '#e53935',
+    menuOptionsColor: 'rgba(255,0,0,0.4)',
+    menuOptionsColorHover: 'rgba(143,0,0,.9)',
+    menuOptionsColorActive: '#ffffff',
+    checkboxBackground: '#e53935',
+    checkboxColor: '#ffffff',
+    checkboxOutlineColor: '#e53935',
+    firstColor: '#fafafa',
+    secondColor: '#e53935',
+    fontColor: '#e53935',
+    bodyBackground: '#fafafa',
+    notificationTitleColor: '#e53935',
+    notificationContentTitleColor: 'rgba(255,0,0,.8)',
+    notificationContentColor: '#e53935',
+    notificationContentIconColor: '#e53935',
+    filterIconColor: '#ffffff',
+    listItemColor: '#e53935',
+    listTitleItemColor: '#e53935',
+    listBackground: '#fafafa',
+    listItemBackgroudHover: '#f1f1f1',
+    listItemBackgroundActive: '#f1f1f1',
+    listContentBackground: '#fafafa',
+    shadowColorTableList: 'rgba(143,0,0,0.2)',
+    scrollbarColor: 'rgba(255,0,0,0.8)',
+    scrollbarColorHover: '#E53935'
   };
   
   ngOnInit() {
