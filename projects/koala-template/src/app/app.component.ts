@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
     checkboxOutlineColor: '#e53935',
     firstColor: '#fafafa',
     secondColor: '#e53935',
-    fontColor: '#e53935',
+    fontColor: '#616161',
     bodyBackground: '#fafafa',
     notificationTitleColor: '#e53935',
     notificationContentTitleColor: 'rgba(255,0,0,.8)',
