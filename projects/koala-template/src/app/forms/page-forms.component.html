@@ -112,7 +112,7 @@
 					[updateFileList]="fileService.fileListSubject"
 					[autoclear]="false"
 					backgroundColor="transparent"
-					color="white"
+					color="red"
 					icon="attach_file"
 					text="Clique para anexar">
 				</koala-file-button>
@@ -120,6 +120,7 @@
 				<mat-list>
 					<mat-list-item *ngFor="let file of files; let index = i;">
 						<button
+							class="btn-list"
 							(click)="fileService.removeFile(files, index)"
 							color="warn"
 							mat-icon-button
