@@ -74,7 +74,8 @@
               "b64-to-blob",
               "papaparse",
               "jwt-encode",
-              "jwt-decode"
+              "jwt-decode",
+              "koala-utils"
             ]
           },
           "configurations": {

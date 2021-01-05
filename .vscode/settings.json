@@ -1,0 +1,11 @@
+{
+  "workbench.colorTheme": "Material Theme",
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 15,
+  "editor.fontWeight": "normal",
+  "files.autoSave": "afterDelay",
+  "terminal.integrated.fontFamily": "monospace",
+  "workbench.iconTheme": "material-icon-theme",
+  "explorer.confirmDelete": false
+}
