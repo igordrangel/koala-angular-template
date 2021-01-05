@@ -9,7 +9,7 @@
             "request": "launch",
             "name": "Debug Angular",
             "url": "http://localhost:4200",
-            "webRoot": "${workspaceFolder}"
+            "webRoot": "${workspaceFolder}/projects/koala-template"
         }
     ]
 }
