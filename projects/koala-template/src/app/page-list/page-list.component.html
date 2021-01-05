@@ -3,12 +3,12 @@
 	customFolderFontColor="#E53935"
 	titleIcon="list_alt"
 	titlePage="List">
-  
+
   <div menu-page>
     <koala-button (click)="dialogList()" backgroundColor="red" color="white" icon="add"
                   tooltip="Inserir"></koala-button>
   </div>
-  
+
   <div content>
     <koala-list
 	    (getDataSource)="countries = $event"

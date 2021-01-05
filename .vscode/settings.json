@@ -4,7 +4,7 @@
   "editor.fontLigatures": true,
   "editor.fontSize": 15,
   "editor.fontWeight": "normal",
-  "files.autoSave": "afterDelay",
+  "files.autoSave": "off",
   "terminal.integrated.fontFamily": "monospace",
   "workbench.iconTheme": "material-icon-theme",
   "explorer.confirmDelete": false
