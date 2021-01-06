@@ -27,6 +27,7 @@
 		      [koalaAutoFocus]="propriedade.get('focus').value"
 		      (keyup)="hoursAndMinutesApplyMask(i, $event)"
 		      [required]="propriedade.get('required').value"
+          [readonly]="propriedade.get('disabled').value"
 		      [tabIndex]="i + 1"
 		      [mask]="((propriedade.get('type').value == typeField.phone) ? '(00)0000-0000?0' : null) ||
                   ((propriedade.get('type').value == typeField.cpf) ? '000.000.000-00' : null) ||
@@ -97,6 +98,7 @@
 	      <input
 		      [koalaAutoFocus]="propriedade.get('focus').value"
 		      [required]="propriedade.get('required').value"
+          [readonly]="propriedade.get('disabled').value"
 		      [tabIndex]="i + 1"
 		      currencyMask
 		      formControlName="value"
@@ -125,6 +127,7 @@
 		      [matAutosizeMaxRows]="8"
 		      [matAutosizeMinRows]="3"
 		      [required]="propriedade.get('required').value"
+          [readonly]="propriedade.get('disabled').value"
 		      [tabIndex]="i + 1"
 		      formControlName="value"
 		      matInput>
@@ -152,6 +155,7 @@
 		      [matAutosizeMaxRows]="8"
 		      [matAutosizeMinRows]="3"
 		      [required]="propriedade.get('required').value"
+          [readonly]="propriedade.get('disabled').value"
 		      [tabIndex]="i + 1"
 		      formControlName="value"
 		      matInput>
@@ -173,7 +177,7 @@
 		    [ngClass]="propriedade.get('fieldClass').value">
 	      <mat-label>{{propriedade.get('label').value}}</mat-label>
 	      <mat-select [multiple]="propriedade.get('multiple').value" [required]="propriedade.get('required').value"
-	                  [tabIndex]="i + 1" formControlName="value">
+	                  [tabIndex]="i + 1" formControlName="value" [disabled]="propriedade.get('disabled').value">
 	        <mat-option *ngFor="let options of propriedade.get('opcoesSelect').value" [value]="options.value">
 	          {{options.name}}
 	        </mat-option>
