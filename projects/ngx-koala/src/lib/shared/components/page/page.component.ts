@@ -69,9 +69,9 @@ export class PageComponent implements OnInit {
     listItemBackgroundActive: '#EEE',
     shadowColorTableList: 'rgba(25, 118, 210, .4)'
   };
-  
+
   @ViewChild('drawer', {static: true}) private menu: MatDrawer;
-  
+
   constructor(
     private tokenService: KoalaTokenService,
     private router: Router,
@@ -152,7 +152,7 @@ export class PageComponent implements OnInit {
       this.palletColors = this.defaultPalletColors;
     }
     this.defineColor();
-  
+
     if (this.showMenu) {
       menuStateSubject.subscribe(async (state) => {
         if (state === 'close') {
@@ -174,18 +174,18 @@ export class PageComponent implements OnInit {
       this.menuService.close();
     }
   }
-  
+
   public async toogleMenu() {
     this.menuService.clearConfig();
     await this.menu.toggle();
   }
-  
+
   public logout() {
     this.menuService.close();
     this.tokenService.removeToken();
     this.tokenService.getTokenSubject().next(null);
   }
-  
+
   public defineColor() {
     const css = `
 *::-webkit-scrollbar-thumb {background: ${this.palletColors.scrollbarColor};width: 2px;}
@@ -253,9 +253,9 @@ koala-menu ul li a {color: ${this.palletColors.menuOptionsColor};}
 koala-menu ul li:hover,
 koala-menu ul li:hover a {color: ${this.palletColors.menuOptionsColorHover} !important;}
 koala-menu ul li.active,
+koala-menu ul li.expanded {color: ${this.palletColors.menuOptionsColorActive} !important;border-left: 4px solid ${this.palletColors.menuOptionsColorActive} !important;background: ${this.palletColors.menuOptionsBackground} !important;}
 koala-menu ul li.active a,
-koala-menu ul li.expanded,
-koala-menu ul li.expanded a {color: ${this.palletColors.menuOptionsColorActive} !important;border-left: 4px solid ${this.palletColors.menuOptionsColorActive} !important;background: ${this.palletColors.menuOptionsBackground} !important;}
+koala-menu ul li.expanded a {color: ${this.palletColors.menuOptionsColorActive} !important;background: ${this.palletColors.menuOptionsBackground} !important;}
 koala-menu ul li li:hover,
 koala-menu ul li li:hover a {color: ${this.palletColors.menuOptionsColorHover} !important;}
 koala-menu ul li li.active,
