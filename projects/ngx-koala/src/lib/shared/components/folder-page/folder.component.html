@@ -3,6 +3,11 @@
     <mat-icon #folderIconTitle *ngIf="titleIcon">{{titleIcon}}</mat-icon>
     {{titlePage}}
   </h1>
+  <ul class="navigate-history" *ngIf="navigateHistory">
+    <li *ngFor="let item of navigateHistory">
+      <a [style]="'color: ' + customFolderFontColor" [ngClass]="{'disabled': !item.routerLink}" [routerLink]="item.routerLink">{{item.name}}</a>
+    </li>
+  </ul>
   <nav class="menu-folder">
     <ng-content select="[menu-page]"></ng-content>
   </nav>

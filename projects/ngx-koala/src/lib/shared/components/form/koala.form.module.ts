@@ -13,7 +13,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { maskOptions } from '../../../mask-options';
-import { CurrencyMaskModule } from 'ngx-currency-mask';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { KoalaButtonModule } from '../button/koala.button.module';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { KoalaAutofocusDirective } from '../../directives/koala-autofocus.directive';

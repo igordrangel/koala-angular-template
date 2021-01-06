@@ -19,6 +19,7 @@ import { CountryComponent } from './country/country-component';
 import { KoalaListItemInterface } from '../../../../ngx-koala/src/lib/shared/components/list/koala-list-item.interface';
 import { KoalaDynamicComponent } from '../../../../ngx-koala/src/lib/shared/components/dynamic-component/koala-dynamic-component';
 import { KoalaListService } from '../../../../ngx-koala/src/lib/shared/services/list/koala.list.service';
+import {KoalaNavigateHistoryInterface} from "../../../../ngx-koala/src/lib/shared/components/folder-page/koala-navigate-history.interface";
 
 @Component({
 	templateUrl: 'page-list.component.html',
@@ -40,7 +41,11 @@ export class PageListComponent implements OnInit {
 	public selection: SelectionModel<object>;
 	public countries: CountriesInterface[];
 	public reloadListSubject = new BehaviorSubject<boolean>(false);
-	
+	public navigateHistory: KoalaNavigateHistoryInterface[] = [
+    {name: 'Components', routerLink: ''},
+    {name: 'List', routerLink: 'list'}
+  ];
+
 	constructor(
 		private fb: FormBuilder,
 		private pageListService: PageListService,
@@ -84,24 +89,24 @@ export class PageListComponent implements OnInit {
 			}
 		};
 	}
-	
+
 	ngOnInit() {
 		this.formData = this.fb.group({});
 	}
-	
+
 	public buscar() {
 		return this.listService.createListRequest(() => {
 			const filter = this.filter?.value;
 			return this.pageListService.get(filter?.params);
 		});
 	}
-	
+
 	public reloadList(reload: boolean) {
 		if (reload) {
 			this.reloadListSubject.next(reload);
 		}
 	}
-	
+
 	public dialogList(countrie?: CountriesInterface) {
 		this.dialogService.open(
 			DialogPageListComponent,
@@ -111,7 +116,7 @@ export class PageListComponent implements OnInit {
 			() => this.buscar()
 		);
 	}
-	
+
 	public actionList() {
 		this.questionService.open({
 			message: 'Você realmente deseja excluir os itens selecionados?'
@@ -127,7 +132,7 @@ export class PageListComponent implements OnInit {
 			}, 2000);
 		});
 	}
-	
+
 	public downloadList() {
 		this.csvService.convertJsonToCsv(
 			this.countries,

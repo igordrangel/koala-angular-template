@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import {KoalaNavigateHistoryInterface} from "./koala-navigate-history.interface";
 
 @Component({
   selector: 'koala-folder-page',
@@ -11,6 +12,7 @@ export class FolderComponent implements OnInit, OnChanges {
   @Input() titleIcon: string;
   @Input() customFolderFontColor: string = '#212121';
   @Input() customFolderBackgroudColor: string = '#FFF';
+  @Input() navigateHistory: KoalaNavigateHistoryInterface[];
 
   @ViewChild('folder', {static: true}) private folder: ElementRef;
   @ViewChild('folderTitle', {static: true}) private folderTitle: ElementRef;

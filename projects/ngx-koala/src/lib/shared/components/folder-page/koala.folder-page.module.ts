@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { FolderComponent } from './folder.component';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import {RouterModule} from "@angular/router";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -12,6 +14,8 @@ import { MatIconModule } from '@angular/material/icon';
   ],
   imports: [
     CommonModule,
+    RouterModule,
+    MatButtonModule,
     MatIconModule
   ]
 })

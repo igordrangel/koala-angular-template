@@ -1,5 +1,5 @@
 .list-container {border-radius: 10px;margin: 0 auto;overflow-x: hidden;width: 90%;}
-.list-container .list {display: block;height: calc(100vh - 225px);overflow-y: auto;position: relative;top: 0;width: 100%;z-index: 1;}
+.list-container .list {display: block;height: calc(100vh - 295px);overflow-y: auto;position: relative;top: 0;width: 100%;z-index: 1;}
 .list-container .list .spinner-container {position: absolute;height: 100%;top: 0;left: 0;bottom: 56px;right: 0;background: rgba(0, 0, 0, 0.15);z-index: 1;display: flex;align-items: center;justify-content: center;}
 .list-container .list table:not(.table-not-selection) .mat-header-cell:first-child,
 .list-container .list .mat-header-cell:last-child {width: 5%;}
@@ -39,12 +39,12 @@
 .list-container .list-filter .advanced {border-top: 1px solid #dddddd;box-shadow: 0 3px 10px rgba(0, 0, 0, .3);height: 0;overflow-x: hidden;overflow-y: auto;position: absolute;top: 60px;transition: .2s;width: 100%;z-index: 1;}
 .list-container .list-filter .advanced .container-filter {padding: 15px;}
 .list-container .list-filter .advanced.show {height: 360px;}
-.list-container nav.menu-list {height: 40px;margin: 0;padding: 0;position: relative;transition: .2s;width: 100%;z-index: 2;}
+.list-container nav.menu-list {height: 40px;margin: 0;padding: 3px 0;position: relative;transition: .2s;width: 100%;z-index: 2;box-sizing: border-box;}
 .list-container nav.menu-list ul.menu {float: left;font-size: 0;list-style: none;margin: 0;padding: 0 10px;position: relative;text-align: left;}
 .list-container nav.menu-list ul.menu li {color: #616161;display: inline-block;font-size: 16px;padding: 0 4px;}
 .list-container nav.menu-list ul.menu li button.mat-button,
 .list-container nav.menu-list ul.menu li button.koala-icon-button {display: inline-block;}
-.list-container mat-paginator {position: absolute;top: -8px;right: 0;background: transparent !important;z-index: 2;}
-.list-container mat-paginator .mat-paginator-container {height: 40px !important;min-height: 40px !important;}
-.list-container mat-paginator .mat-paginator-container .mat-paginator-page-size-select {height: 40px;margin-top: 0 !important;}
-.list-container mat-paginator .mat-paginator-container .mat-paginator-range-label {margin-top: 3px;}
+.list-container .content-paginator mat-paginator .mat-paginator-container {height: 40px !important;min-height: 40px !important;}
+.list-container .content-paginator mat-paginator .mat-paginator-container .mat-paginator-page-size-select {height: 40px;margin-top: 0 !important;}
+.list-container .content-paginator mat-paginator .mat-paginator-container .mat-paginator-range-label {margin-top: 3px;}
+.list-container .content-paginator {position: relative;background: transparent !important;z-index: 2;box-shadow: -3px 1px 3px rgba(0,0,0,.3);}

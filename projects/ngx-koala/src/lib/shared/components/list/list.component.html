@@ -50,12 +50,6 @@
         <ng-content select="[itemsList]"></ng-content>
       </li>
     </ul>
-    <mat-paginator
-      [length]="qtdListResult"
-      [pageSizeOptions]="limitOptions"
-      [pageSize]="30"
-      showFirstLastButtons>
-    </mat-paginator>
   </nav>
   <div class="list">
     <div *ngIf="loader | async" class="spinner-container">
@@ -121,5 +115,13 @@
       <tr *matHeaderRowDef="columnsToShowInList; sticky: true" mat-header-row></tr>
       <tr *matRowDef="let item; columns: columnsToShowInList;" mat-row></tr>
     </table>
+  </div>
+  <div class="content-paginator">
+    <mat-paginator
+      [length]="qtdListResult"
+      [pageSizeOptions]="limitOptions"
+      [pageSize]="30"
+      showFirstLastButtons>
+    </mat-paginator>
   </div>
 </div>

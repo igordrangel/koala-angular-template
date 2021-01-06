@@ -2,11 +2,8 @@
 	*ngIf="text else iconButton"
 	[matTooltipDisabled]="!tooltip"
 	[matTooltip]="tooltip"
-	[ngClass]="[
-    'c-'+color,
-    'b-'+backgroundColor
-  ]"
 	[disabled]="disabled"
+  [style]="style"
 	class="koala-button"
 	mat-button
 	matTooltipPosition="above"
@@ -18,10 +15,7 @@
   <button
 	  [matTooltipDisabled]="!tooltip"
 	  [matTooltip]="tooltip"
-	  [ngClass]="[
-      'c-'+color,
-      'b-'+backgroundColor
-    ]"
+    [style]="style"
 	  [disabled]="disabled"
 	  class="koala-icon-button"
 	  mat-icon-button
