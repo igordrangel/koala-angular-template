@@ -12,6 +12,7 @@
 	             propriedade.get('type').value == typeField.email ||
 	             propriedade.get('type').value == typeField.number ||
 	             propriedade.get('type').value == typeField.time ||
+	             propriedade.get('type').value == typeField.date ||
 	             propriedade.get('type').value == typeField.hoursAndMinutes ||
 	             propriedade.get('type').value == typeField.phone ||
 	             propriedade.get('type').value == typeField.percent ||
@@ -40,8 +41,10 @@
                     propriedade.get('type').value == typeField.phone ||
                     propriedade.get('type').value == typeField.percent
                   )) ? 'tel' : (
-                    propriedade.get('type').value == typeField.datetime ?
+                    propriedade.get('type').value == typeField.date ?
                     'date' : (
+                    propriedade.get('type').value == typeField.datetime ?
+                    'datetime' : (
                     propriedade.get('type').value == typeField.email ?
                     'email' : (
                     propriedade.get('type').value == typeField.number ?
@@ -51,7 +54,7 @@
                     propriedade.get('type').value == typeField.password ?
                     'password' : (
                     propriedade.get('type').value == typeField.color ?
-                    'color' : 'text'))))))"
+                    'color' : 'text')))))))"
 		      showMaskTyped
 		      formControlName="value"
 		      matInput/>

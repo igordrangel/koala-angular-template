@@ -62,6 +62,7 @@ input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hov
 .mat-form-field-suffix .mat-spinner svg {height: 20px !important;width: 20px !important;}
 .mat-progress-negative .mat-progress-bar-fill::after {background-color: #ffffff;}
 .mat-progress-negative .mat-progress-bar-element {background-color: #929292;}
+.mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {color: #f44336;}
 .mat-option {height: auto !important;line-height: normal !important;padding: 10px 16px !important;white-space: normal !important;}
 .mat-expansion-panel-body {padding: 0 24px 5px !important;}
 .text-obs {background: #eeeeee;border-radius: 5px;color: #212121;font-family: OpenSansLight, sans-serif;height: 150px;margin: 0 auto 10px;overflow-y: auto;padding: 10px;position: relative;width: calc(100% - 27px);}

@@ -21,5 +21,6 @@ export enum DynamicFormTypeFieldEnum {
   file,
   autocomplete,
   color,
-  dynamicForm
+  dynamicForm,
+  date
 }
