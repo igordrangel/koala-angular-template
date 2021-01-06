@@ -213,9 +213,9 @@
 						  (click)="addMoreItem(i)"
 						  [disabled]="propriedade.get('moreItemsConfig').value.length === propriedade.get('moreItemsMaxItems').value"
 						  [tooltip]="propriedade.get('moreItemsButtonIconAddlabel').value"
-						  backgroundColor="blue"
+						  [backgroundColor]="propriedade.get('moreItemsIconBackgroundColor').value"
+              [color]="propriedade.get('moreItemsIconFontColor').value"
 						  class="btn-add-more-items"
-						  color="white"
 						  icon="add">
 					  </koala-button>
 					  {{propriedade.get('label').value}} (Min.: {{propriedade.get('moreItemsMinItems').value}}

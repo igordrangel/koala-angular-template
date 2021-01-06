@@ -34,6 +34,8 @@ export interface KoalaDynamicFormFieldInterface {
   moreItemsMinItems?: number;
   moreItemsMaxItems?: number;
   moreItemsIcon?: string;
+  moreItemsIconFontColor?: string;
+  moreItemsIconBackgroundColor?: string;
   moreItemsConfig?: {
     form: FormGroup;
     formConfig: KoalaDynamicFormFieldInterface[];

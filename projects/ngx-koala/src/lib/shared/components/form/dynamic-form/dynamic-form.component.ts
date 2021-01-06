@@ -34,16 +34,16 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 	public controls: FormArray;
 	public typeField = DynamicFormTypeFieldEnum;
 	public hoursAndMinutesMask = '00:000';
-	
+
 	@ViewChild('autocompleteInput') autocompleteInput: ElementRef<HTMLInputElement>;
-	
+
 	constructor(
 		private fb: FormBuilder,
 		private dynamicFormService: KoalaDynamicFormService
 	) {
 		super(() => this.form);
 	}
-	
+
 	ngOnInit() {
 		if (!this.form.get('formData')) {
 			this.form.addControl('formData', this.fb.array([]));
@@ -181,7 +181,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			this.setValuesOnFields(this.setValues, this.form);
 		}
 	}
-	
+
 	public hoursAndMinutesApplyMask(index: number, event: KeyboardEvent) {
 		const control = this.controls?.controls[index];
 		const type = control?.get('type').value as DynamicFormTypeFieldEnum;
@@ -194,7 +194,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			}
 		}
 	}
-	
+
 	public passwordView(index: number) {
 		const control = this.controls?.controls[index];
 		const hidePassword = !control?.get('hidePassword').value;
@@ -204,7 +204,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			DynamicFormTypeFieldEnum.text
 		);
 	}
-	
+
 	public addMoreItem(propIndex: number) {
 		if (this.controls.controls[propIndex].get('moreItemsConfig').value.length < this.controls.controls[propIndex].get('moreItemsMaxItems').value) {
 			this.controls.controls[propIndex].get('moreItemsConfig').value.push({
@@ -218,7 +218,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			);
 		}
 	}
-	
+
 	public removeMoreItem(propIndex: number, removeIndex) {
 		const expandedItemIndex = removeIndex - 1;
 		this.controls.controls[propIndex].get('moreItemsConfig').value.splice(removeIndex, 1);
@@ -226,7 +226,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			this.controls.controls[propIndex].get('moreItemsExpanded').setValue((expandedItemIndex < 0) ? 0 : expandedItemIndex);
 		}, 50);
 	}
-	
+
 	public clearAutocomplete(propIndex: number) {
 		if (this.controls.controls[propIndex].get('multiple').value) {
 			this.controls.controls[propIndex].get('autocompleteSelectedValue').setValue([]);
@@ -236,11 +236,11 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			this.controls.controls[propIndex].get('value').setValue(this.formConfig[propIndex].autocompleteDefaultValueOnClear ?? null);
 		}
 	}
-	
+
 	public display(option?: KoalaDynamicAutocompleteOptionsInterface): string | undefined {
 		return option ? option.name : undefined;
 	}
-	
+
 	public removeOptionOnAutocomplete(propIndex: number, option: KoalaDynamicAutocompleteOptionsInterface) {
 		const value = this.controls.controls[propIndex].get('autocompleteSelectedValue').value.filter(item => item !== option) as KoalaDynamicAutocompleteOptionsInterface[];
 		this.controls.controls[propIndex].get('autocompleteSelectedValue').setValue(value);
@@ -251,11 +251,11 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			this.formConfig[propIndex].valueChanges(value.map(item => item.value));
 		}
 	}
-	
+
 	public getColorChip(config: KoalaDynamicFormAutocompleteMultipleConfigInterface): ThemePalette {
 		return config.color;
 	}
-	
+
 	private newControl(config: KoalaDynamicFormFieldInterface): FormGroup {
 		let validators = [];
 		let value: any = config.value ?? '';
@@ -284,25 +284,25 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		} else if (config.type === DynamicFormTypeFieldEnum.checkbox) {
 			value = config.value ?? false;
 		}
-		
+
 		if (
 			config.type === DynamicFormTypeFieldEnum.hoursAndMinutes &&
 			value.length >= 6
 		) {
 			this.hoursAndMinutesMask = '000:00';
 		}
-		
+
 		if (config.dynamicFormConfig) {
 			const cloneDynamicFormConfig = {} as KoalaDynamicFormConfigInterface;
 			Object.assign(cloneDynamicFormConfig, config.dynamicFormConfig);
 			cloneDynamicFormConfig.form = config.dynamicFormConfig.form;
 			config.dynamicFormConfig = cloneDynamicFormConfig;
 		}
-		
+
 		if (config.show !== true) {
 			validators = [];
 		}
-		
+
 		return this.fb.group({
 			show: [new BehaviorSubject<boolean>(config.show ?? true)],
 			label: [config.label],
@@ -332,6 +332,8 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			moreItemsMinItems: [config.moreItemsMinItems ?? 0],
 			moreItemsMaxItems: [config.moreItemsMaxItems ?? 100],
 			moreItemsIcon: [config.moreItemsIcon],
+      moreItemsIconFontColor: [config.moreItemsIconFontColor],
+      moreItemsIconBackgroundColor: [config.moreItemsIconBackgroundColor],
 			moreItemsExpanded: [''],
 			moreItemsConfig: [[]],
 			autocompleteLoading: [new BehaviorSubject<boolean>(false)],
@@ -343,7 +345,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			value: [value, validators]
 		});
 	}
-	
+
 	private setValuesOnFields(subject: BehaviorSubject<KoalaDynamicSetValueInterface[]>, form: FormGroup) {
 		subject.subscribe(item => {
 			if (item) {
@@ -354,7 +356,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			}
 		});
 	}
-	
+
 	private changeVisibilityFields(subject: BehaviorSubject<KoalaDynamicFormShowFieldInterface[]>, form: FormGroup) {
 		subject.pipe(debounceTime(5)).subscribe(item => {
 			if (item) {
@@ -400,7 +402,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			}
 		});
 	}
-	
+
 	private autocompleteFilter(arr: KoalaDynamicAutocompleteOptionsInterface[], value: string): KoalaDynamicAutocompleteOptionsInterface[] {
 		return arr.filter(filter => {
 			if (typeof value === 'string') {
@@ -414,7 +416,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 							     return false;
 						     }
 					     });
-					
+
 					return find;
 				}
 			} else {
@@ -422,7 +424,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			}
 		});
 	}
-	
+
 	private setValueByProp(formArray: FormArray, prop: KoalaDynamicSetValueInterface) {
 		if (formArray) {
 			if (prop.name.indexOf(' > ') >= 0) {
@@ -462,7 +464,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			}
 		}
 	}
-	
+
 	private async setConfigDynamicForm(newFormGroup: FormGroup) {
 		if (this.showFieldsMoreItensConfig) {
 			const value = newFormGroup.get('value').value;
