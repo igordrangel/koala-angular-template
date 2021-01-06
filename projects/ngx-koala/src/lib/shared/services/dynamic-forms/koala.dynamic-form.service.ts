@@ -11,7 +11,7 @@ import { KoalaDynamicFormConfigInterface } from '../../components/form/dynamic-f
 
 @Injectable({providedIn: 'root'})
 export class KoalaDynamicFormService {
-  
+
   public emitData(form: FormGroup) {
     const data = {};
     const formArray = form.get('formData') as FormArray;
@@ -46,10 +46,10 @@ export class KoalaDynamicFormService {
 		    data[control.get('name').value] = value;
 	    }
     });
-    
+
     return data;
   }
-  
+
   public setValuesInMoreItemsForm(
     subject: BehaviorSubject<BehaviorSubject<KoalaDynamicSetValueInterface[]>[]>,
     values: KoalaDynamicSetValueInterface[][]
@@ -60,7 +60,7 @@ export class KoalaDynamicFormService {
     });
     subject.next(valuesMoreItems);
   }
-  
+
   public autocompleteFilterOnServer(
     request: () => Promise<any[]>,
     nameConfig: {
@@ -74,10 +74,12 @@ export class KoalaDynamicFormService {
         const options: KoalaDynamicAutocompleteOptionsInterface[] = [];
         response.forEach(item => {
           let value = '';
-          if (indexNameByValue.indexOf(' > ') >= 0) {
+          if (indexNameByValue?.indexOf(' > ') >= 0) {
             value = this.getValueByStringPath(indexNameByValue, item);
           } else if (indexNameByValue) {
             value = item[indexNameByValue];
+          } else {
+            value = item;
           }
           options.push({
             name: KoalaObjectHelper.toString(
@@ -93,7 +95,7 @@ export class KoalaDynamicFormService {
       });
     });
   }
-	
+
 	public showFields(
 		subject: BehaviorSubject<KoalaDynamicFormShowFieldInterface[]>,
 		names: string[],
@@ -110,7 +112,7 @@ export class KoalaDynamicFormService {
 		});
 		subject.next(fields);
 	}
-	
+
 	private getValueByStringPath(indexNameByValue: string, item: any) {
 		let value;
 		const partsIndex = indexNameByValue.split(' > ');
@@ -123,7 +125,7 @@ export class KoalaDynamicFormService {
 			}
       partIndex++;
     } while (partIndex < partsIndex.length);
-    
+
     return value;
   }
 }
