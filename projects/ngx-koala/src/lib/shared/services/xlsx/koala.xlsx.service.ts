@@ -22,7 +22,13 @@ export class KoalaXlsxService {
 
     const titleRow = worksheet.addRow([title]);
     titleRow.alignment = {horizontal: "center"};
-    titleRow.font = {bold: true};
+    titleRow.font = {bold: true, color: {argb: config.titleFontColor.replace('#', '')}};
+    titleRow.fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: {argb: config.titleBackgroundColor.replace('#', '')},
+      bgColor: {argb: config.titleBackgroundColor.replace('#', '')}
+    }
     worksheet.mergeCells(`A1:${worksheet.getCell(1, Object.keys(json[0]).length).address}`);
 
     const headerRow = worksheet.addRow(header);
@@ -32,10 +38,10 @@ export class KoalaXlsxService {
         pattern: 'solid',
         fgColor: {argb: config.headerBackgroundColor.replace('#', '')},
         bgColor: {argb: config.headerBackgroundColor.replace('#', '')}
-      }
+      };
       cell.font = {
         color: {argb: config.headerFontColor.replace('#', '')}
-      }
+      };
     });
 
     json.forEach(item => {
