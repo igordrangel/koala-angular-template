@@ -23,7 +23,7 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
   @Input() emptyListComponent?: KoalaDynamicComponent;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   protected constructor(
     private requestFunction: () => Observable<any>,
@@ -77,10 +77,10 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
     }
     this.filterParams.next({
       params: filter,
-      sort: this.sort.active,
-      order: this.sort.direction,
-      page: this.paginator.pageIndex,
-      limit: this.paginator.pageSize
+      sort: this.sort?.active ?? '',
+      order: this.sort?.direction ?? 'asc',
+      page: this.paginator?.pageIndex ?? 1,
+      limit: this.paginator?.pageSize ?? 30
     });
   }
 
