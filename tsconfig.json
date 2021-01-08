@@ -23,6 +23,9 @@
       "ngx-multidesk-service": [
         "dist/ngx-multidesk-service/ngx-multidesk-service",
         "dist/ngx-multidesk-service"
+      ],
+      "exceljs": [
+        "node_modules/exceljs/dist/exceljs.min"
       ]
     }
   },

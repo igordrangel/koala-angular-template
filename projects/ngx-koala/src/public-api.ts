@@ -161,6 +161,11 @@ export * from './lib/shared/services/viacep/viacep.interface';
 export * from './lib/shared/services/viacep/viacep.service';
 //#endregion
 
+//#region [KOALA XLSX]
+export * from './lib/shared/services/xlsx/koala.xlsx-config.interface';
+export * from './lib/shared/services/xlsx/koala.xlsx.service';
+//#endregion
+
 //#endregion
 
 export * from './lib/shared/providers/pagination/pagination.provider';
