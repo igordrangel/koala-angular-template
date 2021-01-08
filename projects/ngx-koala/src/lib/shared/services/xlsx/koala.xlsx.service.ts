@@ -55,8 +55,4 @@ export class KoalaXlsxService {
       fs.saveAs(blob, config.filename + '.xlsx');
     });
   }
-
-  private getCell(columnIndex: number, rowIndex: number) {
-    const letters = ['A','B','C','D','E','F','G','H','I','J']
-  }
 }

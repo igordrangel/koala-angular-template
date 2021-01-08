@@ -36,6 +36,7 @@
     "ngx-mask": "^10.0.4",
     "ngx-papaparse": "^5.0.0",
     "rxjs": "~6.6.3",
+    "stream": "0.0.2",
     "tskoala-helpers": "^1.0.8",
     "tslib": "^2.0.0",
     "xlsx": "^0.16.9",
