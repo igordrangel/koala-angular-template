@@ -1,6 +1,6 @@
 {
   "name": "koala-angular-template",
-  "version": "11.0.16",
+  "version": "11.0.17",
   "description": "Template angular using Angular and Material Angular",
   "scripts": {
     "ng": "ng",
