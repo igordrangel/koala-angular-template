@@ -29,7 +29,6 @@ export class ListComponent extends ListAbstract implements OnInit {
   @Input() filterFormConfig: ListFilterInterface;
   @Input() error = () => {};
   @Input() reload: BehaviorSubject<boolean>;
-  @Input() emptyListComponent?: KoalaDynamicComponent;
   @Output() getSelection = new EventEmitter<SelectionModel<object>>(null);
   @Output() getDataSource = new EventEmitter<any[]>(null);
 

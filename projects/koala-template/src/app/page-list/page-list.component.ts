@@ -45,6 +45,7 @@ export class PageListComponent implements OnInit {
     {name: 'Components', routerLink: ''},
     {name: 'List', routerLink: 'list'}
   ];
+	public emptyList = new KoalaDynamicComponent(CountryComponent, {})
 
 	constructor(
 		private fb: FormBuilder,

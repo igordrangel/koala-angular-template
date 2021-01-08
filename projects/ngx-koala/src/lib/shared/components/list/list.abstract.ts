@@ -9,6 +9,7 @@ import { KoalaDelayHelper } from 'tskoala-helpers/dist/delay/koala-delay.helper'
 import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { ListFormFilterInterface } from './list.form-filter.interface';
+import {KoalaDynamicComponent} from "../dynamic-component/koala-dynamic-component";
 
 @Directive()
 export abstract class ListAbstract extends FormAbstract implements AfterViewInit {
@@ -19,6 +20,7 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
   public dataSource = new MatTableDataSource<any>([]);
   public typeRequest: 'all' | 'onDemand' = 'onDemand';
   @Input() filterParams = new BehaviorSubject<ListFormFilterInterface>(null);
+  @Input() emptyListComponent?: KoalaDynamicComponent;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -38,7 +40,7 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
     do {
       tentativas++;
       await KoalaDelayHelper.waitFor(400);
-      if (this.sort) {
+      if (this.sort || this.emptyListComponent) {
         this.prepareSearch();
       } else if (tentativas > 10) {
         this.requestErrorFunction();
