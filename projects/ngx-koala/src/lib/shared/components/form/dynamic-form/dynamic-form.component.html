@@ -57,6 +57,7 @@
                     propriedade.get('type').value == typeField.color ?
                     'color' : 'text')))))))"
 		      showMaskTyped
+          autocomplete="off"
 		      formControlName="value"
 		      matInput/>
 	      <button
@@ -100,6 +101,7 @@
 		      [required]="propriedade.get('required').value"
           [readonly]="propriedade.get('disabled').value"
 		      [tabIndex]="i + 1"
+          autocomplete="off"
 		      currencyMask
 		      formControlName="value"
 		      matInput
