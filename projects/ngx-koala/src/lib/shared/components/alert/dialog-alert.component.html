@@ -1,5 +1,8 @@
 <div class="content" mat-dialog-content>
-  <mat-icon [ngClass]="iconColor">{{icon}}</mat-icon>
+  <mat-icon *ngIf="alert.alertEnum else avatar" [ngClass]="iconColor">{{icon}}</mat-icon>
+  <ng-template #avatar>
+    <koala-dynamic-component [dynamicComponent]="alert.avatar"></koala-dynamic-component>
+  </ng-template>
   <p [innerHTML]="alert.message" class="w-100 alert-message text-center"></p>
 </div>
 <div align="center" mat-dialog-actions>

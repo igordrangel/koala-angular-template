@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { KoalaAlertService } from '../../services/alert/koala.alert.service';
 import { CommonModule } from '@angular/common';
+import {KoalaDynamicComponentModule} from "../dynamic-component/koala-dynamic-component.module";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     MatDialogModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    KoalaDynamicComponentModule
   ],
   providers: [
     KoalaAlertService
