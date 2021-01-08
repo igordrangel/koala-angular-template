@@ -80,6 +80,8 @@ p {margin: 0 !important;}
 .mat-action-row {padding-right: 24px !important;}
 .mat-menu-panel {max-width: max-content !important;}
 .notifications-content .mat-list-text {padding-bottom: 5px !important;}
+mat-radio-button {margin-right: 5px;}
+mat-radio-button:last-child {margin-right: 0;}
 /****************************************
  ***************** GRID *****************
  ****************************************/
