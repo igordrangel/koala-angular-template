@@ -9,6 +9,7 @@ import { KoalaDelayHelper } from 'tskoala-helpers/dist/delay/koala-delay.helper'
 import { KoalaDynamicFormService } from '../../services/dynamic-forms/koala.dynamic-form.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { KoalaListItemInterface } from './koala-list-item.interface';
+import {KoalaDynamicComponent} from "../dynamic-component/koala-dynamic-component";
 
 @Component({
   selector: 'koala-list',
@@ -26,9 +27,9 @@ export class ListComponent extends ListAbstract implements OnInit {
   @Input() responseQtdResultIndexName: (response: any) => number;
   @Input() typeRequest: 'all' | 'onDemand';
   @Input() filterFormConfig: ListFilterInterface;
-  @Input() error = () => {
-  };
+  @Input() error = () => {};
   @Input() reload: BehaviorSubject<boolean>;
+  @Input() emptyListComponent?: KoalaDynamicComponent;
   @Output() getSelection = new EventEmitter<SelectionModel<object>>(null);
   @Output() getDataSource = new EventEmitter<any[]>(null);
 
@@ -76,7 +77,7 @@ export class ListComponent extends ListAbstract implements OnInit {
       }
     }
     this.getSelection.emit(this.selection);
-  
+
     if (this.reload) {
       this.reload.subscribe(async reload => {
         if (reload) {
