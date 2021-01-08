@@ -362,6 +362,19 @@
 				  </koala-dynamic-form>
 			  </ng-template>
 		  </div>
+      <div
+        *ngIf="propriedade.get('type').value == typeField.radio"
+        [formGroupName]="i"
+        [ngClass]="propriedade.get('fieldClass').value">
+        <mat-radio-group formControlName="value">
+          <mat-radio-button
+            [tabIndex]="i + 1"
+            *ngFor="let options of propriedade.get('opcoesSelect').value"
+            [value]="options.value">
+            {{options.name}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
 	  </div>
   </div>
   <ng-content select="[btn-submit]"></ng-content>
