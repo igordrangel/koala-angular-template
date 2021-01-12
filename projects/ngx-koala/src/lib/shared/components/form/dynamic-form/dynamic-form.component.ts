@@ -117,20 +117,23 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 									            'name'
 								            )[0].autocompleteDefaultValueOnClear ?? null);
 						            }
-						            if (config.autocompleteType === 'all') {
-							            const autocompleteOptionsSubject = newFormGroup.get('autocompleteOptions').value as BehaviorSubject<KoalaDynamicAutocompleteOptionsInterface[]>;
-							            newFormGroup.get('autocompleteOptionsFiltered').value.next(this.autocompleteFilter(
-								            autocompleteOptionsSubject.value,
-								            value
-							            ));
-						            } else {
-							            const loader = newFormGroup.get('autocompleteLoading').value as BehaviorSubject<boolean>;
-							            loader.next(true);
-							            config.autocompleteFilter(value).subscribe(options => {
-								            newFormGroup.get('autocompleteOptionsFiltered').value.next(options);
-								            loader.next(false);
-							            });
-						            }
+
+						            if (config.type === DynamicFormTypeFieldEnum.autocomplete && typeof value !== "object") {
+                          if (config.autocompleteType === 'all') {
+                            const autocompleteOptionsSubject = newFormGroup.get('autocompleteOptions').value as BehaviorSubject<KoalaDynamicAutocompleteOptionsInterface[]>;
+                            newFormGroup.get('autocompleteOptionsFiltered').value.next(this.autocompleteFilter(
+                              autocompleteOptionsSubject.value,
+                              value
+                            ));
+                          } else {
+                            const loader = newFormGroup.get('autocompleteLoading').value as BehaviorSubject<boolean>;
+                            loader.next(true);
+                            config.autocompleteFilter(value).subscribe(options => {
+                              newFormGroup.get('autocompleteOptionsFiltered').value.next(options);
+                              loader.next(false);
+                            });
+                          }
+                        }
 					            }
 					            if (config.valueChanges) {
 						            if (config.type === DynamicFormTypeFieldEnum.autocomplete) {
