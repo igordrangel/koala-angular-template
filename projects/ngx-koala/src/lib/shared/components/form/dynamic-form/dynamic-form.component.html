@@ -388,7 +388,7 @@
         *ngIf="propriedade.get('type').value == typeField.radio"
         [formGroupName]="i"
         [ngClass]="propriedade.get('fieldClass').value">
-        <label>{{propriedade.get('label').value}}</label>
+        <label *ngIf="propriedade.get('label').value">{{propriedade.get('label').value}}</label>
         <mat-radio-group formControlName="value">
           <mat-radio-button
             [tabIndex]="tabIndexStart + i"
