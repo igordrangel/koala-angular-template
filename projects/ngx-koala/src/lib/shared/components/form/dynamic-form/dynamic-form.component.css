@@ -5,4 +5,5 @@
 .more-items-content .items .mat-expansion-panel-header-description {flex-basis: 0;}
 .more-items-content .items .mat-expansion-panel-header-description {align-items: center;justify-content: space-between;}
 .more-items-content .items .mat-form-field + .mat-form-field {margin-left: 8px;}
+.radio-btn-group label {position: relative;display: block;padding: 10px 0;}
 .text-obs {background: #eeeeee;border-radius: 5px;color: #212121;font-family: OpenSansLight, sans-serif;height: 150px;margin: 0 auto 10px;overflow-y: auto;padding: 10px;position: relative;width: calc(100% - 27px);}

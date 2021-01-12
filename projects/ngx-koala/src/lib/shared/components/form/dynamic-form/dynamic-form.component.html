@@ -378,11 +378,12 @@
 			  </ng-template>
 		  </div>
       <div
+        class="radio-btn-group"
         *ngIf="propriedade.get('type').value == typeField.radio"
         [formGroupName]="i"
         [ngClass]="propriedade.get('fieldClass').value">
+        <label>{{propriedade.get('label').value}}</label>
         <mat-radio-group formControlName="value">
-          <mat-label>{{propriedade.get('label').value}}</mat-label>
           <mat-radio-button
             [tabIndex]="tabIndexStart + i"
             *ngFor="let options of propriedade.get('opcoesSelect').value"
