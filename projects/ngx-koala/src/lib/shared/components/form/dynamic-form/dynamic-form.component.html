@@ -103,6 +103,8 @@
 		      [required]="propriedade.get('required').value"
           [readonly]="propriedade.get('disabled').value"
           [tabIndex]="tabIndexStart + i"
+          [minLength]="propriedade.get('minLength').value"
+          [maxLength]="propriedade.get('maxLength').value"
           autocomplete="off"
 		      currencyMask
 		      formControlName="value"
@@ -134,6 +136,8 @@
 		      [required]="propriedade.get('required').value"
           [readonly]="propriedade.get('disabled').value"
           [tabIndex]="tabIndexStart + i"
+          [minLength]="propriedade.get('minLength').value"
+          [maxLength]="propriedade.get('maxLength').value"
 		      formControlName="value"
 		      matInput>
         </textarea>
@@ -166,6 +170,8 @@
 		      [required]="propriedade.get('required').value"
           [readonly]="propriedade.get('disabled').value"
           [tabIndex]="tabIndexStart + i"
+          [minLength]="propriedade.get('minLength').value"
+          [maxLength]="propriedade.get('maxLength').value"
 		      formControlName="value"
 		      matInput>
 	      </textarea>
