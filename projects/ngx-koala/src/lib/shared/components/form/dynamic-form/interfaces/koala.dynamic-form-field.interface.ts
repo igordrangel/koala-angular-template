@@ -56,5 +56,9 @@ export interface KoalaDynamicFormFieldInterface {
     backgroundColor?: 'blue' | 'white' | 'transparent';
     accept?: string;
   }
-  dynamicFormConfig?: KoalaDynamicFormConfigInterface
+  dynamicFormConfig?: KoalaDynamicFormConfigInterface;
+  minLength?: number;
+  maxLength?: number;
+  min?: number;
+  max?: number;
 }

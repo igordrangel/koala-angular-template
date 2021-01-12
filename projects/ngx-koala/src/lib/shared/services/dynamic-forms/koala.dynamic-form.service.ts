@@ -50,6 +50,13 @@ export class KoalaDynamicFormService {
     return data;
   }
 
+  public resetForm(form: FormGroup) {
+    const formArray = form.get('formData') as FormArray;
+    formArray.controls.forEach(control => {
+      control.get('value').reset();
+    });
+  }
+
   public setValuesInMoreItemsForm(
     subject: BehaviorSubject<BehaviorSubject<KoalaDynamicSetValueInterface[]>[]>,
     values: KoalaDynamicSetValueInterface[][]
