@@ -23,13 +23,12 @@
 		    [ngClass]="propriedade.get('fieldClass').value">
 	      <mat-label>{{propriedade.get('label').value}}</mat-label>
 	      <input
-          #input
 		      [dropSpecialCharacters]="false"
 		      [koalaAutoFocus]="propriedade.get('focus').value"
 		      (keyup)="hoursAndMinutesApplyMask(i, $event)"
 		      [required]="propriedade.get('required').value"
           [readonly]="propriedade.get('disabled').value"
-		      [tabIndex]="propriedade.get('tabIndex').value"
+		      [tabIndex]="tabIndexStart + i"
 		      [mask]="((propriedade.get('type').value == typeField.phone) ? '(00)0000-0000?0' : null) ||
                   ((propriedade.get('type').value == typeField.cpf) ? '000.000.000-00' : null) ||
                   ((propriedade.get('type').value == typeField.cnpj) ? '00.000.000/0000-00' : null) ||
@@ -103,7 +102,7 @@
 		      [koalaAutoFocus]="propriedade.get('focus').value"
 		      [required]="propriedade.get('required').value"
           [readonly]="propriedade.get('disabled').value"
-          [tabIndex]="propriedade.get('tabIndex').value"
+          [tabIndex]="tabIndexStart + i"
           autocomplete="off"
 		      currencyMask
 		      formControlName="value"
@@ -127,20 +126,24 @@
 		    [ngClass]="propriedade.get('fieldClass').value">
 	      <mat-label>{{propriedade.get('label').value}}</mat-label>
 	      <textarea
+          #textarea
 		      [koalaAutoFocus]="propriedade.get('focus').value"
 		      [mat-autosize]="true"
 		      [matAutosizeMaxRows]="8"
 		      [matAutosizeMinRows]="3"
 		      [required]="propriedade.get('required').value"
           [readonly]="propriedade.get('disabled').value"
-          [tabIndex]="propriedade.get('tabIndex').value"
+          [tabIndex]="tabIndexStart + i"
 		      formControlName="value"
 		      matInput>
-	            </textarea>
+        </textarea>
 	      <mat-hint *ngIf="propriedade.get('textHint').value">
 	        <mat-icon>info</mat-icon>
 		      {{propriedade.get('textHint').value}}
 	      </mat-hint>
+        <mat-hint align="end" *ngIf="propriedade.get('maxLength').value">
+          {{textarea.value.length}}/{{propriedade.get('maxLength').value}}
+        </mat-hint>
 	      <mat-error *ngIf="propriedade.get('value').errors?.required">
 	        <mat-icon>error</mat-icon>
 		      {{propriedade.get('label').value}} não informado(a).
@@ -155,13 +158,14 @@
 	      <mat-label>{{propriedade.get('label').value}}</mat-label>
 	      <div [innerHTML]="propriedade.get('textLogs').value" class="text-obs"></div>
 	      <textarea
+          #textarea
 		      [koalaAutoFocus]="propriedade.get('focus').value"
 		      [mat-autosize]="true"
 		      [matAutosizeMaxRows]="8"
 		      [matAutosizeMinRows]="3"
 		      [required]="propriedade.get('required').value"
           [readonly]="propriedade.get('disabled').value"
-          [tabIndex]="propriedade.get('tabIndex').value"
+          [tabIndex]="tabIndexStart + i"
 		      formControlName="value"
 		      matInput>
 	      </textarea>
@@ -170,7 +174,7 @@
 		      {{propriedade.get('textHint').value}}
 	      </mat-hint>
         <mat-hint align="end" *ngIf="propriedade.get('maxLength').value">
-          {{propriedade.get('value').value.length}}/{{propriedade.get('maxLength').value}}
+          {{textarea.value.length}}/{{propriedade.get('maxLength').value}}
         </mat-hint>
 	      <mat-error *ngIf="propriedade.get('value').errors?.required">
 	        <mat-icon>error</mat-icon>
@@ -185,7 +189,7 @@
 		    [ngClass]="propriedade.get('fieldClass').value">
 	      <mat-label>{{propriedade.get('label').value}}</mat-label>
 	      <mat-select [multiple]="propriedade.get('multiple').value" [required]="propriedade.get('required').value"
-                    [tabIndex]="propriedade.get('tabIndex').value" formControlName="value" [disabled]="propriedade.get('disabled').value">
+                    [tabIndex]="tabIndexStart + i" formControlName="value" [disabled]="propriedade.get('disabled').value">
 	        <mat-option *ngFor="let options of propriedade.get('opcoesSelect').value" [value]="options.value">
 	          {{options.name}}
 	        </mat-option>
@@ -204,7 +208,7 @@
 		    [formGroupName]="i"
 		    [ngClass]="propriedade.get('fieldClass').value">
 	      <mat-checkbox
-          [tabIndex]="propriedade.get('tabIndex').value"
+          [tabIndex]="tabIndexStart + i"
 		      formControlName="value"
 		      value="true">
 	        {{propriedade.get('label').value}}
@@ -284,7 +288,7 @@
 		          [required]="propriedade.get('required').value"
 		          [matAutocomplete]="auto"
 		          [matChipInputFor]="chipList"
-              [tabIndex]="propriedade.get('tabIndex').value"
+              [tabIndex]="tabIndexStart + i"
 		          formControlName="value"
 		          matInput
 		          type="text"
@@ -296,7 +300,7 @@
 			      [matAutocomplete]="auto"
 			      [readonly]="propriedade.get('disabled').value"
 			      [required]="propriedade.get('required').value"
-            [tabIndex]="propriedade.get('tabIndex').value"
+            [tabIndex]="tabIndexStart + i"
 			      formControlName="value"
 			      matInput
 			      placeholder="Selecione uma opção..."
@@ -377,7 +381,7 @@
         <mat-radio-group formControlName="value">
           <mat-label>{{propriedade.get('label').value}}</mat-label>
           <mat-radio-button
-            [tabIndex]="propriedade.get('tabIndex').value"
+            [tabIndex]="tabIndexStart + i"
             *ngFor="let options of propriedade.get('opcoesSelect').value"
             [value]="options.value">
             {{options.name}}

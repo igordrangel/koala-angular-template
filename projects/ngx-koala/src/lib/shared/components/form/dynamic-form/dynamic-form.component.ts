@@ -31,6 +31,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 	@Input() showFields: BehaviorSubject<KoalaDynamicFormShowFieldInterface[]>;
 	@Input() showFieldsMoreItensConfig: KoalaDynamicFormMoreItensShowFieldConfigInterface[];
 	@Input() setValues: BehaviorSubject<KoalaDynamicSetValueInterface[]>;
+	@Input() tabIndexStart: number = 0;
 	public controls: FormArray;
 	public typeField = DynamicFormTypeFieldEnum;
 	public hoursAndMinutesMask = '00:000';
@@ -307,7 +308,6 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		}
 
 		return this.fb.group({
-      tabIndex: [this.controls?.controls?.length > 0 ? this.controls?.controls?.length + config.tabIndexStart : config.tabIndexStart],
 			show: [new BehaviorSubject<boolean>(config.show ?? true)],
 			label: [config.label],
 			name: [config.name],
