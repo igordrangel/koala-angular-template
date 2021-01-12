@@ -29,7 +29,7 @@
 		      (keyup)="hoursAndMinutesApplyMask(i, $event)"
 		      [required]="propriedade.get('required').value"
           [readonly]="propriedade.get('disabled').value"
-		      [tabIndex]="i + 1"
+		      [tabIndex]="propriedade.get('tabIndex').value"
 		      [mask]="((propriedade.get('type').value == typeField.phone) ? '(00)0000-0000?0' : null) ||
                   ((propriedade.get('type').value == typeField.cpf) ? '000.000.000-00' : null) ||
                   ((propriedade.get('type').value == typeField.cnpj) ? '00.000.000/0000-00' : null) ||
@@ -57,6 +57,8 @@
                     'password' : (
                     propriedade.get('type').value == typeField.color ?
                     'color' : 'text')))))))"
+          [minLength]="propriedade.get('minLength').value"
+          [maxLength]="propriedade.get('maxLength').value"
 		      showMaskTyped
           autocomplete="off"
 		      formControlName="value"
@@ -101,7 +103,7 @@
 		      [koalaAutoFocus]="propriedade.get('focus').value"
 		      [required]="propriedade.get('required').value"
           [readonly]="propriedade.get('disabled').value"
-		      [tabIndex]="i + 1"
+          [tabIndex]="propriedade.get('tabIndex').value"
           autocomplete="off"
 		      currencyMask
 		      formControlName="value"
@@ -131,7 +133,7 @@
 		      [matAutosizeMinRows]="3"
 		      [required]="propriedade.get('required').value"
           [readonly]="propriedade.get('disabled').value"
-		      [tabIndex]="i + 1"
+          [tabIndex]="propriedade.get('tabIndex').value"
 		      formControlName="value"
 		      matInput>
 	            </textarea>
@@ -159,7 +161,7 @@
 		      [matAutosizeMinRows]="3"
 		      [required]="propriedade.get('required').value"
           [readonly]="propriedade.get('disabled').value"
-		      [tabIndex]="i + 1"
+          [tabIndex]="propriedade.get('tabIndex').value"
 		      formControlName="value"
 		      matInput>
 	      </textarea>
@@ -167,6 +169,9 @@
 	        <mat-icon>info</mat-icon>
 		      {{propriedade.get('textHint').value}}
 	      </mat-hint>
+        <mat-hint align="end" *ngIf="propriedade.get('maxLength').value">
+          {{propriedade.get('value').value.length}}/{{propriedade.get('maxLength').value}}
+        </mat-hint>
 	      <mat-error *ngIf="propriedade.get('value').errors?.required">
 	        <mat-icon>error</mat-icon>
 		      {{propriedade.get('label').value}} não informado(a).
@@ -180,7 +185,7 @@
 		    [ngClass]="propriedade.get('fieldClass').value">
 	      <mat-label>{{propriedade.get('label').value}}</mat-label>
 	      <mat-select [multiple]="propriedade.get('multiple').value" [required]="propriedade.get('required').value"
-	                  [tabIndex]="i + 1" formControlName="value" [disabled]="propriedade.get('disabled').value">
+                    [tabIndex]="propriedade.get('tabIndex').value" formControlName="value" [disabled]="propriedade.get('disabled').value">
 	        <mat-option *ngFor="let options of propriedade.get('opcoesSelect').value" [value]="options.value">
 	          {{options.name}}
 	        </mat-option>
@@ -199,7 +204,7 @@
 		    [formGroupName]="i"
 		    [ngClass]="propriedade.get('fieldClass').value">
 	      <mat-checkbox
-		      [tabIndex]="i + 1"
+          [tabIndex]="propriedade.get('tabIndex').value"
 		      formControlName="value"
 		      value="true">
 	        {{propriedade.get('label').value}}
@@ -279,6 +284,7 @@
 		          [required]="propriedade.get('required').value"
 		          [matAutocomplete]="auto"
 		          [matChipInputFor]="chipList"
+              [tabIndex]="propriedade.get('tabIndex').value"
 		          formControlName="value"
 		          matInput
 		          type="text"
@@ -290,6 +296,7 @@
 			      [matAutocomplete]="auto"
 			      [readonly]="propriedade.get('disabled').value"
 			      [required]="propriedade.get('required').value"
+            [tabIndex]="propriedade.get('tabIndex').value"
 			      formControlName="value"
 			      matInput
 			      placeholder="Selecione uma opção..."
@@ -368,8 +375,9 @@
         [formGroupName]="i"
         [ngClass]="propriedade.get('fieldClass').value">
         <mat-radio-group formControlName="value">
+          <mat-label>{{propriedade.get('label').value}}</mat-label>
           <mat-radio-button
-            [tabIndex]="i + 1"
+            [tabIndex]="propriedade.get('tabIndex').value"
             *ngFor="let options of propriedade.get('opcoesSelect').value"
             [value]="options.value">
             {{options.name}}

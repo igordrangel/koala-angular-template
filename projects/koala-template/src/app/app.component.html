@@ -1,16 +1,16 @@
 <koala-page
 	color="primary"
 	[openPages]="openPages"
-	(deleteAllNotifications)="deleteAllNotifications($event)"
-	(deleteNotification)="deleteNotification($event)"
-	[notifications]="notifications"
-	[userMenuOptions]="userMenuOptions"
 	[palletColors]="palletCollors"
-	defaultPage="list"
+  [showMenu]="false"
+	defaultPage="get-started"
 	logotipo="assets/angular-logotipo.png">
-  <div menu-options>
-    <koala-menu [optionsSubject]="menuOptions" titleMenu="Ferramentas"></koala-menu>
+
+  <div menu-toolbar>
+    <a mat-button routerLink="get-started" color="primary">Get Started</a>
+    <a mat-button routerLink="components" color="primary">Componentes</a>
   </div>
+
   <div page-content>
     <router-outlet></router-outlet>
   </div>

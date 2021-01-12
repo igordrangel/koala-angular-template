@@ -203,6 +203,7 @@ input::placeholder,
 fieldset legend,
 .mat-paginator-container,
 .mat-form-field-flex mat-icon {color: ${this.palletColors.fontColor}!important;}
+.mat-paginator-container,
 .mat-card,
 .mat-expansion-panel,
 .mat-select-panel,

@@ -9,11 +9,14 @@ import { KoalaDynamicFormAutocompleteMultipleConfigInterface } from './koala.dyn
 import { KoalaDynamicFormConfigInterface } from './koala.dynamic-form-config.interface';
 
 export interface KoalaDynamicFormFieldInterface {
+  tabIndexStart?: number;
   show?: boolean;
   label?: string;
   name: string;
   required?: boolean;
   disabled?: boolean;
+  minLength?: number;
+  maxLength?: number;
   focus?: boolean;
   type: DynamicFormTypeFieldEnum;
   textObs?: string;

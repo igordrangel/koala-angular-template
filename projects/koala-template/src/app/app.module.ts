@@ -9,11 +9,13 @@ import { NgxKoalaModule } from '../../../ngx-koala/src/lib/ngx-koala.module';
 import { PageLoginComponent } from './login/page-login.component';
 import { KoalaMenuModule } from '../../../ngx-koala/src/lib/shared/components/menu/koala.menu.module';
 import { QuestionAvatarModule } from './shared/components/question-avatar/question-avatar.module';
+import {PageGetStartedComponent} from "./get-started/page-get-started.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    PageLoginComponent
+    PageLoginComponent,
+    PageGetStartedComponent
   ],
   imports: [
     BrowserModule,

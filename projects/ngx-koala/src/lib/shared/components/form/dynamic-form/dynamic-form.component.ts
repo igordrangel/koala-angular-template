@@ -307,6 +307,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		}
 
 		return this.fb.group({
+      tabIndex: [this.controls?.controls?.length > 0 ? this.controls?.controls?.length + config.tabIndexStart : config.tabIndexStart],
 			show: [new BehaviorSubject<boolean>(config.show ?? true)],
 			label: [config.label],
 			name: [config.name],
@@ -326,6 +327,8 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			fieldClass: [config.fieldClass],
 			textHint: [config.textHint],
 			required: [config.required ?? false],
+      minLength: [config.minLength ?? 0],
+      maxLength: [config.maxLength ?? 255],
 			disabled: [config.disabled ?? false],
 			focus: [config.focus ?? false],
 			multiple: [config.multiple ?? false],

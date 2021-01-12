@@ -36,7 +36,8 @@ export class PageLoginComponent extends FormAbstract implements OnInit {
         required: true,
         appearance: 'outline',
         fieldClass: 'w-100',
-        focus: true
+        focus: true,
+        textHint: 'Informe um acesso fake.'
       },
       {
         label: 'Senha',
@@ -44,7 +45,8 @@ export class PageLoginComponent extends FormAbstract implements OnInit {
         type: DynamicFormTypeFieldEnum.password,
         required: true,
         appearance: 'outline',
-        fieldClass: 'w-100'
+        fieldClass: 'w-100',
+        textHint: 'Informe uma senha fake.'
       }
     ];
   }
