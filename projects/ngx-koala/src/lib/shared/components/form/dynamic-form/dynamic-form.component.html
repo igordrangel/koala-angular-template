@@ -57,10 +57,6 @@
                     'password' : (
                     propriedade.get('type').value == typeField.color ?
                     'color' : 'text')))))))"
-          [minLength]="propriedade.get('minLength').value"
-          [maxLength]="propriedade.get('maxLength').value"
-          [min]="propriedade.get('min').value"
-          [max]="propriedade.get('max').value"
 		      showMaskTyped
           autocomplete="off"
 		      formControlName="value"
@@ -77,9 +73,6 @@
 	        <mat-icon>info</mat-icon>
 		      {{propriedade.get('textHint').value}}
 	      </mat-hint>
-        <mat-hint *ngIf="propriedade.get('maxLength').value" align="end">
-          {{input.value?.length || 0}}/{{propriedade.get('maxLength').value}}
-        </mat-hint>
 	      <mat-error *ngIf="propriedade.get('value').errors?.required">
 	        <mat-icon>error</mat-icon>
 		      {{propriedade.get('label').value}} não informado(a).

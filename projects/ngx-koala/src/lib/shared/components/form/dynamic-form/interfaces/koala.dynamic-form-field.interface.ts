@@ -57,8 +57,4 @@ export interface KoalaDynamicFormFieldInterface {
     accept?: string;
   }
   dynamicFormConfig?: KoalaDynamicFormConfigInterface;
-  minLength?: number;
-  maxLength?: number;
-  min?: number;
-  max?: number;
 }
