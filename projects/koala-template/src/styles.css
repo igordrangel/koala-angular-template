@@ -1,4 +1,4 @@
 .mat-button.mat-primary, .mat-icon-button.mat-primary, .mat-stroked-button.mat-primary {color: #fff;}
-.menu-toolbar {background-color: rgba(0,0,0,.1);border-radius: 20px;}
+.menu-toolbar {background-color: #111;border-radius: 20px;}
 .menu-toolbar a:first-child {border-radius: 20px 0 0 20px;}
 .menu-toolbar a:last-child {border-radius: 0 20px 20px 0;}

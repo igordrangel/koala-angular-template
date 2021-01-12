@@ -249,7 +249,8 @@
 							  [showFieldsMoreItensConfig]="item.showFieldsMoreItensConfig"
 							  [showFields]="item.showFields"
 							  [formConfig]="item.formConfig"
-							  [form]="item.form">
+							  [form]="item.form"
+                [tabIndexStart]="tabIndexStart + i">
 						  </koala-dynamic-form>
 					    <mat-action-row
 						    *ngIf="propriedade.get('moreItemsConfig').value.length > propriedade.get('moreItemsMinItems').value">
@@ -362,7 +363,8 @@
 					  [formConfig]="dynamicFormConfig.formConfig"
 					  [form]="dynamicFormConfig.form"
 					  [setValues]="dynamicFormConfig.setValues"
-					  [showFields]="dynamicFormConfig.showFields">
+					  [showFields]="dynamicFormConfig.showFields"
+            [tabIndexStart]="tabIndexStart + i">
 				  </koala-dynamic-form>
 			  </fieldset>
 			  <ng-template #dynamicFormWithoutLabel>
@@ -370,7 +372,8 @@
 					  [formConfig]="dynamicFormConfig.formConfig"
 					  [form]="dynamicFormConfig.form"
 					  [setValues]="dynamicFormConfig.setValues"
-					  [showFields]="dynamicFormConfig.showFields">
+					  [showFields]="dynamicFormConfig.showFields"
+            [tabIndexStart]="tabIndexStart + i">
 				  </koala-dynamic-form>
 			  </ng-template>
 		  </div>
