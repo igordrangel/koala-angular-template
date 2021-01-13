@@ -270,6 +270,8 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		);
 
 		if (config.required === true) validators.push(Validators.required);
+    if (config.minLength) validators.push(Validators.minLength(config.minLength));
+    if (config.maxLength) validators.push(Validators.maxLength(config.maxLength));
 
 		if (config.type === DynamicFormTypeFieldEnum.cpf) {
 			validators.push(CpfValidator);
