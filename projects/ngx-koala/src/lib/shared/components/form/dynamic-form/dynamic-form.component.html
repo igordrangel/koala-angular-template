@@ -11,7 +11,6 @@
 	             propriedade.get('type').value == typeField.datetime ||
 	             propriedade.get('type').value == typeField.email ||
 	             propriedade.get('type').value == typeField.number ||
-	             propriedade.get('type').value == typeField.float ||
 	             propriedade.get('type').value == typeField.time ||
 	             propriedade.get('type').value == typeField.date ||
 	             propriedade.get('type').value == typeField.hoursAndMinutes ||
@@ -34,8 +33,7 @@
                   ((propriedade.get('type').value == typeField.cpf) ? '000.000.000-00' : null) ||
                   ((propriedade.get('type').value == typeField.cnpj) ? '00.000.000/0000-00' : null) ||
                   ((propriedade.get('type').value == typeField.percent) ? 'percent' : null) ||
-									((propriedade.get('type').value == typeField.hoursAndMinutes) ? hoursAndMinutesMask : null) ||
-                  ((propriedade.get('type').value == typeField.float) ? 'separator.2' : null)"
+									((propriedade.get('type').value == typeField.hoursAndMinutes) ? hoursAndMinutesMask : null)"
 		      [validation]="
 	                    (propriedade.get('type').value == typeField.cpf && propriedade.get('value').errors?.cpfInvalid) ||
 	                    (propriedade.get('type').value == typeField.cnpj && propriedade.get('value').errors?.cnpjInvalid)"
@@ -116,6 +114,8 @@
 		      [required]="propriedade.get('required').value"
           [readonly]="propriedade.get('disabled').value"
           [tabIndex]="tabIndexStart + i"
+          [min]="propriedade.get('min').value"
+          [max]="propriedade.get('max').value"
           [minLength]="propriedade.get('minLength').value"
           [maxLength]="propriedade.get('maxLength').value"
           autocomplete="off"
@@ -132,6 +132,37 @@
 		      {{propriedade.get('label').value}} não informado(a).
 	      </mat-error>
 	    </mat-form-field>
+      <mat-form-field
+        *ngIf="propriedade.get('type').value == typeField.float"
+        [appearance]="propriedade.get('appearance').value"
+        [floatLabel]="propriedade.get('floatLabel').value"
+        [formGroupName]="i"
+        [ngClass]="propriedade.get('fieldClass').value">
+        <mat-label>{{propriedade.get('label').value}}</mat-label>
+        <input
+          [koalaAutoFocus]="propriedade.get('focus').value"
+          [required]="propriedade.get('required').value"
+          [readonly]="propriedade.get('disabled').value"
+          [tabIndex]="tabIndexStart + i"
+          [min]="propriedade.get('min').value"
+          [max]="propriedade.get('max').value"
+          [minLength]="propriedade.get('minLength').value"
+          [maxLength]="propriedade.get('maxLength').value"
+          autocomplete="off"
+          currencyMask
+          [options]="{prefix: ''}"
+          formControlName="value"
+          matInput
+          type="tel"/>
+        <mat-hint *ngIf="propriedade.get('textHint').value">
+          <mat-icon>info</mat-icon>
+          {{propriedade.get('textHint').value}}
+        </mat-hint>
+        <mat-error *ngIf="propriedade.get('value').errors?.required">
+          <mat-icon>error</mat-icon>
+          {{propriedade.get('label').value}} não informado(a).
+        </mat-error>
+      </mat-form-field>
 	    <mat-form-field
 		    *ngIf="propriedade.get('type').value == typeField.valueList ||
 	             propriedade.get('type').value == typeField.textarea"
