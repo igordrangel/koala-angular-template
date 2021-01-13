@@ -9,12 +9,14 @@ export class IconComponent implements OnInit {
   @Input() color: string;
   @Input() icon: 'notFound'|'notAllowed'|'sessionExpired'|'empty'|'excel'|'edit'|'trash';
   @Input() size: number = 24;
+  public viewBox: string;
 
   @ViewChild('svgIcon', {static: true}) private svgIconRef: ElementRef<SVGElement>;
 
   ngOnInit() {
     this.svgIconRef.nativeElement.style.width = `${this.size}px`;
     this.svgIconRef.nativeElement.style.height = `${this.size}px`;
+    this.viewBox = `-${this.size} -${this.size} ${512 - this.size} ${512 - this.size}`;
     setTimeout(() => {
       document.querySelectorAll(`
         #koala-icons path,
