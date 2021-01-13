@@ -14,6 +14,7 @@ export class ButtonComponent implements OnInit {
   @Input() tooltip: string;
   @Input() disabled: boolean;
   @Input() koalaIcon: boolean = false;
+  @Input() koalaIconSize: number = 24;
   public style: string;
 
   ngOnInit() {
