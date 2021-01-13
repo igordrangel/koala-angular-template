@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { KoalaIconModule } from "../icon/koala.icon.module";
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     CommonModule,
     MatTooltipModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    KoalaIconModule
   ],
   exports: [
     ButtonComponent

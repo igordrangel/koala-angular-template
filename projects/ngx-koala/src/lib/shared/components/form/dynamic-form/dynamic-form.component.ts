@@ -31,7 +31,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 	@Input() showFields: BehaviorSubject<KoalaDynamicFormShowFieldInterface[]>;
 	@Input() showFieldsMoreItensConfig: KoalaDynamicFormMoreItensShowFieldConfigInterface[];
 	@Input() setValues: BehaviorSubject<KoalaDynamicSetValueInterface[]>;
-	@Input() tabIndexStart: number = 0;
+	@Input() tabIndexStart: number = 1;
 	public controls: FormArray;
 	public typeField = DynamicFormTypeFieldEnum;
 	public hoursAndMinutesMask = '00:000';

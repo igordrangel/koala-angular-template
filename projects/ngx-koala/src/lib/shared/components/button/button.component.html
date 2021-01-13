@@ -8,7 +8,8 @@
 	mat-button
 	matTooltipPosition="above"
 	type="button">
-  <mat-icon *ngIf="icon">{{icon}}</mat-icon>
+  <mat-icon *ngIf="icon && !koalaIcon">{{icon}}</mat-icon>
+  <koala-icon *ngIf="icon && koalaIcon">{{icon}}</koala-icon>
 	{{text}}
 </button>
 <ng-template #iconButton>
@@ -21,6 +22,7 @@
 	  mat-icon-button
 	  matTooltipPosition="before"
 	  type="button">
-    <mat-icon>{{icon}}</mat-icon>
+    <mat-icon *ngIf="!koalaIcon">{{icon}}</mat-icon>
+    <koala-icon *ngIf="koalaIcon">{{icon}}</koala-icon>
   </button>
 </ng-template>

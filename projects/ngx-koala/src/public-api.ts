@@ -17,6 +17,11 @@ export * from './lib/shared/components/button/button.component';
 export * from './lib/shared/components/button/koala.button.module';
 //#endregion
 
+//#region [KOALA ICON]
+export * from './lib/shared/components/icon/icon.component';
+export * from './lib/shared/components/icon/koala.icon.module';
+//#endregion
+
 //#region [KOALA DIALOG]
 export * from './lib/shared/components/dialog/dialog.component';
 export * from './lib/shared/components/dialog/koala.dialog.module';

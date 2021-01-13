@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'koala-button',
@@ -13,6 +13,7 @@ export class ButtonComponent implements OnInit {
   @Input() text: string;
   @Input() tooltip: string;
   @Input() disabled: boolean;
+  @Input() koalaIcon: boolean = false;
   public style: string;
 
   ngOnInit() {
