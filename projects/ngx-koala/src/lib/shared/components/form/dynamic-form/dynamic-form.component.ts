@@ -270,6 +270,8 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		);
 
 		if (config.required === true) validators.push(Validators.required);
+    if (config.min) validators.push(Validators.min(config.min));
+    if (config.max) validators.push(Validators.max(config.max));
     if (config.minLength) validators.push(Validators.minLength(config.minLength));
     if (config.maxLength) validators.push(Validators.maxLength(config.maxLength));
 
@@ -329,6 +331,8 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			fieldClass: [config.fieldClass],
 			textHint: [config.textHint],
 			required: [config.required ?? false],
+      min: [config.min ?? 0],
+      max: [config.max ?? 99999999999],
       minLength: [config.minLength ?? 0],
       maxLength: [config.maxLength ?? 255],
 			disabled: [config.disabled ?? false],

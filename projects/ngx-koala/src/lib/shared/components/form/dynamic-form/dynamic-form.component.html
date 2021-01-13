@@ -33,7 +33,8 @@
                   ((propriedade.get('type').value == typeField.cpf) ? '000.000.000-00' : null) ||
                   ((propriedade.get('type').value == typeField.cnpj) ? '00.000.000/0000-00' : null) ||
                   ((propriedade.get('type').value == typeField.percent) ? 'percent' : null) ||
-									((propriedade.get('type').value == typeField.hoursAndMinutes) ? hoursAndMinutesMask : null)"
+									((propriedade.get('type').value == typeField.hoursAndMinutes) ? hoursAndMinutesMask : null) ||
+                  ((propriedade.get('type').value == typeField.float) ? 'separator.2' : null)"
 		      [validation]="
 	                    (propriedade.get('type').value == typeField.cpf && propriedade.get('value').errors?.cpfInvalid) ||
 	                    (propriedade.get('type').value == typeField.cnpj && propriedade.get('value').errors?.cnpjInvalid)"
@@ -56,8 +57,11 @@
                     'password' : (
                     propriedade.get('type').value == typeField.color ?
                     'color' : 'text')))))))"
+          [min]="propriedade.get('min').value"
+          [max]="propriedade.get('max').value"
           [minLength]="propriedade.get('minLength').value"
           [maxLength]="propriedade.get('maxLength').value"
+          separatorLimit="0"
 		      showMaskTyped
           autocomplete="off"
 		      formControlName="value"
@@ -90,6 +94,14 @@
 	        <mat-icon>error</mat-icon>
 	        E-mail inválido.
 	      </mat-error>
+        <mat-error *ngIf="propriedade.get('value').errors?.min">
+          <mat-icon>error</mat-icon>
+          Informe no minimo o valor de {{propriedade.get('min').value}}.
+        </mat-error>
+        <mat-error *ngIf="propriedade.get('value').errors?.max">
+          <mat-icon>error</mat-icon>
+          Informe até no máximo o valor de {{propriedade.get('max').value}}.
+        </mat-error>
 	    </mat-form-field>
 	    <mat-form-field
 		    *ngIf="propriedade.get('type').value == typeField.coin"

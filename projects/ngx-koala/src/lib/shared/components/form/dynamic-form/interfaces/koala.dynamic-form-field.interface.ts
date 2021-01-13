@@ -14,6 +14,8 @@ export interface KoalaDynamicFormFieldInterface {
   name: string;
   required?: boolean;
   disabled?: boolean;
+  min?: number;
+  max?: number;
   minLength?: number;
   maxLength?: number;
   focus?: boolean;
