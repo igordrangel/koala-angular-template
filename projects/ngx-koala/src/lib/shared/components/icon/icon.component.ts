@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'koala-icon',
@@ -9,15 +9,12 @@ export class IconComponent implements OnInit {
   @Input() color: string;
   @Input() icon: 'notFound'|'notAllowed'|'sessionExpired'|'empty'|'excel'|'edit'|'trash';
   @Input() size: number = 24;
-  public viewBox: string;
-
-  @ViewChild('svgIcon', {static: true}) private svgIconRef: ElementRef<SVGElement>;
 
   ngOnInit() {
-    this.svgIconRef.nativeElement.style.width = `${this.size}px`;
-    this.svgIconRef.nativeElement.style.height = `${this.size}px`;
-    this.viewBox = `-${this.size} -${this.size} ${512 - this.size} ${512 - this.size}`;
     setTimeout(() => {
+      const elSvgIcon = document.querySelector(`svg#koala-icons.${this.icon}`) as SVGElement;
+      elSvgIcon.style.width = `${this.size}px`;
+      elSvgIcon.style.height = `${this.size}px`;
       document.querySelectorAll(`
         #koala-icons path,
         #koala-icons rect,
