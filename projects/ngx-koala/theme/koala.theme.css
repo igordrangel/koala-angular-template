@@ -82,6 +82,8 @@ p {margin: 0 !important;}
 .notifications-content .mat-list-text {padding-bottom: 5px !important;}
 mat-radio-button {margin-right: 5px;}
 mat-radio-button:last-child {margin-right: 0;}
+koala-list .menu-list .mat-icon-button {width: 36px;height: 36px;line-height: 36px;}
+koala-list .menu-list .menu li div {display: flex;justify-content: flex-start;align-items: center;}
 /****************************************
  ***************** GRID *****************
  ****************************************/

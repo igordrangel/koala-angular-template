@@ -35,11 +35,19 @@
 
       <div itemsList>
         <koala-button
+          [koalaIcon]="true"
 	        (click)="downloadList()"
 	        backgroundColor="transparent"
-	        color="red"
-	        icon="assignment_returned"
+	        color="#616161"
+	        icon="excel"
 	        tooltip="Download List (CSV)">
+        </koala-button>
+        <koala-button
+          (click)="reloadList(true)"
+          backgroundColor="transparent"
+          color="#fff"
+          icon="refresh"
+          tooltip="Recarregar Lista">
         </koala-button>
       </div>
 
