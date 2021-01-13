@@ -1,0 +1,2 @@
+.components {display: flex;justify-content: space-between;align-items: center;flex-wrap: wrap;box-sizing: border-box;padding: 0 20px 20px;}
+.components .components__item {background: #111;color: #fff;text-align: center;font-size: 3em;line-height: 2em;padding: 15px 80px;}

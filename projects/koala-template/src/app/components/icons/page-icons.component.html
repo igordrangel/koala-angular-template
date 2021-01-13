@@ -1,0 +1,43 @@
+<koala-folder-page
+  customFolderBackgroudColor="#212121"
+  customFolderFontColor="#fff"
+  titleIcon="webComponents"
+  titlePage="Componentes - Ícones"
+  [koalaIcon]="true"
+  [navigateHistory]="navigationHistory">
+
+  <section content>
+    <div class="menu">
+      <div class="menu__filter">
+        <koala-dynamic-form
+          [form]="formFilter"
+          [formConfig]="formFilterConfig">
+        </koala-dynamic-form>
+      </div>
+      <div *ngIf="selectedIcon$ | async as selectedIcon" class="menu__usage">
+        <h2>Ícone Selecionado</h2>
+        <div class="menu__usage___code">
+<pre>&lt;koala-icon
+  <span>color="{{selectedIcon.color}}"</span>
+  <span>icon="{{selectedIcon.name}}"</span>
+  <span>size="48"</span>&gt;
+&lt;/koala-icon&gt;</pre>
+        </div>
+        <koala-icon [color]="selectedIcon.color" [icon]="selectedIcon.name" size="48"></koala-icon>
+        <h4>{{selectedIcon.name}}</h4>
+      </div>
+    </div>
+    <div class="group">
+      <div *ngFor="let group of (groups$ | async)" class="group__content">
+        <h2 *ngIf="group.icons.length > 0" class="group__content___title">{{group.title}}</h2>
+        <div class="group__content___icons">
+          <div (click)="selectIcon(icon)" class="group__content___icons____icon" *ngFor="let icon of group.icons" [ngClass]="{'active': icon.selected}">
+            <koala-icon [color]="icon.color" [icon]="icon.name" size="48"></koala-icon>
+            <h4>{{icon.name}}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</koala-folder-page>

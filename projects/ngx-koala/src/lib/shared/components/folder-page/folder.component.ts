@@ -10,6 +10,7 @@ import {KoalaNavigateHistoryInterface} from "./koala-navigate-history.interface"
 export class FolderComponent implements OnInit, OnChanges {
   @Input() titlePage: string = 'Title';
   @Input() titleIcon: string;
+  @Input() koalaIcon: boolean;
   @Input() customFolderFontColor: string = '#212121';
   @Input() customFolderBackgroudColor: string = '#FFF';
   @Input() navigateHistory: KoalaNavigateHistoryInterface[];
@@ -17,6 +18,7 @@ export class FolderComponent implements OnInit, OnChanges {
   @ViewChild('folder', {static: true}) private folder: ElementRef;
   @ViewChild('folderTitle', {static: true}) private folderTitle: ElementRef;
   @ViewChild('folderIconTitle', {static: true}) private folderIconTitle: ElementRef;
+  @ViewChild('folderNavigateHistory', {static: false}) private folderNavigateHistory: ElementRef;
 
   ngOnInit() {
     this.setCustomBackgroundColor();
@@ -38,6 +40,10 @@ export class FolderComponent implements OnInit, OnChanges {
       folderTitle.style.color = this.customFolderFontColor;
       const folderIconTitle = this.folderTitle.nativeElement as HTMLDivElement;
       folderIconTitle.style.color = this.customFolderFontColor;
+      setTimeout(() => {
+        const folderNavigateHistory = this.folderNavigateHistory.nativeElement as HTMLDivElement;
+        folderNavigateHistory.style.color = this.customFolderFontColor;
+      }, 50);
     }
   }
 }
