@@ -9,7 +9,6 @@ import { KoalaDelayHelper } from 'tskoala-helpers/dist/delay/koala-delay.helper'
 import { KoalaDynamicFormService } from '../../services/dynamic-forms/koala.dynamic-form.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { KoalaListItemInterface } from './koala-list-item.interface';
-import {KoalaDynamicComponent} from "../dynamic-component/koala-dynamic-component";
 
 @Component({
   selector: 'koala-list',

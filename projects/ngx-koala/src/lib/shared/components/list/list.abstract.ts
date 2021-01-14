@@ -42,6 +42,7 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
       await KoalaDelayHelper.waitFor(400);
       if (this.sort || this.emptyListComponent) {
         this.prepareSearch();
+        if (this.emptyListComponent) stop = true;
       } else if (tentativas > 10) {
         this.requestErrorFunction();
         stop = true;
