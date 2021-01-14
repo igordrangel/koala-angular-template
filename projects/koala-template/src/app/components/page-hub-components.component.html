@@ -2,12 +2,12 @@
   customFolderBackgroudColor="#212121"
   customFolderFontColor="#fff"
   titleIcon="webComponents"
-  titlePage="Componentes"
+  titlePage="Components"
   [koalaIcon]="true">
 
   <div class="components" content>
-    <a mat-button routerLink="/components/icons" class="components__item">
-      <span>Ícones</span>
+    <a *ngFor="let component of components" mat-button [routerLink]="component.routerLink" class="components__item">
+      <span>{{component.name}}</span>
     </a>
   </div>
 

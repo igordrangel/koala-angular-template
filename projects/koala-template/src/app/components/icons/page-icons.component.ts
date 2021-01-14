@@ -24,13 +24,19 @@ interface GroupIcon {
 })
 export class PageIconsComponent extends PageAbstract implements OnInit {
   public groups: GroupIcon[] = [{
-    title: 'Dados',
+    title: 'Data',
     icons: [{
       name: 'excel',
       color: '#616161',
       selected: false
+    }]},{
+    title: 'Social Media',
+    icons: [{
+      name: 'github',
+      color: '#fff',
+      selected: false
     }]}, {
-    title: 'Ações',
+    title: 'Action',
     icons: [{
       name: 'edit',
       color: '#fff',
@@ -40,7 +46,7 @@ export class PageIconsComponent extends PageAbstract implements OnInit {
       color: '#fff',
       selected: false
     }]}, {
-    title: 'Situações de Página',
+    title: 'Page',
     icons: [{
       name: 'empty',
       color: '#fff',
@@ -58,7 +64,7 @@ export class PageIconsComponent extends PageAbstract implements OnInit {
       color: '#fff',
       selected: false
     }]}, {
-    title: 'Outros',
+    title: 'Others',
     icons: [{
       name: 'webComponents',
       color: '#fff',
@@ -78,7 +84,7 @@ export class PageIconsComponent extends PageAbstract implements OnInit {
   ngOnInit() {
     this.formFilter = this.fb.group({});
     this.formFilterConfig = [{
-      label: 'Filtre pelo nome',
+      label: 'Filter by name',
       name: 'filter',
       type: DynamicFormTypeFieldEnum.text,
       fieldClass: 'w-100',

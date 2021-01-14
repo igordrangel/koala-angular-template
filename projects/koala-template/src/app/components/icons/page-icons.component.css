@@ -4,9 +4,7 @@ section {display: flex;align-items: flex-start;}
 .menu__usage.hide {animation: out ease-in .3s;}
 .menu__usage koala-icon {display: block;margin-top: 50px;}
 .menu__usage h4 {width: 100%;padding: 10px;margin: 0;color: #fff;text-align: center;box-sizing: border-box;}
-.menu__usage___code {color: #912525;font-family: "Helvetica Neue", sans-serif;font-size: 1.2em;background: rgba(0,0,0,.1);padding: 15px;width: 100%;box-sizing: border-box;}
-.menu__usage___code span {color: #4CAF50;}
-.group {display: flex;flex-direction: column;justify-content: flex-start;flex-wrap: wrap;box-sizing: border-box;padding: 20px;width: calc(100% - 300px);height: calc(100vh - 130px);background: rgba(0,0,0,.1);}
+.group {display: flex;flex-direction: column;justify-content: flex-start;box-sizing: border-box;padding: 20px;width: calc(100% - 300px);height: calc(100vh - 130px);background: rgba(0,0,0,.1);overflow: auto;}
 .group__content {width: 100%;}
 .group__content___title {width: 100%;color: rgba(255,255,255,.6);}
 .group__content___icons {display: flex;justify-content: flex-start;align-items: center;flex-wrap: wrap;box-sizing: border-box;}

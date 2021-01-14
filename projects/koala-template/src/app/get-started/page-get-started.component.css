@@ -1,0 +1,8 @@
+.content {display: flex;flex-direction: column;height: calc(100vh - 64px);overflow: auto;}
+.presentation {display: flex;flex-direction: column;justify-content: center;align-items: center;width: 100%;min-height: 400px;background: rgba(0,0,0,.1);}
+.presentation h1 {color: rgba(255,255,255,.6);}
+.presentation__install {background: rgba(0,0,0,.2);color: #fafafa;padding: 20px 40px;}
+.get-started {display: flex;flex-direction: column;flex-wrap: wrap;padding: 20px;}
+.get-started h2 {width: 100%;padding: 10px;margin: 0;color: rgba(255,255,255,.6);box-sizing: border-box;}
+.get-started__config-app h3,
+.get-started__page-example h3 {width: 100%;padding: 10px;margin: 0;color: rgba(255,255,255,.8);box-sizing: border-box;font-style: italic;}

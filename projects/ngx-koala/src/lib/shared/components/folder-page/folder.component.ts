@@ -40,12 +40,12 @@ export class FolderComponent implements OnInit, OnChanges {
       folderTitle.style.color = this.customFolderFontColor;
       const folderIconTitle = this.folderTitle.nativeElement as HTMLDivElement;
       folderIconTitle.style.color = this.customFolderFontColor;
-      if (this.folderNavigateHistory) {
-        setTimeout(() => {
+      setTimeout(() => {
+        if (this.folderNavigateHistory) {
           const folderNavigateHistory = this.folderNavigateHistory.nativeElement as HTMLDivElement;
           folderNavigateHistory.style.color = this.customFolderFontColor;
-        }, 50);
-      }
+        }
+      }, 50);
     }
   }
 }

@@ -1,4 +1,13 @@
 .mat-button.mat-primary, .mat-icon-button.mat-primary, .mat-stroked-button.mat-primary {color: #fff;}
 .menu-toolbar {background-color: #111;border-radius: 20px;}
-.menu-toolbar a:first-child {border-radius: 20px 0 0 20px;}
+.menu-toolbar a {border-radius: 0;}
+.menu-toolbar a:first-child {border-radius: 20px 0 0 20px;pointer-events: none;}
 .menu-toolbar a:last-child {border-radius: 0 20px 20px 0;}
+.menu-toolbar a koala-icon {display: inline-flex;padding: 7px 0;}
+.p-20 {padding: 20px;}
+code {display: block;color: rgba(255,255,255,.7);font-family: "Helvetica Neue", sans-serif;font-size: 1.2em;background: #111;padding: 15px;width: 100%;box-sizing: border-box;}
+code span {color: #4CAF50;}
+pre {margin: 0;}
+mat-expansion-panel {background: #181818!important;}
+mat-expansion-panel-header mat-panel-title {color: #fff!important;}
+mat-expansion-panel-header mat-panel-description {display: flex;justify-content: flex-end;color: #fff!important;}

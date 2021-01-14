@@ -16,7 +16,7 @@ import { KoalaDynamicFormService } from '../../../../ngx-koala/src/lib/shared/se
 export class PageLoginComponent extends FormAbstract implements OnInit {
   public formLogin: FormGroup;
   public formConfig: KoalaDynamicFormFieldInterface[];
-  public btnLabel = 'Entrar';
+  public btnLabel = 'Login';
 
   constructor(
     private fb: FormBuilder,
@@ -30,36 +30,36 @@ export class PageLoginComponent extends FormAbstract implements OnInit {
     this.formLogin = this.fb.group({});
     this.formConfig = [
       {
-        label: 'Login',
-        name: 'login',
+        label: 'Username',
+        name: 'username',
         type: DynamicFormTypeFieldEnum.text,
         required: true,
         appearance: 'outline',
         fieldClass: 'w-100',
         focus: true,
-        textHint: 'Informe um acesso fake.'
+        textHint: 'Inform a fake username.'
       },
       {
-        label: 'Senha',
-        name: 'senha',
+        label: 'Password',
+        name: 'password',
         type: DynamicFormTypeFieldEnum.password,
         required: true,
         appearance: 'outline',
         fieldClass: 'w-100',
-        textHint: 'Informe uma senha fake.'
+        textHint: 'Inform a fake password.'
       }
     ];
   }
 
   public submit() {
-    this.loading(true, 'Autenticando...');
+    this.loading(true, 'Validating...');
     const data = this.dynamicFormService.emitData(this.formLogin) as any;
     setTimeout(() => {
       this.tokenService.setToken(jwtEncode({
         id: 1,
-        login: data.login
+        login: data.username
       }, 'secret'));
-      this.loading(false, 'Entrar');
+      this.loading(false, 'Login');
     }, 2000);
   }
 }

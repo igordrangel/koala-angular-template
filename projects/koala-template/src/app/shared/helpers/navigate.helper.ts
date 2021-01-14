@@ -4,10 +4,14 @@ export class NavigateHelper {
 
   public static navigationHistory(): KoalaNavigateHistoryInterface[] {
     if (location.href.indexOf('components/icons') >= 0) {
-      const arrUrl = location.href.split('/');
       return [
-        {name: 'Componentes', routerLink: '/components'},
-        {name: 'Ícones'}
+        {name: 'Components', routerLink: '/components'},
+        {name: 'Icons'}
+      ];
+    } else if (location.href.indexOf('components/folder-page') >= 0) {
+      return [
+        {name: 'Components', routerLink: '/components'},
+        {name: 'Folder Page'}
       ];
     }
   }

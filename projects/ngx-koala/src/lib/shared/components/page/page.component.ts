@@ -31,6 +31,7 @@ export class PageComponent implements OnInit {
   @Input() notifications: BehaviorSubject<KoalaNotificationInterface[]>;
   @Input() userMenuOptions: KoalaUserMenuOptionsInterface[] = [];
   @Input() palletColors: KoalaPagePalletColorsInterface;
+  @Input() labelLogout: string = 'Sair';
   @Output() deleteAllNotifications = new EventEmitter<boolean>(false);
   @Output() deleteNotification = new EventEmitter<KoalaNotificationInterface>(null);
   public logged: boolean;

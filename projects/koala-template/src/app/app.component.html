@@ -3,12 +3,17 @@
 	[openPages]="openPages"
 	[palletColors]="palletCollors"
   [showMenu]="false"
+  labelLogout="Logout"
 	defaultPage="get-started"
 	logotipo="assets/angular-logotipo.png">
 
   <div menu-toolbar>
+    <a mat-button color="primary">v11.0.38</a>
     <a mat-button routerLink="get-started" color="primary">Get Started</a>
-    <a mat-button routerLink="components" color="primary">Componentes</a>
+    <a mat-button routerLink="components" color="primary">Components</a>
+    <a mat-button href="https://github.com/igordrangel/koala-angular-template" target="_blank" color="primary">
+      <koala-icon size="20" color="#fff" icon="github"></koala-icon>
+    </a>
   </div>
 
   <div page-content>

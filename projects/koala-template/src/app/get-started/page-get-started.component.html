@@ -1,10 +1,266 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+<section class="content">
+  <div class="presentation">
+    <h1>Get Started</h1>
+    <div class="presentation__install">npm install ngx-koala</div>
+  </div>
 
-</body>
-</html>
+  <div class="get-started">
+    <h2>Structure</h2>
+    <div class="get-started__config-app">
+      <mat-accordion multi>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>app.module.ts</mat-panel-title>
+            <mat-panel-description>
+              <mat-icon>code</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <pre><code><span>import</span> &#123; BrowserModule &#125; <span>from</span> '@angular/platform-browser';
+<span>import</span> &#123; NgModule &#125; <span>from</span> '@angular/core';
+
+<span>import</span> &#123; AppRoutingModule &#125; <span>from</span> './app-routing.module';
+<span>import</span> &#123; AppComponent &#125; <span>from</span> './app.component';
+<span>import</span> &#123; BrowserAnimationsModule &#125; <span>from</span> '@angular/platform-browser/animations';
+<span>import</span> &#123; NgxKoalaModule, KoalaMenuModule &#125; <span>from</span> 'ngx-koala';
+
+<span>@NgModule</span>(&#123;
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    NgxKoalaModule,
+    KoalaMenuModule,
+    AppRoutingModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+&#125;)
+<span>export class</span> AppModule &#123;&#125;
+</code></pre>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>app.component.ts</mat-panel-title>
+            <mat-panel-description>
+              <mat-icon>code</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <pre><code><span>import</span> &#123; ChangeDetectionStrategy, Component, OnInit &#125; <span>from</span> '@angular/core';
+<span>import</span> &#123;
+  KoalaUserMenuOptionsInterface,
+  KoalaNotificationInterface,
+  KoalaMenuModuleInterface,
+  KoalaAlertService,
+  KoalaDynamicComponent, KoalaMenuService
+&#125; <span>from</span> 'ngx-koala';
+<span>import</span> &#123; KoalaPagePalletColorsInterface &#125; <span>from</span> 'ngx-koala/lib/shared/components/page/koala-page-pallet-colors.interface';
+<span>import</span> &#123; BehaviorSubject &#125; <span>from</span> 'rxjs';
+<span>import</span> &#123; ThemeHelper &#125; <span>from</span> './shared/common/helpers/theme.helper';
+<span>import</span> &#123; UsuarioService &#125; <span>from</span> './shared/services/pne/usuario/usuario.service';
+<span>import</span> &#123; LoginService &#125; <span>from</span> './shared/services/pne/usuario/login.service';
+<span>import</span> &#123; TokenInterface &#125; <span>from</span> './shared/services/pne/usuario/token.interface';
+<span>import</span> &#123; SessionExpiredComponent &#125; <span>from</span> './shared/components/session-expired/session-expired.component';
+
+<span>@Component</span>(&#123;
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+&#125;)
+<span>export class</span> AppComponent <span>implements OnInit</span> &#123;
+  <span>public</span> openPages = ['/login'];
+  <span>public</span> userMenuOptions: <span>KoalaUserMenuOptionsInterface[]</span> = [];
+  <span>public</span> notifications = <span>new BehaviorSubject&#60;KoalaNotificationInterface[]&#62;([])</span>;
+  <span>public</span> menuOptions = <span>new BehaviorSubject&#60;KoalaMenuModuleInterface[]&#62;([])</span>;
+  <span>public</span> palletCollors: <span>KoalaPagePalletColorsInterface</span> = ThemeHelper.getTheme();
+  <span>public</span> intervalNotificacoes: <span>number</span>;
+  <span>public</span> intervalToken: <span>number</span>;
+
+  <span>constructor</span>(
+    <span>private</span> usuarioService: <span>UsuarioService</span>,
+    <span>private</span> loginService: <span>LoginService</span>,
+    <span>private</span> alertService: <span>KoalaAlertService</span>,
+    <span>private</span> menuService: <span>KoalaMenuService</span>
+  ) &#123;
+  &#125;
+
+  <span>ngOnInit()</span> &#123;
+    <span>setInterval</span>(() => &#123;
+        const token = localStorage.getItem(<span>this</span>.loginService.getTokenService().storageName);
+        if (token && !<span>this</span>.loginService.getTokenService().getTokenSubject().value) &#123;
+        <span>this</span>.loginService.getTokenService().setToken(token);
+      &#125; else if (!token && <span>this</span>.loginService.getUsuarioLogado()) &#123;
+        <span>this</span>.logout();
+      &#125;
+    &#125;, 1);
+    <span>this</span>.loginService
+        .getTokenService()
+        .getTokenSubject()
+        .subscribe(async token => &#123;
+        if (token) &#123;
+            <span>this</span>.menuOptions.next(<span>this</span>.usuarioService.getMenu());
+            <span>this</span>.getNotifications();
+            <span>this</span>.intervalNotificacoes = setInterval(() => <span>this</span>.getNotifications(), 30000);
+            <span>this</span>.intervalToken = setInterval(() => <span>this</span>.verificarToken(), 1);
+          &#125; else &#123;
+            <span>this</span>.logout();
+          &#125;
+        &#125;);
+  &#125;
+
+  <span>public</span> deleteAllNotifications(action: boolean) &#123;
+    if (action) &#123;
+        <span>this</span>.notifications.next([]);
+    &#125;
+  &#125;
+
+  <span>public</span> deleteNotification(notification: KoalaNotificationInterface) &#123;
+    <span>this</span>.notifications.next(<span>this</span>.notifications?.value.filter(item => item !== notification));
+  &#125;
+
+  <span>public</span> getNotifications() &#123;
+    <span>this</span>.usuarioService.getNotifications().subscribe(notifications => <span>this</span>.notifications.next(notifications));
+  &#125;
+
+  <span>private</span> verificarToken() &#123;
+    const usuario = <span>this</span>.loginService.getTokenService().getUser&#60;TokenInterface&#62;();
+    if (usuario) &#123;
+      let dateExpire = new Date(usuario.expired);
+      dateExpire.setMinutes(dateExpire.getMinutes() - 5);
+
+      if (dateExpire < new Date()) &#123;
+        <span>this</span>.logout(true);
+      &#125;
+    &#125;
+  &#125;
+
+  <span>private</span> logout(clearToken = false) &#123;
+    <span>clearInterval</span>(<span>this</span>.intervalNotificacoes);
+    <span>clearInterval</span>(<span>this</span>.intervalToken);
+    if (clearToken) &#123;
+      <span>this</span>.loginService.getTokenService().removeToken();
+      <span>this</span>.alertService.create(&#123;
+        avatar: new KoalaDynamicComponent(SessionExpiredComponent),
+        message: 'Sua sessão expirou, informe novamente suas credenciais de acesso.'
+      &#125;);
+    &#125;
+    <span>this</span>.menuOptions.next([]);
+    <span>this</span>.menuService.close();
+  &#125;
+&#125;
+</code></pre>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>app.component.html</mat-panel-title>
+            <mat-panel-description>
+              <mat-icon>code</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <pre><code><span>&#60;koala-page</span>
+  color="primary"
+  [openPages]="openPages"
+  (deleteAllNotifications)="deleteAllNotifications($event)"
+  (deleteNotification)="deleteNotification($event)"
+  [notifications]="notifications"
+  [userMenuOptions]="userMenuOptions"
+  [palletColors]="palletCollors"
+  labelLogout="Logout"
+  defaultPage="home"
+  logotipo="./assets/logotipo.png"<span>&#62;</span>
+  &#60;div <span>menu-options</span>&#62;
+    <span>&#60;koala-menu</span> [optionsSubject]="menuOptions" titleMenu="Tools"&#62;&#60;/koala-menu&#62;
+  &#60;/div&#62;
+  &#60;div <span>page-content</span>&#62;
+    <span>&#60;router-outlet&#62;&#60;/router-outlet&#62;</span>
+  &#60;/div&#62;
+<span>&#60;/koala-page&#62;</span></code></pre>
+
+        </mat-expansion-panel>
+
+      </mat-accordion>
+    </div>
+
+    <h2>Example Page</h2>
+    <div class="get-started__page-example">
+      <mat-accordion multi>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>example.module.ts</mat-panel-title>
+            <mat-panel-description>
+              <mat-icon>code</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <pre><code><span>import</span> &#123; NgModule &#125;&#125; <span>from</span> '@angular/core';
+<span>import</span> &#123; PageStatusNfComponent &#125;&#125; <span>from</span> './page.status-nf.component';
+<span>import</span> &#123; CommonModule &#125;&#125; <span>from</span> '@angular/common';
+<span>import</span> &#123; ErrorsModule &#125;&#125; <span>from</span> '../../../shared/components/page-errors/errors.module';
+<span>import</span> &#123; KoalaFolderPageModule &#125;&#125; <span>from</span> 'ngx-koala';
+<span>import</span> &#123; StatusNfRoutingModule &#125;&#125; <span>from</span> './status-nf.routing.module';
+
+<span>@NgModule</span>(&#123;
+  declarations: [
+    PageExampleComponent
+  ],
+  imports: [
+    CommonModule,
+    KoalaFolderPageModule,
+    ExampleRoutingModule
+  ]
+&#125;)
+<span>export class</span> ExampleModule &#123;&#125;</code></pre>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>page-example.component.ts</mat-panel-title>
+            <mat-panel-description>
+              <mat-icon>code</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <pre><code><span>import</span> &#123; Component &#125; <span>from</span> '@angular/core';
+<span>import</span> &#123; PageAbstract &#125; <span>from</span> '../../../shared/common/abstract/page.abstract';
+<span>import</span> &#123; FormBuilder, FormGroup &#125; <span>from</span> '@angular/forms';
+
+<span>@Component</span>(&#123;
+  templateUrl: 'page-example.component.html'
+&#125;)
+<span>export class</span> PageExampleComponent &#123;&#125;</code></pre>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>page-example.component.html</mat-panel-title>
+            <mat-panel-description>
+              <mat-icon>code</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <pre><code><span>&#60;koala-folder-page</span>
+  customFolderBackgroudColor="#000"
+  customFolderFontColor="#fff"
+  titleIcon="person"
+  titlePage="Example"<span>&#62;
+&#60;/koala-folder-page&#62;</span></code></pre>
+
+        </mat-expansion-panel>
+
+      </mat-accordion>
+    </div>
+  </div>
+</section>
