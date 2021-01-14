@@ -13,6 +13,11 @@ export class NavigateHelper {
         {name: 'Components', routerLink: '/components'},
         {name: 'Folder Page'}
       ];
+    } else if (location.href.indexOf('components/dialog') >= 0) {
+      return [
+        {name: 'Components', routerLink: '/components'},
+        {name: 'Dialog'}
+      ];
     }
   }
 }

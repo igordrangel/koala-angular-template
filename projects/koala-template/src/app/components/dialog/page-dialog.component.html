@@ -1,0 +1,118 @@
+<koala-folder-page
+  customFolderBackgroudColor="#212121"
+  customFolderFontColor="#fff"
+  titleIcon="webComponents"
+  titlePage="Components - Dialog"
+  [koalaIcon]="true"
+  [navigateHistory]="navigationHistory">
+
+  <nav menu-page>
+    <koala-button
+      (click)="openDialog()"
+      text="Open Dialog"
+      icon="launch"
+      backgroundColor="transparent"
+      color="#fff">
+    </koala-button>
+  </nav>
+
+  <section class="p-20" content>
+
+    <mat-accordion multi>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>dialog.module.ts</mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>code</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <pre><code><span>import</span> &#123; NgModule &#125;&#125; <span>from</span> '@angular/core';
+<span>import</span> &#123; PageDialogComponent &#125;&#125; <span>from</span> './page-dialog.component';
+<span>import</span> &#123; DialogExampleComponent &#125;&#125; <span>from</span> './dialog-example.component';
+<span>import</span> &#123; CommonModule &#125;&#125; <span>from</span> '@angular/common';
+<span>import</span> &#123; ExampleRoutingModule &#125;&#125; <span>from</span> './example.routing.module';
+
+<span>@NgModule</span>(&#123;
+  declarations: [
+    PageDialogComponent,
+    DialogExampleComponent
+  ],
+  imports: [
+    CommonModule,
+    KoalaDialogModule,
+    ExampleRoutingModule
+  ],
+  providers: [
+    KoalaDialogService
+  ]
+&#125;)
+<span>export class</span> DialogModule &#123;&#125;</code></pre>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>page-dialog.component.ts</mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>code</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <pre><code><span>import</span> &#123; Component &#125; <span>from</span> '@angular/core';
+<span>import</span> &#123; KoalaDialogService &#125; <span>from</span> "ngx-koala";
+
+<span>@Component</span>(&#123;
+  templateUrl: 'dialog-example.component.html'
+&#125;)
+<span>export class</span> PageDialogComponent &#123;
+  <span>constructor</span>(<span>private</span> dialogService: <span>KoalaDialogService</span>) &#123;
+    super();
+  &#125;
+
+  <span>public</span> openDialog() &#123;
+    <span>this</span>.dialogService.open(<span>DialogExampleComponent</span>,"small");
+  &#125;
+&#125;</code></pre>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>dialog-example.component.ts</mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>code</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <pre><code><span>import</span> &#123; Component &#125; <span>from</span> '@angular/core';
+
+<span>@Component</span>(&#123;
+  templateUrl: 'dialog-example.component.html'
+&#125;)
+<span>export class</span> DialogExampleComponent &#123;&#125;</code></pre>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>dialog-example.component.html</mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>code</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <pre><code><span>&#60;koala-dialog</span>
+  titleDialog="Dialog"
+  iconTitleDialog="launch"
+  btnCloseLabel="Close"
+  btnCloseColor="warn"<span>&#62;
+&#60;/koala-dialog&#62;</span></code></pre>
+
+      </mat-expansion-panel>
+
+    </mat-accordion>
+  </section>
+
+</koala-folder-page>

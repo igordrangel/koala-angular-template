@@ -119,14 +119,14 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 								            )[0].autocompleteDefaultValueOnClear ?? null);
 						            }
 
-						            if (config.type === DynamicFormTypeFieldEnum.autocomplete && typeof value !== "object") {
+						            if (config.type === DynamicFormTypeFieldEnum.autocomplete) {
                           if (config.autocompleteType === 'all') {
                             const autocompleteOptionsSubject = newFormGroup.get('autocompleteOptions').value as BehaviorSubject<KoalaDynamicAutocompleteOptionsInterface[]>;
                             newFormGroup.get('autocompleteOptionsFiltered').value.next(this.autocompleteFilter(
                               autocompleteOptionsSubject.value,
                               value
                             ));
-                          } else {
+                          } else if (config.autocompleteType === 'onDemand' && typeof value !== "object") {
                             const loader = newFormGroup.get('autocompleteLoading').value as BehaviorSubject<boolean>;
                             loader.next(true);
                             config.autocompleteFilter(value).subscribe(options => {
