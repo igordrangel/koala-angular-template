@@ -9,6 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "build-doc": "ng build koala-template --prod --build-optimizer",
     "postinstall": "ngcc",
     "version": "git add -A projects",
     "postversion": "git push && git push --tags",
