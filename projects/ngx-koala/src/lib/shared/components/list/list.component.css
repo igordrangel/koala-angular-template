@@ -20,15 +20,15 @@
 .list-container .list .mat-list-item-content,
 .list-container .list .mat-list-item-content .mat-list-text {padding: 0;}
 .list-container .list-filter {box-shadow: 0 1px 3px rgba(0, 0, 0, .3);height: 60px;position: relative;z-index: 3;}
-.list-container .list-filter .main {display: inline-block;font-size: 1.05em;height: 60px;overflow: hidden;padding-left: 2.5px;position: relative;width: 100%;}
-.list-container .list-filter .main koala-dynamic-form {display: inline-block;width: calc(100% - 270px);}
+.list-container .list-filter .main {display: flex;justify-content: space-between;font-size: 1.05em;height: 60px;overflow: hidden;padding-left: 2.5px;position: relative;width: 100%;}
+.list-container .list-filter .main koala-dynamic-form {width: 100%;}
 .list-container .list-filter .main mat-form-field {display: inline-block;}
 .list-container .list-filter .main .mat-form-field-appearance-fill .mat-form-field-flex {background: transparent;}
 .list-container .list-filter .main .mat-form-field .mat-form-field-wrapper {padding-bottom: 0;}
 .list-container .list-filter .main .mat-form-field-underline {display: none;}
 .list-container .list-filter .main .mat-form-field-appearance-legacy .mat-form-field-subscript-wrapper {display: none}
 .list-container .list-filter .main .mat-form-field-wrapper .mat-form-field-subscript-wrapper {display: none;}
-.list-container .list-filter ul {display: inline-block;font-size: 0;list-style: none;margin: 0;padding: 0 15px;position: relative;text-align: right;top: 5px;width: 240px;float: right;}
+.list-container .list-filter ul {display: flex;align-items: center;font-size: 0;list-style: none;margin: 0;padding: 0 15px 0 0;position: relative;text-align: right;}
 .list-container .list-filter ul li {display: inline-block;font-size: 14px;padding: 5px;position: relative;}
 .list-container .list-filter ul li.option button {transition: .2s;}
 .list-container .list-filter ul li.option button:hover {background: rgba(0, 0, 0, .1);}
