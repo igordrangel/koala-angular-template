@@ -18,6 +18,21 @@ export class NavigateHelper {
         {name: 'Components', routerLink: '/components'},
         {name: 'Dialog'}
       ];
+    } else if (location.href.indexOf('components/button') >= 0) {
+      return [
+        {name: 'Components', routerLink: '/components'},
+        {name: 'Button'}
+      ];
+    } else if (location.href.indexOf('components/alert') >= 0) {
+      return [
+        {name: 'Components', routerLink: '/components'},
+        {name: 'Alert'}
+      ];
+    } else if (location.href.indexOf('components/question') >= 0) {
+      return [
+        {name: 'Components', routerLink: '/components'},
+        {name: 'Question'}
+      ];
     }
   }
 }

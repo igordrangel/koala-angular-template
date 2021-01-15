@@ -14,6 +14,9 @@ export class PageHubComponentsComponent {
   public components: ItemComponent[] = koala([
     {name: 'Icons', routerLink: '/components/icons'},
     {name: 'Folder Page', routerLink: '/components/folder-page'},
-    {name: 'Dialog', routerLink: '/components/dialog'}
+    {name: 'Dialog', routerLink: '/components/dialog'},
+    {name: 'Button', routerLink: '/components/button'},
+    {name: 'Alert', routerLink: '/components/alert'},
+    {name: 'Question', routerLink: '/components/question'}
   ]).array<ItemComponent>().orderBy('name').getValue()
 }

@@ -1,0 +1,95 @@
+<koala-folder-page
+  customFolderBackgroudColor="#212121"
+  customFolderFontColor="#fff"
+  titleIcon="webComponents"
+  titlePage="Components - Alert"
+  [koalaIcon]="true"
+  [navigateHistory]="navigationHistory">
+
+  <section class="p-20" content>
+
+    <koala-button
+      (click)="showAlert()"
+      class="d-block mb-15"
+      backgroundColor="#fff"
+      color="#212121"
+      icon="add"
+      text="Show Alert">
+    </koala-button>
+
+    <mat-accordion multi>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>alert.module.ts</mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>code</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <pre><code><span>import</span> &#123; NgModule &#125; <span>from</span> "@angular/core";
+<span>import</span> &#123; PageAlertComponent &#125; <span>from</span> "./page-alert.component";
+<span>import</span> &#123; CommonModule &#125; <span>from</span> "@angular/common";
+<span>import</span> &#123;
+  KoalaAlertService,
+  KoalaDialogModule,
+  KoalaDialogService
+} from "ngx-koala";
+<span>import</span> &#123; AlertRoutingModule &#125; <span>from</span> "./alert.routing.module";
+
+<span>@NgModule</span>(&#123;
+  exports: [
+    PageAlertComponent
+  ],
+  declarations: [
+    PageAlertComponent
+  ],
+  imports: [
+    KoalaDialogModule,
+    MatIconModule,
+    AlertRoutingModule
+  ],
+  providers: [
+    KoalaAlertService,
+    KoalaDialogService
+  ]
+&#125;)
+<span>export class</span> AlertModule &#123;&#125;</code></pre>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>page-alert.component.ts</mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>code</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <pre><code><span>import</span> &#123; Component &#125; <span>from</span> "@angular/core";
+<span>import</span> &#123; KoalaAlertEnum, KoalaAlertService &#125; <span>from</span> "ngx-koala";
+
+<span>@Component</span>(&#123;
+  templateUrl: 'page-alert.component.html'
+&#125;)
+<span>export class</span> PageAlertComponent &#123;
+
+  <span>constructor</span>(<span>private</span> alertService: <span>KoalaAlertService</span>) &#123;
+    super();
+  &#125;
+
+  <span>public</span> showAlert() &#123;
+    <span>this</span>.alertService.create(&#123;
+      alertEnum: <span>KoalaAlertEnum.success</span>,
+      message: 'This is a alert dialog'
+    &#125;);
+  &#125;
+&#125;</code></pre>
+
+
+      </mat-expansion-panel>
+
+    </mat-accordion>
+  </section>
+
+</koala-folder-page>

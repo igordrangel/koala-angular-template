@@ -1,0 +1,87 @@
+<koala-folder-page
+  customFolderBackgroudColor="#212121"
+  customFolderFontColor="#fff"
+  titleIcon="webComponents"
+  titlePage="Components - Button"
+  [koalaIcon]="true"
+  [navigateHistory]="navigationHistory">
+
+  <section class="p-20" content>
+
+    <koala-button
+      class="d-block mb-15"
+      backgroundColor="#fff"
+      color="#212121"
+      icon="add"
+      text="Add Item">
+    </koala-button>
+
+    <mat-accordion multi>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>button.module.ts</mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>code</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <pre><code><span>import</span> &#123; NgModule &#125; <span>from</span> "@angular/core";
+<span>import</span> &#123; PageButtonComponent &#125; <span>from</span> "./page-button.component";
+<span>import</span> &#123; KoalaButtonModule &#125; <span>from</span> "ngx-koala";
+
+<span>@NgModule</span>(&#123;
+  exports: [
+    PageButtonComponent
+  ],
+  declarations: [
+    PageButtonComponent
+  ],
+  imports: [
+    KoalaButtonModule,
+    ButtonRoutingModule
+  ]
+&#125;)
+<span>export class</span> ButtonModule &#123;&#125;</code></pre>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>page-button.component.ts</mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>code</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <pre><code><span>import</span> &#123; Component &#125; <span>from</span> "@angular/core";
+
+  <span>@Component</span>(&#123;
+    templateUrl: 'page-button.component.html'
+  &#125;)
+  <span>export class</span> PageButtonComponent &#123;&#125;</code></pre>
+
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>page-button.component.html</mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>code</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <pre><code><span>&#60;koala-button</span>
+  backgroundColor="#fff"
+  color="#212121"
+  icon="add"
+  text="Add Item"<span>&#62;
+&#60;/koala-button&#62;</span></code></pre>
+
+      </mat-expansion-panel>
+
+    </mat-accordion>
+  </section>
+
+</koala-folder-page>
