@@ -1,6 +1,6 @@
 import { KoalaDynamicFormFieldInterface } from '../form/dynamic-form/interfaces/koala.dynamic-form-field.interface';
 
-export interface ListFilterInterface {
+export interface KoalaListFilterInterface {
   main: KoalaDynamicFormFieldInterface[];
   advanced?: KoalaDynamicFormFieldInterface[];
   checkAndSearch?: {

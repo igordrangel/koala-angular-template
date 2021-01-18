@@ -9,7 +9,8 @@ const routes: Routes = [
   {path: 'dialog', loadChildren: () => import('./dialog/dialog.module').then(m => m.DialogModule)},
   {path: 'button', loadChildren: () => import('./button/button.module').then(m => m.ButtonModule)},
   {path: 'alert', loadChildren: () => import('./alert/alert.module').then(m => m.AlertModule)},
-  {path: 'question', loadChildren: () => import('./question/question.module').then(m => m.QuestionModule)}
+  {path: 'question', loadChildren: () => import('./question/question.module').then(m => m.QuestionModule)},
+  {path: 'list', loadChildren: () => import('./list/list.module').then(m => m.ListModule)}
 ];
 
 @NgModule({

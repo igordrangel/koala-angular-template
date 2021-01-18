@@ -1,6 +1,6 @@
 import { SortDirection } from '@angular/material/sort';
 
-export interface ListFormFilterInterface {
+export interface KoalaListFormFilterInterface {
   params: any;
   sort: string;
   order: SortDirection;

@@ -1,4 +1,4 @@
-export interface ListItemMenuOptionInterface {
+export interface KoalaListItemMenuOptionInterface {
   icon: string;
   name: string;
   action: (item: any) => void;

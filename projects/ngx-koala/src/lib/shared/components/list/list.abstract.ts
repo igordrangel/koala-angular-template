@@ -8,8 +8,9 @@ import { FormGroup } from '@angular/forms';
 import { KoalaDelayHelper } from 'tskoala-helpers/dist/delay/koala-delay.helper';
 import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
-import { ListFormFilterInterface } from './list.form-filter.interface';
+import { KoalaListFormFilterInterface } from './koala-list-form-filter.interface';
 import {KoalaDynamicComponent} from "../dynamic-component/koala-dynamic-component";
+import { KlDelay } from "koala-utils/dist/utils/KlDelay";
 
 @Directive()
 export abstract class ListAbstract extends FormAbstract implements AfterViewInit {
@@ -19,7 +20,7 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
   public allSelected = false;
   public dataSource = new MatTableDataSource<any>([]);
   public typeRequest: 'all' | 'onDemand' = 'onDemand';
-  @Input() filterParams = new BehaviorSubject<ListFormFilterInterface>(null);
+  @Input() filterParams = new BehaviorSubject<KoalaListFormFilterInterface>(null);
   @Input() emptyListComponent?: KoalaDynamicComponent;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -41,7 +42,7 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
       tentativas++;
       await KoalaDelayHelper.waitFor(400);
       if (this.sort || this.emptyListComponent) {
-        this.prepareSearch();
+        this.prepareSearch().then();
         if (this.emptyListComponent) stop = true;
       } else if (tentativas > 10) {
         this.requestErrorFunction();
@@ -85,7 +86,7 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
     });
   }
 
-  private prepareSearch() {
+  private async prepareSearch() {
     if (this.typeRequest === 'onDemand') {
       this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
@@ -112,7 +113,6 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
       ).subscribe();
     } else {
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
       this.filterParams.pipe(
         startWith({}),
         debounceTime(300),
@@ -123,6 +123,13 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
         }),
         catchError(this.requestErrorFunction)
       ).subscribe();
+
+      if (this.emptyListComponent) {
+        do {
+          await KlDelay.waitFor(301);
+          this.dataSource.sort = this.sort;
+        } while (!this.sort);
+      }
     }
   }
 

@@ -68,9 +68,9 @@ export * from './lib/shared/components/file-button/koala.file.interface';
 //#region [KOALA LIST]
 export * from './lib/shared/components/list/list.abstract';
 export * from './lib/shared/components/list/list.component';
-export * from './lib/shared/components/list/list.filter.interface';
-export * from './lib/shared/components/list/list.form-filter.interface';
-export * from './lib/shared/components/list/list.item-menu-option.interface';
+export * from './lib/shared/components/list/koalaListFilterInterface';
+export * from './lib/shared/components/list/koala-list-form-filter.interface';
+export * from './lib/shared/components/list/koala-list-item-menu-option.interface';
 export * from './lib/shared/components/list/koala.list.module';
 export * from './lib/shared/components/list/koala-list-item.interface';
 //#endregion

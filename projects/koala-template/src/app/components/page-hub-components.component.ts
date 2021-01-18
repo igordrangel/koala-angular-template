@@ -17,6 +17,7 @@ export class PageHubComponentsComponent {
     {name: 'Dialog', routerLink: '/components/dialog'},
     {name: 'Button', routerLink: '/components/button'},
     {name: 'Alert', routerLink: '/components/alert'},
-    {name: 'Question', routerLink: '/components/question'}
+    {name: 'Question', routerLink: '/components/question'},
+    {name: 'List', routerLink: '/components/list'}
   ]).array<ItemComponent>().orderBy('name').getValue()
 }

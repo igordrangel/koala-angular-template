@@ -1,0 +1,2 @@
+.content {display: flex;justify-content: center;align-items: center;flex-direction: column;height: 100%;}
+.content h2 {color: rgba(255,255,255,.6);padding: 15px;}

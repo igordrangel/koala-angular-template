@@ -8,7 +8,6 @@ const routes: Routes = [
   {path: 'login', component: PageLoginComponent},
   {path: 'get-started', component: PageGetStartedComponent},
   {path: 'components', loadChildren: () => import('./components/hub-components.module').then(m => m.HubComponentsModule)},
-  {path: 'list', loadChildren: () => import('./page-list/page-list.module').then(m => m.PageListModule)},
   {path: 'forms', loadChildren: () => import('./forms/page-forms.module').then(m => m.PageFormsModule)}
 ];
 

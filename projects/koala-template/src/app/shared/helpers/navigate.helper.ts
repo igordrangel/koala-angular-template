@@ -33,6 +33,11 @@ export class NavigateHelper {
         {name: 'Components', routerLink: '/components'},
         {name: 'Question'}
       ];
+    } else if (location.href.indexOf('components/list') >= 0) {
+      return [
+        {name: 'Components', routerLink: '/components'},
+        {name: 'List'}
+      ];
     }
   }
 }

@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ListAbstract } from './list.abstract';
-import { ListItemMenuOptionInterface } from './list.item-menu-option.interface';
+import { KoalaListItemMenuOptionInterface } from './koala-list-item-menu-option.interface';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ListFilterInterface } from './list.filter.interface';
+import { KoalaListFilterInterface } from './koalaListFilterInterface';
 import { KoalaObjectHelper } from 'tskoala-helpers/dist/object/koala-object.helper';
 import { KoalaDelayHelper } from 'tskoala-helpers/dist/delay/koala-delay.helper';
 import { KoalaDynamicFormService } from '../../services/dynamic-forms/koala.dynamic-form.service';
@@ -19,16 +19,16 @@ import { KoalaListItemInterface } from './koala-list-item.interface';
 export class ListComponent extends ListAbstract implements OnInit {
   @Input() columnsToShowInList: string[];
   @Input() columnSort: string;
-  @Input() itensMenuListOptions: ListItemMenuOptionInterface[];
+  @Input() itensMenuListOptions: KoalaListItemMenuOptionInterface[];
   @Input() itemsList: KoalaListItemInterface[];
   @Input() request: Observable<any>;
   @Input() responseIndexName: string;
   @Input() responseQtdResultIndexName: (response: any) => number;
   @Input() typeRequest: 'all' | 'onDemand';
-  @Input() filterFormConfig: ListFilterInterface;
+  @Input() filterFormConfig: KoalaListFilterInterface;
   @Input() error = () => {};
   @Input() reload: BehaviorSubject<boolean>;
-  @Output() getSelection = new EventEmitter<SelectionModel<object>>(null);
+  @Output() getSelection = new EventEmitter<SelectionModel<any>>(null);
   @Output() getDataSource = new EventEmitter<any[]>(null);
 
   public formSearch: FormGroup;

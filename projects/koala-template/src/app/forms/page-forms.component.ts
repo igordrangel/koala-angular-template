@@ -6,11 +6,11 @@ import { KoalaDynamicFormService } from '../../../../ngx-koala/src/lib/shared/se
 import { BehaviorSubject } from 'rxjs';
 import { KoalaDynamicSetValueInterface } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-set-value.interface';
 import { KoalaDynamicAutocompleteOptionsInterface } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-autocomplete-options.interface';
-import { PageListService } from '../page-list/page-list.service';
 import { KoalaDynamicFormShowFieldInterface } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-form-show-field.interface';
 import { KoalaBtnFileService } from '../../../../ngx-koala/src/lib/shared/services/btn-file/koala.btn-file.service';
 import { KoalaFileInterface } from '../../../../ngx-koala/src/lib/shared/components/file-button/koala.file.interface';
 import { KoalaDynamicFormAutocompleteMultipleConfigInterface } from '../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-form-autocomplete-multiple-config.interface';
+import { ListService } from "../components/list/list.service";
 
 @Component({
 	templateUrl: 'page-forms.component.html',
@@ -20,33 +20,33 @@ import { KoalaDynamicFormAutocompleteMultipleConfigInterface } from '../../../..
 })
 export class PageFormsComponent implements OnInit {
 	public formLocation: FormGroup;
-	
+
 	public formMoreItens: FormGroup;
 	public formMoreItensConfig: KoalaDynamicFormFieldInterface[];
 	public formMoreItensValuesSubject = new BehaviorSubject<BehaviorSubject<KoalaDynamicSetValueInterface[]>[]>([]);
 	public formMoreItensSistemasSubject = new BehaviorSubject<BehaviorSubject<KoalaDynamicSetValueInterface[]>[]>([]);
 	public formMoreItensAcoesubject = new BehaviorSubject<BehaviorSubject<KoalaDynamicSetValueInterface[]>[]>([]);
-	
+
 	public formAutocomplete: FormGroup;
 	public formAutocompleteConfig: KoalaDynamicFormFieldInterface[];
 	public countriesSubject = new BehaviorSubject<KoalaDynamicAutocompleteOptionsInterface[]>([]);
-	
+
 	public formCamposDinamicos: FormGroup;
 	public formCamposDinamicosConfig: KoalaDynamicFormFieldInterface[];
 	public showFieldsSubject = new BehaviorSubject<KoalaDynamicFormShowFieldInterface[]>([]);
-	
+
 	public files: KoalaFileInterface[] = [];
-	
+
 	constructor(
 		private fb: FormBuilder,
 		private dynamicFormService: KoalaDynamicFormService,
 		public fileService: KoalaBtnFileService,
-		private countryService: PageListService
+		private countryService: ListService
 	) {}
-	
+
 	ngOnInit(): void {
 		this.formLocation = this.fb.group({});
-		
+
 		this.formMoreItens = this.fb.group({});
 		this.formMoreItensConfig = [{
 			label: 'Itens por Demanda',
@@ -143,7 +143,7 @@ export class PageFormsComponent implements OnInit {
 				setValues: this.formMoreItensValuesSubject
 			}
 		}];
-		
+
 		const changeColorChip = new BehaviorSubject<KoalaDynamicFormAutocompleteMultipleConfigInterface>({color: 'primary'});
 		this.formAutocomplete = this.fb.group({});
 		this.formAutocompleteConfig = [{
@@ -179,7 +179,13 @@ export class PageFormsComponent implements OnInit {
 			fieldClass: 'w-100',
 			autocompleteFilter: (filter) => this.dynamicFormService.autocompleteFilterOnServer(() => {
 				return new Promise<any[]>(resolve => {
-					this.countryService.get({name: filter}).subscribe(countries => resolve(countries));
+					this.countryService.getList({
+            params: {name: filter},
+            sort: 'name',
+            order: 'asc',
+            page: 1,
+            limit: 0
+					}).subscribe(countries => resolve(countries));
 				});
 			}, {
 				propsByName: ['name', 'region'],
@@ -198,7 +204,7 @@ export class PageFormsComponent implements OnInit {
 				value: 'teste2'
 			}]
 		}];
-		
+
 		this.formCamposDinamicos = this.fb.group({});
 		this.formCamposDinamicosConfig = [{
 			label: 'Exibir Campos',
@@ -241,8 +247,14 @@ export class PageFormsComponent implements OnInit {
 			value: '#000000',
 			required: true
 		}];
-		
-		this.countryService.get().subscribe(countries => {
+
+		this.countryService.getList({
+      params: {},
+      sort: 'name',
+      order: 'asc',
+      page: 1,
+      limit: 0
+    }).subscribe(countries => {
 			const options: KoalaDynamicAutocompleteOptionsInterface[] = [];
 			countries.forEach(country => {
 				options.push({
@@ -253,7 +265,7 @@ export class PageFormsComponent implements OnInit {
 			this.countriesSubject.next(options);
 		});
 	}
-	
+
 	public async paste(event: ClipboardEvent) {
 		let files = event.clipboardData.files;
 		if (files?.length) {
@@ -262,7 +274,7 @@ export class PageFormsComponent implements OnInit {
 			}
 		}
 	}
-	
+
 	public simulateDataFromServer() {
 		this.dynamicFormService.setValuesInMoreItemsForm(this.formMoreItensValuesSubject, [[
 			{name: 'nome', value: 'Módulo 1'}
@@ -274,7 +286,7 @@ export class PageFormsComponent implements OnInit {
 			{name: 'tipo', value: 'Tipo 1'}
 		]]);
 	}
-	
+
 	public sendToConsole() {
 		console.log('----- MORE ITENS -----');
 		console.log(this.dynamicFormService.emitData(this.formMoreItens));
@@ -283,7 +295,7 @@ export class PageFormsComponent implements OnInit {
 		console.log('----- CAMPOS DINAMICOS -----');
 		console.log(this.dynamicFormService.emitData(this.formCamposDinamicos));
 	}
-	
+
 	public showFileList(files: KoalaFileInterface[]) {
 		this.files = files;
 	}

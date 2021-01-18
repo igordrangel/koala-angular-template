@@ -1,0 +1,254 @@
+<koala-folder-page
+  customFolderBackgroudColor="#212121"
+  customFolderFontColor="#fff"
+  titleIcon="webComponents"
+  titlePage="Components - List"
+  [koalaIcon]="true"
+  [navigateHistory]="navigationHistory">
+
+  <div content>
+    <koala-list
+      typeRequest="all"
+      columnSort="name"
+      [columnsToShowInList]="columns"
+      [filterParams]="filter"
+      [filterFormConfig]="filterConfig"
+      [itemsList]="itensList"
+      [itensMenuListOptions]="itensMenuListOptions"
+      [emptyListComponent]="emptyListComponent"
+      [request]="listService.getList(filter.getValue())"
+      [reload]="reloadList"
+      (getSelection)="selection = $event"
+      (getDataSource)="dataSource = $event">
+
+      <nav itemsList>
+        <koala-button
+          (click)="downloadList()"
+          [koalaIcon]="true"
+          backgroundColor="transparent"
+          color="#616161"
+          icon="excel"
+          tooltip="Download List (XLSX)">
+        </koala-button>
+        <koala-button
+          (click)="reloadList.next(true)"
+          backgroundColor="transparent"
+          color="#fafafa"
+          icon="refresh"
+          tooltip="Reload List">
+        </koala-button>
+      </nav>
+
+    </koala-list>
+
+    <mat-accordion class="d-block mt-15 p-20" multi>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>list.module.ts</mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>code</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <pre><code><span>import</span> &#123; NgModule &#125; <span>from</span> "@angular/core";
+<span>import</span> &#123; CommonModule &#125; <span>from</span> "@angular/common";
+<span>import</span> &#123; PageListComponent &#125; <span>from</span> "./page-list.component";
+<span>import</span> &#123; EmptyListComponent &#125; <span>from</span> "./empty-list/empty-list.component";
+<span>import</span> &#123; ListRoutingModule &#125; <span>from</span> "./list.routing.module";
+<span>import</span> &#123;
+  KoalaListModule,
+  KoalaIconModule,
+  KoalaButtonModule,
+  KoalaAlertService
+&#125; from "ngx-koala";
+
+<span>@NgModule</span>(&#123;
+  exports: [
+    PageListComponent
+  ],
+  declarations: [
+    PageListComponent,
+    EmptyListComponent
+  ],
+  imports: [
+    CommonModule,
+    KoalaListModule,
+    KoalaButtonModule,
+    KoalaIconModule,
+    ListRoutingModule
+  ],
+  providers: [
+    KoalaAlertService
+  ]
+&#125;)
+<span>export class</span> ListModule &#123;&#125;</code></pre>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>page-list.component.ts</mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>code</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <pre><code><span>import</span> &#123; Component &#125; <span>from</span> "@angular/core";
+<span>import</span> &#123; FormGroup &#125; <span>from</span> "@angular/forms";
+<span>import</span> &#123; SelectionModel &#125; <span>from</span> "@angular/cdk/collections";
+<span>import</span> &#123; ListService &#125; <span>from</span> "./list.service";
+<span>import</span> &#123;
+  KoalaListItemInterface,
+  KoalaListFilterInterface,
+  KoalaListItemMenuOptionInterface,
+  KoalaListFormFilterInterface,
+  DynamicFormTypeFieldEnum
+  KoalaDynamicComponent,
+  KoalaXlsxService
+&#125; <span>from</span> "ngx-koala";
+<span>import</span> &#123; BehaviorSubject &#125; <span>from</span> "rxjs";
+<span>import</span> &#123; ListItemInterface &#125; <span>from</span> "./list-item.interface";
+<span>import</span> &#123; koala &#125; <span>from</span> "koala-utils";
+<span>import</span> &#123; EmptyListComponent &#125; <span>from</span> "./empty-list/empty-list.component";
+
+<span>@Component</span>(&#123;
+  templateUrl: 'page-list.component.html'
+&#125;)
+<span>export class</span> PageListComponent &#123;
+  <span>public</span> formData: <span>FormGroup</span>;
+  <span>public</span> columns = [
+    'select',
+    'name',
+    'qtd',
+    'value',
+    'options'
+  ];
+  <span>public</span> itensList: <span>KoalaListItemInterface</span>[];
+  <span>public</span> itensMenuListOptions: <span>KoalaListItemMenuOptionInterface</span>[];
+  <span>public</span> filterConfig: <span>KoalaListFilterInterface</span>;
+  <span>public</span> filter = <span>new BehaviorSubject&#60;KoalaListFormFilterInterface&#62;</span>(&#123;
+    params: &#123;&#125;,
+    sort: 'name',
+    order: 'asc',
+    page: 1,
+    limit: 0
+  &#125;);
+  <span>public</span> selection: <span>SelectionModel&#60;ListItemInterface&#62;</span>;
+  <span>public</span> dataSource?: <span>ListItemInterface</span>[];
+  <span>public</span> emptyListComponent = <span>new KoalaDynamicComponent(EmptyListComponent)</span>;
+  <span>public</span> reloadList = <span>new BehaviorSubject&#60;boolean&#62;(false)</span>;
+
+  <span>constructor</span>(
+    <span>public</span> listService: <span>ListService</span>,
+    <span>private</span> xlsxService: <span>KoalaXlsxService</span>
+  ) &#123;
+    <span>super</span>();
+    <span>this</span>.itensList = [&#123;
+      label: 'Name',
+      columnDef: 'name',
+      sortHeader: 'name',
+      itemNameProperty: (item: <span>ListItemInterface</span>) => item.name,
+      dblClick: (item: <span>ListItemInterface</span>) => <span>this</span>.edit(item)
+    &#125;, &#123;
+      label: 'Qtd.',
+      columnDef: 'qtd',
+      sortHeader: 'qtd',
+      itemNameProperty: (item: <span>ListItemInterface</span>) => item.qtd.toString(),
+      dblClick: (item: <span>ListItemInterface</span>) => <span>this</span>.edit(item)
+    &#125;, &#123;
+      label: 'Value',
+      columnDef: 'value',
+      sortHeader: 'value',
+      itemNameProperty: (item: <span>ListItemInterface</span>) => <span>koala</span>(item.qtd).<span>number</span>().<span>maskCoin</span>('US$ ').<span>getValue</span>(),
+      dblClick: (item: <span>ListItemInterface</span>) => <span>this</span>.edit(item)
+    &#125;];
+
+    <span>this</span>.itensMenuListOptions = [&#123;
+      icon: 'edit',
+      name: 'Edit',
+      havePermission: true,
+      action: (item: <span>ListItemInterface</span>) => <span>this</span>.edit(item)
+    &#125;];
+
+    <span>this</span>.filterConfig = &#123;
+      main: [
+        &#123;
+          label: 'Name',
+          name: 'name',
+          type: DynamicFormTypeFieldEnum.text,
+          appearance: 'outline',
+          floatLabel: "always",
+          class: 'col-12'
+        &#125;
+      ]
+    &#125;;
+  }
+
+  <span>public</span> edit(item: <span>ListItemInterface</span>) &#123;
+    console.log(item);
+  &#125;
+
+  <span>public</span> downloadList() &#123;
+    <span>this</span>.xlsxService.convertJsonToXlsx(<span>this</span>.dataSource, &#123;
+      filename: 'koala-list',
+      sheetName: 'Koala List',
+      title: 'Sheet of Koala List',
+      titleFontColor: '#b71c1c',
+      titleBackgroundColor: '#ffffff',
+      headerFontColor: '#ffffff',
+      headerBackgroundColor: '#b71c1c'
+    &#125;);
+  &#125;
+&#125;</code></pre>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>page-list.component.html</mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>code</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <pre><code><span>&#60;koala-list</span>
+  typeRequest="all"
+  columnSort="name"
+  [columnsToShowInList]="columns"
+  [filterParams]="filter"
+  [filterFormConfig]="filterConfig"
+  [itemsList]="itensList"
+  [itensMenuListOptions]="itensMenuListOptions"
+  [emptyListComponent]="emptyListComponent"
+  [request]="listService.getList(filter.getValue())"
+  [reload]="reloadList"
+  (getSelection)="selection = $event"
+  (getDataSource)="dataSource = $event"<span>&#62;
+
+&#60;nav itemsList&#62;</span>
+  <span>&#60;koala-button</span>
+    (click)="downloadList()"
+    [koalaIcon]="true"
+    backgroundColor="transparent"
+    color="#616161"
+    icon="excel"
+    tooltip="Download List (XLSX)"<span>&#62;
+    &#60;/koala-button&#62;</span>
+    <span>&#60;koala-button</span>
+      (click)="reloadList.next(true)"
+      backgroundColor="transparent"
+      color="#fafafa"
+      icon="refresh"
+      tooltip="Reload List"<span>&#62;
+    &#60;/koala-button&#62;</span>
+  <span>&#60;/nav&#62;</span>
+
+<span>&#60;/koala-list&#62;</span></code></pre>
+
+      </mat-expansion-panel>
+
+    </mat-accordion>
+  </div>
+
+</koala-folder-page>
