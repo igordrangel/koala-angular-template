@@ -9,8 +9,8 @@ import { BehaviorSubject } from 'rxjs';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileButtonComponent implements OnInit {
-	@Input() color: 'blue' | 'red' | 'gray' | 'white' = 'white';
-	@Input() backgroundColor: 'blue' | 'red' | 'gray' | 'white' | 'transparent' = 'blue';
+	@Input() color: string;
+	@Input() backgroundColor: string;
 	@Input() icon: string;
 	@Input() text: string;
 	@Input() tooltip: string;
@@ -22,12 +22,14 @@ export class FileButtonComponent implements OnInit {
 	@Input() autoclear: boolean = true;
 	@Output() getFiles = new EventEmitter<KoalaFileInterface[]>(null);
 	public files: KoalaFileInterface[] = [];
-	
+  public style: string;
+
 	@ViewChild('file', {static: true}) private file: ElementRef<HTMLInputElement>;
-	
+
 	public textSubject = new BehaviorSubject<string>(null);
-	
+
 	ngOnInit() {
+    this.style = `color: ${this.color}!important;background-color: ${this.backgroundColor}!important;`;
 		this.textSubject.next(this.text);
 		if (this.setFile) {
 			this.setFile
@@ -39,7 +41,7 @@ export class FileButtonComponent implements OnInit {
 				    }
 			    });
 		}
-		
+
 		if (this.updateFileList) {
 			this.updateFileList
 			    .subscribe(fileList => {
@@ -48,7 +50,7 @@ export class FileButtonComponent implements OnInit {
 			    });
 		}
 	}
-	
+
 	public async emitFiles(files: FileList) {
 		if (files?.length > 0) {
 			for (let f = 0; f <= files.length; f++) {
@@ -57,14 +59,14 @@ export class FileButtonComponent implements OnInit {
 					this.files.push(await this.convertFile(file));
 				}
 			}
-			
+
 			this.getFiles.emit(this.files);
 		} else {
 			this.getFiles.emit(null);
 		}
 		this.generateTextButton();
 	}
-	
+
 	public open() {
 		this.file.nativeElement.value = null;
 		if (this.autoclear) {
@@ -74,14 +76,14 @@ export class FileButtonComponent implements OnInit {
 		}
 		this.file.nativeElement.click();
 	}
-	
+
 	private generateTextButton() {
 		this.textSubject.next(this.files.length > 0 ?
 			`${this.files.length} arquivo${this.files.length > 1 ? 's' : ''} selecionado` :
 			this.text
 		);
 	}
-	
+
 	private async convertFile(file: File): Promise<KoalaFileInterface> {
 		const blobFile = await new Promise((resolve) => {
 			const fileReader = new FileReader();

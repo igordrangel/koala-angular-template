@@ -3,13 +3,3 @@
 .koala-button:disabled {background: #cccccc !important;color: #616161 !important;cursor: not-allowed;}
 .koala-icon-button {height: 25px;line-height: 25px;width: 25px;}
 .koala-icon-button mat-icon {font-size: 20px;height: 20px;line-height: 20px;position: relative;width: 20px;}
-.koala-button.c-white,
-.koala-icon-button.c-white {color: #ffffff !important;}
-.koala-button.c-blue,
-.koala-icon-button.c-blue {color: #1976d2 !important;}
-.koala-button.b-white,
-.koala-icon-button.b-white {background: #ffffff !important;}
-.koala-button.b-blue,
-.koala-icon-button.b-blue {background: #1976d2 !important;}
-.koala-button.b-transparent,
-.koala-icon-button.b-transparent {background: transparent !important;}

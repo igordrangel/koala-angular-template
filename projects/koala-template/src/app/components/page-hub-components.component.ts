@@ -18,6 +18,8 @@ export class PageHubComponentsComponent {
     {name: 'Button', routerLink: '/components/button'},
     {name: 'Alert', routerLink: '/components/alert'},
     {name: 'Question', routerLink: '/components/question'},
-    {name: 'List', routerLink: '/components/list'}
+    {name: 'List', routerLink: '/components/list'},
+    {name: 'File Button', routerLink: '/components/file-button'},
+    {name: 'Forms', routerLink: '/components/forms'}
   ]).array<ItemComponent>().orderBy('name').getValue()
 }

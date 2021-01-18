@@ -5,9 +5,12 @@
 .menu-toolbar a:last-child {border-radius: 0 20px 20px 0;}
 .menu-toolbar a koala-icon {display: inline-flex;padding: 7px 0;}
 .p-20 {padding: 20px;}
+p.warning {color: #FFC107;font-style: italic;}
+p.warning a {color: #1565c0;font-weight: bold;font-style: normal;text-decoration: none;}
 code {display: block;color: rgba(255,255,255,.7);font-family: "Helvetica Neue", sans-serif;font-size: 1.2em;background: #111;padding: 15px;width: 100%;box-sizing: border-box;}
 code span {color: #4CAF50;}
 pre {margin: 0;}
-mat-expansion-panel {background: #181818!important;}
+mat-expansion-panel {background: rgba(18,18,18, .5) !important;}
 mat-expansion-panel-header mat-panel-title {color: #fff!important;}
 mat-expansion-panel-header mat-panel-description {display: flex;justify-content: flex-end;color: #fff!important;}
+mat-radio-group {color: #fff!important;}

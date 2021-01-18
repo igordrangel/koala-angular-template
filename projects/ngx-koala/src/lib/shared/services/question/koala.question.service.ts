@@ -3,12 +3,12 @@ import { DialogQuestionComponent } from '../../components/question/dialog-questi
 import { KoalaDialogService } from '../dialog/koala.dialog.service';
 import { KoalaQuestionConfigInterface } from '../../components/question/koala-question-config.interface';
 
-@Injectable()
+@Injectable({providedIn: "any"})
 export class KoalaQuestionService {
-  
+
   constructor(private dialogService: KoalaDialogService) {
   }
-  
+
   public open(config: KoalaQuestionConfigInterface, yesCallback?: () => void, noCallback?: () => void) {
     this.dialogService.open(DialogQuestionComponent, 'small', config, {},
       (answer: { question: boolean }) => {

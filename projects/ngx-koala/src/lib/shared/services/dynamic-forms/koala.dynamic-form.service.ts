@@ -9,7 +9,7 @@ import { KoalaObjectHelper } from 'tskoala-helpers/dist/object/koala-object.help
 import { KoalaDynamicFormShowFieldInterface } from '../../components/form/dynamic-form/interfaces/koala.dynamic-form-show-field.interface';
 import { KoalaDynamicFormConfigInterface } from '../../components/form/dynamic-form/interfaces/koala.dynamic-form-config.interface';
 
-@Injectable({providedIn: 'root'})
+@Injectable({providedIn: "any"})
 export class KoalaDynamicFormService {
 
   public emitData(form: FormGroup) {

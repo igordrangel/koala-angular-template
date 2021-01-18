@@ -30,11 +30,7 @@
         <pre><code><span>import</span> &#123; NgModule &#125; <span>from</span> "@angular/core";
 <span>import</span> &#123; PageQuestionComponent &#125; <span>from</span> "./page-question.component";
 <span>import</span> &#123; CommonModule &#125; <span>from</span> "@angular/common";
-<span>import</span> &#123;
-  KoalaQuestionService,
-  KoalaDialogModule,
-  KoalaDialogService
-} from "ngx-koala";
+<span>import</span> &#123; KoalaDialogModule, KoalaQuestionModule &#125; <span>from</span> "ngx-koala";
 <span>import</span> &#123; QuestionRoutingModule &#125; <span>from</span> "./question.routing.module";
 
 <span>@NgModule</span>(&#123;
@@ -46,12 +42,9 @@
   ],
   imports: [
     KoalaDialogModule,
+    KoalaQuestionModule,
     MatIconModule,
     QuestionRoutingModule
-  ],
-  providers: [
-    KoalaQuestionService,
-    KoalaDialogService
   ]
 &#125;)
 <span>export class</span> QuestionModule &#123;&#125;</code></pre>

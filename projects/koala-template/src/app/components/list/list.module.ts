@@ -9,7 +9,6 @@ import { KoalaIconModule } from "../../../../../ngx-koala/src/lib/shared/compone
 import { KoalaButtonModule } from "../../../../../ngx-koala/src/lib/shared/components/button/koala.button.module";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
-import { KoalaAlertService } from "../../../../../ngx-koala/src/lib/shared/services/alert/koala.alert.service";
 
 @NgModule({
   exports: [
@@ -28,9 +27,6 @@ import { KoalaAlertService } from "../../../../../ngx-koala/src/lib/shared/servi
     MatExpansionModule,
     MatIconModule,
     ListRoutingModule
-  ],
-  providers: [
-    KoalaAlertService
   ]
 })
 export class ListModule {}

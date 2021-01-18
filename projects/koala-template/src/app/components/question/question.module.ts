@@ -7,8 +7,7 @@ import { KoalaDialogModule } from "../../../../../ngx-koala/src/lib/shared/compo
 import { MatIconModule } from "@angular/material/icon";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { QuestionRoutingModule } from "./question.routing.module";
-import { KoalaQuestionService } from "../../../../../ngx-koala/src/lib/shared/services/question/koala.question.service";
-import { KoalaDialogService } from "../../../../../ngx-koala/src/lib/shared/services/dialog/koala.dialog.service";
+import { KoalaQuestionModule } from "../../../../../ngx-koala/src/lib/shared/components/question/koala.question.module";
 
 @NgModule({
   exports: [
@@ -22,13 +21,10 @@ import { KoalaDialogService } from "../../../../../ngx-koala/src/lib/shared/serv
     KoalaFolderPageModule,
     KoalaButtonModule,
     KoalaDialogModule,
+    KoalaQuestionModule,
     MatIconModule,
     MatExpansionModule,
     QuestionRoutingModule
-  ],
-  providers: [
-    KoalaQuestionService,
-    KoalaDialogService
   ]
 })
 export class QuestionModule {}

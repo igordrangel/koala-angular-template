@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ViacepInterface } from './viacep.interface';
 
-@Injectable({providedIn: 'root'})
+@Injectable({providedIn: "any"})
 export class ViacepService {
   private baseUrl = 'https://viacep.com.br';
 

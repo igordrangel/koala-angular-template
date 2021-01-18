@@ -30,11 +30,7 @@
         <pre><code><span>import</span> &#123; NgModule &#125; <span>from</span> "@angular/core";
 <span>import</span> &#123; PageAlertComponent &#125; <span>from</span> "./page-alert.component";
 <span>import</span> &#123; CommonModule &#125; <span>from</span> "@angular/common";
-<span>import</span> &#123;
-  KoalaAlertService,
-  KoalaDialogModule,
-  KoalaDialogService
-} from "ngx-koala";
+<span>import</span> &#123; KoalaDialogModule, KoalaAlertModule &#125; <span>from</span> "ngx-koala";
 <span>import</span> &#123; AlertRoutingModule &#125; <span>from</span> "./alert.routing.module";
 
 <span>@NgModule</span>(&#123;
@@ -46,12 +42,9 @@
   ],
   imports: [
     KoalaDialogModule,
+    KoalaAlertModule,
     MatIconModule,
     AlertRoutingModule
-  ],
-  providers: [
-    KoalaAlertService,
-    KoalaDialogService
   ]
 &#125;)
 <span>export class</span> AlertModule &#123;&#125;</code></pre>

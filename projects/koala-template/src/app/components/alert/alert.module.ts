@@ -7,8 +7,7 @@ import { AlertRoutingModule } from "./alert.routing.module";
 import { KoalaFolderPageModule } from "../../../../../ngx-koala/src/lib/shared/components/folder-page/koala.folder-page.module";
 import { KoalaDialogModule } from "../../../../../ngx-koala/src/lib/shared/components/dialog/koala.dialog.module";
 import { KoalaButtonModule } from "../../../../../ngx-koala/src/lib/shared/components/button/koala.button.module";
-import { KoalaAlertService } from "../../../../../ngx-koala/src/lib/shared/services/alert/koala.alert.service";
-import { KoalaDialogService } from "../../../../../ngx-koala/src/lib/shared/services/dialog/koala.dialog.service";
+import { KoalaAlertModule } from "../../../../../ngx-koala/src/lib/shared/components/alert/koala.alert.module";
 
 @NgModule({
   exports: [
@@ -22,13 +21,10 @@ import { KoalaDialogService } from "../../../../../ngx-koala/src/lib/shared/serv
     KoalaFolderPageModule,
     KoalaButtonModule,
     KoalaDialogModule,
+    KoalaAlertModule,
     MatIconModule,
     MatExpansionModule,
     AlertRoutingModule
-  ],
-  providers: [
-    KoalaAlertService,
-    KoalaDialogService
   ]
 })
 export class AlertModule {}

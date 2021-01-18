@@ -8,7 +8,7 @@ export const KOALA_LOADER_SUBJECT = new BehaviorSubject<LoaderBarPageInterface>(
   show: false
 });
 
-@Injectable({providedIn: "root"})
+@Injectable({providedIn: "any"})
 export class KoalaLoaderService {
 
   public getLoaderSubject() {

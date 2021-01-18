@@ -8,7 +8,7 @@ import { koala } from "koala-utils";
 })
 export class IconComponent implements OnInit {
   @Input() color: string;
-  @Input() icon: 'notFound'|'notAllowed'|'sessionExpired'|'empty'|'excel'|'edit'|'trash'|'webComponents'|'github';
+  @Input() icon: 'notFound'|'notAllowed'|'sessionExpired'|'empty'|'excel'|'edit'|'trash'|'webComponents'|'deliveryBox'|'github';
   @Input() size: number = 24;
 
   public intervalCheckElement: number;

@@ -55,6 +55,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			if (config.asyncValidators) {
 				newFormGroup.get('value').setAsyncValidators(config.asyncValidators);
 			}
+      newFormGroup.get('value').updateValueAndValidity();
 			if (config.type === DynamicFormTypeFieldEnum.dynamicForm) {
 				const formGroupDynamicFormsSubject = newFormGroup.get('dynamicFormConfig').value as BehaviorSubject<KoalaDynamicFormConfigInterface>;
 				formGroupDynamicFormsSubject.subscribe(formGroupConfig => {
@@ -211,8 +212,9 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 
 	public addMoreItem(propIndex: number) {
 		if (this.controls.controls[propIndex].get('moreItemsConfig').value.length < this.controls.controls[propIndex].get('moreItemsMaxItems').value) {
+		  const formGroup = this.fb.group({});
 			this.controls.controls[propIndex].get('moreItemsConfig').value.push({
-				form: this.fb.group({}),
+				form: formGroup,
 				formConfig: this.formConfig[propIndex].moreItemsConfig.formConfig,
 				showFields: new BehaviorSubject<BehaviorSubject<KoalaDynamicSetValueInterface[]>[]>([]),
 				showFieldsMoreItensConfig: this.formConfig[propIndex].moreItemsConfig.showFieldsConfig
@@ -220,6 +222,8 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			this.controls.controls[propIndex].get('moreItemsExpanded').setValue(
 				this.controls.controls[propIndex].get('moreItemsConfig').value.length - 1
 			);
+      const formArrayMoreItems = this.controls.controls[propIndex].get('moreItemsFormGroup') as FormArray;
+      formArrayMoreItems.push(formGroup);
 		}
 	}
 
@@ -264,9 +268,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		let validators = [];
 		let value: any = config.value ?? '';
 		let valueSelectedAutocomplete: KoalaDynamicAutocompleteOptionsInterface | KoalaDynamicAutocompleteOptionsInterface[] = (
-			config.multiple ?
-				[] :
-				(config.autocompleteDefaultValueOnClear ?? null)
+			config.multiple ? [] : (config.autocompleteDefaultValueOnClear ?? null)
 		);
 
 		if (config.required === true) validators.push(Validators.required);
@@ -324,6 +326,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 				accept: config?.fileButtonConfig?.accept ?? '*'
 			}],
 			dynamicFormConfig: [new BehaviorSubject<KoalaDynamicFormConfigInterface>(config.dynamicFormConfig)],
+      dynamicFormGroup: this.fb.array([]),
 			appearance: [config.appearance],
 			floatLabel: [config.floatLabel],
 			placeholder: [config.placeholder],
@@ -348,6 +351,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
       moreItemsIconBackgroundColor: [config.moreItemsIconBackgroundColor],
 			moreItemsExpanded: [''],
 			moreItemsConfig: [[]],
+      moreItemsFormGroup: this.fb.array([]),
 			autocompleteLoading: [new BehaviorSubject<boolean>(false)],
 			autocompleteOptions: [config.autocompleteOptions],
 			autocompleteMultipleConfig: [config.autocompleteMultipleConfig],
@@ -377,35 +381,50 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 					for (const [indexControl, control] of formArray.controls.entries()) {
 						if (control.get('name').value === prop.name) {
 							control.get('show').value.next(prop.show);
+              const config: KoalaDynamicFormFieldInterface = this.formConfig[indexControl] ?? null;
 							if (prop.show) {
 								const validators = [];
-								const config: KoalaDynamicFormFieldInterface = this.formConfig[indexControl] ?? null;
 								if (config) {
-									if (config.required === true) {
-										validators.push(Validators.required);
-									}
-									if (config.type === DynamicFormTypeFieldEnum.cpf) {
-										validators.push(CpfValidator);
-									} else if (config.type === DynamicFormTypeFieldEnum.cnpj) {
-										validators.push(CnpjValidator);
-									} else if (config.type === DynamicFormTypeFieldEnum.email) {
-										validators.push(Validators.email);
-									} else if (
-										config.required === true &&
-										config.type === DynamicFormTypeFieldEnum.autocomplete
-									) {
-										validators.push(AutocompleteSelectedValidator);
-									}
-									control.get('value').setValidators(validators);
-									if (prop.clearCurrentValue) {
-										control.get('value').setValue(null);
-									}
+								  if (config.type === DynamicFormTypeFieldEnum.dynamicForm) {
+								    config.dynamicFormConfig.form = this.fb.group({});
+                    const formArrayMoreItems = control.get('dynamicFormGroup') as FormArray;
+                    formArrayMoreItems.push(config.dynamicFormConfig.form);
+                  } else {
+                    if (config.required === true) {
+                      validators.push(Validators.required);
+                    }
+                    if (config.type === DynamicFormTypeFieldEnum.cpf) {
+                      validators.push(CpfValidator);
+                    } else if (config.type === DynamicFormTypeFieldEnum.cnpj) {
+                      validators.push(CnpjValidator);
+                    } else if (config.type === DynamicFormTypeFieldEnum.email) {
+                      validators.push(Validators.email);
+                    } else if (
+                      config.required === true &&
+                      config.type === DynamicFormTypeFieldEnum.autocomplete
+                    ) {
+                      validators.push(AutocompleteSelectedValidator);
+                    }
+                    control.get('value').setValidators(validators);
+                  }
+
+                  control.get('value').updateValueAndValidity();
+                  if (prop.clearCurrentValue) {
+                    control.get('value').setValue(null);
+                  }
 								}
 							} else {
 								control.get('value').clearValidators();
 								control.get('value').clearAsyncValidators();
 								control.setErrors(null);
 								control.get('value').setValue(null);
+                control.get('value').updateValueAndValidity();
+
+                if (config.type === DynamicFormTypeFieldEnum.dynamicForm) {
+                  const formGroup = control as FormGroup;
+                  formGroup.removeControl('dynamicFormGroup');
+                  formGroup.addControl('dynamicFormGroup', this.fb.array([]));
+                }
 							}
 							break;
 						}

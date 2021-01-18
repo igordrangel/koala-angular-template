@@ -1,7 +1,7 @@
 import { Papa } from 'ngx-papaparse';
 import { Injectable } from '@angular/core';
 
-@Injectable({providedIn: "root"})
+@Injectable({providedIn: "any"})
 export class KoalaCsvService {
 
   constructor(private papa: Papa) {

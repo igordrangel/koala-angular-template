@@ -7,10 +7,7 @@
 	[disabled]="disabled"
 	[matTooltipDisabled]="!tooltip"
 	[matTooltip]="tooltip"
-	[ngClass]="[
-    'c-'+color,
-    'b-'+backgroundColor
-  ]"
+  [style]="style"
 	class="koala-button"
 	mat-button
 	matTooltipPosition="above"
@@ -24,10 +21,7 @@
 	  [disabled]="disabled"
 	  [matTooltipDisabled]="!tooltip"
 	  [matTooltip]="tooltip"
-	  [ngClass]="[
-      'c-'+color,
-      'b-'+backgroundColor
-    ]"
+    [style]="style"
 	  class="koala-icon-button"
 	  mat-icon-button
 	  matTooltipPosition="before"

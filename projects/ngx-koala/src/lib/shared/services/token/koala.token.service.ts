@@ -1,9 +1,10 @@
+import jwt from 'jwt-decode';
+
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import jwt from 'jwt-decode';
 import { koalaEnviroment } from '../../../environments/koala.environment';
 
-@Injectable()
+@Injectable({providedIn: "any"})
 export class KoalaTokenService {
   readonly storageName: string;
   private tokenSubject = new BehaviorSubject<string>(null);
@@ -62,7 +63,7 @@ export class KoalaTokenService {
       }
     }, 1000);
   }
-  
+
   private getToken() {
     return localStorage.getItem(this.storageName);
   }

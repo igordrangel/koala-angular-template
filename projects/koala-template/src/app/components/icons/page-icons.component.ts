@@ -69,6 +69,10 @@ export class PageIconsComponent extends PageAbstract implements OnInit {
       name: 'webComponents',
       color: '#fff',
       selected: false
+    },{
+      name: 'deliveryBox',
+      color: '#fff',
+      selected: false
     }]}
   ];
   public groups$ = new BehaviorSubject<GroupIcon[]>([]);

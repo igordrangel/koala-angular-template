@@ -1,0 +1,52 @@
+<koala-folder-page
+  customFolderBackgroudColor="#212121"
+  customFolderFontColor="#fff"
+  titleIcon="deliveryBox"
+  titlePage="Services - Loader Page"
+  [koalaIcon]="true"
+  [navigateHistory]="navigationHistory">
+
+  <section class="p-20" content>
+
+    <koala-button
+      (click)="showLoader()"
+      backgroundColor="#fff"
+      color="#212121"
+      icon="refresh"
+      text="Show Loader">
+    </koala-button>
+    <p class="warning mt-15 mb-20">PS.: The param typeLoader is the same of <a href="https://material.angular.io/components/progress-bar/overview" target="_blank">Angular Material</a></p>
+
+    <mat-accordion multi>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>loader-page.component.ts</mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>code</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <pre><code><span>import</span> &#123; Component &#125; <span>from</span> "@angular/core";
+<span>import</span> &#123; KoalaLoaderService &#125; <span>from</span> "ngx-koala";
+
+<span>@Component</span>(&#123;
+  templateUrl: 'example.component.html'
+&#125;)
+<span>export class</span> ExampleComponent &#123;
+
+  <span>constructor</span>(<span>private</span> loaderService: <span>KoalaLoaderService</span>) &#123;&#125;
+
+  <span>public</span> showLoader() &#123;
+    <span>this</span>.loaderService.create(&#123;typeLoader: "indeterminate"&#125;);
+    <span>setTimeout</span>(() => <span>this</span>.loaderService.dismiss(), 2000);
+  &#125;
+&#125;</code></pre>
+
+      </mat-expansion-panel>
+
+    </mat-accordion>
+
+  </section>
+
+</koala-folder-page>

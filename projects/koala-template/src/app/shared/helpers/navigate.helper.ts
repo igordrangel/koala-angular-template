@@ -38,6 +38,21 @@ export class NavigateHelper {
         {name: 'Components', routerLink: '/components'},
         {name: 'List'}
       ];
+    } else if (location.href.indexOf('components/file-button') >= 0) {
+      return [
+        {name: 'Components', routerLink: '/components'},
+        {name: 'File Button'}
+      ];
+    } else if (location.href.indexOf('components/forms') >= 0) {
+      return [
+        {name: 'Components', routerLink: '/components'},
+        {name: 'Forms'}
+      ];
+    } else if (location.href.indexOf('services/page-loader') >= 0) {
+      return [
+        {name: 'Services', routerLink: '/services'},
+        {name: 'Page Loader'}
+      ];
     }
   }
 }

@@ -1,0 +1,500 @@
+<koala-folder-page
+  customFolderBackgroudColor="#212121"
+  customFolderFontColor="#fff"
+  titleIcon="webComponents"
+  titlePage="Components - Forms"
+  [koalaIcon]="true"
+  [navigateHistory]="navigationHistory">
+
+  <section class="p-20" content>
+    <mat-accordion multi>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Simple Form</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-accordion multi>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>simple-form.module.ts</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <pre><code><span>import</span> &#123; NgModule &#125; <span>from</span> '@angular/core';
+<span>import</span> &#123; PageSimpleFormComponent &#125; <span>from</span> './page-simple-form.component';
+<span>import</span> &#123; KoalaFormModule &#125; <span>from</span> 'ngx-koala';
+
+<span>@NgModule</span>(&#123;
+  declarations: [
+    PageSimpleFormComponent
+  ],
+  imports: [
+    KoalaFormModule
+  ]
+&#125;)
+<span>export class</span> SimpleFormModule &#123;&#125;</code></pre>
+
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>page-simple-form.component.ts</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <pre><code><span>import</span> &#123; Component, OnInit &#125; <span>from</span> "@angular/core";
+<span>import</span> &#123; FormBuilder, FormGroup &#125; <span>from</span> "@angular/forms";
+<span>import</span> &#123;
+  FormAbstract,
+  KoalaDynamicFormFieldInterface,
+  KoalaDynamicFormService,
+  DynamicFormTypeFieldEnum
+&#125; <span>from</span> "ngx-koala";
+
+<span>@Component</span>(&#123;
+  templateUrl: 'page-forms.component.html'
+&#125;)
+<span>export class</span> PageFormsComponent <span>extends</span> FormAbstract <span>implements</span> OnInit &#123;
+  <span>public</span> btnLabel = 'Send';
+
+  <span>public</span> formSimpleExample: FormGroup;
+  <span>public</span> formSimpleExampleConfig: KoalaDynamicFormFieldInterface[];
+
+  <span>constructor</span>(
+    <span>private</span> fb: <span>FormBuilder</span>,
+    <span>private</span> dynamicFormService: <span>KoalaDynamicFormService</span>
+  ) &#123;
+    <span>super</span>(() => <span>this</span>.formSimpleExample);
+  &#125;
+
+  ngOnInit() &#123;
+    <span>this</span>.formSimpleExample = <span>this</span>.fb.group(&#123;&#125;);
+    <span>this</span>.formSimpleExampleConfig = [&#123;
+      label: 'Text Field',
+      name: 'textField',
+      type: <span>DynamicFormTypeFieldEnum</span>.text,
+      appearance: "outline",
+      class: 'col-12',
+      fieldClass: 'w-100',
+      required: true
+    &#125;];
+  &#125;
+
+  <span>public</span> submit(formGroup: FormGroup) &#123;
+    <span>this</span>.loading(true, 'Sending...');
+    const data = <span>this</span>.dynamicFormService.emitData(formGroup);
+    setTimeout(() => &#123;
+      console.log(data);
+      <span>this</span>.loading(false, 'Send');
+    &#125;, 2000);
+  &#125;
+&#125;
+</code></pre>
+
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>page-simple-form.component.html</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <pre><code><span>&#60;form</span> [formGroup]="formSimpleExample" (ngSubmit)="submit(formSimpleExample)"<span>&#62;</span>
+  <span>&#60;koala-dynamic-form</span>
+    [form]="formSimpleExample"
+    [formConfig]="formSimpleExampleConfig"<span>&#62;
+
+    &#60;div btn-submit&#62; align="end"
+      &#60;koala-submit</span>
+        [fg]="formSimpleExample"
+        [btnLabel]="btnLabel"
+        [btnSubmitDisabled]="btnSubmitDisabled"
+        [loader]="loader"<span>&#62;
+      &#60;/koala-submit&#62;
+    &#60;/div&#62;
+
+  &#60;/koala-dynamic-form&#62;
+&#60;/form&#62;</span></code></pre>
+
+          </mat-expansion-panel>
+
+        </mat-accordion>
+
+        <form [formGroup]="formSimpleExample" (ngSubmit)="submit(formSimpleExample)">
+          <koala-dynamic-form
+            [form]="formSimpleExample"
+            [formConfig]="formSimpleExampleConfig">
+
+            <div btn-submit align="end">
+              <koala-submit
+                [fg]="formSimpleExample"
+                [btnLabel]="btnLabel"
+                [btnSubmitDisabled]="btnSubmitDisabled"
+                [loader]="loader">
+              </koala-submit>
+            </div>
+
+          </koala-dynamic-form>
+        </form>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Dynamic fields showed in Form by value</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-accordion multi>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>dynamic-fields-example.module.ts</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <pre><code><span>import</span> &#123; NgModule &#125; <span>from</span> '@angular/core';
+<span>import</span> &#123; PageDynamicFieldsExampleComponent &#125; <span>from</span> './page-dynamic-fields-example.component';
+<span>import</span> &#123; KoalaFormModule &#125; <span>from</span> 'ngx-koala';
+
+<span>@NgModule</span>(&#123;
+  declarations: [
+    PageDynamicFieldsExampleComponent
+  ],
+  imports: [
+    KoalaFormModule
+  ]
+&#125;)
+<span>export class</span> DynamicFieldsExampleModule &#123;&#125;</code></pre>
+
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>page-dynamic-fields-example.component.ts</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <pre><code><span>import</span> &#123; Component, OnInit &#125; <span>from</span> "@angular/core";
+<span>import</span> &#123; FormBuilder, FormGroup &#125; <span>from</span> "@angular/forms";
+<span>import</span> &#123;
+  FormAbstract,
+  KoalaDynamicFormFieldInterface,
+  KoalaDynamicFormShowFieldInterface,
+  KoalaDynamicFormService,
+  DynamicFormTypeFieldEnum
+&#125; <span>from</span> "ngx-koala";
+
+<span>@Component</span>(&#123;
+  templateUrl: 'page-dynamic-fields-example.component.html'
+&#125;)
+<span>export class</span> PageDynamicFieldsExampleComponent <span>extends</span> FormAbstract <span>implements</span> OnInit &#123;
+  <span>public</span> btnLabel = 'Send';
+
+  <span>public</span> formDynamicFieldsExample: FormGroup;
+  <span>public</span> formDynamicFieldsExampleConfig: KoalaDynamicFormFieldInterface[];
+  <span>public</span> formDynamicFieldsExampleShowFields = <span>new BehaviorSubject&#60;KoalaDynamicFormShowFieldInterface[]&#62;</span>(null);
+
+  <span>constructor</span>(
+    <span>private</span> fb: <span>FormBuilder</span>,
+    <span>private</span> dynamicFormService: <span>KoalaDynamicFormService</span>
+  ) &#123;
+    <span>super</span>(() => <span>this</span>.formSimpleExample);
+  &#125;
+
+  ngOnInit() &#123;
+    <span>this</span>.formDynamicFieldsExample = <span>this</span>.fb.group(&#123;&#125;);
+    <span>this</span>.formDynamicFieldsExampleConfig = [&#123;
+      label: 'Show Field (Simple)',
+      name: 'showField',
+      type: <span>DynamicFormTypeFieldEnum</span>.radio,
+      opcoesSelect: [
+        &#123;value: true, name: 'Show'&#125;,
+        &#123;value: false, name: 'Hide'&#125;
+      ],
+      value: false,
+      valueChanges: (showFields: boolean) => <span>this</span>.formDynamicFieldsExampleShowFields.next([&#123;
+        name: 'textField',
+        show: showFields,
+        clearCurrentValue: true
+      &#125;])
+    &#125;, &#123;
+      show: false,
+      label: 'Text Field',
+      name: 'textField',
+      type: <span>DynamicFormTypeFieldEnum</span>.text,
+      appearance: "outline",
+      class: 'col-12',
+      fieldClass: 'w-100',
+      required: true
+    &#125;, &#123;
+      label: 'Show Field (Advanced)',
+      name: 'showFieldAdvanced',
+      type: <span>DynamicFormTypeFieldEnum</span>.radio,
+      opcoesSelect: [
+        &#123;value: true, name: 'Show'&#125;,
+        &#123;value: false, name: 'Hide'&#125;
+      ],
+      value: false,
+      valueChanges: (showFields: boolean) => this.formDynamicFieldsExampleShowFields.next([&#123;
+        name: 'dynamicFields',
+        show: showFields
+      &#125;])
+    &#125;, &#123;
+      show: false,
+      label: 'Dynamic Fields',
+      name: 'dynamicFields',
+      type: <span>DynamicFormTypeFieldEnum</span>.dynamicForm,
+      dynamicFormConfig: &#123;
+        formConfig: [&#123;
+          label: 'Name',
+          name: 'name',
+          type: <span>DynamicFormTypeFieldEnum</span>.text,
+          appearance: "outline",
+          class: 'col-6',
+          fieldClass: 'w-100',
+          required: true
+        &#125;, &#123;
+          label: 'Lastname',
+          name: 'lastname',
+          type: <span>DynamicFormTypeFieldEnum</span>.text,
+          appearance: "outline",
+          class: 'col-6',
+          fieldClass: 'w-100',
+          required: true
+        &#125;]
+      &#125;
+    &#125;];
+  &#125;
+
+  <span>public</span> submit(formGroup: FormGroup) &#123;
+    <span>this</span>.loading(true, 'Sending...');
+    const data = <span>this</span>.dynamicFormService.emitData(formGroup);
+    setTimeout(() => &#123;
+      console.log(data);
+      <span>this</span>.loading(false, 'Send');
+    &#125;, 2000);
+  &#125;
+&#125;
+</code></pre>
+
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>page-dynamic-fields-example.component.html</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <pre><code><span>&#60;form</span> [formGroup]="formDynamicFieldsExample" (ngSubmit)="submit(formDynamicFieldsExample)"<span>&#62;</span>
+  <span>&#60;koala-dynamic-form</span>
+    [form]="formDynamicFieldsExample"
+    [formConfig]="formDynamicFieldsExampleConfig"
+    [showFields]="formDynamicFieldsExampleShowFields"<span>&#62;
+
+    &#60;div btn-submit&#62; align="end"
+      &#60;koala-submit</span>
+        [fg]="formDynamicFieldsExample"
+        [btnLabel]="btnLabel"
+        [btnSubmitDisabled]="btnSubmitDisabled"
+        [loader]="loader"<span>&#62;
+      &#60;/koala-submit&#62;
+    &#60;/div&#62;
+
+  &#60;/koala-dynamic-form&#62;
+&#60;/form&#62;</span></code></pre>
+
+          </mat-expansion-panel>
+
+        </mat-accordion>
+
+        <form [formGroup]="formDynamicFieldsExample" (ngSubmit)="submit(formDynamicFieldsExample)">
+          <koala-dynamic-form
+            [form]="formDynamicFieldsExample"
+            [formConfig]="formDynamicFieldsExampleConfig"
+            [showFields]="formDynamicFieldsExampleShowFields">
+
+            <div btn-submit align="end">
+              <koala-submit
+                [fg]="formDynamicFieldsExample"
+                [btnLabel]="btnLabel"
+                [btnSubmitDisabled]="btnSubmitDisabled"
+                [loader]="loader">
+              </koala-submit>
+            </div>
+
+          </koala-dynamic-form>
+        </form>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>More Items</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-accordion multi>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>more-items-example.module.ts</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <pre><code><span>import</span> &#123; NgModule &#125; <span>from</span> '@angular/core';
+<span>import</span> &#123; PageMoreItemsExampleComponent &#125; <span>from</span> './page-more-items-example.component';
+<span>import</span> &#123; KoalaFormModule &#125; <span>from</span> 'ngx-koala';
+
+<span>@NgModule</span>(&#123;
+  declarations: [
+    PageMoreItemsExampleComponent
+  ],
+  imports: [
+    KoalaFormModule
+  ]
+&#125;)
+<span>export class</span> MoreItemsExampleModule &#123;&#125;</code></pre>
+
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>page-more-items-example.component.ts</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <pre><code><span>import</span> &#123; Component, OnInit &#125; <span>from</span> "@angular/core";
+<span>import</span> &#123; FormBuilder, FormGroup &#125; <span>from</span> "@angular/forms";
+<span>import</span> &#123;
+  FormAbstract,
+  KoalaDynamicFormFieldInterface,
+  KoalaDynamicFormService,
+  DynamicFormTypeFieldEnum
+&#125; <span>from</span> "ngx-koala";
+
+<span>@Component</span>(&#123;
+  templateUrl: 'page-dynamic-fields-example.component.html'
+&#125;)
+<span>export class</span> PageDynamicFieldsExampleComponent <span>extends</span> FormAbstract <span>implements</span> OnInit &#123;
+  <span>public</span> btnLabel = 'Send';
+
+  <span>public</span> formMoreItems: FormGroup;
+  <span>public</span> formMoreItemsConfig: KoalaDynamicFormFieldInterface[];
+
+  <span>constructor</span>(
+    <span>private</span> fb: <span>FormBuilder</span>,
+    <span>private</span> dynamicFormService: <span>KoalaDynamicFormService</span>
+  ) &#123;
+    <span>super</span>(() => <span>this</span>.formSimpleExample);
+  &#125;
+
+  ngOnInit() &#123;
+    <span>this</span>.formMoreItems = <span>this</span>.fb.group(&#123;&#125;);
+    <span>this</span>.formMoreItemsConfig = [&#123;
+      label: 'More Items',
+      name: 'items',
+      type: <span>DynamicFormTypeFieldEnum</span>.moreItems,
+      moreItemsButtonIconAddlabel: 'Add Item',
+      moreItemsIconFontColor: '#212121',
+      moreItemsIconBackgroundColor: '#fff',
+      moreItemsIcon: 'label',
+      moreItemsMinItems: 1,
+      moreItemsMaxItems: 2,
+      moreItemsConfig: &#123;
+        form: this.fb.group(&#123;&#125;),
+        formConfig: [&#123;
+          label: 'Text Field',
+          name: 'textField',
+          type: <span>DynamicFormTypeFieldEnum</span>.text,
+          appearance: "outline",
+          class: 'col-12',
+          fieldClass: 'w-100',
+          required: true
+        &#125;]
+      &#125;,
+      required: true
+    &#125;];
+  &#125;
+
+  <span>public</span> submit(formGroup: FormGroup) &#123;
+    <span>this</span>.loading(true, 'Sending...');
+    const data = <span>this</span>.dynamicFormService.emitData(formGroup);
+    setTimeout(() => &#123;
+      console.log(data);
+      <span>this</span>.loading(false, 'Send');
+    &#125;, 2000);
+  &#125;
+&#125;
+</code></pre>
+
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>page-more-items-example.component.html</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <pre><code><span>&#60;form</span> [formGroup]="formMoreItems" (ngSubmit)="submit(formMoreItems)"<span>&#62;</span>
+  <span>&#60;koala-dynamic-form</span>
+    [form]="formMoreItems"
+    [formConfig]="formMoreItemsConfig"<span>&#62;
+
+    &#60;div btn-submit&#62; align="end"
+      &#60;koala-submit</span>
+        [fg]="formMoreItems"
+        [btnLabel]="btnLabel"
+        [btnSubmitDisabled]="btnSubmitDisabled"
+        [loader]="loader"<span>&#62;
+      &#60;/koala-submit&#62;
+    &#60;/div&#62;
+
+  &#60;/koala-dynamic-form&#62;
+&#60;/form&#62;</span></code></pre>
+
+          </mat-expansion-panel>
+
+        </mat-accordion>
+
+        <form class="mt-15" [formGroup]="formMoreItems" (ngSubmit)="submit(formMoreItems)">
+          <koala-dynamic-form
+            [form]="formMoreItems"
+            [formConfig]="formMoreItemsConfig">
+
+            <div class="mt-15" btn-submit align="end">
+              <koala-submit
+                [fg]="formMoreItems"
+                [btnLabel]="btnLabel"
+                [btnSubmitDisabled]="btnSubmitDisabled"
+                [loader]="loader">
+              </koala-submit>
+            </div>
+
+          </koala-dynamic-form>
+        </form>
+
+      </mat-expansion-panel>
+
+    </mat-accordion>
+  </section>
+
+</koala-folder-page>

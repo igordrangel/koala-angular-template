@@ -8,7 +8,7 @@ const routes: Routes = [
   {path: 'login', component: PageLoginComponent},
   {path: 'get-started', component: PageGetStartedComponent},
   {path: 'components', loadChildren: () => import('./components/hub-components.module').then(m => m.HubComponentsModule)},
-  {path: 'forms', loadChildren: () => import('./forms/page-forms.module').then(m => m.PageFormsModule)}
+  {path: 'services', loadChildren: () => import('./services/hub-services.module').then(m => m.HubServicesModule)}
 ];
 
 @NgModule({

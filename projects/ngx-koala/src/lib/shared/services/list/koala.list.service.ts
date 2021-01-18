@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-@Injectable({providedIn: 'root'})
+@Injectable({providedIn: "any"})
 export class KoalaListService {
-	
+
 	public createListRequest(request: () => Observable<any>) {
 		return new Observable(observe => {
 			request().subscribe(

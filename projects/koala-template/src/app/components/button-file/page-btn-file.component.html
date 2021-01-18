@@ -1,0 +1,136 @@
+<koala-folder-page
+  customFolderBackgroudColor="#212121"
+  customFolderFontColor="#fff"
+  titleIcon="webComponents"
+  titlePage="Components - Button"
+  [koalaIcon]="true"
+  [navigateHistory]="navigationHistory">
+
+  <section class="p-20" content>
+
+    <koala-file-button
+      class="d-block mb-15"
+      backgroundColor="#fff"
+      color="#212121"
+      icon="attachment"
+      text="Attach Item(s)"
+      (getFiles)="files = $event"
+      [multiple]="true"
+      [setFile]="fileService.setFileSubject"
+      [updateFileList]="fileService.fileListSubject"
+      [autoclear]="false">
+    </koala-file-button>
+
+    <mat-list>
+      <mat-list-item *ngFor="let file of files; let index = i;">
+        <mat-icon mat-list-icon (click)="fileService.removeFile(files, index)">delete</mat-icon>
+        <p mat-line>{{file.filename}}</p>
+      </mat-list-item>
+    </mat-list>
+
+    <mat-accordion multi>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>file-button.module.ts</mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>code</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <pre><code><span>import</span> &#123; NgModule &#125; <span>from</span> "@angular/core";
+<span>import</span> &#123; CommonModule &#125; <span>from</span> "@angular/common";
+<span>import</span> &#123; MatIconModule &#125; <span>from</span> "@angular/material/icon";
+<span>import</span> &#123; MatListModule &#125; <span>from</span> "@angular/material/list";
+<span>import</span> &#123; MatExpansionModule &#125; <span>from</span> "@angular/material/expansion";
+<span>import</span> &#123; PageBtnFileComponent &#125; <span>from</span> "./page-btn-file.component";
+<span>import</span> &#123; KoalaFileButtonModule &#125; <span>from</span> "ngx-koala";
+<span>import</span> &#123; BtnFileRoutingModule &#125; <span>from</span> "./btn-file.routing.module";
+
+<span>@NgModule</span>(&#123;
+  exports: [
+    PageBtnFileComponent
+  ],
+  declarations: [
+    PageBtnFileComponent
+  ],
+  imports: [
+    CommonModule,
+    KoalaFileButtonModule,
+    MatListModule,
+    MatExpansionModule,
+    MatIconModule,
+    BtnFileRoutingModule
+  ]
+&#125;)
+<span>export class</span> BtnFileModule &#123;&#125;</code></pre>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>page-file-button.component.ts</mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>code</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <pre><code><span>import</span> &#123; Component &#125; <span>from</span> "@angular/core";
+<span>import</span> &#123;
+  KoalaFileInterface,
+  KoalaBtnFileService
+&#125; <span>from</span> "ngx-koala";
+
+<span>@Component</span>(&#123;
+  templateUrl: 'page-btn-file.component.html',
+  styleUrls: ['page-btn-file.component.css']
+&#125;)
+<span>export class</span> PageBtnFileComponent &#123;
+  <span>public</span> files: <span>KoalaFileInterface</span>[] = [];
+
+  <span>constructor</span>(<span>public</span> fileService: <span>KoalaBtnFileService</span>) &#123;&#125;
+&#125;</code></pre>
+
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>page-file-button.component.css</mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>code</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <pre><code><span>mat-list mat-icon</span> &#123;
+  color: darkred;
+  cursor: pointer;
+&#125;
+<span>mat-list mat-list-item</span> &#123;
+  color: #fff;
+&#125;</code></pre>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>page-file-button.component.html</mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>code</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <pre><code><span>&#60;mat-list&#62;
+  &#60;mat-list-item</span> &#42;ngFor="let file of files; let index = i;"<span>&#62;
+    &#60;mat-icon mat-list-icon</span> (click)="fileService.removeFile(files, index)"<span>&#62;</span>delete<span>&#60;/mat-icon&#62;
+    &#60;p mat-line&#62;</span>&#123;&#123;'&#123;&#123;file.filename&#125;&#125;'&#125;&#125;<span>&#60;/p&#62;
+  &#60;/mat-list-item&#62;
+&#60;/mat-list&#62;</span></code></pre>
+
+      </mat-expansion-panel>
+
+    </mat-accordion>
+  </section>
+
+</koala-folder-page>
+

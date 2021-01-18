@@ -5,6 +5,33 @@
   </div>
 
   <div class="get-started">
+    <h2>Theme</h2>
+    <div class="get-started__config-app">
+      <mat-accordion multi>
+
+        <mat-expansion-panel expanded>
+          <mat-expansion-panel-header>
+            <mat-panel-title>koala.theme.css</mat-panel-title>
+            <mat-panel-description>
+              <mat-icon>code</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <h2>angular.json</h2>
+          <pre><code>"build": &#123;
+  ...,
+  "styles": [
+    "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+    "./node_modules/ngx-koala/theme/koala.theme.css",
+    "src/styles.css"
+  ]
+&#125;</code></pre>
+
+        </mat-expansion-panel>
+
+      </mat-accordion>
+    </div>
+
     <h2>Structure</h2>
     <div class="get-started__config-app">
       <mat-accordion multi>

@@ -6,6 +6,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { FileButtonComponent } from './file-button.component';
 
 @NgModule({
+  exports: [
+    FileButtonComponent
+  ],
 	declarations: [
 		FileButtonComponent
 	],
@@ -14,9 +17,6 @@ import { FileButtonComponent } from './file-button.component';
 		MatTooltipModule,
 		MatButtonModule,
 		MatIconModule
-	],
-	exports: [
-		FileButtonComponent
 	]
 })
 export class KoalaFileButtonModule {
