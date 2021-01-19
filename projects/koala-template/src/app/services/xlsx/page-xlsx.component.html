@@ -1,0 +1,75 @@
+<koala-folder-page
+  customFolderBackgroudColor="#212121"
+  customFolderFontColor="#fff"
+  titleIcon="deliveryBox"
+  titlePage="Services - XLSX"
+  [koalaIcon]="true"
+  [navigateHistory]="navigationHistory">
+
+  <section class="p-20" content>
+
+    <koala-button
+      (click)="downloadXlsx()"
+      backgroundColor="#fff"
+      color="#212121"
+      icon="get_app"
+      text="Download XLSX">
+    </koala-button>
+
+    <mat-accordion class="d-block mt-15" multi>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>xlsx-service.component.ts</mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>code</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <pre><code><span>import</span> &#123; Component &#125; <span>from</span> "@angular/core";
+<span>import</span> &#123; KoalaXlsxService &#125; <span>from</span> "ngx-koala";
+<span>import</span> &#123; ListService &#125; <span>from</span> "../../components/list/list.service";
+
+<span>@Component</span>(&#123;
+  templateUrl: 'xlsx-service.component.html'
+&#125;)
+<span>export class</span> XlsxComponent &#123;
+
+  <span>constructor</span>(
+    <span>private</span> listService: <span>ListService</span>,
+    <span>private</span> xlsxService: <span>KoalaXlsxService</span>
+  ) &#123;
+    <span>super</span>();
+  &#125;
+
+  <span>public</span> downloadXlsx() &#123;
+    <span>this</span>.listService
+        .getList(&#123;
+          params: &#123;},
+          sort: 'name',
+          order: 'asc',
+          page: 1,
+          limit: 0
+        &#125;)
+        .subscribe(data => &#123;
+          <span>this</span>.xlsxService.convertJsonToXlsx(data, &#123;
+            filename: 'koala-xlsx-service',
+            sheetName: 'Koala XLSX Service',
+            title: 'Sheet of Koala XLSX Service',
+            titleFontColor: '#b71c1c',
+            titleBackgroundColor: '#ffffff',
+            headerFontColor: '#ffffff',
+            headerBackgroundColor: '#b71c1c'
+          &#125;);
+        &#125;);
+  &#125;
+&#125;
+</code></pre>
+
+      </mat-expansion-panel>
+
+    </mat-accordion>
+
+  </section>
+
+</koala-folder-page>

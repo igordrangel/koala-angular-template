@@ -8,11 +8,9 @@ const routes: Routes = [
   {path: 'folder-page', loadChildren: () => import('./folder-page/folder-page.module').then(m => m.FolderPageModule)},
   {path: 'dialog', loadChildren: () => import('./dialog/dialog.module').then(m => m.DialogModule)},
   {path: 'button', loadChildren: () => import('./button/button.module').then(m => m.ButtonModule)},
-  {path: 'alert', loadChildren: () => import('./alert/alert.module').then(m => m.AlertModule)},
-  {path: 'question', loadChildren: () => import('./question/question.module').then(m => m.QuestionModule)},
   {path: 'list', loadChildren: () => import('./list/list.module').then(m => m.ListModule)},
   {path: 'file-button', loadChildren: () => import('./button-file/btn-file.module').then(m => m.BtnFileModule)},
-  {path: 'forms', loadChildren: () => import('./forms/forms.module').then(m => m.FormsModule)}
+  {path: 'dynamic-form', loadChildren: () => import('./dynamic-form/dynamic-form.module').then(m => m.DynamicFormModule)}
 ];
 
 @NgModule({

@@ -9,9 +9,9 @@ import { BehaviorSubject } from "rxjs";
 import { KoalaDynamicFormShowFieldInterface } from "../../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-form-show-field.interface";
 
 @Component({
-  templateUrl: 'page-forms.component.html'
+  templateUrl: 'page-dynamic-form.component.html'
 })
-export class PageFormsComponent extends FormAbstract implements OnInit {
+export class PageDynamicFormComponent extends FormAbstract implements OnInit {
   public navigationHistory = NavigateHelper.navigationHistory();
   public btnLabel = 'Send';
 

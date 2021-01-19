@@ -1,24 +1,24 @@
 import { NgModule } from "@angular/core";
-import { PageFormsComponent } from "./page-forms.component";
+import { PageDynamicFormComponent } from "./page-dynamic-form.component";
 import { CommonModule } from "@angular/common";
 import { KoalaFolderPageModule } from "../../../../../ngx-koala/src/lib/shared/components/folder-page/koala.folder-page.module";
-import { FormsRoutingModule } from "./forms.routing.module";
+import { DynamicFormRoutingModule } from "./dynamic-form.routing.module";
 import { KoalaFormModule } from "../../../../../ngx-koala/src/lib/shared/components/form/koala.form.module";
 import { MatExpansionModule } from "@angular/material/expansion";
 
 @NgModule({
   exports: [
-    PageFormsComponent
+    PageDynamicFormComponent
   ],
   declarations: [
-    PageFormsComponent
+    PageDynamicFormComponent
   ],
   imports: [
     CommonModule,
     KoalaFolderPageModule,
     KoalaFormModule,
     MatExpansionModule,
-    FormsRoutingModule
+    DynamicFormRoutingModule
   ]
 })
-export class FormsModule {}
+export class DynamicFormModule {}

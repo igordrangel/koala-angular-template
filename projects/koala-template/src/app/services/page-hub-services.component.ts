@@ -12,6 +12,13 @@ interface ItemService {
 })
 export class PageHubServicesComponent {
   public services: ItemService[] = koala([
-    {name: 'Page Loader', routerLink: '/services/page-loader'}
+    {name: 'Page Loader', routerLink: '/services/page-loader'},
+    {name: 'XLSX', routerLink: '/services/xlsx'},
+    {name: 'CSV', routerLink: '/services/csv'},
+    {name: 'Alert', routerLink: '/services/alert'},
+    {name: 'Question', routerLink: '/services/question'},
+    {name: 'Menu', routerLink: '/services/menu'},
+    {name: 'Request', routerLink: '/services/request'},
+    {name: 'Dynamic Form', routerLink: '/services/dynamic-form'}
   ]).array<ItemService>().orderBy('name').getValue();
 }

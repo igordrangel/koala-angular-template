@@ -23,16 +23,6 @@ export class NavigateHelper {
         {name: 'Components', routerLink: '/components'},
         {name: 'Button'}
       ];
-    } else if (location.href.indexOf('components/alert') >= 0) {
-      return [
-        {name: 'Components', routerLink: '/components'},
-        {name: 'Alert'}
-      ];
-    } else if (location.href.indexOf('components/question') >= 0) {
-      return [
-        {name: 'Components', routerLink: '/components'},
-        {name: 'Question'}
-      ];
     } else if (location.href.indexOf('components/list') >= 0) {
       return [
         {name: 'Components', routerLink: '/components'},
@@ -43,15 +33,50 @@ export class NavigateHelper {
         {name: 'Components', routerLink: '/components'},
         {name: 'File Button'}
       ];
-    } else if (location.href.indexOf('components/forms') >= 0) {
+    } else if (location.href.indexOf('components/dynamic-form') >= 0) {
       return [
         {name: 'Components', routerLink: '/components'},
-        {name: 'Forms'}
+        {name: 'Dynamic Form'}
       ];
     } else if (location.href.indexOf('services/page-loader') >= 0) {
       return [
         {name: 'Services', routerLink: '/services'},
         {name: 'Page Loader'}
+      ];
+    } else if (location.href.indexOf('services/xlsx') >= 0) {
+      return [
+        {name: 'Services', routerLink: '/services'},
+        {name: 'XLSX'}
+      ];
+    } else if (location.href.indexOf('services/csv') >= 0) {
+      return [
+        {name: 'Services', routerLink: '/services'},
+        {name: 'CSV'}
+      ];
+    } else if (location.href.indexOf('services/alert') >= 0) {
+      return [
+        {name: 'Services', routerLink: '/services'},
+        {name: 'Alert'}
+      ];
+    } else if (location.href.indexOf('services/question') >= 0) {
+      return [
+        {name: 'Services', routerLink: '/services'},
+        {name: 'Question'}
+      ];
+    } else if (location.href.indexOf('services/menu') >= 0) {
+      return [
+        {name: 'Services', routerLink: '/services'},
+        {name: 'Menu'}
+      ];
+    } else if (location.href.indexOf('services/request') >= 0) {
+      return [
+        {name: 'Services', routerLink: '/services'},
+        {name: 'Request'}
+      ];
+    } else if (location.href.indexOf('services/dynamic-form') >= 0) {
+      return [
+        {name: 'Services', routerLink: '/services'},
+        {name: 'Dynamic Form'}
       ];
     }
   }

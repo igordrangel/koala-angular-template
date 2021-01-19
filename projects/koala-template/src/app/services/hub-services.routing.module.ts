@@ -4,7 +4,14 @@ import { PageHubServicesComponent } from "./page-hub-services.component";
 
 const routes: Routes = [
   {path: '', component: PageHubServicesComponent},
-  {path: 'page-loader', loadChildren: () => import('./page-loader/page-loader.module').then(m => m.PageLoaderModule)}
+  {path: 'page-loader', loadChildren: () => import('./page-loader/page-loader.module').then(m => m.PageLoaderModule)},
+  {path: 'xlsx', loadChildren: () => import('./xlsx/xlsx.module').then(m => m.XlsxModule)},
+  {path: 'csv', loadChildren: () => import('./csv/csv.module').then(m => m.CsvModule)},
+  {path: 'alert', loadChildren: () => import('./alert/alert.module').then(m => m.AlertModule)},
+  {path: 'question', loadChildren: () => import('./question/question.module').then(m => m.QuestionModule)},
+  {path: 'menu', loadChildren: () => import('./menu/menu.module').then(m => m.MenuModule)},
+  {path: 'request', loadChildren: () => import('./request/request.module').then(m => m.RequestModule)},
+  {path: 'dynamic-form', loadChildren: () => import('./dynamic-form/dynamic-form.module').then(m => m.DynamicFormModule)}
 ];
 
 @NgModule({

@@ -1,0 +1,118 @@
+<koala-folder-page
+  customFolderBackgroudColor="#212121"
+  customFolderFontColor="#fff"
+  titleIcon="deliveryBox"
+  titlePage="Services - Dynamic Form"
+  [koalaIcon]="true"
+  [navigateHistory]="navigationHistory">
+
+  <section class="p-20" content>
+
+    <mat-accordion multi>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>page-dynamic-form.component.ts</mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>code</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <pre><code><span>import</span> &#123; Component &#125; <span>from</span> "@angular/core";
+<span>import</span> &#123; KoalaDynamicFormService &#125; <span>from</span> "ngx-koala";
+
+<span>@Component</span>(&#123;
+  templateUrl: 'page-dynamic-form.component.html'
+&#125;)
+<span>export class</span> PageDynamicFormComponent &#123;
+  <span>public</span> formData: <span>FormGroup</span>;
+  <span>public</span> formDataConfig: <span>KoalaDynamicFormFieldInterface</span>[];
+  <span>public</span> setValuesUsers$ = <span>new BehaviorSubject</span>&#60;<span>BehaviorSubject</span>&#60;<span>KoalaDynamicSetValueInterface</span>[]&#62;[]&#62;([]);
+
+  <span>constructor</span>(<span>private</span> dynamicFormService: <span>KoalaDynamicFormService</span>) &#123;&#125;
+&#125;</code></pre>
+
+        <h2>emitData</h2>
+        <p>This method emit a data from <strong>FormGroup</strong> using in your <strong>koala-dynamic-form</strong> component.</p>
+        <pre><code><span>this</span>.dynamicFormService.<span>emitData</span>(<span>this</span>.formData);</code></pre>
+
+        <h2>resetForm</h2>
+        <p>This method clear your <strong>FormGroup</strong>.</p>
+        <pre><code><span>this</span>.dynamicFormService.<span>resetForm</span>(<span>this</span>.formData);</code></pre>
+
+        <h2>setValuesInMoreItemsForm</h2>
+        <p>This method input a values from object list in your <strong>FormGroup</strong> on <strong>field type MoreItems</strong>.</p>
+        <pre><code><span>this</span>.formDataConfig = [
+  ..., &#123;
+    label: 'Users',
+    name: 'users',
+    type: <span>DynamicFormTypeFieldEnum</span>.moreItems,
+    moreItemsButtonIconAddlabel: 'Add User',
+    moreItemsIconFontColor: '#212121',
+    moreItemsIconBackgroundColor: '#fff',
+    moreItemsIcon: 'person',
+    moreItemsMinItems: 1,
+    moreItemsMaxItems: 2,
+    moreItemsConfig: &#123;
+      form: this.fb.group(&#123;&#125;),
+      formConfig: [&#123;
+        label: 'Login',
+        name: 'login',
+        type: <span>DynamicFormTypeFieldEnum</span>.text,
+        appearance: "outline",
+        class: 'col-12',
+        fieldClass: 'w-100',
+        required: true
+      &#125;,&#123;
+        label: 'Name',
+        name: 'name',
+        type: <span>DynamicFormTypeFieldEnum</span>.text,
+        appearance: "outline",
+        class: 'col-12',
+        fieldClass: 'w-100',
+        required: true
+      &#125;],
+      setValues: this.setValuesUsers$
+    &#125;,
+    required: true
+  &#125;
+];
+
+<span>const</span> dataUsers: <span>KoalaDynamicSetValueInterface</span>[][] = [];
+users.forEach(user => &#123;
+  dataUsers.push([
+    &#123;name: 'login', value: user.login&#125;,
+    &#123;name: 'name', value: user.name&#125;
+  ]);
+&#125;);
+
+<span>this</span>.dynamicFormService.<span>setValuesInMoreItemsForm</span>(<span>this</span>.setValuesUsers$, dataUsers);</code></pre>
+
+        <h2>autocompleteFilterOnServer</h2>
+        <p>This method implements a observable for your autocomplete with onDemand load.</p>
+        <pre><code><span>this</span>.formDataConfig = [
+  ..., &#123;
+    label: 'User',
+    name: 'user',
+    autocompleteOptions: null,
+    autocompleteType: 'onDemand',
+    autocompleteFilter: username => <span>this</span>.dynamicFormService.<span>autocompleteFilterOnServer</span>(() => &#123;
+      <span>return new Promise</span>&#60;<span>UserInterface</span>[]&#62;(resolve => &#123;
+        <span>this</span>.userService.get(username).subscribe(result => resolve(result));
+      &#125;);
+    &#125;, &#123;
+      propsByName: ['login', 'name'], //Gets these properties on the object and concatenates them into a string
+      delimiter: ' - '
+    &#125;,
+      'id' // When the option is selected this property will be gets when uses emitData
+    )
+  &#125;
+]</code></pre>
+
+      </mat-expansion-panel>
+
+    </mat-accordion>
+
+  </section>
+
+</koala-folder-page>
