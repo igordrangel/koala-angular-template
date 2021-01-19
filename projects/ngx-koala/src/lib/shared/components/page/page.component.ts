@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { LoaderBarPageInterface } from '../loader/loader-bar-page.interface';
@@ -11,6 +19,7 @@ import { KoalaPagePalletColorsInterface } from './koala-page-pallet-colors.inter
 import { MatDrawer } from '@angular/material/sidenav';
 import { KoalaMenuService } from '../../services/menu/koala.menu.service';
 import { menuStateSubject } from '../menu/menu.component';
+import { TokenFactory } from "../../services/token/token.factory";
 
 @Component({
   selector: 'koala-page',
@@ -96,10 +105,10 @@ export class PageComponent implements OnInit {
         '/login'
       ];
     }
-    this.tokenService.getTokenSubject()?.subscribe(token => {
+    this.tokenService.getToken()?.subscribe(token => {
       this.logged = !!token;
       if (this.logged) {
-        this.username = this.tokenService.getUser<{ login: string }>().login;
+        this.username = this.tokenService.getDecodedToken<{ login: string }>().login;
         this.firstUserLetter = this.username.charAt(0).toUpperCase();
         this.menuService.open();
       }
@@ -184,7 +193,7 @@ export class PageComponent implements OnInit {
   public logout() {
     this.menuService.close();
     this.tokenService.removeToken();
-    this.tokenService.getTokenSubject().next(null);
+    this.tokenService.getToken().next(null);
   }
 
   public defineColor() {

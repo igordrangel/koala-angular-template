@@ -2,69 +2,41 @@ import jwt from 'jwt-decode';
 
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { koalaEnviroment } from '../../../environments/koala.environment';
+import { TokenFactory } from "./token.factory";
 
 @Injectable({providedIn: "any"})
 export class KoalaTokenService {
-  readonly storageName: string;
-  private tokenSubject = new BehaviorSubject<string>(null);
+  private token$ = new BehaviorSubject<string>(null);
 
   constructor() {
-    this.storageName = koalaEnviroment.storageTokenName;
     this.verifySession();
   }
 
   public setToken(token: string) {
-    try {
-      this.verifyStorageName();
-      localStorage.setItem(this.storageName, token);
-      this.tokenSubject.next(token);
-    } catch (e) {
-      throw e;
-    }
+    TokenFactory.setToken(token);
   }
 
-  public getTokenSubject(): BehaviorSubject<string> {
-    return this.tokenSubject;
+  public getToken(): BehaviorSubject<string> {
+    return this.token$;
   }
 
-  public getUser<U>(): U {
-    const token = this.getToken();
-    return (token ? jwt(token) : null);
+  public getDecodedToken<T>(): T {
+    return (TokenFactory.hasToken() ? jwt(TokenFactory.getToken()) : null);
   }
 
   public removeToken() {
-    try {
-      this.verifyStorageName();
-      localStorage.removeItem(this.storageName);
-      if (this.tokenSubject) {
-        this.tokenSubject.next(null);
-      }
-    } catch (e) {
-      throw e;
-    }
-  }
-
-  private verifyStorageName() {
-    if (!this.storageName) {
-      throw new Error("Storage name is not defined.");
-    }
+    TokenFactory.removeToken();
   }
 
   private verifySession() {
-    let token = this.getToken();
-    if (token) {
-      this.tokenSubject.next(token);
-    }
+    TokenFactory.init();
+    this.token$.next(TokenFactory.getToken());
     setInterval(() => {
-      token = localStorage.getItem(this.storageName);
-      if (!token && this.tokenSubject.value !== null) {
-        this.tokenSubject.next(null);
+      if (!TokenFactory.hasToken()) {
+        this.token$.next(null);
+      } else if (TokenFactory.hasToken() && !this.token$.getValue()) {
+        this.token$.next(TokenFactory.getToken());
       }
-    }, 1000);
-  }
-
-  private getToken() {
-    return localStorage.getItem(this.storageName);
+    }, 300);
   }
 }

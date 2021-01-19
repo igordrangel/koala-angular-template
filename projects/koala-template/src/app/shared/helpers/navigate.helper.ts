@@ -78,6 +78,11 @@ export class NavigateHelper {
         {name: 'Services', routerLink: '/services'},
         {name: 'Dynamic Form'}
       ];
+    } else if (location.href.indexOf('services/token') >= 0) {
+      return [
+        {name: 'Services', routerLink: '/services'},
+        {name: 'Token'}
+      ];
     }
   }
 }

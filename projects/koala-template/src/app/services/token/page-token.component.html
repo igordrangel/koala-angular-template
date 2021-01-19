@@ -1,0 +1,53 @@
+<koala-folder-page
+  customFolderBackgroudColor="#212121"
+  customFolderFontColor="#fff"
+  titleIcon="deliveryBox"
+  titlePage="Services - Token"
+  [koalaIcon]="true"
+  [navigateHistory]="navigationHistory">
+
+  <section class="p-20" content>
+
+    <mat-accordion multi>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>page-token.component.ts</mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>code</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <pre><code><span>import</span> &#123; Component &#125; <span>from</span> "@angular/core";
+<span>import</span> &#123; KoalaTokenService &#125; <span>from</span> "ngx-koala";
+
+<span>@Component</span>(&#123;
+  templateUrl: 'page-token.component.html'
+&#125;)
+<span>export class</span> PageTokenComponent &#123;
+  <span>constructor</span>(<span>private</span> tokenService: <span>KoalaTokenService</span>) &#123;&#125;
+&#125;</code></pre>
+
+        <h2>setToken</h2>
+        <p>This method set a <strong>Token</strong> on <strong>LocalStorage</strong> and redirect to <strong>defaultPage</strong> defined on <strong>app.component.html</strong> in <strong>koala-page</strong>.</p>
+        <pre><code><span>this</span>.tokenService.<span>setToken</span>(token);</code></pre>
+
+        <h2>getDecodedToken</h2>
+        <p>Return a <strong>decoded token</strong>.</p>
+        <pre><code><span>this</span>.tokenService.<span>getDecodedToken</span>&#60;UserInterface&#62;();</code></pre>
+
+        <h2>getToken</h2>
+        <p>Return a <strong>BehaviorSubject</strong> for when a token will be defined return a token on subscribe.</p>
+        <pre><code><span>this</span>.tokenService.<span>getToken</span>().subscribe(token => console.log(token));</code></pre>
+
+        <h2>removeToken</h2>
+        <p>This method <strong>logout</strong> the user removing the token from <strong>LocalStorage</strong>.</p>
+        <pre><code><span>this</span>.tokenService.<span>removeToken</span>();</code></pre>
+
+      </mat-expansion-panel>
+
+    </mat-accordion>
+
+  </section>
+
+</koala-folder-page>

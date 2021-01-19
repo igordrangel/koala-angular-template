@@ -19,6 +19,7 @@ export class PageHubServicesComponent {
     {name: 'Question', routerLink: '/services/question'},
     {name: 'Menu', routerLink: '/services/menu'},
     {name: 'Request', routerLink: '/services/request'},
-    {name: 'Dynamic Form', routerLink: '/services/dynamic-form'}
+    {name: 'Dynamic Form', routerLink: '/services/dynamic-form'},
+    {name: 'Token', routerLink: '/services/token'}
   ]).array<ItemService>().orderBy('name').getValue();
 }
