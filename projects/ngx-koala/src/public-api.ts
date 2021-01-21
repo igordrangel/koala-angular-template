@@ -94,6 +94,7 @@ export * from './lib/shared/components/notifications/notification.component';
 //#endregion
 
 //#region [KOALA PAGE]
+export * from './lib/shared/components/page/koala-oauth2-config.interface';
 export * from './lib/shared/components/page/koala.user-menu-options.interface';
 export * from './lib/shared/components/page/page.component';
 //#endregion

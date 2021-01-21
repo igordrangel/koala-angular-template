@@ -27,7 +27,15 @@ export class PageIconsComponent extends PageAbstract implements OnInit {
     title: 'Data',
     icons: [{
       name: 'excel',
-      color: '#616161',
+      color: '#2E7D32',
+      selected: false
+    }, {
+      name: 'word',
+      color: '#1976D2',
+      selected: false
+    }, {
+      name: 'pdf',
+      color: '#fff',
       selected: false
     }]},{
     title: 'Social Media',

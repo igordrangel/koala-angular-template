@@ -7,6 +7,7 @@ import { DynamicFormTypeFieldEnum } from '../../../../ngx-koala/src/lib/shared/c
 import { FormAbstract } from '../../../../ngx-koala/src/lib/core/form.abstract';
 import { KoalaTokenService } from '../../../../ngx-koala/src/lib/shared/services/token/koala.token.service';
 import { KoalaDynamicFormService } from '../../../../ngx-koala/src/lib/shared/services/dynamic-forms/koala.dynamic-form.service';
+import { OAuthService } from "angular-oauth2-oidc";
 
 @Component({
   templateUrl: 'page-login.component.html',
@@ -19,6 +20,7 @@ export class PageLoginComponent extends FormAbstract implements OnInit {
   public btnLabel = 'Login';
 
   constructor(
+    public oauthService: OAuthService,
     private fb: FormBuilder,
     private tokenService: KoalaTokenService,
     private dynamicFormService: KoalaDynamicFormService

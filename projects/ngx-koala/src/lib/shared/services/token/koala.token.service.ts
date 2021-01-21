@@ -32,7 +32,7 @@ export class KoalaTokenService {
     TokenFactory.init();
     this.token$.next(TokenFactory.getToken());
     setInterval(() => {
-      if (!TokenFactory.hasToken()) {
+      if (!TokenFactory.hasToken() && this.token$.getValue()) {
         this.token$.next(null);
       } else if (TokenFactory.hasToken() && !this.token$.getValue()) {
         this.token$.next(TokenFactory.getToken());

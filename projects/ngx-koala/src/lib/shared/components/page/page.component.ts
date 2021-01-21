@@ -19,6 +19,11 @@ import { KoalaPagePalletColorsInterface } from './koala-page-pallet-colors.inter
 import { MatDrawer } from '@angular/material/sidenav';
 import { KoalaMenuService } from '../../services/menu/koala.menu.service';
 import { menuStateSubject } from '../menu/menu.component';
+import { OAuthService } from "angular-oauth2-oidc";
+import { KoalaOauth2ConfigInterface } from "./koala-oauth2-config.interface";
+import { JwksValidationHandler } from "angular-oauth2-oidc-jwks";
+import jwt from "jwt-decode";
+import jwtEncode from "jwt-encode";
 import { TokenFactory } from "../../services/token/token.factory";
 
 @Component({
@@ -41,6 +46,7 @@ export class PageComponent implements OnInit {
   @Input() userMenuOptions: KoalaUserMenuOptionsInterface[] = [];
   @Input() palletColors: KoalaPagePalletColorsInterface;
   @Input() labelLogout: string = 'Sair';
+  @Input() oauth2Config: KoalaOauth2ConfigInterface;
   @Output() deleteAllNotifications = new EventEmitter<boolean>(false);
   @Output() deleteNotification = new EventEmitter<KoalaNotificationInterface>(null);
   public logged: boolean;
@@ -86,12 +92,14 @@ export class PageComponent implements OnInit {
     private tokenService: KoalaTokenService,
     private router: Router,
     private loaderService: KoalaLoaderService,
-    private menuService: KoalaMenuService
+    private menuService: KoalaMenuService,
+    private oauthService: OAuthService
   ) {
     this.loaderSubject = loaderService.getLoaderSubject();
   }
 
   ngOnInit() {
+    this.initOAuth2();
     if (this.openPages) {
       if (this.openPages.indexOf('/') < 0) {
         this.openPages.push('/');
@@ -132,7 +140,7 @@ export class PageComponent implements OnInit {
           this.loaderService.dismiss();
           if (event instanceof NavigationEnd) {
             this.currentUrl = event.url.split('?')[0];
-            if (event.url.indexOf('/login?clientId=') < 0) {
+            if (event.url.indexOf('/login?clientId=') < 0 && event.url.indexOf('/#id_token=') < 0) {
               if (this.logged && this.defaultPage && this.openPages?.indexOf(this.currentUrl) >= 0) {
                 this.router.navigate([this.defaultPage]).then();
                 return false;
@@ -194,6 +202,7 @@ export class PageComponent implements OnInit {
     this.menuService.close();
     this.tokenService.removeToken();
     this.tokenService.getToken().next(null);
+    if (this.oauth2Config) this.oauthService.logOut();
   }
 
   public defineColor() {
@@ -290,5 +299,28 @@ koala-menu ul li li.active a {color: ${this.palletColors.menuOptionsColorActive}
     const style = document.createElement('style');
     head.appendChild(style);
     style.appendChild(document.createTextNode(css));
+  }
+
+  private initOAuth2() {
+    if (this.oauth2Config) {
+      this.oauthService.redirectUri = window.location.origin;
+      this.oauthService.responseType = 'code';
+      this.oauthService.clientId = this.oauth2Config.clientId;
+      this.oauthService.scope = this.oauth2Config.scope;
+      this.oauthService.issuer = this.oauth2Config.domain;
+      this.oauthService.tokenValidationHandler = new JwksValidationHandler();
+      this.oauthService.loadDiscoveryDocumentAndTryLogin().then();
+
+      this.oauthService.events.subscribe(() => {
+        const claims = this.oauthService.getIdentityClaims();
+        if (claims && !TokenFactory.hasToken()) {
+          this.tokenService.setToken(jwtEncode({
+            accessToken: this.oauthService.getAccessToken(),
+            login: claims[this.oauth2Config.indexLoginName] ?? 'Undefined',
+            expired: this.oauthService.getAccessTokenExpiration()
+          }, 'secret'))
+        }
+      });
+    }
   }
 }

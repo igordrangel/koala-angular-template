@@ -12,6 +12,7 @@ import { QuestionAvatarModule } from './shared/components/question-avatar/questi
 import { PageGetStartedComponent } from "./get-started/page-get-started.component";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { KoalaIconModule } from "../../../ngx-koala/src/lib/shared/components/icon/koala.icon.module";
+import { KoalaButtonModule } from "../../../ngx-koala/src/lib/shared/components/button/koala.button.module";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { KoalaIconModule } from "../../../ngx-koala/src/lib/shared/components/ic
     NgxKoalaModule,
     KoalaFormModule,
     KoalaMenuModule,
+    KoalaButtonModule,
     KoalaIconModule,
     MatExpansionModule,
     QuestionAvatarModule,
