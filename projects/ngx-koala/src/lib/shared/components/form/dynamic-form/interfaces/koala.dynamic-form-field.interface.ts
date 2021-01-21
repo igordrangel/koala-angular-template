@@ -56,8 +56,8 @@ export interface KoalaDynamicFormFieldInterface {
   fileButtonConfig?: {
     icon?: string;
     text?: string;
-    color?: 'blue' | 'white';
-    backgroundColor?: 'blue' | 'white' | 'transparent';
+    color?: string;
+    backgroundColor?: string;
     accept?: string;
   }
   dynamicFormConfig?: KoalaDynamicFormConfigInterface;
