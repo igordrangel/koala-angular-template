@@ -5,7 +5,7 @@ import { Component, Input } from "@angular/core";
   templateUrl: 'icons-animated.component.html'
 })
 export class IconsAnimatedComponent {
-  @Input() icon: 'loader';
+  @Input() icon: 'loading'|'downloading';
   @Input() color: string;
   @Input() size: number;
 }

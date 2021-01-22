@@ -43,7 +43,7 @@ export class NavigateHelper {
         {name: 'Components', routerLink: '/components'},
         {name: 'Dynamic Form'}
       ];
-    } else if (location.href.indexOf('services/page-loader') >= 0) {
+    } else if (location.href.indexOf('services/page-loading') >= 0) {
       return [
         {name: 'Services', routerLink: '/services'},
         {name: 'Page Loader'}

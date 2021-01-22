@@ -26,7 +26,11 @@ export class PageIconsAnimatedComponent extends PageAbstract implements OnInit {
   public groups: GroupIcon[] = [{
     title: 'Data',
     icons: [{
-      name: 'loader',
+      name: 'loading',
+      color: '#fff',
+      selected: false
+    }, {
+      name: 'downloading',
       color: '#fff',
       selected: false
     }]

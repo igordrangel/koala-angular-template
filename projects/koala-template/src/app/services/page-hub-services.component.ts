@@ -12,7 +12,7 @@ interface ItemService {
 })
 export class PageHubServicesComponent {
   public services: ItemService[] = koala([
-    {name: 'Page Loader', routerLink: '/services/page-loader'},
+    {name: 'Page Loader', routerLink: '/services/page-loading'},
     {name: 'XLSX', routerLink: '/services/xlsx'},
     {name: 'CSV', routerLink: '/services/csv'},
     {name: 'Alert', routerLink: '/services/alert'},

@@ -23,7 +23,8 @@ export * from './lib/shared/components/icon/koala.icon.module';
 //#endregion
 
 //#region [KOALA ICON ANIMATED]
-export * from './lib/shared/components/icons-animated/icons/loader/loader-icon-animated.component';
+export * from './lib/shared/components/icons-animated/icons/downloading/downloading-icon-animated.component';
+export * from './lib/shared/components/icons-animated/icons/loading/loading-icon-animated.component';
 export * from './lib/shared/components/icons-animated/icons-animated.component';
 export * from './lib/shared/components/icons-animated/koala-icons-animated.module';
 //#endregion

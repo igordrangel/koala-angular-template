@@ -1,7 +1,8 @@
 import { NgModule } from "@angular/core";
-import { LoaderIconAnimatedComponent } from "./icons/loader/loader-icon-animated.component";
+import { LoadingIconAnimatedComponent } from "./icons/loading/loading-icon-animated.component";
 import { CommonModule } from "@angular/common";
 import { IconsAnimatedComponent } from "./icons-animated.component";
+import { DownloadingIconAnimatedComponent } from "./icons/downloading/downloading-icon-animated.component";
 
 @NgModule({
   exports: [
@@ -9,7 +10,8 @@ import { IconsAnimatedComponent } from "./icons-animated.component";
   ],
   declarations: [
     IconsAnimatedComponent,
-    LoaderIconAnimatedComponent
+    LoadingIconAnimatedComponent,
+    DownloadingIconAnimatedComponent
   ],
   imports: [
     CommonModule

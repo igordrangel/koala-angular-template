@@ -1,0 +1,17 @@
+.koala-icon-animated {overflow: visible;display: block;margin: auto;}
+/*.koala-icon-animated.downloading {animation: shake 1.5s infinite alternate ease-in-out;}*/
+.koala-icon-animated.downloading #arrow-down {
+  animation: downloading-arrow 1.4s infinite ease-in-out;
+}
+.koala-icon-animated.downloading .letters {
+  animation: downloading-letters 1.4s infinite ease-in reverse;
+  transform: rotateY(-60deg);
+  opacity: 0;
+}
+
+@keyframes downloading-arrow {
+  from {transform: translateY(-30px);opacity: 0;}
+}
+@keyframes downloading-letters {
+  from {transform: rotateX(0); opacity: 1}
+}

@@ -1,10 +1,10 @@
 .koala-icon-animated {overflow: visible;display: block;margin: auto;}
-.koala-icon-animated.loader {animation: shake 1.5s infinite alternate ease-in-out;}
-.koala-icon-animated.loader #spinner_left {
+.koala-icon-animated.loading {animation: shake 1.5s infinite alternate ease-in-out;}
+.koala-icon-animated.loading #spinner_left {
   animation: rotateLeft 1.4s infinite linear reverse;
   transform-origin: 50% 68%;
 }
-.koala-icon-animated.loader #spinner_right {
+.koala-icon-animated.loading #spinner_right {
   animation: rotateRight 1.4s infinite linear reverse;
   transform-origin: 50% 68%;
 }
