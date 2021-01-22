@@ -22,6 +22,12 @@ export * from './lib/shared/components/icon/icon.component';
 export * from './lib/shared/components/icon/koala.icon.module';
 //#endregion
 
+//#region [KOALA ICON ANIMATED]
+export * from './lib/shared/components/icons-animated/icons/loader/loader-icon-animated.component';
+export * from './lib/shared/components/icons-animated/icons-animated.component';
+export * from './lib/shared/components/icons-animated/koala-icons-animated.module';
+//#endregion
+
 //#region [KOALA DIALOG]
 export * from './lib/shared/components/dialog/dialog.component';
 export * from './lib/shared/components/dialog/koala.dialog.module';
@@ -79,7 +85,8 @@ export * from './lib/shared/components/list/koala-list-item.interface';
 export * from './lib/shared/components/loader/loader-bar-page.component';
 export * from './lib/shared/components/loader/loader-bar-page.interface';
 export * from './lib/shared/components/loader/loader-config.interface';
-//#endregionexport * from './lib/shared/components/loader/loader-bar-page.component';
+export * from './lib/shared/components/loader/loader-bar-page.component';
+//#endregion
 
 //#region [KOALA MENU]
 export * from './lib/shared/components/menu/koala.menu.module';

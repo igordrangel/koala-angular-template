@@ -13,6 +13,7 @@ interface ItemComponent {
 export class PageHubComponentsComponent {
   public components: ItemComponent[] = koala([
     {name: 'Icons', routerLink: '/components/icons'},
+    {name: 'Icons Animated', routerLink: '/components/icons-animated'},
     {name: 'Folder Page', routerLink: '/components/folder-page'},
     {name: 'Dialog', routerLink: '/components/dialog'},
     {name: 'Button', routerLink: '/components/button'},

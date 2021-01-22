@@ -8,6 +8,11 @@ export class NavigateHelper {
         {name: 'Components', routerLink: '/components'},
         {name: 'Icons'}
       ];
+    } else if (location.href.indexOf('components/icons-animated') >= 0) {
+      return [
+        {name: 'Components', routerLink: '/components'},
+        {name: 'Icons Animated'}
+      ];
     } else if (location.href.indexOf('components/folder-page') >= 0) {
       return [
         {name: 'Components', routerLink: '/components'},

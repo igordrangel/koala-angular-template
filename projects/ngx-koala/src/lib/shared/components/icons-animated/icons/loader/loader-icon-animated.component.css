@@ -1,0 +1,20 @@
+.koala-icon-animated {overflow: visible;display: block;margin: auto;}
+.koala-icon-animated.loader {animation: shake 1.5s infinite alternate ease-in-out;}
+.koala-icon-animated.loader #spinner_left {
+  animation: rotateLeft 1.4s infinite linear reverse;
+  transform-origin: 50% 68%;
+}
+.koala-icon-animated.loader #spinner_right {
+  animation: rotateRight 1.4s infinite linear reverse;
+  transform-origin: 50% 68%;
+}
+
+@keyframes shake {
+  from {transform: translateY(5px);}
+}
+@keyframes rotateLeft {
+  from {transform: rotate(-147.5deg);}
+}
+@keyframes rotateRight {
+  from {transform: rotate(-215.5deg);}
+}
