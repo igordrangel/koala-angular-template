@@ -126,10 +126,12 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
     if (this.emptyListComponent) {
       do {
         await KlDelay.waitFor(301);
-        if (this.typeRequest === "onDemand") {
-          this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-        } else {
-          this.dataSource.sort = this.sort;
+        if (this.sort) {
+          if (this.typeRequest === "onDemand") {
+            this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+          } else {
+            this.dataSource.sort = this.sort;
+          }
         }
       } while (!this.sort);
     }
