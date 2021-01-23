@@ -88,9 +88,7 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
 
   private async prepareSearch() {
     if (this.typeRequest === 'onDemand') {
-      this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-
-      merge(this.sort.sortChange, this.paginator.page, this.filterParams).pipe(
+      merge(this.sort?.sortChange, this.paginator.page, this.filterParams).pipe(
         startWith({}),
         switchMap(() => new Observable(observe => {
           this.loading(true);
@@ -111,6 +109,13 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
         }),
         catchError(this.requestErrorFunction)
       ).subscribe();
+
+      if (this.emptyListComponent) {
+        do {
+          await KlDelay.waitFor(301);
+          this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+        } while (!this.sort);
+      }
     } else {
       this.dataSource.paginator = this.paginator;
       this.filterParams.pipe(
