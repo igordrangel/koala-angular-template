@@ -109,13 +109,6 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
         }),
         catchError(this.requestErrorFunction)
       ).subscribe();
-
-      if (this.emptyListComponent) {
-        do {
-          await KlDelay.waitFor(301);
-          this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-        } while (!this.sort);
-      }
     } else {
       this.dataSource.paginator = this.paginator;
       this.filterParams.pipe(
@@ -128,13 +121,17 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
         }),
         catchError(this.requestErrorFunction)
       ).subscribe();
+    }
 
-      if (this.emptyListComponent) {
-        do {
-          await KlDelay.waitFor(301);
+    if (this.emptyListComponent) {
+      do {
+        await KlDelay.waitFor(301);
+        if (this.typeRequest === "onDemand") {
+          this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+        } else {
           this.dataSource.sort = this.sort;
-        } while (!this.sort);
-      }
+        }
+      } while (!this.sort);
     }
   }
 
