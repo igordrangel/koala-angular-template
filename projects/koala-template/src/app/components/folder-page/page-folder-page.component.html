@@ -53,7 +53,12 @@
 <span>@Component</span>(&#123;
   templateUrl: 'page-example.component.html'
 &#125;)
-<span>export class</span> PageExampleComponent &#123;&#125;</code></pre>
+<span>export class</span> PageExampleComponent &#123;
+  <span>public</span> navigationHistory: <span>KoalaNavigateHistoryInterface</span> = [
+    &#123;name: 'Components', routerLink: '/components'&#125;,
+    &#123;name: 'Folder Page'&#125;
+  ]
+&#125;</code></pre>
 
       </mat-expansion-panel>
 
@@ -69,8 +74,16 @@
   customFolderBackgroudColor="#000"
   customFolderFontColor="#fff"
   titleIcon="person"
-  titlePage="Example"<span>&#62;
-&#60;/koala-folder-page&#62;</span></code></pre>
+  titlePage="Example"
+  [navigateHistory]="navigationHistory"<span>&#62;</span>
+
+  &#60;!-- PUT YOUR MENU PAGE HERE --&#62;
+  <span>&#60;nav</span> menu<span>&#62;&#60;/nav&#62;</span>
+
+  &#60;!-- PUT YOUR CONTENT PAGE HERE --&#62;
+  <span>&#60;section</span> content<span>&#62;&#60;/section&#62;</span>
+
+<span>&#60;/koala-folder-page&#62;</span></code></pre>
 
       </mat-expansion-panel>
 
