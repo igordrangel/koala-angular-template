@@ -120,7 +120,20 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
 
-        <pre><code><span>&#60;mat-list&#62;
+        <pre><code><span>&#60;koala-file-button</span>
+  class="d-block mb-15"
+  backgroundColor="#fff"
+  color="#212121"
+  icon="attachment"
+  text="Attach Item(s)"
+  (getFiles)="files = $event"
+  [multiple]="true"
+  [setFile]="fileService.setFileSubject"
+  [updateFileList]="fileService.fileListSubject"
+  [autoclear]="false"<span>&#60;
+&#62;/koala-file-button&#62;</span>
+
+<span>&#60;mat-list&#62;
   &#60;mat-list-item</span> &#42;ngFor="let file of files; let index = i;"<span>&#62;
     &#60;mat-icon mat-list-icon</span> (click)="fileService.removeFile(files, index)"<span>&#62;</span>delete<span>&#60;/mat-icon&#62;
     &#60;p mat-line&#62;</span>&#123;&#123;'&#123;&#123;file.filename&#125;&#125;'&#125;&#125;<span>&#60;/p&#62;
