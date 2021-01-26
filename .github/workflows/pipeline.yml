@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: build
         run: |
-          npm i -g @angular/cli
+          npm i @angular/cli
           npm i
           npm run build-doc
       - name: 'deploy'
