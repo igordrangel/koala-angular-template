@@ -29,5 +29,5 @@ jobs:
           server: ftp.igordrangel.com.br
           username: koala@igordrangel.com.br
           password: ${{ secrets.FTP_PASSWORD }}
-          remoteDir: '/dist'
-          local-dir: 'dist/**'
+          server-dir: './dist/'
+          local-dir: './dist/koala-template/'
