@@ -31,3 +31,4 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: './dist/'
           local-dir: './dist/koala-template/'
+          dangerous-clean-slate: true
