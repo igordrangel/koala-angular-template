@@ -9,13 +9,21 @@ jobs:
     name: 'production'
     runs-on: ubuntu-latest
     steps:
-      - name: build
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v2.3.2
+        
+      - name: Use Node.js 12
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: '12'
+      
+      - name: 🔨 Build Project
         run: |
-          cd ../
           npm i @angular/cli
           npm i
           npm run build-doc
-      - name: 'deploy'
+      
+      - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
           server: ftp.igordrangel.com.br
