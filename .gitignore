@@ -15,7 +15,6 @@ chrome-profiler-events*.json
 speed-measure-plugin*.json
 
 # IDEs and editors
-.github
 /.idea
 .project
 .classpath
@@ -41,6 +40,7 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+.github/*
 
 # System Files
 .DS_Store
