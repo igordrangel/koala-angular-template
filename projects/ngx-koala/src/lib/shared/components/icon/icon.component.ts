@@ -11,7 +11,7 @@ export class IconComponent implements OnInit {
   @Input() icon: 'notFound'|'notAllowed'|'sessionExpired'|'empty'|'excel'|'word'|'pdf'|'edit'|'trash'|'webComponents'|'deliveryBox'|'github';
   @Input() size: number = 24;
 
-  public intervalCheckElement: number;
+  public intervalCheckElement: any;
   public style: string;
   public idIcon = `koala-icons_${koala(0).number().random(1, 30).getValue()}`;
 
