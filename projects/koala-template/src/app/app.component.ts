@@ -3,6 +3,12 @@ import { KoalaPagePalletColorsInterface } from '../../../ngx-koala/src/lib/share
 import { KoalaTheme } from "./shared/helpers/theme";
 import { KoalaOauth2ConfigInterface } from "../../../ngx-koala/src/lib/shared/components/page/koala-oauth2-config.interface";
 
+declare namespace NodeJS {
+  interface TypedArray {
+
+  }
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

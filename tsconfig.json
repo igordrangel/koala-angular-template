@@ -15,9 +15,6 @@
       "es2018",
       "dom"
     ],
-    "types": [
-      "node"
-    ],
     "paths": {
       "ngx-koala": [
         "dist/ngx-koala/ngx-koala",
