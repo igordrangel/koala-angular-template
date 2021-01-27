@@ -2,6 +2,12 @@
  * Public API Surface of ngx-koala
  */
 
+declare namespace NodeJS {
+  interface TypedArray {
+
+  }
+}
+
 //#region [COMPONENTS]
 
 //#region [KOALA ALERT]
