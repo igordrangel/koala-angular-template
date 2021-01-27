@@ -7,7 +7,7 @@ import { KoalaListFormFilterInterface } from "../../../../../ngx-koala/src/lib/s
 @Injectable({providedIn: "any"})
 export class ListService {
 
-  public getList(params: KoalaListFormFilterInterface) {
+  public getList(params?: KoalaListFormFilterInterface) {
     return new Observable<ListItemInterface[]>(observe => {
       observe.next(koala([
         {name: 'Item 1', qtd: 5, value: 3000},
@@ -18,8 +18,8 @@ export class ListService {
         {name: 'Item 6', qtd: 3, value: 2000},
         {name: 'Item 7', qtd: 9, value: 1000}
       ]).array<ListItemInterface>()
-        .filter(params.params?.name ?? '', 'name')
-        .orderBy(params.sort, params.order.toUpperCase() === 'DESC')
+        .filter(params?.params?.name ?? '', 'name')
+        .orderBy(params?.sort, params?.order.toUpperCase() === 'DESC')
         .getValue());
     });
   }

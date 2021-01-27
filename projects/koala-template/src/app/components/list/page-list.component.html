@@ -7,19 +7,19 @@
   [navigateHistory]="navigationHistory">
 
   <div content>
-    <koala-list
-      typeRequest="all"
-      columnSort="name"
-      [columnsToShowInList]="columns"
-      [filterParams]="filter"
-      [filterFormConfig]="filterConfig"
-      [itemsList]="itensList"
-      [itensMenuListOptions]="itensMenuListOptions"
-      [emptyListComponent]="emptyListComponent"
-      [request]="listService.getList(filter.getValue())"
-      [reload]="reloadList"
-      (getSelection)="selection = $event"
-      (getDataSource)="dataSource = $event">
+    <koala-list [config]="config">
+
+      <nav itemsSelectList>
+        <koala-button
+          [koalaIcon]="true"
+          (click)="delete()"
+          backgroundColor="transparent"
+          color="#EF5350"
+          icon="trash"
+          koalaIconSize="18"
+          tooltip="Delete Selected">
+        </koala-button>
+      </nav>
 
       <nav itemsList>
         <koala-button
@@ -31,7 +31,7 @@
           tooltip="Download List (XLSX)">
         </koala-button>
         <koala-button
-          (click)="reloadList.next(true)"
+          (click)="config.reload.next(true)"
           backgroundColor="transparent"
           color="#fafafa"
           icon="refresh"
@@ -59,7 +59,8 @@
 <span>import</span> &#123;
   KoalaListModule,
   KoalaIconModule,
-  KoalaButtonModule
+  KoalaButtonModule,
+  KoalaAlertModule
 &#125; <span>from</span> "ngx-koala";
 
 <span>@NgModule</span>(&#123;
@@ -75,6 +76,7 @@
     KoalaListModule,
     KoalaButtonModule,
     KoalaIconModule,
+    KoalaAlertModule,
     ListRoutingModule
   ]
 &#125;)
@@ -99,7 +101,7 @@
 <span>@Injectable</span>(&#123;providedIn: "any"&#125;)
 <span>export class</span> ListService &#123;
 
-  <span>public</span> getList(params: <span>KoalaListFormFilterInterface</span>) &#123;
+  <span>public</span> getList(params?: <span>KoalaListFormFilterInterface</span>) &#123;
     <span>return new Observable</span>&#60;<span>ListItemInterface</span>[]&#62;(observe => &#123;
       observe.next(<span>koala</span>([
         &#123;name: 'Item 1', qtd: 5, value: 3000&#125;,
@@ -110,8 +112,8 @@
         &#123;name: 'Item 6', qtd: 3, value: 2000&#125;,
         &#123;name: 'Item 7', qtd: 9, value: 1000&#125;
       ]).<span>array</span>&#60;<span>ListItemInterface</span>&#62;()
-        .<span>filter</span>(params.params?.name ?? '', 'name')
-        .<span>orderBy</span>(params.sort, params.order.toUpperCase() === 'DESC')
+        .<span>filter</span>(params?.params?.name ?? '', 'name')
+        .<span>orderBy</span>(params?.sort, params?.order?.toUpperCase() === 'DESC')
         .<span>getValue</span>());
     &#125;);
   &#125;
@@ -151,76 +153,87 @@
 &#125;)
 <span>export class</span> PageListComponent &#123;
   <span>public</span> formData: <span>FormGroup</span>;
-  <span>public</span> columns = [
-    'select',
-    'name',
-    'qtd',
-    'value',
-    'options'
-  ];
-  <span>public</span> itensList: <span>KoalaListItemInterface</span>[];
-  <span>public</span> itensMenuListOptions: <span>KoalaListItemMenuOptionInterface</span>[];
-  <span>public</span> filterConfig: <span>KoalaListFilterInterface</span>;
-  <span>public</span> filter = <span>new BehaviorSubject&#60;KoalaListFormFilterInterface&#62;</span>(&#123;
-    params: &#123;&#125;,
-    sort: 'name',
-    order: 'asc',
-    page: 1,
-    limit: 0
-  &#125;);
-  <span>public</span> selection: <span>SelectionModel&#60;ListItemInterface&#62;</span>;
   <span>public</span> dataSource?: <span>ListItemInterface</span>[];
-  <span>public</span> emptyListComponent = <span>new KoalaDynamicComponent(EmptyListComponent)</span>;
-  <span>public</span> reloadList = <span>new BehaviorSubject&#60;boolean&#62;(false)</span>;
+  <span>public</span> config: <span>KoalaListConfigInterface</span>;
+  <span>private</span> selectedItems?: <span>SelectionModel</span>&#60;<span>ListItemInterface</span>&#62;;
 
   <span>constructor</span>(
     <span>public</span> listService: <span>ListService</span>,
+    <span>private</span> koalaListService: <span>KoalaListService</span>,
+    <span>private</span> alertService: <span>KoalaAlertService</span>,
     <span>private</span> xlsxService: <span>KoalaXlsxService</span>
   ) &#123;
     <span>super</span>();
-    <span>this</span>.itensList = [&#123;
-      label: 'Name',
-      columnDef: 'name',
-      sortHeader: 'name',
-      itemNameProperty: (item: <span>ListItemInterface</span>) => item.name,
-      dblClick: (item: <span>ListItemInterface</span>) => <span>this</span>.edit(item)
-    &#125;, &#123;
-      label: 'Qtd.',
-      columnDef: 'qtd',
-      sortHeader: 'qtd',
-      itemNameProperty: (item: <span>ListItemInterface</span>) => item.qtd.toString(),
-      dblClick: (item: <span>ListItemInterface</span>) => <span>this</span>.edit(item)
-    &#125;, &#123;
-      label: 'Value',
-      columnDef: 'value',
-      sortHeader: 'value',
-      itemNameProperty: (item: <span>ListItemInterface</span>) => <span>koala</span>(item.qtd).<span>number</span>().<span>maskCoin</span>('US$ ').<span>getValue</span>(),
-      dblClick: (item: <span>ListItemInterface</span>) => <span>this</span>.edit(item)
-    &#125;];
-
-    <span>this</span>.itensMenuListOptions = [&#123;
-      icon: 'edit',
-      name: 'Edit',
-      havePermission: true,
-      action: (item: <span>ListItemInterface</span>) => <span>this</span>.edit(item)
-    &#125;];
-
-    <span>this</span>.filterConfig = &#123;
-      main: [
-        &#123;
-          label: 'Name',
-          name: 'name',
-          type: DynamicFormTypeFieldEnum.text,
-          appearance: 'outline',
-          floatLabel: "always",
-          class: 'col-12'
-        &#125;
-      ]
-    &#125;;
-  }
+    <span>this</span>.config = <span>this</span>.koalaListService
+                              .<span>build</span>&#60;<span>ListItemInterface</span>&#62;()
+                              .<span>service</span>(<span>this</span>.listService.getList())
+                              .<span>filterConfig</span>(&#123;
+                                main: [&#123;
+                                  label: 'Name',
+                                  name: 'name',
+                                  type: <span>DynamicFormTypeFieldEnum</span>.text,
+                                  appearance: 'outline',
+                                  floatLabel: "always",
+                                  class: 'col-12'
+                                &#125;]
+                              &#125;)
+                              .<span>defaultFilter</span>(&#123;
+                                params: &#123;&#125;,
+                                sort: 'name',
+                                order: 'asc',
+                                page: 1,
+                                limit: 0
+                              &#125;)
+                              .<span>columns</span>([
+                                'select',
+                                'name',
+                                'qtd',
+                                'value',
+                                'options'
+                              &#125;)
+                              .<span>itemColumn</span>(&#123;
+                                label: 'Name',
+                                columnDef: 'name',
+                                sortHeader: 'name',
+                                itemNameProperty: (item: <span>ListItemInterface</span>) => item.name,
+                                dblClick: (item: <span>ListItemInterface</span>) => <span>this</span>.edit(item)
+                              &#125;)
+                              .<span>itemColumn</span>(&#123;
+                                label: 'Qtd.',
+                                columnDef: 'qtd',
+                                sortHeader: 'qtd',
+                                itemNameProperty: (item: <span>ListItemInterface</span>) => item.qtd.toString(),
+                                dblClick: (item: <span>ListItemInterface</span>) => <span>this</span>.edit(item)
+                              &#125;)
+                              .<span>itemColumn</span>(&#123;
+                                label: 'Value',
+                                columnDef: 'value',
+                                sortHeader: 'value',
+                                itemNameProperty: (item: <span>ListItemInterface</span>) => koala(item.qtd).number().maskCoin('US$ ').getValue(),
+                                dblClick: (item: <span>ListItemInterface</span>) => <span>this</span>.edit(item)
+                              &#125;)
+                              .<span>actionList</span>(&#123;
+                                icon: 'edit',
+                                name: 'Edit',
+                                havePermission: true,
+                                action: (item: ListItemInterface) => <span>this</span>.edit(item)
+                              &#125;)
+                              .<span>emptyListComponent</span>(EmptyListComponent)
+                              .<span>getDataSource</span>(dataSource) => <span>this</span>.dataSource = dataSource)
+                              .<span>getSelectionList</span>(selection => <span>this</span>.selectedItems = selection)
+                              .<span>getConfig</span>();
+  &#125;
 
   <span>public</span> edit(item: <span>ListItemInterface</span>) &#123;
     console.log(item);
+  &#125;
+
+  <span>public</span> delete() &#123;
+    console.log(<span>this</span>.selectedItems.selected);
+    <span>this</span>.alertService.create(&#123;
+      alertEnum: <span>KoalaAlertEnum</span>.success,
+      message: 'The selected items was showed in devTools console. Press F12 to view.'
+    &#125;)
   &#125;
 
   <span>public</span> downloadList() &#123;

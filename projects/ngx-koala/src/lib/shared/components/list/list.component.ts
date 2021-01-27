@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ListAbstract } from './list.abstract';
 import { KoalaListItemMenuOptionInterface } from './koala-list-item-menu-option.interface';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -7,8 +7,8 @@ import { KoalaListFilterInterface } from './koalaListFilterInterface';
 import { KoalaObjectHelper } from 'tskoala-helpers/dist/object/koala-object.helper';
 import { KoalaDelayHelper } from 'tskoala-helpers/dist/delay/koala-delay.helper';
 import { KoalaDynamicFormService } from '../../services/dynamic-forms/koala.dynamic-form.service';
-import { SelectionModel } from '@angular/cdk/collections';
 import { KoalaListItemInterface } from './koala-list-item.interface';
+import { KoalaListFormFilterInterface } from "./koala-list-form-filter.interface";
 
 @Component({
   selector: 'koala-list',
@@ -17,20 +17,16 @@ import { KoalaListItemInterface } from './koala-list-item.interface';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListComponent extends ListAbstract implements OnInit {
-  @Input() columnsToShowInList: string[];
-  @Input() columnSort: string;
-  @Input() itensMenuListOptions: KoalaListItemMenuOptionInterface[];
-  @Input() itemsList: KoalaListItemInterface[];
-  @Input() request: Observable<any>;
-  @Input() responseIndexName: string;
-  @Input() responseQtdResultIndexName: (response: any) => number;
-  @Input() typeRequest: 'all' | 'onDemand';
-  @Input() filterFormConfig: KoalaListFilterInterface;
-  @Input() error = () => {};
-  @Input() reload: BehaviorSubject<boolean>;
-  @Output() getSelection = new EventEmitter<SelectionModel<any>>(null);
-  @Output() getDataSource = new EventEmitter<any[]>(null);
-
+  public columnsToShowInList: string[];
+  public columnSort: string;
+  public itemsMenuListOptions: KoalaListItemMenuOptionInterface[];
+  public itemsList: KoalaListItemInterface[];
+  public request: Observable<any>;
+  public responseIndexName: string;
+  public responseQtdResultIndexName: (response: any) => number;
+  public typeRequest: 'all' | 'onDemand';
+  public filterFormConfig: KoalaListFilterInterface;
+  public reload: BehaviorSubject<boolean>;
   public formSearch: FormGroup;
   public formAdvancedSearch: FormGroup;
   public showAdvancedFilter: boolean = false;
@@ -41,22 +37,22 @@ export class ListComponent extends ListAbstract implements OnInit {
     private dynamicFormService: KoalaDynamicFormService
   ) {
     super(
-      () => this.request,
+      () => this.config.request,
       (response) => {
-        this.dataSource.data = this.responseIndexName ?
-          response[this.responseIndexName] :
+        this.dataSource.data = this.config.responseIndexName ?
+          response[this.config.responseIndexName] :
           response;
-        this.getDataSource.emit(this.dataSource.data);
-        this.qtdListResult = this.responseQtdResultIndexName ?
-          this.responseQtdResultIndexName(response) :
+        if (this.config.getDataSource) this.config.getDataSource(this.dataSource.data);
+        this.qtdListResult = this.config.responseQtdResultIndexName ?
+          this.config.responseQtdResultIndexName(response) :
           this.dataSource.data.length;
       },
-      () => this.error(),
       () => this.formSearch
     );
   }
 
   ngOnInit() {
+    this.initConfig();
     this.loading(true);
     this.formSearch = this.fb.group({});
     this.formAdvancedSearch = this.fb.group({});
@@ -75,7 +71,8 @@ export class ListComponent extends ListAbstract implements OnInit {
         this.formSearch.addControl(this.filterFormConfig.checkAndSearch.formControlName, new FormControl(false));
       }
     }
-    this.getSelection.emit(this.selection);
+
+    if(this.config.getSelectionList) this.config.getSelectionList(this.selection);
 
     if (this.reload) {
       this.reload.subscribe(async reload => {
@@ -102,5 +99,24 @@ export class ListComponent extends ListAbstract implements OnInit {
 
   public toogleFilter() {
     this.showAdvancedFilter = !this.showAdvancedFilter;
+  }
+
+  private initConfig() {
+    this.columnSort = this.config.columnSort ?? '';
+    this.itemsMenuListOptions = this.config.itemsMenuListOptions ?? [];
+    this.typeRequest = this.config.typeRequest ?? 'all';
+    this.qtdListResult = this.config.qtdListResult ?? 0;
+    this.columnsToShowInList = this.config.columnsToShowInList;
+    this.itemsList = this.config.itemsList;
+    this.formSearch = this.config.formSearch;
+    this.formAdvancedSearch = this.config.formAdvancedSearch;
+    this.showAdvancedFilter = this.config.showAdvancedFilter;
+    this.filterFormConfig = this.config.filterFormConfig;
+    this.request = this.config.request;
+    this.reload = this.config.reload;
+    this.responseIndexName = this.config.responseIndexName;
+    this.responseQtdResultIndexName = this.config.responseQtdResultIndexName;
+    this.filterParams = this.config.filterParams ?? new BehaviorSubject<KoalaListFormFilterInterface>(null);
+    this.emptyListComponent = this.config.emptyListComponent;
   }
 }

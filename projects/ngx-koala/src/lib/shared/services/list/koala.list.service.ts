@@ -1,15 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ListBuilder } from "../../../../../../koala-template/src/app/components/list/list-builder/list.builder";
 
 @Injectable({providedIn: "any"})
 export class KoalaListService {
 
-	public createListRequest(request: () => Observable<any>) {
-		return new Observable(observe => {
-			request().subscribe(
-				(response) => observe.next(response),
-				(e) => observe.error(e)
-			);
-		});
-	}
+  public build<DataType>() {
+    return new ListBuilder<DataType>();
+  }
 }

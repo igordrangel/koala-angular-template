@@ -9,6 +9,7 @@ import { KoalaIconModule } from "../../../../../ngx-koala/src/lib/shared/compone
 import { KoalaButtonModule } from "../../../../../ngx-koala/src/lib/shared/components/button/koala.button.module";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
+import { KoalaAlertModule } from "../../../../../ngx-koala/src/lib/shared/components/alert/koala.alert.module";
 
 @NgModule({
   exports: [
@@ -22,6 +23,7 @@ import { MatIconModule } from "@angular/material/icon";
     CommonModule,
     KoalaFolderPageModule,
     KoalaListModule,
+    KoalaAlertModule,
     KoalaButtonModule,
     KoalaIconModule,
     MatExpansionModule,
