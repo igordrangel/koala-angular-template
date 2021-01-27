@@ -11,6 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { KoalaListFormFilterInterface } from './koala-list-form-filter.interface';
 import {KoalaDynamicComponent} from "../dynamic-component/koala-dynamic-component";
 import { KlDelay } from "koala-utils/dist/utils/KlDelay";
+import { KoalaListConfigInterface } from "./koala.list-config.interface";
 
 @Directive()
 export abstract class ListAbstract extends FormAbstract implements AfterViewInit {
@@ -20,8 +21,10 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
   public allSelected = false;
   public dataSource = new MatTableDataSource<any>([]);
   public typeRequest: 'all' | 'onDemand' = 'onDemand';
-  @Input() filterParams = new BehaviorSubject<KoalaListFormFilterInterface>(null);
-  @Input() emptyListComponent?: KoalaDynamicComponent;
+  public filterParams = new BehaviorSubject<KoalaListFormFilterInterface>(null);
+  public emptyListComponent?: KoalaDynamicComponent;
+
+  @Input() config: KoalaListConfigInterface;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
@@ -29,7 +32,6 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
   protected constructor(
     private requestFunction: () => Observable<any>,
     private requestResponseFunction: <T>(results: T[]) => void,
-    private requestErrorFunction: () => any,
     formSearch: () => FormGroup
   ) {
     super(formSearch);
@@ -45,7 +47,6 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
         this.prepareSearch().then();
         if (this.emptyListComponent) stop = true;
       } else if (tentativas > 10) {
-        this.requestErrorFunction();
         stop = true;
       }
     } while (!this.sort && !stop);
@@ -106,8 +107,7 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
         map((response) => {
           this.loading(false);
           return this.requestResponseFunction(response);
-        }),
-        catchError(this.requestErrorFunction)
+        })
       ).subscribe();
     } else {
       this.dataSource.paginator = this.paginator;
@@ -118,8 +118,7 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
         map((response) => {
           this.loading(false);
           return this.requestResponseFunction(response);
-        }),
-        catchError(this.requestErrorFunction)
+        })
       ).subscribe();
     }
 
