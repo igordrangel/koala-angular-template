@@ -1,7 +1,7 @@
 name: PUBLISH DOC
 on:
   push:
-    branches: [ release-doc ]
+    branches: [ release/doc ]
 jobs:
   build:
     name: 'production'
