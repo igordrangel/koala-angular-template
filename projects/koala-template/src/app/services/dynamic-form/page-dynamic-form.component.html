@@ -12,6 +12,25 @@
 
       <mat-expansion-panel expanded>
         <mat-expansion-panel-header>
+          <mat-panel-title>page-dynamic-form.component.html</mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>code</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <form>
+          <koala-dynamic-form
+            [form]="config.form"
+            [formConfig]="config.formConfig"
+            [setValues]="config.setValues"
+            [showFields]="config.showFields">
+          </koala-dynamic-form>
+        </form>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
           <mat-panel-title>page-dynamic-form.component.ts</mat-panel-title>
           <mat-panel-description>
             <mat-icon>code</mat-icon>
@@ -25,89 +44,71 @@
   templateUrl: 'page-dynamic-form.component.html'
 &#125;)
 <span>export class</span> PageDynamicFormComponent &#123;
-  <span>public</span> formData: <span>FormGroup</span>;
-  <span>public</span> formDataConfig: <span>KoalaDynamicFormFieldInterface</span>[];
-  <span>public</span> setValuesUsers$ = <span>new BehaviorSubject</span>&#60;<span>BehaviorSubject</span>&#60;<span>KoalaDynamicSetValueInterface</span>[]&#62;[]&#62;([]);
+  <span>public</span> config: <span>KoalaDynamicFormConfigInterface</span>;
 
-  <span>constructor</span>(<span>private</span> dynamicFormService: <span>KoalaDynamicFormService</span>) &#123;&#125;
+  <span>constructor</span>(
+    <span>private</span> listService: <span>ListService</span>,
+    <span>private</span> dynamicFormService: <span>KoalaDynamicFormService</span>
+  ) &#123;
+    <span>this</span>.config = dynamicFormService.<span>build</span>()
+                                                          .<span>field</span>('Text Field', 'text', "text").<span>grid</span>(2).<span>generate</span>()
+                                                          .<span>field</span>('Date Field', 'date', "date").<span>grid</span>(2).<span>focus</span>().<span>generate</span>()
+                                                          .<span>field</span>('Datetime Field', 'datetime', "datetime").<span>grid</span>(2).<span>generate</span>()
+                                                          .<span>field</span>('Time Field', 'time', "time").<span>grid</span>(2).<span>generate</span>()
+                                                          .<span>field</span>('CPF Field', 'cpf', "cpf").<span>grid</span>(2).<span>generate</span>()
+                                                          .<span>field</span>('CNPJ Field', 'cnpj', "cnpj").<span>grid</span>(2).<span>generate</span>()
+                                                          .<span>field</span>('Coin Field', 'coin', "coin").<span>grid</span>(2).<span>generate</span>()
+                                                          .<span>field</span>('Color Field', 'color', "color").<span>grid</span>(2).<span>generate</span>()
+                                                          .<span>field</span>('E-mail Field', 'email', "email").<span>grid</span>(2).<span>generate</span>()
+                                                          .<span>field</span>('Float Field', 'float', "float").<span>grid</span>(2).<span>generate</span>()
+                                                          .<span>field</span>('Percent Field', 'percent', "percent").<span>grid</span>(2).<span>generate</span>()
+                                                          .<span>field</span>('Hours and Minutes Field', 'hoursAndMinutes', "hoursAndMinutes").<span>grid</span>(2).<span>generate</span>()
+                                                          .<span>field</span>('Password Field', 'password', "password").<span>grid</span>(2).<span>generate</span>()
+                                                          .<span>field</span>('Phone Field', 'phone', "phone").<span>grid</span>(2).<span>generate</span>()
+                                                          .<span>autocomplete</span>('Autocomplete All Field', 'autocompleteAll').<span>grid</span>(2).<span>required</span>()
+                                                            .<span>service</span>(new Observable&#60;KoalaDynamicAutocompleteOptionsInterface[]&#62;(observe => &#123;
+                                                              <span>this</span>.listService.getList().subscribe(list => &#123;
+                                                                const options: KoalaDynamicAutocompleteOptionsInterface[] = [];
+                                                                list.forEach(item => options.push(&#123;
+                                                                  value: item.value,
+                                                                  name: item.name
+                                                                &#125;));
+                                                                observe.next(options);
+                                                              &#125;);
+                                                            &#125;)).<span>loadOptions</span>('all').<span>generate</span>()
+                                                          .<span>field</span>('Select Field', 'select', "select")
+                                                            .<span>setOptions</span>([
+                                                              &#123;value: true, name: 'true'&#125;,
+                                                              &#123;value: false, name: 'false'&#125;
+                                                            ]).<span>grid</span>(2).<span>generate</span>()
+                                                          .<span>field</span>('Radio Field', 'radio', "radio")
+                                                            .<span>setOptions</span>([
+                                                              &#123;value: true, name: 'true'&#125;,
+                                                              &#123;value: false, name: 'false'&#125;
+                                                            ]).<span>grid</span>(2).<span>generate</span>()
+                                                          .<span>field</span>('Checkbox', 'checkbox', "checkbox").<span>grid</span>(2).<span>generate</span>()
+                                                          .<span>field</span>('Textarea Field', 'textarea', "textarea").<span>generate</span>()
+                                                          .<span>field</span>('ValueList Field', 'valueList', "valueList").<span>generate</span>()
+                                                          .<span>field</span>('TextLogs Field', 'textLogs', "textLogs").<span>generate</span>()
+                                                          .<span>autofill</span>(&#123;text: 'Teste 123'&#125;)
+                                                          .<span>generate</span>();
+  &#125;
 &#125;</code></pre>
 
         <h2>emitData</h2>
         <p>This method emit a data from <strong>FormGroup</strong> using in your <strong>koala-dynamic-form</strong> component.</p>
-        <pre><code><span>this</span>.dynamicFormService.<span>emitData</span>(<span>this</span>.formData);</code></pre>
+        <pre><code><span>this</span>.dynamicFormService.<span>emitData</span>(<span>this</span>.config.form);</code></pre>
 
         <h2>resetForm</h2>
         <p>This method clear your <strong>FormGroup</strong>.</p>
-        <pre><code><span>this</span>.dynamicFormService.<span>resetForm</span>(<span>this</span>.formData);</code></pre>
+        <pre><code><span>this</span>.dynamicFormService.<span>resetForm</span>(<span>this</span>.config.form);</code></pre>
 
-        <h2>setValuesInMoreItemsForm</h2>
-        <p>This method input a values from object list in your <strong>FormGroup</strong> on <strong>field type MoreItems</strong>.</p>
-        <pre><code><span>this</span>.formDataConfig = [
-  ..., &#123;
-    label: 'Users',
-    name: 'users',
-    type: <span>DynamicFormTypeFieldEnum</span>.moreItems,
-    moreItemsButtonIconAddlabel: 'Add User',
-    moreItemsIconFontColor: '#212121',
-    moreItemsIconBackgroundColor: '#fff',
-    moreItemsIcon: 'person',
-    moreItemsMinItems: 1,
-    moreItemsMaxItems: 2,
-    moreItemsConfig: &#123;
-      form: this.fb.group(&#123;&#125;),
-      formConfig: [&#123;
-        label: 'Login',
-        name: 'login',
-        type: <span>DynamicFormTypeFieldEnum</span>.text,
-        appearance: "outline",
-        class: 'col-12',
-        fieldClass: 'w-100',
-        required: true
-      &#125;,&#123;
-        label: 'Name',
-        name: 'name',
-        type: <span>DynamicFormTypeFieldEnum</span>.text,
-        appearance: "outline",
-        class: 'col-12',
-        fieldClass: 'w-100',
-        required: true
-      &#125;],
-      setValues: this.setValuesUsers$
-    &#125;,
-    required: true
-  &#125;
-];
-
-<span>const</span> dataUsers: <span>KoalaDynamicSetValueInterface</span>[][] = [];
-users.forEach(user => &#123;
-  dataUsers.push([
-    &#123;name: 'login', value: user.login&#125;,
-    &#123;name: 'name', value: user.name&#125;
-  ]);
-&#125;);
-
-<span>this</span>.dynamicFormService.<span>setValuesInMoreItemsForm</span>(<span>this</span>.setValuesUsers$, dataUsers);</code></pre>
-
-        <h2>autocompleteFilterOnServer</h2>
-        <p>This method implements a observable for your autocomplete with onDemand load.</p>
-        <pre><code><span>this</span>.formDataConfig = [
-  ..., &#123;
-    label: 'User',
-    name: 'user',
-    autocompleteOptions: null,
-    autocompleteType: 'onDemand',
-    autocompleteFilter: username => <span>this</span>.dynamicFormService.<span>autocompleteFilterOnServer</span>(() => &#123;
-      <span>return new Promise</span>&#60;<span>UserInterface</span>[]&#62;(resolve => &#123;
-        <span>this</span>.userService.get(username).subscribe(result => resolve(result));
-      &#125;);
-    &#125;, &#123;
-      propsByName: ['login', 'name'], //Gets these properties on the object and concatenates them into a string
-      delimiter: ' - '
-    &#125;,
-      'id' // When the option is selected this property will be gets when uses emitData
-    )
-  &#125;
-]</code></pre>
+        <h2>build</h2>
+        <p>This method build a <strong>Koala Dynamic Form</strong>.</p>
+        <pre><code><span>this</span>.dynamicFormService
+      .<span>build</span>()
+      .<span>buildField</span>('Text Field', 'text', "text").<span>grid</span>(2).<span>generate</span>()
+      .<span>generate</span>();</code></pre>
 
       </mat-expansion-panel>
 
