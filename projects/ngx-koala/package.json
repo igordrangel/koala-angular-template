@@ -1,6 +1,6 @@
 {
   "name": "ngx-koala",
-  "version": "11.1.7",
+  "version": "11.1.0.0",
   "peerDependencies": {
     "@angular/animations": "~11.1.0",
     "@angular/cdk": "^11.1.0",
