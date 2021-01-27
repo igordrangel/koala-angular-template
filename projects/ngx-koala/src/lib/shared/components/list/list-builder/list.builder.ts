@@ -1,11 +1,11 @@
-import { KoalaListConfigInterface } from "../../../../../../ngx-koala/src/lib/shared/components/list/koala.list-config.interface";
-import { KoalaListItemInterface } from "../../../../../../ngx-koala/src/lib/shared/components/list/koala-list-item.interface";
+import { KoalaListConfigInterface } from "../koala.list-config.interface";
+import { KoalaListItemInterface } from "../koala-list-item.interface";
 import { Type } from "@angular/core";
-import { KoalaDynamicComponent } from "../../../../../../ngx-koala/src/lib/shared/components/dynamic-component/koala-dynamic-component";
-import { KoalaListFilterInterface } from "../../../../../../ngx-koala/src/lib/shared/components/list/koalaListFilterInterface";
+import { KoalaDynamicComponent } from "../../dynamic-component/koala-dynamic-component";
+import { KoalaListFilterInterface } from "../koalaListFilterInterface";
 import { BehaviorSubject, Observable } from "rxjs";
-import { KoalaListFormFilterInterface } from "../../../../../../ngx-koala/src/lib/shared/components/list/koala-list-form-filter.interface";
-import { KoalaListItemMenuOptionInterface } from "../../../../../../ngx-koala/src/lib/shared/components/list/koala-list-item-menu-option.interface";
+import { KoalaListFormFilterInterface } from "../koala-list-form-filter.interface";
+import { KoalaListItemMenuOptionInterface } from "../koala-list-item-menu-option.interface";
 import { SelectionModel } from "@angular/cdk/collections";
 
 export class ListBuilder<DataType> {

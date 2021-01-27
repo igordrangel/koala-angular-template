@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ListBuilder } from "../../../../../../koala-template/src/app/components/list/list-builder/list.builder";
+import { ListBuilder } from "../../components/list/list-builder/list.builder";
 
 @Injectable({providedIn: "any"})
 export class KoalaListService {
