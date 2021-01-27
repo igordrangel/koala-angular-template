@@ -5,16 +5,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4201",
-    "build": "ng build",
+    "build": "ng build ngx-koala && cd dist/ngx-koala",
+    "build-doc": "ng build koala-template --prod --build-optimizer",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-doc": "ng build koala-template --prod --build-optimizer",
     "postinstall": "ngcc",
     "version": "git add -A projects",
     "postversion": "git push && git push --tags",
-    "deploy": "npm version patch && cd projects/ngx-koala && npm version patch && cd ../../ && ng build ngx-koala && cd dist/ngx-koala && npm publish --ignore-scripts",
-    "deploy-break-version": "ng build ngx-koala && cd dist/ngx-koala && npm publish --ignore-scripts"
+    "deploy": "npm version patch && cd projects/ngx-koala && npm version patch"
   },
   "private": false,
   "dependencies": {
