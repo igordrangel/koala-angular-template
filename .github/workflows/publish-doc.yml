@@ -1,9 +1,7 @@
-name: CI
+name: PUBLISH DOC
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches: [ release-doc ]
 jobs:
   build:
     name: 'production'
