@@ -1,0 +1,26 @@
+name: NPM PUBLISH
+on:
+  push:
+    branches: [ master ]
+jobs:
+  build:
+    name: 'npm publish library'
+    runs-on: ubuntu-latest
+    steps:      
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v2.3.2
+      
+      - name: 🔨 Build Project
+        run: | 
+          npm install @angular/cli
+          npm install
+          npm run build
+        
+      - name: Publish npm package        
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - run: npm publish --ignore-scripts
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
