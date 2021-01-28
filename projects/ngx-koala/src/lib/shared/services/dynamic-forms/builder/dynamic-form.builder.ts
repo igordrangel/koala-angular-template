@@ -29,6 +29,7 @@ export class DynamicFormBuilder {
 
   public field(label: string, name: string, type: DynamicFormFieldType) {
     switch (type) {
+      case "id":
       case "text":
       case "textarea":
       case "number":
