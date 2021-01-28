@@ -47,6 +47,7 @@
   <span>public</span> config: <span>KoalaDynamicFormConfigInterface</span>;
 
   <span>constructor</span>(
+    <span>private</span> fb: <span>FormBuilder</span>,
     <span>private</span> listService: <span>ListService</span>,
     <span>private</span> dynamicFormService: <span>KoalaDynamicFormService</span>
   ) &#123;
@@ -87,10 +88,86 @@
                                                               &#123;value: false, name: 'false'&#125;
                                                             ]).<span>grid</span>(2).<span>generate</span>()
                                                           .<span>field</span>('Checkbox', 'checkbox', "checkbox").<span>grid</span>(2).<span>generate</span>()
+                                                          .<span>simpleMoreItems</span>('More Items', 'moreItems', 'Add Item', 1, 2)
+                                                            .<span>build</span>()
+                                                              .<span>field</span>('Text Field', 'text', "text").<span>maxLength</span>(10).<span>grid</span>(4).<span>generate</span>()
+                                                              .<span>field</span>('Date Field', 'date', "date").<span>grid</span>(4).<span>generate</span>()
+                                                              .<span>field</span>('Number Field', 'number', "number").<span>grid</span>(4).<span>min</span>(5).<span>max</span>(10).<span>generate</span>()
+                                                          .<span>generateMoreItems</span>()
+                                                          .<span>literalConfig</span>(&#123;
+                                                            label: 'More Items',
+                                                            name: 'items',
+                                                            type: <span>DynamicFormTypeFieldEnum</span>.moreItems,
+                                                            moreItemsButtonIconAddlabel: 'Add Item',
+                                                            moreItemsIconFontColor: '#212121',
+                                                            moreItemsIconBackgroundColor: '#fff',
+                                                            moreItemsIcon: 'label',
+                                                            moreItemsMinItems: 1,
+                                                            moreItemsMaxItems: 2,
+                                                            moreItemsConfig: &#123;
+                                                              form: <span>this</span>.fb.group(&#123;&#125;),
+                                                              formConfig: [&#123;
+                                                                label: 'More Items',
+                                                                name: 'items',
+                                                                type: <span>DynamicFormTypeFieldEnum</span>.moreItems,
+                                                                moreItemsButtonIconAddlabel: 'Add Item',
+                                                                moreItemsIconFontColor: '#212121',
+                                                                moreItemsIconBackgroundColor: '#fff',
+                                                                moreItemsIcon: 'label',
+                                                                moreItemsMinItems: 1,
+                                                                moreItemsMaxItems: 2,
+                                                                moreItemsConfig: &#123;
+                                                                  form: this.fb.group(&#123;&#125;),
+                                                                  formConfig: [&#123;
+                                                                    label: 'Text Field',
+                                                                    name: 'textField',
+                                                                    type: <span>DynamicFormTypeFieldEnum</span>.text,
+                                                                    appearance: "outline",
+                                                                    class: 'col-12',
+                                                                    fieldClass: 'w-100',
+                                                                    required: <span>true</span>
+                                                                  &#125;]
+                                                                &#125;,
+                                                                required: <span>true</span>
+                                                              &#125;]
+                                                            &#125;,
+                                                            required: <span>true</span>
+                                                          &#125;)
                                                           .<span>field</span>('Textarea Field', 'textarea', "textarea").<span>generate</span>()
                                                           .<span>field</span>('ValueList Field', 'valueList', "valueList").<span>generate</span>()
                                                           .<span>field</span>('TextLogs Field', 'textLogs', "textLogs").<span>generate</span>()
-                                                          .<span>autofill</span>(&#123;text: 'Teste 123'&#125;)
+                                                          .<span>field</span>('DynamicForm', 'dynamicForm', 'select').<span>setOptions</span>([
+                                                            &#123;value: true, name: 'Show'&#125;,
+                                                            &#123;value: false, name: 'Hide'&#125;
+                                                          ]).<span>valueChanges</span>((value: <span>boolean</span>) => &#123;
+                                                            <span>this</span>.config.showFields.next([
+                                                              &#123;name: 'dynamicFormShow', show: value&#125;
+                                                            ])
+                                                          &#125;).<span>generate</span>()
+                                                          .<span>literalConfig</span>(&#123;
+                                                            show: false,
+                                                            label: 'DynamicForm Showed',
+                                                            name: 'dynamicFormShow',
+                                                            type: <span>DynamicFormTypeFieldEnum</span>.dynamicForm,
+                                                            dynamicFormConfig: <span>this</span>.dynamicFormService
+                                                              .<span>build</span>()
+                                                                .<span>field</span>('Option', 'option', "select").<span>setOptions</span>([
+                                                                  &#123;value: '1', name: 'Option 1'&#125;,
+                                                                  &#123;value: '2', name: 'Option 2'&#125;
+                                                                ]).<span>generate</span>()
+                                                              .<span>generate</span>()
+                                                          &#125;)
+                                                          .<span>autofill</span>(&#123;
+                                                            text: 'Teste 123',
+                                                            dynamicForm: <span>false</span>,
+                                                            dynamicFormShow: &#123;
+                                                              option: '1'
+                                                            &#125;,
+                                                            moreItems: [
+                                                              &#123;text: '123', date: koala('now').date().format('YYYY-MM-DD').getValue(), number: 6&#125;
+                                                            ],
+                                                            textLogs: 'teste 123'
+                                                          &#125;)
                                                           .<span>generate</span>();
   &#125;
 &#125;</code></pre>

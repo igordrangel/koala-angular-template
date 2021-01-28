@@ -7,6 +7,6 @@ import { KoalaDynamicFormShowFieldInterface } from "../../../components/form/dyn
 export interface KoalaDynamicFormConfigInterface {
   form: FormGroup;
   formConfig: KoalaDynamicFormFieldInterface[];
-  setValues?: BehaviorSubject<BehaviorSubject<KoalaDynamicSetValueInterface[]>[]> | BehaviorSubject<KoalaDynamicSetValueInterface[]>;
+  setValues?: BehaviorSubject<KoalaDynamicSetValueInterface[]>;
   showFields?: BehaviorSubject<KoalaDynamicFormShowFieldInterface[]>;
 }
