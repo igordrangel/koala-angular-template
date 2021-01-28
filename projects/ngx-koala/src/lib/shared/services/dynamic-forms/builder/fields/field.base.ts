@@ -68,6 +68,10 @@ export abstract class FieldBase {
     return this;
   }
 
+  public multiple(multiple: boolean = true) {
+    this.fieldConfig.multiple = true;
+  }
+
   public valueChanges<T>(fn: (value: T) => void) {
     this.fieldConfig.valueChanges = fn;
     return this;

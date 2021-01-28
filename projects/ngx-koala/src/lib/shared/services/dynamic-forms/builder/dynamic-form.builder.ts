@@ -9,14 +9,12 @@ import { KoalaDynamicSetValueInterface } from "../../../components/form/dynamic-
 import { KoalaDynamicFormShowFieldInterface } from "../../../components/form/dynamic-form/interfaces/koala.dynamic-form-show-field.interface";
 import { MoreItemsBuilder } from "./fields/more-items.builder";
 import { koala } from "koala-utils";
-import { FieldSelectBuilder } from "./fields/field-select.builder";
 
-export type DynamicFormFieldType = 'text' | 'password' | 'cpf' | 'cnpj' | 'datetime' | 'email' | 'phone' | 'number' | 'valueList' | 'textarea' | 'time' | 'hoursAndMinutes' | 'checkbox' | 'select' | 'coin' | 'percent' | 'id' | 'textLogs' | 'file' | 'color' | 'date' | 'radio' | 'float';
+export type DynamicFormFieldType = 'text' | 'password' | 'cpf' | 'cnpj' | 'datetime' | 'email' | 'phone' | 'number' | 'valueList' | 'textarea' | 'time' | 'hoursAndMinutes' | 'checkbox' | 'select' | 'coin' | 'percent' | 'id' | 'textLogs' | 'color' | 'date' | 'radio' | 'float';
 
 export class DynamicFormBuilder {
   private readonly config: KoalaDynamicFormConfigInterface;
   private newField: FieldBuilder;
-  private newSelect: FieldSelectBuilder;
   private newAutocomplete: AutocompleteBuilder;
   private newMoreItems: MoreItemsBuilder;
 
@@ -52,10 +50,8 @@ export class DynamicFormBuilder {
       case "valueList":
       case "checkbox":
       case "radio":
-        this.newField = new FieldBuilder(label, name, DynamicFormTypeFieldEnum[type], this.config, this.fb);
-        return this.newField;
       case "select":
-        this.newSelect = new FieldSelectBuilder(label, name, DynamicFormTypeFieldEnum[type], this.config, this.fb);
+        this.newField = new FieldBuilder(label, name, DynamicFormTypeFieldEnum[type], this.config, this.fb);
         return this.newField;
     }
   }
@@ -89,9 +85,9 @@ export class DynamicFormBuilder {
           field.textObs = object[indexName];
         } else {
           setValues.push({
-            name: indexName,
-            value: object[indexName]
-          });
+                           name: indexName,
+                           value: object[indexName]
+                         });
         }
       } else {
         const arrField = koala(this.config.formConfig).array<KoalaDynamicFormFieldInterface>().filter(indexName, 'name').getValue();
@@ -104,15 +100,15 @@ export class DynamicFormBuilder {
             const moreItemValues: KoalaDynamicSetValueInterface[] = [];
             Object.keys(objectItem).forEach(objectIndexName => {
               moreItemValues.push({
-                name: objectIndexName,
-                value: objectItem[objectIndexName]
-              });
+                                    name: objectIndexName,
+                                    value: objectItem[objectIndexName]
+                                  });
             });
             setValuesMoreItems.push(new BehaviorSubject<KoalaDynamicSetValueInterface[]>(moreItemValues));
           });
 
           field.moreItemsConfig.setValues.next(setValuesMoreItems);
-        } else if(field.type === DynamicFormTypeFieldEnum.dynamicForm) {
+        } else if (field.type === DynamicFormTypeFieldEnum.dynamicForm) {
           const dynamicFormObject = object[indexName];
           const dynamicFormSetValues: KoalaDynamicSetValueInterface[] = [];
 
@@ -124,9 +120,9 @@ export class DynamicFormBuilder {
               dynamicField.textObs = object[indexName];
             } else {
               dynamicFormSetValues.push({
-                name: dynamicFormIndexName,
-                value: dynamicFormObject[dynamicFormIndexName]
-              });
+                                          name: dynamicFormIndexName,
+                                          value: dynamicFormObject[dynamicFormIndexName]
+                                        });
             }
           });
 
@@ -154,9 +150,9 @@ export class DynamicFormBuilder {
 
   public generateMoreItems() {
     this.config.formConfig.push({
-      name: 'endMoreItems',
-      type: DynamicFormTypeFieldEnum.moreItems
-    });
+                                  name: 'endMoreItems',
+                                  type: DynamicFormTypeFieldEnum.moreItems
+                                });
     return new DynamicFormBuilder(
       this.fb,
       this.config.formConfig
