@@ -309,7 +309,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			config.dynamicFormConfig = cloneDynamicFormConfig;
 		}
 
-		if (config.show !== true) {
+		if (config.show === false) {
 			validators = [];
 		}
 

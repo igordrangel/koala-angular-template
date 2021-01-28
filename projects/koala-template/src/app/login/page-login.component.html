@@ -5,10 +5,10 @@
       <h1>Login</h1>
       <small>This is the <strong>fake login page</strong>, so you <strong>don't need to have an account</strong>, just report a fake one.</small>
     </div>
-    <form (ngSubmit)="submit()" [formGroup]="formLogin">
+    <form (ngSubmit)="submit()" [formGroup]="config.form">
       <koala-dynamic-form
-        [formConfig]="formConfig"
-        [form]="formLogin">
+        [form]="config.form"
+        [formConfig]="config.formConfig">
       </koala-dynamic-form>
       <div align="end" class="mt-15">
         <koala-button
@@ -31,7 +31,7 @@
         <koala-submit
           [btnLabel]="btnLabel"
           [btnSubmitDisabled]="btnSubmitDisabled"
-          [fg]="formLogin"
+          [fg]="config.form"
           [loader]="loader"
           color="primary">
         </koala-submit>
