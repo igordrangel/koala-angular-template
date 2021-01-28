@@ -259,21 +259,21 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
 
-        <pre><code><span>&#60;koala-list</span>
-  typeRequest="all"
-  columnSort="name"
-  [columnsToShowInList]="columns"
-  [filterParams]="filter"
-  [filterFormConfig]="filterConfig"
-  [itemsList]="itensList"
-  [itensMenuListOptions]="itensMenuListOptions"
-  [emptyListComponent]="emptyListComponent"
-  [request]="listService.getList(filter.getValue())"
-  [reload]="reloadList"
-  (getSelection)="selection = $event"
-  (getDataSource)="dataSource = $event"<span>&#62;
+        <pre><code><span>&#60;koala-list</span> [config]="config"&#62;
 
-&#60;nav itemsList&#62;</span>
+  <span>&#60;nav</span> itemsSelectList&#62;
+    <span>&#60;koala-button</span>
+      [koalaIcon]="true"
+      (click)="delete()"
+      backgroundColor="transparent"
+      color="#EF5350"
+      icon="trash"
+      koalaIconSize="18"
+      tooltip="Delete Selected"<span>&#62;
+      &#60;/koala-button&#62;
+  &#60;/nav&#62;
+
+&#60;nav</span> itemsList&#62;
   <span>&#60;koala-button</span>
     (click)="downloadList()"
     [koalaIcon]="true"
