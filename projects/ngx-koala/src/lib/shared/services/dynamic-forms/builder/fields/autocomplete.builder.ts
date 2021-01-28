@@ -3,10 +3,10 @@ import { DynamicFormTypeFieldEnum } from "../../../../components/form/dynamic-fo
 import { BehaviorSubject, Observable } from "rxjs";
 import { KoalaDynamicAutocompleteOptionsInterface } from "../../../../components/form/dynamic-form/interfaces/koala.dynamic-autocomplete-options.interface";
 import { FormBuilder } from "@angular/forms";
-import { FieldSelectBase } from "./field-select.base";
 import { KoalaDynamicFormAutocompleteMultipleConfigInterface } from "../../../../components/form/dynamic-form/interfaces/koala.dynamic-form-autocomplete-multiple-config.interface";
+import { FieldBase } from "./field.base";
 
-export class AutocompleteBuilder extends FieldSelectBase {
+export class AutocompleteBuilder extends FieldBase {
   private service$: Observable<KoalaDynamicAutocompleteOptionsInterface[]>;
 
   constructor(
@@ -28,7 +28,7 @@ export class AutocompleteBuilder extends FieldSelectBase {
     return this;
   }
 
-  public loadOptions(type: 'all'|'onDemand', onDemandFilter?: (filter: string) => Observable<KoalaDynamicAutocompleteOptionsInterface[]>) {
+  public loadOptions(type: 'all' | 'onDemand', onDemandFilter?: (filter: string) => Observable<KoalaDynamicAutocompleteOptionsInterface[]>) {
     this.fieldConfig.autocompleteType = type;
 
     if (type === "all") {
