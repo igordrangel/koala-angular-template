@@ -1,9 +1,9 @@
 import { KoalaDynamicFormFieldInterface } from "../../../../components/form/dynamic-form/interfaces/koala.dynamic-form-field.interface";
 import { DynamicFormTypeFieldEnum } from "../../../../components/form/dynamic-form/enums/dynamic-form-type-field.enum";
-import { KoalaDynamicFormConfigInterface } from "../koala.dynamic-form-config.interface";
 import { FloatLabelType, MatFormFieldAppearance } from "@angular/material/form-field";
 import { DynamicFormBuilder } from "../dynamic-form.builder";
 import { FormBuilder } from "@angular/forms";
+import { KoalaDynamicFormConfigInterface } from "../../../../components/form/dynamic-form/interfaces/koala.dynamic-form-config.interface";
 
 export abstract class FieldBase {
   protected readonly fieldConfig: KoalaDynamicFormFieldInterface;

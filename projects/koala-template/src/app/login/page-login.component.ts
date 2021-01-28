@@ -5,7 +5,7 @@ import { FormAbstract } from '../../../../ngx-koala/src/lib/core/form.abstract';
 import { KoalaTokenService } from '../../../../ngx-koala/src/lib/shared/services/token/koala.token.service';
 import { KoalaDynamicFormService } from '../../../../ngx-koala/src/lib/shared/services/dynamic-forms/koala.dynamic-form.service';
 import { OAuthService } from "angular-oauth2-oidc";
-import { KoalaDynamicFormConfigInterface } from "../../../../ngx-koala/src/lib/shared/services/dynamic-forms/builder/koala.dynamic-form-config.interface";
+import { KoalaDynamicFormConfigInterface } from "../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-form-config.interface";
 
 @Component({
   templateUrl: 'page-login.component.html',

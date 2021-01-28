@@ -4,10 +4,10 @@ import { KoalaDynamicFormService } from "../../../../../ngx-koala/src/lib/shared
 import { ListService } from "../../components/list/list.service";
 import { KoalaDynamicAutocompleteOptionsInterface } from "../../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-autocomplete-options.interface";
 import { Observable } from "rxjs";
-import { KoalaDynamicFormConfigInterface } from "../../../../../ngx-koala/src/lib/shared/services/dynamic-forms/builder/koala.dynamic-form-config.interface";
 import { koala } from "koala-utils";
 import { DynamicFormTypeFieldEnum } from "../../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/enums/dynamic-form-type-field.enum";
 import { FormBuilder } from "@angular/forms";
+import { KoalaDynamicFormConfigInterface } from "../../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-form-config.interface";
 
 @Component({
   templateUrl: 'page-dynamic-form.component.html',

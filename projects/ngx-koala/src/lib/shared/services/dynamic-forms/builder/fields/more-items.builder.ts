@@ -1,10 +1,10 @@
 import { DynamicFormTypeFieldEnum } from "../../../../components/form/dynamic-form/enums/dynamic-form-type-field.enum";
-import { KoalaDynamicFormConfigInterface } from "../koala.dynamic-form-config.interface";
 import { FormBuilder } from "@angular/forms";
 import { BehaviorSubject } from "rxjs";
 import { KoalaDynamicSetValueInterface } from "../../../../components/form/dynamic-form/interfaces/koala.dynamic-set-value.interface";
 import { DynamicFormBuilder } from "../dynamic-form.builder";
 import { KoalaDynamicFormFieldInterface } from "../../../../components/form/dynamic-form/interfaces/koala.dynamic-form-field.interface";
+import { KoalaDynamicFormConfigInterface } from "../../../../components/form/dynamic-form/interfaces/koala.dynamic-form-config.interface";
 
 export class MoreItemsBuilder {
   private fieldConfig: KoalaDynamicFormFieldInterface;

@@ -1,7 +1,7 @@
 import { DynamicFormTypeFieldEnum } from "../../../../components/form/dynamic-form/enums/dynamic-form-type-field.enum";
-import { KoalaDynamicFormConfigInterface } from "../koala.dynamic-form-config.interface";
 import { FieldBase } from "./field.base";
 import { FormBuilder } from "@angular/forms";
+import { KoalaDynamicFormConfigInterface } from "../../../../components/form/dynamic-form/interfaces/koala.dynamic-form-config.interface";
 
 export class FieldBuilder extends FieldBase {
 
