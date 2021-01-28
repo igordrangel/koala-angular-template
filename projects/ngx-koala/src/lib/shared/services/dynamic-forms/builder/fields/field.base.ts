@@ -23,8 +23,8 @@ export abstract class FieldBase {
     this.appearance().grid();
   }
 
-  public hide() {
-    this.fieldConfig.show = false;
+  public hide(hide: boolean = true) {
+    this.fieldConfig.show = !hide;
     return this;
   }
 
@@ -33,13 +33,13 @@ export abstract class FieldBase {
     return this;
   }
 
-  public disabled() {
-    this.fieldConfig.disabled = true;
+  public disabled(disabled: boolean = true) {
+    this.fieldConfig.disabled = disabled;
     return this;
   }
 
-  public required() {
-    this.fieldConfig.required = true;
+  public required(required: boolean = true) {
+    this.fieldConfig.required = required;
     return this;
   }
 
