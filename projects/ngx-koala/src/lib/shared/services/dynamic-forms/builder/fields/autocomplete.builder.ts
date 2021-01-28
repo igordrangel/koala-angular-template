@@ -1,11 +1,12 @@
-import { FieldBase } from "./field.base";
 import { KoalaDynamicFormConfigInterface } from "../koala.dynamic-form-config.interface";
 import { DynamicFormTypeFieldEnum } from "../../../../components/form/dynamic-form/enums/dynamic-form-type-field.enum";
 import { BehaviorSubject, Observable } from "rxjs";
 import { KoalaDynamicAutocompleteOptionsInterface } from "../../../../components/form/dynamic-form/interfaces/koala.dynamic-autocomplete-options.interface";
 import { FormBuilder } from "@angular/forms";
+import { FieldSelectBase } from "./field-select.base";
+import { KoalaDynamicFormAutocompleteMultipleConfigInterface } from "../../../../components/form/dynamic-form/interfaces/koala.dynamic-form-autocomplete-multiple-config.interface";
 
-export class AutocompleteBuilder extends FieldBase {
+export class AutocompleteBuilder extends FieldSelectBase {
   private service$: Observable<KoalaDynamicAutocompleteOptionsInterface[]>;
 
   constructor(
@@ -38,6 +39,12 @@ export class AutocompleteBuilder extends FieldBase {
       this.fieldConfig.autocompleteFilter = onDemandFilter;
     }
 
+    return this;
+  }
+
+  public colorChipConfig(fn: (subject: BehaviorSubject<KoalaDynamicFormAutocompleteMultipleConfigInterface>) => void) {
+    this.fieldConfig.autocompleteMultipleConfig = new BehaviorSubject<KoalaDynamicFormAutocompleteMultipleConfigInterface>(null);
+    fn(this.fieldConfig.autocompleteMultipleConfig);
     return this;
   }
 }
