@@ -31,7 +31,13 @@ export class PageListComponent extends PageAbstract {
     super();
     this.config = this.koalaListService
                       .build<ListItemInterface>()
-                      .service(this.listService.getList())
+                      .defaultFilter({
+                        params: {},
+                        sort: 'name',
+                        order: 'asc',
+                        page: 1,
+                        limit: 0
+                      })
                       .filterConfig({
                         main: [{
                           label: 'Name',
@@ -42,13 +48,7 @@ export class PageListComponent extends PageAbstract {
                           class: 'col-12'
                         }]
                       })
-                      .defaultFilter({
-                        params: {},
-                        sort: 'name',
-                        order: 'asc',
-                        page: 1,
-                        limit: 0
-                      })
+                      .service(filter => this.listService.getList())
                       .columns([
                         'select',
                         'name',

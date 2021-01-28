@@ -11,10 +11,15 @@ import { SelectionModel } from "@angular/cdk/collections";
 export class ListBuilder<DataType> {
   private config = {} as KoalaListConfigInterface;
 
-  public service(service: (filter: KoalaListFormFilterInterface) => Observable<any> | Promise<any>, type: 'all' | 'onDemand') {
+  public service(
+    service: (filter: KoalaListFormFilterInterface) => Observable<any> | Promise<any>,
+    type: 'all' | 'onDemand' = "all",
+    qtdResultIndexName?: string
+  ) {
     this.config.typeRequest = type;
+    this.config.responseQtdResultIndexName = response => response[qtdResultIndexName];
 
-    const response = service(this.config?.filterParams.getValue());
+    const response = service(this.config?.filterParams?.getValue());
 
     if (response instanceof Promise) {
       this.config.request = new Observable<any>(observe => {

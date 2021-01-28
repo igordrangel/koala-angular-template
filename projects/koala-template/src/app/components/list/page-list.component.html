@@ -166,7 +166,13 @@
     <span>super</span>();
     <span>this</span>.config = <span>this</span>.koalaListService
                               .<span>build</span>&#60;<span>ListItemInterface</span>&#62;()
-                              .<span>service</span>(<span>this</span>.listService.getList())
+                              .<span>defaultFilter</span>(&#123;
+                                params: &#123;&#125;,
+                                sort: 'name',
+                                order: 'asc',
+                                page: 1,
+                                limit: 0
+                              &#125;)
                               .<span>filterConfig</span>(&#123;
                                 main: [&#123;
                                   label: 'Name',
@@ -177,13 +183,7 @@
                                   class: 'col-12'
                                 &#125;]
                               &#125;)
-                              .<span>defaultFilter</span>(&#123;
-                                params: &#123;&#125;,
-                                sort: 'name',
-                                order: 'asc',
-                                page: 1,
-                                limit: 0
-                              &#125;)
+                              .<span>service</span>(filter => <span>this</span>.listService.getList())
                               .<span>columns</span>([
                                 'select',
                                 'name',
