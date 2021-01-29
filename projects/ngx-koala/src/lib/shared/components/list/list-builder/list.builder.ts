@@ -12,7 +12,7 @@ export class ListBuilder<DataType> {
   private config = {} as KoalaListConfigInterface;
 
   public service(
-    service: (filter: KoalaListFormFilterInterface) => Observable<any> | Promise<any>,
+    service: (filter: BehaviorSubject<KoalaListFormFilterInterface>) => Observable<any> | Promise<any>,
     type: 'all' | 'onDemand' = "all",
     resultIndexName?: string,
     qtdResultIndexName?: string
@@ -21,7 +21,7 @@ export class ListBuilder<DataType> {
     this.config.responseIndexName = resultIndexName;
     this.config.responseQtdResultIndexName = response => response[qtdResultIndexName];
 
-    const response = service(this.config?.filterParams?.getValue());
+    const response = service(this.config?.filterParams);
 
     if (response instanceof Promise) {
       this.config.request = new Observable<any>(observe => {
