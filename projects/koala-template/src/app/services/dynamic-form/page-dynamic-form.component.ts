@@ -41,7 +41,7 @@ export class PageDynamicFormComponent extends PageAbstract {
                                     .service(new Observable<KoalaDynamicAutocompleteOptionsInterface[]>(observe => {
                                       this.listService.getList().subscribe(list => {
                                         const options: KoalaDynamicAutocompleteOptionsInterface[] = [];
-                                        list.forEach(item => options.push({
+                                        list.items.forEach(item => options.push({
                                           value: item.value,
                                           name: item.name
                                         }));
