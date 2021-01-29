@@ -74,8 +74,8 @@ export class ListBuilder<DataType> {
     return this;
   }
 
-  public emptyListComponent(component: Type<any>) {
-    this.config.emptyListComponent = new KoalaDynamicComponent(component);
+  public emptyListComponent(component: Type<any>, data?: any) {
+    this.config.emptyListComponent = new KoalaDynamicComponent(component, data);
     return this;
   }
 
