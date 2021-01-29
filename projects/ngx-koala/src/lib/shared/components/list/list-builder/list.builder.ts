@@ -14,6 +14,7 @@ export class ListBuilder<DataType> {
   public service(
     service: (filter: KoalaListFormFilterInterface) => Observable<any> | Promise<any>,
     type: 'all' | 'onDemand' = "all",
+    resultIndexName?: string,
     qtdResultIndexName?: string
   ) {
     this.config.typeRequest = type;
@@ -23,11 +24,16 @@ export class ListBuilder<DataType> {
 
     if (response instanceof Promise) {
       this.config.request = new Observable<any>(observe => {
-        response.then(response => observe.next(response))
+        response.then(response => observe.next(response[resultIndexName]))
                 .catch(error => observe.error(error));
       });
     } else {
-      this.config.request = response;
+      this.config.request = new Observable<any>(observe => {
+        response.subscribe(
+          result => observe.next(result[resultIndexName]),
+          error => observe.error(error)
+        );
+      });
     }
 
     return this;
