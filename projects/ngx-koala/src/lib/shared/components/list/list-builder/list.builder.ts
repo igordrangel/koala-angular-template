@@ -18,22 +18,18 @@ export class ListBuilder<DataType> {
     qtdResultIndexName?: string
   ) {
     this.config.typeRequest = type;
+    this.config.responseIndexName = resultIndexName;
     this.config.responseQtdResultIndexName = response => response[qtdResultIndexName];
 
     const response = service(this.config?.filterParams?.getValue());
 
     if (response instanceof Promise) {
       this.config.request = new Observable<any>(observe => {
-        response.then(response => observe.next(response[resultIndexName]))
+        response.then(response => observe.next(response))
                 .catch(error => observe.error(error));
       });
     } else {
-      this.config.request = new Observable<any>(observe => {
-        response.subscribe(
-          result => observe.next(result[resultIndexName]),
-          error => observe.error(error)
-        );
-      });
+      this.config.request = response;
     }
 
     return this;
