@@ -386,9 +386,8 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 								const validators = [];
 								if (config) {
 								  if (config.type === DynamicFormTypeFieldEnum.dynamicForm) {
-								    // config.dynamicFormConfig.form = this.fb.group({});
                     const formArrayMoreItems = control.get('dynamicFormGroup') as FormArray;
-                    formArrayMoreItems.push(config.dynamicFormConfig.form);
+                    formArrayMoreItems.push(config?.dynamicFormConfig?.form);
                   } else {
                     if (config.required === true) {
                       validators.push(Validators.required);
