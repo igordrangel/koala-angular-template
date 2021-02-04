@@ -335,6 +335,7 @@
 	          </mat-chip>
 	          <input
 		          #autocompleteInput
+              [koalaAutoFocus]="propriedade.get('focus').value"
 		          [readonly]="propriedade.get('disabled').value"
 		          [required]="propriedade.get('required').value"
 		          [matAutocomplete]="auto"
@@ -349,6 +350,7 @@
 	      <ng-template #single>
 		      <input
 			      [matAutocomplete]="auto"
+            [koalaAutoFocus]="propriedade.get('focus').value"
 			      [readonly]="propriedade.get('disabled').value"
 			      [required]="propriedade.get('required').value"
             [tabIndex]="tabIndexStart + i"
