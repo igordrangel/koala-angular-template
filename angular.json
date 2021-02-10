@@ -61,7 +61,8 @@
             "aot": true,
             "assets": [
               "projects/koala-template/src/favicon.ico",
-              "projects/koala-template/src/assets"
+              "projects/koala-template/src/assets",
+              "projects/koala-template/src/.well-known"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",

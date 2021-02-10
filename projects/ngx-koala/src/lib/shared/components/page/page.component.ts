@@ -140,7 +140,16 @@ export class PageComponent implements OnInit {
           this.loaderService.dismiss();
           if (event instanceof NavigationEnd) {
             this.currentUrl = event.url.split('?')[0];
-            if (event.url.indexOf('/login?clientId=') < 0 && event.url.indexOf('/#id_token=') < 0) {
+
+            if (event.url.indexOf('/#state=') >= 0) {
+              console.log(event.url);
+            }
+
+            if (
+              event.url.indexOf('/login?clientId=') < 0 &&
+              event.url.indexOf('/#id_token=') < 0 &&
+              event.url.indexOf('/#state=') < 0
+            ) {
               if (this.logged && this.defaultPage && this.openPages?.indexOf(this.currentUrl) >= 0) {
                 this.router.navigate([this.defaultPage]).then();
                 return false;
@@ -309,6 +318,7 @@ koala-menu ul li li.active a {color: ${this.palletColors.menuOptionsColorActive}
       this.oauthService.scope = this.oauth2Config.scope;
       this.oauthService.issuer = this.oauth2Config.domain;
       this.oauthService.tokenValidationHandler = new JwksValidationHandler();
+      this.oauthService.strictDiscoveryDocumentValidation = this.oauth2Config?.strictDiscoveryDocumentValidation ?? true;
       this.oauthService.loadDiscoveryDocumentAndTryLogin().then();
 
       this.oauthService.events.subscribe(() => {
@@ -316,6 +326,7 @@ koala-menu ul li li.active a {color: ${this.palletColors.menuOptionsColorActive}
         if (claims && !TokenFactory.hasToken()) {
           this.tokenService.setToken(jwtEncode({
             accessToken: this.oauthService.getAccessToken(),
+            idToken: this.oauthService.getIdToken(),
             login: claims[this.oauth2Config.indexLoginName] ?? 'Undefined',
             expired: this.oauthService.getAccessTokenExpiration()
           }, 'secret'))
