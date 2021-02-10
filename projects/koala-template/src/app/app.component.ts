@@ -19,9 +19,10 @@ export class AppComponent {
   public openPages = ['/login'];
   public palletCollors: KoalaPagePalletColorsInterface = KoalaTheme;
   public oauth2Config: KoalaOauth2ConfigInterface = {
-    clientId: '0oa40cp7kvadipTQO5d6',
+    clientId: '679440572859-iviegii370t3n4m15qrpr4fpj4db8jc7.apps.googleusercontent.com',
     scope: 'openid profile email',
-    domain: 'https://dev-5633813.okta.com/oauth2/default',
+    domain: 'https://accounts.google.com',
+    strictDiscoveryDocumentValidation: false,
     indexLoginName: 'name'
   }
 }

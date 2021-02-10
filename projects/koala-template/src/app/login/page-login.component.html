@@ -13,7 +13,7 @@
       <div align="end" class="mt-15">
         <koala-button
           *ngIf="!oauthService.getIdentityClaims() else btnLogout"
-          (click)="oauthService.initCodeFlow()"
+          (click)="oauthService.initLoginFlow()"
           class="mr-8"
           color="#fff"
           backgroundColor="#00796B"

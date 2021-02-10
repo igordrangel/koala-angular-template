@@ -3,4 +3,5 @@ export interface KoalaOauth2ConfigInterface {
   scope: string;
   domain: string;
   indexLoginName: string;
+  strictDiscoveryDocumentValidation?: boolean;
 }
