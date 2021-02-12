@@ -118,5 +118,6 @@ export class ListComponent extends ListAbstract implements OnInit {
     this.responseQtdResultIndexName = this.config.responseQtdResultIndexName;
     this.filterParams = this.config.filterParams ?? new BehaviorSubject<KoalaListFormFilterInterface>(null);
     this.emptyListComponent = this.config.emptyListComponent;
+    this.pageSize = this.config.pageSize ?? 30;
   }
 }

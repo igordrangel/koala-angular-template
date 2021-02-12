@@ -6,6 +6,7 @@ import { KoalaListFilterInterface } from "./koalaListFilterInterface";
 import { FormGroup } from "@angular/forms";
 import { KoalaListFormFilterInterface } from "./koala-list-form-filter.interface";
 import { KoalaDynamicComponent } from "../dynamic-component/koala-dynamic-component";
+import { KoalaListPageSize } from "./list.abstract";
 
 export interface KoalaListConfigInterface {
   columnsToShowInList: string[];
@@ -26,4 +27,5 @@ export interface KoalaListConfigInterface {
   qtdListResult?: number;
   getSelectionList: (selection: SelectionModel<any>) => void;
   getDataSource: (dataSource: any[]) => void;
+  pageSize?: KoalaListPageSize;
 }
