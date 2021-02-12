@@ -13,6 +13,8 @@ import {KoalaDynamicComponent} from "../dynamic-component/koala-dynamic-componen
 import { KlDelay } from "koala-utils/dist/utils/KlDelay";
 import { KoalaListConfigInterface } from "./koala.list-config.interface";
 
+export type KoalaListPageSize = 10|20|30|50|100;
+
 @Directive()
 export abstract class ListAbstract extends FormAbstract implements AfterViewInit {
   public selection = new SelectionModel<object>(true, []);
@@ -23,6 +25,7 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
   public typeRequest: 'all' | 'onDemand' = 'onDemand';
   public filterParams = new BehaviorSubject<KoalaListFormFilterInterface>(null);
   public emptyListComponent?: KoalaDynamicComponent;
+  public pageSize: KoalaListPageSize;
 
   @Input() config: KoalaListConfigInterface;
 

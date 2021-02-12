@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable } from "rxjs";
 import { KoalaListFormFilterInterface } from "../koala-list-form-filter.interface";
 import { KoalaListItemMenuOptionInterface } from "../koala-list-item-menu-option.interface";
 import { SelectionModel } from "@angular/cdk/collections";
+import { KoalaListPageSize } from "../list.abstract";
 
 export class ListBuilder<DataType> {
   private config = {} as KoalaListConfigInterface;
@@ -42,6 +43,11 @@ export class ListBuilder<DataType> {
 
   public defaultFilter(config: KoalaListFormFilterInterface) {
     this.config.filterParams = new BehaviorSubject<KoalaListFormFilterInterface>(config);
+    return this;
+  }
+
+  public pageSize(size: KoalaListPageSize) {
+    this.config.pageSize = size;
     return this;
   }
 

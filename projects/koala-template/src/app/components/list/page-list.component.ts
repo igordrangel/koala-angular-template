@@ -86,6 +86,7 @@ export class PageListComponent extends PageAbstract {
                       .emptyListComponent(EmptyListComponent)
                       .getDataSource(dataSource => this.dataSource = dataSource)
                       .getSelectionList(selection => this.selectedItems = selection)
+                      .pageSize(20)
                       .getConfig();
   }
 
