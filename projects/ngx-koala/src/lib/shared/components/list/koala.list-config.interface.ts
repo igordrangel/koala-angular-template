@@ -7,10 +7,12 @@ import { FormGroup } from "@angular/forms";
 import { KoalaListFormFilterInterface } from "./koala-list-form-filter.interface";
 import { KoalaDynamicComponent } from "../dynamic-component/koala-dynamic-component";
 import { KoalaListPageSize } from "./list.abstract";
+import { SortDirection } from "@angular/material/sort";
 
 export interface KoalaListConfigInterface {
   columnsToShowInList: string[];
   columnSort?: string;
+  sortDirection?: SortDirection;
   itemsMenuListOptions?: KoalaListItemMenuOptionInterface[];
   itemsList: KoalaListItemInterface[];
   request: Observable<any>;

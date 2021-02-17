@@ -34,7 +34,7 @@ export class PageListComponent extends PageAbstract {
                       .defaultFilter({
                         params: {},
                         sort: 'name',
-                        order: 'asc',
+                        order: 'desc',
                         page: 1,
                         limit: 0
                       })
@@ -48,7 +48,7 @@ export class PageListComponent extends PageAbstract {
                           class: 'col-12'
                         }]
                       })
-                      .service(filter => this.listService.getList())
+                      .service(filter => this.listService.getList(filter.getValue()), 'onDemand')
                       .columns([
                         'select',
                         'name',

@@ -9,6 +9,7 @@ import { KoalaObjectHelper } from 'tskoala-helpers/dist/object/koala-object.help
 import { KoalaDynamicFormShowFieldInterface } from '../../components/form/dynamic-form/interfaces/koala.dynamic-form-show-field.interface';
 import { KoalaDynamicFormConfigInterface } from '../../components/form/dynamic-form/interfaces/koala.dynamic-form-config.interface';
 import { DynamicFormBuilder } from "./builder/dynamic-form.builder";
+import { koala } from "koala-utils";
 
 @Injectable({providedIn: "any"})
 export class KoalaDynamicFormService {
@@ -50,7 +51,16 @@ export class KoalaDynamicFormService {
 		    } else if (control.get('type').value === DynamicFormTypeFieldEnum.dynamicForm) {
 			    const dynamicFormConfig = control.get('dynamicFormConfig').value as BehaviorSubject<KoalaDynamicFormConfigInterface>;
 			    value = this.emitData(dynamicFormConfig.getValue().form);
-		    }
+		    } else if (control.get('type').value === DynamicFormTypeFieldEnum.number) {
+		      value = parseInt(value);
+        } else if (
+          control.get('type').value === DynamicFormTypeFieldEnum.float ||
+          control.get('type').value === DynamicFormTypeFieldEnum.percent
+        ) {
+          value = parseFloat(value.replace(/,/g, '.'));
+        } else if (control.get('type').value === DynamicFormTypeFieldEnum.coin) {
+          value = koala(value).string().unmaskCoin().getValue();
+        }
 		    data[control.get('name').value] = value;
 	    }
     });
