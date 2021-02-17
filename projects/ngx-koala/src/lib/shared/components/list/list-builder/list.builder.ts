@@ -21,6 +21,8 @@ export class ListBuilder<DataType> {
     this.config.typeRequest = type;
     this.config.responseIndexName = resultIndexName;
     this.config.responseQtdResultIndexName = response => response[qtdResultIndexName];
+    this.config.columnSort = this.config?.filterParams?.getValue()?.sort ?? null;
+    this.config.sortDirection = this.config?.filterParams?.getValue()?.order ?? 'asc';
 
     const response = service(this.config?.filterParams);
 

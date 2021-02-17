@@ -9,6 +9,7 @@ export class ListService {
 
   public getList(params?: KoalaListFormFilterInterface) {
     return new Observable<ListItemInterface[]>(observe => {
+      console.log(params);
       observe.next(koala([
         {name: 'Item 1', qtd: 5, value: 3000},
         {name: 'Item 2', qtd: 2, value: 8000},

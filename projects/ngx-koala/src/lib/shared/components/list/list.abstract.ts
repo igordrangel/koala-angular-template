@@ -1,22 +1,22 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { AfterViewInit, Directive, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Directive, Input, OnDestroy, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { BehaviorSubject, merge, Observable } from 'rxjs';
+import { BehaviorSubject, merge, Observable, Subscription } from 'rxjs';
 import { FormAbstract } from '../../../core/form.abstract';
 import { FormGroup } from '@angular/forms';
 import { KoalaDelayHelper } from 'tskoala-helpers/dist/delay/koala-delay.helper';
-import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators';
+import { debounceTime, map, startWith, switchMap } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { KoalaListFormFilterInterface } from './koala-list-form-filter.interface';
-import {KoalaDynamicComponent} from "../dynamic-component/koala-dynamic-component";
+import { KoalaDynamicComponent } from "../dynamic-component/koala-dynamic-component";
 import { KlDelay } from "koala-utils/dist/utils/KlDelay";
 import { KoalaListConfigInterface } from "./koala.list-config.interface";
 
-export type KoalaListPageSize = 10|20|30|50|100;
+export type KoalaListPageSize = 10 | 20 | 30 | 50 | 100;
 
 @Directive()
-export abstract class ListAbstract extends FormAbstract implements AfterViewInit {
+export abstract class ListAbstract extends FormAbstract implements AfterViewInit, OnDestroy {
   public selection = new SelectionModel<object>(true, []);
   public limitOptions: number[] = [10, 20, 30, 50, 100];
   public showMenuList: boolean = false;
@@ -26,11 +26,11 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
   public filterParams = new BehaviorSubject<KoalaListFormFilterInterface>(null);
   public emptyListComponent?: KoalaDynamicComponent;
   public pageSize: KoalaListPageSize;
-
   @Input() config: KoalaListConfigInterface;
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
+  private subscriptionSortList: Subscription;
+  private intervalSortList: any;
 
   protected constructor(
     private requestFunction: () => Observable<any>,
@@ -38,6 +38,11 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
     formSearch: () => FormGroup
   ) {
     super(formSearch);
+  }
+
+  ngOnDestroy() {
+    this.subscriptionSortList.unsubscribe();
+    clearInterval(this.intervalSortList);
   }
 
   async ngAfterViewInit() {
@@ -57,8 +62,8 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
 
   public selectAll() {
     this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(item => this.selection.select(item));
+    this.selection.clear() :
+    this.dataSource.data.forEach(item => this.selection.select(item));
 
     this.isAllSelected();
   }
@@ -92,14 +97,26 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
 
   private async prepareSearch() {
     if (this.typeRequest === 'onDemand') {
-      merge(this.sort?.sortChange ?? new Observable(null), this.paginator.page, this.filterParams).pipe(
+
+      this.intervalSortList = setInterval(() => {
+        if (this.sort && !this.subscriptionSortList) {
+          this.subscriptionSortList = this.sort.sortChange.subscribe(() => {
+            const filter = this.filterParams.value;
+            filter.sort = this.sort.active;
+            filter.order = this.sort.direction;
+            this.filterParams.next(filter);
+          });
+        } else if (!this.sort && this.subscriptionSortList) {
+          this.subscriptionSortList.unsubscribe();
+        }
+      }, 50);
+
+      merge(this.paginator.page, this.filterParams).pipe(
         startWith({}),
         switchMap(() => new Observable(observe => {
           this.loading(true);
           this.selection.clear();
           if (this.filterParams.value) {
-            this.filterParams.value.sort = this.sort?.active ?? '';
-            this.filterParams.value.order = this.sort?.direction ?? 'asc';
             this.filterParams.value.page = this.paginator.pageIndex;
             this.filterParams.value.limit = this.paginator.pageSize;
           }

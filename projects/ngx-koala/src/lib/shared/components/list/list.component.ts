@@ -9,6 +9,7 @@ import { KoalaDelayHelper } from 'tskoala-helpers/dist/delay/koala-delay.helper'
 import { KoalaDynamicFormService } from '../../services/dynamic-forms/koala.dynamic-form.service';
 import { KoalaListItemInterface } from './koala-list-item.interface';
 import { KoalaListFormFilterInterface } from "./koala-list-form-filter.interface";
+import { SortDirection } from "@angular/material/sort";
 
 @Component({
   selector: 'koala-list',
@@ -19,6 +20,7 @@ import { KoalaListFormFilterInterface } from "./koala-list-form-filter.interface
 export class ListComponent extends ListAbstract implements OnInit {
   public columnsToShowInList: string[];
   public columnSort: string;
+  public sortDirection: SortDirection = 'asc';
   public itemsMenuListOptions: KoalaListItemMenuOptionInterface[];
   public itemsList: KoalaListItemInterface[];
   public request: Observable<any>;
@@ -102,7 +104,8 @@ export class ListComponent extends ListAbstract implements OnInit {
   }
 
   private initConfig() {
-    this.columnSort = this.config.columnSort ?? '';
+    this.columnSort = this.config.columnSort ?? null;
+    this.sortDirection = this.config.sortDirection ?? 'asc';
     this.itemsMenuListOptions = this.config.itemsMenuListOptions ?? [];
     this.typeRequest = this.config.typeRequest ?? 'all';
     this.qtdListResult = this.config.qtdListResult ?? 0;

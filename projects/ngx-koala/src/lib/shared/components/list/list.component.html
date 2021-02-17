@@ -62,7 +62,7 @@
       class="table-hover"
       mat-table
       matSort
-      matSortDirection="asc" matSortDisableClear>
+      [matSortDirection]="sortDirection" matSortDisableClear>
       <ng-container matColumnDef="select">
         <th *matHeaderCellDef mat-header-cell>
           <mat-checkbox (change)="$event ? selectAll() : null"
@@ -79,7 +79,7 @@
       </ng-container>
 
       <ng-container *ngFor="let itemList of itemsList" [matColumnDef]="itemList.columnDef">
-        <th *matHeaderCellDef [mat-sort-header]="itemList.sortHeader" mat-header-cell>{{itemList.label}}</th>
+        <th *matHeaderCellDef [mat-sort-header]="itemList.sortHeader" [disabled]="!itemList.sortHeader" mat-header-cell>{{itemList.label}}</th>
         <td (dblclick)="itemList.dblClick(item)" *matCellDef="let item" mat-cell>
 	        <koala-dynamic-component *ngIf="itemList.itemComponent else itemText"
 	                                 [dynamicComponent]="itemList.itemComponent(item)"></koala-dynamic-component>
