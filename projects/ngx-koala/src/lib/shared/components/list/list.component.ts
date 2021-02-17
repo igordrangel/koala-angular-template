@@ -70,7 +70,7 @@ export class ListComponent extends ListAbstract implements OnInit {
         return item;
       });
       if (this.filterFormConfig?.checkAndSearch) {
-        this.formSearch.addControl(this.filterFormConfig.checkAndSearch.formControlName, new FormControl(false));
+        this.formSearch.addControl(this.filterFormConfig.checkAndSearch.formControlName, new FormControl(this.filterFormConfig.checkAndSearch.isChecked ?? false));
       }
     }
 
