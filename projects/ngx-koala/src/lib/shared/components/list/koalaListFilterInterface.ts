@@ -6,5 +6,6 @@ export interface KoalaListFilterInterface {
   checkAndSearch?: {
     formControlName: string;
     label: string;
+    isChecked?: boolean;
   };
 }
