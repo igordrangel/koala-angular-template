@@ -41,7 +41,7 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
   }
 
   ngOnDestroy() {
-    this.subscriptionSortList.unsubscribe();
+    this.subscriptionSortList?.unsubscribe();
     clearInterval(this.intervalSortList);
   }
 
