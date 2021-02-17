@@ -58,7 +58,10 @@ export class KoalaDynamicFormService {
           control.get('type').value === DynamicFormTypeFieldEnum.percent
         ) {
           value = parseFloat(value.replace(/,/g, '.'));
-        } else if (control.get('type').value === DynamicFormTypeFieldEnum.coin) {
+        } else if (
+          control.get('type').value === DynamicFormTypeFieldEnum.coin &&
+          typeof value === "string"
+        ) {
           value = koala(value).string().unmaskCoin().getValue();
         }
 		    data[control.get('name').value] = value;
