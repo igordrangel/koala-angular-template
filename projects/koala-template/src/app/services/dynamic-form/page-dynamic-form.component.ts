@@ -23,7 +23,7 @@ export class PageDynamicFormComponent extends PageAbstract {
   ) {
     super();
     this.config = dynamicFormService.build()
-                                    .field('Text Field', 'text', "text").grid(2).generate()
+                                    .field('Text Field', 'text', "text").addClass('field-content').addFieldClass('field-input').grid(2).generate()
                                     .field('Date Field', 'date', "date").grid(2).focus().generate()
                                     .field('Datetime Field', 'datetime', "datetime").grid(2).generate()
                                     .field('Time Field', 'time', "time").grid(2).generate()

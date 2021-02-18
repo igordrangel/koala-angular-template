@@ -4,6 +4,7 @@ import { FloatLabelType, MatFormFieldAppearance } from "@angular/material/form-f
 import { DynamicFormBuilder } from "../dynamic-form.builder";
 import { FormBuilder } from "@angular/forms";
 import { KoalaDynamicFormConfigInterface } from "../../../../components/form/dynamic-form/interfaces/koala.dynamic-form-config.interface";
+import { koala } from "koala-utils";
 
 export abstract class FieldBase {
   protected readonly fieldConfig: KoalaDynamicFormFieldInterface;
@@ -84,13 +85,36 @@ export abstract class FieldBase {
   }
 
   public grid(size: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 = 12, width: number = 100) {
-    this.fieldConfig.class = 'col-' + size;
-    this.fieldConfig.fieldClass = 'w-' + width;
+    for (let colSize = 12; colSize >= 1; colSize--) {
+      this.fieldConfig.class = this.fieldConfig.class?.replace('col-' + colSize, '');
+    }
+    this.addClass('col-' + size);
+    this.addFieldClass('w-' + width);
     return this;
   }
 
   public setOptions(options: { value: any; name: string; }[]) {
     this.fieldConfig.opcoesSelect = options;
+    return this;
+  }
+
+  public addClass(className: string) {
+    this.fieldConfig.class = koala(`${this.fieldConfig?.class ?? ''} ${className}`)
+      .string()
+      .split(' ')
+      .clearEmptyValues()
+      .toString(' ')
+      .getValue();
+    return this;
+  }
+
+  public addFieldClass(className: string) {
+    this.fieldConfig.fieldClass = koala(`${this.fieldConfig?.fieldClass ?? ''} ${className}`)
+      .string()
+      .split(' ')
+      .clearEmptyValues()
+      .toString(' ')
+      .getValue();
     return this;
   }
 

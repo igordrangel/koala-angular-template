@@ -52,7 +52,7 @@
     <span>private</span> dynamicFormService: <span>KoalaDynamicFormService</span>
   ) &#123;
     <span>this</span>.config = dynamicFormService.<span>build</span>()
-                                                          .<span>field</span>('Text Field', 'text', "text").<span>grid</span>(2).<span>generate</span>()
+                                                          .<span>field</span>('Text Field', 'text', "text").<span>addClass</span>('field-content').<span>addFieldClass</span>('field-input').<span>grid</span>(2).<span>generate</span>()
                                                           .<span>field</span>('Date Field', 'date', "date").<span>grid</span>(2).<span>focus</span>().<span>generate</span>()
                                                           .<span>field</span>('Datetime Field', 'datetime', "datetime").<span>grid</span>(2).<span>generate</span>()
                                                           .<span>field</span>('Time Field', 'time', "time").<span>grid</span>(2).<span>generate</span>()
