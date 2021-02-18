@@ -48,7 +48,7 @@ export class PageListComponent extends PageAbstract {
                           class: 'col-12'
                         }]
                       })
-                      .service(filter => this.listService.getList(filter.getValue()), 'onDemand')
+                      .service(filter => this.listService.getList(filter.getValue()), 'all')
                       .columns([
                         'select',
                         'name',

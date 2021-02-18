@@ -6,7 +6,7 @@ import { BehaviorSubject, merge, Observable, Subscription } from 'rxjs';
 import { FormAbstract } from '../../../core/form.abstract';
 import { FormGroup } from '@angular/forms';
 import { KoalaDelayHelper } from 'tskoala-helpers/dist/delay/koala-delay.helper';
-import { debounceTime, map, startWith, switchMap } from 'rxjs/operators';
+import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { KoalaListFormFilterInterface } from './koala-list-form-filter.interface';
 import { KoalaDynamicComponent } from "../dynamic-component/koala-dynamic-component";
@@ -124,6 +124,10 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
         })),
         debounceTime(300),
         switchMap(this.requestFunction),
+        catchError(() => new Observable(observe => {
+          this.loading(false);
+          observe.next(true);
+        })),
         map((response) => {
           this.loading(false);
           return this.requestResponseFunction(response);
@@ -135,6 +139,10 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
         startWith({}),
         debounceTime(300),
         switchMap(this.requestFunction),
+        catchError(() => new Observable(observe => {
+          this.loading(false);
+          observe.next(true);
+        })),
         map((response) => {
           this.loading(false);
           return this.requestResponseFunction(response);
