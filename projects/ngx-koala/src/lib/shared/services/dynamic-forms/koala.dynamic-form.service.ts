@@ -53,10 +53,10 @@ export class KoalaDynamicFormService {
 			    value = this.emitData(dynamicFormConfig.getValue().form);
 		    } else if (control.get('type').value === DynamicFormTypeFieldEnum.number) {
 		      value = parseInt(value);
-        } else if (
+        } else if ((
           control.get('type').value === DynamicFormTypeFieldEnum.float ||
           control.get('type').value === DynamicFormTypeFieldEnum.percent
-        ) {
+        ) && typeof value === "string") {
           value = parseFloat(value.replace(/,/g, '.'));
         } else if (
           control.get('type').value === DynamicFormTypeFieldEnum.coin &&
