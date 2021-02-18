@@ -75,65 +75,66 @@ export class DynamicFormBuilder {
   }
 
   public autofill(object: any) {
-    const setValues: KoalaDynamicSetValueInterface[] = [];
-    Object.keys(object).forEach(indexName => {
-      if (typeof object[indexName] !== "object") {
+    if (object) {
+      const setValues: KoalaDynamicSetValueInterface[] = [];
+      Object.keys(object).forEach(indexName => {
+
         const arrField = koala(this.config.formConfig).array<KoalaDynamicFormFieldInterface>().filter(indexName, 'name').getValue();
         const field = arrField[0] ?? null;
 
-        if (field?.type === DynamicFormTypeFieldEnum.textLogs) {
-          field.textObs = object[indexName];
-        } else {
-          setValues.push({
-                           name: indexName,
-                           value: object[indexName]
-                         });
-        }
-      } else {
-        const arrField = koala(this.config.formConfig).array<KoalaDynamicFormFieldInterface>().filter(indexName, 'name').getValue();
-        const field = arrField[0];
-
-        if (field.type === DynamicFormTypeFieldEnum.moreItems) {
-          const setValuesMoreItems = [];
-          const objectMoreItems = object[indexName] as any[];
-          objectMoreItems.forEach(objectItem => {
-            const moreItemValues: KoalaDynamicSetValueInterface[] = [];
-            Object.keys(objectItem).forEach(objectIndexName => {
-              moreItemValues.push({
-                                    name: objectIndexName,
-                                    value: objectItem[objectIndexName]
-                                  });
+        if (typeof object[indexName] !== "object" || field.type === DynamicFormTypeFieldEnum.autocomplete) {
+          if (field?.type === DynamicFormTypeFieldEnum.textLogs) {
+            field.textObs = object[indexName];
+          } else {
+            setValues.push({
+              name: indexName,
+              value: object[indexName]
             });
-            setValuesMoreItems.push(new BehaviorSubject<KoalaDynamicSetValueInterface[]>(moreItemValues));
-          });
-
-          field.moreItemsConfig.setValues.next(setValuesMoreItems);
-        } else if (field.type === DynamicFormTypeFieldEnum.dynamicForm) {
-          const dynamicFormObject = object[indexName];
-          const dynamicFormSetValues: KoalaDynamicSetValueInterface[] = [];
-
-          Object.keys(dynamicFormObject).forEach(dynamicFormIndexName => {
-            const arrDynamicField = koala(field.dynamicFormConfig.formConfig).array<KoalaDynamicFormFieldInterface>().filter(indexName, 'name').getValue();
-            const dynamicField = arrDynamicField[0] ?? null;
-
-            if (dynamicField?.type === DynamicFormTypeFieldEnum.textLogs) {
-              dynamicField.textObs = object[indexName];
-            } else {
-              dynamicFormSetValues.push({
-                                          name: dynamicFormIndexName,
-                                          value: dynamicFormObject[dynamicFormIndexName]
-                                        });
-            }
-          });
-
-          field.dynamicFormConfig.setValues.next(dynamicFormSetValues);
+          }
         } else {
-          this.autofill(object[indexName]);
-        }
-      }
-    });
+          if (field.type === DynamicFormTypeFieldEnum.moreItems) {
+            const setValuesMoreItems = [];
+            const objectMoreItems = object[indexName] as any[];
+            objectMoreItems.forEach(objectItem => {
+              const moreItemValues: KoalaDynamicSetValueInterface[] = [];
+              Object.keys(objectItem).forEach(objectIndexName => {
+                moreItemValues.push({
+                  name: objectIndexName,
+                  value: objectItem[objectIndexName]
+                });
+              });
+              setValuesMoreItems.push(new BehaviorSubject<KoalaDynamicSetValueInterface[]>(moreItemValues));
+            });
 
-    this.config.setValues.next(setValues);
+            field.moreItemsConfig.setValues.next(setValuesMoreItems);
+          } else if (field.type === DynamicFormTypeFieldEnum.dynamicForm) {
+            const dynamicFormObject = object[indexName];
+            const dynamicFormSetValues: KoalaDynamicSetValueInterface[] = [];
+
+            Object.keys(dynamicFormObject).forEach(dynamicFormIndexName => {
+              const arrDynamicField = koala(field.dynamicFormConfig.formConfig).array<KoalaDynamicFormFieldInterface>().filter(indexName, 'name').getValue();
+              const dynamicField = arrDynamicField[0] ?? null;
+
+              if (dynamicField?.type === DynamicFormTypeFieldEnum.textLogs) {
+                dynamicField.textObs = object[indexName];
+              } else {
+                dynamicFormSetValues.push({
+                  name: dynamicFormIndexName,
+                  value: dynamicFormObject[dynamicFormIndexName]
+                });
+              }
+            });
+
+            field.dynamicFormConfig.setValues.next(dynamicFormSetValues);
+          } else {
+            this.autofill(object[indexName]);
+          }
+        }
+      });
+
+      this.config.setValues.next(setValues);
+    }
+
     return this;
   }
 
