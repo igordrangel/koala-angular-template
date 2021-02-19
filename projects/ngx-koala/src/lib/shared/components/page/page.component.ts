@@ -312,11 +312,13 @@ koala-menu ul li li.active a {color: ${this.palletColors.menuOptionsColorActive}
 
   private initOAuth2() {
     if (this.oauth2Config) {
-      this.oauthService.redirectUri = window.location.origin;
-      this.oauthService.responseType = 'code';
-      this.oauthService.clientId = this.oauth2Config.clientId;
-      this.oauthService.scope = this.oauth2Config.scope;
-      this.oauthService.issuer = this.oauth2Config.domain;
+      this.oauthService.configure({
+        redirectUri: window.location.origin,
+        responseType: 'code',
+        clientId: this.oauth2Config.clientId,
+        scope: this.oauth2Config.scope,
+        issuer: this.oauth2Config.domain
+      });
       this.oauthService.tokenValidationHandler = new JwksValidationHandler();
       this.oauthService.strictDiscoveryDocumentValidation = this.oauth2Config?.strictDiscoveryDocumentValidation ?? true;
       this.oauthService.loadDiscoveryDocumentAndTryLogin().then();

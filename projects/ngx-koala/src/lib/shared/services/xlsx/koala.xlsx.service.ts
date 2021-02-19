@@ -2,14 +2,14 @@ import * as Excel from "exceljs/dist/exceljs.min.js";
 import * as ExcelProper from "exceljs";
 import * as fs from 'file-saver';
 
-import {Injectable} from "@angular/core";
-import {KoalaXlsxConfigInterface} from "./koala.xlsx-config.interface";
-import {koala} from "koala-utils";
+import { Injectable } from "@angular/core";
+import { KoalaXlsxConfigInterface } from "./koala.xlsx-config.interface";
+import { koala } from "koala-utils";
 
 @Injectable({providedIn: "any"})
 export class KoalaXlsxService {
 
-  public convertJsonToXlsx(json: any[], config: KoalaXlsxConfigInterface) {
+  public async convertJsonToXlsx(json: any[], config: KoalaXlsxConfigInterface) {
     const title = config.title;
     const header = [];
 
@@ -19,6 +19,11 @@ export class KoalaXlsxService {
 
     const workbook: ExcelProper.Workbook = new Excel.Workbook();
     const worksheet = workbook.addWorksheet(config.sheetName);
+    if (config.password) await worksheet.protect(config.password, {
+      selectLockedCells: false,
+      selectUnlockedCells: false,
+      scenarios: false
+    });
 
     const titleRow = worksheet.addRow([title]);
     titleRow.alignment = {horizontal: "center"};
