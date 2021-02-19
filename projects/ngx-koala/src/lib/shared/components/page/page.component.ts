@@ -141,14 +141,11 @@ export class PageComponent implements OnInit {
           if (event instanceof NavigationEnd) {
             this.currentUrl = event.url.split('?')[0];
 
-            if (event.url.indexOf('/#state=') >= 0) {
-              console.log(event.url);
-            }
-
             if (
               event.url.indexOf('/login?clientId=') < 0 &&
               event.url.indexOf('/#id_token=') < 0 &&
-              event.url.indexOf('/#state=') < 0
+              event.url.indexOf('/#state=') < 0 &&
+              event.url.indexOf('/?state=') < 0
             ) {
               if (this.logged && this.defaultPage && this.openPages?.indexOf(this.currentUrl) >= 0) {
                 this.router.navigate([this.defaultPage]).then();
@@ -317,7 +314,8 @@ koala-menu ul li li.active a {color: ${this.palletColors.menuOptionsColorActive}
         responseType: 'code',
         clientId: this.oauth2Config.clientId,
         scope: this.oauth2Config.scope,
-        issuer: this.oauth2Config.domain
+        issuer: this.oauth2Config.domain,
+        customQueryParams: this.oauth2Config.customQueryParams
       });
       this.oauthService.tokenValidationHandler = new JwksValidationHandler();
       this.oauthService.strictDiscoveryDocumentValidation = this.oauth2Config?.strictDiscoveryDocumentValidation ?? true;
