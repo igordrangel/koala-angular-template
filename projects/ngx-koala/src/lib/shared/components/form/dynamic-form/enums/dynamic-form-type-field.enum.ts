@@ -24,5 +24,6 @@ export enum DynamicFormTypeFieldEnum {
   dynamicForm,
   date,
   radio,
-  float
+  float,
+  stringNumber
 }

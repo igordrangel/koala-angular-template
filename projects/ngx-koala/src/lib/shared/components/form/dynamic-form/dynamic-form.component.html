@@ -11,6 +11,7 @@
 	             propriedade.get('type').value == typeField.datetime ||
 	             propriedade.get('type').value == typeField.email ||
 	             propriedade.get('type').value == typeField.number ||
+	             propriedade.get('type').value == typeField.stringNumber ||
 	             propriedade.get('type').value == typeField.time ||
 	             propriedade.get('type').value == typeField.date ||
 	             propriedade.get('type').value == typeField.hoursAndMinutes ||
@@ -30,6 +31,7 @@
           [readonly]="propriedade.get('disabled').value"
 		      [tabIndex]="tabIndexStart + i"
 		      [mask]="((propriedade.get('type').value == typeField.phone) ? '(00)0000-0000?0' : null) ||
+		              ((propriedade.get('type').value == typeField.stringNumber) ? '0{'+propriedade.get('maxLength').value+'}' : null) ||
                   ((propriedade.get('type').value == typeField.cpf) ? '000.000.000-00' : null) ||
                   ((propriedade.get('type').value == typeField.cnpj) ? '00.000.000/0000-00' : null) ||
                   ((propriedade.get('type').value == typeField.percent) ? 'percent' : null) ||
