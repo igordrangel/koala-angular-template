@@ -64,6 +64,7 @@ export class PageDynamicFormComponent extends PageAbstract {
                                         .field('Text Field', 'text', "text").grid(4).maxLength(10).generate()
                                         .field('Date Field', 'date', "date").grid(4).generate()
                                         .field('Number Field', 'number', "number").grid(4).min(5).max(10).generate()
+                                        .field('String Number Field', 'stringNumber', "stringNumber").grid(4).maxLength(4).generate()
                                     .generateMoreItems()
                                     .literalConfig({
                                       label: 'More Items',

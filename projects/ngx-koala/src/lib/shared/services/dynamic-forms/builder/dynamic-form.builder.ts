@@ -10,7 +10,7 @@ import { KoalaDynamicFormShowFieldInterface } from "../../../components/form/dyn
 import { MoreItemsBuilder } from "./fields/more-items.builder";
 import { koala } from "koala-utils";
 
-export type DynamicFormFieldType = 'text' | 'password' | 'cpf' | 'cnpj' | 'datetime' | 'email' | 'phone' | 'number' | 'valueList' | 'textarea' | 'time' | 'hoursAndMinutes' | 'checkbox' | 'select' | 'coin' | 'percent' | 'id' | 'textLogs' | 'color' | 'date' | 'radio' | 'float';
+export type DynamicFormFieldType = 'text' | 'password' | 'cpf' | 'cnpj' | 'datetime' | 'email' | 'phone' | 'number' | 'stringNumber' | 'valueList' | 'textarea' | 'time' | 'hoursAndMinutes' | 'checkbox' | 'select' | 'coin' | 'percent' | 'id' | 'textLogs' | 'color' | 'date' | 'radio' | 'float';
 
 export class DynamicFormBuilder {
   private readonly config: KoalaDynamicFormConfigInterface;
@@ -33,6 +33,7 @@ export class DynamicFormBuilder {
       case "text":
       case "textarea":
       case "number":
+      case "stringNumber":
       case "cnpj":
       case "cpf":
       case "coin":
