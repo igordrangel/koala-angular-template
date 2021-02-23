@@ -195,28 +195,28 @@
                                 label: 'Name',
                                 columnDef: 'name',
                                 sortHeader: 'name',
-                                itemNameProperty: (item: <span>ListItemInterface</span>) => item.name,
-                                dblClick: (item: <span>ListItemInterface</span>) => <span>this</span>.edit(item)
+                                itemNameProperty: item => item.name,
+                                dblClick: item => <span>this</span>.edit(item)
                               &#125;)
                               .<span>itemColumn</span>(&#123;
                                 label: 'Qtd.',
                                 columnDef: 'qtd',
                                 sortHeader: 'qtd',
-                                itemNameProperty: (item: <span>ListItemInterface</span>) => item.qtd.toString(),
-                                dblClick: (item: <span>ListItemInterface</span>) => <span>this</span>.edit(item)
+                                itemNameProperty: item => item.qtd.toString(),
+                                dblClick: item => <span>this</span>.edit(item)
                               &#125;)
                               .<span>itemColumn</span>(&#123;
                                 label: 'Value',
                                 columnDef: 'value',
                                 sortHeader: 'value',
-                                itemNameProperty: (item: <span>ListItemInterface</span>) => koala(item.qtd).number().maskCoin('US$ ').getValue(),
-                                dblClick: (item: <span>ListItemInterface</span>) => <span>this</span>.edit(item)
+                                itemNameProperty: item => koala(item.qtd).number().maskCoin('US$ ').getValue(),
+                                dblClick: item => <span>this</span>.edit(item)
                               &#125;)
                               .<span>actionList</span>(&#123;
                                 icon: 'edit',
                                 name: 'Edit',
                                 havePermission: true,
-                                action: (item: ListItemInterface) => <span>this</span>.edit(item)
+                                action: item => <span>this</span>.edit(item)
                               &#125;)
                               .<span>emptyListComponent</span>(EmptyListComponent)
                               .<span>getDataSource</span>(dataSource) => <span>this</span>.dataSource = dataSource)

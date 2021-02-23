@@ -1,7 +1,7 @@
-export interface KoalaListItemMenuOptionInterface {
+export interface KoalaListItemMenuOptionInterface<DataType> {
   icon: string;
   name: string;
-  action: (item: any) => void;
+  action: (item: DataType) => void;
   havePermission: boolean;
-  showByItemList?: (item: any) => boolean;
+  showByItemList?: (item: DataType) => boolean;
 }
