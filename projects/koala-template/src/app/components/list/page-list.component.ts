@@ -60,28 +60,28 @@ export class PageListComponent extends PageAbstract {
                         label: 'Name',
                         columnDef: 'name',
                         sortHeader: 'name',
-                        itemNameProperty: (item: ListItemInterface) => item.name,
-                        dblClick: (item: ListItemInterface) => this.edit(item)
+                        itemNameProperty: item => item.name,
+                        dblClick: item => this.edit(item)
                       })
                       .itemColumn({
                         label: 'Qtd.',
                         columnDef: 'qtd',
                         sortHeader: 'qtd',
-                        itemNameProperty: (item: ListItemInterface) => item.qtd.toString(),
-                        dblClick: (item: ListItemInterface) => this.edit(item)
+                        itemNameProperty: item => item.qtd.toString(),
+                        dblClick: item => this.edit(item)
                       })
                       .itemColumn({
                         label: 'Value',
                         columnDef: 'value',
                         sortHeader: 'value',
-                        itemNameProperty: (item: ListItemInterface) => koala(item.qtd).number().maskCoin('US$ ').getValue(),
-                        dblClick: (item: ListItemInterface) => this.edit(item)
+                        itemNameProperty: item => koala(item.qtd).number().maskCoin('US$ ').getValue(),
+                        dblClick: item => this.edit(item)
                       })
                       .actionList({
                         icon: 'edit',
                         name: 'Edit',
                         havePermission: true,
-                        action: (item: ListItemInterface) => this.edit(item)
+                        action: item => this.edit(item)
                       })
                       .emptyListComponent(EmptyListComponent)
                       .getDataSource(dataSource => this.dataSource = dataSource)

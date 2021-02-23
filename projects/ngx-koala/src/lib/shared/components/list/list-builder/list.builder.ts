@@ -58,7 +58,7 @@ export class ListBuilder<DataType> {
     return this;
   }
 
-  public itemColumn(item: KoalaListItemInterface) {
+  public itemColumn(item: KoalaListItemInterface<DataType>) {
     (this.config.itemsList?.length > 0) ?
       this.config.itemsList.push(item) :
       this.config.itemsList = [item];
@@ -66,7 +66,7 @@ export class ListBuilder<DataType> {
     return this;
   }
 
-  public actionList(item: KoalaListItemMenuOptionInterface) {
+  public actionList(item: KoalaListItemMenuOptionInterface<DataType>) {
     (this.config.itemsMenuListOptions?.length > 0) ?
       this.config.itemsMenuListOptions.push(item) :
       this.config.itemsMenuListOptions = [item];
