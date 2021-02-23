@@ -2,7 +2,7 @@ import { KoalaListConfigInterface } from "../koala.list-config.interface";
 import { KoalaListItemInterface } from "../koala-list-item.interface";
 import { Type } from "@angular/core";
 import { KoalaDynamicComponent } from "../../dynamic-component/koala-dynamic-component";
-import { KoalaListFilterInterface } from "../koalaListFilterInterface";
+import { KoalaListFilterInterface } from "../koala-list-filter.interface";
 import { BehaviorSubject, Observable } from "rxjs";
 import { KoalaListFormFilterInterface } from "../koala-list-form-filter.interface";
 import { KoalaListItemMenuOptionInterface } from "../koala-list-item-menu-option.interface";
