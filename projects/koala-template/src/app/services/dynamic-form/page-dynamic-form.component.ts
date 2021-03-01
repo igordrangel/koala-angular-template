@@ -59,12 +59,20 @@ export class PageDynamicFormComponent extends PageAbstract {
                                       {value: false, name: 'false'}
                                     ]).grid(2).generate()
                                     .field('Checkbox', 'checkbox', "checkbox").grid(2).generate()
+                                    .field('Select Multiple Native', 'selectMultipleNative', "selectMultipleNative").setOptions([
+        {value: 1, name: 'Item 1'},
+        {value: 2, name: 'Item 2'},
+        {value: 3, name: 'Item 3'},
+        {value: 4, name: 'Item 4'},
+        {value: 5, name: 'Item 5'},
+        {value: 6, name: 'Item 6'}
+      ]).required().textHint('Selecione um ou mais Items').generate()
                                     .simpleMoreItems('More Items', 'moreItems', 'Add Item', 1, 2)
-                                      .build()
-                                        .field('Text Field', 'text', "text").grid(4).maxLength(10).generate()
-                                        .field('Date Field', 'date', "date").grid(4).generate()
-                                        .field('Number Field', 'number', "number").grid(4).min(5).max(10).generate()
-                                        .field('String Number Field', 'stringNumber', "stringNumber").grid(4).maxLength(4).generate()
+                                    .build()
+                                    .field('Text Field', 'text', "text").grid(4).maxLength(10).generate()
+                                    .field('Date Field', 'date', "date").grid(4).generate()
+                                    .field('Number Field', 'number', "number").grid(4).min(5).max(10).generate()
+                                    .field('String Number Field', 'stringNumber', "stringNumber").grid(4).maxLength(4).generate()
                                     .generateMoreItems()
                                     .literalConfig({
                                       label: 'More Items',
@@ -109,25 +117,25 @@ export class PageDynamicFormComponent extends PageAbstract {
                                     .field('ValueList Field', 'valueList', "valueList").generate()
                                     .field('TextLogs Field', 'textLogs', "textLogs").generate()
                                     .field('DynamicForm', 'dynamicForm', 'select').setOptions([
-                                      {value: true, name: 'Show'},
-                                      {value: false, name: 'Hide'}
-                                    ]).valueChanges((value: boolean) => {
-                                      this.config.showFields.next([
-                                        {name: 'dynamicFormShow', show: value}
-                                      ])
-                                    }).generate()
+        {value: true, name: 'Show'},
+        {value: false, name: 'Hide'}
+      ]).valueChanges((value: boolean) => {
+        this.config.showFields.next([
+          {name: 'dynamicFormShow', show: value}
+        ])
+      }).generate()
                                     .literalConfig({
                                       show: false,
                                       label: 'DynamicForm Showed',
                                       name: 'dynamicFormShow',
                                       type: DynamicFormTypeFieldEnum.dynamicForm,
                                       dynamicFormConfig: this.dynamicFormService
-                                        .build()
-                                          .field('Option', 'option', "select").setOptions([
-                                            {value: '1', name: 'Option 1'},
-                                            {value: '2', name: 'Option 2'}
-                                          ]).generate()
-                                        .generate()
+                                                             .build()
+                                                             .field('Option', 'option', "select").setOptions([
+                                          {value: '1', name: 'Option 1'},
+                                          {value: '2', name: 'Option 2'}
+                                        ]).generate()
+                                                             .generate()
                                     })
                                     .autofill({
                                       text: 'Teste 123',
@@ -136,8 +144,13 @@ export class PageDynamicFormComponent extends PageAbstract {
                                         option: '1'
                                       },
                                       moreItems: [
-                                        {text: '123', date: koala('now').date().format('YYYY-MM-DD').getValue(), number: 6}
+                                        {
+                                          text: '123',
+                                          date: koala('now').date().format('YYYY-MM-DD').getValue(),
+                                          number: 6
+                                        }
                                       ],
+                                      selectMultipleNative: [1,2],
                                       textLogs: 'teste 123'
                                     })
                                     .generate();

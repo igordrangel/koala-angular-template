@@ -255,6 +255,34 @@
 		      {{propriedade.get('label').value}} não informado(a).
 	      </mat-error>
 	    </mat-form-field>
+      <mat-form-field
+        class="select-multiple-native"
+        *ngIf="propriedade.get('type').value == typeField.selectMultipleNative"
+        [appearance]="propriedade.get('appearance').value"
+        [floatLabel]="propriedade.get('floatLabel').value"
+        [formGroupName]="i"
+        [ngClass]="propriedade.get('fieldClass').value">
+        <mat-label>{{propriedade.get('label').value}}</mat-label>
+        <select
+          matNativeControl
+          formControlName="value"
+          multiple
+          [tabIndex]="tabIndexStart + i"
+          [required]="propriedade.get('required').value"
+          [disabled]="propriedade.get('disabled').value">
+          <option *ngFor="let options of propriedade.get('opcoesSelect').value" [value]="options.value">
+            {{options.name}}
+          </option>
+        </select>
+        <mat-hint *ngIf="propriedade.get('textHint').value">
+          <mat-icon>info</mat-icon>
+          {{propriedade.get('textHint').value}}
+        </mat-hint>
+        <mat-error *ngIf="propriedade.get('value').errors?.required">
+          <mat-icon>error</mat-icon>
+          {{propriedade.get('label').value}} não informado(a).
+        </mat-error>
+      </mat-form-field>
 	    <div
 		    *ngIf="propriedade.get('type').value == typeField.checkbox"
 		    [formGroupName]="i"

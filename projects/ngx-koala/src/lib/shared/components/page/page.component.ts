@@ -246,7 +246,8 @@ fieldset legend,
 .mat-form-field input,
 .mat-form-field textarea,
 .mat-form-field-appearance-outline:not(.mat-form-field-invalid) .mat-form-field-outline-thick,
-.mat-form-field label {color: ${this.palletColors.fontColor}!important;caret-color: ${this.palletColors.fontColor}!important;}
+.mat-form-field label,
+.select-multiple-native select {color: ${this.palletColors.fontColor}!important;caret-color: ${this.palletColors.fontColor}!important;}
 .mat-form-field-underline,
 .mat-form-field-appearance-fill .mat-form-field-underline::before,
 .mat-form-field-ripple {background: ${this.palletColors.fontColor}!important;}

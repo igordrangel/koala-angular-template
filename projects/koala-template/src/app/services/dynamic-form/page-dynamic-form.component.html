@@ -88,6 +88,14 @@
                                                               &#123;value: false, name: 'false'&#125;
                                                             ]).<span>grid</span>(2).<span>generate</span>()
                                                           .<span>field</span>('Checkbox', 'checkbox', "checkbox").<span>grid</span>(2).<span>generate</span>()
+                                                          .<span>field</span>('Select Multiple Native', 'selectMultipleNative', "selectMultipleNative").<span>setOptions</span>([
+                                                              &#123;value: 1, name: 'Item 1'&#125;,
+                                                              &#123;value: 2, name: 'Item 2'&#125;,
+                                                              &#123;value: 3, name: 'Item 3'&#125;,
+                                                              &#123;value: 4, name: 'Item 4'&#125;,
+                                                              &#123;value: 5, name: 'Item 5'&#125;,
+                                                              &#123;value: 6, name: 'Item 6'&#125;
+                                                          ]).<span>required</span>().<span>textHint</span>('Selecione um ou mais Items').<span>generate</span>()
                                                           .<span>simpleMoreItems</span>('More Items', 'moreItems', 'Add Item', 1, 2)
                                                             .<span>build</span>()
                                                               .<span>field</span>('Text Field', 'text', "text").<span>maxLength</span>(10).<span>grid</span>(4).<span>generate</span>()
@@ -164,6 +172,7 @@
                                                             dynamicFormShow: &#123;
                                                               option: '1'
                                                             &#125;,
+                                                            selectMultipleNative: [1,2],
                                                             moreItems: [
                                                               &#123;text: '123', date: koala('now').date().format('YYYY-MM-DD').getValue(), number: 6&#125;
                                                             ],
