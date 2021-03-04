@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  ViewChild
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { LoaderBarPageInterface } from '../loader/loader-bar-page.interface';
@@ -22,9 +14,9 @@ import { menuStateSubject } from '../menu/menu.component';
 import { OAuthService } from "angular-oauth2-oidc";
 import { KoalaOauth2ConfigInterface } from "./koala-oauth2-config.interface";
 import { JwksValidationHandler } from "angular-oauth2-oidc-jwks";
-import jwt from "jwt-decode";
 import jwtEncode from "jwt-encode";
 import { TokenFactory } from "../../services/token/token.factory";
+import { KlDelay } from "koala-utils/dist/utils/KlDelay";
 
 @Component({
   selector: 'koala-page',
@@ -204,8 +196,11 @@ export class PageComponent implements OnInit {
     await this.menu.toggle();
   }
 
-  public logout() {
-    if (this.oauth2Config) this.oauthService.logOut();
+  public async logout() {
+    if (this.oauth2Config) {
+      this.oauthService.logOut();
+      await KlDelay.waitFor(1000);
+    }
     this.menuService.close();
     this.tokenService.removeToken();
     this.tokenService.getToken().next(null);
