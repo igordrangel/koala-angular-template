@@ -17,6 +17,7 @@ import { JwksValidationHandler } from "angular-oauth2-oidc-jwks";
 import jwtEncode from "jwt-encode";
 import { TokenFactory } from "../../services/token/token.factory";
 import { KlDelay } from "koala-utils/dist/utils/KlDelay";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: 'koala-page',
@@ -39,6 +40,7 @@ export class PageComponent implements OnInit {
   @Input() palletColors: KoalaPagePalletColorsInterface;
   @Input() labelLogout: string = 'Sair';
   @Input() oauth2Config: KoalaOauth2ConfigInterface;
+  @Output() logoutEmitter = new EventEmitter<boolean>(false);
   @Output() deleteAllNotifications = new EventEmitter<boolean>(false);
   @Output() deleteNotification = new EventEmitter<KoalaNotificationInterface>(null);
   public logged: boolean;
@@ -81,6 +83,7 @@ export class PageComponent implements OnInit {
   @ViewChild('drawer', {static: true}) private menu: MatDrawer;
 
   constructor(
+    private http: HttpClient,
     private tokenService: KoalaTokenService,
     private router: Router,
     private loaderService: KoalaLoaderService,
@@ -197,13 +200,18 @@ export class PageComponent implements OnInit {
   }
 
   public async logout() {
+    this.logoutEmitter.emit(true);
     if (this.oauth2Config) {
-      this.oauthService.logOut();
-      await KlDelay.waitFor(3000);
+      if (this.oauth2Config.endpointLogout) {
+        await this.http.get(this.oauth2Config.endpointLogout).toPromise();
+      } else {
+        this.oauthService.logOut();
+      }
     }
     this.menuService.close();
     this.tokenService.removeToken();
     this.tokenService.getToken().next(null);
+    this.logoutEmitter.emit(false);
   }
 
   public defineColor() {
