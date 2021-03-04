@@ -313,7 +313,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			validators = [];
 		}
 
-		return this.fb.group({
+		const field = this.fb.group({
 			show: [new BehaviorSubject<boolean>(config.show ?? true)],
 			label: [config.label],
 			name: [config.name],
@@ -360,6 +360,13 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			textLogs: [config?.textObs],
 			value: [value, validators, config.asyncValidators]
 		});
+
+    field.get('autocompleteOptionsFiltered').value.next(this.autocompleteFilter(
+      config.autocompleteOptions.value,
+      ''
+    ));
+
+		return field;
 	}
 
 	private setValuesOnFields(subject: BehaviorSubject<KoalaDynamicSetValueInterface[]>, form: FormGroup) {
