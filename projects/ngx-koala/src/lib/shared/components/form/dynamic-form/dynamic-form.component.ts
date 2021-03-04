@@ -361,10 +361,14 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 			value: [value, validators, config.asyncValidators]
 		});
 
-    field.get('autocompleteOptionsFiltered').value.next(this.autocompleteFilter(
-      config.autocompleteOptions.value,
-      ''
-    ));
+		if (config.autocompleteType === "onDemand") {
+      const loader = field.get('autocompleteLoading').value as BehaviorSubject<boolean>;
+      loader.next(true);
+      config.autocompleteFilter('').subscribe(options => {
+        field.get('autocompleteOptionsFiltered').value.next(options);
+        loader.next(false);
+      });
+    }
 
 		return field;
 	}
