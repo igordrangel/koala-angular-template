@@ -205,10 +205,10 @@ export class PageComponent implements OnInit {
   }
 
   public logout() {
+    if (this.oauth2Config) this.oauthService.logOut();
     this.menuService.close();
     this.tokenService.removeToken();
     this.tokenService.getToken().next(null);
-    if (this.oauth2Config) this.oauthService.logOut();
   }
 
   public defineColor() {
