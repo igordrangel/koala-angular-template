@@ -16,8 +16,6 @@ import { KoalaOauth2ConfigInterface } from "./koala-oauth2-config.interface";
 import { JwksValidationHandler } from "angular-oauth2-oidc-jwks";
 import jwtEncode from "jwt-encode";
 import { TokenFactory } from "../../services/token/token.factory";
-import { KlDelay } from "koala-utils/dist/utils/KlDelay";
-import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: 'koala-page',
@@ -83,7 +81,6 @@ export class PageComponent implements OnInit {
   @ViewChild('drawer', {static: true}) private menu: MatDrawer;
 
   constructor(
-    private http: HttpClient,
     private tokenService: KoalaTokenService,
     private router: Router,
     private loaderService: KoalaLoaderService,
@@ -203,7 +200,10 @@ export class PageComponent implements OnInit {
     this.logoutEmitter.emit(true);
     if (this.oauth2Config) {
       if (this.oauth2Config.endpointLogout) {
-        await this.http.get(this.oauth2Config.endpointLogout).toPromise();
+        const iframeLogout = document.createElement('iframe');
+        iframeLogout.style.display = 'none';
+        iframeLogout.src = this.oauth2Config.endpointLogout;
+        document.querySelector('body').appendChild(iframeLogout);
       } else {
         this.oauthService.logOut();
       }
