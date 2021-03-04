@@ -199,7 +199,7 @@ export class PageComponent implements OnInit {
   public async logout() {
     if (this.oauth2Config) {
       this.oauthService.logOut();
-      await KlDelay.waitFor(1000);
+      await KlDelay.waitFor(3000);
     }
     this.menuService.close();
     this.tokenService.removeToken();
