@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { koala } from "koala-utils";
 
+export type KoalaIconType = 'notFound'|'notAllowed'|'sessionExpired'|'empty'|'excel'|'word'|'pdf'|'edit'|'trash'|'webComponents'|'deliveryBox'|'github'|'facebook_squared'|'facebook_circle'|'instagram'|'twitter_squared'|'twitter_circle'|'linkedin_squared'|'linkedin_circle';
+
 @Component({
   selector: 'koala-icon',
   templateUrl: 'icon.component.html',
@@ -8,7 +10,7 @@ import { koala } from "koala-utils";
 })
 export class IconComponent implements OnInit {
   @Input() color: string;
-  @Input() icon: 'notFound'|'notAllowed'|'sessionExpired'|'empty'|'excel'|'word'|'pdf'|'edit'|'trash'|'webComponents'|'deliveryBox'|'github';
+  @Input() icon: KoalaIconType;
   @Input() size: number = 24;
 
   public intervalCheckElement: any;

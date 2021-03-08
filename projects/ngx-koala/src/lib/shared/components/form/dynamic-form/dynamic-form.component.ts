@@ -272,8 +272,8 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 		);
 
 		if (config.required === true) validators.push(Validators.required);
-    if (config.min) validators.push(Validators.min(config.min));
-    if (config.max) validators.push(Validators.max(config.max));
+    if (config.min && typeof config.min === "number") validators.push(Validators.min(config.min));
+    if (config.max && typeof config.max === "number") validators.push(Validators.max(config.max));
     if (config.minLength) validators.push(Validators.minLength(config.minLength));
     if (config.maxLength) validators.push(Validators.maxLength(config.maxLength));
 
