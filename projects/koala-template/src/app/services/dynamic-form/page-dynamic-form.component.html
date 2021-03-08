@@ -179,12 +179,46 @@
                                                             textLogs: 'teste 123'
                                                           &#125;)
                                                           .<span>generate</span>();
+
+    <span>setTimeout</span>(() => &#123;
+        dynamicFormService.<span>updateValidator</span>(
+            <span>this</span>.config.form,
+            'date',
+            'required',
+            <span>true</span>
+        );
+          
+        dynamicFormService.<span>updateValidator</span>(
+            <span>this</span>.config.form,
+            'date',
+            'min',
+            '2021-03-08'
+        );
+    &#125;, 5000);
   &#125;
 &#125;</code></pre>
 
         <h2>emitData</h2>
         <p>This method emit a data from <strong>FormGroup</strong> using in your <strong>koala-dynamic-form</strong> component.</p>
         <pre><code><span>this</span>.dynamicFormService.<span>emitData</span>(<span>this</span>.config.form);</code></pre>
+
+        <h2>updateValidator</h2>
+        <p>This method update a Validator in field on <strong>FormGroup</strong>.</p>
+        <pre><code><span>this</span>.dynamicFormService
+      .<span>updateValidator</span>(
+          this.config.form,
+          'date',
+          'required',
+          true
+      );
+
+<span>this</span>.dynamicFormService
+      .<span>updateValidator</span>(
+          this.config.form,
+          'date',
+          'min',
+          '2021-03-08'
+      );</code></pre>
 
         <h2>resetForm</h2>
         <p>This method clear your <strong>FormGroup</strong>.</p>

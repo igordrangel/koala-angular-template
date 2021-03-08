@@ -154,5 +154,20 @@ export class PageDynamicFormComponent extends PageAbstract {
                                       textLogs: 'teste 123'
                                     })
                                     .generate();
+
+    setTimeout(() => {
+      dynamicFormService.updateValidator(
+        this.config.form,
+        'date',
+        'required',
+        true
+      );
+      dynamicFormService.updateValidator(
+        this.config.form,
+        'date',
+        'min',
+        koala('now').date().format('YYYY-MM-DD').getValue()
+      );
+    }, 5000);
   }
 }

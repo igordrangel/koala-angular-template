@@ -6,9 +6,10 @@ import { KoalaDynamicFormFieldInterface } from "../../../../../ngx-koala/src/lib
 import { DynamicFormTypeFieldEnum } from "../../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/enums/dynamic-form-type-field.enum";
 import { koala } from "koala-utils";
 import { KlDelay } from "koala-utils/dist/utils/KlDelay";
+import { KoalaIconType } from "../../../../../ngx-koala/src/lib/shared/components/icon/icon.component";
 
 interface Icon {
-  name: string;
+  name: KoalaIconType;
   color: string;
   selected: boolean;
 }
@@ -41,6 +42,34 @@ export class PageIconsComponent extends PageAbstract implements OnInit {
     title: 'Social Media',
     icons: [{
       name: 'github',
+      color: '#fff',
+      selected: false
+    },{
+      name: 'facebook_squared',
+      color: '#fff',
+      selected: false
+    },{
+      name: 'facebook_circle',
+      color: '#fff',
+      selected: false
+    },{
+      name: 'instagram',
+      color: '#fff',
+      selected: false
+    },{
+      name: 'twitter_squared',
+      color: '#fff',
+      selected: false
+    },{
+      name: 'twitter_circle',
+      color: '#fff',
+      selected: false
+    },{
+      name: 'linkedin_squared',
+      color: '#fff',
+      selected: false
+    },{
+      name: 'linkedin_circle',
       color: '#fff',
       selected: false
     }]}, {
