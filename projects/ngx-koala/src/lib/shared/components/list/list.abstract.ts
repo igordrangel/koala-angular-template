@@ -5,7 +5,6 @@ import { MatSort } from '@angular/material/sort';
 import { BehaviorSubject, merge, Observable, Subscription } from 'rxjs';
 import { FormAbstract } from '../../../core/form.abstract';
 import { FormGroup } from '@angular/forms';
-import { KoalaDelayHelper } from 'tskoala-helpers/dist/delay/koala-delay.helper';
 import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { KoalaListFormFilterInterface } from './koala-list-form-filter.interface';
@@ -50,7 +49,7 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
     let stop = false;
     do {
       tentativas++;
-      await KoalaDelayHelper.waitFor(400);
+      await KlDelay.waitFor(400);
       if (this.sort || this.emptyListComponent) {
         this.prepareSearch().then();
         if (this.emptyListComponent) stop = true;

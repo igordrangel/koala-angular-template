@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { KoalaDialogTemplateInterface } from './koala.dialog-template.interface';
-import { KoalaStringHelper } from 'tskoala-helpers/dist/string/koala-string.helper';
 import { ComponentType } from '@angular/cdk/overlay';
+import { koala } from "koala-utils";
 
 @Injectable({providedIn: "any"})
 export class KoalaDialogService {
@@ -40,7 +40,7 @@ export class KoalaDialogService {
   }
 
   private dialogTemplate(data: any = null): KoalaDialogTemplateInterface {
-    let dialogElementId = "dialog-" + KoalaStringHelper.generateRandomString(10, true);
+    let dialogElementId = "dialog-" + koala('').string().random(10, true).getValue();
 
     return {
       small: {id: dialogElementId, panelClass: ['koala-dialog', 'small'], data},

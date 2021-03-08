@@ -4,12 +4,12 @@ import { KoalaListItemMenuOptionInterface } from './koala-list-item-menu-option.
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { KoalaListFilterInterface } from './koala-list-filter.interface';
-import { KoalaObjectHelper } from 'tskoala-helpers/dist/object/koala-object.helper';
-import { KoalaDelayHelper } from 'tskoala-helpers/dist/delay/koala-delay.helper';
 import { KoalaDynamicFormService } from '../../services/dynamic-forms/koala.dynamic-form.service';
 import { KoalaListItemInterface } from './koala-list-item.interface';
 import { KoalaListFormFilterInterface } from "./koala-list-form-filter.interface";
 import { SortDirection } from "@angular/material/sort";
+import { KlDelay } from "koala-utils/dist/utils/KlDelay";
+import { koala } from "koala-utils";
 
 @Component({
   selector: 'koala-list',
@@ -87,11 +87,12 @@ export class ListComponent extends ListAbstract implements OnInit {
 
   public async filterSubmit() {
     this.showAdvancedFilter = false;
-    await KoalaDelayHelper.waitFor(1);
-    let dados = KoalaObjectHelper.merge(
-      this.dynamicFormService.emitData(this.formSearch),
-      this.dynamicFormService.emitData(this.formAdvancedSearch)
-    );
+    await KlDelay.waitFor(1);
+    let dados = koala(this.dynamicFormService.emitData(this.formSearch))
+      .object()
+      .merge(this.dynamicFormService.emitData(this.formAdvancedSearch))
+      .getValue();
+
     if (this.filterFormConfig?.checkAndSearch) {
       const controlName = this.filterFormConfig.checkAndSearch.formControlName;
       dados[controlName] = this.formSearch.get(controlName).value;

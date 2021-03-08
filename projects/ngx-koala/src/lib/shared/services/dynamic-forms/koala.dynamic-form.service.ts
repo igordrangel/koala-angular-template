@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { DynamicFormTypeFieldEnum } from '../../components/form/dynamic-form/enums/dynamic-form-type-field.enum';
-import { KoalaStringHelper } from 'tskoala-helpers/dist/string/koala-string.helper';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { KoalaDynamicSetValueInterface } from '../../components/form/dynamic-form/interfaces/koala.dynamic-set-value.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { KoalaDynamicAutocompleteOptionsInterface } from '../../components/form/dynamic-form/interfaces/koala.dynamic-autocomplete-options.interface';
-import { KoalaObjectHelper } from 'tskoala-helpers/dist/object/koala-object.helper';
 import { KoalaDynamicFormShowFieldInterface } from '../../components/form/dynamic-form/interfaces/koala.dynamic-form-show-field.interface';
 import { KoalaDynamicFormConfigInterface } from '../../components/form/dynamic-form/interfaces/koala.dynamic-form-config.interface';
 import { DynamicFormBuilder } from "./builder/dynamic-form.builder";
@@ -80,7 +78,7 @@ export class KoalaDynamicFormService {
           if (value === null || value === undefined) {
             value = '';
           }
-          value = KoalaStringHelper.split(value);
+          value = koala(value).string().split().getValue();
         } else if (control.get('type').value === DynamicFormTypeFieldEnum.moreItems) {
           const moreItems = control.get('moreItemsConfig').value as { form: FormGroup }[];
           value = [];
@@ -159,12 +157,10 @@ export class KoalaDynamicFormService {
             value = item;
           }
           options.push({
-            name: KoalaObjectHelper.toString(
-              [item],
+            name: koala(item).object().toString(
               nameConfig.propsByName,
-              ';',
               (nameConfig.delimiter ?? ' ')
-            ),
+            ).getValue(),
             value
           });
         });
