@@ -17,5 +17,19 @@
       "ng2-currency-mask": "ng2-currency-mask",
       "ngx-mask": "ngx-mask"
     }
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "tslib",
+    "angular-oauth2-oidc",
+    "angular-oauth2-oidc-jwks",
+    "exceljs",
+    "file-saver",
+    "jwt-decode",
+    "jwt-encode",
+    "koala-utils",
+    "ng2-currency-mask",
+    "ngx-mask",
+    "ngx-papaparse",
+    "rxjs"
+  ]
 }
