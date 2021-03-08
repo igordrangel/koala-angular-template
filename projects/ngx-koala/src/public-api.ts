@@ -59,8 +59,6 @@ export * from './lib/shared/components/form/dynamic-form/validators/cnpj.validat
 export * from './lib/shared/components/form/dynamic-form/validators/autocomplete-selected.validator';
 export * from './lib/shared/components/form/dynamic-form/dynamic-form.component';
 export * from './lib/shared/components/form/show-invalid-fields/show-invalid-fields';
-export * from './lib/shared/components/form/location-form/location-form.component';
-export * from './lib/shared/components/form/location-form/koala.location-form.module';
 export * from './lib/shared/components/form/koala.form.module';
 //#endregion
 
@@ -175,11 +173,6 @@ export * from './lib/shared/services/request/koala.request.service';
 
 //#region [KOALA TOKEN]
 export * from './lib/shared/services/token/koala.token.service';
-//#endregion
-
-//#region [KOALA VIACEP]
-export * from './lib/shared/services/viacep/viacep.interface';
-export * from './lib/shared/services/viacep/viacep.service';
 //#endregion
 
 //#region [KOALA XLSX]
