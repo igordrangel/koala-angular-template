@@ -103,6 +103,14 @@
           <mat-icon>error</mat-icon>
           Informe até no máximo o valor de {{propriedade.get('max').value}}.
         </mat-error>
+        <mat-error *ngIf="propriedade.get('value').errors?.dateMin">
+          <mat-icon>error</mat-icon>
+          Informe no mínimo a data de {{propriedade.get('min').value | date:"shortDate"}}.
+        </mat-error>
+        <mat-error *ngIf="propriedade.get('value').errors?.dateMax">
+          <mat-icon>error</mat-icon>
+          Informe no máximo a data de {{propriedade.get('max').value | date:"shortDate"}}.
+        </mat-error>
 	    </mat-form-field>
 	    <mat-form-field
 		    *ngIf="propriedade.get('type').value == typeField.coin"

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +13,10 @@ import { PageGetStartedComponent } from "./get-started/page-get-started.componen
 import { MatExpansionModule } from "@angular/material/expansion";
 import { KoalaIconModule } from "../../../ngx-koala/src/lib/shared/components/icon/koala.icon.module";
 import { KoalaButtonModule } from "../../../ngx-koala/src/lib/shared/components/button/koala.button.module";
+import { registerLocaleData } from "@angular/common";
+import ptBr from '@angular/common/locales/pt';
+
+registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [
@@ -32,7 +36,9 @@ import { KoalaButtonModule } from "../../../ngx-koala/src/lib/shared/components/
     QuestionAvatarModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {provide: LOCALE_ID, useValue: 'pt-BR'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

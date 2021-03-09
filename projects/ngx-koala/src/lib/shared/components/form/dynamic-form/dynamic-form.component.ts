@@ -18,6 +18,8 @@ import { KoalaDynamicFormAutocompleteMultipleConfigInterface } from './interface
 import { KoalaDynamicFormConfigInterface } from './interfaces/koala.dynamic-form-config.interface';
 import { KlDelay } from "koala-utils/dist/utils/KlDelay";
 import { koala } from "koala-utils";
+import { DateMinValidator } from "./validators/date-min.validator";
+import { DateMaxValidator } from "./validators/date-max.validator";
 
 @Component({
   selector: 'koala-dynamic-form',
@@ -272,6 +274,14 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
     if (config.required === true) validators.push(Validators.required);
     if (config.min && typeof config.min === "number") validators.push(Validators.min(config.min));
     if (config.max && typeof config.max === "number") validators.push(Validators.max(config.max));
+    if (
+      config.type === DynamicFormTypeFieldEnum.date ||
+      config.type === DynamicFormTypeFieldEnum.datetime ||
+      config.type === DynamicFormTypeFieldEnum.time
+    ) {
+      if (config.min && typeof config.min === "string") { validators.push(DateMinValidator(config.min)); }
+      if (config.max && typeof config.max === "string") { validators.push(DateMaxValidator(config.max)); }
+    }
     if (config.minLength) validators.push(Validators.minLength(config.minLength));
     if (config.maxLength) validators.push(Validators.maxLength(config.maxLength));
 

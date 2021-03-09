@@ -1,6 +1,6 @@
 <div class="list-container">
   <div *ngIf="filterFormConfig" class="list-filter">
-    <form (ngSubmit)="filterSubmit()" [formGroup]="formSearch">
+    <form (ngSubmit)="filterSubmit()" [formGroup]="formFilter">
       <div class="main">
         <koala-dynamic-form
           [formConfig]="filterFormConfig.main"
@@ -22,7 +22,7 @@
           <li class="option">
             <koala-submit
               [btnSubmitDisabled]="btnSubmitDisabled"
-              [fg]="formSearch"
+              [fg]="formFilter"
               [iconButton]="true"
               [loader]="loader"
               icon="search">

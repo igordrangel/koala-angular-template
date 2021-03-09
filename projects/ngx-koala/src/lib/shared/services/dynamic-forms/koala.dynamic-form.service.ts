@@ -8,6 +8,8 @@ import { KoalaDynamicFormShowFieldInterface } from '../../components/form/dynami
 import { KoalaDynamicFormConfigInterface } from '../../components/form/dynamic-form/interfaces/koala.dynamic-form-config.interface';
 import { DynamicFormBuilder } from "./builder/dynamic-form.builder";
 import { koala } from "koala-utils";
+import { DateMinValidator } from "../../components/form/dynamic-form/validators/date-min.validator";
+import { DateMaxValidator } from "../../components/form/dynamic-form/validators/date-max.validator";
 
 export type KoalaDynamicFormValidatorType = 'required' | 'min' | 'max';
 
@@ -35,24 +37,33 @@ export class KoalaDynamicFormService {
       const currentRequired = control.get('required').value;
       const currentMin = control.get('min').value;
       const currentMax = control.get('max').value;
+      const validators = [];
 
       control.get('value').clearValidators();
       control.get('value').setErrors(null);
 
       if ((type === "required" && value) || currentRequired) {
-        control.get('value').setValidators(Validators.required);
+        validators.push(Validators.required);
         control.get('value').setErrors({required: true});
       }
-      if ((type === "min" || currentMin) && typeof value === "number") {
-        control.get('value').setValidators(Validators.min((type === "min" ? value : currentMin)));
-        if (type === "min") {
+      if ((type === "min" || currentMin)) {
+        if (typeof value === "number") {
+          validators.push(Validators.min((type === "min" ? value : currentMin)));
           control.get('value').setErrors({min: true});
         }
+        else if (typeof value === "string") {
+          validators.push(DateMinValidator((type === "min" ? value : currentMin)));
+          control.get('value').setErrors({dateMin: true});
+        }
       }
-      if ((type === "max" || currentMax) && typeof value === "number") {
-        control.get('value').setValidators(Validators.min((type === "max" ? value : currentMax)));
-        if (type === "max") {
+      if ((type === "max" || currentMax)) {
+        if (typeof value === "number") {
+          validators.push(Validators.max((type === "max" ? value : currentMax)));
           control.get('value').setErrors({max: true});
+        }
+        else if (typeof value === "string") {
+          validators.push(DateMaxValidator((type === "max" ? value : currentMax)));
+          control.get('value').setErrors({dateMax: true});
         }
       }
 
@@ -63,7 +74,7 @@ export class KoalaDynamicFormService {
       } else if (type === "max") {
         control.get('max').setValue(value);
       }
-
+      control.get('value').setValidators(validators);
       control.get('value').updateValueAndValidity();
     }
   }
