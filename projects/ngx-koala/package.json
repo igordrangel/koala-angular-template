@@ -1,6 +1,6 @@
 {
   "name": "ngx-koala",
-  "version": "11.4.0",
+  "version": "11.4.1",
   "dependencies": {
     "tslib": "^2.0.0",
     "angular-oauth2-oidc": "^10.0.3",
