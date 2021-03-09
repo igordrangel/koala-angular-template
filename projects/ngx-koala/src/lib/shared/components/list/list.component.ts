@@ -56,8 +56,6 @@ export class ListComponent extends ListAbstract implements OnInit {
   ngOnInit() {
     this.initConfig();
     this.loading(true);
-    this.formSearch = this.fb.group({});
-    this.formAdvancedSearch = this.fb.group({});
     if (this.filterFormConfig) {
       this.filterFormConfig?.main?.map(item => {
         item.class = item.class + ' padding-none';
