@@ -8,9 +8,13 @@ import { KoalaListFormFilterInterface } from "../koala-list-form-filter.interfac
 import { KoalaListItemMenuOptionInterface } from "../koala-list-item-menu-option.interface";
 import { SelectionModel } from "@angular/cdk/collections";
 import { KoalaListPageSize } from "../list.abstract";
+import { FormBuilder } from "@angular/forms";
 
 export class ListBuilder<DataType> {
   private config = {} as KoalaListConfigInterface;
+
+  constructor(private fb: FormBuilder) {
+  }
 
   public service(
     service: (filter: BehaviorSubject<KoalaListFormFilterInterface>) => Observable<any> | Promise<any>,
@@ -40,6 +44,8 @@ export class ListBuilder<DataType> {
 
   public filterConfig(config: KoalaListFilterInterface) {
     this.config.filterFormConfig = config;
+    this.config.formSearch = this.fb.group({});
+    this.config.formAdvancedSearch = this.fb.group({});
     return this;
   }
 
