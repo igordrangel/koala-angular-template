@@ -12,22 +12,15 @@
       </koala-dynamic-form>
       <div align="end" class="mt-15">
         <koala-button
-          *ngIf="!oauthService.getIdentityClaims() else btnLogout"
+          *ngIf="!oauthService.getIdentityClaims()"
           (click)="oauthService.initLoginFlow()"
+          [koalaIcon]="true"
+          icon="google"
           class="mr-8"
-          color="#fff"
-          backgroundColor="#00796B"
-          text="Login OAuth2">
+          color="#00796B"
+          backgroundColor="#fff"
+          text="Login with Google">
         </koala-button>
-        <ng-template #btnLogout>
-          <koala-button
-            (click)="oauthService.logOut()"
-            class="mr-8"
-            color="#fff"
-            backgroundColor="#00796B"
-            text="Logout OAuth2">
-          </koala-button>
-        </ng-template>
         <koala-submit
           [btnLabel]="btnLabel"
           [btnSubmitDisabled]="btnSubmitDisabled"

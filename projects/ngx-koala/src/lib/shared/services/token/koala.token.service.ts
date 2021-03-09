@@ -4,6 +4,13 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { TokenFactory } from "./token.factory";
 
+export interface KoalaOAuth2TokenInterface {
+  accessToken: string;
+  idToken: string;
+  login: string;
+  expired: number;
+}
+
 @Injectable({providedIn: "any"})
 export class KoalaTokenService {
   private token$ = new BehaviorSubject<string>(null);
@@ -20,7 +27,11 @@ export class KoalaTokenService {
     return this.token$;
   }
 
-  public getDecodedToken<T>(): T {
+  public getDecodedToken<T>(): T|null {
+    return (TokenFactory.hasToken() ? jwt(TokenFactory.getToken()) : null);
+  }
+
+  public getOAuth2Token(): KoalaOAuth2TokenInterface|null {
     return (TokenFactory.hasToken() ? jwt(TokenFactory.getToken()) : null);
   }
 

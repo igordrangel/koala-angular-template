@@ -88,6 +88,11 @@ export class NavigateHelper {
         {name: 'Services', routerLink: '/services'},
         {name: 'Token'}
       ];
+    } else if (location.href.indexOf('services/oauth2') >= 0) {
+      return [
+        {name: 'Services', routerLink: '/services'},
+        {name: 'OAuth2'}
+      ];
     }
   }
 }

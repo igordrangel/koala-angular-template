@@ -72,6 +72,10 @@ export class PageIconsComponent extends PageAbstract implements OnInit {
       name: 'linkedin_circle',
       color: '#fff',
       selected: false
+    },{
+      name: 'google',
+      color: '#fff',
+      selected: false
     }]}, {
     title: 'Action',
     icons: [{

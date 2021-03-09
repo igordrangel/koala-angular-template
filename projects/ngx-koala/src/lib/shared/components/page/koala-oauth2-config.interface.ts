@@ -6,4 +6,6 @@ export interface KoalaOauth2ConfigInterface {
   customQueryParams?: object;
   strictDiscoveryDocumentValidation?: boolean;
   endpointLogout?: string;
+  endpointToken?: string;
+  endpointClaims?: string;
 }

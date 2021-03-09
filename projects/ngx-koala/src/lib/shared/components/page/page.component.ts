@@ -11,11 +11,10 @@ import { KoalaPagePalletColorsInterface } from './koala-page-pallet-colors.inter
 import { MatDrawer } from '@angular/material/sidenav';
 import { KoalaMenuService } from '../../services/menu/koala.menu.service';
 import { menuStateSubject } from '../menu/menu.component';
-import { OAuthService } from "angular-oauth2-oidc";
 import { KoalaOauth2ConfigInterface } from "./koala-oauth2-config.interface";
-import { JwksValidationHandler } from "angular-oauth2-oidc-jwks";
 import jwtEncode from "jwt-encode";
 import { TokenFactory } from "../../services/token/token.factory";
+import { KoalaOAuth2Service } from "../../services/openid/koala.oauth2.service";
 
 @Component({
   selector: 'koala-page',
@@ -85,7 +84,7 @@ export class PageComponent implements OnInit {
     private router: Router,
     private loaderService: KoalaLoaderService,
     private menuService: KoalaMenuService,
-    private oauthService: OAuthService
+    private oauth2Service: KoalaOAuth2Service
   ) {
     this.loaderSubject = loaderService.getLoaderSubject();
   }
@@ -133,12 +132,7 @@ export class PageComponent implements OnInit {
           if (event instanceof NavigationEnd) {
             this.currentUrl = event.url.split('?')[0];
 
-            if (
-              event.url.indexOf('/login?clientId=') < 0 &&
-              event.url.indexOf('/#id_token=') < 0 &&
-              event.url.indexOf('/#state=') < 0 &&
-              event.url.indexOf('/?state=') < 0
-            ) {
+            if (event.url.indexOf('/login?clientId=') < 0) {
               if (this.logged && this.defaultPage && this.openPages?.indexOf(this.currentUrl) >= 0) {
                 this.router.navigate([this.defaultPage]).then();
                 return false;
@@ -198,16 +192,7 @@ export class PageComponent implements OnInit {
 
   public async logout() {
     this.logoutEmitter.emit(true);
-    if (this.oauth2Config) {
-      if (this.oauth2Config.endpointLogout) {
-        const iframeLogout = document.createElement('iframe');
-        iframeLogout.style.display = 'none';
-        iframeLogout.src = this.oauth2Config.endpointLogout;
-        document.querySelector('body').appendChild(iframeLogout);
-      } else {
-        this.oauthService.logOut();
-      }
-    }
+    if (this.oauth2Config) { this.oauth2Service.logout(); }
     this.menuService.close();
     this.tokenService.removeToken();
     this.tokenService.getToken().next(null);
@@ -313,27 +298,30 @@ koala-menu ul li li.active a {color: ${this.palletColors.menuOptionsColorActive}
 
   private initOAuth2() {
     if (this.oauth2Config) {
-      this.oauthService.configure({
+      this.oauth2Service.configure({
         redirectUri: window.location.origin,
+        redirectUriAfterAuth: this.defaultPage,
         responseType: 'code',
         clientId: this.oauth2Config.clientId,
         scope: this.oauth2Config.scope,
         issuer: this.oauth2Config.domain,
-        customQueryParams: this.oauth2Config.customQueryParams
+        customQueryParams: this.oauth2Config.customQueryParams,
+        endpointToken: this.oauth2Config.endpointToken ?? null,
+        endpointClaims: this.oauth2Config.endpointClaims ?? null
       });
-      this.oauthService.tokenValidationHandler = new JwksValidationHandler();
-      this.oauthService.strictDiscoveryDocumentValidation = this.oauth2Config?.strictDiscoveryDocumentValidation ?? true;
-      this.oauthService.loadDiscoveryDocumentAndTryLogin().then();
+      this.oauth2Service.loadDiscoveryDocumentAndTryLogin().then();
 
-      this.oauthService.events.subscribe(() => {
-        const claims = this.oauthService.getIdentityClaims();
-        if (claims && !TokenFactory.hasToken()) {
-          this.tokenService.setToken(jwtEncode({
-            accessToken: this.oauthService.getAccessToken(),
-            idToken: this.oauthService.getIdToken(),
-            login: claims[this.oauth2Config.indexLoginName] ?? 'Undefined',
-            expired: this.oauthService.getAccessTokenExpiration()
-          }, 'secret'))
+      this.oauth2Service.events.subscribe(event => {
+        if (event === 'userAuthenticated') {
+          const claims = this.oauth2Service.getIdentityClaims();
+          if (claims && !TokenFactory.hasToken()) {
+            this.tokenService.setToken(jwtEncode({
+              accessToken: this.oauth2Service.getAccessToken(),
+              idToken: this.oauth2Service.getIdToken(),
+              login: claims[this.oauth2Config.indexLoginName] ?? 'Undefined',
+              expired: this.oauth2Service.getAccessTokenExpiration()
+            }, 'secret'))
+          }
         }
       });
     }

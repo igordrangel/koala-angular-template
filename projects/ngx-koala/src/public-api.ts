@@ -175,11 +175,19 @@ export * from './lib/shared/services/request/koala.request.service';
 export * from './lib/shared/services/token/koala.token.service';
 //#endregion
 
+//#region [KOALA OPENID]
+export * from './lib/shared/services/openid/koala.oauth2.service';
+//#endregion
+
 //#region [KOALA XLSX]
 export * from './lib/shared/services/xlsx/koala.xlsx-config.interface';
 export * from './lib/shared/services/xlsx/koala.xlsx.service';
 //#endregion
 
+//#endregion
+
+//#region [ROUTER]
+export * from './lib/shared/router/koala.parameter-hash-location-stategy';
 //#endregion
 
 export * from './lib/shared/providers/pagination/pagination.provider';

@@ -15,7 +15,6 @@ import { NotificationComponent } from './shared/components/notifications/notific
 import { MatBadgeModule } from '@angular/material/badge';
 import { RouterModule } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { OAuthModule } from "angular-oauth2-oidc";
 
 @NgModule({
   declarations: [
@@ -36,8 +35,7 @@ import { OAuthModule } from "angular-oauth2-oidc";
     MatIconModule,
     MatSidenavModule,
     MatListModule,
-    MatMenuModule,
-    OAuthModule.forRoot(),
+    MatMenuModule
   ],
   exports: [
     PageComponent,
@@ -47,8 +45,7 @@ import { OAuthModule } from "angular-oauth2-oidc";
     MatButtonModule,
     MatIconModule,
     MatSidenavModule,
-    MatListModule,
-    OAuthModule
+    MatListModule
   ]
 })
 export class NgxKoalaModule {

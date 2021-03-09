@@ -12,7 +12,8 @@ const routes: Routes = [
   {path: 'menu', loadChildren: () => import('./menu/menu.module').then(m => m.MenuModule)},
   {path: 'request', loadChildren: () => import('./request/request.module').then(m => m.RequestModule)},
   {path: 'dynamic-form', loadChildren: () => import('./dynamic-form/dynamic-form.module').then(m => m.DynamicFormModule)},
-  {path: 'token', loadChildren: () => import('./token/token.module').then(m => m.TokenModule)}
+  {path: 'token', loadChildren: () => import('./token/token.module').then(m => m.TokenModule)},
+  {path: 'oauth2', loadChildren: () => import('./openid/openid.module').then(m => m.OpenidModule)}
 ];
 
 @NgModule({

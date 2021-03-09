@@ -1,10 +1,23 @@
 {
   "name": "ngx-koala",
-  "version": "11.4.2",
+  "version": "11.5.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/igordrangel/koala-angular-template.git"
+  },
+  "keywords": [
+    "koala",
+    "angular material",
+    "angular template"
+  ],
+  "author": "Igor D. Rangel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/igordrangel/koala-angular-template/issues"
+  },
+  "homepage": "https://github.com/igordrangel/koala-angular-template#readme",
   "dependencies": {
     "tslib": "^2.0.0",
-    "angular-oauth2-oidc": "^10.0.3",
-    "angular-oauth2-oidc-jwks": "^9.0.0",
     "exceljs": "^3.10.0",
     "file-saver": "^2.0.5",
     "jwt-decode": "^3.0.0",

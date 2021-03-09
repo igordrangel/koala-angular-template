@@ -15,6 +15,7 @@ import { KoalaIconModule } from "../../../ngx-koala/src/lib/shared/components/ic
 import { KoalaButtonModule } from "../../../ngx-koala/src/lib/shared/components/button/koala.button.module";
 import { registerLocaleData } from "@angular/common";
 import ptBr from '@angular/common/locales/pt';
+import { KoalaOAuth2Service } from "../../../ngx-koala/src/lib/shared/services/openid/koala.oauth2.service";
 
 registerLocaleData(ptBr);
 
@@ -37,7 +38,8 @@ registerLocaleData(ptBr);
     AppRoutingModule
   ],
   providers: [
-    {provide: LOCALE_ID, useValue: 'pt-BR'}
+    {provide: LOCALE_ID, useValue: 'pt-BR'},
+    KoalaOAuth2Service
   ],
   bootstrap: [AppComponent]
 })

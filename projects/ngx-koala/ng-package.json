@@ -7,10 +7,6 @@
   "lib": {
     "entryFile": "src/public-api.ts",
     "umdModuleIds": {
-      "tskoala-helpers/dist/delay/koala-delay.helper": "tskoala-helpers/dist/delay/koala-delay.helper",
-      "tskoala-helpers/dist/object/koala-object.helper": "tskoala-helpers/dist/object/koala-object.helper",
-      "tskoala-helpers/dist/string/koala-string.helper": "tskoala-helpers/dist/string/koala-string.helper",
-      "tskoala-helpers/dist/array/koala-array.helper": "tskoala-helpers/dist/array/koala-array.helper",
       "koala-utils": "koala-utils",
       "jwt-decode": "jwt-decode",
       "ngx-papaparse": "ngx-papaparse",
@@ -20,8 +16,6 @@
   },
   "whitelistedNonPeerDependencies": [
     "tslib",
-    "angular-oauth2-oidc",
-    "angular-oauth2-oidc-jwks",
     "exceljs",
     "file-saver",
     "jwt-decode",
