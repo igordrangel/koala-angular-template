@@ -29,6 +29,7 @@ export class ListComponent extends ListAbstract implements OnInit {
   public typeRequest: 'all' | 'onDemand';
   public filterFormConfig: KoalaListFilterInterface;
   public reload: BehaviorSubject<boolean>;
+  public formFilter: FormGroup;
   public formSearch: FormGroup;
   public formAdvancedSearch: FormGroup;
   public showAdvancedFilter: boolean = false;
@@ -55,6 +56,10 @@ export class ListComponent extends ListAbstract implements OnInit {
 
   ngOnInit() {
     this.initConfig();
+    this.formFilter = this.fb.group({
+      formSearch: this.formSearch,
+      formAdvancedSearch: this.formAdvancedSearch
+    });
     this.loading(true);
     if (this.filterFormConfig) {
       this.filterFormConfig?.main?.map(item => {
