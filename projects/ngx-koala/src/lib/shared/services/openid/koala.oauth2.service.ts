@@ -50,7 +50,7 @@ export interface KoalaOpenIdConfig {
   userinfo_signing_alg_values_supported: string[];
 }
 
-export type EventType = 'loadedConfig' | 'getToken' | 'getClaims' | 'userAuthenticated' | 'authenticate';
+export type EventType = 'loadedConfig' | 'getToken' | 'getClaims' | 'userAuthenticated' | 'authenticate' | 'logout';
 
 const STATE_STORAGE_NAME = 'koala_openid_state';
 
@@ -142,6 +142,7 @@ export class KoalaOAuth2Service implements OnDestroy {
     iframeLogout.style.display = 'none';
     iframeLogout.src = this.openIdOptions.end_session_endpoint;
     document.querySelector('body').appendChild(iframeLogout);
+    this.events.next('logout');
   }
 
   private getToken(code: string) {
