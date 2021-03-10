@@ -116,8 +116,8 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
                         } else if (!newFormGroup.get('multiple').value) {
                           newFormGroup.get('autocompleteSelectedValue').setValue(koala(this.formConfig)
                             .array<KoalaDynamicFormFieldInterface>()
-                            .filter(newFormGroup.get('name').value, name)
-                            .getValue()[0].autocompleteDefaultValueOnClear ?? null);
+                            .filter(newFormGroup.get('name').value, 'name')
+                            .getValue()[0]?.autocompleteDefaultValueOnClear ?? null);
                         }
 
                         if (config.type === DynamicFormTypeFieldEnum.autocomplete) {
