@@ -1,18 +1,16 @@
-export class TokenFactory {
-  private static storageName = 'koalaStorageToken';
+export const KOALA_TOKEN_STORAGE_NAME = 'koalaStorageToken';
 
+export class TokenFactory {
   private static token?: string;
-  private static clientId?: string;
-  private static OAuth2Domain?: string;
 
   public static init() {
-    if (!!localStorage.getItem(TokenFactory.storageName)) {
-      TokenFactory.setToken(localStorage.getItem(TokenFactory.storageName));
+    if (!!localStorage.getItem(KOALA_TOKEN_STORAGE_NAME)) {
+      TokenFactory.setToken(localStorage.getItem(KOALA_TOKEN_STORAGE_NAME));
     }
   }
 
   public static setToken(token: string) {
-    localStorage.setItem(this.storageName, token);
+    localStorage.setItem(KOALA_TOKEN_STORAGE_NAME, token);
     this.token = token;
   }
 
@@ -21,7 +19,7 @@ export class TokenFactory {
   }
 
   public static removeToken() {
-    localStorage.removeItem(this.storageName);
+    localStorage.removeItem(KOALA_TOKEN_STORAGE_NAME);
     this.token = null;
   }
 
