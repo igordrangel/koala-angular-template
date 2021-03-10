@@ -91,10 +91,10 @@ export class ListComponent extends ListAbstract implements OnInit {
   public async filterSubmit() {
     this.showAdvancedFilter = false;
     await KlDelay.waitFor(1);
-    let dados = koala(this.dynamicFormService.emitData(this.formSearch))
+    let dados = (this.formSearch ? koala(this.dynamicFormService.emitData(this.formSearch))
       .object()
-      .merge(this.dynamicFormService.emitData(this.formAdvancedSearch))
-      .getValue();
+      .merge(this.formAdvancedSearch ? this.dynamicFormService.emitData(this.formAdvancedSearch) : {})
+      .getValue() : null);
 
     if (this.filterFormConfig?.checkAndSearch) {
       const controlName = this.filterFormConfig.checkAndSearch.formControlName;
