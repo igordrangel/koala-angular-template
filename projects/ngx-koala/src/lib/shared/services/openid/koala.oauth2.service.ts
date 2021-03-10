@@ -157,7 +157,7 @@ export class KoalaOAuth2Service implements OnDestroy {
       formData.append(indexName, data[indexName]);
     });
 
-    this.http.post(this.openIdOptions.token_endpoint, formData.toString(), {
+    this.http.post(this.config.endpointToken ?? this.openIdOptions.token_endpoint, formData.toString(), {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
@@ -168,7 +168,7 @@ export class KoalaOAuth2Service implements OnDestroy {
   }
 
   private getClaims() {
-    this.http.get(this.openIdOptions.userinfo_endpoint, {
+    this.http.get(this.config.endpointClaims ?? this.openIdOptions.userinfo_endpoint, {
       headers: {
         Authorization: `Bearer ${this.getAccessToken()}`
       }
