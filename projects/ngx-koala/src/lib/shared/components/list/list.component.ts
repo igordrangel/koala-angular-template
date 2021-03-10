@@ -114,7 +114,10 @@ export class ListComponent extends ListAbstract implements OnInit {
     this.typeRequest = this.config.typeRequest ?? 'all';
     this.qtdListResult = this.config.qtdListResult ?? 0;
     this.columnsToShowInList = this.config.columnsToShowInList;
-    this.itemsList = this.config.itemsList;
+    this.itemsList = this.config.itemsList.map(item => {
+      if (!item.dblClick) { item.dblClick = () => {}; }
+      return item;
+    });
     this.formSearch = this.config.formSearch;
     this.formAdvancedSearch = this.config.formAdvancedSearch;
     this.showAdvancedFilter = this.config.showAdvancedFilter;
