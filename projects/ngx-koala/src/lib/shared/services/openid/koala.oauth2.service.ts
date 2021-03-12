@@ -78,6 +78,10 @@ export class KoalaOAuth2Service implements OnDestroy {
     }
   }
 
+  public hasOpenIdConfig() {
+    return !!this.openIdOptions;
+  }
+
   public configure(options: KoalaOAuth2Config) {
     this.config = options;
   }
