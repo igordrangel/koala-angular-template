@@ -50,7 +50,7 @@ export interface KoalaOpenIdConfig {
   userinfo_signing_alg_values_supported: string[];
 }
 
-export type EventType = 'loadedConfig' | 'getToken' | 'getClaims' | 'userAuthenticated' | 'authenticate' | 'logout';
+export type EventType = 'loadedConfig' | 'getToken' | 'getClaims' | 'userAuthenticated' | 'authenticate' | 'logout' | 'errorLoadConfig';
 
 const STATE_STORAGE_NAME = 'koala_openid_state';
 
@@ -69,15 +69,17 @@ export class KoalaOAuth2Service implements OnDestroy {
     private router: Router,
     private tokenService: KoalaTokenService
   ) {
-    this.state = localStorage.getItem(STATE_STORAGE_NAME) ?
-                 localStorage.getItem(STATE_STORAGE_NAME) :
-                 koala('').string().random(30, true, true, true).getValue();
+    this.generateState();
   }
 
   ngOnDestroy() {
     if (this.eventSubscription) {
       this.eventSubscription.unsubscribe();
     }
+  }
+
+  public hasOpenIdConfig() {
+    return !!this.openIdOptions;
   }
 
   public configure(options: KoalaOAuth2Config) {
@@ -88,12 +90,18 @@ export class KoalaOAuth2Service implements OnDestroy {
 
     this.eventSubscription = this.events.subscribe(event => {
       if (event === 'authenticate') {
+        this.generateState();
         localStorage.setItem(STATE_STORAGE_NAME, this.state);
         window.location.href = `${this.openIdOptions.authorization_endpoint}?response_type=${this.config.responseType}&client_id=${this.config.clientId}&state=${this.state}&redirect_uri=${this.config.redirectUri}&scope=${this.config.scope}`;
       } else if (event === 'getToken') {
         const urlParams = new URLSearchParams(window.location.search);
-        const code = urlParams.get('code');
-        this.getToken(code);
+        const state = urlParams.get('state');
+        if (state === this.state) {
+          const code = urlParams.get('code');
+          this.getToken(code);
+        } else {
+          this.logout();
+        }
       } else if (event === 'getClaims') {
         this.getClaims();
       }
@@ -110,6 +118,7 @@ export class KoalaOAuth2Service implements OnDestroy {
         resolve(true);
       }, e => {
         console.error(e);
+        this.events.next('errorLoadConfig');
         reject(e);
       });
     });
@@ -180,5 +189,11 @@ export class KoalaOAuth2Service implements OnDestroy {
       this.events.next('userAuthenticated');
       this.router.navigate([this.config.redirectUriAfterAuth]).then();
     });
+  }
+
+  private generateState() {
+    this.state = localStorage.getItem(STATE_STORAGE_NAME) ?
+                 localStorage.getItem(STATE_STORAGE_NAME) :
+                 koala('').string().random(30, true, true, true).getValue();
   }
 }
