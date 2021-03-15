@@ -192,7 +192,7 @@ export class KoalaOAuth2Service implements OnDestroy {
       this.state = null;
       localStorage.removeItem(STATE_STORAGE_NAME);
       this.events.next('userAuthenticated');
-      this.router.navigate([this.config.redirectUriAfterAuth]).then();
+      if (this.config.redirectUriAfterAuth) { this.router.navigate([this.config.redirectUriAfterAuth]).then(); }
     });
   }
 
