@@ -154,13 +154,14 @@ export class KoalaOAuth2Service implements OnDestroy {
     this.events.next('logout');
   }
 
-  private getToken(code: string) {
+  private getToken(code: string, refreshToken?: string) {
     const formData = new URLSearchParams();
     const data = koala({
-      grant_type: 'authorization_code',
+      grant_type: (refreshToken ? 'refresh_token' : 'authorization_code'),
       code,
       redirect_uri: this.config.redirectUri,
-      client_id: this.config.clientId
+      client_id: this.config.clientId,
+      refresh_token: refreshToken
     }).object().merge(this.config.customQueryParams ?? {}).getValue();
 
     Object.keys(data).forEach(indexName => {
@@ -171,9 +172,13 @@ export class KoalaOAuth2Service implements OnDestroy {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
-    }).subscribe(token => {
-      this.token = token;
-      this.events.next('getClaims');
+    }).subscribe((token: any) => {
+      if (!refreshToken) {
+        this.getToken(code, token.refresh_token);
+      } else {
+        this.token = token;
+        this.events.next('getClaims');
+      }
     }, () => this.events.next('loadedConfig'));
   }
 
