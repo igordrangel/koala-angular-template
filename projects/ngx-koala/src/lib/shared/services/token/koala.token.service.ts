@@ -1,6 +1,6 @@
 import jwt from 'jwt-decode';
 
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { TokenFactory } from "./token.factory";
 
@@ -14,11 +14,18 @@ export interface KoalaOAuth2TokenInterface {
 }
 
 @Injectable({providedIn: "any"})
-export class KoalaTokenService {
+export class KoalaTokenService implements OnDestroy {
   private token$ = new BehaviorSubject<string>(null);
+  private intervalToken: any;
 
   constructor() {
     this.verifySession();
+  }
+
+  ngOnDestroy() {
+    if (this.intervalToken) {
+      clearInterval(this.intervalToken);
+    }
   }
 
   public setToken(token: string) {
@@ -45,7 +52,7 @@ export class KoalaTokenService {
   private verifySession() {
     TokenFactory.init();
     this.token$.next(TokenFactory.getToken());
-    setInterval(() => {
+    this.intervalToken = setInterval(() => {
       if (!TokenFactory.hasToken() && this.token$.getValue()) {
         this.token$.next(null);
       } else if (TokenFactory.hasToken() && !this.token$.getValue()) {

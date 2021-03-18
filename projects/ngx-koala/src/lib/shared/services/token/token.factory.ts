@@ -24,6 +24,10 @@ export class TokenFactory {
   }
 
   public static hasToken() {
-    return !!this.token;
+    return !!this.token && !!localStorage.getItem(KOALA_TOKEN_STORAGE_NAME);
+  }
+
+  public static logout() {
+    this.removeToken();
   }
 }

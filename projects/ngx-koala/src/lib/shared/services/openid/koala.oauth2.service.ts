@@ -245,7 +245,7 @@ export class KoalaOAuth2Service implements OnDestroy {
       if (this.config.redirectUriAfterAuth) {
         this.router.navigate([this.config.redirectUriAfterAuth]).then();
       }
-    });
+    }, () => this.events.next('loadedConfig'));
   }
 
   private generateState() {
