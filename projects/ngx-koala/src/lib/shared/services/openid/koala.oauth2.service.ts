@@ -2,7 +2,6 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { koala } from 'koala-utils';
-import { KlDelay } from "koala-utils/dist/utils/KlDelay";
 import { Router } from "@angular/router";
 import { KoalaTokenService } from "../token/koala.token.service";
 
@@ -50,7 +49,15 @@ export interface KoalaOpenIdConfig {
   userinfo_signing_alg_values_supported: string[];
 }
 
-export type EventType = 'loadedConfig' | 'getToken' | 'getClaims' | 'userAuthenticated' | 'authenticate' | 'logout' | 'errorLoadConfig';
+export type EventType =
+  'loadedConfig'
+  | 'getToken'
+  | 'refreshToken'
+  | 'getClaims'
+  | 'userAuthenticated'
+  | 'authenticate'
+  | 'logout'
+  | 'errorLoadConfig';
 
 const STATE_STORAGE_NAME = 'koala_openid_state';
 
@@ -61,8 +68,10 @@ export class KoalaOAuth2Service implements OnDestroy {
   private openIdOptions: KoalaOpenIdConfig;
   private eventSubscription: Subscription;
   private state?: string;
+  private code?: string;
   private token?: any = {};
   private claims?: any;
+  private refreshTokenInterval?: any;
 
   constructor(
     private http: HttpClient,
@@ -75,6 +84,9 @@ export class KoalaOAuth2Service implements OnDestroy {
   ngOnDestroy() {
     if (this.eventSubscription) {
       this.eventSubscription.unsubscribe();
+    }
+    if (this.refreshTokenInterval) {
+      clearInterval(this.refreshTokenInterval);
     }
   }
 
@@ -102,7 +114,7 @@ export class KoalaOAuth2Service implements OnDestroy {
         } else {
           this.logout();
         }
-      } else if (event === 'getClaims') {
+      } else if (event === 'getClaims' || (event === 'refreshToken' && !this.claims)) {
         this.getClaims();
       }
     });
@@ -140,21 +152,59 @@ export class KoalaOAuth2Service implements OnDestroy {
     return this.token.id_token;
   }
 
+  public getRefreshToken() {
+    return this.token.refresh_token;
+  }
+
   public getAccessTokenExpiration() {
-    return this.token.expires_in;
+    const expires_in = new Date();
+    expires_in.setSeconds(this.token.expires_in);
+    return expires_in.toString();
+  }
+
+  public getCode() {
+    return this.code;
   }
 
   public logout() {
-    this.claims = null;
-    this.token = null;
-    const iframeLogout = document.createElement('iframe');
-    iframeLogout.style.display = 'none';
-    iframeLogout.src = this.openIdOptions.end_session_endpoint;
-    document.querySelector('body').appendChild(iframeLogout);
-    this.events.next('logout');
+    const logoutInterval = setInterval(() => {
+      if (this.hasOpenIdConfig()) {
+        this.claims = null;
+        this.token = null;
+        const iframeLogout = document.createElement('iframe');
+        iframeLogout.style.display = 'none';
+        iframeLogout.src = this.openIdOptions.end_session_endpoint;
+        document.querySelector('body').appendChild(iframeLogout);
+        this.events.next('logout');
+        clearInterval(logoutInterval);
+      }
+    }, 300);
+  }
+
+  public initRefreshTokenInterval(code: string, refreshToken: string) {
+    if (!this.refreshTokenInterval) {
+      this.refreshTokenInterval = setInterval(() => {
+        const refreshTokenDate = new Date();
+        refreshTokenDate.setMinutes(refreshTokenDate.getMinutes() + 1);
+        const token = this.tokenService.getOAuth2Token();
+        if (token) {
+          const expires_in = token.expired;
+          if (expires_in) {
+            if (new Date(expires_in) <= refreshTokenDate) {
+              this.getToken(code, refreshToken);
+            }
+          }
+        }
+      }, 1000);
+    }
   }
 
   private getToken(code: string, refreshToken?: string) {
+    if (refreshToken) {
+      clearInterval(this.refreshTokenInterval);
+      this.refreshTokenInterval = null;
+    }
+
     const formData = new URLSearchParams();
     const data = koala({
       grant_type: (refreshToken ? 'refresh_token' : 'authorization_code'),
@@ -163,6 +213,10 @@ export class KoalaOAuth2Service implements OnDestroy {
       client_id: this.config.clientId,
       refresh_token: refreshToken
     }).object().merge(this.config.customQueryParams ?? {}).getValue();
+
+    if (!this.code) {
+      this.code = code;
+    }
 
     Object.keys(data).forEach(indexName => {
       formData.append(indexName, data[indexName]);
@@ -173,12 +227,8 @@ export class KoalaOAuth2Service implements OnDestroy {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     }).subscribe((token: any) => {
-      if (!refreshToken) {
-        this.getToken(code, token.refresh_token);
-      } else {
-        this.token = token;
-        this.events.next('getClaims');
-      }
+      this.token = token;
+      this.events.next((refreshToken ? 'refreshToken' : 'getClaims'));
     }, () => this.events.next('loadedConfig'));
   }
 
@@ -191,8 +241,10 @@ export class KoalaOAuth2Service implements OnDestroy {
       this.claims = userInfo;
       this.state = null;
       localStorage.removeItem(STATE_STORAGE_NAME);
-      this.events.next('userAuthenticated');
-      if (this.config.redirectUriAfterAuth) { this.router.navigate([this.config.redirectUriAfterAuth]).then(); }
+      this.events.next(this.events.getValue() === 'refreshToken' ? 'refreshToken' : 'userAuthenticated');
+      if (this.config.redirectUriAfterAuth) {
+        this.router.navigate([this.config.redirectUriAfterAuth]).then();
+      }
     });
   }
 
