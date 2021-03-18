@@ -7,8 +7,10 @@ import { TokenFactory } from "./token.factory";
 export interface KoalaOAuth2TokenInterface {
   accessToken: string;
   idToken: string;
+  refreshToken: string;
   login: string;
   expired: number;
+  code: string;
 }
 
 @Injectable({providedIn: "any"})
@@ -20,6 +22,7 @@ export class KoalaTokenService {
   }
 
   public setToken(token: string) {
+    if (TokenFactory.hasToken()) { this.token$.next(token); }
     TokenFactory.setToken(token);
   }
 

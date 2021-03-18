@@ -312,14 +312,19 @@ koala-menu ul li li.active a {color: ${this.palletColors.menuOptionsColorActive}
       this.oauth2Service.loadDiscoveryDocumentAndTryLogin().then();
 
       this.oauth2Service.events.subscribe(event => {
-        if (event === 'userAuthenticated') {
+        if (event === 'userAuthenticated' || event === 'refreshToken') {
           const claims = this.oauth2Service.getIdentityClaims();
-          if (claims && !TokenFactory.hasToken()) {
+          if (claims && (
+            !TokenFactory.hasToken() ||
+            (TokenFactory.hasToken() && event === 'refreshToken')
+          )) {
             this.tokenService.setToken(jwtEncode({
               accessToken: this.oauth2Service.getAccessToken(),
               idToken: this.oauth2Service.getIdToken(),
+              refreshToken: this.oauth2Service.getRefreshToken(),
               login: claims[this.oauth2Config.indexLoginName] ?? 'Undefined',
-              expired: this.oauth2Service.getAccessTokenExpiration()
+              expired: this.oauth2Service.getAccessTokenExpiration(),
+              code: this.oauth2Service.getCode()
             }, 'secret'))
           }
         }
