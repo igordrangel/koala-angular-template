@@ -15,9 +15,13 @@ export class IconComponent implements OnInit {
 
   public intervalCheckElement: any;
   public style: string;
-  public idIcon = `koala-icons_${koala(0).number().random(1, 30).getValue()}`;
+  public idIcon = `koala-icons_${koala(0).number().random(1, 999999999).getValue()}`;
 
   ngOnInit() {
+    do {
+      this.idIcon = `koala-icons_${koala(0).number().random(1, 999999999).getValue()}`;
+    } while (document.getElementById(this.idIcon));
+
     this.style = `width: ${this.size}px;height: ${this.size}px;`;
     this.intervalCheckElement = setInterval(() => {
       const mainElementSelector = `svg#${this.idIcon}.${this.icon}`;
