@@ -71,7 +71,8 @@
           </mat-checkbox>
         </th>
         <td *matCellDef="let item" mat-cell>
-          <mat-checkbox (change)="$event ? selection.toggle(item) : null"
+          <mat-checkbox *ngIf="disabledCheckboxItemList ? !disabledCheckboxItemList(item) : true"
+                        (change)="$event ? selection.toggle(item) : null"
                         (click)="$event.stopPropagation(); selectItem();"
                         [checked]="selection.isSelected(item)">
           </mat-checkbox>

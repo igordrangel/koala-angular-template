@@ -62,7 +62,11 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
   public selectAll() {
     this.isAllSelected() ?
     this.selection.clear() :
-    this.dataSource.data.forEach(item => this.selection.select(item));
+    this.dataSource.data.forEach(item => {
+      if (!this.config.disabledCheckboxItemList(item)) {
+        this.selection.select(item);
+      }
+    });
 
     this.isAllSelected();
   }
@@ -167,7 +171,7 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
 
   private isAllSelected() {
     const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
+    const numRows = this.dataSource.data.filter(item => !this.config.disabledCheckboxItemList(item)).length;
 
     return this.defineStatusSelectAll(numSelected === numRows);
   }

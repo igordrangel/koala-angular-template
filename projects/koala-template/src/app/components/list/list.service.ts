@@ -17,7 +17,10 @@ export class ListService {
         {name: 'Item 4', qtd: 1, value: 4000},
         {name: 'Item 5', qtd: 6, value: 6000},
         {name: 'Item 6', qtd: 3, value: 2000},
-        {name: 'Item 7', qtd: 9, value: 1000}
+        {name: 'Item 7', qtd: 9, value: 1000},
+        {name: 'Item 8', qtd: 0, value: 0},
+        {name: 'Item 9', qtd: 0, value: 0},
+        {name: 'Item 10', qtd: 0, value: 0}
       ]).array<ListItemInterface>()
         .filter(params?.params?.name ?? '', 'name')
         .orderBy(params?.sort, params?.order.toUpperCase() === 'DESC')

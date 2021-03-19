@@ -95,6 +95,11 @@ export class ListBuilder<DataType> {
     return this;
   }
 
+  public disableCheckboxItemList(fn: (item: DataType) => boolean) {
+    this.config.disabledCheckboxItemList = fn;
+    return this;
+  }
+
   public getConfig(): KoalaListConfigInterface {
     this.config.reload = new BehaviorSubject<boolean>(false);
     return this.config;

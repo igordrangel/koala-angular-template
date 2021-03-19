@@ -56,6 +56,7 @@ export class PageListComponent extends PageAbstract {
                         'value',
                         'options'
                       ])
+                      .disableCheckboxItemList((item => item.qtd === 0))
                       .itemColumn({
                         label: 'Name',
                         columnDef: 'name',

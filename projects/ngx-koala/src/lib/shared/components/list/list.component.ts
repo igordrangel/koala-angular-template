@@ -34,6 +34,7 @@ export class ListComponent extends ListAbstract implements OnInit {
   public formAdvancedSearch: FormGroup;
   public showAdvancedFilter: boolean = false;
   public qtdListResult = 0;
+  public disabledCheckboxItemList?: (item: any) => boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -129,5 +130,6 @@ export class ListComponent extends ListAbstract implements OnInit {
     this.filterParams = this.config.filterParams ?? new BehaviorSubject<KoalaListFormFilterInterface>(null);
     this.emptyListComponent = this.config.emptyListComponent;
     this.pageSize = this.config.pageSize ?? 30;
+    this.disabledCheckboxItemList = this.config.disabledCheckboxItemList;
   }
 }

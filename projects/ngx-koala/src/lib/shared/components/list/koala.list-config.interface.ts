@@ -30,4 +30,5 @@ export interface KoalaListConfigInterface {
   getSelectionList: (selection: SelectionModel<any>) => void;
   getDataSource: (dataSource: any[]) => void;
   pageSize?: KoalaListPageSize;
+  disabledCheckboxItemList?: (item: any) => boolean;
 }
