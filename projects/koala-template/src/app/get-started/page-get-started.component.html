@@ -93,7 +93,7 @@
             </mat-panel-description>
           </mat-expansion-panel-header>
 
-          <pre><code><span>import</span> &#123; ChangeDetectionStrategy, Component, OnInit &#125; <span>from</span> '@angular/core';
+          <pre><code><span>import</span> &#123; ChangeDetectionStrategy, Component &#125; <span>from</span> '@angular/core';
 <span>import</span> &#123;
   KoalaUserMenuOptionsInterface,
   KoalaNotificationInterface,
@@ -104,9 +104,7 @@
 <span>import</span> &#123; KoalaPagePalletColorsInterface &#125; <span>from</span> 'ngx-koala/lib/shared/components/page/koala-page-pallet-colors.interface';
 <span>import</span> &#123; BehaviorSubject &#125; <span>from</span> 'rxjs';
 <span>import</span> &#123; ThemeHelper &#125; <span>from</span> './shared/common/helpers/theme.helper';
-<span>import</span> &#123; UsuarioService &#125; <span>from</span> './shared/services/pne/usuario/usuario.service';
-<span>import</span> &#123; LoginService &#125; <span>from</span> './shared/services/pne/usuario/login.service';
-<span>import</span> &#123; TokenInterface &#125; <span>from</span> './shared/services/pne/usuario/token.interface';
+<span>import</span> &#123; UserService &#125; <span>from</span> './shared/services/pne/user/user.service';
 <span>import</span> &#123; SessionExpiredComponent &#125; <span>from</span> './shared/components/session-expired/session-expired.component';
 
 <span>@Component</span>(&#123;
@@ -115,45 +113,19 @@
   styleUrls: ['./app.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 &#125;)
-<span>export class</span> AppComponent <span>implements OnInit</span> &#123;
+<span>export class</span> AppComponent &#123;
   <span>public</span> openPages = ['/login'];
   <span>public</span> userMenuOptions: <span>KoalaUserMenuOptionsInterface[]</span> = [];
   <span>public</span> notifications = <span>new BehaviorSubject&#60;KoalaNotificationInterface[]&#62;([])</span>;
   <span>public</span> menuOptions = <span>new BehaviorSubject&#60;KoalaMenuModuleInterface[]&#62;([])</span>;
-  <span>public</span> palletCollors: <span>KoalaPagePalletColorsInterface</span> = ThemeHelper.getTheme();
-  <span>public</span> intervalNotificacoes: <span>number</span>;
+  <span>public</span> palletColors: <span>KoalaPagePalletColorsInterface</span> = ThemeHelper.getTheme();
+  <span>public</span> intervalNotifications: <span>number</span>;
   <span>public</span> intervalToken: <span>number</span>;
 
   <span>constructor</span>(
-    <span>private</span> usuarioService: <span>UsuarioService</span>,
-    <span>private</span> loginService: <span>LoginService</span>,
-    <span>private</span> alertService: <span>KoalaAlertService</span>,
+    <span>private</span> userService: <span>UserService</span>,
     <span>private</span> menuService: <span>KoalaMenuService</span>
   ) &#123;
-  &#125;
-
-  <span>ngOnInit()</span> &#123;
-    <span>setInterval</span>(() => &#123;
-        const token = localStorage.getItem(<span>this</span>.loginService.getTokenService().storageName);
-        if (token && !<span>this</span>.loginService.getTokenService().getTokenSubject().value) &#123;
-        <span>this</span>.loginService.getTokenService().setToken(token);
-      &#125; else if (!token && <span>this</span>.loginService.getUsuarioLogado()) &#123;
-        <span>this</span>.logout();
-      &#125;
-    &#125;, 1);
-    <span>this</span>.loginService
-        .getTokenService()
-        .getTokenSubject()
-        .subscribe(async token => &#123;
-        if (token) &#123;
-            <span>this</span>.menuOptions.next(<span>this</span>.usuarioService.getMenu());
-            <span>this</span>.getNotifications();
-            <span>this</span>.intervalNotificacoes = setInterval(() => <span>this</span>.getNotifications(), 30000);
-            <span>this</span>.intervalToken = setInterval(() => <span>this</span>.verificarToken(), 1);
-          &#125; else &#123;
-            <span>this</span>.logout();
-          &#125;
-        &#125;);
   &#125;
 
   <span>public</span> deleteAllNotifications(action: boolean) &#123;
@@ -167,30 +139,14 @@
   &#125;
 
   <span>public</span> getNotifications() &#123;
-    <span>this</span>.usuarioService.getNotifications().subscribe(notifications => <span>this</span>.notifications.next(notifications));
-  &#125;
-
-  <span>private</span> verificarToken() &#123;
-    const usuario = <span>this</span>.loginService.getTokenService().getUser&#60;TokenInterface&#62;();
-    if (usuario) &#123;
-      let dateExpire = new Date(usuario.expired);
-      dateExpire.setMinutes(dateExpire.getMinutes() - 5);
-
-      if (dateExpire < new Date()) &#123;
-        <span>this</span>.logout(true);
-      &#125;
-    &#125;
+    <span>this</span>.userService.getNotifications().subscribe(notifications => <span>this</span>.notifications.next(notifications));
   &#125;
 
   <span>private</span> logout(clearToken = false) &#123;
-    <span>clearInterval</span>(<span>this</span>.intervalNotificacoes);
+    <span>clearInterval</span>(<span>this</span>.intervalNotifications);
     <span>clearInterval</span>(<span>this</span>.intervalToken);
     if (clearToken) &#123;
       <span>this</span>.loginService.getTokenService().removeToken();
-      <span>this</span>.alertService.create(&#123;
-        avatar: new KoalaDynamicComponent(SessionExpiredComponent),
-        message: 'Sua sessão expirou, informe novamente suas credenciais de acesso.'
-      &#125;);
     &#125;
     <span>this</span>.menuOptions.next([]);
     <span>this</span>.menuService.close();
@@ -215,10 +171,10 @@
   (deleteNotification)="deleteNotification($event)"
   [notifications]="notifications"
   [userMenuOptions]="userMenuOptions"
-  [palletColors]="palletCollors"
+  [palletColors]="palletColors"
   labelLogout="Logout"
   defaultPage="home"
-  logotipo="./assets/logotipo.png"<span>&#62;</span>
+  logo="./assets/logo.png"<span>&#62;</span>
   &#60;div <span>menu-options</span>&#62;
     <span>&#60;koala-menu</span> [optionsSubject]="menuOptions" titleMenu="Tools"&#62;&#60;/koala-menu&#62;
   &#60;/div&#62;

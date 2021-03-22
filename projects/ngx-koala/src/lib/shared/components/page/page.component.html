@@ -1,7 +1,7 @@
 <div *ngIf="showLoaderPage | async" class="koala-loader-pg">
   <div class="loader-content">
     <figure>
-      <img [src]="logotipo" alt="Logotipo"/>
+      <img [src]="logo" alt="Logotipo"/>
       <figcaption *ngIf="(messageLoaderPage | async) as messageLoader" [innerHTML]="messageLoader"></figcaption>
     </figure>
     <mat-spinner></mat-spinner>
@@ -11,12 +11,12 @@
                  [typeLoader]="loader.typeLoader"></app-loader-page>
 <mat-drawer-container autosize class="menu-container">
   <mat-drawer #drawer class="menu-options" mode="side">
-    <img [src]="logotipo" alt="Logotipo" id="logotipo"/>
+    <img [src]="logo" alt="Logotipo" id="logotipo"/>
     <ng-content *ngIf="showMenu" select="[menu-options]"></ng-content>
   </mat-drawer>
 
   <mat-toolbar *ngIf="!!logged && (username$ | async)" class="toolbar">
-    <img *ngIf="!showMenu" [src]="logotipo" alt="Logotipo" id="logotipo"/>
+    <img *ngIf="!showMenu" [src]="logo" alt="Logotipo" id="logotipo"/>
     <button (click)="toogleMenu()" *ngIf="showMenu" [color]="color" class="btn-collapse-menu" mat-icon-button>
       <mat-icon>menu</mat-icon>
     </button>

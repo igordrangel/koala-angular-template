@@ -5,4 +5,79 @@
   titlePage="Making a Crud Page"
   [navigateHistory]="navigationHistory">
 
+  <section content>
+    <mat-vertical-stepper>
+      <mat-step label="Get Started" state="number">
+        <p>First step it's going to <a routerLink="/get-started">Get Started</a> and follow the instructions.</p>
+      </mat-step>
+      <mat-step label="Example" state="number">
+        <p>Click <a routerLink="/guides/crud-page/example">here</a> to open a example <strong>Crud Page</strong>.</p>
+      </mat-step>
+      <mat-step label="Structure">
+        <p>To make a crud page you need import a fill modules in your page module.</p>
+        <pre><code><span>import</span> &#123; CommonModule &#125; <span>from</span> '@angular/platform-browser';
+<span>import</span> &#123; NgModule &#125; <span>from</span> '@angular/core';
+
+<span>import</span> &#123; CrudPageRoutingModule &#125; <span>from</span> './crud-page.routing.module';
+<span>import</span> &#123; PageCrudPageComponent &#125; <span>from</span> './page-crud-page.component';
+<span>import</span> &#123;
+  KoalaFolderPageModule,
+  KoalaButtonModule,
+  KoalaDialogModule,
+  KoalaAlertModule,
+  KoalaQuestionModule,
+  KoalaListModule
+&#125; <span>from</span> 'ngx-koala';
+
+<span>@NgModule</span>(&#123;
+  exports: [
+    PageCrudPageComponent
+  ],
+  declarations: [
+    PageCrudPageComponent
+  ],
+  imports: [
+    CommonModule,
+    <span>KoalaFolderPageModule</span>,
+    <span>KoalaButtonModule</span>,
+    <span>KoalaDialogModule</span>,
+    <span>KoalaAlertModule</span>,
+    <span>KoalaQuestionModule</span>,
+    <span>KoalaListModule</span>,
+    CrudPageRoutingModule
+  ]
+&#125;)
+<span>export class</span> CrudPageModule &#123;&#125;
+</code></pre>
+      </mat-step>
+      <mat-step label="Implementing a Folder Page">
+        <p>A Folder page it's a component to make a 'title' when you put buttons, navigation history and content for your page.</p>
+        <h2>page-crud-page.component.ts</h2>
+        <pre><code><span>import</span> &#123; Component } <span>from</span> "@angular/core";
+<span>import</span> &#123; KoalaNavigateHistoryInterface } <span>from</span> "ngx-koala";
+
+<span>@Component</span>(&#123;
+  templateUrl: 'crud-page-page.component.html'
+})
+<span>export class</span> CrudPagePageComponent &#123;
+  <span>public</span> navigateHistory: <span>KoalaNavigateHistoryInterface</span>[] = [
+    &#123;name: 'Guides', routerLink: '/guides'},
+    &#123;name: 'Crud Page', routerLink: '/guides/crud-page'},
+    &#123;name: 'Example'}
+  ]
+}</code></pre>
+        <h2>page-crud-page.component.html</h2>
+        <pre><code><span>&#60;koala-folder-page</span>
+  customFolderBackgroudColor="#212121"
+  customFolderFontColor="#fff"
+  titleIcon="menu_book"
+  titlePage="Crud Page"
+  <span>[navigateHistory]="navigateHistory">
+&#60;/koala-folder-page></span>
+</code></pre>
+      </mat-step>
+    </mat-vertical-stepper>
+
+  </section>
+
 </koala-folder-page>
