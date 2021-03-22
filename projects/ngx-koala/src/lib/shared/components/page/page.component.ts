@@ -42,8 +42,8 @@ export class PageComponent implements OnInit {
   @Output() deleteNotification = new EventEmitter<KoalaNotificationInterface>(null);
   public logged: boolean;
   public loaderSubject: BehaviorSubject<LoaderBarPageInterface>;
-  public username: string;
-  public firstUserLetter: string;
+  public username$ = new BehaviorSubject<string>('');
+  public firstUserLetter$ = new BehaviorSubject<string>('');
   public currentUrl: string;
   private defaultPalletColors: KoalaPagePalletColorsInterface = {
     scrollbarColor: '#1976D2',
@@ -107,8 +107,9 @@ export class PageComponent implements OnInit {
     this.tokenService.getToken()?.subscribe(token => {
       this.logged = !!token;
       if (this.logged) {
-        this.username = this.tokenService.getDecodedToken<{ login: string }>().login;
-        this.firstUserLetter = this.username.charAt(0).toUpperCase();
+        const decodedToken = this.tokenService.getDecodedToken<{ login: string }>();
+        this.username$.next(decodedToken.login);
+        this.firstUserLetter$.next(decodedToken.login.charAt(0).toUpperCase());
         this.menuService.open();
       }
       if (this.logged && this.openPages?.indexOf(this.currentUrl) >= 0 && this.defaultPage) {

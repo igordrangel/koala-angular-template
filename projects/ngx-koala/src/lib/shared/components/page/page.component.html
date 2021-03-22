@@ -15,7 +15,7 @@
     <ng-content *ngIf="showMenu" select="[menu-options]"></ng-content>
   </mat-drawer>
 
-  <mat-toolbar *ngIf="!!logged && username" class="toolbar">
+  <mat-toolbar *ngIf="!!logged && (username$ | async)" class="toolbar">
     <img *ngIf="!showMenu" [src]="logotipo" alt="Logotipo" id="logotipo"/>
     <button (click)="toogleMenu()" *ngIf="showMenu" [color]="color" class="btn-collapse-menu" mat-icon-button>
       <mat-icon>menu</mat-icon>
@@ -42,13 +42,13 @@
       </mat-menu>
     </div>
     <button [color]="color" [matMenuTriggerFor]="userOptions" class="btn-toolbar" mat-button>
-      <span>{{username}}</span>
-      <span class="icon-user">{{firstUserLetter}}</span>
+      <span>{{username$ | async}}</span>
+      <span class="icon-user">{{firstUserLetter$ | async}}</span>
     </button>
     <mat-menu #userOptions="matMenu" class="user-menu menu-list" yPosition="below">
       <div class="user-presentation">
-        <span class="icon-user">{{firstUserLetter}}</span><br/>
-        <span class="username">{{username}}</span>
+        <span class="icon-user">{{firstUserLetter$ | async}}</span><br/>
+        <span class="username">{{username$ | async}}</span>
       </div>
       <button (click)="btn.action()" *ngFor="let btn of userMenuOptions" mat-menu-item>
         <mat-icon>{{btn.icon}}</mat-icon>
