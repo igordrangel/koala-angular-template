@@ -8,18 +8,22 @@ import { KoalaDialogModule } from "../../../../../../ngx-koala/src/lib/shared/co
 import { KoalaAlertModule } from "../../../../../../ngx-koala/src/lib/shared/components/alert/koala.alert.module";
 import { KoalaQuestionModule } from "../../../../../../ngx-koala/src/lib/shared/components/question/koala.question.module";
 import { KoalaListModule } from "../../../../../../ngx-koala/src/lib/shared/components/list/koala.list.module";
+import { DialogFormItemComponent } from "./dialog/dialog-form-item.component";
+import { KoalaFormModule } from "../../../../../../ngx-koala/src/lib/shared/components/form/koala.form.module";
 
 @NgModule({
   exports: [
     CrudPageExampleComponent
   ],
   declarations: [
-    CrudPageExampleComponent
+    CrudPageExampleComponent,
+    DialogFormItemComponent
   ],
   imports: [
     CommonModule,
     KoalaFolderPageModule,
     KoalaButtonModule,
+    KoalaFormModule,
     KoalaDialogModule,
     KoalaAlertModule,
     KoalaQuestionModule,
