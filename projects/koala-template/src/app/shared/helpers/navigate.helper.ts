@@ -93,6 +93,11 @@ export class NavigateHelper {
         {name: 'Services', routerLink: '/services'},
         {name: 'OAuth2'}
       ];
+    } else if (location.href.indexOf('guides/crud-page') >= 0) {
+      return [
+        {name: 'Guides', routerLink: '/guides'},
+        {name: 'Crud Page'}
+      ];
     }
   }
 }

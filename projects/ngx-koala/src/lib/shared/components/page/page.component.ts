@@ -26,7 +26,7 @@ import { KoalaOAuth2Service } from "../../services/openid/koala.oauth2.service";
 export class PageComponent implements OnInit {
   @Input() showMenu: boolean = true;
   @Input() color: ThemePalette;
-  @Input() logotipo: string;
+  @Input() logo: string;
   @Input() startMenuOpened = true;
   @Input() showLoaderPage: BehaviorSubject<boolean>;
   @Input() messageLoaderPage: BehaviorSubject<string>;
