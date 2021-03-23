@@ -32,6 +32,7 @@
 
       <nav itemsList>
         <koala-button
+          *ngIf="dataSource?.length > 0"
           (click)="downloadList()"
           [koalaIcon]="true"
           backgroundColor="transparent"
