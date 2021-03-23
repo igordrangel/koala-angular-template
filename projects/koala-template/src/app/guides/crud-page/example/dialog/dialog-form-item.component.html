@@ -1,0 +1,28 @@
+<form [formGroup]="formConfig.form" (ngSubmit)="save()">
+
+  <koala-dialog
+    btnCloseColor="warn"
+    btnCloseLabel="Close"
+    [iconTitleDialog]="item ? 'edit' : 'add'"
+    [titleDialog]="item ? 'Edit Item' : 'Add Item'">
+
+    <div dialog-content>
+      <koala-dynamic-form
+        [form]="formConfig.form"
+        [formConfig]="formConfig.formConfig"
+        [setValues]="formConfig.setValues">
+      </koala-dynamic-form>
+    </div>
+
+    <div dialog-actions>
+      <koala-submit
+        [fg]="formConfig.form"
+        [btnLabel]="btnLabel"
+        [btnSubmitDisabled]="btnSubmitDisabled"
+        [loader]="loader">
+      </koala-submit>
+    </div>
+
+  </koala-dialog>
+
+</form>

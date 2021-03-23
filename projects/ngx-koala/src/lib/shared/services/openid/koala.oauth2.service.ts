@@ -206,13 +206,16 @@ export class KoalaOAuth2Service implements OnDestroy {
     }
 
     const formData = new URLSearchParams();
-    const data = koala({
+    let data = koala({
       grant_type: (refreshToken ? 'refresh_token' : 'authorization_code'),
       code,
       redirect_uri: this.config.redirectUri,
-      client_id: this.config.clientId,
-      refresh_token: refreshToken
+      client_id: this.config.clientId
     }).object().merge(this.config.customQueryParams ?? {}).getValue();
+
+    if (refreshToken) {
+      data = koala(data).object().merge({refresh_token: refreshToken}).getValue();
+    }
 
     if (!this.code) {
       this.code = code;

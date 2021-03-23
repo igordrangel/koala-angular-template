@@ -1,0 +1,477 @@
+<koala-folder-page
+  customFolderBackgroudColor="#212121"
+  customFolderFontColor="#fff"
+  titleIcon="menu_book"
+  titlePage="Making a Crud Page"
+  [navigateHistory]="navigationHistory">
+
+  <section content>
+    <mat-vertical-stepper>
+      <mat-step label="Get Started" state="number">
+        <p>First step it's going to <a routerLink="/get-started">Get Started</a> and follow the instructions.</p>
+      </mat-step>
+      <mat-step label="Example" state="number">
+        <p>Click <a routerLink="/guides/crud-page/example">here</a> to open a example <strong>Crud Page</strong>.</p>
+      </mat-step>
+      <mat-step label="Structure">
+        <p>To make a crud page you need import a fill modules in your page module.</p>
+        <pre><code><span>import</span> &#123; CommonModule &#125; <span>from</span> '@angular/platform-browser';
+<span>import</span> &#123; NgModule &#125; <span>from</span> '@angular/core';
+
+<span>import</span> &#123; CrudPageRoutingModule &#125; <span>from</span> './crud-page.routing.module';
+<span>import</span> &#123; PageCrudPageComponent &#125; <span>from</span> './page-crud-page.component';
+<span>import</span> &#123; DialogFormItemComponent &#125; <span>from</span> './dialog/page-crud-page.component';
+
+<span>import</span> &#123;
+  KoalaFolderPageModule,
+  KoalaButtonModule,
+  KoalaFormModule,
+  KoalaDialogModule,
+  KoalaAlertModule,
+  KoalaQuestionModule,
+  KoalaListModule
+&#125; <span>from</span> 'ngx-koala';
+
+<span>@NgModule</span>(&#123;
+  exports: [
+    PageCrudPageComponent
+  ],
+  declarations: [
+    PageCrudPageComponent,
+    DialogFormItemComponent
+  ],
+  imports: [
+    CommonModule,
+    <span>KoalaFolderPageModule</span>,
+    <span>KoalaButtonModule</span>,
+    <span>KoalaDialogModule</span>,
+    <span>KoalaFormModule</span>,
+    <span>KoalaAlertModule</span>,
+    <span>KoalaQuestionModule</span>,
+    <span>KoalaListModule</span>,
+    CrudPageRoutingModule
+  ]
+&#125;)
+<span>export class</span> CrudPageModule &#123;&#125;
+</code></pre>
+      </mat-step>
+      <mat-step label="Implementing the Folder Page">
+        <p>A Folder page it's a component to make a 'title' when you put buttons, navigation history and content for your page.</p>
+        <h2>page-crud-page.component.ts</h2>
+        <pre><code><span>import</span> &#123; Component } <span>from</span> "@angular/core";
+<span>import</span> &#123; KoalaNavigateHistoryInterface } <span>from</span> "ngx-koala";
+
+<span>@Component</span>(&#123;
+  templateUrl: 'crud-page-page.component.html'
+})
+<span>export class</span> CrudPagePageComponent &#123;
+  <span>public</span> navigateHistory: <span>KoalaNavigateHistoryInterface</span>[] = [
+    &#123;name: 'Guides', routerLink: '/guides'},
+    &#123;name: 'Crud Page', routerLink: '/guides/crud-page'},
+    &#123;name: 'Example'}
+  ];
+}</code></pre>
+        <h2>page-crud-page.component.html</h2>
+        <pre><code><span>&#60;koala-folder-page</span>
+  customFolderBackgroudColor="#212121"
+  customFolderFontColor="#fff"
+  titleIcon="menu_book"
+  titlePage="Crud Page"
+  <span>[navigateHistory]="navigateHistory"></span>
+
+    <span>&#60;nav</span> menu-page<span>></span>
+        &#60;!-- PUT YOUR MENU PAGE HERE -->
+    <span>&#60;/nav></span>
+
+    <span>&#60;section</span> content<span>></span>
+        &#60;!-- PUT YOUR CONTENT PAGE HERE -->
+    <span>&#60;/section></span>
+
+<span>&#60;/koala-folder-page></span>
+</code></pre>
+      </mat-step>
+      <mat-step label="Implementing the Item Service">
+        <p>This service was <strong>save</strong>, <strong>get</strong> and <strong>delete</strong> (Uses a <a href="https://www.npmjs.com/package/koala-utils" target="_blank">koala-utils</a>) items on list.</p>
+        <h2>item.service.ts</h2>
+        <pre><code><span>import</span> &#123; Injectable } from "@angular/core";
+<span>import</span> &#123; Observable } from "rxjs";
+<span>import</span> &#123; koala } from "koala-utils";
+
+<span>export interface</span> ItemInterface &#123;
+    id?: <span>number</span>;
+    name: <span>string</span>;
+    description: <span>string</span>;
+}
+
+<span>export class</span> ItemsDB &#123;
+    <span>public static</span> itemsList: <span>ItemInterface</span>[] = [];
+}
+
+<span>@Injectable</span>(&#123;providedIn: "any"})
+<span>export class</span> ItemService &#123;
+
+  <span>public</span> save(data: <span>ItemInterface</span>) &#123;
+    <span>return new Observable</span><<span>ItemInterface</span>>(observe => &#123;
+      if (data.id) &#123;
+        <span>ItemsDB</span>.itemsList[data.id - 1] = data;
+      } else &#123;
+        data.id = ItemsDB.itemsList.length + 1;
+        <span>ItemsDB</span>.itemsList.<span>push</span>(data);
+      }
+      observe.<span>next</span>(data);
+      observe.<span>complete</span>();
+    });
+  }
+
+  <span>public</span> getAll() &#123;
+    <span>return new Observable</span><<span>ItemInterface</span>[]>(observe => &#123;
+        observe.<span>next</span>(ItemsDB.itemsList);
+        observe.<span>complete</span>();
+    });
+  }
+
+  <span>public</span> delete(id: <span>number</span>) &#123;
+    <span>ItemsDB</span>.itemsList = <span>koala</span>(<span>ItemsDB</span>.itemsList)
+        .<span>array</span><<span>ItemInterface</span>>()
+        .<span>map</span>(item => &#123;
+            <span>return</span> (item.id === id ? null : item);
+        })
+        .<span>clearEmptyValues</span>()
+        .<span>map</span>((item, index) => &#123;
+            item.id = index + 1;
+            <span>return</span> item;
+        })
+        .<span>getValue</span>();
+  }
+}</code></pre>
+      </mat-step>
+      <mat-step label="Implementing the menu page and Dialog Form to add a item">
+        <p>Inside the tag <strong>nav#menu-page</strong> you can put a <a routerLink="/components/button">koala-button</a> and default button. Let's create a dialog form and call action with click in button on menu page.</p>
+        <h2>page-crud-page.component.ts</h2>
+        <pre><code><span>import</span> &#123; Component } <span>from</span> "@angular/core";
+<span>import</span> &#123;
+  KoalaNavigateHistoryInterface,
+  KoalaDialogService
+} <span>from</span> "ngx-koala";
+<span>import</span> &#123; DialogFormItemComponent } <span>from</span> "./dialog/dialog-form-item.component";
+
+<span>@Component</span>(&#123;
+  templateUrl: 'crud-page-page.component.html'
+})
+<span>export class</span> CrudPagePageComponent &#123;
+  <span>public</span> navigateHistory: <span>KoalaNavigateHistoryInterface</span>[] = [
+    &#123;name: 'Guides', routerLink: '/guides'},
+    &#123;name: 'Crud Page', routerLink: '/guides/crud-page'},
+    &#123;name: 'Example'}
+  ];
+
+  <span>constructor</span>(
+    <span>private</span> dialogService: <span>KoalaDialogService</span>
+  ) &#123;
+  }
+
+  <span>public</span> dialogList(item?: <span>ItemInterface</span>) &#123;
+    <span>this</span>.dialogService.<span>open</span>(
+      <span>DialogFormItemComponent</span>,
+      'small',
+      item,
+      'reloadList',
+      () => &#123;
+          // HERE YOU PUT YOUR CODE RELOAD LIST. IT'S CALL WHEN DIALOG WAS CLOSED WITH reloadList PARAM ON CLOSE DIALOG.
+      }
+    );
+  }
+}</code></pre>
+        <h2>page-crud-page.component.html</h2>
+        <pre><code><span>&#60;koala-folder-page</span>
+  customFolderBackgroudColor="#212121"
+  customFolderFontColor="#fff"
+  titleIcon="menu_book"
+  titlePage="Crud Page"
+  <span>[navigateHistory]="navigateHistory"></span>
+
+    <span>&#60;nav</span> menu-page<span>></span>
+        <span>&#60;koala-button</span>
+          (click)="dialogList()"
+          backgroundColor="#fff"
+          color="#212121"
+          tooltip="Add Item"
+          icon="add"<span>>
+        &#60;/koala-button></span>
+    <span>&#60;/nav></span>
+
+<span>&#60;/koala-folder-page></span>
+</code></pre>
+      </mat-step>
+      <mat-step label="Implementing the Dialog Form">
+        <p>This component use a <a routerLink="/components/dynamic-form">koala-dynamic-form</a> and <a routerLink="/components/dialog">koala-dialog</a>.</p>
+        <h2>dialog-form-item.component.ts</h2>
+        <pre><code><span>import</span> &#123; Component } from "@angular/core";
+<span>import</span> &#123; MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+
+<span>import</span> &#123;
+  FormAbstract,
+  KoalaDynamicFormService,
+  KoalaDynamicFormConfigInterface,
+  KoalaRequestService
+} from "ngx-koala";
+<span>import</span> &#123; ItemService } from "../item.service";
+
+<span>@Component</span>(&#123;
+  templateUrl: 'dialog-form-item.component.html'
+})
+<span>export class</span> DialogFormItemComponent <span>extends FormAbstract</span> &#123;
+  <span>public</span> formConfig: <span>KoalaDynamicFormConfigInterface</span>;
+
+  <span>constructor</span>(
+    <span>private</span> dynamicFormService: <span>KoalaDynamicFormService</span>,
+    <span>private</span> requestService: <span>KoalaRequestService</span>,
+    <span>private</span> itemService: <span>ItemService</span>,
+    <span>private</span> dialogRef: <span>MatDialogRef</span>&#60;<span>DialogFormItemComponent</span>>,
+    <span>@Inject</span>(MAT_DIALOG_DATA) <span>public</span> item?: <span>ItemInterface</span>
+  ) &#123;
+    <span>super</span>(() => <span>this</span>.formConfig.form);
+    <span>this</span>.formConfig = dynamicFormService.<span>build</span>()
+                                                                  .<span>field</span>('','id', 'id').<span>generate</span>()
+                                                                  .<span>field</span>('Name', 'name', 'text').<span>maxLength</span>(40).<span>required</span>().<span>focus</span>().<span>generate</span>()
+                                                                  .<span>field</span>('Description', 'description', 'textarea').<span>maxLength</span>(5000).<span>required</span>().<span>generate</span>()
+                                                                  .<span>autofill</span>(item)
+                                                                  .<span>generate</span>();
+  }
+
+  <span>public</span> save() &#123;
+    <span>this</span>.<span>loading</span>(true, 'Sending Data...');
+    <span>this</span>.requestService
+          .<span>request</span>(
+              <span>this</span>.itemService.<span>save</span>(
+                  <span>this</span>.dynamicFormService.<span>emitData</span>(<span>this</span>.formConfig.form) as <span>ItemInterface</span>
+              ),
+              response => &#123;
+                  console.<span>log</span>(response);
+                  <span>this</span>.dialogRef.<span>close</span>('reloadList');
+              },
+              error => &#123;
+                  console.<span>error</span>(error);
+                  <span>this</span>.<span>loading</span>(false, 'Try Again');
+              }
+          );
+  }
+}</code></pre>
+        <h2>dialog-form-item.component.html</h2>
+        <pre><code><span>&#60;form</span> [formGroup]="formConfig.form" (ngSubmit)="<span>save</span>()">
+
+  <span>&#60;koala-dialog</span>
+    btnCloseColor="warn"
+    btnCloseLabel="Close"
+    [iconTitleDialog]="item ? 'edit' : 'add'"
+    [titleDialog]="item ? 'Edit Item' : 'Add Item'">
+
+    <span>&#60;div</span> dialog-content<span>></span>
+      <span>&#60;koala-dynamic-form</span>
+        [form]="formConfig.form"
+        [formConfig]="formConfig.formConfig"
+        [setValues]="formConfig.setValues"<span>>
+      &#60;/koala-dynamic-form></span>
+    <span>&#60;/div></span>
+
+    <span>&#60;div</span> dialog-actions<span>></span>
+      <span>&#60;koala-submit</span>
+        [fg]="formConfig.form"
+        [btnLabel]="btnLabel"
+        [btnSubmitDisabled]="btnSubmitDisabled"
+        [loader]="loader"<span>>
+      &#60;/koala-submit></span>
+    <span>&#60;/div></span>
+
+  <span>&#60;/koala-dialog></span>
+
+<span>&#60;/form></span></code></pre>
+      </mat-step>
+      <mat-step label="Implementing the Data Table List">
+        <p>The <strong>koala-list</strong> allow create a Data Table by easy way. The implementing this component can be found <a routerLink="/components/list">here</a>.</p>
+        <h2>crud-page-example.component.ts</h2>
+        <pre><code><span>import</span> &#123; Component } <span>from</span> "@angular/core";
+<span>import</span> &#123; SelectionModel } <span>from</span> "@angular/cdk/collections";
+
+<span>import</span> &#123;
+  DynamicFormTypeFieldEnum,
+  KoalaNavigateHistoryInterface,
+  KoalaDialogService,
+  KoalaListConfigInterface,
+  KoalaListService,
+  KoalaDynamicFormService,
+  KoalaXlsxService,
+  KoalaAlertEnum
+} <span>from</span> "ngx-koala";
+<span>import</span> &#123; DialogFormItemComponent } <span>from</span> "./dialog/dialog-form-item.component";
+<span>import</span> &#123; EmptyListComponent } <span>from</span> "../../../shared/components/empty-list/empty-list.component";
+<span>import</span> &#123; ItemInterface, ItemService } <span>from</span> "./item.service";
+
+<span>@Component</span>(&#123;
+  templateUrl: 'crud-page-page.component.html'
+})
+<span>export class</span> CrudPagePageComponent &#123;
+
+  <span>public</span> navigateHistory: <span>KoalaNavigateHistoryInterface</span>[] = [
+    &#123;name: 'Guides', routerLink: '/guides'},
+    &#123;name: 'Crud Page', routerLink: '/guides/crud-page'},
+    &#123;name: 'Example'}
+  ];
+  <span>public</span> config: <span>KoalaListConfigInterface</span>;
+  <span>public</span> dataSource?: <span>ItemInterface</span>[];
+
+  <span>private</span> selectedItems?: <span>SelectionModel</span>&#60;<span>ItemInterface</span>>;
+
+  <span>constructor</span>(
+    <span>private</span> itemService: <span>ItemService</span>,
+    <span>private</span> dynamicFormService: <span>KoalaDynamicFormService</span>,
+    <span>private</span> koalaListService: <span>KoalaListService</span>,
+    <span>private</span> dialogService: <span>KoalaDialogService</span>,
+    <span>private</span> questionService: <span>KoalaQuestionService</span>,
+    <span>private</span> xlsxService: <span>KoalaXlsxService</span>
+  ) &#123;
+    <span>this</span>.config = <span>this</span>.koalaListService
+                              .<span>build</span>&#60;<span>ItemInterface</span>>()
+                              .<span>defaultFilter</span>(&#123;
+                                  params: &#123;},
+                                  sort: 'name',
+                                  order: 'desc',
+                                  page: 1,
+                                  limit: 0
+                              })
+                              .<span>filterConfig</span>(&#123;
+                                  main: <span>this</span>.dynamicFormService
+                                                  .<span>build</span>()
+                                                  .<span>field</span>('Name', 'name', 'text').<span>generate</span>()
+                                                  .<span>generate</span>().formConfig
+                              })
+                              .<span>service</span>(() => <span>this</span>.itemService.<span>getAll</span>(), 'all')
+                              .<span>columns</span>([
+                                  'select',
+                                  'name',
+                                  'description',
+                                  'options'
+                              ])
+                              .<span>itemColumn</span>(&#123;
+                                  label: 'Name',
+                                  columnDef: 'name',
+                                  sortHeader: 'name',
+                                  itemNameProperty: item => item.name,
+                                  dblClick: item => <span>this</span>.<span>dialogList</span>(item)
+                              })
+                              .<span>itemColumn</span>(&#123;
+                                  label: 'Description',
+                                  columnDef: 'description',
+                                  sortHeader: 'description',
+                                  itemNameProperty: item => item.description.<span>toString</span>(),
+                                  dblClick: item => <span>this</span>.dialogList(item)
+                              })
+                              .<span>actionList</span>(&#123;
+                                  icon: 'edit',
+                                  name: 'Edit',
+                                  havePermission: true,
+                                  action: item => <span>this</span>.<span>dialogList</span>(item)
+                              })
+                              .<span>emptyListComponent</span>(<span>EmptyListComponent</span>)
+                              .<span>getDataSource</span>(dataSource => <span>this</span>.dataSource = dataSource)
+                              .<span>getSelectionList</span>(selection => <span>this</span>.selectedItems = selection)
+                              .<span>pageSize</span>(20)
+                              .<span>getConfig</span>();
+  }
+
+  <span>public</span> dialogList(item?: <span>ItemInterface</span>) &#123;
+    <span>this</span>.dialogService.open(
+        <span>DialogFormItemComponent</span>,
+        'small',
+        item,
+        'reloadList',
+        () => &#123;
+            <span>this</span>.config.reload.<span>next</span>(true);
+        }
+    );
+  }
+
+  <span>public</span> delete() &#123;
+    <span>this</span>.questionService
+          .<span>open</span>(&#123;
+              message: 'Do you really want delete the selected items?'
+          }, () => &#123;
+              <span>this</span>.selectedItems.selected.forEach(item => <span>this</span>.itemService.<span>delete</span>(item.id));
+              <span>this</span>.listConfig.reload.<span>next</span>(true);
+          });
+  }
+
+  <span>public</span> downloadList() &#123;
+    <span>this</span>.xlsxService.<span>convertJsonToXlsx</span>(<span>this</span>.dataSource, &#123;
+        filename: 'koala-list',
+        sheetName: 'Koala List',
+        title: 'Sheet of Koala List',
+        titleFontColor: '#b71c1c',
+        titleBackgroundColor: '#ffffff',
+        headerFontColor: '#ffffff',
+        headerBackgroundColor: '#b71c1c'
+    }).<span>then</span>();
+  }
+}
+</code></pre>
+        <h2>crud-page-example.component.html</h2>
+        <pre><code><span>&#60;koala-folder-page</span>
+  customFolderBackgroudColor="#212121"
+  customFolderFontColor="#fff"
+  titleIcon="menu_book"
+  titlePage="Crud Page"
+  <span>[navigateHistory]="navigateHistory"></span>
+
+    <span>&#60;nav</span> menu-page<span>></span>
+        <span>&#60;koala-button</span>
+          (click)="dialogList()"
+          backgroundColor="#fff"
+          color="#212121"
+          tooltip="Add Item"
+          icon="add"<span>>
+        &#60;/koala-button></span>
+    <span>&#60;/nav></span>
+
+    <span>&#60;section</span> content<span>></span>
+        <span>&#60;koala-list</span> [config]="listConfig"<span>></span>
+
+          <span>&#60;nav</span> itemsSelectList<span>>
+            &#60;koala-button</span>
+              [koalaIcon]="true"
+              (click)="delete()"
+              backgroundColor="transparent"
+              color="#EF5350"
+              icon="trash"
+              koalaIconSize="18"
+              tooltip="Delete Selected"<span>>
+            &#60;/koala-button>
+          &#60;/nav></span>
+
+          <span>&#60;nav</span> itemsList<span>>
+            &#60;koala-button</span>
+              (click)="downloadList()"
+              [koalaIcon]="true"
+              backgroundColor="transparent"
+              color="#616161"
+              icon="excel"
+              tooltip="Download List (XLSX)"<span>>
+            &#60;/koala-button>
+            &#60;koala-button</span>
+              (click)="config.reload.next(true)"
+              backgroundColor="transparent"
+              color="#fafafa"
+              icon="refresh"
+              tooltip="Reload List"<span>>
+            &#60;/koala-button>
+          &#60;/nav>
+
+        &#60;/koala-list>
+    &#60;/section>
+
+&#60;/koala-folder-page></span></code></pre>
+      </mat-step>
+    </mat-vertical-stepper>
+
+  </section>
+
+</koala-folder-page>
