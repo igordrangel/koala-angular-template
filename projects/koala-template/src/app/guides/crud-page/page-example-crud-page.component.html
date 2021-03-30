@@ -449,6 +449,7 @@
 
           <span>&#60;nav</span> itemsList<span>>
             &#60;koala-button</span>
+              *ngIf="dataSource?.length > 0"
               (click)="downloadList()"
               [koalaIcon]="true"
               backgroundColor="transparent"

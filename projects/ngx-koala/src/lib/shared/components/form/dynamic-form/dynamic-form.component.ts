@@ -423,6 +423,20 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
                     ) {
                       validators.push(AutocompleteSelectedValidator);
                     }
+
+                    if (config.min && typeof config.min === "number") validators.push(Validators.min(config.min));
+                    if (config.max && typeof config.max === "number") validators.push(Validators.max(config.max));
+                    if (
+                      config.type === DynamicFormTypeFieldEnum.date ||
+                      config.type === DynamicFormTypeFieldEnum.datetime ||
+                      config.type === DynamicFormTypeFieldEnum.time
+                    ) {
+                      if (config.min && typeof config.min === "string") { validators.push(DateMinValidator(config.min)); }
+                      if (config.max && typeof config.max === "string") { validators.push(DateMaxValidator(config.max)); }
+                    }
+                    if (config.minLength) validators.push(Validators.minLength(config.minLength));
+                    if (config.maxLength) validators.push(Validators.maxLength(config.maxLength));
+
                     control.get('value').setValidators(validators);
                   }
 
