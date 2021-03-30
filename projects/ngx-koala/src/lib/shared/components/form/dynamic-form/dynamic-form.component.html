@@ -103,6 +103,14 @@
           <mat-icon>error</mat-icon>
           Informe até no máximo o valor de {{propriedade.get('max').value}}.
         </mat-error>
+        <mat-error *ngIf="propriedade.get('value').errors?.minLength">
+          <mat-icon>error</mat-icon>
+          Informe um valor com no minimo {{propriedade.get('minLength').value}} caracteres.
+        </mat-error>
+        <mat-error *ngIf="propriedade.get('value').errors?.maxLength">
+          <mat-icon>error</mat-icon>
+          Informe um valor com no máximo {{propriedade.get('maxLength').value}} caracteres.
+        </mat-error>
         <mat-error *ngIf="propriedade.get('value').errors?.dateMin">
           <mat-icon>error</mat-icon>
           Informe no mínimo a data de {{propriedade.get('min').value | date:"shortDate"}}.
@@ -137,6 +145,22 @@
 	        <mat-icon>info</mat-icon>
 		      {{propriedade.get('textHint').value}}
 	      </mat-hint>
+        <mat-error *ngIf="propriedade.get('value').errors?.min">
+          <mat-icon>error</mat-icon>
+          Informe no minimo o valor de {{propriedade.get('min').value}}.
+        </mat-error>
+        <mat-error *ngIf="propriedade.get('value').errors?.max">
+          <mat-icon>error</mat-icon>
+          Informe até no máximo o valor de {{propriedade.get('max').value}}.
+        </mat-error>
+        <mat-error *ngIf="propriedade.get('value').errors?.minLength">
+          <mat-icon>error</mat-icon>
+          Informe um valor com no minimo {{propriedade.get('minLength').value}} caracteres.
+        </mat-error>
+        <mat-error *ngIf="propriedade.get('value').errors?.maxLength">
+          <mat-icon>error</mat-icon>
+          Informe um valor com no máximo {{propriedade.get('maxLength').value}} caracteres.
+        </mat-error>
 	      <mat-error *ngIf="propriedade.get('value').errors?.required">
 	        <mat-icon>error</mat-icon>
 		      {{propriedade.get('label').value}} não informado(a).
@@ -168,6 +192,22 @@
           <mat-icon>info</mat-icon>
           {{propriedade.get('textHint').value}}
         </mat-hint>
+        <mat-error *ngIf="propriedade.get('value').errors?.min">
+          <mat-icon>error</mat-icon>
+          Informe no minimo o valor de {{propriedade.get('min').value}}.
+        </mat-error>
+        <mat-error *ngIf="propriedade.get('value').errors?.max">
+          <mat-icon>error</mat-icon>
+          Informe até no máximo o valor de {{propriedade.get('max').value}}.
+        </mat-error>
+        <mat-error *ngIf="propriedade.get('value').errors?.minLength">
+          <mat-icon>error</mat-icon>
+          Informe um valor com no minimo {{propriedade.get('minLength').value}} caracteres.
+        </mat-error>
+        <mat-error *ngIf="propriedade.get('value').errors?.maxLength">
+          <mat-icon>error</mat-icon>
+          Informe um valor com no máximo {{propriedade.get('maxLength').value}} caracteres.
+        </mat-error>
         <mat-error *ngIf="propriedade.get('value').errors?.required">
           <mat-icon>error</mat-icon>
           {{propriedade.get('label').value}} não informado(a).
@@ -202,6 +242,14 @@
         <mat-hint align="end" *ngIf="propriedade.get('maxLength').value">
           {{textarea.value.length}}/{{propriedade.get('maxLength').value}}
         </mat-hint>
+        <mat-error *ngIf="propriedade.get('value').errors?.minLength">
+          <mat-icon>error</mat-icon>
+          Informe um valor com no minimo {{propriedade.get('minLength').value}} caracteres.
+        </mat-error>
+        <mat-error *ngIf="propriedade.get('value').errors?.maxLength">
+          <mat-icon>error</mat-icon>
+          Informe um valor com no máximo {{propriedade.get('maxLength').value}} caracteres.
+        </mat-error>
 	      <mat-error *ngIf="propriedade.get('value').errors?.required">
 	        <mat-icon>error</mat-icon>
 		      {{propriedade.get('label').value}} não informado(a).
@@ -236,6 +284,14 @@
         <mat-hint align="end" *ngIf="propriedade.get('maxLength').value">
           {{textarea.value.length}}/{{propriedade.get('maxLength').value}}
         </mat-hint>
+        <mat-error *ngIf="propriedade.get('value').errors?.minLength">
+          <mat-icon>error</mat-icon>
+          Informe um valor com no minimo {{propriedade.get('minLength').value}} caracteres.
+        </mat-error>
+        <mat-error *ngIf="propriedade.get('value').errors?.maxLength">
+          <mat-icon>error</mat-icon>
+          Informe um valor com no máximo {{propriedade.get('maxLength').value}} caracteres.
+        </mat-error>
 	      <mat-error *ngIf="propriedade.get('value').errors?.required">
 	        <mat-icon>error</mat-icon>
 		      {{propriedade.get('label').value}} não informado(a).
