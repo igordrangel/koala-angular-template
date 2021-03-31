@@ -15,6 +15,7 @@ import { NotificationComponent } from './shared/components/notifications/notific
 import { MatBadgeModule } from '@angular/material/badge';
 import { RouterModule } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { KoalaOAuth2Service } from "./shared/services/openid/koala.oauth2.service";
 
 @NgModule({
   declarations: [
@@ -46,6 +47,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatIconModule,
     MatSidenavModule,
     MatListModule
+  ],
+  providers: [
+    KoalaOAuth2Service
   ]
 })
 export class NgxKoalaModule {
