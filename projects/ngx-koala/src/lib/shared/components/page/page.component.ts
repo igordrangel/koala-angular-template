@@ -166,13 +166,15 @@ export class PageComponent implements OnInit {
 
     if (this.showMenu) {
       menuStateSubject.subscribe(async (state) => {
-        if (state === 'close') {
-          if (this.menu.opened) {
-            await this.menu.close();
-          }
-        } else if (state === 'open') {
-          if (!this.menu.opened) {
-            await this.menu.open();
+        if (this.menu) {
+          if (state === 'close') {
+            if (this.menu.opened) {
+              await this.menu.close();
+            }
+          } else if (state === 'open') {
+            if (!this.menu.opened) {
+              await this.menu.open();
+            }
           }
         }
       });
@@ -188,7 +190,9 @@ export class PageComponent implements OnInit {
 
   public async toogleMenu() {
     this.menuService.clearConfig();
-    await this.menu.toggle();
+    if (this.menu) {
+      await this.menu.toggle();
+    }
   }
 
   public async logout() {
