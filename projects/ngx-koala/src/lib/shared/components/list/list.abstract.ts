@@ -63,7 +63,10 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
     this.isAllSelected() ?
     this.selection.clear() :
     this.dataSource.data.forEach(item => {
-      if (!this.config?.disabledCheckboxItemList(item)) {
+      if (
+        (this.config.disabledCheckboxItemList && !this.config.disabledCheckboxItemList(item)) ||
+        !this.config.disabledCheckboxItemList
+      ) {
         this.selection.select(item);
       }
     });
