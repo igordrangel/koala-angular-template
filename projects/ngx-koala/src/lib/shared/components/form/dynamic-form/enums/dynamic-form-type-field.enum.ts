@@ -26,5 +26,6 @@ export enum DynamicFormTypeFieldEnum {
   radio,
   float,
   stringNumber,
-  selectMultipleNative
+  selectMultipleNative,
+  month
 }
