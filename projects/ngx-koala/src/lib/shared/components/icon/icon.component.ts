@@ -1,7 +1,28 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { koala } from "koala-utils";
 
-export type KoalaIconType = 'notFound'|'notAllowed'|'sessionExpired'|'empty'|'excel'|'word'|'pdf'|'edit'|'trash'|'webComponents'|'deliveryBox'|'github'|'facebook_squared'|'facebook_circle'|'instagram'|'twitter_squared'|'twitter_circle'|'linkedin_squared'|'linkedin_circle'|'google';
+export type KoalaIconType =
+  'notFound'
+  | 'notAllowed'
+  | 'sessionExpired'
+  | 'empty'
+  | 'excel'
+  | 'word'
+  | 'pdf'
+  | 'edit'
+  | 'trash'
+  | 'webComponents'
+  | 'deliveryBox'
+  | 'github'
+  | 'facebook_squared'
+  | 'facebook_circle'
+  | 'instagram'
+  | 'twitter_squared'
+  | 'twitter_circle'
+  | 'linkedin_squared'
+  | 'linkedin_circle'
+  | 'google'
+  | 'whatsapp';
 
 @Component({
   selector: 'koala-icon',

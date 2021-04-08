@@ -174,14 +174,10 @@
                                 limit: 0
                               &#125;)
                               .<span>filterConfig</span>(&#123;
-                                main: [&#123;
-                                  label: 'Name',
-                                  name: 'name',
-                                  type: <span>DynamicFormTypeFieldEnum</span>.text,
-                                  appearance: 'outline',
-                                  floatLabel: "always",
-                                  class: 'col-12'
-                                &#125;]
+                                main: <span>this</span>.dynamicFormService
+                                                  .<span>build</span>()
+                                                  .<span>field</span>('Name', 'name', 'text').<span>generate</span>()
+                                                  .<span>generate</span>()
                               &#125;)
                               .<span>service</span>(filter => <span>this</span>.listService.getList())
                               .<span>columns</span>([
