@@ -47,7 +47,7 @@ export class CrudPageExampleComponent {
                             main: this.dynamicFormService
                                       .build()
                                       .field('Name', 'name', 'text').generate()
-                                      .generate().formConfig
+                                      .generate()
                           })
                           .service(() => this.itemService.getAll(), 'all')
                           .columns([

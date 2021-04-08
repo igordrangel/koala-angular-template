@@ -1,6 +1,6 @@
 <div [formGroup]="form" class="p-relative w-100">
   <div *ngFor="let propriedade of controls?.controls; let i = index;"
-       [ngClass]="(propriedade.get('show').value | async) ? propriedade.get('class').value : null"
+       [ngClass]="(propriedade.get('show').value | async) ? propriedade.get('class').value : 'd-none'"
        formArrayName="formData">
 	  <div *ngIf="propriedade.get('show').value | async">
 	    <mat-form-field

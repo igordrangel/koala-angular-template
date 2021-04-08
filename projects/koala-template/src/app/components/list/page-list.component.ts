@@ -4,7 +4,6 @@ import { ListService } from "./list.service";
 import { FormGroup } from "@angular/forms";
 import { ListItemInterface } from "./list-item.interface";
 import { koala } from "koala-utils";
-import { DynamicFormTypeFieldEnum } from "../../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/enums/dynamic-form-type-field.enum";
 import { EmptyListComponent } from "./empty-list/empty-list.component";
 import { KoalaXlsxService } from "../../../../../ngx-koala/src/lib/shared/services/xlsx/koala.xlsx.service";
 import { KoalaListConfigInterface } from "../../../../../ngx-koala/src/lib/shared/components/list/koala.list-config.interface";
@@ -12,6 +11,7 @@ import { KoalaListService } from "../../../../../ngx-koala/src/lib/shared/servic
 import { SelectionModel } from "@angular/cdk/collections";
 import { KoalaAlertService } from "../../../../../ngx-koala/src/lib/shared/services/alert/koala.alert.service";
 import { KoalaAlertEnum } from "../../../../../ngx-koala/src/lib/shared/components/alert/koala.alert.enum";
+import { KoalaDynamicFormService } from "../../../../../ngx-koala/src/lib/shared/services/dynamic-forms/koala.dynamic-form.service";
 
 @Component({
   templateUrl: 'page-list.component.html'
@@ -23,6 +23,7 @@ export class PageListComponent extends PageAbstract {
   private selectedItems?: SelectionModel<ListItemInterface>;
 
   constructor(
+    dynamicFormService: KoalaDynamicFormService,
     public listService: ListService,
     private koalaListService: KoalaListService,
     private alertService: KoalaAlertService,
@@ -39,14 +40,9 @@ export class PageListComponent extends PageAbstract {
                         limit: 0
                       })
                       .filterConfig({
-                        main: [{
-                          label: 'Name',
-                          name: 'name',
-                          type: DynamicFormTypeFieldEnum.text,
-                          appearance: 'outline',
-                          floatLabel: "always",
-                          class: 'col-12'
-                        }]
+                        main: dynamicFormService.build()
+                                                .field('Name', 'name', "text").generate()
+                                                .generate()
                       })
                       .service(filter => this.listService.getList(filter.getValue()), 'all')
                       .columns([

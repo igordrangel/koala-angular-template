@@ -30,8 +30,6 @@ export class ListComponent extends ListAbstract implements OnInit {
   public filterFormConfig: KoalaListFilterInterface;
   public reload: BehaviorSubject<boolean>;
   public formFilter: FormGroup;
-  public formSearch: FormGroup;
-  public formAdvancedSearch: FormGroup;
   public showAdvancedFilter: boolean = false;
   public qtdListResult = 0;
   public disabledCheckboxItemList?: (item: any) => boolean;
@@ -51,30 +49,28 @@ export class ListComponent extends ListAbstract implements OnInit {
           this.config.responseQtdResultIndexName(response) :
           this.dataSource.data.length;
       },
-      () => this.formSearch
+      () => this.formFilter
     );
   }
 
   ngOnInit() {
     this.initConfig();
     this.formFilter = this.fb.group({
-      formSearch: this.formSearch,
-      formAdvancedSearch: this.formAdvancedSearch
+      formSearch: this.filterFormConfig.main?.form,
+      formAdvancedSearch: this.filterFormConfig.advanced?.form
     });
     this.loading(true);
     if (this.filterFormConfig) {
-      this.filterFormConfig?.main?.map(item => {
+      this.filterFormConfig?.main?.formConfig?.map(item => {
         item.class = item.class + ' padding-none';
-        item.fieldClass = 'w-99';
         return item;
       });
-      this.filterFormConfig?.advanced?.map(item => {
+      this.filterFormConfig?.advanced?.formConfig?.map(item => {
         item.class = item.class + ' padding-none';
-        item.fieldClass = 'w-99';
         return item;
       });
       if (this.filterFormConfig?.checkAndSearch) {
-        this.formSearch.addControl(this.filterFormConfig.checkAndSearch.formControlName, new FormControl(this.filterFormConfig.checkAndSearch.isChecked ?? false));
+        this.formFilter.addControl(this.filterFormConfig.checkAndSearch.formControlName, new FormControl(this.filterFormConfig.checkAndSearch.isChecked ?? false));
       }
     }
 
@@ -92,14 +88,14 @@ export class ListComponent extends ListAbstract implements OnInit {
   public async filterSubmit() {
     this.showAdvancedFilter = false;
     await KlDelay.waitFor(1);
-    let dados = (this.formSearch ? koala(this.dynamicFormService.emitData(this.formSearch))
+    let dados = (this.filterFormConfig?.main?.form ? koala(this.dynamicFormService.emitData(this.filterFormConfig?.main?.form))
       .object()
-      .merge(this.formAdvancedSearch ? this.dynamicFormService.emitData(this.formAdvancedSearch) : {})
+      .merge(this.filterFormConfig?.advanced?.form ? this.dynamicFormService.emitData(this.filterFormConfig?.advanced?.form) : {})
       .getValue() : null);
 
     if (this.filterFormConfig?.checkAndSearch) {
       const controlName = this.filterFormConfig.checkAndSearch.formControlName;
-      dados[controlName] = this.formSearch.get(controlName).value;
+      dados[controlName] = this.formFilter.get(controlName).value;
     }
     await super.search(dados);
   }
@@ -119,8 +115,6 @@ export class ListComponent extends ListAbstract implements OnInit {
       if (!item.dblClick) { item.dblClick = () => {}; }
       return item;
     });
-    this.formSearch = this.config.formSearch;
-    this.formAdvancedSearch = this.config.formAdvancedSearch;
     this.showAdvancedFilter = this.config.showAdvancedFilter;
     this.filterFormConfig = this.config.filterFormConfig;
     this.request = this.config.request;

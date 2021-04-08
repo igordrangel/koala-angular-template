@@ -21,8 +21,6 @@ export interface KoalaListConfigInterface {
   typeRequest?: 'all' | 'onDemand';
   filterFormConfig: KoalaListFilterInterface;
   reload: BehaviorSubject<boolean>;
-  formSearch: FormGroup;
-  formAdvancedSearch: FormGroup;
   showAdvancedFilter: boolean;
   filterParams?: BehaviorSubject<KoalaListFormFilterInterface>;
   emptyListComponent?: KoalaDynamicComponent;
