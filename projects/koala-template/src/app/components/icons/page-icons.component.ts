@@ -76,6 +76,10 @@ export class PageIconsComponent extends PageAbstract implements OnInit {
       name: 'google',
       color: '#fff',
       selected: false
+    },{
+      name: 'whatsapp',
+      color: '#fff',
+      selected: false
     }]}, {
     title: 'Action',
     icons: [{
