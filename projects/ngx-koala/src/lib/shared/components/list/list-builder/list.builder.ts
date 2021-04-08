@@ -44,8 +44,6 @@ export class ListBuilder<DataType> {
 
   public filterConfig(config: KoalaListFilterInterface) {
     this.config.filterFormConfig = config;
-    this.config.formSearch = this.fb.group({});
-    this.config.formAdvancedSearch = this.fb.group({});
     return this;
   }
 

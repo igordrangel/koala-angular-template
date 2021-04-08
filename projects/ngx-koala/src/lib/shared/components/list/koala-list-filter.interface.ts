@@ -1,8 +1,8 @@
-import { KoalaDynamicFormFieldInterface } from '../form/dynamic-form/interfaces/koala.dynamic-form-field.interface';
+import { KoalaDynamicFormConfigInterface } from "../form/dynamic-form/interfaces/koala.dynamic-form-config.interface";
 
 export interface KoalaListFilterInterface {
-  main: KoalaDynamicFormFieldInterface[];
-  advanced?: KoalaDynamicFormFieldInterface[];
+  main: KoalaDynamicFormConfigInterface;
+  advanced?: KoalaDynamicFormConfigInterface;
   checkAndSearch?: {
     formControlName: string;
     label: string;
