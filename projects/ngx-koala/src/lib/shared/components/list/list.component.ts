@@ -62,11 +62,11 @@ export class ListComponent extends ListAbstract implements OnInit {
     this.loading(true);
     if (this.filterFormConfig) {
       this.filterFormConfig?.main?.formConfig?.map(item => {
-        item.class = item.class + ' padding-none';
+        item.class += ' padding-none w-99';
         return item;
       });
       this.filterFormConfig?.advanced?.formConfig?.map(item => {
-        item.class = item.class + ' padding-none';
+        item.class += ' padding-none';
         return item;
       });
       if (this.filterFormConfig?.checkAndSearch) {
