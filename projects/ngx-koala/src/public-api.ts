@@ -134,6 +134,11 @@ export * from './lib/shared/providers/pagination/pagination.provider';
 export * from './lib/shared/services/alert/koala.alert.service';
 //#endregion
 
+//#region [KOALA API REQUESTER]
+export * from './lib/shared/services/api-requester/koala.api-requester.service';
+export * from './lib/shared/services/api-requester/koala.api-requester.base';
+//#endregion
+
 //#region [KOALA BTN FILE]
 export * from './lib/shared/services/btn-file/koala.btn-file.service';
 //#endregion

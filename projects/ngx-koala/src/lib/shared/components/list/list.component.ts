@@ -56,8 +56,8 @@ export class ListComponent extends ListAbstract implements OnInit {
   ngOnInit() {
     this.initConfig();
     this.formFilter = this.fb.group({
-      formSearch: this.filterFormConfig.main?.form,
-      formAdvancedSearch: this.filterFormConfig.advanced?.form
+      formSearch: this.filterFormConfig?.main?.form ?? [''],
+      formAdvancedSearch: this.filterFormConfig?.advanced?.form ?? ['']
     });
     this.loading(true);
     if (this.filterFormConfig) {

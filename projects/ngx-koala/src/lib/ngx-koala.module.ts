@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { KoalaFormModule } from './shared/components/form/koala.form.module';
 import { PageComponent } from './shared/components/page/page.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -16,6 +16,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { RouterModule } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { KoalaOAuth2Service } from "./shared/services/openid/koala.oauth2.service";
+import { koalaEnvironment, KoalaEnvironmentInterface } from "./environments/koala.environment";
 
 @NgModule({
   declarations: [
@@ -53,4 +54,13 @@ import { KoalaOAuth2Service } from "./shared/services/openid/koala.oauth2.servic
   ]
 })
 export class NgxKoalaModule {
+  static forRoot(environment: KoalaEnvironmentInterface): ModuleWithProviders<any> {
+    koalaEnvironment.production = environment.production;
+    koalaEnvironment.storageTokenName = environment.storageTokenName;
+    koalaEnvironment.endpointApi = environment.endpointApi;
+
+    return {
+      ngModule: NgxKoalaModule
+    };
+  }
 }
