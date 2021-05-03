@@ -8,6 +8,8 @@ import { koala } from "koala-utils";
 import { DynamicFormTypeFieldEnum } from "../../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/enums/dynamic-form-type-field.enum";
 import { FormBuilder } from "@angular/forms";
 import { KoalaDynamicFormConfigInterface } from "../../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-form-config.interface";
+import { CustomSyncValidator } from "./validators/custom-sync.validator";
+import { CustomAsyncValidator } from "./validators/custom-async.validator";
 
 @Component({
   templateUrl: 'page-dynamic-form.component.html',
@@ -23,6 +25,8 @@ export class PageDynamicFormComponent extends PageAbstract {
   ) {
     super();
     this.config = dynamicFormService.build()
+                                    .field('Custom Sync Validator', 'customSyncValidator', 'text').grid(6).syncValidator([CustomSyncValidator(() => this.config)]).generate()
+                                    .field('Custom Async Validator', 'customAsyncValidator', 'text').grid(6).asyncValidator([CustomAsyncValidator(() => this.config)]).generate()
                                     .field('Text Field', 'text', "text").addClass('field-content').addFieldClass('field-input').grid(2).generate()
                                     .field('Date Field', 'date', "date").grid(2).focus().generate()
                                     .field('Datetime Field', 'datetime', "datetime").grid(2).generate()

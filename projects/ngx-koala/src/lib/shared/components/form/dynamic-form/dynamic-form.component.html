@@ -122,6 +122,10 @@
           <mat-icon>error</mat-icon>
           Informe no máximo a data de {{propriedade.get('max').value | date:"shortDate"}}.
         </mat-error>
+        <mat-error *ngIf="propriedade.get('value').errors?.customError">
+          <mat-icon>error</mat-icon>
+          {{propriedade.get('value').errors?.customError.message}}.
+        </mat-error>
 	    </mat-form-field>
 	    <mat-form-field
 		    *ngIf="propriedade.get('type').value == typeField.coin"
@@ -168,6 +172,10 @@
 	        <mat-icon>error</mat-icon>
 		      {{propriedade.get('label').value}} não informado(a).
 	      </mat-error>
+        <mat-error *ngIf="propriedade.get('value').errors?.customError">
+          <mat-icon>error</mat-icon>
+          {{propriedade.get('value').errors?.customError.message}}.
+        </mat-error>
 	    </mat-form-field>
       <mat-form-field
         *ngIf="propriedade.get('type').value == typeField.float"
@@ -215,6 +223,10 @@
           <mat-icon>error</mat-icon>
           {{propriedade.get('label').value}} não informado(a).
         </mat-error>
+        <mat-error *ngIf="propriedade.get('value').errors?.customError">
+          <mat-icon>error</mat-icon>
+          {{propriedade.get('value').errors?.customError.message}}.
+        </mat-error>
       </mat-form-field>
 	    <mat-form-field
 		    *ngIf="propriedade.get('type').value == typeField.valueList ||
@@ -257,6 +269,10 @@
 	        <mat-icon>error</mat-icon>
 		      {{propriedade.get('label').value}} não informado(a).
 	      </mat-error>
+        <mat-error *ngIf="propriedade.get('value').errors?.customError">
+          <mat-icon>error</mat-icon>
+          {{propriedade.get('value').errors?.customError.message}}.
+        </mat-error>
 	    </mat-form-field>
 		  <mat-form-field
 			  *ngIf="propriedade.get('type').value == typeField.textLogs"
@@ -299,6 +315,10 @@
 	        <mat-icon>error</mat-icon>
 		      {{propriedade.get('label').value}} não informado(a).
 	      </mat-error>
+        <mat-error *ngIf="propriedade.get('value').errors?.customError">
+          <mat-icon>error</mat-icon>
+          {{propriedade.get('value').errors?.customError.message}}.
+        </mat-error>
 	    </mat-form-field>
 	    <mat-form-field
 		    *ngIf="propriedade.get('type').value == typeField.select"
@@ -321,6 +341,10 @@
 	        <mat-icon>error</mat-icon>
 		      {{propriedade.get('label').value}} não informado(a).
 	      </mat-error>
+        <mat-error *ngIf="propriedade.get('value').errors?.customError">
+          <mat-icon>error</mat-icon>
+          {{propriedade.get('value').errors?.customError.message}}.
+        </mat-error>
 	    </mat-form-field>
       <mat-form-field
         class="select-multiple-native"
@@ -348,6 +372,10 @@
         <mat-error *ngIf="propriedade.get('value').errors?.required">
           <mat-icon>error</mat-icon>
           {{propriedade.get('label').value}} não informado(a).
+        </mat-error>
+        <mat-error *ngIf="propriedade.get('value').errors?.customError">
+          <mat-icon>error</mat-icon>
+          {{propriedade.get('value').errors?.customError.message}}.
         </mat-error>
       </mat-form-field>
 	    <div
@@ -481,6 +509,10 @@
 	        <mat-icon>error</mat-icon>
 	        Você deve selecionar um {{propriedade.get('label').value}}
 	      </mat-error>
+        <mat-error *ngIf="propriedade.get('value').errors?.customError">
+          <mat-icon>error</mat-icon>
+          {{propriedade.get('value').errors?.customError.message}}.
+        </mat-error>
 	      <mat-autocomplete
 		      #auto="matAutocomplete"
 		      [displayWith]="display" autoActiveFirstOption>

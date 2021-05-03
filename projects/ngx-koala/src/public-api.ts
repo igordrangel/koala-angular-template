@@ -195,6 +195,10 @@ export * from './lib/shared/services/xlsx/koala.xlsx.service';
 export * from './lib/shared/router/koala.parameter-hash-location-stategy';
 //#endregion
 
+//#region [HELPERS]
+export * from './lib/shared/helpers/dynamic-form/koala-dynamic-form-validator-result.helper';
+//#endregion
+
 export * from './lib/shared/providers/pagination/pagination.provider';
 export * from './lib/core/form.abstract';
 export * from './lib/mask-options';
