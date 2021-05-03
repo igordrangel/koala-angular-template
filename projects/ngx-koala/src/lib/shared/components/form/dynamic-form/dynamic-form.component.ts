@@ -402,12 +402,13 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
               control.get('show').value.next(prop.show);
               const config: KoalaDynamicFormFieldInterface = this.formConfig[indexControl] ?? null;
               if (prop.show) {
-                const validators = [];
+                let validators = [];
                 if (config) {
                   if (config.type === DynamicFormTypeFieldEnum.dynamicForm) {
                     const formArrayMoreItems = control.get('dynamicFormGroup') as FormArray;
                     formArrayMoreItems.push(config?.dynamicFormConfig?.form);
                   } else {
+                    validators = config.syncValidators ?? [];
                     if (config.required === true) {
                       validators.push(Validators.required);
                     }
@@ -438,6 +439,9 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
                     if (config.maxLength) validators.push(Validators.maxLength(config.maxLength));
 
                     control.get('value').setValidators(validators);
+                    if (config.asyncValidators) {
+                      control.get('value').setAsyncValidators(config.asyncValidators);
+                    }
                   }
 
                   control.get('value').updateValueAndValidity();
