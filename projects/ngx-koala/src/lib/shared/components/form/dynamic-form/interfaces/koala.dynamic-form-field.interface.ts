@@ -1,7 +1,7 @@
 import { DynamicFormTypeFieldEnum } from '../enums/dynamic-form-type-field.enum';
 import { FloatLabelType, MatFormFieldAppearance } from '@angular/material/form-field';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AsyncValidatorFn, FormGroup } from '@angular/forms';
+import { AsyncValidatorFn, FormGroup, ValidatorFn } from '@angular/forms';
 import { KoalaDynamicSetValueInterface } from './koala.dynamic-set-value.interface';
 import { KoalaDynamicAutocompleteOptionsInterface } from './koala.dynamic-autocomplete-options.interface';
 import { KoalaDynamicFormMoreItensShowFieldConfigInterface } from './koala.dynamic-form-more-itens-show-field-config.interface';
@@ -53,6 +53,7 @@ export interface KoalaDynamicFormFieldInterface {
   autocompleteType?: 'all' | 'onDemand';
   valueChanges?: (value: any) => void;
   asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[];
+  syncValidators?: ValidatorFn[],
   fileButtonConfig?: {
     icon?: string;
     text?: string;

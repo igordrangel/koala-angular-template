@@ -265,7 +265,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
   }
 
   private newControl(config: KoalaDynamicFormFieldInterface): FormGroup {
-    let validators = [];
+    let validators = config.syncValidators ?? [];
     let value: any = config.value ?? '';
     let valueSelectedAutocomplete: KoalaDynamicAutocompleteOptionsInterface | KoalaDynamicAutocompleteOptionsInterface[] = (
       config.multiple ? [] : (config.autocompleteDefaultValueOnClear ?? null)

@@ -40,6 +40,25 @@
         <pre><code><span>import</span> &#123; Component &#125; <span>from</span> "@angular/core";
 <span>import</span> &#123; KoalaDynamicFormService &#125; <span>from</span> "ngx-koala";
 
+<span>function</span> CustomAsyncValidator(config: () => <span>KoalaDynamicFormConfigInterface</span>) &#123;
+  <span>return async</span> (control: <span>AbstractControl</span>) => &#123;
+    <span>await KlDelay</span>.<span>waitFor</span>(2000);
+    config()?.setValues.<span>next</span>([
+      &#123;name: 'text', value: control.value}
+    ]);
+    <span>return KoalaDynamicFormValidatorResultHelper</span>.<span>generate</span>('Custom Async Validator Message');
+  &#125;
+&#125;
+
+<span>function</span> CustomSyncValidator(config: () => <span>KoalaDynamicFormConfigInterface</span>) &#123;
+  <span>return</span> (control: <span>AbstractControl</span>) => &#123;
+    config()?.setValues.<span>next</span>([
+      &#123;name: 'text', value: control.value}
+    ]);
+    <span>return KoalaDynamicFormValidatorResultHelper</span>.<span>generate</span>('Custom Sync Validator Message');
+  &#125;
+&#125;
+
 <span>@Component</span>(&#123;
   templateUrl: 'page-dynamic-form.component.html'
 &#125;)
@@ -52,6 +71,8 @@
     <span>private</span> dynamicFormService: <span>KoalaDynamicFormService</span>
   ) &#123;
     <span>this</span>.config = dynamicFormService.<span>build</span>()
+                                                          .<span>field</span>('Custom Sync Validator', 'customSyncValidator', 'text').<span>grid</span>(6).<span>syncValidator</span>([<span>CustomSyncValidator</span>(() => <span>this</span>.config)]).<span>generate</span>()
+                                                          .<span>field</span>('Custom Async Validator', 'customAsyncValidator', 'text').<span>grid</span>(6).<span>asyncValidator</span>([<span>CustomAsyncValidator</span>(() => <span>this</span>.config)]).<span>generate</span>()
                                                           .<span>field</span>('Text Field', 'text', "text").<span>addClass</span>('field-content').<span>addFieldClass</span>('field-input').<span>grid</span>(2).<span>generate</span>()
                                                           .<span>field</span>('Date Field', 'date', "date").<span>grid</span>(2).<span>focus</span>().<span>generate</span>()
                                                           .<span>field</span>('Datetime Field', 'datetime', "datetime").<span>grid</span>(2).<span>generate</span>()
@@ -187,7 +208,7 @@
             'required',
             <span>true</span>
         );
-          
+
         dynamicFormService.<span>updateValidator</span>(
             <span>this</span>.config.form,
             'date',

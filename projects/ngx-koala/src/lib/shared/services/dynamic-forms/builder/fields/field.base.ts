@@ -2,7 +2,7 @@ import { KoalaDynamicFormFieldInterface } from "../../../../components/form/dyna
 import { DynamicFormTypeFieldEnum } from "../../../../components/form/dynamic-form/enums/dynamic-form-type-field.enum";
 import { FloatLabelType, MatFormFieldAppearance } from "@angular/material/form-field";
 import { DynamicFormBuilder } from "../dynamic-form.builder";
-import { FormBuilder } from "@angular/forms";
+import { AsyncValidatorFn, FormBuilder, ValidatorFn } from "@angular/forms";
 import { KoalaDynamicFormConfigInterface } from "../../../../components/form/dynamic-form/interfaces/koala.dynamic-form-config.interface";
 import { koala } from "koala-utils";
 
@@ -31,6 +31,16 @@ export abstract class FieldBase {
 
   public focus() {
     this.fieldConfig.focus = true;
+    return this;
+  }
+
+  public syncValidator(validators: ValidatorFn[]) {
+    this.fieldConfig.syncValidators = validators;
+    return this;
+  }
+
+  public asyncValidator(validators: AsyncValidatorFn | AsyncValidatorFn[]) {
+    this.fieldConfig.asyncValidators = validators;
     return this;
   }
 
