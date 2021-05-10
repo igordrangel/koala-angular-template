@@ -18,7 +18,8 @@
 	             propriedade.get('type').value == typeField.phone ||
 	             propriedade.get('type').value == typeField.percent ||
 	             propriedade.get('type').value == typeField.color ||
-	             propriedade.get('type').value == typeField.month"
+	             propriedade.get('type').value == typeField.month ||
+	             propriedade.get('type').value == typeField.competenceDate"
 		    [appearance]="propriedade.get('appearance').value"
 		    [floatLabel]="propriedade.get('floatLabel').value"
 		    [formGroupName]="i"
@@ -31,7 +32,8 @@
 		      [required]="propriedade.get('required').value"
           [readonly]="propriedade.get('disabled').value"
 		      [tabIndex]="tabIndexStart + i"
-		      [mask]="((propriedade.get('type').value == typeField.phone) ? '(00)0000-0000?0' : null) ||
+		      [mask]="((propriedade.get('type').value == typeField.competenceDate) ? '00/0000' : null) ||
+		              ((propriedade.get('type').value == typeField.phone) ? '(00)0000-0000?0' : null) ||
 		              ((propriedade.get('type').value == typeField.stringNumber) ? '0{'+propriedade.get('maxLength').value+'}' : null) ||
                   ((propriedade.get('type').value == typeField.cpf) ? '000.000.000-00' : null) ||
                   ((propriedade.get('type').value == typeField.cnpj) ? '00.000.000/0000-00' : null) ||
@@ -46,7 +48,7 @@
                     propriedade.get('type').value == typeField.percent
                   )) ? 'tel' : (
                     propriedade.get('type').value == typeField.month ?
-                    'month' :
+                    'month' : (
                     propriedade.get('type').value == typeField.date ?
                     'date' : (
                     propriedade.get('type').value == typeField.datetime ?
@@ -60,7 +62,7 @@
                     propriedade.get('type').value == typeField.password ?
                     'password' : (
                     propriedade.get('type').value == typeField.color ?
-                    'color' : 'text')))))))"
+                    'color' : 'text'))))))))"
           [min]="propriedade.get('min').value"
           [max]="propriedade.get('max').value"
           [minLength]="propriedade.get('minLength').value"

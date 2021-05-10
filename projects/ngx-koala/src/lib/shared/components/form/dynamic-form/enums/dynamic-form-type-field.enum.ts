@@ -27,5 +27,6 @@ export enum DynamicFormTypeFieldEnum {
   float,
   stringNumber,
   selectMultipleNative,
-  month
+  month,
+  competenceDate
 }
