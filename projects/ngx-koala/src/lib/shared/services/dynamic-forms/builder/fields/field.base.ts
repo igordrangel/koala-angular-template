@@ -133,6 +133,11 @@ export abstract class FieldBase {
     return this;
   }
 
+  public setCustomMasc(mask: string) {
+    this.fieldConfig.customMasc = mask;
+    return this;
+  }
+
   public generate() {
     let getLastConfig = (this.formConfig.formConfig.length > 0) ?
       this.formConfig.formConfig[this.formConfig.formConfig.length - 1] :

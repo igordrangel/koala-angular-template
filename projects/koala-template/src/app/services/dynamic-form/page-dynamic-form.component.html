@@ -71,9 +71,10 @@
     <span>private</span> dynamicFormService: <span>KoalaDynamicFormService</span>
   ) &#123;
     <span>this</span>.config = dynamicFormService.<span>build</span>()
-                                                          .<span>field</span>('Custom Sync Validator', 'customSyncValidator', 'text').<span>grid</span>(4).<span>syncValidator</span>([<span>CustomSyncValidator</span>(() => <span>this</span>.config)]).<span>generate</span>()
-                                                          .<span>field</span>('Custom Async Validator', 'customAsyncValidator', 'text').<span>grid</span>(4).<span>asyncValidator</span>([<span>CustomAsyncValidator</span>(() => <span>this</span>.config)]).<span>generate</span>()
-                                                          .<span>field</span>('Competence Data Field', 'competenceDate', 'competenceDate').<span>setValue</span>(<span>koala</span>('now').<span>date</span>().<span>format</span>('MM/YYYY').<span>getValue</span>()).<span>grid</span>(4).<span>generate</span>()
+                                                          .<span>field</span>('Custom Mask', 'stringCustomMasc', 'stringWithCustomMasc').<span>grid</span>(3).<span>setCustomMasc</span>("separator.3").<span>textHint</span>("Uses a ngx-mask library.").<span>generate</span>()
+                                                          .<span>field</span>('Custom Sync Validator', 'customSyncValidator', 'text').<span>grid</span>(3).<span>syncValidator</span>([<span>CustomSyncValidator</span>(() => <span>this</span>.config)]).<span>generate</span>()
+                                                          .<span>field</span>('Custom Async Validator', 'customAsyncValidator', 'text').<span>grid</span>(3).<span>asyncValidator</span>([<span>CustomAsyncValidator</span>(() => <span>this</span>.config)]).<span>generate</span>()
+                                                          .<span>field</span>('Competence Data Field', 'competenceDate', 'competenceDate').<span>setValue</span>(<span>koala</span>('now').<span>date</span>().<span>format</span>('MM/YYYY').<span>getValue</span>()).<span>grid</span>(3).<span>generate</span>()
                                                           .<span>field</span>('Text Field', 'text', "text").<span>addClass</span>('field-content').<span>addFieldClass</span>('field-input').<span>grid</span>(2).<span>generate</span>()
                                                           .<span>field</span>('Date Field', 'date', "date").<span>grid</span>(2).<span>focus</span>().<span>generate</span>()
                                                           .<span>field</span>('Datetime Field', 'datetime', "datetime").<span>grid</span>(2).<span>generate</span>()

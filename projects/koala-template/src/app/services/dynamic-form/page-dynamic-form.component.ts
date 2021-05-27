@@ -25,9 +25,10 @@ export class PageDynamicFormComponent extends PageAbstract {
   ) {
     super();
     this.config = dynamicFormService.build()
-                                    .field('Custom Sync Validator', 'customSyncValidator', 'text').grid(4).syncValidator([CustomSyncValidator(() => this.config)]).generate()
-                                    .field('Custom Async Validator', 'customAsyncValidator', 'text').grid(4).asyncValidator([CustomAsyncValidator(() => this.config)]).generate()
-                                    .field('Competence Data Field', 'competenceDate', 'competenceDate').setValue(koala('now').date().format('MM/YYYY').getValue()).grid(4).generate()
+                                    .field('Custom Mask', 'stringCustomMasc', 'stringWithCustomMasc').grid(3).setCustomMasc("separator.3").textHint("Uses a ngx-mask library.").generate()
+                                    .field('Custom Sync Validator', 'customSyncValidator', 'text').grid(3).syncValidator([CustomSyncValidator(() => this.config)]).generate()
+                                    .field('Custom Async Validator', 'customAsyncValidator', 'text').grid(3).asyncValidator([CustomAsyncValidator(() => this.config)]).generate()
+                                    .field('Competence Data Field', 'competenceDate', 'competenceDate').setValue(koala('now').date().format('MM/YYYY').getValue()).grid(3).generate()
                                     .field('Text Field', 'text', "text").addClass('field-content').addFieldClass('field-input').grid(2).generate()
                                     .field('Date Field', 'date', "date").grid(2).focus().generate()
                                     .field('Datetime Field', 'datetime', "datetime").grid(2).generate()

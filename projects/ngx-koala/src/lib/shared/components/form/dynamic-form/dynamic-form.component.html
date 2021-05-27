@@ -19,7 +19,8 @@
 	             propriedade.get('type').value == typeField.percent ||
 	             propriedade.get('type').value == typeField.color ||
 	             propriedade.get('type').value == typeField.month ||
-	             propriedade.get('type').value == typeField.competenceDate"
+	             propriedade.get('type').value == typeField.competenceDate ||
+               propriedade.get('type').value == typeField.stringWithCustomMasc"
 		    [appearance]="propriedade.get('appearance').value"
 		    [floatLabel]="propriedade.get('floatLabel').value"
 		    [formGroupName]="i"
@@ -38,7 +39,8 @@
                   ((propriedade.get('type').value == typeField.cpf) ? '000.000.000-00' : null) ||
                   ((propriedade.get('type').value == typeField.cnpj) ? '00.000.000/0000-00' : null) ||
                   ((propriedade.get('type').value == typeField.percent) ? 'percent' : null) ||
-									((propriedade.get('type').value == typeField.hoursAndMinutes) ? hoursAndMinutesMask : null)"
+									((propriedade.get('type').value == typeField.hoursAndMinutes) ? hoursAndMinutesMask : null) ||
+									((propriedade.get('type').value == typeField.stringWithCustomMasc) ? propriedade.get('customMasc').value : null)"
 		      [validation]="
 	                    (propriedade.get('type').value == typeField.cpf && propriedade.get('value').errors?.cpfInvalid) ||
 	                    (propriedade.get('type').value == typeField.cnpj && propriedade.get('value').errors?.cnpjInvalid)"
