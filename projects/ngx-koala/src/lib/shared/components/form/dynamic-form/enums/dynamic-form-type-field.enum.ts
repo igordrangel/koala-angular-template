@@ -28,5 +28,6 @@ export enum DynamicFormTypeFieldEnum {
   stringNumber,
   selectMultipleNative,
   month,
-  competenceDate
+  competenceDate,
+  stringWithCustomMasc
 }

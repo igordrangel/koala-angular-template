@@ -62,4 +62,5 @@ export interface KoalaDynamicFormFieldInterface {
     accept?: string;
   }
   dynamicFormConfig?: KoalaDynamicFormConfigInterface;
+  customMasc?: string;
 }
