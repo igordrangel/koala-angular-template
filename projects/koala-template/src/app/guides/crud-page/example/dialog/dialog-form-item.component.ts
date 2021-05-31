@@ -11,6 +11,7 @@ import { ItemInterface, ItemService } from "../item.service";
 })
 export class DialogFormItemComponent extends FormAbstract {
   public formConfig: KoalaDynamicFormConfigInterface;
+  public btnLabel = "Sent";
 
   constructor(
     private dynamicFormService: KoalaDynamicFormService,

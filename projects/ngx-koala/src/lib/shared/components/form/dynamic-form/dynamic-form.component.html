@@ -505,11 +505,7 @@
 	        <mat-icon>info</mat-icon>
 		      {{propriedade.get('textHint').value}}
 	      </mat-hint>
-	      <mat-error *ngIf="propriedade.get('value').errors?.required">
-	        <mat-icon>error</mat-icon>
-		      {{propriedade.get('label').value}} não informado(a).
-	      </mat-error>
-	      <mat-error *ngIf="propriedade.get('value').errors?.autocompleteSelected">
+	      <mat-error *ngIf="propriedade.get('value').errors?.required || propriedade.get('value').errors?.autocompleteSelected">
 	        <mat-icon>error</mat-icon>
 	        Você deve selecionar um {{propriedade.get('label').value}}
 	      </mat-error>
