@@ -197,7 +197,9 @@ export class PageComponent implements OnInit {
 
   public async logout() {
     this.logoutEmitter.emit(true);
-    if (this.oauth2Config) { this.oauth2Service.logout(); }
+    if (this.oauth2Config) {
+      this.oauth2Service.logout();
+    }
     this.menuService.close();
     this.tokenService.removeToken();
     this.tokenService.getToken().next(null);

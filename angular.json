@@ -58,7 +58,6 @@
             "main": "projects/koala-template/src/main.ts",
             "polyfills": "projects/koala-template/src/polyfills.ts",
             "tsConfig": "projects/koala-template/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/koala-template/src/favicon.ico",
               "projects/koala-template/src/assets",
@@ -78,7 +77,13 @@
               "jwt-encode",
               "jwt-decode",
               "koala-utils"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -108,7 +113,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
