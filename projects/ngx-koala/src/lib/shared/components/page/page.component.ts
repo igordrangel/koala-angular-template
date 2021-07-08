@@ -282,6 +282,16 @@ koala-menu ul li li:hover,
 koala-menu ul li li:hover a {color: ${this.palletColors.menuOptionsColorHover} !important;}
 koala-menu ul li li.active,
 koala-menu ul li li.active a {color: ${this.palletColors.menuOptionsColorActive} !important;}
+koala-menu ul li koala-icon svg *,
+koala-menu ul li a koala-icon svg * {fill: ${this.palletColors.menuOptionsColor};}
+koala-menu ul li:hover koala-icon svg *,
+koala-menu ul li:hover a koala-icon svg * {fill: ${this.palletColors.menuOptionsColorHover} !important;}
+koala-menu ul li.active koala-icon *,
+koala-menu ul li.expanded koala-icon * {fill: ${this.palletColors.menuOptionsColorActive} !important;}
+koala-menu ul li li:hover koala-icon *,
+koala-menu ul li li:hover a koala-icon * {fill: ${this.palletColors.menuOptionsColorHover} !important;}
+koala-menu ul li li.active koala-icon *,
+koala-menu ul li li.active a koala-icon * {fill: ${this.palletColors.menuOptionsColorActive}!important;}
 .notifications-content .title {color: ${this.palletColors.notificationTitleColor}!important;}
 .notifications-content .empty,
 .notifications-content .titleList {color: ${this.palletColors.notificationContentTitleColor}!important;}
@@ -293,6 +303,8 @@ koala-menu ul li li.active a {color: ${this.palletColors.menuOptionsColorActive}
 .list-container .list-filter .advanced {background: ${this.palletColors.firstColor};}
 .list-container nav.menu-list {background: ${this.palletColors.firstColor};color: rgba(25, 118, 210, .3);}
 .content {background: ${this.palletColors.listContentBackground};}
+.mat-tab-group .mat-tab-label {color: ${this.palletColors.fontColor};}
+.mat-tab-group .mat-ink-bar {background-color: ${this.palletColors.fontColor}!important;}
 .mat-table {background: ${this.palletColors.listBackground};color: ${this.palletColors.fontColor};}
 .mat-table th {color: ${this.palletColors.listTitleItemColor}!important;}
 .mat-sort-header-arrow {color: ${this.palletColors.listItemColor}!important;}

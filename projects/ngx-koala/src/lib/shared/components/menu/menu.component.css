@@ -1,8 +1,9 @@
 .title {font-family: OpenSans, sans-serif;font-size: .8em;font-weight: bold;line-height: .8em;margin: 0;padding: 8px 15px;}
-ul {font-size: 0;list-style: none;margin: 0;padding: 0;}
+ul {font-size: 0;list-style: none;margin: 0;padding: 0;width: 90%;}
 ul.list-menu {height: calc(100vh - 107px);overflow: auto;}
-ul ul {height: 0;overflow: hidden;transition: .2s;}
-ul li {cursor: pointer;display: block;font-size: 14px;outline: none;padding: 0;position: relative;transition: .2s;}
+ul.list-menu.without-title {height: calc(100vh - 78px);}
+ul ul {height: 0;overflow: hidden;transition: .2s;width: 100%;}
+ul li {cursor: pointer;display: block;font-size: 14px;outline: none;padding: 0;position: relative;transition: .2s;overflow: hidden;border-radius: 0 20px 20px 0;}
 ul li a {transition: .2s;}
 .module {outline: none;padding: 5px 15px;text-decoration: none;}
 a.module {box-sizing: border-box;cursor: pointer;display: block;width: 100%;}
@@ -13,11 +14,16 @@ ul li.expanded ul {border-bottom: 1px solid rgba(0, 0, 0, .1);box-shadow: 0 1px 
 ul li li a.active {background: rgba(0, 0, 0, .1) !important;cursor: default;height: fit-content !important;}
 ul li h3,
 ul li h4,
+ul li koala-icon,
 ul li mat-icon {display: inline-flex;line-height: 1.5em;margin: 0;vertical-align: middle;}
 ul li h3,
 ul li h4 {font-size: .9em;}
+ul li koala-icon,
+ul li li koala-icon,
 ul li mat-icon,
 ul li li mat-icon {font-size: 22px;height: 22px;line-height: 22px;margin-right: 5px;width: 22px;}
+ul li koala-icon,
+ul li li koala-icon {margin-right: 10px;}
 ul li li a {cursor: pointer;display: block;padding: 5px 15px !important;text-decoration: none;width: 100%;}
 ul li li:hover {background: rgba(0, 0, 0, .1);}
 ul li li a.active:hover {background: transparent;}

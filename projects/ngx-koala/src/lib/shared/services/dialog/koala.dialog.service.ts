@@ -4,6 +4,8 @@ import { KoalaDialogTemplateInterface } from './koala.dialog-template.interface'
 import { ComponentType } from '@angular/cdk/overlay';
 import { koala } from "koala-utils";
 
+export type KoalaDialogSizeType = 'auto' | 'small' | 'normal' | 'big' | 'mobile';
+
 @Injectable({providedIn: "any"})
 export class KoalaDialogService {
 
@@ -12,7 +14,7 @@ export class KoalaDialogService {
 
   public open<T>(
     dialogComponent: ComponentType<T>,
-    size: 'small' | 'normal' | 'big' | 'mobile',
+    size: KoalaDialogSizeType,
     data?: any,
     triggerBeforeClosed: string | boolean | object = false,
     beforeClosed?: (event?) => void
@@ -43,6 +45,7 @@ export class KoalaDialogService {
     let dialogElementId = "dialog-" + koala('').string().random(10, true).getValue();
 
     return {
+      auto: {id: dialogElementId, panelClass: ['koala-dialog', 'auto'], data},
       small: {id: dialogElementId, panelClass: ['koala-dialog', 'small'], data},
       normal: {id: dialogElementId, panelClass: ['koala-dialog', 'normal'], data},
       big: {id: dialogElementId, panelClass: ['koala-dialog', 'big'], data},

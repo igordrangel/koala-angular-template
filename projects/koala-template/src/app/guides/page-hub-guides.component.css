@@ -1,4 +1,0 @@
-.guides {display: flex;align-items: center;flex-wrap: wrap;box-sizing: border-box;padding: 0 20px 20px;}
-.guides .guides__item {background: #111;color: #fff;text-align: center;font-size: 2em;line-height: 2em;padding: 15px 0;margin: 5px;width: calc((100% - 20px)/5);}
-.guides .guides__item:nth-child(1n) {margin-left: 0;}
-.guides .guides__item:nth-child(5n) {margin-right: 0;}

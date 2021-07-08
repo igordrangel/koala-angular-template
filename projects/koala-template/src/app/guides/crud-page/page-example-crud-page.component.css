@@ -1,4 +1,5 @@
 section {padding: 0 20px;}
-section h2 {padding: 5px 0 5px 10px;margin: 5px 0 0;color: rgba(255,255,255,.6);background: rgba(0,0,0,.6);font-weight: bold;font-size: 12px;}
+section h2 {padding: 5px 0 5px 10px;margin: 5px 0 0;color: rgba(255,255,255,.6);background: #1d0528;font-weight: bold;font-size: 12px;border-radius: 10px 10px 0 0;}
+section code {border-radius: 0 0 10px 10px;}
 section p {padding: 5px 0;color: #fff;text-align: justify;}
 section a {color: #3976ba;font-weight: bold;text-decoration: none;}

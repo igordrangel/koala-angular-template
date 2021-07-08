@@ -6,6 +6,7 @@ import { ButtonRoutingModule } from "./button.routing.module";
 import { MatIconModule } from "@angular/material/icon";
 import { KoalaFolderPageModule } from "../../../../../ngx-koala/src/lib/shared/components/folder-page/koala.folder-page.module";
 import { KoalaButtonModule } from "../../../../../ngx-koala/src/lib/shared/components/button/koala.button.module";
+import { MatTabsModule } from "@angular/material/tabs";
 
 @NgModule({
   exports: [
@@ -20,6 +21,7 @@ import { KoalaButtonModule } from "../../../../../ngx-koala/src/lib/shared/compo
     KoalaButtonModule,
     MatExpansionModule,
     MatIconModule,
+    MatTabsModule,
     ButtonRoutingModule
   ]
 })

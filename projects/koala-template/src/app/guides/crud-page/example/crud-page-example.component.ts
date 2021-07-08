@@ -10,11 +10,12 @@ import { KoalaXlsxService } from "../../../../../../ngx-koala/src/lib/shared/ser
 import { ItemInterface, ItemService } from "./item.service";
 import { KoalaDynamicFormService } from "../../../../../../ngx-koala/src/lib/shared/services/dynamic-forms/koala.dynamic-form.service";
 import { KoalaQuestionService } from "../../../../../../ngx-koala/src/lib/shared/services/question/koala.question.service";
+import { PageAbstract } from "../../../shared/abstract/page.abstract";
 
 @Component({
   templateUrl: 'crud-page-example.component.html'
 })
-export class CrudPageExampleComponent {
+export class CrudPageExampleComponent extends PageAbstract {
 
   public navigateHistory: KoalaNavigateHistoryInterface[] = [
     {name: 'Guides', routerLink: '/guides'},
@@ -34,6 +35,7 @@ export class CrudPageExampleComponent {
     private questionService: KoalaQuestionService,
     private xlsxService: KoalaXlsxService
   ) {
+    super();
     this.listConfig = this.koalaListService
                           .build<ItemInterface>()
                           .defaultFilter({

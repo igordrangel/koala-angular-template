@@ -5,6 +5,7 @@ import { KoalaFolderPageModule } from "../../../../../ngx-koala/src/lib/shared/c
 import { FolderPageRoutingModule } from "./folder-page.routing.module";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
+import { MatTabsModule } from "@angular/material/tabs";
 
 @NgModule({
   exports: [
@@ -18,6 +19,7 @@ import { MatIconModule } from "@angular/material/icon";
     KoalaFolderPageModule,
     MatExpansionModule,
     MatIconModule,
+    MatTabsModule,
     FolderPageRoutingModule
   ]
 })

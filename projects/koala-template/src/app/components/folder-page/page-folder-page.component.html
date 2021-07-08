@@ -1,5 +1,5 @@
 <koala-folder-page
-  customFolderBackgroudColor="#212121"
+  [customFolderBackgroudColor]="folderBackground"
   customFolderFontColor="#fff"
   titleIcon="webComponents"
   titlePage="Components - Folder Page"
@@ -7,18 +7,19 @@
   [navigateHistory]="navigationHistory">
 
   <section class="p-20" content>
+    <mat-tab-group color="primary">
+      <mat-tab label="OVERVIEW">
+        <mat-accordion multi>
 
-    <mat-accordion multi>
+          <mat-expansion-panel expanded>
+            <mat-expansion-panel-header>
+              <mat-panel-title>example.module.ts</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
 
-      <mat-expansion-panel expanded>
-        <mat-expansion-panel-header>
-          <mat-panel-title>example.module.ts</mat-panel-title>
-          <mat-panel-description>
-            <mat-icon>code</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-
-        <pre><code><span>import</span> &#123; NgModule &#125; <span>from</span> '@angular/core';
+            <pre><code><span>import</span> &#123; NgModule &#125; <span>from</span> '@angular/core';
 <span>import</span> &#123; PageExampleComponent &#125; <span>from</span> './page-example.component';
 <span>import</span> &#123; CommonModule &#125; <span>from</span> '@angular/common';
 <span>import</span> &#123; KoalaFolderPageModule &#125; <span>from</span> 'ngx-koala';
@@ -36,17 +37,17 @@
 &#125;)
 <span>export class</span> ExampleModule &#123;&#125;</code></pre>
 
-      </mat-expansion-panel>
+          </mat-expansion-panel>
 
-      <mat-expansion-panel expanded>
-        <mat-expansion-panel-header>
-          <mat-panel-title>page-example.component.ts</mat-panel-title>
-          <mat-panel-description>
-            <mat-icon>code</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
+          <mat-expansion-panel expanded>
+            <mat-expansion-panel-header>
+              <mat-panel-title>page-example.component.ts</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
 
-        <pre><code><span>import</span> &#123; Component &#125; <span>from</span> '@angular/core';
+            <pre><code><span>import</span> &#123; Component &#125; <span>from</span> '@angular/core';
 <span>import</span> &#123; PageAbstract &#125; <span>from</span> '../../../shared/common/abstract/page.abstract';
 <span>import</span> &#123; FormBuilder, FormGroup &#125; <span>from</span> '@angular/forms';
 
@@ -60,17 +61,17 @@
   ]
 &#125;</code></pre>
 
-      </mat-expansion-panel>
+          </mat-expansion-panel>
 
-      <mat-expansion-panel expanded>
-        <mat-expansion-panel-header>
-          <mat-panel-title>page-example.component.html</mat-panel-title>
-          <mat-panel-description>
-            <mat-icon>code</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
+          <mat-expansion-panel expanded>
+            <mat-expansion-panel-header>
+              <mat-panel-title>page-example.component.html</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
 
-        <pre><code><span>&#60;koala-folder-page</span>
+            <pre><code><span>&#60;koala-folder-page</span>
   customFolderBackgroudColor="#000"
   customFolderFontColor="#fff"
   titleIcon="person"
@@ -85,10 +86,11 @@
 
 <span>&#60;/koala-folder-page&#62;</span></code></pre>
 
-      </mat-expansion-panel>
+          </mat-expansion-panel>
 
-    </mat-accordion>
-
+        </mat-accordion>
+      </mat-tab>
+    </mat-tab-group>
   </section>
 
 </koala-folder-page>

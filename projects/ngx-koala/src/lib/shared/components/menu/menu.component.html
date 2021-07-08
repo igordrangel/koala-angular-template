@@ -1,6 +1,6 @@
 <nav>
-  <h2 class="title">{{titleMenu}}</h2>
-  <ul *ngIf="(optionsSubject | async) as options" class="list-menu">
+  <h2 *ngIf="titleMenu" class="title">{{titleMenu}}</h2>
+  <ul *ngIf="(optionsSubject | async) as options" class="list-menu" [ngClass]="{'without-title': !titleMenu}">
     <li
 	    (click)="toogle(module)"
 	    *ngFor="let module of options"
@@ -9,7 +9,8 @@
         active: module.active
       }">
       <a *ngIf="!!module.routerLink else moduleWithoutLink" [routerLink]="module.routerLink" class="module">
-        <mat-icon *ngIf="module.icon">{{module.icon}}</mat-icon>
+        <mat-icon *ngIf="module.icon && !module.koalaIcon">{{module.icon}}</mat-icon>
+        <koala-icon *ngIf="module.icon && module.koalaIcon" [icon]="module.icon"></koala-icon>
         <h3>{{module.name}}</h3>
         <mat-icon
 	        *ngIf="module.tools?.length > 0"
@@ -17,7 +18,8 @@
       </a>
       <ng-template #moduleWithoutLink>
         <div class="module">
-          <mat-icon *ngIf="module.icon">{{module.icon}}</mat-icon>
+          <mat-icon *ngIf="module.icon && !module.koalaIcon">{{module.icon}}</mat-icon>
+          <koala-icon *ngIf="module.icon && module.koalaIcon" [icon]="module.icon" size="22"></koala-icon>
           <h3>{{module.name}}</h3>
           <mat-icon
 	          *ngIf="module.tools?.length > 0"
@@ -27,7 +29,8 @@
       <ul *ngIf="module.tools?.length > 0">
         <li *ngFor="let tool of module.tools">
 		      <a [routerLink]="tool.routerLink" routerLinkActive="active">
-	          <mat-icon *ngIf="tool.icon">{{tool.icon}}</mat-icon>
+	          <mat-icon *ngIf="tool.icon && !tool.koalaIcon">{{tool.icon}}</mat-icon>
+            <koala-icon *ngIf="tool.icon && tool.koalaIcon" [icon]="tool.icon" size="22"></koala-icon>
 	          <h4>{{tool.name}}</h4>
 		      </a>
         </li>

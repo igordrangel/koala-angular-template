@@ -1,7 +1,7 @@
 .content {display: flex;flex-direction: column;height: calc(100vh - 64px);overflow: auto;}
 .presentation {display: flex;flex-direction: column;justify-content: center;align-items: center;width: 100%;min-height: 400px;background: rgba(0,0,0,.1);}
 .presentation h1 {color: rgba(255,255,255,.6);}
-.presentation__install {background: rgba(0,0,0,.2);color: #fafafa;padding: 20px 40px;}
+.presentation__install {background: rgba(0,0,0,.2);color: #fafafa;padding: 20px 40px;border-radius: 10px;}
 .presentation__install ol {margin: 0;padding: 0;}
 .presentation__install li {color: #fafafa;padding: 5px 0 5px 10px;font-size: 14px;}
 .presentation__install li::marker {color: rgba(255,255,255,.5);font-weight: bold;font-size: 12px;}

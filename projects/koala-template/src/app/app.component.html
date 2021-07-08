@@ -2,24 +2,23 @@
 	color="primary"
 	[openPages]="openPages"
 	[palletColors]="palletCollors"
-  [showMenu]="false"
   [oauth2Config]="oauth2Config"
   labelLogout="Logout"
 	defaultPage="get-started"
   logo="assets/angular-logotipo.png">
 
   <div menu-toolbar>
-    <a mat-button color="primary">v12.0.0</a>
-    <a mat-button routerLink="get-started" color="primary">Get Started</a>
-    <a mat-button routerLink="guides" color="primary">Guides</a>
-    <a mat-button routerLink="components" color="primary">Components</a>
-    <a mat-button routerLink="services" color="primary">Services</a>
+    <a mat-button color="primary">v12.1.0</a>
     <a mat-button href="https://github.com/igordrangel/koala-angular-template" target="_blank" color="primary">
       <koala-icon size="20" color="#fff" icon="github"></koala-icon>
     </a>
   </div>
 
-  <div page-content>
+  <div menu-options>
+    <koala-menu [optionsSubject]="menuOptions$"></koala-menu>
+  </div>
+
+  <div class="page-content" page-content>
     <router-outlet></router-outlet>
   </div>
 </koala-page>

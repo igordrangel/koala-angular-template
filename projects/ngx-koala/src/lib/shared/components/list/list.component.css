@@ -1,5 +1,5 @@
 .list-container {border-radius: 10px;margin: 0 auto;overflow-x: hidden;width: calc(100% - 40px);}
-.list-container .list {display: block;height: calc(100vh - 295px);overflow-y: auto;position: relative;top: 0;width: 100%;z-index: 1;}
+.list-container .list {display: block;height: calc(100vh - 320px);overflow-y: auto;position: relative;top: 0;width: 100%;z-index: 1;}
 .list-container .list .spinner-container {position: absolute;height: 100%;top: 0;left: 0;bottom: 56px;right: 0;background: rgba(0, 0, 0, 0.15);z-index: 1;display: flex;align-items: center;justify-content: center;}
 .list-container .list table:not(.table-not-selection) .mat-header-cell:first-child,
 .list-container .list .mat-header-cell:last-child {width: 5%;}

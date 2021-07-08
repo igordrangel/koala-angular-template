@@ -10,7 +10,7 @@ export class KoalaQuestionService {
   }
 
   public open(config: KoalaQuestionConfigInterface, yesCallback?: () => void, noCallback?: () => void) {
-    this.dialogService.open(DialogQuestionComponent, 'small', config, {},
+    this.dialogService.open(DialogQuestionComponent, 'auto', config, {},
       (answer: { question: boolean }) => {
         if (answer.question && yesCallback) {
           yesCallback();

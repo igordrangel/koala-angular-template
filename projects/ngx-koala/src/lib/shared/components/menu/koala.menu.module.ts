@@ -3,6 +3,7 @@ import { MenuComponent } from './menu.component';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { KoalaIconModule } from "../icon/koala.icon.module";
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule,
-    MatIconModule
+    MatIconModule,
+    KoalaIconModule
   ],
   exports: [
     MenuComponent

@@ -7,6 +7,7 @@ import { PageBtnFileComponent } from "./page-btn-file.component";
 import { BtnFileRoutingModule } from "./btn-file.routing.module";
 import { KoalaFolderPageModule } from "../../../../../ngx-koala/src/lib/shared/components/folder-page/koala.folder-page.module";
 import { KoalaFileButtonModule } from "../../../../../ngx-koala/src/lib/shared/components/file-button/koala.file-button.module";
+import { MatTabsModule } from "@angular/material/tabs";
 
 @NgModule({
   exports: [
@@ -22,6 +23,7 @@ import { KoalaFileButtonModule } from "../../../../../ngx-koala/src/lib/shared/c
     MatListModule,
     MatExpansionModule,
     MatIconModule,
+    MatTabsModule,
     BtnFileRoutingModule
   ]
 })

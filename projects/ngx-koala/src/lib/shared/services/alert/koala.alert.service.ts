@@ -10,6 +10,6 @@ export class KoalaAlertService {
   }
 
   public create(alertConfig: KoalaAlertConfigInterface) {
-    this.dialogService.open(DialogAlertComponent, 'small', alertConfig);
+    this.dialogService.open(DialogAlertComponent, 'auto', alertConfig);
   }
 }

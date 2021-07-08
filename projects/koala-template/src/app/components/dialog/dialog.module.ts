@@ -7,6 +7,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
 import { KoalaButtonModule } from "../../../../../ngx-koala/src/lib/shared/components/button/koala.button.module";
 import { KoalaDialogModule } from "../../../../../ngx-koala/src/lib/shared/components/dialog/koala.dialog.module";
+import { MatTabsModule } from "@angular/material/tabs";
 
 @NgModule({
   exports: [
@@ -23,6 +24,7 @@ import { KoalaDialogModule } from "../../../../../ngx-koala/src/lib/shared/compo
     KoalaButtonModule,
     MatExpansionModule,
     MatIconModule,
+    MatTabsModule,
     DialogRoutingModule
   ]
 })
