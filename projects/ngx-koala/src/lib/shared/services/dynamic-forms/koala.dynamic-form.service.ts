@@ -132,7 +132,11 @@ export class KoalaDynamicFormService {
   public resetForm(form: FormGroup) {
     const formArray = form.get('formData') as FormArray;
     formArray.controls.forEach(control => {
-      control.get('value').reset();
+      if (control.get('type').value === DynamicFormTypeFieldEnum.moreItems) {
+        control.get('moreItemsConfig').setValue([]);
+      } else {
+        control.get('value').reset();
+      }
     });
   }
 
