@@ -100,6 +100,9 @@ export class KoalaOAuth2Service implements OnDestroy {
 
   public loadDiscoveryDocumentAndTryLogin() {
 
+    if (this.eventSubscription) {
+      this.eventSubscription.unsubscribe();
+    }
     this.eventSubscription = this.events.subscribe(event => {
       if (event === 'authenticate') {
         this.generateState();
