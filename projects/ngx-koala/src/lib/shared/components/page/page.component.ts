@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 import { ThemePalette } from '@angular/material/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { LoaderBarPageInterface } from '../loader/loader-bar-page.interface';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { KoalaTokenService } from '../../services/token/koala.token.service';
 import { KoalaLoaderService } from '../../services/loader/koala.loader.service';
 import { KoalaNotificationInterface } from '../notifications/koala.notification.interface';
@@ -36,6 +36,7 @@ export class PageComponent implements OnInit {
   @Input() userMenuOptions: KoalaUserMenuOptionsInterface[] = [];
   @Input() palletColors: KoalaPagePalletColorsInterface;
   @Input() labelLogout: string = 'Sair';
+  @Input() oauth2Config$: BehaviorSubject<KoalaOauth2ConfigInterface>;
   @Input() oauth2Config: KoalaOauth2ConfigInterface;
   @Output() logoutEmitter = new EventEmitter<boolean>(false);
   @Output() deleteAllNotifications = new EventEmitter<boolean>(false);
@@ -76,6 +77,7 @@ export class PageComponent implements OnInit {
     listItemBackgroundActive: '#EEE',
     shadowColorTableList: 'rgba(25, 118, 210, .4)'
   };
+  private oauthEventsSubscription: Subscription;
 
   @ViewChild('drawer', {static: true}) private menu: MatDrawer;
 
@@ -197,7 +199,7 @@ export class PageComponent implements OnInit {
 
   public async logout() {
     this.logoutEmitter.emit(true);
-    if (this.oauth2Config) {
+    if (this.oauth2Config$) {
       this.oauth2Service.logout();
     }
     this.menuService.close();
@@ -316,38 +318,49 @@ koala-menu ul li li.active a koala-icon * {fill: ${this.palletColors.menuOptions
   }
 
   private initOAuth2() {
-    if (this.oauth2Config) {
-      this.oauth2Service.configure({
-        redirectUri: window.location.origin,
-        redirectUriAfterAuth: this.defaultPage,
-        responseType: 'code',
-        clientId: this.oauth2Config.clientId,
-        scope: this.oauth2Config.scope,
-        issuer: this.oauth2Config.domain,
-        customQueryParams: this.oauth2Config.customQueryParams,
-        endpointToken: this.oauth2Config.endpointToken ?? null,
-        endpointClaims: this.oauth2Config.endpointClaims ?? null
+    if (this.oauth2Config$) {
+      this.oauth2Config$.subscribe(config => {
+        this.startConfig(config);
       });
-      this.oauth2Service.loadDiscoveryDocumentAndTryLogin().then();
-
-      this.oauth2Service.events.subscribe(event => {
-        if (event === 'userAuthenticated' || event === 'refreshToken') {
-          const claims = this.oauth2Service.getIdentityClaims();
-          if (claims && (
-            !TokenFactory.hasToken() ||
-            (TokenFactory.hasToken() && event === 'refreshToken')
-          )) {
-            this.tokenService.setToken(jwtEncode({
-              accessToken: this.oauth2Service.getAccessToken(),
-              idToken: this.oauth2Service.getIdToken(),
-              refreshToken: this.oauth2Service.getRefreshToken(),
-              login: claims[this.oauth2Config.indexLoginName] ?? 'Undefined',
-              expired: this.oauth2Service.getAccessTokenExpiration(),
-              code: this.oauth2Service.getCode()
-            }, 'secret'))
-          }
-        }
-      });
+    } else if (this.oauth2Config) {
+      this.startConfig(this.oauth2Config);
     }
+  }
+
+  private startConfig(config) {
+    this.oauth2Service.configure({
+      redirectUri: window.location.origin,
+      redirectUriAfterAuth: this.defaultPage,
+      responseType: 'code',
+      clientId: config.clientId,
+      scope: config.scope,
+      issuer: config.domain,
+      customQueryParams: config.customQueryParams,
+      endpointToken: config.endpointToken ?? null,
+      endpointClaims: config.endpointClaims ?? null
+    });
+    this.oauth2Service.loadDiscoveryDocumentAndTryLogin().then();
+
+    if (this.oauthEventsSubscription) {
+      this.oauthEventsSubscription.unsubscribe();
+    }
+    this.oauthEventsSubscription = this.oauth2Service.events.subscribe(event => {
+      if (event === 'userAuthenticated' || event === 'refreshToken') {
+        const claims = this.oauth2Service.getIdentityClaims();
+        if (claims && (
+          !TokenFactory.hasToken() ||
+          (TokenFactory.hasToken() && event === 'refreshToken')
+        )) {
+          this.tokenService.setToken(jwtEncode({
+            accessToken: this.oauth2Service.getAccessToken(),
+            idToken: this.oauth2Service.getIdToken(),
+            refreshToken: this.oauth2Service.getRefreshToken(),
+            login: claims[config.indexLoginName] ?? 'Undefined',
+            expired: this.oauth2Service.getAccessTokenExpiration(),
+            code: this.oauth2Service.getCode()
+          }, 'secret'))
+        }
+      }
+    });
   }
 }
