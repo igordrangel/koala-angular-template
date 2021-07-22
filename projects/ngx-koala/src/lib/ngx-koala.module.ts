@@ -55,8 +55,8 @@ import { KoalaEnvironment, KoalaEnvironmentInterface } from "./environments/koal
 })
 export class NgxKoalaModule {
   static forRoot(environment: KoalaEnvironmentInterface): ModuleWithProviders<NgxKoalaModule> {
-    environment.storageOAuthTypeName = environment.storageOAuthTypeName ?? 'koala_oauth_type';
-    environment.storageTokenName = environment.storageTokenName ?? 'koala_token';
+    environment.storageOAuthTypeName = environment.storageOAuthTypeName ?? 'koala_ui_oauth_type';
+    environment.storageTokenName = environment.storageTokenName ?? 'koala_ui_token';
 
     KoalaEnvironment.environment = environment;
 

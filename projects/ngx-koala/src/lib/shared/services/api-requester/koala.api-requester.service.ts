@@ -7,6 +7,7 @@ import { KlDelay } from "koala-utils/dist/utils/KlDelay";
 import { KoalaErrorsHelper } from "./helpers/error/koala.errors.helper";
 import { KoalaRequestHeaderHelper } from "./helpers/service/koala.request-header.helper";
 import { KoalaResponseFactory } from "./factory/koala.response.factory";
+import { KoalaEnvironment } from "../../../environments/koalaEnvironment";
 
 export type ApiRequesterType = 'get' | 'post' | 'put' | 'patch' | 'delete';
 
@@ -174,9 +175,9 @@ export class KoalaApiRequesterService {
   }
 
   private getToken() {
-    const tmpToken = localStorage.getItem('koalaStorageToken');
+    const tmpToken = localStorage.getItem(KoalaEnvironment.environment?.storageTokenName);
     if (tmpToken) {
-      const koalaToken = jwtDecode(localStorage.getItem('koalaStorageToken')) as any;
+      const koalaToken = jwtDecode(localStorage.getItem(KoalaEnvironment.environment?.storageTokenName)) as any;
       return koalaToken.accessToken;
     }
 
