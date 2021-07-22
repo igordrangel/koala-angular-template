@@ -1,6 +1,6 @@
 {
   "name": "ngx-koala",
-  "version": "12.2.7",
+  "version": "12.2.8",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/igordrangel/koala-angular-template.git"
@@ -26,6 +26,7 @@
     "ng2-currency-mask": "^9.0.2",
     "ngx-mask": "^10.0.4",
     "ngx-papaparse": "^5.0.0",
+    "xlsx": "^0.17.0",
     "rxjs": "~6.6.3"
   }
 }
