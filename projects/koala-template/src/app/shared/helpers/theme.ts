@@ -1,26 +1,27 @@
 import {KoalaPagePalletColorsInterface} from "../../../../../ngx-koala/src/lib/shared/components/page/koala-page-pallet-colors.interface";
 
 export const KoalaThemeColors = {
-  primary: '#36044c',
-  secondary: '#39064f'
+  primary: '#1b0524',
+  secondary: '#18011f',
+  backgroundSpotlight: '#312f4e'
 };
 
 export const KoalaTheme:KoalaPagePalletColorsInterface = {
-  userPresentationUserFontColor: '#36044c',
+  userPresentationUserFontColor: KoalaThemeColors.secondary,
   userPresentationUserBackground: '#fff',
   userPresentationBackground: KoalaThemeColors.primary,
   userPresentationButtonColor: KoalaThemeColors.primary,
   toolbarBackground: KoalaThemeColors.secondary,
   toolbarColor: '#fff',
   menuBackground: KoalaThemeColors.secondary,
-  menuOptionsBackground: '#2d063e',
+  menuOptionsBackground: KoalaThemeColors.backgroundSpotlight,
   menuOptionsColor: 'rgba(255,255,255,0.6)',
-  menuOptionsColorHover: 'rgba(255,255,255,.9)',
+  menuOptionsColorHover: 'rgba(255,255,255,.8)',
   menuOptionsColorActive: '#fff',
   checkboxBackground: '#fff',
   checkboxColor: KoalaThemeColors.primary,
   checkboxOutlineColor: '#fff',
-  firstColor: KoalaThemeColors.primary,
+  firstColor: KoalaThemeColors.secondary,
   secondColor: '#303030',
   fontColor: '#fff',
   bodyBackground: KoalaThemeColors.secondary,
@@ -33,9 +34,9 @@ export const KoalaTheme:KoalaPagePalletColorsInterface = {
   listTitleItemColor: '#fafafa',
   listBackground: KoalaThemeColors.secondary,
   listItemBackgroudHover: KoalaThemeColors.secondary,
-  listItemBackgroundActive: '#2d063e',
+  listItemBackgroundActive: '#0c0110',
   listContentBackground: KoalaThemeColors.secondary,
-  shadowColorTableList: 'rgba(255,255,255,.3)',
+  shadowColorTableList: 'rgba(0,0,0,.6)',
   scrollbarColor: 'rgba(255,255,255,0.8)',
   scrollbarColorHover: '#fff'
 };

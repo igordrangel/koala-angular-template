@@ -1,16 +1,16 @@
-import { koalaEnvironment } from "../../../environments/koala.environment";
+import { KoalaEnvironment } from "../../../environments/koalaEnvironment";
 
 export class TokenFactory {
   private static token?: string;
 
   public static init() {
-    if (!!localStorage.getItem(koalaEnvironment.storageTokenName)) {
-      TokenFactory.setToken(localStorage.getItem(koalaEnvironment.storageTokenName));
+    if (!!localStorage.getItem(KoalaEnvironment.environment?.storageTokenName)) {
+      TokenFactory.setToken(localStorage.getItem(KoalaEnvironment.environment?.storageTokenName));
     }
   }
 
   public static setToken(token: string) {
-    localStorage.setItem(koalaEnvironment.storageTokenName, token);
+    localStorage.setItem(KoalaEnvironment.environment?.storageTokenName, token);
     this.token = token;
   }
 
@@ -19,12 +19,12 @@ export class TokenFactory {
   }
 
   public static removeToken() {
-    localStorage.removeItem(koalaEnvironment.storageTokenName);
+    localStorage.removeItem(KoalaEnvironment.environment?.storageTokenName);
     this.token = null;
   }
 
   public static hasToken() {
-    return !!this.token && !!localStorage.getItem(koalaEnvironment.storageTokenName);
+    return !!this.token && !!localStorage.getItem(KoalaEnvironment.environment?.storageTokenName);
   }
 
   public static logout() {

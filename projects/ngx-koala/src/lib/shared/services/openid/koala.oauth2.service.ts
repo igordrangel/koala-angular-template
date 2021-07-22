@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { koala } from 'koala-utils';
 import { Router } from "@angular/router";
 import { KoalaTokenService } from "../token/koala.token.service";
+import { KoalaOauthConfig } from "./koala.oauth.config";
+import { KlDelay } from "koala-utils/dist/utils/KlDelay";
 
 export interface KoalaOAuth2Config {
   redirectUri: string;
@@ -139,7 +141,12 @@ export class KoalaOAuth2Service implements OnDestroy {
     });
   }
 
-  public initLoginFlow() {
+  public async initLoginFlow(name?: string) {
+    if (name) {
+      KoalaOauthConfig.setConfig(name);
+      await KlDelay.waitFor(1000);
+    }
+
     this.events.next('authenticate');
   }
 

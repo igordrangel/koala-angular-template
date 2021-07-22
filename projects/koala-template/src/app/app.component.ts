@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { KoalaPagePalletColorsInterface } from '../../../ngx-koala/src/lib/shared/components/page/koala-page-pallet-colors.interface';
 import { KoalaTheme } from "./shared/helpers/theme";
-import { KoalaOauth2ConfigInterface } from "../../../ngx-koala/src/lib/shared/components/page/koala-oauth2-config.interface";
 import { KoalaMenuModuleInterface } from "../../../ngx-koala/src/lib/shared/components/menu/koala.menu-module.interface";
 import { BehaviorSubject } from "rxjs";
 
@@ -20,16 +19,6 @@ declare namespace NodeJS {
 export class AppComponent {
   public openPages = ['/login'];
   public palletCollors: KoalaPagePalletColorsInterface = KoalaTheme;
-  public oauth2Config: KoalaOauth2ConfigInterface = {
-    customQueryParams: {
-      client_secret: 't1gbmEgh4EUgAJRLy16Zjrks'
-    },
-    clientId: '679440572859-iviegii370t3n4m15qrpr4fpj4db8jc7.apps.googleusercontent.com',
-    scope: 'openid profile email',
-    domain: 'https://accounts.google.com',
-    strictDiscoveryDocumentValidation: false,
-    indexLoginName: 'name'
-  }
   public menuOptions$ = new BehaviorSubject<KoalaMenuModuleInterface[]>([{
     icon: 'get_app',
     name: 'Get Started',
@@ -95,6 +84,9 @@ export class AppComponent {
     },{
       name: 'Request',
       routerLink: '/services/request'
+    },{
+      name: 'Snackbar',
+      routerLink: '/services/snackbar'
     },{
       name: 'Token',
       routerLink: '/services/token'

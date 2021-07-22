@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,11 +13,8 @@ import { PageGetStartedComponent } from "./get-started/page-get-started.componen
 import { MatExpansionModule } from "@angular/material/expansion";
 import { KoalaIconModule } from "../../../ngx-koala/src/lib/shared/components/icon/koala.icon.module";
 import { KoalaButtonModule } from "../../../ngx-koala/src/lib/shared/components/button/koala.button.module";
-import { registerLocaleData } from "@angular/common";
-import ptBr from '@angular/common/locales/pt';
 import { KoalaOAuth2Service } from "../../../ngx-koala/src/lib/shared/services/openid/koala.oauth2.service";
-
-registerLocaleData(ptBr);
+import { environment } from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -28,7 +25,7 @@ registerLocaleData(ptBr);
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    NgxKoalaModule,
+    NgxKoalaModule.forRoot(environment),
     KoalaFormModule,
     KoalaMenuModule,
     KoalaButtonModule,
@@ -38,7 +35,6 @@ registerLocaleData(ptBr);
     AppRoutingModule
   ],
   providers: [
-    {provide: LOCALE_ID, useValue: 'pt-BR'},
     KoalaOAuth2Service
   ],
   bootstrap: [AppComponent]

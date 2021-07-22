@@ -1,6 +1,6 @@
 import * as jwtEncode from 'jwt-encode';
 
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormAbstract } from '../../../../ngx-koala/src/lib/core/form.abstract';
 import { KoalaTokenService } from '../../../../ngx-koala/src/lib/shared/services/token/koala.token.service';
 import { KoalaDynamicFormService } from '../../../../ngx-koala/src/lib/shared/services/dynamic-forms/koala.dynamic-form.service';

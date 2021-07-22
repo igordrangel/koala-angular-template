@@ -13,7 +13,7 @@
       <div align="end" class="mt-15">
         <koala-button
           *ngIf="!oauthService.getIdentityClaims()"
-          (click)="oauthService.initLoginFlow()"
+          (click)="oauthService.initLoginFlow('google')"
           [koalaIcon]="true"
           icon="google"
           class="mr-8"

@@ -2,14 +2,12 @@ import { koala } from 'koala-utils';
 
 export class KoalaRequestHeaderHelper {
 
-  public static add(token?: string) {
-    let headers = {};
-    if (token) {
-      koala(headers).object().merge({
-        Authorization: 'Bearer ' + token
-      });
-    }
+  public static add(token?: string, authenticator?: string) {
+    const headers = koala({}).object();
 
-    return headers;
+    if (token) { headers.merge({Authorization: 'Bearer ' + token}); }
+    if (authenticator) { headers.merge({Authenticator: authenticator}); }
+
+    return headers.getValue();
   }
 }

@@ -11,10 +11,13 @@ import { KoalaPagePalletColorsInterface } from './koala-page-pallet-colors.inter
 import { MatDrawer } from '@angular/material/sidenav';
 import { KoalaMenuService } from '../../services/menu/koala.menu.service';
 import { menuStateSubject } from '../menu/menu.component';
-import { KoalaOauth2ConfigInterface } from "./koala-oauth2-config.interface";
 import jwtEncode from "jwt-encode";
 import { TokenFactory } from "../../services/token/token.factory";
 import { KoalaOAuth2Service } from "../../services/openid/koala.oauth2.service";
+import { KoalaEnvironment } from "../../../environments/koalaEnvironment";
+import { KoalaOauthConfig } from "../../services/openid/koala.oauth.config";
+import { KoalaOauth2ConfigInterface } from "./koala-oauth2-config.interface";
+import { KoalaLanguageHelper, KoalaLanguageType } from "../../helpers/koala-language.helper";
 
 @Component({
   selector: 'koala-page',
@@ -35,17 +38,18 @@ export class PageComponent implements OnInit {
   @Input() notifications: BehaviorSubject<KoalaNotificationInterface[]>;
   @Input() userMenuOptions: KoalaUserMenuOptionsInterface[] = [];
   @Input() palletColors: KoalaPagePalletColorsInterface;
-  @Input() labelLogout: string = 'Sair';
-  @Input() oauth2Config$: BehaviorSubject<KoalaOauth2ConfigInterface>;
-  @Input() oauth2Config: KoalaOauth2ConfigInterface;
+  @Input() language: KoalaLanguageType = 'ptBr';
   @Output() logoutEmitter = new EventEmitter<boolean>(false);
   @Output() deleteAllNotifications = new EventEmitter<boolean>(false);
   @Output() deleteNotification = new EventEmitter<KoalaNotificationInterface>(null);
-  public logged: boolean;
+
   public loaderSubject: BehaviorSubject<LoaderBarPageInterface>;
   public username$ = new BehaviorSubject<string>('');
   public firstUserLetter$ = new BehaviorSubject<string>('');
   public currentUrl: string;
+  public logged$ = new BehaviorSubject<boolean>(false);
+  public validationScope$ = new BehaviorSubject<boolean>(false);
+
   private defaultPalletColors: KoalaPagePalletColorsInterface = {
     scrollbarColor: '#1976D2',
     scrollbarColorHover: '#1565C0',
@@ -92,6 +96,7 @@ export class PageComponent implements OnInit {
   }
 
   ngOnInit() {
+    KoalaLanguageHelper.setLanguage(this.language);
     this.initOAuth2();
     if (this.openPages) {
       if (this.openPages.indexOf('/') < 0) {
@@ -107,16 +112,16 @@ export class PageComponent implements OnInit {
       ];
     }
     this.tokenService.getToken()?.subscribe(token => {
-      this.logged = !!token;
-      if (this.logged) {
+      this.logged$.next(!!token);
+      if (this.logged$.getValue()) {
         const decodedToken = this.tokenService.getDecodedToken<{ login: string }>();
         this.username$.next(decodedToken.login);
         this.firstUserLetter$.next(decodedToken.login.charAt(0).toUpperCase());
         this.menuService.open();
       }
-      if (this.logged && this.openPages?.indexOf(this.currentUrl) >= 0 && this.defaultPage) {
+      if (this.logged$.getValue() && this.openPages?.indexOf(this.currentUrl) >= 0 && this.defaultPage) {
         this.router.navigate([this.defaultPage]).then();
-      } else if (!this.logged && this.currentUrl && this.openPages?.indexOf(this.currentUrl) < 0) {
+      } else if (!this.logged$.getValue() && this.currentUrl && this.openPages?.indexOf(this.currentUrl) < 0) {
         this.router.navigate(['login']).then();
         return false;
       }
@@ -136,10 +141,10 @@ export class PageComponent implements OnInit {
             this.currentUrl = event.url.split('?')[0];
 
             if (event.url.indexOf('/login?clientId=') < 0) {
-              if (this.logged && this.defaultPage && this.openPages?.indexOf(this.currentUrl) >= 0) {
+              if (this.logged$.getValue() && this.defaultPage && this.openPages?.indexOf(this.currentUrl) >= 0) {
                 this.router.navigate([this.defaultPage]).then();
                 return false;
-              } else if (!this.logged && this.openPages?.indexOf(this.currentUrl) < 0) {
+              } else if (!this.logged$.getValue() && this.openPages?.indexOf(this.currentUrl) < 0) {
                 this.router.navigate(['login']).then();
                 return false;
               }
@@ -180,7 +185,7 @@ export class PageComponent implements OnInit {
           }
         }
       });
-      if (this.startMenuOpened && !!this.logged) {
+      if (this.startMenuOpened && !!this.logged$.getValue()) {
         this.menuService.open();
       } else {
         this.menuService.close();
@@ -199,7 +204,7 @@ export class PageComponent implements OnInit {
 
   public async logout() {
     this.logoutEmitter.emit(true);
-    if (this.oauth2Config$) {
+    if (KoalaEnvironment.environment?.oauthConfig) {
       this.oauth2Service.logout();
     }
     this.menuService.close();
@@ -318,49 +323,54 @@ koala-menu ul li li.active a koala-icon * {fill: ${this.palletColors.menuOptions
   }
 
   private initOAuth2() {
-    if (this.oauth2Config$) {
-      this.oauth2Config$.subscribe(config => {
-        this.startConfig(config);
-      });
-    } else if (this.oauth2Config) {
-      this.startConfig(this.oauth2Config);
+    KoalaOauthConfig.config.subscribe(config => this.startConfig(config));
+    if (KoalaOauthConfig.hasConfig()) {
+      KoalaOauthConfig.setConfig(KoalaOauthConfig.getConfig());
     }
   }
 
-  private startConfig(config) {
-    this.oauth2Service.configure({
-      redirectUri: window.location.origin,
-      redirectUriAfterAuth: this.defaultPage,
-      responseType: 'code',
-      clientId: config.clientId,
-      scope: config.scope,
-      issuer: config.domain,
-      customQueryParams: config.customQueryParams,
-      endpointToken: config.endpointToken ?? null,
-      endpointClaims: config.endpointClaims ?? null
-    });
-    this.oauth2Service.loadDiscoveryDocumentAndTryLogin().then();
+  private startConfig(config: KoalaOauth2ConfigInterface) {
+    if (config.clientId) {
+      this.oauth2Service.configure({
+        redirectUri: window.location.origin,
+        redirectUriAfterAuth: this.defaultPage,
+        responseType: 'code',
+        clientId: config.clientId,
+        scope: config.scope,
+        issuer: config.domain,
+        customQueryParams: config.customQueryParams,
+        endpointToken: config.endpointToken ?? null,
+        endpointClaims: config.endpointClaims ?? null
+      });
+      this.oauth2Service.loadDiscoveryDocumentAndTryLogin().then();
 
-    if (this.oauthEventsSubscription) {
-      this.oauthEventsSubscription.unsubscribe();
-    }
-    this.oauthEventsSubscription = this.oauth2Service.events.subscribe(event => {
-      if (event === 'userAuthenticated' || event === 'refreshToken') {
-        const claims = this.oauth2Service.getIdentityClaims();
-        if (claims && (
-          !TokenFactory.hasToken() ||
-          (TokenFactory.hasToken() && event === 'refreshToken')
-        )) {
-          this.tokenService.setToken(jwtEncode({
-            accessToken: this.oauth2Service.getAccessToken(),
-            idToken: this.oauth2Service.getIdToken(),
-            refreshToken: this.oauth2Service.getRefreshToken(),
-            login: claims[config.indexLoginName] ?? 'Undefined',
-            expired: this.oauth2Service.getAccessTokenExpiration(),
-            code: this.oauth2Service.getCode()
-          }, 'secret'))
-        }
+      if (this.oauthEventsSubscription) {
+        this.oauthEventsSubscription.unsubscribe();
       }
-    });
+      this.oauthEventsSubscription = this.oauth2Service.events.subscribe(event => {
+        if (event === 'userAuthenticated' || event === 'refreshToken') {
+          const claims = this.oauth2Service.getIdentityClaims();
+          if (claims && (
+            !TokenFactory.hasToken() ||
+            (TokenFactory.hasToken() && event === 'refreshToken')
+          )) {
+            this.tokenService.setToken(jwtEncode({
+              accessToken: this.oauth2Service.getAccessToken(),
+              idToken: this.oauth2Service.getIdToken(),
+              refreshToken: this.oauth2Service.getRefreshToken(),
+              login: claims[config.indexLoginName] ?? 'Undefined',
+              expired: this.oauth2Service.getAccessTokenExpiration(),
+              code: this.oauth2Service.getCode()
+            }, 'secret'))
+          }
+
+          if (event === 'userAuthenticated') {
+            setTimeout(() => this.validationScope$.next(false), 300);
+          }
+        } else if (event === 'getToken') {
+          this.validationScope$.next(true);
+        }
+      });
+    }
   }
 }

@@ -15,8 +15,8 @@
     <ng-content *ngIf="showMenu" select="[menu-options]"></ng-content>
   </mat-drawer>
 
-  <mat-toolbar *ngIf="!!logged && (username$ | async)" class="toolbar">
-    <img *ngIf="!showMenu" [src]="logo" alt="Logotipo" id="logotipo"/>
+  <mat-toolbar *ngIf="!!(logged$ | async) && (username$ | async)" class="toolbar">
+    <img *ngIf="!showMenu" [src]="logo" alt="Logotipo Toolbar" id="logotipo-toolbar"/>
     <button (click)="toogleMenu()" *ngIf="showMenu" [color]="color" class="btn-collapse-menu" mat-icon-button>
       <mat-icon>menu</mat-icon>
     </button>
@@ -56,7 +56,7 @@
       </button>
       <button (click)="logout()" mat-menu-item>
         <mat-icon>exit_to_app</mat-icon>
-        <span>{{this.labelLogout}}</span>
+        <span>{{language === 'ptBr' ? 'Sair' : 'Logout'}}</span>
       </button>
     </mat-menu>
   </mat-toolbar>
@@ -64,3 +64,8 @@
   <ng-content class="page-content" select="[page-content]"></ng-content>
 
 </mat-drawer-container>
+
+<ng-content
+  *ngIf="validationScope$ | async"
+  class="loading-info-content" select="[loading-info-content]">
+</ng-content>

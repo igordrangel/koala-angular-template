@@ -118,6 +118,12 @@ export * from './lib/shared/components/question/koala.question.module';
 export * from './lib/shared/components/question/koala-question-config.interface';
 //#endregion
 
+//#region [KOALA SNACKBAR]
+export * from './lib/shared/components/snackbar/koala.snackbar.component';
+export * from './lib/shared/components/snackbar/koala.snackbar.module';
+export * from './lib/shared/components/snackbar/koala.snackbar.interface';
+//#endregion
+
 //#endregion
 
 //#region [DIRECTIVES]
@@ -182,11 +188,16 @@ export * from './lib/shared/services/token/koala.token.service';
 
 //#region [KOALA OPENID]
 export * from './lib/shared/services/openid/koala.oauth2.service';
+export * from './lib/shared/services/openid/koala.oauth.config';
 //#endregion
 
 //#region [KOALA XLSX]
 export * from './lib/shared/services/xlsx/koala.xlsx-config.interface';
 export * from './lib/shared/services/xlsx/koala.xlsx.service';
+//#endregion
+
+//#region [KOALA SNACKBAR]
+export * from './lib/shared/services/snackbar/koala.snackbar.service';
 //#endregion
 
 //#endregion
@@ -197,6 +208,7 @@ export * from './lib/shared/router/koala.parameter-hash-location-stategy';
 
 //#region [HELPERS]
 export * from './lib/shared/helpers/dynamic-form/koala-dynamic-form-validator-result.helper';
+export * from './lib/shared/helpers/koala-language.helper';
 //#endregion
 
 export * from './lib/shared/providers/pagination/pagination.provider';

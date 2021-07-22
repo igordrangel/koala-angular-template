@@ -158,21 +158,32 @@
 
           <pre><code><span>&#60;koala-page</span>
   color="primary"
+  language="enUs"
   [openPages]="openPages"
   (deleteAllNotifications)="deleteAllNotifications($event)"
   (deleteNotification)="deleteNotification($event)"
   [notifications]="notifications"
   [userMenuOptions]="userMenuOptions"
   [palletColors]="palletColors"
-  labelLogout="Logout"
   defaultPage="home"
   logo="./assets/logo.png"<span>&#62;</span>
+
   &#60;div <span>menu-options</span>&#62;
     <span>&#60;koala-menu</span> [optionsSubject]="menuOptions" titleMenu="Tools"&#62;&#60;/koala-menu&#62;
   &#60;/div&#62;
+
   &#60;div <span>page-content</span>&#62;
     <span>&#60;router-outlet&#62;&#60;/router-outlet&#62;</span>
   &#60;/div&#62;
+
+  &#60;div <span>loading-info-content</span>&#62;
+    &#60;div class="loading-info"&#62;
+      <span>&#60;img</span> alt="Image Icon" src="./assets/angular-logotipo.png"<span>/&#62;</span>
+      <span>&#60;h2&#62;</span>Loading your profile, wait a moment...<span>&#60;/h2&#62;</span>
+      <span>&#60;mat-spinner</span> diameter="20" color="primary"<span>&#62;&#60;/mat-spinner&#62;</span>
+    &#60;/div&#62;
+  &#60;/div&#62;
+
 <span>&#60;/koala-page&#62;</span></code></pre>
 
         </mat-expansion-panel>
