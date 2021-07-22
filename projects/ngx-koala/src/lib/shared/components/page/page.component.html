@@ -10,7 +10,7 @@
 <app-loader-page *ngIf="(loaderSubject | async) as loader" [progress]="loader.progress" [show]="loader.show"
                  [typeLoader]="loader.typeLoader"></app-loader-page>
 <mat-drawer-container autosize class="menu-container">
-  <mat-drawer #drawer class="menu-options" mode="side">
+  <mat-drawer *ngIf="!!(logged$ | async) && (username$ | async)" #drawer class="menu-options" mode="side">
     <img [src]="logo" alt="Logotipo" id="logotipo"/>
     <ng-content *ngIf="showMenu" select="[menu-options]"></ng-content>
   </mat-drawer>
