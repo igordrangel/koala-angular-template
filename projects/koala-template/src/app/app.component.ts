@@ -95,4 +95,5 @@ export class AppComponent {
       routerLink: '/services/xlsx'
     }]
   }]);
+  public validatingScope$ = new BehaviorSubject<boolean>(false);
 }
