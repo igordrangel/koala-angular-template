@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse, HttpParams, HttpResponse } from "@angular/common/http";
 import { KoalaOAuth2Service } from "../openid/koala.oauth2.service";
-import jwtDecode from "jwt-decode";
 import { Observable, Subscription } from "rxjs";
 import { KlDelay } from "koala-utils/dist/utils/KlDelay";
 import { KoalaErrorsHelper } from "./helpers/error/koala.errors.helper";
@@ -174,13 +173,7 @@ export class KoalaApiRequesterService {
   }
 
   private getToken() {
-    const tmpToken = localStorage.getItem(KoalaEnvironment.environment?.storageTokenName);
-    if (tmpToken) {
-      const koalaToken = jwtDecode(localStorage.getItem(KoalaEnvironment.environment?.storageTokenName)) as any;
-      return koalaToken?.accessToken ?? tmpToken;
-    }
-
-    return null;
+    return localStorage.getItem(KoalaEnvironment.environment?.storageTokenName);
   }
 
   private getUrlBase() {
