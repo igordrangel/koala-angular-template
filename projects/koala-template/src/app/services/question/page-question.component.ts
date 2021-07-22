@@ -13,7 +13,7 @@ export class PageQuestionComponent extends PageAbstract {
 
   public showQuestion() {
     this.questionService.open({
-      message: 'Click "Sim" for yes or "Não" for no'
+      message: 'Click yes or no'
     }, () => alert("You click on yes."), () => alert("You click on no."));
   }
 }

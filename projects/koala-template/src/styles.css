@@ -1,5 +1,5 @@
 .mat-button.mat-primary, .mat-icon-button.mat-primary, .mat-stroked-button.mat-primary {color: #fff;}
-.menu-toolbar {background-color: #2d063e;border-radius: 20px;}
+.menu-toolbar {background-color: #312f4e;border-radius: 20px;}
 .menu-toolbar a {border-radius: 0;}
 .menu-toolbar a:first-child {border-radius: 20px 0 0 20px;pointer-events: none;}
 .menu-toolbar a:last-child {border-radius: 0 20px 20px 0;}
@@ -8,7 +8,7 @@
 .text-obs {background: rgba(255,255,255,.1)!important;color: rgba(255,255,255,.6)!important;}
 p.warning {color: #FFC107;font-style: italic;}
 p.warning a {color: #1565c0;font-weight: bold;font-style: normal;text-decoration: none;}
-code {display: block;color: rgba(255,255,255,.7);font-family: "Helvetica Neue", sans-serif;font-size: 1.2em;background: #2d063e;padding: 15px;width: 100%;box-sizing: border-box;border-radius: 10px;}
+code {display: block;color: rgba(255,255,255,.7);font-family: "Helvetica Neue", sans-serif;font-size: 1.2em;background: #312f4e;padding: 15px;width: 100%;box-sizing: border-box;border-radius: 10px;}
 code span {color: #4CAF50;}
 pre {margin: 0;}
 .mat-stepper-horizontal,
@@ -22,3 +22,5 @@ mat-expansion-panel-header mat-panel-description {display: flex;justify-content:
 mat-radio-group {color: #fff!important;}
 .mat-tab-group .mat-tab-body,
 .mat-tab-group .mat-tab-body-content {overflow: hidden!important;}
+.mat-progress-spinner circle, .mat-spinner circle {stroke: #fff;}
+.btn-group {display: flex;justify-content: flex-start;align-items: center;}

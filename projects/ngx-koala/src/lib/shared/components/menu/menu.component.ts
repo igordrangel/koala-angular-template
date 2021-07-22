@@ -14,10 +14,10 @@ export const menuStateSubject = new BehaviorSubject<'open' | 'close'>(null);
 export class MenuComponent implements OnInit {
   @Input() titleMenu: string;
   @Input() optionsSubject: BehaviorSubject<KoalaMenuModuleInterface[]>;
-  
+
   constructor(private router: Router) {
   }
-  
+
   ngOnInit() {
     if (this.optionsSubject) {
       this.optionsSubject.subscribe(options => {
@@ -36,7 +36,7 @@ export class MenuComponent implements OnInit {
           });
     }
   }
-  
+
   public toogle(module: KoalaMenuModuleInterface) {
     this.optionsSubject.next(koala(this.optionsSubject.getValue())
       .array<KoalaMenuModuleInterface>()
@@ -50,12 +50,12 @@ export class MenuComponent implements OnInit {
       })
       .getValue());
   }
-  
+
   private defineMenuOptions(options: KoalaMenuModuleInterface[]) {
     options.map(module => {
       module.active = module.tools ?
         (this.router.url === module.routerLink ||
-          !!module.tools.find(tool => this.router.url === tool.routerLink)) :
+          !!module.tools.find(tool => this.router.url.indexOf(tool.routerLink) >= 0)) :
         this.router.url === module.routerLink;
       return module;
     });

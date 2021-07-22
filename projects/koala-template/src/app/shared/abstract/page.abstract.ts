@@ -3,5 +3,5 @@ import { KoalaThemeColors } from "../helpers/theme";
 
 export abstract class PageAbstract {
   public navigationHistory = NavigateHelper.navigationHistory();
-  public folderBackground = KoalaThemeColors.secondary;
+  public folderBackground = KoalaThemeColors.backgroundSpotlight;
 }

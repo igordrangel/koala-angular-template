@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse, HttpParams, HttpResponse } from "@angular/common/http";
 import { KoalaOAuth2Service } from "../openid/koala.oauth2.service";
 import jwtDecode from "jwt-decode";
-import { Subscription } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { KlDelay } from "koala-utils/dist/utils/KlDelay";
 import { KoalaErrorsHelper } from "./helpers/error/koala.errors.helper";
 import { KoalaRequestHeaderHelper } from "./helpers/service/koala.request-header.helper";
@@ -14,7 +14,7 @@ export type ApiRequesterType = 'get' | 'post' | 'put' | 'patch' | 'delete';
 export class KoalaApiRequesterService {
   public apiUrl: string;
   public isMockup = false;
-  private _apiUrlMockup = './assets/mockup';
+  public authenticator?: string;
   private _tryRequestRepeat = 0;
   private _subscriptions: Subscription[] = [];
 
@@ -24,7 +24,7 @@ export class KoalaApiRequesterService {
   ) {
   }
 
-  public async request<T>(method: ApiRequesterType, url: string, data: any = {}): Promise<T> {
+  public request<T>(method: ApiRequesterType, url: string, data: any = {}): Observable<T> {
     if (data.__zone_symbol__state) {
       data = data.__zone_symbol__value;
     }
@@ -69,9 +69,9 @@ export class KoalaApiRequesterService {
         conclusion = false;
         tryRequest++;
         this._subscriptions
-            .push(this.http.get<T>((this.isMockup ? this._apiUrlMockup : this.apiUrl) + "/" + url, {
+            .push(this.http.get<T>(`${this.getUrlBase()}/${url}`, {
               observe: 'response',
-              headers: KoalaRequestHeaderHelper.add(this.getToken()),
+              headers: KoalaRequestHeaderHelper.add(this.getToken(), this.authenticator),
               params
             }).subscribe(response => {
               conclusion = true;
@@ -101,21 +101,21 @@ export class KoalaApiRequesterService {
         conclusion = false;
         tryRequest++;
         const req = (method == 'post') ?
-                    this.http.post<HttpResponse<any>>((this.isMockup ? this._apiUrlMockup : this.apiUrl) + "/" + url, data, {
+                    this.http.post<HttpResponse<any>>(`${this.getUrlBase()}/${url}`, data, {
                       observe: 'response',
-                      headers: KoalaRequestHeaderHelper.add(this.getToken())
+                      headers: KoalaRequestHeaderHelper.add(this.getToken(), this.authenticator)
                     }) : ((method == 'put') ?
-                          this.http.put<HttpResponse<any>>((this.isMockup ? this._apiUrlMockup : this.apiUrl) + "/" + url, data, {
+                          this.http.put<HttpResponse<any>>(`${this.getUrlBase()}/${url}`, data, {
                             observe: 'response',
-                            headers: KoalaRequestHeaderHelper.add(this.getToken())
+                            headers: KoalaRequestHeaderHelper.add(this.getToken(), this.authenticator)
                           }) : ((method == 'patch') ?
-                                this.http.patch<HttpResponse<any>>((this.isMockup ? this._apiUrlMockup : this.apiUrl) + "/" + url, data, {
+                                this.http.patch<HttpResponse<any>>(`${this.getUrlBase()}/${url}`, data, {
                                   observe: 'response',
-                                  headers: KoalaRequestHeaderHelper.add(this.getToken())
+                                  headers: KoalaRequestHeaderHelper.add(this.getToken(), this.authenticator)
                                 }) :
-                                this.http.delete<HttpResponse<any>>((this.isMockup ? this._apiUrlMockup : this.apiUrl) + "/" + url, {
+                                this.http.delete<HttpResponse<any>>(`${this.getUrlBase()}/${url}`, {
                                   observe: 'response',
-                                  headers: KoalaRequestHeaderHelper.add(this.getToken())
+                                  headers: KoalaRequestHeaderHelper.add(this.getToken(), this.authenticator)
                                 }))
                     );
 
@@ -141,30 +141,36 @@ export class KoalaApiRequesterService {
     });
   }
 
-  private async promiseGetData<T>(promise: Promise<T>): Promise<T> {
-    return new Promise<T>((resolve, reject) => {
-      promise.then(response => resolve(response)).catch(e => {
+  private promiseGetData<T>(promise: Promise<T>): Observable<T> {
+    return new Observable<T>(observe => {
+      promise.then(response => {
+        observe.next(response);
+        observe.complete();
+      }).catch(e => {
         if (e.status === 401) {
           this.oauth2Service.logout();
         }
-        reject(KoalaErrorsHelper.generate(e));
+        observe.error(KoalaErrorsHelper.generate(e));
       });
     });
   }
 
-  private async promiseSendData<T>(promise: Promise<HttpResponse<any>>, urlRequest?: string): Promise<T> {
-    return new Promise<T>(((resolve, reject) => {
+  private promiseSendData<T>(promise: Promise<HttpResponse<any>>, urlRequest?: string): Observable<T> {
+    return new Observable<T>(observe => {
       this._tryRequestRepeat++;
       promise.then(response => KoalaResponseFactory.generateResponse(response, urlRequest)
-                                                   .then(success => resolve(success as any))
+                                                   .then(success => {
+                                                     observe.next(success as any);
+                                                     observe.complete();
+                                                   })
                                                    .catch(error => {
                                                      if (error.status === 401) {
                                                        this.oauth2Service.logout();
                                                      }
-                                                     reject(error);
+                                                     observe.error(error);
                                                    }))
-             .catch(e => reject(KoalaErrorsHelper.generate(e)));
-    }));
+             .catch(e => observe.error(KoalaErrorsHelper.generate(e)));
+    });
   }
 
   private getToken() {
@@ -175,5 +181,9 @@ export class KoalaApiRequesterService {
     }
 
     return null;
+  }
+
+  private getUrlBase() {
+    return this.isMockup ? 'http://localhost:4200/assets/mockup' : this.apiUrl;
   }
 }

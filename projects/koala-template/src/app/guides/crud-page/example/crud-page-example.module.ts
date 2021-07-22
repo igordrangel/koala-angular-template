@@ -10,6 +10,7 @@ import { KoalaQuestionModule } from "../../../../../../ngx-koala/src/lib/shared/
 import { KoalaListModule } from "../../../../../../ngx-koala/src/lib/shared/components/list/koala.list.module";
 import { DialogFormItemComponent } from "./dialog/dialog-form-item.component";
 import { KoalaFormModule } from "../../../../../../ngx-koala/src/lib/shared/components/form/koala.form.module";
+import { KoalaSnackbarModule } from "../../../../../../ngx-koala/src/lib/shared/components/snackbar/koala.snackbar.module";
 
 @NgModule({
   exports: [
@@ -28,6 +29,7 @@ import { KoalaFormModule } from "../../../../../../ngx-koala/src/lib/shared/comp
     KoalaAlertModule,
     KoalaQuestionModule,
     KoalaListModule,
+    KoalaSnackbarModule,
     CrudPageExampleRoutingModule
   ]
 })

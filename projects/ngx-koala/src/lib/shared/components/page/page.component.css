@@ -1,9 +1,10 @@
 .menu-container {height: 100vh;width: 100vw;}
 .menu-options {border: none;padding: 20px 0 0;width: 250px;}
 .page-content {align-items: center;display: flex;height: 100%;justify-content: center;}
-img#logotipo {display: block;height: auto;margin: 0 auto 25px;position: relative;width: 120px;}
+img#logotipo,
+img#logotipo-toolbar {display: block;height: auto;margin: 0 auto 25px;position: relative;width: 120px;}
 .toolbar {box-shadow: none;padding: 0 7px 0 13px;}
-.toolbar img#logotipo {margin: 0;padding: 0 10px;}
+.toolbar img#logotipo-toolbar {margin: 0;padding: 0 10px;}
 .menu-toolbar {margin: 0 10px;}
 .spacer {flex: 1 1 auto;}
 .btn-toolbar {display: inline-block;margin-right: 10px;position: relative;}

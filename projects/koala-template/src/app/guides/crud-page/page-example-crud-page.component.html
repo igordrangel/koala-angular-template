@@ -29,7 +29,8 @@
   KoalaDialogModule,
   KoalaAlertModule,
   KoalaQuestionModule,
-  KoalaListModule
+  KoalaListModule,
+  KoalaSnackbarModule
 &#125; <span>from</span> 'ngx-koala';
 
 <span>@NgModule</span>(&#123;
@@ -49,6 +50,7 @@
     <span>KoalaAlertModule</span>,
     <span>KoalaQuestionModule</span>,
     <span>KoalaListModule</span>,
+    <span>KoalaSnackbarModule</span>,
     CrudPageRoutingModule
   ]
 &#125;)
@@ -213,7 +215,8 @@
   FormAbstract,
   KoalaDynamicFormService,
   KoalaDynamicFormConfigInterface,
-  KoalaRequestService
+  KoalaRequestService,
+  KoalaSnackbarService
 } from "ngx-koala";
 <span>import</span> &#123; ItemService } from "../item.service";
 
@@ -228,6 +231,7 @@
     <span>private</span> requestService: <span>KoalaRequestService</span>,
     <span>private</span> itemService: <span>ItemService</span>,
     <span>private</span> dialogRef: <span>MatDialogRef</span>&#60;<span>DialogFormItemComponent</span>>,
+    <span>private</span> snackbarService: <span>KoalaSnackbarService</span>,
     <span>@Inject</span>(MAT_DIALOG_DATA) <span>public</span> item?: <span>ItemInterface</span>
   ) &#123;
     <span>super</span>(() => <span>this</span>.formConfig.form);
@@ -248,6 +252,7 @@
               ),
               response => &#123;
                   console.<span>log</span>(response);
+                  <span>this</span>.snackbarService.<span>success</span>('Object saved with success!');
                   <span>this</span>.dialogRef.<span>close</span>('reloadList');
               },
               error => &#123;

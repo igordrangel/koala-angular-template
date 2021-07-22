@@ -11,6 +11,6 @@
   </div>
 </div>
 <div align="center" mat-dialog-actions>
-  <button [mat-dialog-close]="{question: true}" color="primary" class="outline" mat-button>Sim</button>
-  <button [mat-dialog-close]="{question: false}" color="warn" class="outline" mat-button>Não</button>
+  <button [mat-dialog-close]="{question: true}" color="primary" class="outline" mat-button>{{languageHelper.getYesMessage()}}</button>
+  <button [mat-dialog-close]="{question: false}" color="warn" class="outline" mat-button>{{languageHelper.getNoMessage()}}</button>
 </div>

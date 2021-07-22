@@ -20,6 +20,7 @@ import { KlDelay } from "koala-utils/dist/utils/KlDelay";
 import { koala } from "koala-utils";
 import { DateMinValidator } from "./validators/date-min.validator";
 import { DateMaxValidator } from "./validators/date-max.validator";
+import { KoalaLanguageHelper } from "../../../helpers/koala-language.helper";
 
 @Component({
   selector: 'koala-dynamic-form',
@@ -37,6 +38,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
   public controls: FormArray;
   public typeField = DynamicFormTypeFieldEnum;
   public hoursAndMinutesMask = '00:000';
+  public errorMessage = KoalaLanguageHelper;
 
   @ViewChild('autocompleteInput') autocompleteInput: ElementRef<HTMLInputElement>;
 
