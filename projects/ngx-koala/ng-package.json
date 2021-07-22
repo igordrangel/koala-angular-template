@@ -24,6 +24,7 @@
     "ng2-currency-mask",
     "ngx-mask",
     "ngx-papaparse",
-    "rxjs"
+    "rxjs",
+    "xlsx"
   ]
 }
