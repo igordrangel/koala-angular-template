@@ -177,7 +177,7 @@ export class KoalaApiRequesterService {
     const tmpToken = localStorage.getItem(KoalaEnvironment.environment?.storageTokenName);
     if (tmpToken) {
       const koalaToken = jwtDecode(localStorage.getItem(KoalaEnvironment.environment?.storageTokenName)) as any;
-      return koalaToken.accessToken;
+      return koalaToken?.accessToken ?? tmpToken;
     }
 
     return null;
