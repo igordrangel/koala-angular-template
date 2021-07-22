@@ -186,7 +186,7 @@ export class PageComponent implements OnInit {
           }
         }
       });
-      if (this.startMenuOpened && !!this.logged$.getValue()) {
+      if (this.startMenuOpened && this.logged$.getValue()) {
         this.menuService.open();
       } else {
         this.menuService.close();
@@ -206,14 +206,13 @@ export class PageComponent implements OnInit {
   }
 
   public async logout() {
-    this.logoutEmitter.emit(true);
     if (KoalaEnvironment.environment?.oauthConfig) {
       this.oauth2Service.logout();
     }
     this.menuService.close();
     this.tokenService.removeToken();
     this.tokenService.getToken().next(null);
-    this.logoutEmitter.emit(false);
+    this.logoutEmitter.emit(true);
   }
 
   public defineColor() {
