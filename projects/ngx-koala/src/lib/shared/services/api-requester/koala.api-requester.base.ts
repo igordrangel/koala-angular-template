@@ -13,7 +13,6 @@ export abstract class KoalaApiRequesterBase<EntityType, GetAllType, DataType> {
     isMockup = false
   ) {
     koalaService.apiUrl = KoalaEnvironment.environment?.endpointApi;
-    koalaService.authenticator = KoalaEnvironment.environment?.authenticator;
     koalaService.isMockup = isMockup;
   }
 
