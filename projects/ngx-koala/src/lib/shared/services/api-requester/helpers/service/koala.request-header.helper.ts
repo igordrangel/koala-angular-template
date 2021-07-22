@@ -1,6 +1,6 @@
 import { koala } from 'koala-utils';
 import { HttpHeaders } from "@angular/common/http";
-import { KoalaEnvironment } from "../../../../../environments/koalaEnvironment";
+import { KoalaOauthConfig } from "../../../openid/koala.oauth.config";
 
 export class KoalaRequestHeaderHelper {
 
@@ -8,7 +8,7 @@ export class KoalaRequestHeaderHelper {
     const headers = koala({}).object();
 
     if (token) { headers.merge({Authorization: 'Bearer ' + token}); }
-    if (KoalaEnvironment.environment?.authenticator) { headers.merge({Authenticator: KoalaEnvironment.environment?.authenticator}); }
+    if (KoalaOauthConfig.hasConfig()) { headers.merge({Authenticator: KoalaOauthConfig.getConfig()}); }
 
     return headers.getValue() as HttpHeaders;
   }
