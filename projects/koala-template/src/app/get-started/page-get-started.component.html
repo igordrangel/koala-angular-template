@@ -113,6 +113,7 @@
   <span>public</span> palletColors: <span>KoalaPagePalletColorsInterface</span> = ThemeHelper.getTheme();
   <span>public</span> intervalNotifications: <span>number</span>;
   <span>public</span> intervalToken: <span>number</span>;
+  <span>public</span> validatingScope$ = <span>new BehaviorSubject&#60;boolean&#62;(false)</span>;
 
   <span>constructor</span>(
     <span>private</span> userService: <span>UserService</span>,
@@ -160,6 +161,7 @@
   color="primary"
   language="enUs"
   [openPages]="openPages"
+  (validatingScope)="validatingScope$.next($event)"
   (deleteAllNotifications)="deleteAllNotifications($event)"
   (deleteNotification)="deleteNotification($event)"
   [notifications]="notifications"
@@ -176,7 +178,7 @@
     <span>&#60;router-outlet&#62;&#60;/router-outlet&#62;</span>
   &#60;/div&#62;
 
-  &#60;div <span>loading-info-content</span>&#62;
+  &#60;div *ngIf="validatingScope$ | <span>async</span>" <span>loading-info-content</span>&#62;
     &#60;div class="loading-info"&#62;
       <span>&#60;img</span> alt="Image Icon" src="./assets/angular-logotipo.png"<span>/&#62;</span>
       <span>&#60;h2&#62;</span>Loading your profile, wait a moment...<span>&#60;/h2&#62;</span>

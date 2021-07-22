@@ -39,6 +39,7 @@ export class PageComponent implements OnInit {
   @Input() userMenuOptions: KoalaUserMenuOptionsInterface[] = [];
   @Input() palletColors: KoalaPagePalletColorsInterface;
   @Input() language: KoalaLanguageType = 'ptBr';
+  @Output() validatingScope = new EventEmitter<boolean>(false);
   @Output() logoutEmitter = new EventEmitter<boolean>(false);
   @Output() deleteAllNotifications = new EventEmitter<boolean>(false);
   @Output() deleteNotification = new EventEmitter<KoalaNotificationInterface>(null);
@@ -193,6 +194,8 @@ export class PageComponent implements OnInit {
     } else {
       this.menuService.close();
     }
+
+    this.validationScope$.subscribe(scope => this.validatingScope.emit(scope));
   }
 
   public async toogleMenu() {
