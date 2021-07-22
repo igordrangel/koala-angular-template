@@ -15,7 +15,6 @@ export type ApiRequesterType = 'get' | 'post' | 'put' | 'patch' | 'delete';
 export class KoalaApiRequesterService {
   public apiUrl: string;
   public isMockup = false;
-  public authenticator?: string;
   private _tryRequestRepeat = 0;
   private _subscriptions: Subscription[] = [];
 
@@ -72,7 +71,7 @@ export class KoalaApiRequesterService {
         this._subscriptions
             .push(this.http.get<T>(`${this.getUrlBase()}/${url}`, {
               observe: 'response',
-              headers: KoalaRequestHeaderHelper.add(this.getToken(), this.authenticator),
+              headers: KoalaRequestHeaderHelper.add(this.getToken()),
               params
             }).subscribe(response => {
               conclusion = true;
@@ -104,19 +103,19 @@ export class KoalaApiRequesterService {
         const req = (method == 'post') ?
                     this.http.post<HttpResponse<any>>(`${this.getUrlBase()}/${url}`, data, {
                       observe: 'response',
-                      headers: KoalaRequestHeaderHelper.add(this.getToken(), this.authenticator)
+                      headers: KoalaRequestHeaderHelper.add(this.getToken())
                     }) : ((method == 'put') ?
                           this.http.put<HttpResponse<any>>(`${this.getUrlBase()}/${url}`, data, {
                             observe: 'response',
-                            headers: KoalaRequestHeaderHelper.add(this.getToken(), this.authenticator)
+                            headers: KoalaRequestHeaderHelper.add(this.getToken())
                           }) : ((method == 'patch') ?
                                 this.http.patch<HttpResponse<any>>(`${this.getUrlBase()}/${url}`, data, {
                                   observe: 'response',
-                                  headers: KoalaRequestHeaderHelper.add(this.getToken(), this.authenticator)
+                                  headers: KoalaRequestHeaderHelper.add(this.getToken())
                                 }) :
                                 this.http.delete<HttpResponse<any>>(`${this.getUrlBase()}/${url}`, {
                                   observe: 'response',
-                                  headers: KoalaRequestHeaderHelper.add(this.getToken(), this.authenticator)
+                                  headers: KoalaRequestHeaderHelper.add(this.getToken())
                                 }))
                     );
 
