@@ -1,4 +1,5 @@
 import { koala } from 'koala-utils';
+import { HttpHeaders } from "@angular/common/http";
 
 export class KoalaRequestHeaderHelper {
 
@@ -8,6 +9,6 @@ export class KoalaRequestHeaderHelper {
     if (token) { headers.merge({Authorization: 'Bearer ' + token}); }
     if (authenticator) { headers.merge({Authenticator: authenticator}); }
 
-    return headers.getValue();
+    return headers.getValue() as HttpHeaders;
   }
 }
