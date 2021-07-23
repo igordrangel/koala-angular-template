@@ -11,6 +11,7 @@ import { SortDirection } from "@angular/material/sort";
 import { KlDelay } from "koala-utils/dist/utils/KlDelay";
 import { koala } from "koala-utils";
 import { DeviceDetectorService } from "ngx-device-detector";
+import { KoalaDynamicFormConfigInterface } from "../form/dynamic-form/interfaces/koala.dynamic-form-config.interface";
 
 @Component({
   selector: 'koala-list',
@@ -121,12 +122,14 @@ export class ListComponent extends ListAbstract implements OnInit {
       return item;
     });
     this.showAdvancedFilter = this.config.showAdvancedFilter;
-    this.filterFormConfig = (this.deviceService.isMobile()
-                             ? {
-        advanced: koala({}).object().merge(this.config.filterFormConfig.main ?? {}).merge(this.config.filterFormConfig.advanced ?? {}).getValue(),
-        checkAndSearch: this.config.filterFormConfig.checkAndSearch
-      }
-                             : this.config.filterFormConfig);
+    this.filterFormConfig = (this.deviceService.isMobile() ? {
+      advanced: koala({})
+        .object()
+        .merge(this.config.filterFormConfig.main ?? {})
+        .merge(this.config.filterFormConfig.advanced ?? {})
+        .getValue() as KoalaDynamicFormConfigInterface,
+      checkAndSearch: this.config.filterFormConfig.checkAndSearch
+    } : this.config.filterFormConfig);
     this.request = this.config.request;
     this.reload = this.config.reload;
     this.responseIndexName = this.config.responseIndexName;
