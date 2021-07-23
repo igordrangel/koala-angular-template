@@ -5,6 +5,7 @@ import { KoalaDynamicSetValueInterface } from "../../../../components/form/dynam
 import { DynamicFormBuilder } from "../dynamic-form.builder";
 import { KoalaDynamicFormFieldInterface } from "../../../../components/form/dynamic-form/interfaces/koala.dynamic-form-field.interface";
 import { KoalaDynamicFormConfigInterface } from "../../../../components/form/dynamic-form/interfaces/koala.dynamic-form-config.interface";
+import { DeviceDetectorService } from "ngx-device-detector";
 
 export class MoreItemsBuilder {
   private fieldConfig: KoalaDynamicFormFieldInterface;
@@ -16,7 +17,8 @@ export class MoreItemsBuilder {
     private min: number,
     private max: number,
     private formConfig: KoalaDynamicFormConfigInterface,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private deviceService: DeviceDetectorService,
   ) {
   }
 
@@ -61,6 +63,7 @@ export class MoreItemsBuilder {
 
     return new DynamicFormBuilder(
       this.fb,
+      this.deviceService,
       this.formConfig.formConfig
     );
   }

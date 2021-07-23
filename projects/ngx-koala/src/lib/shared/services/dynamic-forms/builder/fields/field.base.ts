@@ -5,6 +5,7 @@ import { DynamicFormBuilder } from "../dynamic-form.builder";
 import { AsyncValidatorFn, FormBuilder, ValidatorFn } from "@angular/forms";
 import { KoalaDynamicFormConfigInterface } from "../../../../components/form/dynamic-form/interfaces/koala.dynamic-form-config.interface";
 import { koala } from "koala-utils";
+import { DeviceDetectorService } from "ngx-device-detector";
 
 export abstract class FieldBase {
   protected readonly fieldConfig: KoalaDynamicFormFieldInterface;
@@ -14,7 +15,8 @@ export abstract class FieldBase {
     name: string,
     type: DynamicFormTypeFieldEnum,
     private formConfig: KoalaDynamicFormConfigInterface,
-    protected fb: FormBuilder
+    protected fb: FormBuilder,
+    protected deviceService: DeviceDetectorService
   ) {
     this.fieldConfig = {
       label,
@@ -100,11 +102,16 @@ export abstract class FieldBase {
   }
 
   public grid(size: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 = 12, width: number = 100) {
+    if (this.deviceService.isMobile()) {
+      size = 12;
+    }
+
     for (let colSize = 12; colSize >= 1; colSize--) {
       this.fieldConfig.class = this.fieldConfig.class?.replace('col-' + colSize, '');
     }
     this.addClass('col-' + size);
     this.addFieldClass('w-' + width);
+
     return this;
   }
 
@@ -114,6 +121,24 @@ export abstract class FieldBase {
   }
 
   public addClass(className: string) {
+    if (
+      this.deviceService.isMobile() &&
+      className.indexOf('col-') >= 0 &&
+      className.indexOf('col-12') === 0
+    ) {
+      className = className.replace('col-1', 'col-12')
+                           .replace('col-2', 'col-12')
+                           .replace('col-3', 'col-12')
+                           .replace('col-4', 'col-12')
+                           .replace('col-5', 'col-12')
+                           .replace('col-6', 'col-12')
+                           .replace('col-7', 'col-12')
+                           .replace('col-8', 'col-12')
+                           .replace('col-9', 'col-12')
+                           .replace('col-10', 'col-12')
+                           .replace('col-11', 'col-12');
+    }
+
     this.fieldConfig.class = koala(`${this.fieldConfig?.class ?? ''} ${className}`)
       .string()
       .split(' ')
@@ -154,6 +179,7 @@ export abstract class FieldBase {
     }
     return new DynamicFormBuilder(
       this.fb,
+      this.deviceService,
       this.formConfig.formConfig
     );
   }

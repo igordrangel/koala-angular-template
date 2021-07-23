@@ -18,6 +18,7 @@ import { KoalaEnvironment } from "../../../environments/koalaEnvironment";
 import { KoalaOauthConfig } from "../../services/openid/koala.oauth.config";
 import { KoalaOauth2ConfigInterface } from "./koala-oauth2-config.interface";
 import { KoalaLanguageHelper, KoalaLanguageType } from "../../helpers/koala-language.helper";
+import { DeviceDetectorService } from "ngx-device-detector";
 
 @Component({
   selector: 'koala-page',
@@ -50,6 +51,7 @@ export class PageComponent implements OnInit {
   public currentUrl: string;
   public logged$ = new BehaviorSubject<boolean>(false);
   public validationScope$ = new BehaviorSubject<boolean>(false);
+  public isMobile: boolean = this.deviceService.isMobile();
 
   private defaultPalletColors: KoalaPagePalletColorsInterface = {
     scrollbarColor: '#1976D2',
@@ -91,7 +93,8 @@ export class PageComponent implements OnInit {
     private router: Router,
     private loaderService: KoalaLoaderService,
     private menuService: KoalaMenuService,
-    private oauth2Service: KoalaOAuth2Service
+    private oauth2Service: KoalaOAuth2Service,
+    private deviceService: DeviceDetectorService,
   ) {
     this.loaderSubject = loaderService.getLoaderSubject();
   }
@@ -118,7 +121,9 @@ export class PageComponent implements OnInit {
         const decodedToken = this.tokenService.getDecodedToken<{ login: string }>();
         this.username$.next(decodedToken.login);
         this.firstUserLetter$.next(decodedToken.login.charAt(0).toUpperCase());
-        this.menuService.open();
+        if (!this.isMobile) {
+          this.menuService.open();
+        }
       }
       if (this.logged$.getValue() && this.openPages?.indexOf(this.currentUrl) >= 0 && this.defaultPage) {
         this.router.navigate([this.defaultPage]).then();
@@ -139,6 +144,10 @@ export class PageComponent implements OnInit {
         case event instanceof NavigationError: {
           this.loaderService.dismiss();
           if (event instanceof NavigationEnd) {
+            if (this.isMobile) {
+              this.menuService.close();
+            }
+
             this.currentUrl = event.url.split('?')[0];
 
             if (event.url.indexOf('/login?clientId=') < 0) {
@@ -187,7 +196,9 @@ export class PageComponent implements OnInit {
         }
       });
       if (this.startMenuOpened && this.logged$.getValue()) {
-        this.menuService.open();
+        if (!this.isMobile) {
+          this.menuService.open();
+        }
       } else {
         this.menuService.close();
       }
@@ -278,6 +289,7 @@ koala-page .btn-toolbar span.icon-user,
 .user-presentation span.icon-user {background: ${this.palletColors.userPresentationUserBackground};color: ${this.palletColors.userPresentationUserFontColor};}
 .user-presentation {background: ${this.palletColors.userPresentationBackground};}
 .user-presentation span.username {color: ${this.palletColors.toolbarColor};}
+.mat-drawer.mat-drawer-push {background-color: ${this.palletColors.bodyBackground};}
 koala-menu .title {background: ${this.palletColors.menuTitleBackground};color: ${this.palletColors.menuTitleColor};}
 koala-menu ul li,
 koala-menu ul li a {color: ${this.palletColors.menuOptionsColor};}

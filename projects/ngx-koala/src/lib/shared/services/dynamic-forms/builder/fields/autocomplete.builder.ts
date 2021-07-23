@@ -5,6 +5,7 @@ import { KoalaDynamicAutocompleteOptionsInterface } from "../../../../components
 import { FormBuilder } from "@angular/forms";
 import { KoalaDynamicFormAutocompleteMultipleConfigInterface } from "../../../../components/form/dynamic-form/interfaces/koala.dynamic-form-autocomplete-multiple-config.interface";
 import { FieldBase } from "./field.base";
+import { DeviceDetectorService } from "ngx-device-detector";
 
 export class AutocompleteBuilder extends FieldBase {
   private service$: Observable<KoalaDynamicAutocompleteOptionsInterface[]>;
@@ -13,9 +14,10 @@ export class AutocompleteBuilder extends FieldBase {
     label: string,
     name: string,
     formConfig: KoalaDynamicFormConfigInterface,
-    fb: FormBuilder
+    fb: FormBuilder,
+    deviceService: DeviceDetectorService
   ) {
-    super(label, name, DynamicFormTypeFieldEnum.autocomplete, formConfig, fb);
+    super(label, name, DynamicFormTypeFieldEnum.autocomplete, formConfig, fb, deviceService);
   }
 
   public service(service: Observable<KoalaDynamicAutocompleteOptionsInterface[]>) {
