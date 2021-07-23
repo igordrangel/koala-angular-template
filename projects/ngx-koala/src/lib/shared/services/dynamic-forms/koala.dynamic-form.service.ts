@@ -10,17 +10,20 @@ import { DynamicFormBuilder } from "./builder/dynamic-form.builder";
 import { koala } from "koala-utils";
 import { DateMinValidator } from "../../components/form/dynamic-form/validators/date-min.validator";
 import { DateMaxValidator } from "../../components/form/dynamic-form/validators/date-max.validator";
+import { DeviceDetectorService } from "ngx-device-detector";
 
 export type KoalaDynamicFormValidatorType = 'required' | 'min' | 'max';
 
 @Injectable({providedIn: "any"})
 export class KoalaDynamicFormService {
 
-  constructor(protected fb: FormBuilder) {
+  constructor(
+    protected fb: FormBuilder,
+    protected deviceService: DeviceDetectorService) {
   }
 
   public build() {
-    return new DynamicFormBuilder(this.fb);
+    return new DynamicFormBuilder(this.fb, this.deviceService);
   }
 
   public updateValidator(formGroup: FormGroup, name: string, type: KoalaDynamicFormValidatorType, value: boolean | number | string) {

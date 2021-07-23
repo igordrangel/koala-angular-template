@@ -9,6 +9,7 @@ import { KoalaDynamicSetValueInterface } from "../../../components/form/dynamic-
 import { KoalaDynamicFormShowFieldInterface } from "../../../components/form/dynamic-form/interfaces/koala.dynamic-form-show-field.interface";
 import { MoreItemsBuilder } from "./fields/more-items.builder";
 import { koala } from "koala-utils";
+import { DeviceDetectorService } from "ngx-device-detector";
 
 export type DynamicFormFieldType = 'text' | 'password' | 'cpf' | 'cnpj' | 'datetime' | 'email' | 'phone' | 'number' | 'stringNumber' | 'valueList' | 'textarea' | 'time' | 'hoursAndMinutes' | 'checkbox' | 'select' | 'selectMultipleNative' | 'coin' | 'percent' | 'id' | 'textLogs' | 'color' | 'date' | 'radio' | 'float' | 'month' | 'competenceDate' | 'stringWithCustomMasc';
 
@@ -18,7 +19,10 @@ export class DynamicFormBuilder {
   private newAutocomplete: AutocompleteBuilder;
   private newMoreItems: MoreItemsBuilder;
 
-  constructor(private fb: FormBuilder, configInMemory?: KoalaDynamicFormFieldInterface[]) {
+  constructor(
+    private fb: FormBuilder,
+    private deviceService: DeviceDetectorService,
+    configInMemory?: KoalaDynamicFormFieldInterface[]) {
     this.config = {
       form: fb.group({}),
       formConfig: configInMemory ?? [],
@@ -56,13 +60,13 @@ export class DynamicFormBuilder {
       case "month":
       case "competenceDate":
       case "stringWithCustomMasc":
-        this.newField = new FieldBuilder(label, name, DynamicFormTypeFieldEnum[type], this.config, this.fb);
+        this.newField = new FieldBuilder(label, name, DynamicFormTypeFieldEnum[type], this.config, this.fb, this.deviceService);
         return this.newField;
     }
   }
 
   public autocomplete(label: string, name: string) {
-    this.newAutocomplete = new AutocompleteBuilder(label, name, this.config, this.fb);
+    this.newAutocomplete = new AutocompleteBuilder(label, name, this.config, this.fb, this.deviceService);
     return this.newAutocomplete;
   }
 
@@ -74,7 +78,8 @@ export class DynamicFormBuilder {
       min,
       max,
       this.config,
-      this.fb
+      this.fb,
+      this.deviceService
     );
     return this.newMoreItems;
   }
@@ -165,6 +170,7 @@ export class DynamicFormBuilder {
                                 });
     return new DynamicFormBuilder(
       this.fb,
+      this.deviceService,
       this.config.formConfig
     );
   }

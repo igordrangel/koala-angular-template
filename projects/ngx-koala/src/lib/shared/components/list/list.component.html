@@ -3,6 +3,7 @@
     <form (ngSubmit)="filterSubmit()" [formGroup]="formFilter">
       <div class="main">
         <koala-dynamic-form
+          *ngIf="filterFormConfig.main"
           [form]="filterFormConfig.main.form"
           [formConfig]="filterFormConfig.main.formConfig"
           [setValues]="filterFormConfig.main.setValues"

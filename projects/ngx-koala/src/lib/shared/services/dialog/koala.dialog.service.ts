@@ -3,13 +3,16 @@ import { MatDialog } from '@angular/material/dialog';
 import { KoalaDialogTemplateInterface } from './koala.dialog-template.interface';
 import { ComponentType } from '@angular/cdk/overlay';
 import { koala } from "koala-utils";
+import { DeviceDetectorService } from "ngx-device-detector";
 
 export type KoalaDialogSizeType = 'auto' | 'small' | 'normal' | 'big' | 'mobile';
 
 @Injectable({providedIn: "any"})
 export class KoalaDialogService {
 
-  constructor(private dialog: MatDialog) {
+  constructor(
+    private dialog: MatDialog,
+    private deviceService: DeviceDetectorService) {
   }
 
   public open<T>(
@@ -19,7 +22,7 @@ export class KoalaDialogService {
     triggerBeforeClosed: string | boolean | object = false,
     beforeClosed?: (event?) => void
   ) {
-    const dialogRef = this.dialog.open(dialogComponent, this.dialogTemplate(data)[size])
+    const dialogRef = this.dialog.open(dialogComponent, this.dialogTemplate(data)[this.deviceService.isMobile() ? 'mobile' : size])
     dialogRef.afterOpened().subscribe(() => {
       history.pushState(null, null, location.href);
       return false;
@@ -53,10 +56,10 @@ export class KoalaDialogService {
       mobile: {
         id: dialogElementId,
         autoFocus: false,
-        panelClass: ["koala-dialog-mobile"],
+        panelClass: ["koala-dialog", 'mobile'],
         width: '100vw',
         maxWidth: '100vw',
-        height: '100vh',
+        maxHeight: '90vh',
         data
       }
     };

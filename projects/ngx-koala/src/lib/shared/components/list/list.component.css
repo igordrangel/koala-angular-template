@@ -48,3 +48,9 @@
 .list-container .content-paginator mat-paginator .mat-paginator-container .mat-paginator-page-size-select {height: 40px;margin-top: 0 !important;}
 .list-container .content-paginator mat-paginator .mat-paginator-container .mat-paginator-range-label {margin-top: 3px;}
 .list-container .content-paginator {position: relative;background: transparent !important;z-index: 2;box-shadow: -3px 1px 3px rgba(0,0,0,.3);}
+
+@media (max-width: 900px) {
+  .list-container {width: 100%;box-shadow: none!important;padding: 15px 10px 15px 15px;box-sizing: border-box;}
+  .list-container .list {height: auto;overflow: unset;}
+  .list-container .list-filter .main {justify-content: flex-end;}
+}

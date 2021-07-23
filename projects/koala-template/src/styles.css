@@ -8,7 +8,7 @@
 .text-obs {background: rgba(255,255,255,.1)!important;color: rgba(255,255,255,.6)!important;}
 p.warning {color: #FFC107;font-style: italic;}
 p.warning a {color: #1565c0;font-weight: bold;font-style: normal;text-decoration: none;}
-code {display: block;color: rgba(255,255,255,.7);font-family: "Helvetica Neue", sans-serif;font-size: 1.2em;background: #312f4e;padding: 15px;width: 100%;box-sizing: border-box;border-radius: 10px;}
+code {display: block;color: rgba(255,255,255,.7);font-family: "Helvetica Neue", sans-serif;font-size: 1.2em;background: #312f4e;padding: 15px;width: 100%;box-sizing: border-box;border-radius: 10px;overflow: auto;}
 code span {color: #4CAF50;}
 pre {margin: 0;}
 .mat-stepper-horizontal,

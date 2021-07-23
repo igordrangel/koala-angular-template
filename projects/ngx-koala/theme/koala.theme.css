@@ -66,6 +66,7 @@ input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hov
 .mat-option {height: auto !important;line-height: normal !important;padding: 10px 16px !important;white-space: normal !important;}
 .mat-expansion-panel {border-radius: 10px!important;}
 .mat-expansion-panel-body {padding: 0 24px 5px !important;}
+@media (max-width: 900px) {.mat-expansion-panel-body pre {max-width: calc(100vw - 96px);}}
 .text-obs {background: #eeeeee;border-radius: 5px;color: #212121;font-family: OpenSansLight, sans-serif;height: 150px;margin: 0 auto 10px;overflow-y: auto;padding: 10px;position: relative;width: calc(100% - 27px);}
 .btn-green {background: #43a047;color: #ffffff;}
 .fa-dropdown-list {margin-right: 20px;}
@@ -84,6 +85,9 @@ p {margin: 0 !important;}
 .mat-tab-group .mat-tab-body-content {padding: 20px 0;}
 .mat-drawer-content {overflow: initial!important;z-index: 2!important;}
 .page-content {border-radius: 20px 0 0 0;box-shadow: -2px -2px 8px rgba(0,0,0,.3);z-index: 2!important;height: 100%;overflow: hidden;}
+@media (max-width: 900px) {
+  .page-content {border-radius: 0;}
+}
 mat-radio-group {box-sizing: border-box;margin-bottom: 15px;display: block;}
 mat-radio-button {margin-right: 10px;}
 mat-radio-button:last-child {margin-right: 0;}
@@ -140,6 +144,7 @@ form fieldset legend {border: none;font-family: JosefinSans, sans-serif;font-siz
 .koala-dialog .mat-dialog-title h2 {display: inline-block;font-family: OpenSansLight, sans-serif;font-size: .7em;margin: 0;padding: 0 8px;position: relative;text-align: left;top: -5px;}
 .koala-dialog .mat-dialog-title mat-icon {display: inline-block;font-size: 22px;height: 22px;line-height: 22px;position: relative;top: 1px;width: 22px;}
 .koala-dialog .mat-dialog-content {margin: 0;padding: 20px;}
+.koala-dialog.mobile .mat-dialog-content {height: 100%;}
 .koala-dialog.auto .mat-dialog-content {margin: 0;padding: 0 20px;}
 .koala-dialog .mat-dialog-actions {margin: 0;padding: 10px 20px 10px;}
 /*****************************************

@@ -10,7 +10,7 @@
         [form]="config.form"
         [formConfig]="config.formConfig">
       </koala-dynamic-form>
-      <div align="end" class="mt-15">
+      <div align="end" class="btn-group mt-15">
         <koala-button
           *ngIf="!oauthService.getIdentityClaims()"
           (click)="oauthService.initLoginFlow('google')"

@@ -10,6 +10,7 @@ import { KoalaListFormFilterInterface } from "./koala-list-form-filter.interface
 import { SortDirection } from "@angular/material/sort";
 import { KlDelay } from "koala-utils/dist/utils/KlDelay";
 import { koala } from "koala-utils";
+import { DeviceDetectorService } from "ngx-device-detector";
 
 @Component({
   selector: 'koala-list',
@@ -36,18 +37,19 @@ export class ListComponent extends ListAbstract implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private dynamicFormService: KoalaDynamicFormService
+    private dynamicFormService: KoalaDynamicFormService,
+    private deviceService: DeviceDetectorService
   ) {
     super(
       () => this.config.request,
       (response) => {
         this.dataSource.data = this.config.responseIndexName ?
-          response[this.config.responseIndexName] :
-          response;
+                               response[this.config.responseIndexName] :
+                               response;
         if (this.config.getDataSource) this.config.getDataSource(this.dataSource.data);
         this.qtdListResult = this.config.responseQtdResultIndexName ?
-          this.config.responseQtdResultIndexName(response) :
-          this.dataSource.data.length;
+                             this.config.responseQtdResultIndexName(response) :
+                             this.dataSource.data.length;
       },
       () => this.formFilter
     );
@@ -74,7 +76,7 @@ export class ListComponent extends ListAbstract implements OnInit {
       }
     }
 
-    if(this.config.getSelectionList) this.config.getSelectionList(this.selection);
+    if (this.config.getSelectionList) this.config.getSelectionList(this.selection);
 
     if (this.reload) {
       this.reload.subscribe(async reload => {
@@ -112,11 +114,19 @@ export class ListComponent extends ListAbstract implements OnInit {
     this.qtdListResult = this.config.qtdListResult ?? 0;
     this.columnsToShowInList = this.config.columnsToShowInList;
     this.itemsList = this.config.itemsList.map(item => {
-      if (!item.dblClick) { item.dblClick = () => {}; }
+      if (!item.dblClick) {
+        item.dblClick = () => {
+        };
+      }
       return item;
     });
     this.showAdvancedFilter = this.config.showAdvancedFilter;
-    this.filterFormConfig = this.config.filterFormConfig;
+    this.filterFormConfig = (this.deviceService.isMobile()
+                             ? {
+        advanced: koala({}).object().merge(this.config.filterFormConfig.main ?? {}).merge(this.config.filterFormConfig.advanced ?? {}).getValue(),
+        checkAndSearch: this.config.filterFormConfig.checkAndSearch
+      }
+                             : this.config.filterFormConfig);
     this.request = this.config.request;
     this.reload = this.config.reload;
     this.responseIndexName = this.config.responseIndexName;

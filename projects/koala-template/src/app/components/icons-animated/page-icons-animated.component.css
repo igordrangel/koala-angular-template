@@ -18,3 +18,9 @@ section {display: flex;align-items: flex-start;}
 @keyframes out {
   to {transform: translateX(-500px);}
 }
+@media (max-width: 900px) {
+  section {flex-direction: column;}
+  .menu {width: 100%;height: fit-content;}
+  .group {width: 100%;overflow: unset;}
+  .group__content___icons____icon {width: calc((100%/3) - 10px);}
+}
