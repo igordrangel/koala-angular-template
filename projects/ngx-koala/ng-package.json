@@ -10,11 +10,16 @@
       "jwt-decode": "jwt-decode",
       "koala-utils": "koala-utils",
       "ng2-currency-mask": "ng2-currency-mask",
+      "ngx-device-detector": "i2",
+      "koala-utils/dist/utils/KlDelay": "KlDelay",
+      "jwt-encode": "jwtEncode",
+      "exceljs/dist/exceljs.min.js": "Excel",
+      "file-saver": "fs",
       "ngx-mask": "ngx-mask",
       "ngx-papaparse": "ngx-papaparse"
     }
   },
-  "whitelistedNonPeerDependencies": [
+  "allowedNonPeerDependencies": [
     "tslib",
     "exceljs",
     "file-saver",

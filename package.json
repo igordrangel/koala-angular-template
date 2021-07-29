@@ -1,12 +1,12 @@
 {
   "name": "koala-angular-template",
-  "version": "12.3.1",
+  "version": "12.3.2",
   "description": "Template angular using Angular and Material Angular",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 4201",
-    "build": "ng build ngx-koala && cd dist/ngx-koala",
-    "build-doc": "ng build koala-template --prod --build-optimizer",
+    "start": "ng serve",
+    "build": "ng build ngx-koala --configuration production && cd dist/ngx-koala",
+    "build-doc": "ng build koala-template --configuration production --build-optimizer",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",

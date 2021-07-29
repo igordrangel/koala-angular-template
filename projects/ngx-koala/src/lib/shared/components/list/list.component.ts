@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ListAbstract } from './list.abstract';
 import { KoalaListItemMenuOptionInterface } from './koala-list-item-menu-option.interface';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -7,11 +7,13 @@ import { KoalaListFilterInterface } from './koala-list-filter.interface';
 import { KoalaDynamicFormService } from '../../services/dynamic-forms/koala.dynamic-form.service';
 import { KoalaListItemInterface } from './koala-list-item.interface';
 import { KoalaListFormFilterInterface } from "./koala-list-form-filter.interface";
-import { SortDirection } from "@angular/material/sort";
+import { MatSort, SortDirection } from "@angular/material/sort";
 import { KlDelay } from "koala-utils/dist/utils/KlDelay";
 import { koala } from "koala-utils";
 import { DeviceDetectorService } from "ngx-device-detector";
 import { KoalaDynamicFormConfigInterface } from "../form/dynamic-form/interfaces/koala.dynamic-form-config.interface";
+import { KoalaListConfigInterface } from "./koala.list-config.interface";
+import { MatPaginator } from "@angular/material/paginator";
 
 @Component({
   selector: 'koala-list',
@@ -19,7 +21,12 @@ import { KoalaDynamicFormConfigInterface } from "../form/dynamic-form/interfaces
   styleUrls: ['list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListComponent extends ListAbstract implements OnInit {
+export class ListComponent extends ListAbstract implements OnInit, AfterViewInit, OnDestroy {
+  @Input() protected config: KoalaListConfigInterface;
+
+  @ViewChild(MatPaginator) protected paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) protected sort: MatSort;
+
   public columnsToShowInList: string[];
   public columnSort: string;
   public sortDirection: SortDirection = 'asc';
@@ -86,6 +93,14 @@ export class ListComponent extends ListAbstract implements OnInit {
         }
       });
     }
+  }
+
+  ngOnDestroy() {
+    super.onDestroy();
+  }
+
+  ngAfterViewInit() {
+    super.afterViewInit().then();
   }
 
   public async filterSubmit() {

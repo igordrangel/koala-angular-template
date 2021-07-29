@@ -4,7 +4,9 @@ import { KoalaNotFoundError } from "../helpers/error/koala.not-found.error";
 import { KoalaClientError } from "../helpers/error/koala.client.error";
 import { KoalaUnhautorizedError } from "../helpers/error/koala.unhautorized.error";
 import { KoalaSuccessError } from "../helpers/error/koala.success.error";
+import { KoalaLanguageHelper } from "../../../helpers/koala-language.helper";
 
+// @dynamic
 export class KoalaResponseFactory {
 
   public static async generateResponse(response: HttpResponse<any>, urlRequest?: string): Promise<KoalaResponseInterface> {
@@ -35,7 +37,7 @@ export class KoalaResponseFactory {
           break;
         case 500:
         default:
-          alert = KoalaErrorsHelper.generate(new Error((response && response.body?.message) ? response.body?.message : "Ocorreu um erro interno na aplicação."), urlRequest);
+          alert = KoalaErrorsHelper.generate(new Error((response && response.body?.message) ? response.body?.message : KoalaLanguageHelper.getInternalServerErrorMessage()), urlRequest);
           reject(alert);
           break;
       }

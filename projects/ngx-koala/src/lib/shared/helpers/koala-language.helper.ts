@@ -1,5 +1,6 @@
 export type KoalaLanguageType = 'ptBr'|'enUs';
 
+// @dynamic
 export class KoalaLanguageHelper {
   private static language: KoalaLanguageType
 

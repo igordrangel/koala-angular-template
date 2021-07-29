@@ -1,5 +1,6 @@
 import { KoalaEnvironment } from "../../../environments/koalaEnvironment";
 
+// @dynamic
 export class TokenFactory {
   private static token?: string;
 

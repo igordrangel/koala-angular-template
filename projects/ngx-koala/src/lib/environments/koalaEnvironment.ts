@@ -13,6 +13,7 @@ export interface KoalaEnvironmentInterface {
   oauthConfig?: KoalaEnvironmentOAuthInterface[];
 }
 
+// @dynamic
 export class KoalaEnvironment {
   public static environment: KoalaEnvironmentInterface;
 }

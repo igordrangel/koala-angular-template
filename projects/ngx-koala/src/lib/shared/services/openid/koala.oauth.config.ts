@@ -2,6 +2,7 @@ import { BehaviorSubject } from "rxjs";
 import { KoalaOauth2ConfigInterface } from "../../components/page/koala-oauth2-config.interface";
 import { KoalaEnvironment } from "../../../environments/koalaEnvironment";
 
+// @dynamic
 export class KoalaOauthConfig {
   public static config = new BehaviorSubject<KoalaOauth2ConfigInterface>(
     KoalaOauthConfig.getOAuthConfig(KoalaOauthConfig.getConfig())

@@ -1,7 +1,6 @@
 import { Component } from "@angular/core";
 import { PageAbstract } from "../../shared/abstract/page.abstract";
 import { ListService } from "./list.service";
-import { FormGroup } from "@angular/forms";
 import { ListItemInterface } from "./list-item.interface";
 import { koala } from "koala-utils";
 import { EmptyListComponent } from "./empty-list/empty-list.component";
@@ -17,7 +16,6 @@ import { KoalaDynamicFormService } from "../../../../../ngx-koala/src/lib/shared
   templateUrl: 'page-list.component.html'
 })
 export class PageListComponent extends PageAbstract {
-  public formData: FormGroup;
   public dataSource?: ListItemInterface[];
   public config: KoalaListConfigInterface;
   private selectedItems?: SelectionModel<ListItemInterface>;
@@ -108,6 +106,6 @@ export class PageListComponent extends PageAbstract {
       titleBackgroundColor: '#ffffff',
       headerFontColor: '#ffffff',
       headerBackgroundColor: '#b71c1c'
-    });
+    }).then();
   }
 }

@@ -1,5 +1,4 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { AfterViewInit, Directive, Input, OnDestroy, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { BehaviorSubject, merge, Observable, Subscription } from 'rxjs';
@@ -14,8 +13,7 @@ import { KoalaListConfigInterface } from "./koala.list-config.interface";
 
 export type KoalaListPageSize = 10 | 20 | 30 | 50 | 100;
 
-@Directive()
-export abstract class ListAbstract extends FormAbstract implements AfterViewInit, OnDestroy {
+export abstract class ListAbstract extends FormAbstract {
   public selection = new SelectionModel<object>(true, []);
   public limitOptions: number[] = [10, 20, 30, 50, 100];
   public showMenuList: boolean = false;
@@ -25,9 +23,11 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
   public filterParams = new BehaviorSubject<KoalaListFormFilterInterface>(null);
   public emptyListComponent?: KoalaDynamicComponent;
   public pageSize: KoalaListPageSize;
-  @Input() config: KoalaListConfigInterface;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+
+  protected config: KoalaListConfigInterface;
+  protected paginator: MatPaginator;
+  protected sort: MatSort;
+
   private subscriptionSortList: Subscription;
   private intervalSortList: any;
 
@@ -37,26 +37,6 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
     formSearch: () => FormGroup
   ) {
     super(formSearch);
-  }
-
-  ngOnDestroy() {
-    this.subscriptionSortList?.unsubscribe();
-    clearInterval(this.intervalSortList);
-  }
-
-  async ngAfterViewInit() {
-    let tentativas = 0;
-    let stop = false;
-    do {
-      tentativas++;
-      await KlDelay.waitFor(400);
-      if (this.sort || this.emptyListComponent) {
-        this.prepareSearch().then();
-        if (this.emptyListComponent) stop = true;
-      } else if (tentativas > 10) {
-        stop = true;
-      }
-    } while (!this.sort && !stop);
   }
 
   public selectAll() {
@@ -99,6 +79,26 @@ export abstract class ListAbstract extends FormAbstract implements AfterViewInit
       page: this.paginator?.pageIndex ?? 1,
       limit: this.paginator?.pageSize ?? 30
     });
+  }
+
+  protected onDestroy() {
+    this.subscriptionSortList?.unsubscribe();
+    clearInterval(this.intervalSortList);
+  }
+
+  protected async afterViewInit() {
+    let tentativas = 0;
+    let stop = false;
+    do {
+      tentativas++;
+      await KlDelay.waitFor(400);
+      if (this.sort || this.emptyListComponent) {
+        this.prepareSearch().then();
+        if (this.emptyListComponent) stop = true;
+      } else if (tentativas > 10) {
+        stop = true;
+      }
+    } while (!this.sort && !stop);
   }
 
   private async prepareSearch() {

@@ -2,10 +2,10 @@ import { DynamicFormTypeFieldEnum } from "../../../../components/form/dynamic-fo
 import { FormBuilder } from "@angular/forms";
 import { BehaviorSubject } from "rxjs";
 import { KoalaDynamicSetValueInterface } from "../../../../components/form/dynamic-form/interfaces/koala.dynamic-set-value.interface";
-import { DynamicFormBuilder } from "../dynamic-form.builder";
 import { KoalaDynamicFormFieldInterface } from "../../../../components/form/dynamic-form/interfaces/koala.dynamic-form-field.interface";
 import { KoalaDynamicFormConfigInterface } from "../../../../components/form/dynamic-form/interfaces/koala.dynamic-form-config.interface";
 import { DeviceDetectorService } from "ngx-device-detector";
+import { DynamicFormBuilder } from "../dynamic-form.builder";
 
 export class MoreItemsBuilder {
   private fieldConfig: KoalaDynamicFormFieldInterface;

@@ -1,23 +1,20 @@
 import { FormBuilder } from "@angular/forms";
 import { KoalaDynamicFormConfigInterface } from "../../../components/form/dynamic-form/interfaces/koala.dynamic-form-config.interface";
-import { FieldBuilder } from "./fields/field.builder";
 import { KoalaDynamicFormFieldInterface } from "../../../components/form/dynamic-form/interfaces/koala.dynamic-form-field.interface";
 import { DynamicFormTypeFieldEnum } from "../../../components/form/dynamic-form/enums/dynamic-form-type-field.enum";
 import { AutocompleteBuilder } from "./fields/autocomplete.builder";
 import { BehaviorSubject } from "rxjs";
 import { KoalaDynamicSetValueInterface } from "../../../components/form/dynamic-form/interfaces/koala.dynamic-set-value.interface";
 import { KoalaDynamicFormShowFieldInterface } from "../../../components/form/dynamic-form/interfaces/koala.dynamic-form-show-field.interface";
-import { MoreItemsBuilder } from "./fields/more-items.builder";
 import { koala } from "koala-utils";
 import { DeviceDetectorService } from "ngx-device-detector";
+import { FieldBuilder } from "./fields/field.builder";
+import { MoreItemsBuilder } from "./fields/more-items.builder";
 
 export type DynamicFormFieldType = 'text' | 'password' | 'cpf' | 'cnpj' | 'datetime' | 'email' | 'phone' | 'number' | 'stringNumber' | 'valueList' | 'textarea' | 'time' | 'hoursAndMinutes' | 'checkbox' | 'select' | 'selectMultipleNative' | 'coin' | 'percent' | 'id' | 'textLogs' | 'color' | 'date' | 'radio' | 'float' | 'month' | 'competenceDate' | 'stringWithCustomMasc';
 
 export class DynamicFormBuilder {
   private readonly config: KoalaDynamicFormConfigInterface;
-  private newField: FieldBuilder;
-  private newAutocomplete: AutocompleteBuilder;
-  private newMoreItems: MoreItemsBuilder;
 
   constructor(
     private fb: FormBuilder,
@@ -60,18 +57,16 @@ export class DynamicFormBuilder {
       case "month":
       case "competenceDate":
       case "stringWithCustomMasc":
-        this.newField = new FieldBuilder(label, name, DynamicFormTypeFieldEnum[type], this.config, this.fb, this.deviceService);
-        return this.newField;
+        return new FieldBuilder(label, name, DynamicFormTypeFieldEnum[type], this.config, this.fb, this.deviceService);
     }
   }
 
   public autocomplete(label: string, name: string) {
-    this.newAutocomplete = new AutocompleteBuilder(label, name, this.config, this.fb, this.deviceService);
-    return this.newAutocomplete;
+    return new AutocompleteBuilder(label, name, this.config, this.fb, this.deviceService);
   }
 
   public simpleMoreItems(label: string, name: string, btnAddLabel: string, min: number, max: number) {
-    this.newMoreItems = new MoreItemsBuilder(
+    return new MoreItemsBuilder(
       label,
       name,
       btnAddLabel,
@@ -81,7 +76,6 @@ export class DynamicFormBuilder {
       this.fb,
       this.deviceService
     );
-    return this.newMoreItems;
   }
 
   public autofill(object: any) {

@@ -12,7 +12,6 @@ import { KoalaSnackbarService } from "../../../../../../../ngx-koala/src/lib/sha
 })
 export class DialogFormItemComponent extends FormAbstract {
   public formConfig: KoalaDynamicFormConfigInterface;
-  public btnLabel = "Sent";
 
   constructor(
     private dynamicFormService: KoalaDynamicFormService,
