@@ -1,6 +1,6 @@
 {
   "name": "ngx-koala",
-  "version": "12.3.2",
+  "version": "12.3.3",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/igordrangel/koala-angular-template.git"
@@ -16,6 +16,17 @@
     "url": "https://github.com/igordrangel/koala-angular-template/issues"
   },
   "homepage": "https://github.com/igordrangel/koala-angular-template#readme",
+  "main": "./bundles/ngx-koala.umd.js",
+  "module": "./esm5/ngx-koala.js",
+  "es2015": "./esm2015/ngx-koala.js",
+  "typings": "./ngx-koala.d.ts",
+  "peerDependencies": {
+    "@angular/common": ">=12.0.0",
+    "@angular/core": ">=12.0.0",
+    "@angular/forms": ">=12.0.0",
+    "@angular/material": ">=12.0.0",
+    "@angular/cdk": ">=12.0.0"
+  },
   "dependencies": {
     "tslib": "^2.0.0",
     "exceljs": "^3.10.0",
