@@ -1,10 +1,11 @@
 import { ShowInvalidFields } from '../shared/components/form/show-invalid-fields/show-invalid-fields';
 import { FormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
+import { KoalaLanguageHelper } from '../../public-api';
 
 export abstract class FormAbstract {
   public showInvalidFields: ShowInvalidFields;
-  public btnLabel = 'Enviar';
+  public btnLabel = KoalaLanguageHelper.getBtnLabel();
   public loader = new BehaviorSubject<boolean>(false);
   public btnSubmitDisabled = false;
   public getData = new BehaviorSubject<boolean>(false);

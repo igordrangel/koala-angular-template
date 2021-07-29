@@ -7,11 +7,11 @@
   "lib": {
     "entryFile": "src/public-api.ts",
     "umdModuleIds": {
-      "koala-utils": "koala-utils",
       "jwt-decode": "jwt-decode",
-      "ngx-papaparse": "ngx-papaparse",
+      "koala-utils": "koala-utils",
       "ng2-currency-mask": "ng2-currency-mask",
-      "ngx-mask": "ngx-mask"
+      "ngx-mask": "ngx-mask",
+      "ngx-papaparse": "ngx-papaparse"
     }
   },
   "whitelistedNonPeerDependencies": [
@@ -22,6 +22,7 @@
     "jwt-encode",
     "koala-utils",
     "ng2-currency-mask",
+    "ngx-device-detector",
     "ngx-mask",
     "ngx-papaparse",
     "rxjs",

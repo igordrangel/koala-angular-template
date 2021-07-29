@@ -11,6 +11,15 @@ export class KoalaLanguageHelper {
     return this.language;
   }
 
+  public static getBtnLabel() {
+    switch (this.language) {
+      case "enUs":
+        return 'Send';
+      default:
+        return 'Enviar';
+    }
+  }
+
   public static getYesMessage() {
     switch (this.language) {
       case "enUs":
