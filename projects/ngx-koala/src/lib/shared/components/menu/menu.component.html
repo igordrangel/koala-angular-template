@@ -19,7 +19,7 @@
       <ng-template #moduleWithoutLink>
         <div class="module">
           <mat-icon *ngIf="module.icon && !module.koalaIcon">{{module.icon}}</mat-icon>
-          <koala-icon *ngIf="module.icon && module.koalaIcon" [icon]="module.icon" size="22"></koala-icon>
+          <koala-icon *ngIf="module.icon && module.koalaIcon" [icon]="module.icon" size="18"></koala-icon>
           <h3>{{module.name}}</h3>
           <mat-icon
 	          *ngIf="module.tools?.length > 0"
@@ -30,7 +30,7 @@
         <li *ngFor="let tool of module.tools">
 		      <a [routerLink]="tool.routerLink" routerLinkActive="active">
 	          <mat-icon *ngIf="tool.icon && !tool.koalaIcon">{{tool.icon}}</mat-icon>
-            <koala-icon *ngIf="tool.icon && tool.koalaIcon" [icon]="tool.icon" size="22"></koala-icon>
+            <koala-icon *ngIf="tool.icon && tool.koalaIcon" [icon]="tool.icon" size="18"></koala-icon>
 	          <h4>{{tool.name}}</h4>
 		      </a>
         </li>

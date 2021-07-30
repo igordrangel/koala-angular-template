@@ -1,5 +1,5 @@
 .title {font-family: OpenSans, sans-serif;font-size: .8em;font-weight: bold;line-height: .8em;margin: 0;padding: 8px 15px;}
-ul {font-size: 0;list-style: none;margin: 0;padding: 0;width: 90%;}
+ul {font-size: 0;list-style: none;margin: 0;padding: 0 20px 0 0;width: 100%;}
 ul.list-menu {height: calc(100vh - 107px);overflow: auto;}
 ul.list-menu.without-title {height: calc(100vh - 78px);}
 ul ul {height: 0;overflow: hidden;transition: .2s;width: 100%;}
@@ -19,9 +19,9 @@ ul li mat-icon {display: inline-flex;line-height: 1.5em;margin: 0;vertical-align
 ul li h3,
 ul li h4 {font-size: .9em;}
 ul li koala-icon,
-ul li li koala-icon,
+ul li li koala-icon {font-size: 18px;height: 18px;line-height: 18px;margin-right: 5px;width: 18px;}
 ul li mat-icon,
-ul li li mat-icon {font-size: 22px;height: 22px;line-height: 22px;margin-right: 5px;width: 22px;}
+ul li li mat-icon {font-size: 20px;height: 20px;line-height: 20px;margin-right: 5px;width: 20px;}
 ul li koala-icon,
 ul li li koala-icon {margin-right: 10px;}
 ul li li a {cursor: pointer;display: block;padding: 5px 15px !important;text-decoration: none;width: 100%;}

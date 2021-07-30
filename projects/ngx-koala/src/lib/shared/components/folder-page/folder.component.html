@@ -1,7 +1,7 @@
 <div #folder class="folder-list">
   <h1 #folderTitle>
     <mat-icon #folderIconTitle *ngIf="titleIcon && !koalaIcon">{{titleIcon}}</mat-icon>
-    <koala-icon *ngIf="titleIcon && koalaIcon" size="30" [color]="customFolderFontColor" [icon]="titleIcon"></koala-icon>
+    <koala-icon *ngIf="titleIcon && koalaIcon" size="20" [color]="customFolderFontColor" [icon]="titleIcon"></koala-icon>
     {{titlePage}}
   </h1>
   <ul #folderNavigateHistory class="navigate-history" *ngIf="navigateHistory">
