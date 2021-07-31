@@ -179,12 +179,14 @@ export class KoalaOAuth2Service implements OnDestroy {
   public logout() {
     const logoutInterval = setInterval(() => {
       if (this.hasOpenIdConfig()) {
-        this.claims = null;
-        this.token = null;
-        const iframeLogout = document.createElement('iframe');
-        iframeLogout.style.display = 'none';
-        iframeLogout.src = this.openIdOptions.end_session_endpoint;
-        document.querySelector('body').appendChild(iframeLogout);
+        if (this.openIdOptions.end_session_endpoint) {
+          this.claims = null;
+          this.token = null;
+          const iframeLogout = document.createElement('iframe');
+          iframeLogout.style.display = 'none';
+          iframeLogout.src = this.openIdOptions.end_session_endpoint;
+          document.querySelector('body').appendChild(iframeLogout);
+        }
         this.events.next('logout');
         clearInterval(logoutInterval);
       }
