@@ -1,5 +1,5 @@
 .title {font-family: OpenSans, sans-serif;font-size: .8em;font-weight: bold;line-height: .8em;margin: 0;padding: 8px 15px;}
-ul {font-size: 0;list-style: none;margin: 0;padding: 0 20px 0 0;width: 100%;}
+ul {font-size: 0;list-style: none;margin: 0;padding: 0 20px 0 0;width: 100%;box-sizing: border-box;}
 ul.list-menu {height: calc(100vh - 107px);overflow: auto;}
 ul.list-menu.without-title {height: calc(100vh - 78px);}
 ul ul {height: 0;overflow: hidden;transition: .2s;width: 100%;}
