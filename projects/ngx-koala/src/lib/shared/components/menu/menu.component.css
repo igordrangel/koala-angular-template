@@ -9,7 +9,7 @@ ul li a {transition: .2s;}
 a.module {box-sizing: border-box;cursor: pointer;display: block;width: 100%;}
 ul li li {border: none !important;padding: 0 !important;}
 .state-module {position: absolute;right: 10px;top: 4px;}
-ul li.active ul,
+ul li.active ul {border-bottom: 1px solid rgba(0, 0, 0, .1);box-shadow: 0 1px 3px rgba(0, 0, 0, .5);}
 ul li.expanded ul {border-bottom: 1px solid rgba(0, 0, 0, .1);box-shadow: 0 1px 3px rgba(0, 0, 0, .5);height: fit-content !important;padding: 15px 0;}
 ul li li a.active {background: rgba(0, 0, 0, .1) !important;cursor: default;height: fit-content !important;}
 ul li h3,
