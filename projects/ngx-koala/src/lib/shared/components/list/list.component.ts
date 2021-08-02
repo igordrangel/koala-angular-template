@@ -22,7 +22,7 @@ import { MatPaginator } from "@angular/material/paginator";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListComponent extends ListAbstract implements OnInit, AfterViewInit, OnDestroy {
-  @Input() protected config: KoalaListConfigInterface;
+  @Input() public config: KoalaListConfigInterface;
 
   @ViewChild(MatPaginator) protected paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) protected sort: MatSort;
