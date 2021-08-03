@@ -6,7 +6,7 @@ import { KoalaErrorsHelper } from "./helpers/error/koala.errors.helper";
 import { KoalaRequestHeaderHelper } from "./helpers/service/koala.request-header.helper";
 import { KoalaResponseFactory } from "./factory/koala.response.factory";
 import { KoalaEnvironment } from "../../../environments/koalaEnvironment";
-import { map, take } from "rxjs/operators";
+import { first, map } from "rxjs/operators";
 
 export type ApiRequesterType = 'get' | 'post' | 'put' | 'patch' | 'delete';
 
@@ -80,7 +80,7 @@ export class KoalaApiRequesterService {
 
   private promiseGetData<T>(request: Observable<T>): Observable<T> {
     return new Observable<T>(observe => {
-      request.pipe(take(1))
+      request.pipe(first())
              .subscribe({
                next: response => {
                  observe.next(response);
@@ -99,7 +99,7 @@ export class KoalaApiRequesterService {
   private promiseSendData<T>(request: Observable<HttpResponse<any>>, urlRequest?: string): Observable<T> {
     return new Observable<T>(observe => {
       this._tryRequestRepeat++;
-      request.pipe(take(1))
+      request.pipe(first())
              .subscribe({
                next: response => KoalaResponseFactory.generateResponse(response, urlRequest)
                                                      .then(success => {
