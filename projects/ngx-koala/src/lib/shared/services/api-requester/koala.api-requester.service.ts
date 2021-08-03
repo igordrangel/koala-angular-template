@@ -142,7 +142,10 @@ export class KoalaApiRequesterService {
 
   private promiseGetData<T>(promise: Promise<T>): Observable<T> {
     return new Observable<T>(observe => {
-      promise.then(response => observe.next(response)).catch(e => {
+      promise.then(response => {
+        observe.next(response);
+        observe.complete();
+      }).catch(e => {
         if (e.status === 401) {
           this.oauth2Service.logout();
         }
