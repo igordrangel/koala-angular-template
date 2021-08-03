@@ -38,17 +38,21 @@ export class MenuComponent implements OnInit {
   }
 
   public toogle(module: KoalaMenuModuleInterface) {
-    this.optionsSubject.next(koala(this.optionsSubject.getValue())
-      .array<KoalaMenuModuleInterface>()
-      .map(item => {
-        if (item.name === module.name) {
-          item.expanded = !module.expanded;
-        } else {
-          item.expanded = false;
-        }
-        return item;
-      })
-      .getValue());
+    const options = JSON.parse(JSON.stringify(this.optionsSubject.getValue())) as KoalaMenuModuleInterface[];
+    this.optionsSubject
+        .next(
+          koala(options)
+            .array<KoalaMenuModuleInterface>()
+            .map(item => {
+              if (item.name === module.name) {
+                item.expanded = !module.expanded;
+              } else {
+                item.expanded = false;
+              }
+              return item;
+            })
+            .getValue()
+        );
   }
 
   private defineMenuOptions(options: KoalaMenuModuleInterface[], routerChange = false) {

@@ -67,12 +67,16 @@ export abstract class KoalaApiRequesterBase<EntityType, GetAllType, DataType> {
           filter.params[indexName] = '';
         }
       });
-      return koala(filter.params).object().merge({
-        sort: filter.sort,
-        order: filter.order,
-        limit: filter.limit,
-        page: filter.page
-      }).getValue();
+      return koala({})
+        .object()
+        .merge(filter.params)
+        .merge({
+          sort: filter.sort,
+          order: filter.order,
+          limit: filter.limit,
+          page: filter.page
+        })
+        .getValue();
     }
 
     return filter ?? null;
