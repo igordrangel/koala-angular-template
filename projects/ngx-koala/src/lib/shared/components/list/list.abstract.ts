@@ -133,9 +133,7 @@ export abstract class ListAbstract extends FormAbstract {
           observe.next(true);
         })),
         debounceTime(300),
-        switchMap(() => new Observable<any>(observe => {
-          this.requestFunction().pipe(take(1)).subscribe(observe);
-        })),
+        switchMap(this.requestFunction),
         catchError(() => new Observable(observe => {
           this.loading(false);
           observe.next(true);
@@ -150,9 +148,7 @@ export abstract class ListAbstract extends FormAbstract {
       this.subscriptionList = this.filterParams.pipe(
         startWith({}),
         debounceTime(300),
-        switchMap(() => new Observable<any>(observe => {
-          this.requestFunction().pipe(take(1)).subscribe(observe);
-        })),
+        switchMap(this.requestFunction),
         catchError(() => new Observable(observe => {
           this.loading(false);
           observe.next(true);

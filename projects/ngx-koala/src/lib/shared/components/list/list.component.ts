@@ -49,7 +49,7 @@ export class ListComponent extends ListAbstract implements OnInit, AfterViewInit
     private deviceService: DeviceDetectorService
   ) {
     super(
-      () => this.config.request,
+      () => new Observable(observe => this.config.request.subscribe(observe)),
       (response) => {
         this.dataSource.data = this.config.responseIndexName ?
                                response[this.config.responseIndexName] :
