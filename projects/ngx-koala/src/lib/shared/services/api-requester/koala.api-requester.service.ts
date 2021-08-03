@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpErrorResponse, HttpParams, HttpResponse } from "@angular/common/http";
+import { HttpClient, HttpParams, HttpResponse } from "@angular/common/http";
 import { KoalaOAuth2Service } from "../openid/koala.oauth2.service";
 import { Observable, Subscription } from "rxjs";
-import { KlDelay } from "koala-utils/dist/utils/KlDelay";
 import { KoalaErrorsHelper } from "./helpers/error/koala.errors.helper";
 import { KoalaRequestHeaderHelper } from "./helpers/service/koala.request-header.helper";
 import { KoalaResponseFactory } from "./factory/koala.response.factory";
 import { KoalaEnvironment } from "../../../environments/koalaEnvironment";
+import { map, take } from "rxjs/operators";
 
 export type ApiRequesterType = 'get' | 'post' | 'put' | 'patch' | 'delete';
 
@@ -53,122 +53,67 @@ export class KoalaApiRequesterService {
     }
   }
 
-  public async cancelRequests() {
+  public cancelRequests() {
     for (let subscribe of this._subscriptions.values()) {
       subscribe.unsubscribe();
     }
   }
 
-  private async get<T>(url: string, params: HttpParams): Promise<T> {
-    return new Promise<T>(async (resolve, reject) => {
-      let tryRequest = 0;
-      let conclusion = false;
-      let success = false;
-      do {
-        conclusion = false;
-        tryRequest++;
-        this._subscriptions
-            .push(this.http.get<T>(`${this.getUrlBase()}/${url}`, {
-              observe: 'response',
-              headers: KoalaRequestHeaderHelper.add(this.getToken()),
-              params
-            }).subscribe(response => {
-              conclusion = true;
-              success = true;
-              if (response) {
-                resolve(response.body);
-              }
-            }, (err: HttpErrorResponse) => {
-              conclusion = true;
-              if (tryRequest >= 3) {
-                reject(err);
-              }
-            }));
-        while (!conclusion) {
-          await KlDelay.waitFor(300);
-        }
-      } while (tryRequest < 3 && !success);
+  private get<T>(url: string, params: HttpParams) {
+    return this.http
+               .get<T>(`${this.getUrlBase()}/${url}`, {
+                 observe: 'response',
+                 headers: KoalaRequestHeaderHelper.add(this.getToken()),
+                 params
+               })
+               .pipe(map(response => {
+                 return response.body;
+               }));
+  }
+
+  private postPutDelete(method: ApiRequesterType, url: string, data: any) {
+    return this.getMethod(method)<HttpResponse<any>>(`${this.getUrlBase()}/${url}`, data, {
+      observe: 'response',
+      headers: KoalaRequestHeaderHelper.add(this.getToken())
     });
   }
 
-  private async postPutDelete(method: ApiRequesterType, url: string, data: any): Promise<HttpResponse<any>> {
-    return new Promise<HttpResponse<any>>(async (resolve, reject) => {
-      let tryRequest = 0;
-      let conclusion = false;
-      let success = false;
-      do {
-        conclusion = false;
-        tryRequest++;
-        const req = (method == 'post') ?
-                    this.http.post<HttpResponse<any>>(`${this.getUrlBase()}/${url}`, data, {
-                      observe: 'response',
-                      headers: KoalaRequestHeaderHelper.add(this.getToken())
-                    }) : ((method == 'put') ?
-                          this.http.put<HttpResponse<any>>(`${this.getUrlBase()}/${url}`, data, {
-                            observe: 'response',
-                            headers: KoalaRequestHeaderHelper.add(this.getToken())
-                          }) : ((method == 'patch') ?
-                                this.http.patch<HttpResponse<any>>(`${this.getUrlBase()}/${url}`, data, {
-                                  observe: 'response',
-                                  headers: KoalaRequestHeaderHelper.add(this.getToken())
-                                }) :
-                                this.http.delete<HttpResponse<any>>(`${this.getUrlBase()}/${url}`, {
-                                  observe: 'response',
-                                  headers: KoalaRequestHeaderHelper.add(this.getToken())
-                                }))
-                    );
-
-        this._subscriptions
-            .push(req.subscribe(response => {
-              conclusion = true;
-              success = true;
-              if (response) {
-                resolve(response);
-              } else {
-                reject(new Error("A requisição não obteve uma resposta."));
-              }
-            }, error => {
-              conclusion = true;
-              if (tryRequest >= 3) {
-                reject(error);
-              }
-            }));
-        while (!conclusion) {
-          await KlDelay.waitFor(300);
-        }
-      } while (tryRequest < 3 && !success);
-    });
-  }
-
-  private promiseGetData<T>(promise: Promise<T>): Observable<T> {
+  private promiseGetData<T>(request: Observable<T>): Observable<T> {
     return new Observable<T>(observe => {
-      promise.then(response => {
-        observe.next(response);
-        observe.complete();
-      }).catch(e => {
-        if (e.status === 401) {
-          this.oauth2Service.logout();
-        }
-        observe.error(KoalaErrorsHelper.generate(e));
-      });
+      request.pipe(take(1))
+             .subscribe({
+               next: response => {
+                 observe.next(response);
+                 observe.complete();
+               },
+               error: e => {
+                 if (e.status === 401) {
+                   this.oauth2Service.logout();
+                 }
+                 observe.error(KoalaErrorsHelper.generate(e));
+               }
+             });
     });
   }
 
-  private promiseSendData<T>(promise: Promise<HttpResponse<any>>, urlRequest?: string): Observable<T> {
+  private promiseSendData<T>(request: Observable<HttpResponse<any>>, urlRequest?: string): Observable<T> {
     return new Observable<T>(observe => {
       this._tryRequestRepeat++;
-      promise.then(response => KoalaResponseFactory.generateResponse(response, urlRequest)
-                                                   .then(success => {
-                                                     observe.next(success as any);
-                                                     observe.complete();
-                                                   })
-                                                   .catch(error => {
-                                                     if (error.status === 401) {
-                                                       this.oauth2Service.logout();
-                                                     }
-                                                     observe.error(error);
-                                                   }))
-             .catch(e => observe.error(KoalaErrorsHelper.generate(e)));
+      request.pipe(take(1))
+             .subscribe({
+               next: response => KoalaResponseFactory.generateResponse(response, urlRequest)
+                                                     .then(success => {
+                                                       observe.next(success as any);
+                                                       observe.complete();
+                                                     })
+                                                     .catch(error => {
+                                                       if (error.status === 401) {
+                                                         this.oauth2Service.logout();
+                                                       }
+                                                       observe.error(error);
+                                                     }),
+               error: e => observe.error(KoalaErrorsHelper.generate(e))
+             });
     });
   }
 
@@ -178,5 +123,20 @@ export class KoalaApiRequesterService {
 
   private getUrlBase() {
     return this.isMockup ? 'http://localhost:4200/assets/mockup' : this.apiUrl;
+  }
+
+  private getMethod(method: ApiRequesterType) {
+    switch (method) {
+      case "post":
+        return this.http.post;
+      case "put":
+        return this.http.put;
+      case "patch":
+        return this.http.patch;
+      case "delete":
+        return this.http.delete;
+      case "get":
+        return this.http.get;
+    }
   }
 }
