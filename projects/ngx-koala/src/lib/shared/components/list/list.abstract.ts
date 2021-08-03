@@ -28,6 +28,7 @@ export abstract class ListAbstract extends FormAbstract {
   protected paginator: MatPaginator;
   protected sort: MatSort;
 
+  private subscriptionList: Subscription;
   private subscriptionSortList: Subscription;
   private intervalSortList: any;
 
@@ -76,13 +77,14 @@ export abstract class ListAbstract extends FormAbstract {
       params: filter,
       sort: this.sort?.active ?? '',
       order: this.sort?.direction ?? 'asc',
-      page: this.paginator?.pageIndex ?? 1,
+      page: this.paginator?.pageIndex ?? 0,
       limit: this.paginator?.pageSize ?? 30
     });
   }
 
   protected onDestroy() {
     this.subscriptionSortList?.unsubscribe();
+    this.subscriptionList?.unsubscribe();
     clearInterval(this.intervalSortList);
   }
 
@@ -117,7 +119,7 @@ export abstract class ListAbstract extends FormAbstract {
         }
       }, 50);
 
-      merge(this.paginator.page, this.filterParams).pipe(
+      this.subscriptionList = merge(this.paginator.page, this.filterParams).pipe(
         startWith({}),
         switchMap(() => new Observable(observe => {
           this.loading(true);
@@ -143,7 +145,7 @@ export abstract class ListAbstract extends FormAbstract {
       ).subscribe();
     } else {
       this.dataSource.paginator = this.paginator;
-      this.filterParams.pipe(
+      this.subscriptionList = this.filterParams.pipe(
         startWith({}),
         debounceTime(300),
         switchMap(this.requestFunction),

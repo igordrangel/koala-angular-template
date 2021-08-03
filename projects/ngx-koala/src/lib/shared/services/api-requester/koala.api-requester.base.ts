@@ -59,7 +59,6 @@ export abstract class KoalaApiRequesterBase<EntityType, GetAllType, DataType> {
       filter.hasOwnProperty('page') &&
       filter.hasOwnProperty('params')
     ) {
-      filter.page++;
       Object.keys(filter.params).forEach(indexName => {
         if (
           `${filter.params[indexName]}` === 'NaN' ||
@@ -68,7 +67,7 @@ export abstract class KoalaApiRequesterBase<EntityType, GetAllType, DataType> {
           filter.params[indexName] = '';
         }
       });
-      return koala({}).object().merge(filter.params).merge({
+      return koala(filter.params).object().merge({
         sort: filter.sort,
         order: filter.order,
         limit: filter.limit,
