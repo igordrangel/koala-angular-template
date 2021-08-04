@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { KoalaMenuModuleInterface } from './koala.menu-module.interface';
-import { Router, Scroll } from '@angular/router';
+import { NavigationEnd, Router, Scroll } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { koala } from 'koala-utils';
 import { map, switchMap } from "rxjs/operators";
@@ -37,6 +37,7 @@ export class MenuComponent implements OnInit {
           .subscribe(event => {
             switch (true) {
               case event instanceof Scroll:
+              case event instanceof NavigationEnd:
                 const options = JSON.parse(JSON.stringify(this.optionsSubject.getValue())) as KoalaMenuModuleInterface[];
                 if (options?.length > 0) {
                   this.optionsSubject.next(this.defineMenuOptions(options, true));
