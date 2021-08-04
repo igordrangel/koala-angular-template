@@ -54,6 +54,7 @@ export interface KoalaOpenIdConfig {
 export type EventType =
   'loadedConfig'
   | 'getToken'
+  | 'getTokenError'
   | 'refreshToken'
   | 'getClaims'
   | 'userAuthenticated'
@@ -244,7 +245,7 @@ export class KoalaOAuth2Service implements OnDestroy {
     }).subscribe((token: any) => {
       this.token = token;
       this.events.next((refreshToken ? 'refreshToken' : 'getClaims'));
-    }, () => this.events.next('loadedConfig'));
+    }, () => this.events.next('getTokenError'));
   }
 
   private getClaims() {
