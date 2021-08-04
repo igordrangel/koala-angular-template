@@ -13,7 +13,6 @@ import { PageGetStartedComponent } from "./get-started/page-get-started.componen
 import { MatExpansionModule } from "@angular/material/expansion";
 import { KoalaIconModule } from "../../../ngx-koala/src/lib/shared/components/icon/koala.icon.module";
 import { KoalaButtonModule } from "../../../ngx-koala/src/lib/shared/components/button/koala.button.module";
-import { KoalaOAuth2Service } from "../../../ngx-koala/src/lib/shared/services/openid/koala.oauth2.service";
 import { environment } from "../environments/environment";
 
 @NgModule({
@@ -33,9 +32,6 @@ import { environment } from "../environments/environment";
     MatExpansionModule,
     QuestionAvatarModule,
     AppRoutingModule
-  ],
-  providers: [
-    KoalaOAuth2Service
   ],
   bootstrap: [AppComponent]
 })

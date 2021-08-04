@@ -61,7 +61,8 @@ export class NgxKoalaModule {
     KoalaEnvironment.environment = environment;
 
     return {
-      ngModule: NgxKoalaModule
+      ngModule: NgxKoalaModule,
+      providers: [KoalaOAuth2Service]
     };
   }
 }
