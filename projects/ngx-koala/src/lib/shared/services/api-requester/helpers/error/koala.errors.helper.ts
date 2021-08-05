@@ -42,15 +42,7 @@ export class KoalaErrorsHelper {
       errorMessage.statusCode = e.status;
       errorMessage.alertEnum = KoalaAlertEnum.internalServerError;
       if (e.error && e.error.message) {
-        if (typeof e.error.message === 'string') {
-          errorMessage.message = e.error.message;
-        } else {
-          errorMessage.message = `<ul>${koala(e.error.message)
-            .array<string>()
-            .map(item => `<li>${item}</li>`)
-            .toString('')
-            .getValue()}</ul>`;
-        }
+        errorMessage.message = e.error.message;
       }
     } else {
       errorMessage.statusCode = 500;
