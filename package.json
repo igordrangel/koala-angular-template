@@ -1,6 +1,6 @@
 {
   "name": "koala-angular-template",
-  "version": "12.3.20",
+  "version": "12.3.21",
   "description": "Template angular using Angular and Material Angular",
   "scripts": {
     "ng": "ng",
@@ -46,7 +46,7 @@
     "file-saver": "^2.0.5",
     "jwt-decode": "^3.0.0",
     "jwt-encode": "^1.0.1",
-    "koala-utils": "^1.0.16",
+    "koala-utils": "^1.0.29",
     "ng2-currency-mask": "^9.0.2",
     "ngx-device-detector": "^2.1.1",
     "ngx-mask": "^10.0.4",

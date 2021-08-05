@@ -71,8 +71,8 @@
       <ng-container matColumnDef="select">
         <th *matHeaderCellDef mat-header-cell>
           <mat-checkbox (change)="$event ? selectAll() : null"
-                        [checked]="selection.hasValue() && allSelected"
-                        [indeterminate]="selection.hasValue() && !allSelected">
+                        [checked]="selection.hasValue() && allSelected$ | async"
+                        [indeterminate]="selection.hasValue() && !(allSelected$ | async)">
           </mat-checkbox>
         </th>
         <td *matCellDef="let item" mat-cell>

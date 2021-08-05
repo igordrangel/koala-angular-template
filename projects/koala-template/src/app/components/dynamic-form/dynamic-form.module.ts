@@ -7,6 +7,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { DynamicFormRoutingModule } from "./dynamic-form.routing.module";
 import { KoalaFormModule } from "../../../../../ngx-koala/src/lib/shared/components/form/koala.form.module";
 import { MatTabsModule } from "@angular/material/tabs";
+import { KoalaButtonModule } from "../../../../../ngx-koala/src/lib/shared/components/button/koala.button.module";
 
 @NgModule({
   exports: [
@@ -19,6 +20,7 @@ import { MatTabsModule } from "@angular/material/tabs";
     CommonModule,
     KoalaFolderPageModule,
     KoalaFormModule,
+    KoalaButtonModule,
     MatExpansionModule,
     MatIconModule,
     MatTabsModule,

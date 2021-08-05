@@ -369,7 +369,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
       autocompleteSelectedValue: [valueSelectedAutocomplete],
       textLogs: [config?.textObs],
       customMasc: [config?.customMasc],
-      value: [value, validators, config.asyncValidators]
+      value: [{value, disabled: config.disabled}, validators, config.asyncValidators]
     });
 
     if (config.autocompleteType === "onDemand") {

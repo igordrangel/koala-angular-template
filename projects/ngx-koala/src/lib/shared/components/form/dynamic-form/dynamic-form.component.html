@@ -31,7 +31,6 @@
 		      [koalaAutoFocus]="propriedade.get('focus').value"
 		      (keyup)="hoursAndMinutesApplyMask(i, $event)"
 		      [required]="propriedade.get('required').value"
-          [readonly]="propriedade.get('disabled').value"
 		      [tabIndex]="tabIndexStart + i"
 		      [mask]="((propriedade.get('type').value == typeField.competenceDate) ? '00/0000' : null) ||
 		              ((propriedade.get('type').value == typeField.phone) ? '(00)0000-0000?0' : null) ||
@@ -143,7 +142,6 @@
 	      <input
 		      [koalaAutoFocus]="propriedade.get('focus').value"
 		      [required]="propriedade.get('required').value"
-          [readonly]="propriedade.get('disabled').value"
           [tabIndex]="tabIndexStart + i"
           [min]="propriedade.get('min').value"
           [max]="propriedade.get('max').value"
@@ -193,7 +191,6 @@
         <input
           [koalaAutoFocus]="propriedade.get('focus').value"
           [required]="propriedade.get('required').value"
-          [readonly]="propriedade.get('disabled').value"
           [tabIndex]="tabIndexStart + i"
           [min]="propriedade.get('min').value"
           [max]="propriedade.get('max').value"
@@ -249,7 +246,6 @@
 		      [matAutosizeMaxRows]="8"
 		      [matAutosizeMinRows]="3"
 		      [required]="propriedade.get('required').value"
-          [readonly]="propriedade.get('disabled').value"
           [tabIndex]="tabIndexStart + i"
           [minLength]="propriedade.get('minLength').value"
           [maxLength]="propriedade.get('maxLength').value"
@@ -295,7 +291,6 @@
 		      [matAutosizeMaxRows]="8"
 		      [matAutosizeMinRows]="3"
 		      [required]="propriedade.get('required').value"
-          [readonly]="propriedade.get('disabled').value"
           [tabIndex]="tabIndexStart + i"
           [minLength]="propriedade.get('minLength').value"
           [maxLength]="propriedade.get('maxLength').value"
@@ -334,7 +329,7 @@
 		    [ngClass]="propriedade.get('fieldClass').value">
 	      <mat-label>{{propriedade.get('label').value}}</mat-label>
 	      <mat-select [multiple]="propriedade.get('multiple').value" [required]="propriedade.get('required').value"
-                    [tabIndex]="tabIndexStart + i" formControlName="value" [disabled]="propriedade.get('disabled').value">
+                    [tabIndex]="tabIndexStart + i" formControlName="value">
 	        <mat-option *ngFor="let options of propriedade.get('opcoesSelect').value" [value]="options.value">
 	          {{options.name}}
 	        </mat-option>
@@ -365,8 +360,7 @@
           formControlName="value"
           multiple
           [tabIndex]="tabIndexStart + i"
-          [required]="propriedade.get('required').value"
-          [disabled]="propriedade.get('disabled').value">
+          [required]="propriedade.get('required').value">
           <option *ngFor="let options of propriedade.get('opcoesSelect').value" [value]="options.value">
             {{options.name}}
           </option>
@@ -467,7 +461,6 @@
 	          <input
 		          #autocompleteInput
               [koalaAutoFocus]="propriedade.get('focus').value"
-		          [readonly]="propriedade.get('disabled').value"
 		          [required]="propriedade.get('required').value"
 		          [matAutocomplete]="auto"
 		          [matChipInputFor]="chipList"
@@ -482,7 +475,6 @@
 		      <input
 			      [matAutocomplete]="auto"
             [koalaAutoFocus]="propriedade.get('focus').value"
-			      [readonly]="propriedade.get('disabled').value"
 			      [required]="propriedade.get('required').value"
             [tabIndex]="tabIndexStart + i"
 			      formControlName="value"

@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { BehaviorSubject, merge, Observable, Subscription } from 'rxjs';
 import { FormAbstract } from '../../../core/form.abstract';
 import { FormGroup } from '@angular/forms';
-import { catchError, debounceTime, map, startWith, switchMap, take } from 'rxjs/operators';
+import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { KoalaListFormFilterInterface } from './koala-list-form-filter.interface';
 import { KoalaDynamicComponent } from "../dynamic-component/koala-dynamic-component";
@@ -17,7 +17,7 @@ export abstract class ListAbstract extends FormAbstract {
   public selection = new SelectionModel<object>(true, []);
   public limitOptions: number[] = [10, 20, 30, 50, 100];
   public showMenuList: boolean = false;
-  public allSelected = false;
+  public allSelected$ = new BehaviorSubject<boolean>(false);
   public dataSource = new MatTableDataSource<any>([]);
   public typeRequest: 'all' | 'onDemand' = 'onDemand';
   public filterParams = new BehaviorSubject<KoalaListFormFilterInterface>(null);
@@ -56,8 +56,8 @@ export abstract class ListAbstract extends FormAbstract {
   }
 
   public defineStatusSelectAll(status: boolean) {
-    this.allSelected = status;
-    return this.allSelected;
+    this.allSelected$.next(status);
+    return this.allSelected$.getValue();
   }
 
   public selectItem() {

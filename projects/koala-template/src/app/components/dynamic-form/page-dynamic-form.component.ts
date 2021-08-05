@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { PageAbstract } from "../../shared/abstract/page.abstract";
 import { KoalaDynamicFormService } from "../../../../../ngx-koala/src/lib/shared/services/dynamic-forms/koala.dynamic-form.service";
-import { ListService } from "../../components/list/list.service";
+import { ListService } from "../list/list.service";
 import { KoalaDynamicAutocompleteOptionsInterface } from "../../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-autocomplete-options.interface";
 import { Observable } from "rxjs";
 import { koala } from "koala-utils";
