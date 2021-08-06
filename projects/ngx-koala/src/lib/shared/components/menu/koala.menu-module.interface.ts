@@ -8,4 +8,6 @@ export interface KoalaMenuModuleInterface {
   routerLink?: string;
   expanded?: boolean;
   active?: boolean;
+  animateOpen?: boolean;
+  animateClose?: boolean;
 }

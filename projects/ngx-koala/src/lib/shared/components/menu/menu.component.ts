@@ -27,18 +27,26 @@ export class MenuComponent implements OnInit {
       this.router
           .events
           .pipe(switchMap(event => new Promise(async resolve => {
-            do {
+            while (this.optionsSubject.getValue().length === 0) {
               await KlDelay.waitFor(300);
             }
-            while (this.optionsSubject.getValue().length === 0);
 
             resolve(event);
           })))
+          .pipe(map(event => {
+            const options = this.cloneOptions();
+            this.optionsSubject.next(options.map(option => {
+              option.active = false;
+              return option;
+            }));
+
+            return event;
+          }))
           .subscribe(event => {
             switch (true) {
               case event instanceof Scroll:
               case event instanceof NavigationEnd:
-                const options = JSON.parse(JSON.stringify(this.optionsSubject.getValue())) as KoalaMenuModuleInterface[];
+                const options = this.cloneOptions();
                 if (options?.length > 0) {
                   this.optionsSubject.next(this.defineMenuOptions(options, true));
                 }
@@ -54,8 +62,12 @@ export class MenuComponent implements OnInit {
           koala(options)
             .array<KoalaMenuModuleInterface>()
             .map(item => {
+              item.animateOpen = false;
+              item.animateClose = false;
               if (item.name === module.name) {
                 item.expanded = !module.expanded;
+                item.animateOpen = item.expanded === true;
+                item.animateClose = item.expanded === false;
               } else {
                 item.expanded = false;
               }
@@ -68,6 +80,8 @@ export class MenuComponent implements OnInit {
   private defineMenuOptions(options: KoalaMenuModuleInterface[], routerChange = false) {
     options.map(module => {
       if (routerChange) {
+        module.animateOpen = false;
+        module.animateClose = false;
         module.active = module.tools ?
                         (this.router.url === module.routerLink ||
                           !!module.tools.find(tool => this.router.url.indexOf(tool.routerLink) >= 0)) :
@@ -78,5 +92,9 @@ export class MenuComponent implements OnInit {
       return module;
     });
     return options;
+  }
+
+  private cloneOptions() {
+    return JSON.parse(JSON.stringify(this.optionsSubject.getValue())) as KoalaMenuModuleInterface[];
   }
 }

@@ -2,13 +2,15 @@
   <h2 *ngIf="titleMenu" class="title">{{titleMenu}}</h2>
   <ul *ngIf="(optionsSubject | async) as options" class="list-menu" [ngClass]="{'without-title': !titleMenu}">
     <li
-	    (click)="toogle(module)"
+      #moduleItem
 	    *ngFor="let module of options"
 	    [ngClass]="{
+	      animateOpen: module.animateOpen,
+	      animateClose: module.animateClose,
         expanded: module.expanded,
         active: module.active
       }">
-      <a *ngIf="!!module.routerLink else moduleWithoutLink" [routerLink]="module.routerLink" class="module">
+      <a *ngIf="!!module.routerLink else moduleWithoutLink" [routerLink]="module.routerLink" (click)="toogle(module)" class="module">
         <mat-icon *ngIf="module.icon && !module.koalaIcon">{{module.icon}}</mat-icon>
         <koala-icon *ngIf="module.icon && module.koalaIcon" [icon]="module.icon"></koala-icon>
         <h3>{{module.name}}</h3>
@@ -17,7 +19,7 @@
 	        class="state-module">{{module.expanded || module.active ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}}</mat-icon>
       </a>
       <ng-template #moduleWithoutLink>
-        <div class="module">
+        <div (click)="toogle(module)" class="module">
           <mat-icon *ngIf="module.icon && !module.koalaIcon">{{module.icon}}</mat-icon>
           <koala-icon *ngIf="module.icon && module.koalaIcon" [icon]="module.icon" size="18"></koala-icon>
           <h3>{{module.name}}</h3>
