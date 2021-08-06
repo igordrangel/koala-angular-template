@@ -24,6 +24,7 @@ export interface KoalaListConfigInterface {
   showAdvancedFilter: boolean;
   filterParams?: BehaviorSubject<KoalaListFormFilterInterface>;
   emptyListComponent?: KoalaDynamicComponent;
+  errorListComponent?: KoalaDynamicComponent;
   qtdListResult?: number;
   getSelectionList: (selection: SelectionModel<any>) => void;
   getDataSource: (dataSource: any[]) => void;

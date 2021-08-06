@@ -52,12 +52,12 @@ export class ListComponent extends ListAbstract implements OnInit, AfterViewInit
       () => this.config.request,
       (response) => {
         this.dataSource.data = this.config.responseIndexName ?
-                               response[this.config.responseIndexName] :
+                               response[this.config.responseIndexName] ?? [] :
                                response;
         if (this.config.getDataSource) this.config.getDataSource(this.dataSource.data);
         this.qtdListResult = this.config.responseQtdResultIndexName ?
-                             this.config.responseQtdResultIndexName(response) :
-                             this.dataSource.data.length;
+                             this.config.responseQtdResultIndexName(response) ?? 0 :
+                             this.dataSource.data?.length ?? 0;
       },
       () => this.formFilter
     );
@@ -151,6 +151,7 @@ export class ListComponent extends ListAbstract implements OnInit, AfterViewInit
     this.responseQtdResultIndexName = this.config.responseQtdResultIndexName;
     this.filterParams = this.config.filterParams ?? new BehaviorSubject<KoalaListFormFilterInterface>(null);
     this.emptyListComponent = this.config.emptyListComponent;
+    this.errorListComponent = this.config.errorListComponent;
     this.pageSize = this.config.pageSize ?? 30;
     this.disabledCheckboxItemList = this.config.disabledCheckboxItemList;
   }

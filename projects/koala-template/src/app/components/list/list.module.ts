@@ -10,6 +10,7 @@ import { KoalaButtonModule } from "../../../../../ngx-koala/src/lib/shared/compo
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
 import { KoalaAlertModule } from "../../../../../ngx-koala/src/lib/shared/components/alert/koala.alert.module";
+import { ErrorListComponent } from "./error-list/error-list.component";
 
 @NgModule({
   exports: [
@@ -17,7 +18,8 @@ import { KoalaAlertModule } from "../../../../../ngx-koala/src/lib/shared/compon
   ],
   declarations: [
     PageListComponent,
-    EmptyListComponent
+    EmptyListComponent,
+    ErrorListComponent
   ],
   imports: [
     CommonModule,

@@ -11,6 +11,7 @@ import { SelectionModel } from "@angular/cdk/collections";
 import { KoalaAlertService } from "../../../../../ngx-koala/src/lib/shared/services/alert/koala.alert.service";
 import { KoalaAlertEnum } from "../../../../../ngx-koala/src/lib/shared/components/alert/koala.alert.enum";
 import { KoalaDynamicFormService } from "../../../../../ngx-koala/src/lib/shared/services/dynamic-forms/koala.dynamic-form.service";
+import { ErrorListComponent } from "./error-list/error-list.component";
 
 @Component({
   templateUrl: 'page-list.component.html'
@@ -42,7 +43,7 @@ export class PageListComponent extends PageAbstract {
                                                 .field('Name', 'name', "text").generate()
                                                 .generate()
                       })
-                      .service(filter => this.listService.getList(filter.getValue()), 'all')
+                      .service(filter => this.listService.getList(filter.getValue()))
                       .columns([
                         'select',
                         'name',
@@ -79,6 +80,7 @@ export class PageListComponent extends PageAbstract {
                         action: item => this.edit(item)
                       })
                       .emptyListComponent(EmptyListComponent)
+                      .errorListComponent(ErrorListComponent)
                       .getDataSource(dataSource => this.dataSource = dataSource)
                       .getSelectionList(selection => this.selectedItems = selection)
                       .pageSize(20)

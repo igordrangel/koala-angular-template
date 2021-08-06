@@ -1,10 +1,10 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { BehaviorSubject, merge, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, EMPTY, merge, Observable, Subscription } from 'rxjs';
 import { FormAbstract } from '../../../core/form.abstract';
 import { FormGroup } from '@angular/forms';
-import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators';
+import { catchError, debounceTime, first, map, startWith, switchMap } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { KoalaListFormFilterInterface } from './koala-list-form-filter.interface';
 import { KoalaDynamicComponent } from "../dynamic-component/koala-dynamic-component";
@@ -21,7 +21,9 @@ export abstract class ListAbstract extends FormAbstract {
   public dataSource = new MatTableDataSource<any>([]);
   public typeRequest: 'all' | 'onDemand' = 'onDemand';
   public filterParams = new BehaviorSubject<KoalaListFormFilterInterface>(null);
+  public filterError$ = new BehaviorSubject<any>(null);
   public emptyListComponent?: KoalaDynamicComponent;
+  public errorListComponent?: KoalaDynamicComponent;
   public pageSize: KoalaListPageSize;
 
   protected config: KoalaListConfigInterface;
@@ -133,10 +135,18 @@ export abstract class ListAbstract extends FormAbstract {
           observe.next(true);
         })),
         debounceTime(300),
-        switchMap(this.requestFunction),
-        catchError(() => new Observable(observe => {
-          this.loading(false);
-          observe.next(true);
+        switchMap(() => new Observable<unknown[]>(observe => {
+          this.requestFunction().pipe(first()).subscribe({
+            next: response => observe.next(response),
+            error: err => {
+              if (this.errorListComponent) {
+                this.filterError$.next(err);
+                this.errorListComponent.data = err;
+              }
+              this.loading(false);
+              observe.next([]);
+            }
+          })
         })),
         map((response) => {
           this.loading(false);
@@ -148,10 +158,18 @@ export abstract class ListAbstract extends FormAbstract {
       this.subscriptionList = this.filterParams.pipe(
         startWith({}),
         debounceTime(300),
-        switchMap(this.requestFunction),
-        catchError(() => new Observable(observe => {
-          this.loading(false);
-          observe.next(true);
+        switchMap(() => new Observable<unknown[]>(observe => {
+          this.requestFunction().pipe(first()).subscribe({
+            next: response => observe.next(response),
+            error: err => {
+              if (this.errorListComponent) {
+                this.filterError$.next(err);
+                this.errorListComponent.data = err;
+              }
+              this.loading(false);
+              observe.next([]);
+            }
+          })
         })),
         map((response) => {
           this.loading(false);

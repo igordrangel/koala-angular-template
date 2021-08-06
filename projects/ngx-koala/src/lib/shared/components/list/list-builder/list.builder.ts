@@ -21,7 +21,7 @@ export class ListBuilder<DataType> {
   ) {
     this.config.typeRequest = type;
     this.config.responseIndexName = resultIndexName;
-    this.config.responseQtdResultIndexName = response => response[qtdResultIndexName];
+    this.config.responseQtdResultIndexName = response => response[qtdResultIndexName] ?? [];
     this.config.columnSort = this.config?.filterParams?.getValue()?.sort ?? null;
     this.config.sortDirection = this.config?.filterParams?.getValue()?.order ?? 'asc';
 
@@ -89,6 +89,11 @@ export class ListBuilder<DataType> {
 
   public emptyListComponent(component: Type<any>, data?: any) {
     this.config.emptyListComponent = new KoalaDynamicComponent(component, data);
+    return this;
+  }
+
+  public errorListComponent(component: Type<any>, data?: any) {
+    this.config.errorListComponent = new KoalaDynamicComponent(component, data);
     return this;
   }
 

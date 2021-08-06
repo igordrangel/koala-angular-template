@@ -309,7 +309,7 @@
   KoalaAlertEnum
 } <span>from</span> "ngx-koala";
 <span>import</span> &#123; DialogFormItemComponent } <span>from</span> "./dialog/dialog-form-item.component";
-<span>import</span> &#123; EmptyListComponent } <span>from</span> "../../../shared/components/empty-list/empty-list.component";
+<span>import</span> &#123; ErrorListComponent } <span>from</span> "../../../shared/components/empty-list/empty-list.component";
 <span>import</span> &#123; ItemInterface, ItemService } <span>from</span> "./item.service";
 
 <span>@Component</span>(&#123;
@@ -377,7 +377,7 @@
                                   havePermission: true,
                                   action: item => <span>this</span>.<span>dialogList</span>(item)
                               })
-                              .<span>emptyListComponent</span>(<span>EmptyListComponent</span>)
+                              .<span>emptyListComponent</span>(<span>ErrorListComponent</span>)
                               .<span>getDataSource</span>(dataSource => <span>this</span>.dataSource = dataSource)
                               .<span>getSelectionList</span>(selection => <span>this</span>.selectedItems = selection)
                               .<span>pageSize</span>(20)
