@@ -56,7 +56,9 @@
       </li>
     </ul>
   </nav>
-  <div *ngIf="loader | async" class="spinner-container">
+  <div *ngIf="loader | async" class="spinner-container" [ngClass]="{
+    'no-filter': !filterFormConfig
+  }">
     <mat-spinner diameter="40"></mat-spinner>
   </div>
   <div class="list">
