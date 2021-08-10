@@ -12,8 +12,6 @@ ul li li {border: none !important;padding: 0 !important;height: 0;}
 ul li.active ul {border-bottom: 1px solid rgba(0, 0, 0, .1);box-shadow: 0 1px 3px rgba(0, 0, 0, .5);}
 ul li.expanded ul {border-bottom: 1px solid rgba(0, 0, 0, .1);box-shadow: 0 1px 3px rgba(0, 0, 0, .5);height: fit-content;padding: 15px 0;}
 ul li.expanded ul li {height: 30px;}
-ul li.expanded.animateOpen ul li {animation: animateOptionsMenu ease-in .1s;}
-ul li.animateClose ul li {animation: animateOptionsMenu ease-in .2s reverse;}
 ul li li a.active {background: rgba(0, 0, 0, .1) !important;cursor: default;height: fit-content !important;}
 ul li h3,
 ul li h4,
@@ -30,8 +28,3 @@ ul li li koala-icon {margin-right: 10px;}
 ul li li a {cursor: pointer;display: block;padding: 5px 15px !important;text-decoration: none;width: 100%;}
 ul li li:hover {background: rgba(0, 0, 0, .1);}
 ul li li a.active:hover {background: transparent;}
-
-@keyframes animateOptionsMenu {
-  from {height: 0;}
-  to {height: 30px;}
-}
