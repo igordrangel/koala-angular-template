@@ -134,7 +134,7 @@ export abstract class ListAbstract extends FormAbstract {
           observe.next(true);
         })),
         debounceTime(300),
-        switchMap(this.runRequestFunction),
+        switchMap(() => this.runRequestFunction()),
         map((response) => {
           this.loading(false);
           return this.requestResponseFunction(response);
@@ -145,7 +145,7 @@ export abstract class ListAbstract extends FormAbstract {
       this.subscriptionList = this.filterParams.pipe(
         startWith({}),
         debounceTime(300),
-        switchMap(this.runRequestFunction),
+        switchMap(() => this.runRequestFunction()),
         map((response) => {
           this.loading(false);
           return this.requestResponseFunction(response);
