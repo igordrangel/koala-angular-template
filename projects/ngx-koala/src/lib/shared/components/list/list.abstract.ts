@@ -106,21 +106,20 @@ export abstract class ListAbstract extends FormAbstract {
   }
 
   private async prepareSearch() {
+    this.intervalSortList = setInterval(() => {
+      if (this.sort && !this.subscriptionSortList) {
+        this.subscriptionSortList = this.sort.sortChange.subscribe(() => {
+          const filter = this.filterParams.value;
+          filter.sort = this.sort.active;
+          filter.order = this.sort.direction;
+          this.filterParams.next(filter);
+        });
+      } else if (!this.sort && this.subscriptionSortList) {
+        this.subscriptionSortList.unsubscribe();
+      }
+    }, 50);
+
     if (this.typeRequest === 'onDemand') {
-
-      this.intervalSortList = setInterval(() => {
-        if (this.sort && !this.subscriptionSortList) {
-          this.subscriptionSortList = this.sort.sortChange.subscribe(() => {
-            const filter = this.filterParams.value;
-            filter.sort = this.sort.active;
-            filter.order = this.sort.direction;
-            this.filterParams.next(filter);
-          });
-        } else if (!this.sort && this.subscriptionSortList) {
-          this.subscriptionSortList.unsubscribe();
-        }
-      }, 50);
-
       this.subscriptionList = merge(this.paginator.page, this.filterParams).pipe(
         startWith({}),
         switchMap(() => new Observable(observe => {
@@ -135,19 +134,7 @@ export abstract class ListAbstract extends FormAbstract {
           observe.next(true);
         })),
         debounceTime(300),
-        switchMap(() => new Observable<unknown[]>(observe => {
-          this.requestFunction().pipe(first()).subscribe({
-            next: response => observe.next(response),
-            error: err => {
-              if (this.errorListComponent) {
-                this.filterError$.next(err);
-                this.errorListComponent.data = err;
-              }
-              this.loading(false);
-              observe.next([]);
-            }
-          })
-        })),
+        switchMap(this.runRequestFunction),
         map((response) => {
           this.loading(false);
           return this.requestResponseFunction(response);
@@ -158,19 +145,7 @@ export abstract class ListAbstract extends FormAbstract {
       this.subscriptionList = this.filterParams.pipe(
         startWith({}),
         debounceTime(300),
-        switchMap(() => new Observable<unknown[]>(observe => {
-          this.requestFunction().pipe(first()).subscribe({
-            next: response => observe.next(response),
-            error: err => {
-              if (this.errorListComponent) {
-                this.filterError$.next(err);
-                this.errorListComponent.data = err;
-              }
-              this.loading(false);
-              observe.next([]);
-            }
-          })
-        })),
+        switchMap(this.runRequestFunction),
         map((response) => {
           this.loading(false);
           return this.requestResponseFunction(response);
@@ -199,5 +174,21 @@ export abstract class ListAbstract extends FormAbstract {
                      this.dataSource.data).length;
 
     return this.defineStatusSelectAll(numSelected === numRows);
+  }
+
+  private runRequestFunction() {
+    return new Observable<unknown[]>(observe => {
+      this.requestFunction().pipe(first()).subscribe({
+        next: response => observe.next(response),
+        error: err => {
+          if (this.errorListComponent) {
+            this.filterError$.next(err);
+            this.errorListComponent.data = err;
+          }
+          this.loading(false);
+          observe.next([]);
+        }
+      })
+    })
   }
 }

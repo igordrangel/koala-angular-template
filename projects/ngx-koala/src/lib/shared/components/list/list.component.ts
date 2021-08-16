@@ -51,13 +51,13 @@ export class ListComponent extends ListAbstract implements OnInit, AfterViewInit
     super(
       () => this.config.request,
       (response) => {
-        this.dataSource.data = this.config.responseIndexName ?
-                               response[this.config.responseIndexName] ?? [] :
-                               response;
+        this.dataSource.data = this.config.responseIndexName
+                               ? response[this.config.responseIndexName] ?? []
+                               : response;
         if (this.config.getDataSource) this.config.getDataSource(this.dataSource.data);
-        this.qtdListResult = this.config.responseQtdResultIndexName ?
-                             this.config.responseQtdResultIndexName(response) ?? 0 :
-                             this.dataSource.data?.length ?? 0;
+        this.qtdListResult = this.config.responseQtdResultIndexName
+                             ? this.config.responseQtdResultIndexName(response) ?? 0
+                             : this.dataSource.data?.length ?? 0;
       },
       () => this.formFilter
     );
