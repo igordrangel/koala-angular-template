@@ -100,7 +100,7 @@
       <ng-container matColumnDef="options">
         <th *matHeaderCellDef mat-header-cell></th>
         <td *matCellDef="let item" mat-cell>
-          <div *ngIf="itemsMenuListOptions">
+          <div *ngIf="haveOptionsOnItemLine(item)">
             <button [matMenuTriggerFor]="options" mat-icon-button type="button">
               <i class='material-icons'>more_vert</i>
             </button>

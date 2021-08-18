@@ -77,6 +77,7 @@ export class PageListComponent extends PageAbstract {
                         icon: 'edit',
                         name: 'Edit',
                         havePermission: true,
+                        showByItemList: item => item.qtd > 0,
                         action: item => this.edit(item)
                       })
                       .emptyListComponent(EmptyListComponent)

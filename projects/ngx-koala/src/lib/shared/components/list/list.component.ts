@@ -122,6 +122,13 @@ export class ListComponent extends ListAbstract implements OnInit, AfterViewInit
     this.showAdvancedFilter = !this.showAdvancedFilter;
   }
 
+  public haveOptionsOnItemLine(item: any) {
+    return this.itemsMenuListOptions.filter(option => option.havePermission && (
+      !option.showByItemList ||
+      option.showByItemList(item)
+    )).length > 0
+  }
+
   private initConfig() {
     this.columnSort = this.config.columnSort ?? null;
     this.sortDirection = this.config.sortDirection ?? 'asc';

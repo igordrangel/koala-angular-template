@@ -220,6 +220,7 @@
                                 icon: 'edit',
                                 name: 'Edit',
                                 havePermission: true,
+                                showByItemList: item => item.qtd > 0,
                                 action: item => <span>this</span>.edit(item)
                               &#125;)
                               .<span>emptyListComponent</span>(ErrorListComponent)
