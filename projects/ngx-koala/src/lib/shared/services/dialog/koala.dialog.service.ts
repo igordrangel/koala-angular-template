@@ -41,18 +41,17 @@ export class KoalaDialogService {
         dialogRef.close({closeOnNavigation: true})
       }
     });
-    dialogRef.disableClose = true;
   }
 
   private dialogTemplate(data: any = null): KoalaDialogTemplateInterface {
     let dialogElementId = "dialog-" + koala('').string().random(10, true).getValue();
 
     return {
-      auto: {id: dialogElementId, panelClass: ['koala-dialog', 'auto'], data},
-      small: {id: dialogElementId, panelClass: ['koala-dialog', 'small'], data},
-      normal: {id: dialogElementId, panelClass: ['koala-dialog', 'normal'], data},
-      big: {id: dialogElementId, panelClass: ['koala-dialog', 'big'], data},
-      fullScreen: {id: dialogElementId, panelClass: ['koala-dialog'], data},
+      auto: {id: dialogElementId, panelClass: ['koala-dialog', 'auto'], disableClose: true, data},
+      small: {id: dialogElementId, panelClass: ['koala-dialog', 'small'], disableClose: true, data},
+      normal: {id: dialogElementId, panelClass: ['koala-dialog', 'normal'], disableClose: true, data},
+      big: {id: dialogElementId, panelClass: ['koala-dialog', 'big'], disableClose: true, data},
+      fullScreen: {id: dialogElementId, panelClass: ['koala-dialog'], disableClose: true, data},
       mobile: {
         id: dialogElementId,
         autoFocus: false,
