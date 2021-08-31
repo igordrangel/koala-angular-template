@@ -53,7 +53,7 @@ export class KoalaLanguageHelper {
       case "enUs":
         return `${label} is required.`;
       default:
-        return `${label} não informado(a).`;
+        return `Nenhum valor informado.`;
     }
   }
 
@@ -62,7 +62,7 @@ export class KoalaLanguageHelper {
       case "enUs":
         return `${label} is invalid.`;
       default:
-        return `${label} inválido.`;
+        return `Registro inválido.`;
     }
   }
 
@@ -123,9 +123,9 @@ export class KoalaLanguageHelper {
   public static getAutocompleteMessage(label: string) {
     switch (this.language) {
       case "enUs":
-        return `You must select a ${label}.`;
+        return `You must select a option.`;
       default:
-        return `Você deve selecionar um ${label}.`;
+        return `Você deve selecionar uma opção.`;
     }
   }
 }
