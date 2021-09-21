@@ -45,7 +45,7 @@
 <span>import</span> &#123; MatListModule &#125; <span>from</span> "@angular/material/list";
 <span>import</span> &#123; MatExpansionModule &#125; <span>from</span> "@angular/material/expansion";
 <span>import</span> &#123; PageBtnFileComponent &#125; <span>from</span> "./page-btn-file.component";
-<span>import</span> &#123; KoalaFileButtonModule &#125; <span>from</span> "ngx-koala";
+<span>import</span> &#123; KoalaFileButtonModule &#125; <span>from</span> "@koalarx/ui/file-button";
 <span>import</span> &#123; BtnFileRoutingModule &#125; <span>from</span> "./btn-file.routing.module";
 
 <span>@NgModule</span>(&#123;
@@ -77,10 +77,7 @@
             </mat-expansion-panel-header>
 
             <pre><code><span>import</span> &#123; Component &#125; <span>from</span> "@angular/core";
-<span>import</span> &#123;
-  KoalaFileInterface,
-  KoalaBtnFileService
-&#125; <span>from</span> "ngx-koala";
+<span>import</span> &#123; KoalaFileInterface, KoalaBtnFileService &#125; <span>from</span> "@koalarx/ui/file-button";
 
 <span>@Component</span>(&#123;
   templateUrl: 'page-btn-file.component.html',

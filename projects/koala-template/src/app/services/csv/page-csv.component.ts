@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { PageAbstract } from "../../shared/abstract/page.abstract";
 import { ListService } from "../../components/list/list.service";
-import { KoalaCsvService } from "../../../../../ngx-koala/src/lib/shared/services/csv/koala.csv.service";
+import { KoalaCsvService } from "../../../../../ngx-koala/src/core";
 
 @Component({
   templateUrl: 'page-csv.component.html'

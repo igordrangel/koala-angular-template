@@ -5,8 +5,8 @@ import { MatListModule } from "@angular/material/list";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { PageBtnFileComponent } from "./page-btn-file.component";
 import { BtnFileRoutingModule } from "./btn-file.routing.module";
-import { KoalaFolderPageModule } from "../../../../../ngx-koala/src/lib/shared/components/folder-page/koala.folder-page.module";
-import { KoalaFileButtonModule } from "../../../../../ngx-koala/src/lib/shared/components/file-button/koala.file-button.module";
+import { KoalaFolderPageModule } from "../../../../../ngx-koala/src/folder-page";
+import { KoalaFileButtonModule } from "../../../../../ngx-koala/src/file-button";
 import { MatTabsModule } from "@angular/material/tabs";
 
 @NgModule({

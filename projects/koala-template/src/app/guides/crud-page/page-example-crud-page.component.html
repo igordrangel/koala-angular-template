@@ -22,16 +22,14 @@
 <span>import</span> &#123; PageCrudPageComponent &#125; <span>from</span> './page-crud-page.component';
 <span>import</span> &#123; DialogFormItemComponent &#125; <span>from</span> './dialog/page-crud-page.component';
 
-<span>import</span> &#123;
-  KoalaFolderPageModule,
-  KoalaButtonModule,
-  KoalaFormModule,
-  KoalaDialogModule,
-  KoalaAlertModule,
-  KoalaQuestionModule,
-  KoalaListModule,
-  KoalaSnackbarModule
-&#125; <span>from</span> 'ngx-koala';
+<span>import</span> &#123; KoalaDialogModule &#125; <span>from</span> '@koalarx/ui/dialog';
+<span>import</span> &#123; KoalaAlertModule &#125; <span>from</span> '@koalarx/ui/alert';
+<span>import</span> &#123; KoalaQuestionModule &#125; <span>from</span> '@koalarx/ui/question';
+<span>import</span> &#123; KoalaListModule &#125; <span>from</span> '@koalarx/ui/list';
+<span>import</span> &#123; KoalaSnackbarModule &#125; <span>from</span> '@koalarx/ui/snackbar';
+<span>import</span> &#123; KoalaFormModule &#125; <span>from</span> '@koalarx/ui/form';
+<span>import</span> &#123; KoalaButtonModule &#125; <span>from</span> '@koalarx/ui/button';
+<span>import</span> &#123; KoalaFolderPageModule &#125; <span>from</span> '@koalarx/ui/folder-page';
 
 <span>@NgModule</span>(&#123;
   exports: [
@@ -60,17 +58,17 @@
       <mat-step label="Implementing the Folder Page">
         <p>A Folder page it's a component to make a 'title' when you put buttons, navigation history and content for your page.</p>
         <h2>page-crud-page.component.ts</h2>
-        <pre><code><span>import</span> &#123; Component } <span>from</span> "@angular/core";
-<span>import</span> &#123; KoalaNavigateHistoryInterface } <span>from</span> "ngx-koala";
+        <pre><code><span>import</span> &#123; Component &#125; <span>from</span> "@angular/core";
+<span>import</span> &#123; KoalaNavigateHistoryInterface &#125; <span>from</span> "@koalarx/ui/folder-page";
 
 <span>@Component</span>(&#123;
   templateUrl: 'crud-page-page.component.html'
 })
 <span>export class</span> CrudPagePageComponent &#123;
   <span>public</span> navigateHistory: <span>KoalaNavigateHistoryInterface</span>[] = [
-    &#123;name: 'Guides', routerLink: '/guides'},
-    &#123;name: 'Crud Page', routerLink: '/guides/crud-page'},
-    &#123;name: 'Example'}
+    &#123;name: 'Guides', routerLink: '/guides'&#125;,
+    &#123;name: 'Crud Page', routerLink: '/guides/crud-page'&#125;,
+    &#123;name: 'Example'&#125;
   ];
 }</code></pre>
         <h2>page-crud-page.component.html</h2>
@@ -95,9 +93,9 @@
       <mat-step label="Implementing the Item Service">
         <p>This service was <strong>save</strong>, <strong>get</strong> and <strong>delete</strong> (Uses a <a href="https://www.npmjs.com/package/koala-utils" target="_blank">koala-utils</a>) items on list.</p>
         <h2>item.service.ts</h2>
-        <pre><code><span>import</span> &#123; Injectable } from "@angular/core";
-<span>import</span> &#123; Observable } from "rxjs";
-<span>import</span> &#123; koala } from "koala-utils";
+        <pre><code><span>import</span> &#123; Injectable &#125; from "@angular/core";
+<span>import</span> &#123; Observable &#125; from "rxjs";
+<span>import</span> &#123; koala &#125; from "@koalarx/utils";
 
 <span>export interface</span> ItemInterface &#123;
     id?: <span>number</span>;
@@ -150,21 +148,19 @@
       <mat-step label="Implementing the menu page and Dialog Form to add a item">
         <p>Inside the tag <strong>nav#menu-page</strong> you can put a <a routerLink="/components/button">koala-button</a> and default button. Let's create a dialog form and call action with click in button on menu page.</p>
         <h2>page-crud-page.component.ts</h2>
-        <pre><code><span>import</span> &#123; Component } <span>from</span> "@angular/core";
-<span>import</span> &#123;
-  KoalaNavigateHistoryInterface,
-  KoalaDialogService
-} <span>from</span> "ngx-koala";
-<span>import</span> &#123; DialogFormItemComponent } <span>from</span> "./dialog/dialog-form-item.component";
+        <pre><code><span>import</span> &#123; Component &#125; <span>from</span> "@angular/core";
+<span>import</span> &#123; KoalaNavigateHistoryInterface &#125; <span>from</span> "@koalarx/ui/folder-page";
+<span>import</span> &#123; KoalaDialogService &#125; <span>from</span> "@koalarx/ui/dialog";
+<span>import</span> &#123; DialogFormItemComponent &#125; <span>from</span> "./dialog/dialog-form-item.component";
 
 <span>@Component</span>(&#123;
   templateUrl: 'crud-page-page.component.html'
 })
 <span>export class</span> CrudPagePageComponent &#123;
   <span>public</span> navigateHistory: <span>KoalaNavigateHistoryInterface</span>[] = [
-    &#123;name: 'Guides', routerLink: '/guides'},
-    &#123;name: 'Crud Page', routerLink: '/guides/crud-page'},
-    &#123;name: 'Example'}
+    &#123;name: 'Guides', routerLink: '/guides'&#125;,
+    &#123;name: 'Crud Page', routerLink: '/guides/crud-page'&#125;,
+    &#123;name: 'Example'&#125;
   ];
 
   <span>constructor</span>(
@@ -208,21 +204,18 @@
       <mat-step label="Implementing the Dialog Form">
         <p>This component use a <a routerLink="/components/dynamic-form">koala-dynamic-form</a> and <a routerLink="/components/dialog">koala-dialog</a>.</p>
         <h2>dialog-form-item.component.ts</h2>
-        <pre><code><span>import</span> &#123; Component } from "@angular/core";
-<span>import</span> &#123; MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+        <pre><code><span>import</span> &#123; Component &#125; from "@angular/core";
+<span>import</span> &#123; MAT_DIALOG_DATA, MatDialogRef &#125; from "@angular/material/dialog";
 
-<span>import</span> &#123;
-  FormAbstract,
-  KoalaDynamicFormService,
-  KoalaDynamicFormConfigInterface,
-  KoalaRequestService,
-  KoalaSnackbarService
-} from "ngx-koala";
-<span>import</span> &#123; ItemService } from "../item.service";
+<span>import</span> &#123; FormAbstract &#125; from "@koalarx/ui/core";
+<span>import</span> &#123; KoalaDynamicFormService, KoalaDynamicFormConfigInterface &#125; from "@koalarx/ui/form";
+<span>import</span> &#123; KoalaRequestService &#125; from "@koalarx/ui/core";
+<span>import</span> &#123; KoalaSnackbarService &#125; from "@koalarx/ui/snackbar";
+<span>import</span> &#123; ItemService &#125; from "../item.service";
 
 <span>@Component</span>(&#123;
   templateUrl: 'dialog-form-item.component.html'
-})
+&#125;)
 <span>export class</span> DialogFormItemComponent <span>extends FormAbstract</span> &#123;
   <span>public</span> formConfig: <span>KoalaDynamicFormConfigInterface</span>;
 
@@ -295,22 +288,18 @@
       <mat-step label="Implementing the Data Table List">
         <p>The <strong>koala-list</strong> allow create a Data Table by easy way. The implementing this component can be found <a routerLink="/components/list">here</a>.</p>
         <h2>crud-page-example.component.ts</h2>
-        <pre><code><span>import</span> &#123; Component } <span>from</span> "@angular/core";
-<span>import</span> &#123; SelectionModel } <span>from</span> "@angular/cdk/collections";
+        <pre><code><span>import</span> &#123; Component &#125; <span>from</span> "@angular/core";
+<span>import</span> &#123; SelectionModel &#125; <span>from</span> "@angular/cdk/collections";
 
-<span>import</span> &#123;
-  DynamicFormTypeFieldEnum,
-  KoalaNavigateHistoryInterface,
-  KoalaDialogService,
-  KoalaListConfigInterface,
-  KoalaListService,
-  KoalaDynamicFormService,
-  KoalaXlsxService,
-  KoalaAlertEnum
-} <span>from</span> "ngx-koala";
-<span>import</span> &#123; DialogFormItemComponent } <span>from</span> "./dialog/dialog-form-item.component";
-<span>import</span> &#123; ErrorListComponent } <span>from</span> "../../../shared/components/empty-list/empty-list.component";
-<span>import</span> &#123; ItemInterface, ItemService } <span>from</span> "./item.service";
+<span>import</span> &#123; KoalaNavigateHistoryInterface &#125; <span>from</span> "@koalarx/ui/folder-page";
+<span>import</span> &#123; KoalaDialogService &#125; <span>from</span> "@koalarx/ui/dialog";
+<span>import</span> &#123; KoalaListService, KoalaListConfigInterface &#125; <span>from</span> "@koalarx/ui/list";
+<span>import</span> &#123; KoalaDynamicFormService &#125; <span>from</span> "@koalarx/ui/form";
+<span>import</span> &#123; KoalaXlsxService &#125; <span>from</span> "@koalarx/ui/core";
+
+<span>import</span> &#123; DialogFormItemComponent &#125; <span>from</span> "./dialog/dialog-form-item.component";
+<span>import</span> &#123; ErrorListComponent &#125; <span>from</span> "../../../shared/components/empty-list/empty-list.component";
+<span>import</span> &#123; ItemInterface, ItemService &#125; <span>from</span> "./item.service";
 
 <span>@Component</span>(&#123;
   templateUrl: 'crud-page-page.component.html'
@@ -318,9 +307,9 @@
 <span>export class</span> CrudPagePageComponent &#123;
 
   <span>public</span> navigateHistory: <span>KoalaNavigateHistoryInterface</span>[] = [
-    &#123;name: 'Guides', routerLink: '/guides'},
-    &#123;name: 'Crud Page', routerLink: '/guides/crud-page'},
-    &#123;name: 'Example'}
+    &#123;name: 'Guides', routerLink: '/guides'&#125;,
+    &#123;name: 'Crud Page', routerLink: '/guides/crud-page'&#125;,
+    &#123;name: 'Example'&#125;
   ];
   <span>public</span> config: <span>KoalaListConfigInterface</span>;
   <span>public</span> dataSource?: <span>ItemInterface</span>[];

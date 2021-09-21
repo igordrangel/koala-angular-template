@@ -2,15 +2,13 @@ import { Component } from "@angular/core";
 import { PageAbstract } from "../../shared/abstract/page.abstract";
 import { ListService } from "./list.service";
 import { ListItemInterface } from "./list-item.interface";
-import { koala } from "koala-utils";
+import { koala } from "@koalarx/utils";
 import { EmptyListComponent } from "./empty-list/empty-list.component";
-import { KoalaXlsxService } from "../../../../../ngx-koala/src/lib/shared/services/xlsx/koala.xlsx.service";
-import { KoalaListConfigInterface } from "../../../../../ngx-koala/src/lib/shared/components/list/koala.list-config.interface";
-import { KoalaListService } from "../../../../../ngx-koala/src/lib/shared/services/list/koala.list.service";
+import { KoalaXlsxService } from "../../../../../ngx-koala/src/core";
+import { KoalaListService, KoalaListConfigInterface } from "../../../../../ngx-koala/src/list";
 import { SelectionModel } from "@angular/cdk/collections";
-import { KoalaAlertService } from "../../../../../ngx-koala/src/lib/shared/services/alert/koala.alert.service";
-import { KoalaAlertEnum } from "../../../../../ngx-koala/src/lib/shared/components/alert/koala.alert.enum";
-import { KoalaDynamicFormService } from "../../../../../ngx-koala/src/lib/shared/services/dynamic-forms/koala.dynamic-form.service";
+import { KoalaAlertService, KoalaAlertEnum } from "../../../../../ngx-koala/src/alert";
+import { KoalaDynamicFormService } from "../../../../../ngx-koala/src/form";
 import { ErrorListComponent } from "./error-list/error-list.component";
 
 @Component({

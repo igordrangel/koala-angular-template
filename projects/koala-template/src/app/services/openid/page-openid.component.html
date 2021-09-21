@@ -18,7 +18,7 @@
         </mat-expansion-panel-header>
 
         <pre><code><span>import</span> &#123; NgModule &#125; <span>from</span> "@angular/core";
-<span>import</span> &#123; NgxKoalaModule,KoalaOAuth2Service &#125; <span>from</span> "ngx-koala";
+<span>import</span> &#123; NgxKoalaModule, KoalaOAuth2Service &#125; <span>from</span> "@koalarx/ui/core";
 
 <span>@NgModule</span>(&#123;
   exports: [...],
@@ -44,7 +44,7 @@
         </mat-expansion-panel-header>
 
         <pre><code><span>import</span> &#123; Component, OnInit &#125; <span>from</span> "@angular/core";
-<span>import</span> &#123; KoalaOauth2ConfigInterface, KoalaOAuth2Service &#125; <span>from</span> "ngx-koala";
+<span>import</span> &#123; KoalaOauth2ConfigInterface, KoalaOAuth2Service &#125; <span>from</span> "@koalarx/ui/core";
 
 <span>@Component</span>(&#123;
   templateUrl: 'app.component.html'
@@ -74,7 +74,8 @@
 <span>import</span> &#123; AppRoutingModule &#125; <span>from</span> './app-routing.module';
 <span>import</span> &#123; AppComponent &#125; <span>from</span> './app.component';
 <span>import</span> &#123; BrowserAnimationsModule &#125; <span>from</span> '@angular/platform-browser/animations';
-<span>import</span> &#123; NgxKoalaModule, KoalaMenuModule &#125; <span>from</span> 'ngx-koala';
+<span>import</span> &#123; NgxKoalaModule &#125; <span>from</span> '@koalarx/ui/core';
+<span>import</span> &#123; KoalaMenuModule &#125; <span>from</span> '@koalarx/ui/menu';
 <span>import</span> &#123; environment &#125; <span>from</span> '../environments/environment';
 
 <span>@NgModule</span>(&#123;

@@ -1,6 +1,6 @@
 {
-  "name": "ngx-koala",
-  "version": "12.3.32",
+  "name": "@koalarx/ui",
+  "version": "12.4.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/igordrangel/koala-angular-template.git"
@@ -16,10 +16,10 @@
     "url": "https://github.com/igordrangel/koala-angular-template/issues"
   },
   "homepage": "https://github.com/igordrangel/koala-angular-template#readme",
-  "main": "./bundles/ngx-koala.umd.js",
-  "module": "./esm5/ngx-koala.js",
-  "es2015": "./esm2015/ngx-koala.js",
-  "typings": "./ngx-koala.d.ts",
+  "main": "./bundles/koalarx-ui.umd.js",
+  "module": "./esm5/koalarx-ui.js",
+  "es2015": "./esm2015/koalarx-ui.js",
+  "typings": "./koalarx-ui.d.ts",
   "peerDependencies": {
     "@angular/common": ">=12.0.0",
     "@angular/core": ">=12.0.0",
@@ -33,7 +33,7 @@
     "file-saver": "^2.0.5",
     "jwt-decode": "^3.0.0",
     "jwt-encode": "^1.0.1",
-    "koala-utils": "^1.0.29",
+    "@koalarx/utils": "^1.0.37",
     "ng2-currency-mask": "^9.0.2",
     "ngx-device-detector": "^2.1.1",
     "ngx-mask": "^10.0.4",

@@ -1,11 +1,8 @@
 import * as jwtEncode from 'jwt-encode';
 
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormAbstract } from '../../../../ngx-koala/src/lib/core/form.abstract';
-import { KoalaTokenService } from '../../../../ngx-koala/src/lib/shared/services/token/koala.token.service';
-import { KoalaDynamicFormService } from '../../../../ngx-koala/src/lib/shared/services/dynamic-forms/koala.dynamic-form.service';
-import { KoalaDynamicFormConfigInterface } from "../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-form-config.interface";
-import { KoalaOAuth2Service } from "../../../../ngx-koala/src/lib/shared/services/openid/koala.oauth2.service";
+import { FormAbstract, KoalaTokenService, KoalaOAuth2Service } from '../../../../ngx-koala/src/core';
+import { KoalaDynamicFormService, KoalaDynamicFormConfigInterface } from '../../../../ngx-koala/src/form';
 
 @Component({
   templateUrl: 'page-login.component.html',

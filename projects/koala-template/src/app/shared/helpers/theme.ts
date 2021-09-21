@@ -1,4 +1,4 @@
-import {KoalaPagePalletColorsInterface} from "../../../../../ngx-koala/src/lib/shared/components/page/koala-page-pallet-colors.interface";
+import { KoalaPagePalletColorsInterface } from "../../../../../ngx-koala/src/core/page/koala-page-pallet-colors.interface";
 
 export const KoalaThemeColors = {
   primary: '#1b0524',
@@ -6,7 +6,7 @@ export const KoalaThemeColors = {
   backgroundSpotlight: '#312f4e'
 };
 
-export const KoalaTheme:KoalaPagePalletColorsInterface = {
+export const KoalaTheme: KoalaPagePalletColorsInterface = {
   userPresentationUserFontColor: KoalaThemeColors.secondary,
   userPresentationUserBackground: '#fff',
   userPresentationBackground: KoalaThemeColors.primary,

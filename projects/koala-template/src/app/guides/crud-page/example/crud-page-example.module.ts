@@ -1,16 +1,16 @@
 import { NgModule } from "@angular/core";
 import { CrudPageExampleRoutingModule } from "./crud-page-example.routing.module";
 import { CommonModule } from "@angular/common";
-import { KoalaFolderPageModule } from "../../../../../../ngx-koala/src/lib/shared/components/folder-page/koala.folder-page.module";
+import { KoalaFolderPageModule } from "../../../../../../ngx-koala/src/folder-page";
 import { CrudPageExampleComponent } from "./crud-page-example.component";
-import { KoalaButtonModule } from "../../../../../../ngx-koala/src/lib/shared/components/button/koala.button.module";
-import { KoalaDialogModule } from "../../../../../../ngx-koala/src/lib/shared/components/dialog/koala.dialog.module";
-import { KoalaAlertModule } from "../../../../../../ngx-koala/src/lib/shared/components/alert/koala.alert.module";
-import { KoalaQuestionModule } from "../../../../../../ngx-koala/src/lib/shared/components/question/koala.question.module";
-import { KoalaListModule } from "../../../../../../ngx-koala/src/lib/shared/components/list/koala.list.module";
+import { KoalaButtonModule } from "../../../../../../ngx-koala/src/button";
+import { KoalaDialogModule } from "../../../../../../ngx-koala/src/dialog";
+import { KoalaAlertModule } from "../../../../../../ngx-koala/src/alert";
+import { KoalaQuestionModule } from "../../../../../../ngx-koala/src/question";
+import { KoalaListModule } from "../../../../../../ngx-koala/src/list";
 import { DialogFormItemComponent } from "./dialog/dialog-form-item.component";
-import { KoalaFormModule } from "../../../../../../ngx-koala/src/lib/shared/components/form/koala.form.module";
-import { KoalaSnackbarModule } from "../../../../../../ngx-koala/src/lib/shared/components/snackbar/koala.snackbar.module";
+import { KoalaFormModule } from "../../../../../../ngx-koala/src/form";
+import { KoalaSnackbarModule } from "../../../../../../ngx-koala/src/snackbar";
 
 @NgModule({
   exports: [

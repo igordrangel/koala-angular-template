@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { PageMenuComponent } from "./page-menu.component";
 import { CommonModule } from "@angular/common";
-import { KoalaFolderPageModule } from "../../../../../ngx-koala/src/lib/shared/components/folder-page/koala.folder-page.module";
+import { KoalaFolderPageModule } from "../../../../../ngx-koala/src/folder-page";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
 import { MenuRoutingModule } from "./menu.routing.module";

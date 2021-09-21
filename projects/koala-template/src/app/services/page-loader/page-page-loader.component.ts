@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { PageAbstract } from "../../shared/abstract/page.abstract";
-import { KoalaLoaderService } from "../../../../../ngx-koala/src/lib/shared/services/loader/koala.loader.service";
+import { KoalaLoaderService } from "../../../../../ngx-koala/src/core";
 
 @Component({
   templateUrl: 'page-page-loader.component.html'

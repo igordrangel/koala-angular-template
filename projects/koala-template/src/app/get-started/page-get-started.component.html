@@ -5,7 +5,7 @@
       <ol>
         <li>ng new [project-name]</li>
         <li>ng add @angular/material</li>
-        <li>npm install ngx-koala</li>
+        <li>npm i @koalarx/ui</li>
       </ol>
     </div>
   </div>
@@ -28,7 +28,7 @@
   ...,
   "styles": [
     "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-    "./node_modules/ngx-koala/theme/koala.theme.css",
+    "./node_modules/@koalarx/utils/theme/koala.theme.css",
     "src/styles.css"
   ]
 &#125;</code></pre>
@@ -56,7 +56,8 @@
 <span>import</span> &#123; AppRoutingModule &#125; <span>from</span> './app-routing.module';
 <span>import</span> &#123; AppComponent &#125; <span>from</span> './app.component';
 <span>import</span> &#123; BrowserAnimationsModule &#125; <span>from</span> '@angular/platform-browser/animations';
-<span>import</span> &#123; NgxKoalaModule, KoalaMenuModule &#125; <span>from</span> 'ngx-koala';
+<span>import</span> &#123; NgxKoalaModule &#125; <span>from</span> '@koalarx/ui/core';
+<span>import</span> &#123; KoalaMenuModule &#125; <span>from</span> '@koalarx/ui/menu';
 
 <span>@NgModule</span>(&#123;
   declarations: [
@@ -86,14 +87,14 @@
           </mat-expansion-panel-header>
 
           <pre><code><span>import</span> &#123; ChangeDetectionStrategy, Component &#125; <span>from</span> '@angular/core';
+<span>import</span> &#123; KoalaAlertService &#125; <span>from</span> '@koalarx/ui/alert';
+<span>import</span> &#123; KoalaDynamicComponent &#125; <span>from</span> '@koalarx/ui/dynamic-component';
+<span>import</span> &#123; KoalaMenuService, KoalaMenuModuleInterface &#125; <span>from</span> '@koalarx/ui/menu';
 <span>import</span> &#123;
+  KoalaPagePalletColorsInterface,
   KoalaUserMenuOptionsInterface,
-  KoalaNotificationInterface,
-  KoalaMenuModuleInterface,
-  KoalaAlertService,
-  KoalaDynamicComponent, KoalaMenuService
-&#125; <span>from</span> 'ngx-koala';
-<span>import</span> &#123; KoalaPagePalletColorsInterface &#125; <span>from</span> 'ngx-koala/lib/shared/components/page/koala-page-pallet-colors.interface';
+  KoalaNotificationInterface
+&#125; <span>from</span> '@koalarx/ui/page';
 <span>import</span> &#123; BehaviorSubject &#125; <span>from</span> 'rxjs';
 <span>import</span> &#123; ThemeHelper &#125; <span>from</span> './shared/common/helpers/theme.helper';
 <span>import</span> &#123; UserService &#125; <span>from</span> './shared/services/pne/user/user.service';
@@ -209,7 +210,7 @@
 <span>import</span> &#123; PageStatusNfComponent &#125;&#125; <span>from</span> './page.status-nf.component';
 <span>import</span> &#123; CommonModule &#125;&#125; <span>from</span> '@angular/common';
 <span>import</span> &#123; ErrorsModule &#125;&#125; <span>from</span> '../../../shared/components/page-errors/errors.module';
-<span>import</span> &#123; KoalaFolderPageModule &#125;&#125; <span>from</span> 'ngx-koala';
+<span>import</span> &#123; KoalaFolderPageModule &#125;&#125; <span>from</span> '@koalarx/ui/folder-page';
 <span>import</span> &#123; StatusNfRoutingModule &#125;&#125; <span>from</span> './status-nf.routing.module';
 
 <span>@NgModule</span>(&#123;

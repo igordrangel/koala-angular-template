@@ -57,12 +57,10 @@
 <span>import</span> &#123; EmptyListComponent &#125; <span>from</span> "./empty-list/empty-list.component";
 <span>import</span> &#123; ErrorListComponent &#125; <span>from</span> "./error-list/error-list.component";
 <span>import</span> &#123; ListRoutingModule &#125; <span>from</span> "./list.routing.module";
-<span>import</span> &#123;
-  KoalaListModule,
-  KoalaIconModule,
-  KoalaButtonModule,
-  KoalaAlertModule
-&#125; <span>from</span> "ngx-koala";
+<span>import</span> &#123; KoalaListModule &#125; <span>from</span> "@koalarx/ui/list";
+<span>import</span> &#123; KoalaIconModule &#125; <span>from</span> "@koalarx/ui/icon";
+<span>import</span> &#123; KoalaButtonModule &#125; <span>from</span> "@koalarx/ui/button";
+<span>import</span> &#123; KoalaAlertModule &#125; <span>from</span> "@koalarx/ui/alert";
 
 <span>@NgModule</span>(&#123;
   exports: [
@@ -96,9 +94,9 @@
 
         <pre><code><span>import</span> &#123; Injectable &#125; <span>from</span> "@angular/core";
 <span>import</span> &#123; Observable &#125; <span>from</span> "rxjs";
-<span>import</span> &#123; koala &#125; <span>from</span> "koala-utils";
+<span>import</span> &#123; koala &#125; <span>from</span> "@koalarx/utils";
 <span>import</span> &#123; ListItemInterface &#125; <span>from</span> "./list-item.interface";
-<span>import</span> &#123; KoalaListFormFilterInterface &#125; <span>from</span> "ngx-koala";
+<span>import</span> &#123; KoalaListFormFilterInterface &#125; <span>from</span> "@koalarx/ui/list";
 
 <span>@Injectable</span>(&#123;providedIn: "any"&#125;)
 <span>export class</span> ListService &#123;
@@ -140,18 +138,15 @@
 <span>import</span> &#123; FormGroup &#125; <span>from</span> "@angular/forms";
 <span>import</span> &#123; SelectionModel &#125; <span>from</span> "@angular/cdk/collections";
 <span>import</span> &#123; ListService &#125; <span>from</span> "./list.service";
-<span>import</span> &#123;
-  KoalaListItemInterface,
-  KoalaListFilterInterface,
-  KoalaListItemMenuOptionInterface,
-  KoalaListFormFilterInterface,
-  DynamicFormTypeFieldEnum
-  KoalaDynamicComponent,
-  KoalaXlsxService
-&#125; <span>from</span> "ngx-koala";
+
+<span>import</span> &#123; KoalaListService, KoalaListConfigInterface &#125; <span>from</span> "@koalarx/ui/list";
+<span>import</span> &#123; KoalaDynamicFormService &#125; <span>from</span> "@koalarx/ui/form";
+<span>import</span> &#123; KoalaXlsxService &#125; <span>from</span> "@koalarx/ui/core";
+<span>import</span> &#123; KoalaDynamicComponent &#125; <span>from</span> "@koalarx/ui/dynamic-component";
+<span>import</span> &#123; KoalaAlertService, KoalaAlertEnum &#125; from "@koalarx/ui/alert";
 <span>import</span> &#123; BehaviorSubject &#125; <span>from</span> "rxjs";
 <span>import</span> &#123; ListItemInterface &#125; <span>from</span> "./list-item.interface";
-<span>import</span> &#123; koala &#125; <span>from</span> "koala-utils";
+<span>import</span> &#123; koala &#125; <span>from</span> "@koalarx/utils";
 <span>import</span> &#123; EmptyListComponent &#125; <span>from</span> "./empty-list/empty-list.component";
 <span>import</span> &#123; ErrorListComponent &#125; <span>from</span> "./error-list/error-list.component";
 
@@ -366,7 +361,7 @@
         </mat-expansion-panel-header>
 
         <pre><code><span>import</span> &#123; Component &#125; <span>from</span> "@angular/core";
-<span>import</span> &#123; KoalaDynamicComponentComponent &#125; <span>from</span> "ngx-koala";
+<span>import</span> &#123; KoalaDynamicComponentComponent &#125; <span>from</span> "@koalarx/ui/dynamic-component";
 
 <span>@Component</span>(&#123;
   templateUrl: 'error-list.component.html',

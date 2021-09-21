@@ -1,13 +1,15 @@
 import { Component } from "@angular/core";
 import { PageAbstract } from "../../shared/abstract/page.abstract";
-import { KoalaDynamicFormService } from "../../../../../ngx-koala/src/lib/shared/services/dynamic-forms/koala.dynamic-form.service";
+import {
+  KoalaDynamicFormService,
+  DynamicFormTypeFieldEnum,
+  KoalaDynamicFormConfigInterface
+} from "../../../../../ngx-koala/src/form";
 import { ListService } from "../list/list.service";
-import { KoalaDynamicAutocompleteOptionsInterface } from "../../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-autocomplete-options.interface";
+import { KoalaDynamicAutocompleteOptionsInterface } from "../../../../../ngx-koala/src/form";
 import { Observable } from "rxjs";
-import { koala } from "koala-utils";
-import { DynamicFormTypeFieldEnum } from "../../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/enums/dynamic-form-type-field.enum";
+import { koala } from "@koalarx/utils";
 import { FormBuilder } from "@angular/forms";
-import { KoalaDynamicFormConfigInterface } from "../../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-form-config.interface";
 import { CustomSyncValidator } from "./validators/custom-sync.validator";
 import { CustomAsyncValidator } from "./validators/custom-async.validator";
 

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { koala } from "koala-utils";
+import { koala } from "@koalarx/utils";
 
 export interface ItemInterface {
   id?: number;

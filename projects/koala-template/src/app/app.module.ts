@@ -3,16 +3,16 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { KoalaFormModule } from '../../../ngx-koala/src/lib/shared/components/form/koala.form.module';
+import { KoalaFormModule } from '../../../ngx-koala/src/form';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxKoalaModule } from '../../../ngx-koala/src/lib/ngx-koala.module';
+import { NgxKoalaModule } from '../../../ngx-koala/src/core';
 import { PageLoginComponent } from './login/page-login.component';
-import { KoalaMenuModule } from '../../../ngx-koala/src/lib/shared/components/menu/koala.menu.module';
+import { KoalaMenuModule } from '../../../ngx-koala/src/menu';
 import { QuestionAvatarModule } from './shared/components/question-avatar/question-avatar.module';
 import { PageGetStartedComponent } from "./get-started/page-get-started.component";
 import { MatExpansionModule } from "@angular/material/expansion";
-import { KoalaIconModule } from "../../../ngx-koala/src/lib/shared/components/icon/koala.icon.module";
-import { KoalaButtonModule } from "../../../ngx-koala/src/lib/shared/components/button/koala.button.module";
+import { KoalaIconModule } from "../../../ngx-koala/src/icon";
+import { KoalaButtonModule } from "../../../ngx-koala/src/button";
 import { environment } from "../environments/environment";
 
 @NgModule({

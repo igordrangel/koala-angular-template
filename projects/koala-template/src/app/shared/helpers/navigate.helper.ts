@@ -1,4 +1,4 @@
-import { KoalaNavigateHistoryInterface } from "../../../../../ngx-koala/src/lib/shared/components/folder-page/koala-navigate-history.interface";
+import { KoalaNavigateHistoryInterface } from "../../../../../ngx-koala/src/folder-page/koala-navigate-history.interface";
 
 export class NavigateHelper {
 

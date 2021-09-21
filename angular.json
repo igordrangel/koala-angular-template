@@ -70,13 +70,12 @@
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
-              "tskoala-helpers",
               "lodash",
               "b64-to-blob",
               "papaparse",
               "jwt-encode",
               "jwt-decode",
-              "koala-utils"
+              "json-2-csv"
             ],
             "vendorChunk": true,
             "extractLicenses": false,

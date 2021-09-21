@@ -1,6 +1,5 @@
 import { AbstractControl } from "@angular/forms";
-import { KoalaDynamicFormValidatorResultHelper } from "../../../../../../ngx-koala/src/lib/shared/helpers/dynamic-form/koala-dynamic-form-validator-result.helper";
-import { KoalaDynamicFormConfigInterface } from "../../../../../../ngx-koala/src/lib/shared/components/form/dynamic-form/interfaces/koala.dynamic-form-config.interface";
+import { KoalaDynamicFormValidatorResultHelper, KoalaDynamicFormConfigInterface } from "../../../../../../ngx-koala/src/form";
 
 export function CustomSyncValidator(config: () => KoalaDynamicFormConfigInterface) {
   return (control: AbstractControl) => {

@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { PageAbstract } from "../../shared/abstract/page.abstract";
-import { KoalaSnackbarService } from "../../../../../ngx-koala/src/lib/shared/services/snackbar/koala.snackbar.service";
+import { KoalaSnackbarService } from "../../../../../ngx-koala/src/snackbar";
 
 @Component({
   templateUrl: 'page-snackbar.component.html'

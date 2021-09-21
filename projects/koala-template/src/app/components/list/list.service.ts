@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { koala } from "koala-utils";
+import { koala } from "@koalarx/utils";
 import { ListItemInterface } from "./list-item.interface";
-import { KoalaListFormFilterInterface } from "../../../../../ngx-koala/src/lib/shared/components/list/koala-list-form-filter.interface";
+import { KoalaListFormFilterInterface } from "../../../../../ngx-koala/src/list";
 
 @Injectable({providedIn: "any"})
 export class ListService {
