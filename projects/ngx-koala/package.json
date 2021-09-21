@@ -1,6 +1,6 @@
 {
   "name": "@koalarx/ui",
-  "version": "12.4.0",
+  "version": "12.4.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/igordrangel/koala-angular-template.git"
@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/igordrangel/koala-angular-template#readme",
   "main": "./bundles/koalarx-ui.umd.js",
-  "module": "./esm5/koalarx-ui.js",
+  "module": "./fesm2015/koalarx-ui.js",
   "es2015": "./esm2015/koalarx-ui.js",
   "typings": "./koalarx-ui.d.ts",
   "peerDependencies": {
@@ -25,7 +25,8 @@
     "@angular/core": ">=12.0.0",
     "@angular/forms": ">=12.0.0",
     "@angular/material": ">=12.0.0",
-    "@angular/cdk": ">=12.0.0"
+    "@angular/cdk": ">=12.0.0",
+    "@koalarx/utils": ">= 1.0.37"
   },
   "dependencies": {
     "tslib": "^2.0.0",

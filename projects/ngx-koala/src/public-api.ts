@@ -1,3 +1,7 @@
+/*
+ * Public API Surface of ngx-koala
+ */
+
 import "./alert";
 import "./button";
 import "./core";

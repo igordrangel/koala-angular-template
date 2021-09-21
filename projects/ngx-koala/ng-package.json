@@ -14,7 +14,9 @@
       "exceljs/dist/exceljs.min.js": "Excel",
       "file-saver": "fs",
       "ngx-mask": "ngx-mask",
-      "ngx-papaparse": "ngx-papaparse"
+      "ngx-papaparse": "ngx-papaparse",
+      "@koalarx/utils": "utils",
+      "@koalarx/utils/dist/utils/KlDelay": "KlDelay"
     }
   },
   "allowedNonPeerDependencies": [

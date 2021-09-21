@@ -1,7 +1,7 @@
 # NgxKoala
 
 ```
-npm i ngx-koala
+npm i @koalarx/ui
 ```
 
 ## Usage
