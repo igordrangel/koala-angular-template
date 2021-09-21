@@ -1,11 +1,11 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { koala } from 'koala-utils';
+import { koala } from "@koalarx/utils";
 import { Router } from "@angular/router";
 import { KoalaTokenService } from "../token/koala.token.service";
 import { KoalaOauthConfig } from "./koala.oauth.config";
-import { KlDelay } from "koala-utils/dist/utils/KlDelay";
+import { KlDelay } from "@koalarx/utils/dist/utils/KlDelay";
 
 export interface KoalaOAuth2Config {
   redirectUri: string;
