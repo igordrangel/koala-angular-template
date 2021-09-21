@@ -7,7 +7,7 @@ import { AlertRoutingModule } from "./alert.routing.module";
 import { KoalaFolderPageModule } from "../../../../../ngx-koala/src/folder-page";
 import { KoalaDialogModule } from "../../../../../ngx-koala/src/dialog";
 import { KoalaButtonModule } from "../../../../../ngx-koala/src/button";
-import { KoalaAlertModule } from "../../../../../../dist/ngx-koala/alert";
+import { KoalaAlertModule } from "../../../../../ngx-koala/src/alert";
 
 @NgModule({
   exports: [
