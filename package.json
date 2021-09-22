@@ -1,12 +1,12 @@
 {
   "name": "koala-angular-template",
-  "version": "12.4.2",
+  "version": "12.4.3",
   "description": "Template angular using Angular and Material Angular",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "node scripts/publish.js && npm run format",
-    "build-doc": "npm run build && ng build koala-template --configuration production --build-optimizer",
+    "build-doc": "ng build koala-template --configuration production --build-optimizer",
     "format": "prettier --write \"dist/package.json\"",
     "test": "ng test",
     "lint": "ng lint",

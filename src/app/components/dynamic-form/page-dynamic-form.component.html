@@ -13,25 +13,6 @@
 
           <mat-expansion-panel expanded>
             <mat-expansion-panel-header>
-              <mat-panel-title>page-dynamic-form.component.html</mat-panel-title>
-              <mat-panel-description>
-                <mat-icon>code</mat-icon>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-
-            <form>
-              <koala-dynamic-form
-                [form]="config.form"
-                [formConfig]="config.formConfig"
-                [setValues]="config.setValues"
-                [showFields]="config.showFields">
-              </koala-dynamic-form>
-            </form>
-
-          </mat-expansion-panel>
-
-          <mat-expansion-panel expanded>
-            <mat-expansion-panel-header>
               <mat-panel-title>page-dynamic-form.component.ts</mat-panel-title>
               <mat-panel-description>
                 <mat-icon>code</mat-icon>
@@ -225,6 +206,34 @@
     &#125;, 5000);
   &#125;
 &#125;</code></pre>
+
+          </mat-expansion-panel>
+
+          <mat-expansion-panel expanded>
+            <mat-expansion-panel-header>
+              <mat-panel-title>page-dynamic-form.component.html</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <pre><code><span>&#60;form</span> [formGroup]="config.form"<span>&#62;
+  &#60;koala-dynamic-form</span>
+    [form]="config.form"
+    [formConfig]="config.formConfig"
+    [setValues]="config.setValues"
+    [showFields]="config.showFields<span>"&#62;
+  &#60;/koala-dynamic-form&#62;
+&#60;/form&#62;</span></code></pre><br/><br/>
+
+            <form [formGroup]="config.form">
+              <koala-dynamic-form
+                [form]="config.form"
+                [formConfig]="config.formConfig"
+                [setValues]="config.setValues"
+                [showFields]="config.showFields">
+              </koala-dynamic-form>
+            </form>
 
           </mat-expansion-panel>
 

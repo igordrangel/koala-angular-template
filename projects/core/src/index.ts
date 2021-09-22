@@ -27,6 +27,13 @@ export * from './lib/page/page.component';
 //#region [KOALA API REQUESTER]
 export * from './lib/services/api-requester/koala.api-requester.service';
 export * from './lib/services/api-requester/koala.api-requester.base';
+export * from './lib/services/api-requester/factory/koala.response.factory';
+export * from './lib/services/api-requester/helpers/error/koala.client.error';
+export * from './lib/services/api-requester/helpers/error/koala.errors.helper';
+export * from './lib/services/api-requester/helpers/error/koala.not-found.error';
+export * from './lib/services/api-requester/helpers/error/koala.success.error';
+export * from './lib/services/api-requester/helpers/error/koala.unhautorized.error';
+export * from './lib/services/api-requester/helpers/service/koala.request-header.helper';
 //#endregion
 
 //#region [KOALA CSV]

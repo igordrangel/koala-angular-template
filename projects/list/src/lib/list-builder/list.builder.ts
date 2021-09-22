@@ -14,7 +14,7 @@ export class ListBuilder<DataType> {
   private config = {} as KoalaListConfigInterface;
 
   public service(
-    service: (filter: BehaviorSubject<KoalaListFormFilterInterface>|null) => Observable<any> | Promise<any>,
+    service: (filter: BehaviorSubject<KoalaListFormFilterInterface>) => Observable<any> | Promise<any>,
     type: 'all' | 'onDemand' = "all",
     resultIndexName?: string,
     qtdResultIndexName?: string

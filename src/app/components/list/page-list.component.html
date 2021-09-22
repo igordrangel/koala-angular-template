@@ -7,40 +7,6 @@
   [navigateHistory]="navigationHistory">
 
   <div content>
-    <koala-list [config]="config">
-
-      <nav itemsSelectList>
-        <koala-button
-          [koalaIcon]="true"
-          (click)="delete()"
-          backgroundColor="transparent"
-          color="#EF5350"
-          icon="trash"
-          koalaIconSize="18"
-          tooltip="Delete Selected">
-        </koala-button>
-      </nav>
-
-      <nav itemsList>
-        <koala-button
-          (click)="downloadList()"
-          [koalaIcon]="true"
-          backgroundColor="transparent"
-          color="#616161"
-          icon="excel"
-          tooltip="Download List (XLSX)">
-        </koala-button>
-        <koala-button
-          (click)="config.reload.next(true)"
-          backgroundColor="transparent"
-          color="#fafafa"
-          icon="refresh"
-          tooltip="Reload List">
-        </koala-button>
-      </nav>
-
-    </koala-list>
-
     <mat-accordion class="d-block mt-15 p-20" multi>
 
       <mat-expansion-panel expanded>
@@ -411,6 +377,40 @@
       </mat-expansion-panel>
 
     </mat-accordion>
+
+    <koala-list [config]="config">
+
+      <nav itemsSelectList>
+        <koala-button
+          [koalaIcon]="true"
+          (click)="delete()"
+          backgroundColor="transparent"
+          color="#EF5350"
+          icon="trash"
+          koalaIconSize="18"
+          tooltip="Delete Selected">
+        </koala-button>
+      </nav>
+
+      <nav itemsList>
+        <koala-button
+          (click)="downloadList()"
+          [koalaIcon]="true"
+          backgroundColor="transparent"
+          color="#616161"
+          icon="excel"
+          tooltip="Download List (XLSX)">
+        </koala-button>
+        <koala-button
+          (click)="config.reload.next(true)"
+          backgroundColor="transparent"
+          color="#fafafa"
+          icon="refresh"
+          tooltip="Reload List">
+        </koala-button>
+      </nav>
+
+    </koala-list>
   </div>
 
 </koala-folder-page>
