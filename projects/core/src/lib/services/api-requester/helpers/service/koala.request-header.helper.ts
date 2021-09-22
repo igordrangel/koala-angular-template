@@ -1,6 +1,6 @@
 import { koala } from "@koalarx/utils";
 import { HttpHeaders } from "@angular/common/http";
-import { KoalaOauthConfig } from "../../../openid/koala.oauth.config";
+import { KoalaOauthConfig } from "@koalarx/ui/core";
 
 export class KoalaRequestHeaderHelper {
 
