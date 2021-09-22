@@ -22,7 +22,7 @@ jobs:
           node-version: 12
           registry-url: https://registry.npmjs.org/
       - run: |
-          cd ./dist/ngx-koala
+          cd ./dist
           npm publish --access public --ignore-scripts
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
