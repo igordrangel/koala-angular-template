@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "node scripts/publish.js && npm run format",
-    "build-doc": "ng build koala-template --configuration production --build-optimizer",
+    "build-doc": "npm run build && ng build koala-template --configuration production --build-optimizer",
     "format": "prettier --write \"dist/package.json\"",
     "test": "ng test",
     "lint": "ng lint",
