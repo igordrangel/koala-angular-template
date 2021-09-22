@@ -31,9 +31,8 @@ function writeLine(msg, color = 37) {
 }
 
 for (const [index, lib] of libs.entries()) {
-  writeLine(`Building package ${lib}...`);
+  writeLine(`[${index + 1} of ${libs.length}] Building package ${lib}...`);
   execSync(`ng build ${lib} --configuration production`, {stdio: 'ignore'});
-  writeLine(`[${index + 1} of ${libs.length}] ${lib}\n`, 32);
 }
 
 fs.writeFileSync('dist/package.json', JSON.stringify({
@@ -79,4 +78,4 @@ fs.writeFileSync('dist/package.json', JSON.stringify({
   }
 }), 'utf8');
 
-writeLine('');
+writeLine('Build completed');

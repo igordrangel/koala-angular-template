@@ -4,7 +4,7 @@ import { KoalaNotFoundError } from "../helpers/error/koala.not-found.error";
 import { KoalaClientError } from "../helpers/error/koala.client.error";
 import { KoalaUnhautorizedError } from "../helpers/error/koala.unhautorized.error";
 import { KoalaSuccessError } from "../helpers/error/koala.success.error";
-import { KoalaLanguageHelper } from "@koalarx/ui/core";
+import { KoalaLanguageHelper } from "../../../page/koala-language.helper";
 
 // @dynamic
 export class KoalaResponseFactory {

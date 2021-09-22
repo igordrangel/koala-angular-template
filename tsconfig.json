@@ -18,45 +18,59 @@
     ],
     "paths": {
       "@koalarx/ui/alert": [
+        "dist/alert",
         "projects/alert/src"
       ],
       "@koalarx/ui/button": [
+        "dist/button",
         "projects/button/src"
       ],
       "@koalarx/ui/core": [
+        "dist/core",
         "projects/core/src"
       ],
       "@koalarx/ui/dialog": [
+        "dist/dialog",
         "projects/dialog/src"
       ],
       "@koalarx/ui/dynamic-component": [
+        "dist/dynamic-component",
         "projects/dynamic-component/src"
       ],
       "@koalarx/ui/file-button": [
+        "dist/file-button",
         "projects/file-button/src"
       ],
       "@koalarx/ui/folder-page": [
+        "dist/folder-page",
         "projects/folder-page/src"
       ],
       "@koalarx/ui/form": [
+        "dist/form",
         "projects/form/src"
       ],
       "@koalarx/ui/icon": [
+        "dist/icon",
         "projects/icon/src"
       ],
       "@koalarx/ui/icons-animated": [
+        "dist/icons-animated",
         "projects/icons-animated/src"
       ],
       "@koalarx/ui/list": [
+        "dist/list",
         "projects/list/src"
       ],
       "@koalarx/ui/menu": [
+        "dist/menu",
         "projects/menu/src"
       ],
       "@koalarx/ui/question": [
+        "dist/question",
         "projects/question/src"
       ],
       "@koalarx/ui/snackbar": [
+        "dist/snackbar",
         "projects/snackbar/src"
       ]
     }
