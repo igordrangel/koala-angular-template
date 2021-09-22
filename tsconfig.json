@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "rootDir": ".",
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
@@ -16,14 +17,57 @@
       "dom"
     ],
     "paths": {
-      "@koalarx/ui": [
-        "dist/ngx-koala/*",
-        "dist/ngx-koala"
+      "@koalarx/ui/alert": [
+        "dist/alert"
+      ],
+      "@koalarx/ui/button": [
+        "dist/button"
+      ],
+      "@koalarx/ui/core": [
+        "dist/core"
+      ],
+      "@koalarx/ui/dialog": [
+        "dist/dialog"
+      ],
+      "@koalarx/ui/dynamic-component": [
+        "dist/dynamic-component"
+      ],
+      "@koalarx/ui/file-button": [
+        "dist/file-button"
+      ],
+      "@koalarx/ui/folder-page": [
+        "dist/folder-page"
+      ],
+      "@koalarx/ui/form": [
+        "dist/form"
+      ],
+      "@koalarx/ui/icon": [
+        "dist/icon"
+      ],
+      "@koalarx/ui/icons-animated": [
+        "dist/icons-animated"
+      ],
+      "@koalarx/ui/menu": [
+        "dist/menu"
+      ],
+      "@koalarx/ui/question": [
+        "dist/question"
+      ],
+      "@koalarx/ui/snackbar": [
+        "dist/snackbar"
       ]
     }
   },
+  "references": [
+    { "path": "../" }
+  ],
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "scripts"
+  ]
 }

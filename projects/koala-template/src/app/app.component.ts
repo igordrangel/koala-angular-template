@@ -1,14 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { KoalaPagePalletColorsInterface } from '../../../ngx-koala/src/core/page/koala-page-pallet-colors.interface';
+import { KoalaPagePalletColorsInterface } from '../../../core/src/lib/page/koala-page-pallet-colors.interface';
 import { KoalaTheme } from "./shared/helpers/theme";
 import { KoalaMenuModuleInterface } from "../../../ngx-koala/src/menu";
 import { BehaviorSubject } from "rxjs";
-
-declare namespace NodeJS {
-  interface TypedArray {
-
-  }
-}
 
 @Component({
   selector: 'app-root',

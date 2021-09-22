@@ -1,0 +1,11 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/dialog",
+  "lib": {
+    "entryFile": "src/index.ts",
+    "umdModuleIds": {
+      "ngx-device-detector": "i2",
+      "@koalarx/utils": "utils"
+    }
+  }
+}

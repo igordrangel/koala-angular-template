@@ -3,46 +3,6 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-koala": {
-      "projectType": "library",
-      "root": "projects/ngx-koala",
-      "sourceRoot": "projects/ngx-koala/src",
-      "prefix": "koala",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "tsConfig": "projects/ngx-koala/tsconfig.lib.json",
-            "project": "projects/ngx-koala/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/ngx-koala/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/ngx-koala/src/test.ts",
-            "tsConfig": "projects/ngx-koala/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-koala/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ngx-koala/tsconfig.lib.json",
-              "projects/ngx-koala/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
     "koala-template": {
       "projectType": "application",
       "schematics": {},
@@ -175,7 +135,440 @@
           }
         }
       }
+    },
+    "alert": {
+      "projectType": "library",
+      "root": "projects/alert",
+      "sourceRoot": "projects/alert/src",
+      "prefix": "koalaui",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/alert/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/alert/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/alert/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/alert/src/test.ts",
+            "tsConfig": "projects/alert/tsconfig.spec.json",
+            "karmaConfig": "projects/alert/karma.conf.js"
+          }
+        }
+      }
+    },
+    "button": {
+      "projectType": "library",
+      "root": "projects/button",
+      "sourceRoot": "projects/button/src",
+      "prefix": "koalaui",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/button/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/button/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/button/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/button/src/test.ts",
+            "tsConfig": "projects/button/tsconfig.spec.json",
+            "karmaConfig": "projects/button/karma.conf.js"
+          }
+        }
+      }
+    },
+    "core": {
+      "projectType": "library",
+      "root": "projects/core",
+      "sourceRoot": "projects/core/src",
+      "prefix": "koalaui",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/core/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/core/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/core/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/core/src/test.ts",
+            "tsConfig": "projects/core/tsconfig.spec.json",
+            "karmaConfig": "projects/core/karma.conf.js"
+          }
+        }
+      }
+    },
+    "dialog": {
+      "projectType": "library",
+      "root": "projects/dialog",
+      "sourceRoot": "projects/dialog/src",
+      "prefix": "koalaui",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/dialog/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/dialog/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/dialog/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/dialog/src/test.ts",
+            "tsConfig": "projects/dialog/tsconfig.spec.json",
+            "karmaConfig": "projects/dialog/karma.conf.js"
+          }
+        }
+      }
+    },
+    "dynamic-component": {
+      "projectType": "library",
+      "root": "projects/dynamic-component",
+      "sourceRoot": "projects/dynamic-component/src",
+      "prefix": "koalaui",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/dynamic-component/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/dynamic-component/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/dynamic-component/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/dynamic-component/src/test.ts",
+            "tsConfig": "projects/dynamic-component/tsconfig.spec.json",
+            "karmaConfig": "projects/dynamic-component/karma.conf.js"
+          }
+        }
+      }
+    },
+    "file-button": {
+      "projectType": "library",
+      "root": "projects/file-button",
+      "sourceRoot": "projects/file-button/src",
+      "prefix": "koalaui",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/file-button/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/file-button/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/file-button/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/file-button/src/test.ts",
+            "tsConfig": "projects/file-button/tsconfig.spec.json",
+            "karmaConfig": "projects/file-button/karma.conf.js"
+          }
+        }
+      }
+    },
+    "folder-page": {
+      "projectType": "library",
+      "root": "projects/folder-page",
+      "sourceRoot": "projects/folder-page/src",
+      "prefix": "koalaui",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/folder-page/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/folder-page/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/folder-page/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/folder-page/src/test.ts",
+            "tsConfig": "projects/folder-page/tsconfig.spec.json",
+            "karmaConfig": "projects/folder-page/karma.conf.js"
+          }
+        }
+      }
+    },
+    "form": {
+      "projectType": "library",
+      "root": "projects/form",
+      "sourceRoot": "projects/form/src",
+      "prefix": "koalaui",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/form/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/form/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/form/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/form/src/test.ts",
+            "tsConfig": "projects/form/tsconfig.spec.json",
+            "karmaConfig": "projects/form/karma.conf.js"
+          }
+        }
+      }
+    },
+    "icon": {
+      "projectType": "library",
+      "root": "projects/icon",
+      "sourceRoot": "projects/icon/src",
+      "prefix": "koalaui",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/icon/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/icon/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/icon/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/icon/src/test.ts",
+            "tsConfig": "projects/icon/tsconfig.spec.json",
+            "karmaConfig": "projects/icon/karma.conf.js"
+          }
+        }
+      }
+    },
+    "icons-animated": {
+      "projectType": "library",
+      "root": "projects/icons-animated",
+      "sourceRoot": "projects/icons-animated/src",
+      "prefix": "koalaui",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/icons-animated/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/icons-animated/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/icons-animated/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/icons-animated/src/test.ts",
+            "tsConfig": "projects/icons-animated/tsconfig.spec.json",
+            "karmaConfig": "projects/icons-animated/karma.conf.js"
+          }
+        }
+      }
+    },
+    "list": {
+      "projectType": "library",
+      "root": "projects/list",
+      "sourceRoot": "projects/list/src",
+      "prefix": "koalaui",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/list/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/list/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/list/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/list/src/test.ts",
+            "tsConfig": "projects/list/tsconfig.spec.json",
+            "karmaConfig": "projects/list/karma.conf.js"
+          }
+        }
+      }
+    },
+    "menu": {
+      "projectType": "library",
+      "root": "projects/menu",
+      "sourceRoot": "projects/menu/src",
+      "prefix": "koalaui",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/menu/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/menu/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/menu/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/menu/src/test.ts",
+            "tsConfig": "projects/menu/tsconfig.spec.json",
+            "karmaConfig": "projects/menu/karma.conf.js"
+          }
+        }
+      }
+    },
+    "question": {
+      "projectType": "library",
+      "root": "projects/question",
+      "sourceRoot": "projects/question/src",
+      "prefix": "koalaui",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/question/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/question/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/question/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/question/src/test.ts",
+            "tsConfig": "projects/question/tsconfig.spec.json",
+            "karmaConfig": "projects/question/karma.conf.js"
+          }
+        }
+      }
+    },
+    "snackbar": {
+      "projectType": "library",
+      "root": "projects/snackbar",
+      "sourceRoot": "projects/snackbar/src",
+      "prefix": "koalaui",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/snackbar/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/snackbar/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/snackbar/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/snackbar/src/test.ts",
+            "tsConfig": "projects/snackbar/tsconfig.spec.json",
+            "karmaConfig": "projects/snackbar/karma.conf.js"
+          }
+        }
+      }
     }
-  },
-  "defaultProject": "ngx-koala"
+  }
 }

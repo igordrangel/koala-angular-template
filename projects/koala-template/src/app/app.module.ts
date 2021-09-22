@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { KoalaFormModule } from '../../../ngx-koala/src/form';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxKoalaModule } from '../../../ngx-koala/src/core';
+import { NgxKoalaModule } from '@koalarx/ui/core';
 import { PageLoginComponent } from './login/page-login.component';
 import { KoalaMenuModule } from '../../../ngx-koala/src/menu';
 import { QuestionAvatarModule } from './shared/components/question-avatar/question-avatar.module';
