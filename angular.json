@@ -6,27 +6,27 @@
     "koala-template": {
       "projectType": "application",
       "schematics": {},
-      "root": "projects/koala-template",
-      "sourceRoot": "projects/koala-template/src",
+      "root": "src",
+      "sourceRoot": "src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/koala-template",
-            "index": "projects/koala-template/src/index.html",
-            "main": "projects/koala-template/src/main.ts",
-            "polyfills": "projects/koala-template/src/polyfills.ts",
-            "tsConfig": "projects/koala-template/tsconfig.app.json",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
             "assets": [
-              "projects/koala-template/src/favicon.ico",
-              "projects/koala-template/src/assets",
-              "projects/koala-template/src/.well-known"
+              "src/favicon.ico",
+              "src/assets",
+              ".well-known"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "projects/ngx-koala/theme/koala.theme.css",
-              "projects/koala-template/src/styles.css"
+              "dist/core/lib/theme/koala.theme.css",
+              "src/styles.css"
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
@@ -48,8 +48,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "projects/koala-template/src/environments/environment.ts",
-                  "with": "projects/koala-template/src/environments/environment.prod.ts"
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -95,16 +95,15 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/koala-template/src/test.ts",
-            "polyfills": "projects/koala-template/src/polyfills.ts",
-            "tsConfig": "projects/koala-template/tsconfig.spec.json",
-            "karmaConfig": "projects/koala-template/karma.conf.js",
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
             "assets": [
-              "projects/koala-template/src/favicon.ico",
-              "projects/koala-template/src/assets"
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
-              "projects/koala-template/src/styles.css"
+              "src/styles.css"
             ],
             "scripts": []
           }
@@ -113,9 +112,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/koala-template/tsconfig.app.json",
-              "projects/koala-template/tsconfig.spec.json",
-              "projects/koala-template/e2e/tsconfig.json"
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -125,7 +124,7 @@
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "projects/koala-template/e2e/protractor.conf.js",
+            "protractorConfig": "e2e/protractor.conf.js",
             "devServerTarget": "koala-template:serve"
           },
           "configurations": {

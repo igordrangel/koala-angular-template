@@ -1,4 +1,4 @@
-import { KoalaPagePalletColorsInterface } from "../../../../../core/src/lib/page/koala-page-pallet-colors.interface";
+import { KoalaPagePalletColorsInterface } from "../../../../projects/core/src/lib/page/koala-page-pallet-colors.interface";
 
 export const KoalaThemeColors = {
   primary: '#1b0524',

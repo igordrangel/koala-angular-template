@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { KoalaNavigateHistoryInterface } from "../../../../../../folder-page/src/lib/koala-navigate-history.interface";
+import { KoalaNavigateHistoryInterface } from "../../../../../projects/folder-page/src/lib/koala-navigate-history.interface";
 import { KoalaDialogService } from "../../../../../../ngx-koala/src/dialog";
 import { DialogFormItemComponent } from "./dialog/dialog-form-item.component";
 import { EmptyListComponent } from "../../../components/list/empty-list/empty-list.component";

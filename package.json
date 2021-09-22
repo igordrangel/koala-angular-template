@@ -4,7 +4,7 @@
   "description": "Template angular using Angular and Material Angular",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve koala-template",
     "build": "node scripts/publish.js && npm run format",
     "build-doc": "ng build koala-template --configuration production --build-optimizer",
     "format": "prettier --write \"dist/package.json\"",
