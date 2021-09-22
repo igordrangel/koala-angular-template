@@ -3,17 +3,17 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { KoalaFormModule } from '../../../ngx-koala/src/form';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxKoalaModule } from '@koalarx/ui/core';
 import { PageLoginComponent } from './login/page-login.component';
-import { KoalaMenuModule } from '../../../ngx-koala/src/menu';
 import { QuestionAvatarModule } from './shared/components/question-avatar/question-avatar.module';
 import { PageGetStartedComponent } from "./get-started/page-get-started.component";
 import { MatExpansionModule } from "@angular/material/expansion";
-import { KoalaIconModule } from "../../../ngx-koala/src/icon";
-import { KoalaButtonModule } from "../../../ngx-koala/src/button";
 import { environment } from "../environments/environment";
+import { KoalaFormModule } from "@koalarx/ui/form";
+import { KoalaButtonModule } from "@koalarx/ui/button";
+import { KoalaIconModule } from "@koalarx/ui/icon";
+import { KoalaMenuModule } from "@koalarx/ui/menu";
 
 @NgModule({
   declarations: [

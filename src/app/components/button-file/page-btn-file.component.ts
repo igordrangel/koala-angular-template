@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { PageAbstract } from "../../shared/abstract/page.abstract";
-import { KoalaFileInterface, KoalaBtnFileService } from "../../../../../ngx-koala/src/file-button";
+import { KoalaFileInterface, KoalaBtnFileService } from "@koalarx/ui/file-button";
 
 @Component({
   templateUrl: 'page-btn-file.component.html',

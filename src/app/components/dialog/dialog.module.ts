@@ -1,12 +1,12 @@
 import { NgModule } from "@angular/core";
 import { DialogExample, PageDialogComponent } from "./page-dialog.component";
 import { CommonModule } from "@angular/common";
-import { KoalaFolderPageModule } from "../../../../../ngx-koala/src/folder-page";
+import { KoalaFolderPageModule } from "@koalarx/ui/folder-page";
 import { DialogRoutingModule } from "./dialog.routing.module";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
-import { KoalaButtonModule } from "../../../../../ngx-koala/src/button";
-import { KoalaDialogModule } from "../../../../../ngx-koala/src/dialog";
+import { KoalaButtonModule } from "@koalarx/ui/button";
+import { KoalaDialogModule } from "@koalarx/ui/dialog";
 import { MatTabsModule } from "@angular/material/tabs";
 
 @NgModule({

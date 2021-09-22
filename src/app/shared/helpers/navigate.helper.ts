@@ -1,4 +1,4 @@
-import { KoalaNavigateHistoryInterface } from "../../../../projects/folder-page/src/lib/koala-navigate-history.interface";
+import { KoalaNavigateHistoryInterface } from "@koalarx/ui/folder-page";
 
 export class NavigateHelper {
 

@@ -47,6 +47,9 @@
       "@koalarx/ui/icons-animated": [
         "dist/icons-animated"
       ],
+      "@koalarx/ui/list": [
+        "dist/list"
+      ],
       "@koalarx/ui/menu": [
         "dist/menu"
       ],
@@ -58,9 +61,6 @@
       ]
     }
   },
-  "references": [
-    { "path": "../" }
-  ],
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true

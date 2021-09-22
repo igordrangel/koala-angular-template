@@ -1,14 +1,14 @@
 import { Component } from "@angular/core";
 import { KoalaNavigateHistoryInterface } from "../../../../../projects/folder-page/src/lib/koala-navigate-history.interface";
-import { KoalaDialogService } from "../../../../../../ngx-koala/src/dialog";
+import { KoalaDialogService } from "@koalarx/ui/dialog";
 import { DialogFormItemComponent } from "./dialog/dialog-form-item.component";
 import { EmptyListComponent } from "../../../components/list/empty-list/empty-list.component";
-import { KoalaListService, KoalaListConfigInterface } from "../../../../../../ngx-koala/src/list";
+import { KoalaListService, KoalaListConfigInterface } from "@koalarx/ui/list";
 import { SelectionModel } from "@angular/cdk/collections";
-import { KoalaXlsxService } from "../../../../../../ngx-koala/src/core";
+import { KoalaXlsxService } from "@koalarx/ui/core";
 import { ItemInterface, ItemService } from "./item.service";
-import { KoalaDynamicFormService } from "../../../../../../ngx-koala/src/form";
-import { KoalaQuestionService } from "../../../../../../ngx-koala/src/question";
+import { KoalaDynamicFormService } from "@koalarx/ui/form";
+import { KoalaQuestionService } from "@koalarx/ui/question";
 import { PageAbstract } from "../../../shared/abstract/page.abstract";
 
 @Component({

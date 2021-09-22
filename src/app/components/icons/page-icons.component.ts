@@ -2,11 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { PageAbstract } from "../../shared/abstract/page.abstract";
 import { BehaviorSubject } from "rxjs";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { KoalaDynamicFormFieldInterface } from "../../../../projects/form/src/lib/dynamic-form/interfaces/koala.dynamic-form-field.interface";
-import { DynamicFormTypeFieldEnum } from "../../../../projects/form/src/lib/dynamic-form/enums/dynamic-form-type-field.enum";
+import { KoalaDynamicFormFieldInterface, DynamicFormTypeFieldEnum } from "@koalarx/ui/form";
 import { koala } from "@koalarx/utils";
 import { KlDelay } from "@koalarx/utils/dist/utils/KlDelay";
-import { KoalaIconType } from "../../../../projects/icon/src/lib/icon.component";
+import { KoalaIconType } from "@koalarx/ui/icon";
 
 interface Icon {
   name: KoalaIconType;

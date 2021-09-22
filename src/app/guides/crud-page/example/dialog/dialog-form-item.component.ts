@@ -1,9 +1,9 @@
 import { Component, Inject } from "@angular/core";
-import { FormAbstract, KoalaRequestService } from "../../../../../../../ngx-koala/src/core";
-import { KoalaDynamicFormService, KoalaDynamicFormConfigInterface } from "../../../../../../../ngx-koala/src/form";
+import { KoalaRequestService } from "@koalarx/ui/core";
+import { FormAbstract, KoalaDynamicFormService, KoalaDynamicFormConfigInterface } from "@koalarx/ui/form";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { ItemInterface, ItemService } from "../item.service";
-import { KoalaSnackbarService } from "../../../../../../../ngx-koala/src/snackbar";
+import { KoalaSnackbarService } from "@koalarx/ui/snackbar";
 
 @Component({
   templateUrl: 'dialog-form-item.component.html'

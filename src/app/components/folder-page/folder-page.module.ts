@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { PageFolderPageComponent } from "./page-folder-page.component";
 import { CommonModule } from "@angular/common";
-import { KoalaFolderPageModule } from "../../../../../ngx-koala/src/folder-page";
+import { KoalaFolderPageModule } from "@koalarx/ui/folder-page";
 import { FolderPageRoutingModule } from "./folder-page.routing.module";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";

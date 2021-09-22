@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { KoalaDynamicComponentComponent } from "../../../../../../ngx-koala/src/dynamic-component";
+import { KoalaDynamicComponentComponent } from "@koalarx/ui/dynamic-component";
 
 @Component({
   templateUrl: 'error-list.component.html',

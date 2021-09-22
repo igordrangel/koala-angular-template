@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { PageAbstract } from "../../shared/abstract/page.abstract";
 import { BehaviorSubject } from "rxjs";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { KoalaDynamicFormFieldInterface, DynamicFormTypeFieldEnum } from "../../../../../ngx-koala/src/form";
+import { KoalaDynamicFormFieldInterface, DynamicFormTypeFieldEnum } from "@koalarx/ui/form";
 import { koala } from "@koalarx/utils";
 import { KlDelay } from "@koalarx/utils/dist/utils/KlDelay";
 

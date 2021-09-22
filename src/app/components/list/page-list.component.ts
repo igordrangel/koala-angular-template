@@ -4,11 +4,11 @@ import { ListService } from "./list.service";
 import { ListItemInterface } from "./list-item.interface";
 import { koala } from "@koalarx/utils";
 import { EmptyListComponent } from "./empty-list/empty-list.component";
-import { KoalaXlsxService } from "../../../../../ngx-koala/src/core";
-import { KoalaListService, KoalaListConfigInterface } from "../../../../../ngx-koala/src/list";
+import { KoalaXlsxService } from "@koalarx/ui/core";
+import { KoalaListService, KoalaListConfigInterface } from "@koalarx/ui/list";
 import { SelectionModel } from "@angular/cdk/collections";
-import { KoalaAlertService, KoalaAlertEnum } from "../../../../../ngx-koala/src/alert";
-import { KoalaDynamicFormService } from "../../../../../ngx-koala/src/form";
+import { KoalaAlertService, KoalaAlertEnum } from "@koalarx/ui/alert";
+import { KoalaDynamicFormService } from "@koalarx/ui/form";
 import { ErrorListComponent } from "./error-list/error-list.component";
 
 @Component({

@@ -1,16 +1,16 @@
 import { NgModule } from "@angular/core";
 import { CrudPageExampleRoutingModule } from "./crud-page-example.routing.module";
 import { CommonModule } from "@angular/common";
-import { KoalaFolderPageModule } from "../../../../../../ngx-koala/src/folder-page";
+import { KoalaFolderPageModule } from "@koalarx/ui/folder-page";
 import { CrudPageExampleComponent } from "./crud-page-example.component";
-import { KoalaButtonModule } from "../../../../../../ngx-koala/src/button";
-import { KoalaDialogModule } from "../../../../../../ngx-koala/src/dialog";
-import { KoalaAlertModule } from "../../../../../../ngx-koala/src/alert";
-import { KoalaQuestionModule } from "../../../../../../ngx-koala/src/question";
-import { KoalaListModule } from "../../../../../../ngx-koala/src/list";
+import { KoalaButtonModule } from "@koalarx/ui/button";
+import { KoalaDialogModule } from "@koalarx/ui/dialog";
 import { DialogFormItemComponent } from "./dialog/dialog-form-item.component";
-import { KoalaFormModule } from "../../../../../../ngx-koala/src/form";
-import { KoalaSnackbarModule } from "../../../../../../ngx-koala/src/snackbar";
+import { KoalaFormModule } from "@koalarx/ui/form";
+import { KoalaAlertModule } from "@koalarx/ui/alert";
+import { KoalaQuestionModule } from "@koalarx/ui/question";
+import { KoalaListModule } from "@koalarx/ui/list";
+import { KoalaSnackbarModule } from "@koalarx/ui/snackbar";
 
 @NgModule({
   exports: [

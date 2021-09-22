@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { PageAbstract } from "../../shared/abstract/page.abstract";
-import { KoalaMenuService } from "../../../../../ngx-koala/src/menu";
+import { KoalaMenuService } from "@koalarx/ui/menu";
 
 @Component({
   templateUrl: 'page-menu.component.html'

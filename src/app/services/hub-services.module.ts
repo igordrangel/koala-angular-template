@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { KoalaFolderPageModule } from "../../../../ngx-koala/src/folder-page";
+import { KoalaFolderPageModule } from "@koalarx/ui/folder-page";
 import { HubServicesRoutingModule } from "./hub-services.routing.module";
 import { MatButtonModule } from "@angular/material/button";
 

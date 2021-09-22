@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { PageAbstract } from "../../shared/abstract/page.abstract";
-import { KoalaDialogService } from "../../../../../ngx-koala/src/dialog";
+import { KoalaDialogService } from "@koalarx/ui/dialog";
 
 @Component({
   template: `

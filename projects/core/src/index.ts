@@ -16,6 +16,7 @@ export * from './lib/page/notifications/notification.component';
 export * from './lib/page/koala-language.helper';
 export * from './lib/page/koala-oauth2-config.interface';
 export * from './lib/page/koala.user-menu-options.interface';
+export * from './lib/page/koala-page-pallet-colors.interface';
 export * from './lib/page/page.component';
 //#endregion
 

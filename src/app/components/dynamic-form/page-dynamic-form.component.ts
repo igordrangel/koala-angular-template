@@ -3,10 +3,10 @@ import { PageAbstract } from "../../shared/abstract/page.abstract";
 import {
   KoalaDynamicFormService,
   DynamicFormTypeFieldEnum,
-  KoalaDynamicFormConfigInterface
-} from "../../../../../ngx-koala/src/form";
+  KoalaDynamicFormConfigInterface,
+  KoalaDynamicAutocompleteOptionsInterface
+} from "@koalarx/ui/form";
 import { ListService } from "../list/list.service";
-import { KoalaDynamicAutocompleteOptionsInterface } from "../../../../../ngx-koala/src/form";
 import { Observable } from "rxjs";
 import { koala } from "@koalarx/utils";
 import { FormBuilder } from "@angular/forms";

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { koala } from "@koalarx/utils";
 import { ListItemInterface } from "./list-item.interface";
-import { KoalaListFormFilterInterface } from "../../../../../ngx-koala/src/list";
+import { KoalaListFormFilterInterface } from "@koalarx/ui/list";
 
 @Injectable({providedIn: "any"})
 export class ListService {

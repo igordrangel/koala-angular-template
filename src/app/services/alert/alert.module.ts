@@ -4,10 +4,10 @@ import { CommonModule } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { AlertRoutingModule } from "./alert.routing.module";
-import { KoalaFolderPageModule } from "../../../../../ngx-koala/src/folder-page";
-import { KoalaDialogModule } from "../../../../../ngx-koala/src/dialog";
-import { KoalaButtonModule } from "../../../../../ngx-koala/src/button";
-import { KoalaAlertModule } from "../../../../../ngx-koala/src/alert";
+import { KoalaAlertModule } from "@koalarx/ui/alert";
+import { KoalaDialogModule } from "@koalarx/ui/dialog";
+import { KoalaButtonModule } from "@koalarx/ui/button";
+import { KoalaFolderPageModule } from "@koalarx/ui/folder-page";
 
 @NgModule({
   exports: [

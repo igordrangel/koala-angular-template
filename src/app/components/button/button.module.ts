@@ -4,8 +4,8 @@ import { CommonModule } from "@angular/common";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { ButtonRoutingModule } from "./button.routing.module";
 import { MatIconModule } from "@angular/material/icon";
-import { KoalaFolderPageModule } from "../../../../../ngx-koala/src/folder-page";
-import { KoalaButtonModule } from "../../../../../ngx-koala/src/button";
+import { KoalaFolderPageModule } from "@koalarx/ui/folder-page";
+import { KoalaButtonModule } from "@koalarx/ui/button";
 import { MatTabsModule } from "@angular/material/tabs";
 
 @NgModule({

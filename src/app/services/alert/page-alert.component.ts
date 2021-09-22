@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { PageAbstract } from "../../shared/abstract/page.abstract";
-import { KoalaAlertService, KoalaAlertEnum } from "../../../../../ngx-koala/src/alert";
+import { KoalaAlertEnum, KoalaAlertService } from "@koalarx/ui/alert";
 
 @Component({
   templateUrl: 'page-alert.component.html'

@@ -1,4 +1,4 @@
-import { KoalaDynamicFormConfigInterface, KoalaDynamicFormValidatorResultHelper } from "../../../../../../ngx-koala/src/form";
+import { KoalaDynamicFormConfigInterface, KoalaDynamicFormValidatorResultHelper } from "@koalarx/ui/form";
 import { KlDelay } from "@koalarx/utils/dist/utils/KlDelay";
 import { AbstractControl } from "@angular/forms";
 

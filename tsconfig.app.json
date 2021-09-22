@@ -7,7 +7,7 @@
     ]
   },
   "files": [
-    "src/koala-template/src/main.ts",
+    "src/main.ts",
     "src/polyfills.ts"
   ],
   "include": [

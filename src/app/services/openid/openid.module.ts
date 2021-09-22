@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { KoalaFolderPageModule } from "../../../../../ngx-koala/src/folder-page";
+import { KoalaFolderPageModule } from "@koalarx/ui/folder-page";
 import { PageOpenidComponent } from "./page-openid.component";
 import { OpenidRoutingModule } from "./openid.routing.module";
 import { MatExpansionModule } from "@angular/material/expansion";
