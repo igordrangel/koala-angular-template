@@ -12,7 +12,7 @@ import { KoalaLanguageHelper } from "@koalarx/ui/core";
 export class BtnSubmitComponent implements OnInit, OnChanges {
   @Input() fg: FormGroup;
   @Input() color: ThemePalette = 'primary';
-  @Input() btnLabel = KoalaLanguageHelper.getBtnLabel();
+  @Input() btnLabel: string = KoalaLanguageHelper.getBtnLabel();
   @Input() btnSubmitDisabled = false;
   @Input() loader: BehaviorSubject<boolean>;
   @Input() iconButton: boolean;
