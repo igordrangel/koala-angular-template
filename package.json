@@ -1,6 +1,6 @@
 {
   "name": "koala-angular-template",
-  "version": "12.4.4",
+  "version": "12.4.5",
   "description": "Template angular using Angular and Material Angular",
   "scripts": {
     "ng": "ng",
@@ -14,7 +14,7 @@
     "postinstall": "ngcc",
     "version": "git add -A projects",
     "postversion": "git push && git push --tags",
-    "deploy": "npm version patch && cd projects/ngx-koala && npm version patch"
+    "deploy": "npm version patch"
   },
   "private": false,
   "repository": {

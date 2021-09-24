@@ -77,5 +77,6 @@ fs.writeFileSync('dist/package.json', JSON.stringify({
     "rxjs": "~6.6.3"
   }
 }), 'utf8');
+fs.writeFileSync('dist/README.md', fs.readFileSync('README.md').toString(), 'utf8');
 
 writeLine('Build completed');
