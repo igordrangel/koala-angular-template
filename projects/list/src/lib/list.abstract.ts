@@ -8,7 +8,7 @@ import { debounceTime, first, map, startWith, switchMap } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { KoalaListFormFilterInterface } from './koala-list-form-filter.interface';
 import { KoalaDynamicComponent } from "@koalarx/ui/dynamic-component";
-import { KlDelay } from "@koalarx/utils/dist/utils/KlDelay";
+import { delay } from "@koalarx/utils/operators/delay";
 import { KoalaListConfigInterface } from "./koala.list-config.interface";
 
 export type KoalaListPageSize = 10 | 20 | 30 | 50 | 100;
@@ -95,7 +95,7 @@ export abstract class ListAbstract extends FormAbstract {
     let stop = false;
     do {
       tentativas++;
-      await KlDelay.waitFor(400);
+      await delay(400);
       if (this.sort || this.emptyListComponent) {
         this.prepareSearch().then();
         if (this.emptyListComponent) stop = true;
@@ -155,7 +155,7 @@ export abstract class ListAbstract extends FormAbstract {
 
     if (this.emptyListComponent) {
       do {
-        await KlDelay.waitFor(301);
+        await delay(301);
         if (this.sort) {
           if (this.typeRequest === "onDemand") {
             this.sort.sortChange.subscribe(() => {

@@ -16,7 +16,7 @@ import { KoalaDynamicFormMoreItensShowFieldConfigInterface } from './interfaces/
 import { ThemePalette } from '@angular/material/core';
 import { KoalaDynamicFormAutocompleteMultipleConfigInterface } from './interfaces/koala.dynamic-form-autocomplete-multiple-config.interface';
 import { KoalaDynamicFormConfigInterface } from './interfaces/koala.dynamic-form-config.interface';
-import { KlDelay } from "@koalarx/utils/dist/utils/KlDelay";
+import { delay } from "@koalarx/utils/operators/delay";
 import { koala } from "@koalarx/utils";
 import { DateMinValidator } from "./validators/date-min.validator";
 import { DateMaxValidator } from "./validators/date-max.validator";
@@ -554,7 +554,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
                                                  );
             const dynamicFormConfigSubject = controlDynamicFormConfig.get('dynamicFormConfig').value as BehaviorSubject<KoalaDynamicFormConfigInterface>;
             dynamicFormConfigSubject.next(null);
-            await KlDelay.waitFor(1);
+            await delay(1);
             dynamicFormConfigSubject.next(config.dynamicFormConfig(value));
           }
           this.dynamicFormService.showFields(

@@ -11,6 +11,7 @@ import { koala } from "@koalarx/utils";
 import { DateMinValidator } from "./validators/date-min.validator";
 import { DateMaxValidator } from "./validators/date-max.validator";
 import { DeviceDetectorService } from "ngx-device-detector";
+import { unmaskCoin } from "@koalarx/utils/operators/string";
 
 export type KoalaDynamicFormValidatorType = 'required' | 'min' | 'max';
 
@@ -123,7 +124,7 @@ export class KoalaDynamicFormService {
           control.get('type').value === DynamicFormTypeFieldEnum.coin &&
           typeof value === "string"
         ) {
-          value = koala(value).string().unmaskCoin().getValue();
+          value = unmaskCoin(value);
         }
         data[control.get('name').value] = value;
       }

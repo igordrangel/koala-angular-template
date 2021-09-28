@@ -8,7 +8,8 @@
     <form (ngSubmit)="submit()" [formGroup]="config.form">
       <koala-dynamic-form
         [form]="config.form"
-        [formConfig]="config.formConfig">
+        [formConfig]="config.formConfig"
+        [setValues]="config.setValues">
       </koala-dynamic-form>
       <div align="end" class="btn-group mt-15">
         <koala-button

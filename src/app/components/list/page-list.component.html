@@ -174,7 +174,7 @@
                                 label: 'Value',
                                 columnDef: 'value',
                                 sortHeader: 'value',
-                                itemNameProperty: item => koala(item.qtd).number().maskCoin('US$ ').getValue(),
+                                itemNameProperty: item => `US$ $&#123;maskCoin(item.qtd)&#125;`,
                                 dblClick: item => <span>this</span>.edit(item)
                               &#125;)
                               .<span>actionList</span>(&#123;

@@ -4,7 +4,7 @@ import { BehaviorSubject } from "rxjs";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { KoalaDynamicFormFieldInterface, DynamicFormTypeFieldEnum } from "@koalarx/ui/form";
 import { koala } from "@koalarx/utils";
-import { KlDelay } from "@koalarx/utils/dist/utils/KlDelay";
+import { delay } from "@koalarx/utils/operators/delay";
 import { KoalaIconType } from "@koalarx/ui/icon";
 
 interface Icon {
@@ -164,7 +164,7 @@ export class PageIconsComponent extends PageAbstract implements OnInit {
     const elMenuUsage = document.querySelector('.menu__usage') as HTMLDivElement;
     if (elMenuUsage) {
       elMenuUsage.classList.add('hide');
-      await KlDelay.waitFor(250);
+      await delay(250);
     }
     this.selectedIcon$.next(null);
     setTimeout(() => this.selectedIcon$.next(icon), 1);

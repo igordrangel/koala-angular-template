@@ -12,6 +12,7 @@ import { koala } from "@koalarx/utils";
 import { FormBuilder } from "@angular/forms";
 import { CustomSyncValidator } from "./validators/custom-sync.validator";
 import { CustomAsyncValidator } from "./validators/custom-async.validator";
+import { format } from "@koalarx/utils/operators/date";
 
 @Component({
   templateUrl: 'page-dynamic-form.component.html',
@@ -30,7 +31,7 @@ export class PageDynamicFormComponent extends PageAbstract {
                                     .field('Custom Mask', 'stringCustomMasc', 'stringWithCustomMasc').grid(3).setCustomMasc("separator.3").textHint("Uses a ngx-mask library.").generate()
                                     .field('Custom Sync Validator', 'customSyncValidator', 'text').grid(3).syncValidator([CustomSyncValidator(() => this.config)]).generate()
                                     .field('Custom Async Validator', 'customAsyncValidator', 'text').grid(3).asyncValidator([CustomAsyncValidator(() => this.config)]).generate()
-                                    .field('Competence Data Field', 'competenceDate', 'competenceDate').setValue(koala('now').date().format('MM/YYYY').getValue()).grid(3).generate()
+                                    .field('Competence Data Field', 'competenceDate', 'competenceDate').setValue(format('now', 'MM/YYYY')).grid(3).generate()
                                     .field('Text Field', 'text', "text").addClass('field-content').addFieldClass('field-input').grid(2).generate()
                                     .field('Date Field', 'date', "date").grid(2).focus().generate()
                                     .field('Datetime Field', 'datetime', "datetime").grid(2).generate()
@@ -154,7 +155,7 @@ export class PageDynamicFormComponent extends PageAbstract {
                                       moreItems: [
                                         {
                                           text: '123',
-                                          date: koala('now').date().format('YYYY-MM-DD').getValue(),
+                                          date: format('now', 'YYYY-MM-DD'),
                                           number: 6
                                         }
                                       ],
@@ -174,7 +175,7 @@ export class PageDynamicFormComponent extends PageAbstract {
         this.config.form,
         'date',
         'min',
-        koala('now').date().format('YYYY-MM-DD').getValue()
+        format('now', 'YYYY-MM-DD')
       );
     }, 5000);
   }

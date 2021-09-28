@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { KoalaDialogTemplateInterface } from './koala.dialog-template.interface';
 import { ComponentType } from '@angular/cdk/overlay';
-import { koala } from "@koalarx/utils";
 import { DeviceDetectorService } from "ngx-device-detector";
+import { randomString } from "@koalarx/utils/operators/string";
 
 export type KoalaDialogSizeType = 'auto' | 'small' | 'normal' | 'big' | 'mobile';
 
@@ -44,7 +44,7 @@ export class KoalaDialogService {
   }
 
   private dialogTemplate(data: any = null): KoalaDialogTemplateInterface {
-    let dialogElementId = "dialog-" + koala('').string().random(10, true).getValue();
+    let dialogElementId = "dialog-" + randomString(10, true);
 
     return {
       auto: {id: dialogElementId, panelClass: ['koala-dialog', 'auto'], disableClose: true, data},

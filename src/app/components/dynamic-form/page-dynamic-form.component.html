@@ -25,10 +25,11 @@
   DynamicFormTypeFieldEnum,
   KoalaDynamicFormConfigInterface
 &#125; <span>from</span> "@koalarx/ui/form";
+<span>import</span> &#123; format &#125; <span>from</span> "@koalarx/utils/operators/date";
 
 <span>function</span> CustomAsyncValidator(config: () => <span>KoalaDynamicFormConfigInterface</span>) &#123;
   <span>return async</span> (control: <span>AbstractControl</span>) => &#123;
-    <span>await KlDelay</span>.<span>waitFor</span>(2000);
+    <span>await delay</span>(2000);
     config()?.setValues.<span>next</span>([
       &#123;name: 'text', value: control.value}
     ]);
@@ -183,7 +184,7 @@
                                                             &#125;,
                                                             selectMultipleNative: [1,2],
                                                             moreItems: [
-                                                              &#123;text: '123', date: koala('now').date().format('YYYY-MM-DD').getValue(), number: 6&#125;
+                                                              &#123;text: '123', date: format('now', 'YYYY-MM-DD'), number: 6&#125;
                                                             ],
                                                             textLogs: 'teste 123'
                                                           &#125;)

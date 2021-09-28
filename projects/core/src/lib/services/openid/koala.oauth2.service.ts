@@ -5,7 +5,8 @@ import { koala } from "@koalarx/utils";
 import { Router } from "@angular/router";
 import { KoalaTokenService } from "../token/koala.token.service";
 import { KoalaOauthConfig } from "./koala.oauth.config";
-import { KlDelay } from "@koalarx/utils/dist/utils/KlDelay";
+import { delay } from "@koalarx/utils/operators/delay";
+import { randomString } from "@koalarx/utils/operators/string";
 
 export interface KoalaOAuth2Config {
   redirectUri: string;
@@ -145,7 +146,7 @@ export class KoalaOAuth2Service implements OnDestroy {
   public async initLoginFlow(name?: string) {
     if (name) {
       KoalaOauthConfig.setConfig(name);
-      await KlDelay.waitFor(1000);
+      await delay(1000);
     }
 
     this.events.next('authenticate');
@@ -264,6 +265,6 @@ export class KoalaOAuth2Service implements OnDestroy {
   private generateState() {
     this.state = localStorage.getItem(STATE_STORAGE_NAME) ?
                  localStorage.getItem(STATE_STORAGE_NAME) :
-                 koala('').string().random(30, true, true, true).getValue();
+                 randomString(30, true, true, true);
   }
 }

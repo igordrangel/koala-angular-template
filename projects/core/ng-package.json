@@ -16,7 +16,6 @@
       "ngx-mask": "ngx-mask",
       "ngx-papaparse": "ngx-papaparse",
       "@koalarx/utils": "utils",
-      "@koalarx/utils/dist/utils/KlDelay": "KlDelay",
       "@koalarx/ui/menu": "menu",
       "@koalarx/ui/alert": "alert"
     }

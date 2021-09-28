@@ -4,7 +4,7 @@ import { NavigationEnd, Router, Scroll } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { koala } from "@koalarx/utils";
 import { map, switchMap } from "rxjs/operators";
-import { KlDelay } from "@koalarx/utils/dist/utils/KlDelay";
+import { delay } from "@koalarx/utils/operators/delay";
 
 export type MenuStateType = 'open' | 'close';
 export const menuStateSubject = new BehaviorSubject<MenuStateType | null>(null);
@@ -29,7 +29,7 @@ export class MenuComponent implements OnInit {
           .events
           .pipe(switchMap(event => new Promise(async resolve => {
             while (this.optionsSubject?.getValue()?.length === 0) {
-              await KlDelay.waitFor(300);
+              await delay(300);
             }
 
             resolve(event);

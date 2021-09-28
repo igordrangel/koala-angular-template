@@ -10,6 +10,7 @@ import { SelectionModel } from "@angular/cdk/collections";
 import { KoalaAlertService, KoalaAlertEnum } from "@koalarx/ui/alert";
 import { KoalaDynamicFormService } from "@koalarx/ui/form";
 import { ErrorListComponent } from "./error-list/error-list.component";
+import { maskCoin } from "@koalarx/utils/operators/number";
 
 @Component({
   templateUrl: 'page-list.component.html'
@@ -68,7 +69,7 @@ export class PageListComponent extends PageAbstract {
                         label: 'Value',
                         columnDef: 'value',
                         sortHeader: 'value',
-                        itemNameProperty: item => koala(item.qtd).number().maskCoin('US$ ').getValue(),
+                        itemNameProperty: item => `US$ ${maskCoin(item.qtd)}`,
                         dblClick: item => this.edit(item)
                       })
                       .actionList({

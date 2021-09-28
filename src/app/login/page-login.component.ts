@@ -21,17 +21,12 @@ export class PageLoginComponent extends FormAbstract {
     super(() => this.config.form);
     this.config = dynamicFormService
       .build()
-        .field('Username', 'username', "text")
-          .appearance("outline", "auto")
-          .textHint('Inform a fake username.')
-          .focus()
-          .required()
-        .generate()
-        .field('Password', 'password', "password")
-          .appearance("outline", "auto")
-          .textHint('Inform a fake password.')
-          .required()
-        .generate()
+      .field('Username', 'username', "text").appearance("outline", "auto").textHint('Inform a fake username.').focus().required().generate()
+      .field('Password', 'password', "password").appearance("outline", "auto").textHint('Inform a fake password.').required().generate()
+      .autofill({
+        username: 'demo',
+        password: '123'
+      })
       .generate();
   }
 

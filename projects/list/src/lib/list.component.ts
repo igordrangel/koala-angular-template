@@ -8,7 +8,7 @@ import { KoalaDynamicFormService, KoalaDynamicFormConfigInterface } from '@koala
 import { KoalaListItemInterface } from './koala-list-item.interface';
 import { KoalaListFormFilterInterface } from "./koala-list-form-filter.interface";
 import { MatSort, SortDirection } from "@angular/material/sort";
-import { KlDelay } from "@koalarx/utils/dist/utils/KlDelay";
+import { delay } from "@koalarx/utils/operators/delay";
 import { koala } from "@koalarx/utils";
 import { DeviceDetectorService } from "ngx-device-detector";
 import { KoalaListConfigInterface } from "./koala.list-config.interface";
@@ -106,7 +106,7 @@ export class ListComponent extends ListAbstract implements OnInit, AfterViewInit
 
   public async filterSubmit() {
     this.showAdvancedFilter = false;
-    await KlDelay.waitFor(1);
+    await delay(1);
     let dados = (this.filterFormConfig?.main?.form ? koala(this.dynamicFormService.emitData(this.filterFormConfig?.main?.form))
       .object()
       .merge(this.filterFormConfig?.advanced?.form ? this.dynamicFormService.emitData(this.filterFormConfig?.advanced?.form) : {})
