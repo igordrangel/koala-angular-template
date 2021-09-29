@@ -158,10 +158,15 @@ export abstract class FieldBase {
     return this;
   }
 
-  public setCustomMasc(mask: string, thousandSeparator?: string, suffix?: string) {
+  public setCustomMasc(mask: string, config?: {
+    thousandSeparator?: string;
+    suffix?: string;
+    prefix?: string;
+  }) {
     this.fieldConfig.customMasc = mask;
-    this.fieldConfig.customMascThousandSeparator = thousandSeparator;
-    this.fieldConfig.customMascSuffix = suffix;
+    this.fieldConfig.customMascThousandSeparator = config?.thousandSeparator;
+    this.fieldConfig.customMascSuffix = config?.suffix;
+    this.fieldConfig.customMascPrefix = config?.prefix;
     return this;
   }
 
