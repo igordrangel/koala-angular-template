@@ -369,6 +369,8 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
       autocompleteSelectedValue: [valueSelectedAutocomplete],
       textLogs: [config?.textObs],
       customMasc: [config?.customMasc],
+      customMascThousandSeparator: [config?.customMascThousandSeparator],
+      customMascSuffix: [config?.customMascSuffix],
       value: [{value, disabled: config.disabled}, validators, config.asyncValidators]
     });
 
