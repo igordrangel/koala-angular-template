@@ -44,7 +44,7 @@ export class KoalaDialogService {
   }
 
   private dialogTemplate(data: any = null): KoalaDialogTemplateInterface {
-    let dialogElementId = "dialog-" + randomString(10, true);
+    let dialogElementId = "dialog-" + randomString(10);
 
     return {
       auto: {id: dialogElementId, panelClass: ['koala-dialog', 'auto'], disableClose: true, data},

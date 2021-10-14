@@ -265,6 +265,10 @@ export class KoalaOAuth2Service implements OnDestroy {
   private generateState() {
     this.state = localStorage.getItem(STATE_STORAGE_NAME) ?
                  localStorage.getItem(STATE_STORAGE_NAME) :
-                 randomString(30, true, true, true);
+                 randomString(30, {
+                   numbers: true,
+                   uppercase: true,
+                   lowercase: true
+                 });
   }
 }
