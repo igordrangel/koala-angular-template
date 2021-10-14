@@ -7,4 +7,8 @@ export interface KoalaListItemInterface<DataType> {
   itemComponent?: (item: DataType) => KoalaDynamicComponent;
   dblClick?: (item: DataType) => void;
   sortHeader?: string;
+  footer?: {
+    itemNameProperty?: (responseRequest: any) => string;
+    itemComponent?: (responseRequest: any) => KoalaDynamicComponent;
+  }
 }

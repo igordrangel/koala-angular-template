@@ -84,6 +84,7 @@
                         [checked]="selection.isSelected(item)">
           </mat-checkbox>
         </td>
+        <td *matFooterCellDef mat-footer-cell></td>
       </ng-container>
 
       <ng-container *ngFor="let itemList of itemsList" [matColumnDef]="itemList.columnDef">
@@ -94,6 +95,13 @@
 	        <ng-template #itemText>
 	          {{itemList.itemNameProperty(item)}}
 	        </ng-template>
+        </td>
+        <td *matFooterCellDef mat-footer-cell>
+          <koala-dynamic-component *ngIf="itemList.footer?.itemComponent else itemFooterText"
+                                   [dynamicComponent]="itemList.footer?.itemComponent(responseRequest)"></koala-dynamic-component>
+          <ng-template #itemFooterText>
+            {{itemList.footer?.itemNameProperty(responseRequest)}}
+          </ng-template>
         </td>
       </ng-container>
 
@@ -120,9 +128,13 @@
             </mat-menu>
           </div>
         </td>
+        <td *matFooterCellDef mat-footer-cell></td>
       </ng-container>
       <tr *matHeaderRowDef="columnsToShowInList; sticky: true" mat-header-row></tr>
       <tr *matRowDef="let item; columns: columnsToShowInList;" mat-row></tr>
+      <ng-container *ngIf="hasFooter()">
+        <tr *matFooterRowDef="columnsToShowInList; sticky: true" mat-footer-row></tr>
+      </ng-container>
     </table>
     <ng-template #emptyList>
       <koala-dynamic-component *ngIf="!(filterError$ | async) else errorList" [dynamicComponent]="emptyListComponent"></koala-dynamic-component>

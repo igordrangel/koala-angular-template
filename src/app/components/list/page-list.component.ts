@@ -56,21 +56,38 @@ export class PageListComponent extends PageAbstract {
                         columnDef: 'name',
                         sortHeader: 'name',
                         itemNameProperty: item => item.name,
-                        dblClick: item => this.edit(item)
+                        dblClick: item => this.edit(item),
+                        footer: {
+                          itemNameProperty: () => 'Total'
+                        }
                       })
                       .itemColumn({
                         label: 'Qtd.',
                         columnDef: 'qtd',
                         sortHeader: 'qtd',
                         itemNameProperty: item => item.qtd.toString(),
-                        dblClick: item => this.edit(item)
+                        dblClick: item => this.edit(item),
+                        footer: {
+                          itemNameProperty: responseRequest => {
+                            let qtdTotal = 0;
+                            responseRequest.forEach(item => qtdTotal += item.qtd);
+                            return qtdTotal.toString();
+                          }
+                        }
                       })
                       .itemColumn({
                         label: 'Value',
                         columnDef: 'value',
                         sortHeader: 'value',
-                        itemNameProperty: item => `US$ ${maskCoin(item.qtd)}`,
-                        dblClick: item => this.edit(item)
+                        itemNameProperty: item => maskCoin(item.value, {prefix: 'US$'}),
+                        dblClick: item => this.edit(item),
+                        footer: {
+                          itemNameProperty: responseRequest => {
+                            let total = 0;
+                            responseRequest.forEach(item => total += item.value);
+                            return maskCoin(total, {prefix: 'US$'});
+                          }
+                        }
                       })
                       .actionList({
                         icon: 'edit',

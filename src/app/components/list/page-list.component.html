@@ -161,21 +161,38 @@
                                 columnDef: 'name',
                                 sortHeader: 'name',
                                 itemNameProperty: item => item.name,
-                                dblClick: item => <span>this</span>.edit(item)
+                                dblClick: item => <span>this</span>.edit(item),
+                                footer: &#123;
+                                  itemNameProperty: () => 'Total'
+                                &#125;
                               &#125;)
                               .<span>itemColumn</span>(&#123;
                                 label: 'Qtd.',
                                 columnDef: 'qtd',
                                 sortHeader: 'qtd',
                                 itemNameProperty: item => item.qtd.toString(),
-                                dblClick: item => <span>this</span>.edit(item)
+                                dblClick: item => <span>this</span>.edit(item),
+                                footer: &#123;
+                                  itemNameProperty: responseRequest => &#123;
+                                    let qtdTotal = 0;
+                                    responseRequest.forEach(item => qtdTotal += item.value);
+                                    return qtdTotal.<span>toString</span>();
+                                  &#125;
+                                &#125;
                               &#125;)
                               .<span>itemColumn</span>(&#123;
                                 label: 'Value',
                                 columnDef: 'value',
                                 sortHeader: 'value',
                                 itemNameProperty: item => `US$ $&#123;maskCoin(item.qtd)&#125;`,
-                                dblClick: item => <span>this</span>.edit(item)
+                                dblClick: item => <span>this</span>.edit(item),
+                                footer: &#123;
+                                  itemNameProperty: responseRequest => &#123;
+                                    let total = 0;
+                                    responseRequest.forEach(item => total += item.value);
+                                    return maskCoin(total, &#123;prefix: 'US$'&#125;);
+                                  &#125;
+                                &#125;
                               &#125;)
                               .<span>actionList</span>(&#123;
                                 icon: 'edit',

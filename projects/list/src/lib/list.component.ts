@@ -34,6 +34,7 @@ export class ListComponent extends ListAbstract implements OnInit, AfterViewInit
   public request?: Observable<any>;
   public responseIndexName?: string;
   public responseQtdResultIndexName?: (response: any) => number;
+  public responseRequest?: any;
   public typeRequest: 'all' | 'onDemand' = 'all'
   public filterFormConfig?: KoalaListFilterInterface;
   public reload?: BehaviorSubject<boolean>;
@@ -50,6 +51,7 @@ export class ListComponent extends ListAbstract implements OnInit, AfterViewInit
     super(
       () => this.config?.request ?? new Observable<any>(),
       (response) => {
+        this.responseRequest = response;
         this.dataSource.data = this.config?.responseIndexName
                                ? (this.config.responseIndexName
                                   ? response[this.config.responseIndexName]
@@ -128,6 +130,10 @@ export class ListComponent extends ListAbstract implements OnInit, AfterViewInit
       !option.showByItemList ||
       option.showByItemList(item)
     )).length > 0
+  }
+
+  public hasFooter() {
+    return !!this.itemsList.find(item => !!item.footer);
   }
 
   private initConfig() {

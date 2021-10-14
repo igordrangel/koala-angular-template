@@ -6,7 +6,8 @@
 .list-container .list .mat-header-cell:last-child {width: 5%;}
 .list-container .list .mat-header-cell:last-child {text-align: center;}
 .list-container .list .mat-header-row,
-.list-container .list .mat-row {height: 35px;}
+.list-container .list .mat-row,
+.list-container .list .mat-footer-row {height: 35px;}
 .list-container .list .mat-row .mat-icon-button {height: 35px; line-height: 35px;width: 35px;}
 .list-container .list tr.detail-row:not(.expanded-row) {height: 0;}
 .list-container .list .element-detail {display: flex;overflow: hidden;}
