@@ -1,7 +1,7 @@
 {
   "name": "koala-angular-template",
-  "version": "12.5.1",
-  "description": "Design System using Angular and Material Angular",
+  "version": "12.5.2",
+  "description": "Koala UI is a Design System developed in Angular whose objective is to facilitate and make your development faster and simpler, making this framework your greatest ally.",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

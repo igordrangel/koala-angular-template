@@ -38,16 +38,12 @@ for (const [index, lib] of libs.entries()) {
 fs.writeFileSync('dist/package.json', JSON.stringify({
   "name": "@koalarx/ui",
   "version": currentVersion,
+  "description": config.description,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/igordrangel/koala-angular-template.git"
   },
-  "keywords": [
-    "koala",
-    "angular material",
-    "angular template",
-    "design system"
-  ],
+  "keywords": config.keywords,
   "author": "Igor D. Rangel",
   "license": "MIT",
   "bugs": {
