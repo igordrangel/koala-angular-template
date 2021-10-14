@@ -45,7 +45,8 @@ fs.writeFileSync('dist/package.json', JSON.stringify({
   "keywords": [
     "koala",
     "angular material",
-    "angular template"
+    "angular template",
+    "design system"
   ],
   "author": "Igor D. Rangel",
   "license": "MIT",

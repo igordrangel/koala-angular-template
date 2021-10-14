@@ -1,4 +1,4 @@
-# Koala UI - A Angular Material Template
+# Koala UI - A Material Design System
 
 ## Install
 ```bash
