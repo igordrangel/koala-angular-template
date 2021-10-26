@@ -11,13 +11,13 @@
       "jwt-encode": "jwtEncode",
       "ng2-currency-mask": "ng2-currency-mask",
       "ngx-device-detector": "ngxDeviceDetector",
-      "exceljs/dist/exceljs.min.js": "Excel",
-      "file-saver": "fs",
       "ngx-mask": "ngx-mask",
       "ngx-papaparse": "ngx-papaparse",
       "@koalarx/utils": "utils",
       "@koalarx/ui/menu": "menu",
-      "@koalarx/ui/alert": "alert"
+      "@koalarx/ui/alert": "alert",
+      "@koalarx/utils/operators/delay": "delay",
+      "@koalarx/utils/operators/string": "string"
     }
   }
 }

@@ -1,8 +1,8 @@
 import * as jwtEncode from 'jwt-encode';
 
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { KoalaOAuth2Service, KoalaTokenService } from "@koalarx/ui/core";
 import { FormAbstract, KoalaDynamicFormConfigInterface, KoalaDynamicFormService } from "@koalarx/ui/form";
+import { KoalaOAuth2Service, KoalaTokenService } from "@koalarx/ui/core";
 
 @Component({
   templateUrl: 'page-login.component.html',

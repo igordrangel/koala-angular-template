@@ -5,7 +5,7 @@ import { DialogFormItemComponent } from "./dialog/dialog-form-item.component";
 import { EmptyListComponent } from "../../../components/list/empty-list/empty-list.component";
 import { KoalaListService, KoalaListConfigInterface } from "@koalarx/ui/list";
 import { SelectionModel } from "@angular/cdk/collections";
-import { KoalaXlsxService } from "@koalarx/ui/core";
+import { KoalaXlsxService } from "@koalarx/ui/common";
 import { ItemInterface, ItemService } from "./item.service";
 import { KoalaDynamicFormService } from "@koalarx/ui/form";
 import { KoalaQuestionService } from "@koalarx/ui/question";

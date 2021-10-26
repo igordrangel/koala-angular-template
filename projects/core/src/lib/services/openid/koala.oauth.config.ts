@@ -1,5 +1,5 @@
 import { BehaviorSubject } from "rxjs";
-import { KoalaOauth2ConfigInterface } from "../../page/koala-oauth2-config.interface";
+import { KoalaOauth2ConfigInterface } from "./koala-oauth2-config.interface";
 import { KoalaEnvironment } from "../../environments/koalaEnvironment";
 
 // @dynamic

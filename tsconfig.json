@@ -25,6 +25,10 @@
         "dist/button",
         "projects/button/src"
       ],
+      "@koalarx/ui/common": [
+        "dist/common",
+        "projects/common/src"
+      ],
       "@koalarx/ui/core": [
         "dist/core",
         "projects/core/src"
@@ -72,6 +76,10 @@
       "@koalarx/ui/snackbar": [
         "dist/snackbar",
         "projects/snackbar/src"
+      ],
+      "common": [
+        "dist/common/common",
+        "dist/common"
       ]
     }
   },

@@ -15,6 +15,7 @@ const libs = [
   'folder-page',
   'menu',
   'core',
+  'common',
   'question',
   'form',
   'list',

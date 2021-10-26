@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { PageAbstract } from "../../shared/abstract/page.abstract";
-import { KoalaXlsxService } from "@koalarx/ui/core";
+import { KoalaXlsxService } from "@koalarx/ui/common";
 import { ListService } from "../../components/list/list.service";
 
 @Component({

@@ -1,5 +1,5 @@
 import { Component, Inject } from "@angular/core";
-import { KoalaRequestService } from "@koalarx/ui/core";
+import { KoalaRequestService } from "@koalarx/ui/common";
 import { FormAbstract, KoalaDynamicFormService, KoalaDynamicFormConfigInterface } from "@koalarx/ui/form";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { ItemInterface, ItemService } from "../item.service";

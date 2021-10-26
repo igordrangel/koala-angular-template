@@ -1,4 +1,4 @@
-import { KoalaOauth2ConfigInterface } from "../page/koala-oauth2-config.interface";
+import { KoalaOauth2ConfigInterface } from "../services/openid/koala-oauth2-config.interface";
 
 export interface KoalaEnvironmentOAuthInterface extends KoalaOauth2ConfigInterface {
   name: string;

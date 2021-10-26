@@ -15,7 +15,7 @@ import { TokenFactory } from "../services/token/token.factory";
 import { KoalaOAuth2Service } from "../services/openid/koala.oauth2.service";
 import { KoalaEnvironment } from "../environments/koalaEnvironment";
 import { KoalaOauthConfig } from "../services/openid/koala.oauth.config";
-import { KoalaOauth2ConfigInterface } from "./koala-oauth2-config.interface";
+import { KoalaOauth2ConfigInterface } from "../services/openid/koala-oauth2-config.interface";
 import { KoalaLanguageHelper, KoalaLanguageType } from "./koala-language.helper";
 import { DeviceDetectorService } from "ngx-device-detector";
 
