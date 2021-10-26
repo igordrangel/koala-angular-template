@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { PageAbstract } from "../../shared/abstract/page.abstract";
-import { KoalaRequestService } from "@koalarx/ui/common";
+import { KoalaRequestService } from "@koalarx/ui/core";
 import { Observable } from "rxjs";
 
 interface ResponseInterface {

@@ -12,7 +12,7 @@ import { BtnSubmitComponent } from './btn-submit/btn-submit.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 import { NgxMaskModule } from 'ngx-mask';
-import { maskOptions } from '@koalarx/ui/core';
+import { maskOptions } from '@koalarx/ui/common';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { KoalaButtonModule } from '@koalarx/ui/button';
 import { MatExpansionModule } from '@angular/material/expansion';
