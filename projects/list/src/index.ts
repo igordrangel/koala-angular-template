@@ -5,6 +5,7 @@ export * from './lib/list.component';
 export * from './lib/koala-list-filter.interface';
 export * from './lib/koala-list-form-filter.interface';
 export * from './lib/koala-list-item-menu-option.interface';
+export * from './lib/koala-list-btn-collapse-sub-list-config.interface';
 export * from './lib/koala.list-config.interface';
 export * from './lib/koala.list.module';
 export * from './lib/koala-list-item.interface';
