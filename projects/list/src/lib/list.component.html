@@ -1,4 +1,4 @@
-<div class="list-container">
+<div class="list-container" [ngClass]="customClass">
   <div *ngIf="filterFormConfig" class="list-filter">
     <form (ngSubmit)="filterSubmit()" [formGroup]="formFilter">
       <div class="main">

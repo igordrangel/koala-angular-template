@@ -117,10 +117,7 @@ export class PageListComponent extends PageAbstract {
                                           columnDef: 'name',
                                           sortHeader: 'name',
                                           itemNameProperty: item => item.name,
-                                          dblClick: item => this.edit(item),
-                                          footer: {
-                                            itemNameProperty: () => 'Total'
-                                          }
+                                          dblClick: item => this.edit(item)
                                         })
                                         .itemColumn({
                                           label: 'Qtd.',
@@ -138,6 +135,7 @@ export class PageListComponent extends PageAbstract {
                                         })
                                         .service(() => new Observable(observe => observe.next([item])))
                                         .hidePaginator()
+                                        .setCustomClass('koala-list-sublist-content')
                                         .getConfig()
                       )
                       .getDataSource(dataSource => this.dataSource = dataSource)

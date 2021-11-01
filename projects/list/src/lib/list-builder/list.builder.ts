@@ -118,6 +118,11 @@ export class ListBuilder<DataType> {
     return this;
   }
 
+  public setCustomClass(className: string) {
+    this.config.customClass = className;
+    return this;
+  }
+
   public getConfig(): KoalaListConfigInterface {
     this.config.reload = new BehaviorSubject<boolean>(false);
     return this.config;

@@ -35,6 +35,7 @@ export class ListComponent extends ListAbstract implements OnInit, AfterViewInit
   @ViewChild(MatPaginator) protected paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) protected sort: MatSort;
 
+  public customClass?: string;
   public columnsToShowInList?: string[];
   public hidePaginator?: boolean = false;
   public columnSort?: string;
@@ -184,5 +185,6 @@ export class ListComponent extends ListAbstract implements OnInit, AfterViewInit
     this.subListConfig = this.config.subListConfig;
     this.btnCollapseSubListConfig = this.config.btnCollapseSubListConfig;
     this.hidePaginator = this.config.hidePaginator;
+    this.customClass = this.config.customClass;
   }
 }
