@@ -10,6 +10,7 @@ import { PaginationProvider } from './providers/pagination/pagination.provider';
 import { KoalaFolderPageModule } from '@koalarx/ui/folder-page';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { KoalaDynamicComponentModule } from '@koalarx/ui/dynamic-component';
+import { KoalaButtonModule } from "@koalarx/ui/button";
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { KoalaDynamicComponentModule } from '@koalarx/ui/dynamic-component';
     KoalaFolderPageModule,
     KoalaFormModule,
     KoalaDynamicComponentModule,
+    KoalaButtonModule,
     MatMenuModule,
     MatTableModule,
     MatSortModule,

@@ -9,6 +9,7 @@ import { KoalaListItemMenuOptionInterface } from "../koala-list-item-menu-option
 import { SelectionModel } from "@angular/cdk/collections";
 import { KoalaListPageSize } from "../list.abstract";
 import { first } from "rxjs/operators";
+import { KoalaListBtnCollapseSubListConfigInterface } from "../koala-list-btn-collapse-sub-list-config.interface";
 
 export class ListBuilder<DataType> {
   private config = {} as KoalaListConfigInterface;
@@ -99,6 +100,21 @@ export class ListBuilder<DataType> {
 
   public disableCheckboxItemList(fn: (item: DataType) => boolean) {
     this.config.disabledCheckboxItemList = fn;
+    return this;
+  }
+
+  public setSubList(config: (item: DataType) => KoalaListConfigInterface) {
+    this.config.subListConfig = config;
+    return this;
+  }
+
+  public defineBtnCollapseSubListConfig(config: KoalaListBtnCollapseSubListConfigInterface<DataType>) {
+    this.config.btnCollapseSubListConfig = config;
+    return this;
+  }
+
+  public hidePaginator(hide: boolean = true) {
+    this.config.hidePaginator = hide;
     return this;
   }
 

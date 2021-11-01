@@ -7,17 +7,19 @@
   [navigateHistory]="navigationHistory">
 
   <div content>
-    <mat-accordion class="d-block mt-15 p-20" multi>
+    <mat-tab-group color="primary">
+      <mat-tab label="CODE">
+        <mat-accordion class="d-block mt-15 p-20" multi>
 
-      <mat-expansion-panel expanded>
-        <mat-expansion-panel-header>
-          <mat-panel-title>list.module.ts</mat-panel-title>
-          <mat-panel-description>
-            <mat-icon>code</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
+          <mat-expansion-panel expanded>
+            <mat-expansion-panel-header>
+              <mat-panel-title>list.module.ts</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
 
-        <pre><code><span>import</span> &#123; NgModule &#125; <span>from</span> "@angular/core";
+            <pre><code><span>import</span> &#123; NgModule &#125; <span>from</span> "@angular/core";
 <span>import</span> &#123; CommonModule &#125; <span>from</span> "@angular/common";
 <span>import</span> &#123; PageListComponent &#125; <span>from</span> "./page-list.component";
 <span>import</span> &#123; EmptyListComponent &#125; <span>from</span> "./empty-list/empty-list.component";
@@ -48,17 +50,17 @@
 &#125;)
 <span>export class</span> ListModule &#123;&#125;</code></pre>
 
-      </mat-expansion-panel>
+          </mat-expansion-panel>
 
-      <mat-expansion-panel expanded>
-        <mat-expansion-panel-header>
-          <mat-panel-title>list.service.ts</mat-panel-title>
-          <mat-panel-description>
-            <mat-icon>code</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
+          <mat-expansion-panel expanded>
+            <mat-expansion-panel-header>
+              <mat-panel-title>list.service.ts</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
 
-        <pre><code><span>import</span> &#123; Injectable &#125; <span>from</span> "@angular/core";
+            <pre><code><span>import</span> &#123; Injectable &#125; <span>from</span> "@angular/core";
 <span>import</span> &#123; Observable &#125; <span>from</span> "rxjs";
 <span>import</span> &#123; koala &#125; <span>from</span> "@koalarx/utils";
 <span>import</span> &#123; ListItemInterface &#125; <span>from</span> "./list-item.interface";
@@ -90,17 +92,17 @@
 
 &#125;</code></pre>
 
-      </mat-expansion-panel>
+          </mat-expansion-panel>
 
-      <mat-expansion-panel expanded>
-        <mat-expansion-panel-header>
-          <mat-panel-title>page-list.component.ts</mat-panel-title>
-          <mat-panel-description>
-            <mat-icon>code</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
+          <mat-expansion-panel expanded>
+            <mat-expansion-panel-header>
+              <mat-panel-title>page-list.component.ts</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
 
-        <pre><code><span>import</span> &#123; Component &#125; <span>from</span> "@angular/core";
+            <pre><code><span>import</span> &#123; Component &#125; <span>from</span> "@angular/core";
 <span>import</span> &#123; FormGroup &#125; <span>from</span> "@angular/forms";
 <span>import</span> &#123; SelectionModel &#125; <span>from</span> "@angular/cdk/collections";
 <span>import</span> &#123; ListService &#125; <span>from</span> "./list.service";
@@ -150,12 +152,19 @@
                               .<span>service</span>(filter => <span>this</span>.listService.getList())
                               .<span>columns</span>([
                                 'select',
+                                'collapseButton',
                                 'name',
                                 'qtd',
                                 'value',
                                 'options'
                               &#125;)
                               .<span>disableCheckboxItemList</span>((item => item.qtd === 0))
+                              .<span>defineBtnCollapseSubListConfig</span>(&#123;
+                                icon: 'expand_more',
+                                iconColor: '#fff',
+                                backgroundColor: 'transparent',
+                                show: () => true
+                              &#125;)
                               .<span>itemColumn</span>(&#123;
                                 label: 'Name',
                                 columnDef: 'name',
@@ -184,13 +193,13 @@
                                 label: 'Value',
                                 columnDef: 'value',
                                 sortHeader: 'value',
-                                itemNameProperty: item => `US$ $&#123;maskCoin(item.qtd)&#125;`,
+                                itemNameProperty: item => `US$ $&#123;<span>maskCoin</span>(item.qtd)&#125;`,
                                 dblClick: item => <span>this</span>.edit(item),
                                 footer: &#123;
                                   itemNameProperty: responseRequest => &#123;
                                     let total = 0;
                                     responseRequest.forEach(item => total += item.value);
-                                    return maskCoin(total, &#123;prefix: 'US$'&#125;);
+                                    return <span>maskCoin</span>(total, &#123;prefix: 'US$'&#125;);
                                   &#125;
                                 &#125;
                               &#125;)
@@ -203,6 +212,38 @@
                               &#125;)
                               .<span>emptyListComponent</span>(ErrorListComponent)
                               .<span>errorListComponent</span>(ErrorListComponent)
+                              .<span>setSubList</span>(item =>
+                                koalaListService.<span>build</span>&#60;<span>ListItemInterface</span>&#62;()
+                                                          .<span>columns</span>([
+                                                            'name',
+                                                            'qtd',
+                                                            'value'
+                                                          ])
+                                                          .<span>itemColumn</span>(&#123;
+                                                            label: 'Name',
+                                                            columnDef: 'name',
+                                                            sortHeader: 'name',
+                                                            itemNameProperty: item => item.name,
+                                                            dblClick: item => <span>this</span>.edit(item)
+                                                          &#125;)
+                                                          .<span>itemColumn</span>(&#123;
+                                                            label: 'Qtd.',
+                                                            columnDef: 'qtd',
+                                                            sortHeader: 'qtd',
+                                                            itemNameProperty: item => item.qtd.toString(),
+                                                            dblClick: item => <span>this</span>.edit(item)
+                                                          &#125;)
+                                                          .<span>itemColumn</span>(&#123;
+                                                            label: 'Value',
+                                                            columnDef: 'value',
+                                                            sortHeader: 'value',
+                                                            itemNameProperty: item => <span>maskCoin</span>(item.value, &#123;prefix: 'US$'&#125;),
+                                                            dblClick: item => <span>this</span>.edit(item)
+                                                          &#125;)
+                                                          .<span>service</span>(() => <span>new</span> Observable(observe => observe.<span>next</span>([item])))
+                                                          .<span>hidePaginator</span>()
+                                                          .<span>getConfig</span>()
+                              )
                               .<span>getDataSource</span>(dataSource) => <span>this</span>.dataSource = dataSource)
                               .<span>getSelectionList</span>(selection => <span>this</span>.selectedItems = selection)
                               .<span>pageSize</span>(20)
@@ -234,17 +275,17 @@
   &#125;
 &#125;</code></pre>
 
-      </mat-expansion-panel>
+          </mat-expansion-panel>
 
-      <mat-expansion-panel expanded>
-        <mat-expansion-panel-header>
-          <mat-panel-title>page-list.component.html</mat-panel-title>
-          <mat-panel-description>
-            <mat-icon>code</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
+          <mat-expansion-panel expanded>
+            <mat-expansion-panel-header>
+              <mat-panel-title>page-list.component.html</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
 
-        <pre><code><span>&#60;koala-list</span> [config]="config"&#62;
+            <pre><code><span>&#60;koala-list</span> [config]="config"&#62;
 
   <span>&#60;nav</span> itemsSelectList&#62;
     <span>&#60;koala-button</span>
@@ -278,17 +319,17 @@
 
 <span>&#60;/koala-list&#62;</span></code></pre>
 
-      </mat-expansion-panel>
+          </mat-expansion-panel>
 
-      <mat-expansion-panel expanded>
-        <mat-expansion-panel-header>
-          <mat-panel-title>empty-list.component.ts</mat-panel-title>
-          <mat-panel-description>
-            <mat-icon>code</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
+          <mat-expansion-panel expanded>
+            <mat-expansion-panel-header>
+              <mat-panel-title>empty-list.component.ts</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
 
-        <pre><code><span>import</span> &#123; Component &#125; <span>from</span> "@angular/core";
+            <pre><code><span>import</span> &#123; Component &#125; <span>from</span> "@angular/core";
 
 <span>@Component</span>(&#123;
   templateUrl: 'empty-list.component.html',
@@ -296,17 +337,17 @@
 })
 <span>export class</span> EmptyListComponent &#123;&#125;</code></pre>
 
-      </mat-expansion-panel>
+          </mat-expansion-panel>
 
-      <mat-expansion-panel expanded>
-        <mat-expansion-panel-header>
-          <mat-panel-title>empty-list.component.css</mat-panel-title>
-          <mat-panel-description>
-            <mat-icon>code</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
+          <mat-expansion-panel expanded>
+            <mat-expansion-panel-header>
+              <mat-panel-title>empty-list.component.css</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
 
-        <pre><code><span>.content</span> &#123;
+            <pre><code><span>.content</span> &#123;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -318,32 +359,32 @@
   padding: 15px;
 &#125;</code></pre>
 
-      </mat-expansion-panel>
+          </mat-expansion-panel>
 
-      <mat-expansion-panel expanded>
-        <mat-expansion-panel-header>
-          <mat-panel-title>empty-list.component.html</mat-panel-title>
-          <mat-panel-description>
-            <mat-icon>code</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
+          <mat-expansion-panel expanded>
+            <mat-expansion-panel-header>
+              <mat-panel-title>empty-list.component.html</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
 
-        <pre><code><span>&#60;div</span> class="content"<span>&#62;</span>
+            <pre><code><span>&#60;div</span> class="content"<span>&#62;</span>
   <span>&#60;koala-icon</span> color="rgba(255,255,255,.6)" icon="empty" size="60"<span>&#62;</span><span>&#60;/koala-icon&#62;</span>
   <span>&#60;h2&#62;</span>No data was found.<span>&#60;/h2&#62;
 &#60;/div&#62;</span></code></pre>
 
-      </mat-expansion-panel>
+          </mat-expansion-panel>
 
-      <mat-expansion-panel expanded>
-        <mat-expansion-panel-header>
-          <mat-panel-title>error-list.component.ts</mat-panel-title>
-          <mat-panel-description>
-            <mat-icon>code</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
+          <mat-expansion-panel expanded>
+            <mat-expansion-panel-header>
+              <mat-panel-title>error-list.component.ts</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
 
-        <pre><code><span>import</span> &#123; Component &#125; <span>from</span> "@angular/core";
+            <pre><code><span>import</span> &#123; Component &#125; <span>from</span> "@angular/core";
 <span>import</span> &#123; KoalaDynamicComponentComponent &#125; <span>from</span> "@koalarx/ui/dynamic-component";
 
 <span>@Component</span>(&#123;
@@ -354,17 +395,17 @@
   <span>public</span> data: <span>Error</span>;
 &#125;</code></pre>
 
-      </mat-expansion-panel>
+          </mat-expansion-panel>
 
-      <mat-expansion-panel expanded>
-        <mat-expansion-panel-header>
-          <mat-panel-title>error-list.component.css</mat-panel-title>
-          <mat-panel-description>
-            <mat-icon>code</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
+          <mat-expansion-panel expanded>
+            <mat-expansion-panel-header>
+              <mat-panel-title>error-list.component.css</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
 
-        <pre><code><span>.content</span> &#123;
+            <pre><code><span>.content</span> &#123;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -376,58 +417,62 @@
   padding: 15px;
 &#125;</code></pre>
 
-      </mat-expansion-panel>
+          </mat-expansion-panel>
 
-      <mat-expansion-panel expanded>
-        <mat-expansion-panel-header>
-          <mat-panel-title>error-list.component.html</mat-panel-title>
-          <mat-panel-description>
-            <mat-icon>code</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
+          <mat-expansion-panel expanded>
+            <mat-expansion-panel-header>
+              <mat-panel-title>error-list.component.html</mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>code</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
 
-        <pre><code><span>&#60;div</span> class="content"<span>&#62;</span>
+            <pre><code><span>&#60;div</span> class="content"<span>&#62;</span>
   <span>&#60;koala-icon</span> color="rgba(255,255,255,.6)" icon="empty" size="60"<span>&#62;</span><span>&#60;/koala-icon&#62;</span>
   <span>&#60;h2&#62;</span>&#123; &#123;data.message&#125;&#125;<span>&#60;/h2&#62;
 &#60;/div&#62;</span></code></pre>
 
-      </mat-expansion-panel>
+          </mat-expansion-panel>
 
-    </mat-accordion>
+        </mat-accordion>
+      </mat-tab>
 
-    <koala-list [config]="config">
+      <mat-tab label="RESULT">
+        <koala-list [config]="config">
 
-      <nav itemsSelectList>
-        <koala-button
-          [koalaIcon]="true"
-          (click)="delete()"
-          backgroundColor="transparent"
-          color="#EF5350"
-          icon="trash"
-          koalaIconSize="18"
-          tooltip="Delete Selected">
-        </koala-button>
-      </nav>
+          <nav itemsSelectList>
+            <koala-button
+              [koalaIcon]="true"
+              (click)="delete()"
+              backgroundColor="transparent"
+              color="#EF5350"
+              icon="trash"
+              koalaIconSize="18"
+              tooltip="Delete Selected">
+            </koala-button>
+          </nav>
 
-      <nav itemsList>
-        <koala-button
-          (click)="downloadList()"
-          [koalaIcon]="true"
-          backgroundColor="transparent"
-          color="#616161"
-          icon="excel"
-          tooltip="Download List (XLSX)">
-        </koala-button>
-        <koala-button
-          (click)="config.reload.next(true)"
-          backgroundColor="transparent"
-          color="#fafafa"
-          icon="refresh"
-          tooltip="Reload List">
-        </koala-button>
-      </nav>
+          <nav itemsList>
+            <koala-button
+              (click)="downloadList()"
+              [koalaIcon]="true"
+              backgroundColor="transparent"
+              color="#616161"
+              icon="excel"
+              tooltip="Download List (XLSX)">
+            </koala-button>
+            <koala-button
+              (click)="config.reload.next(true)"
+              backgroundColor="transparent"
+              color="#fafafa"
+              icon="refresh"
+              tooltip="Reload List">
+            </koala-button>
+          </nav>
 
-    </koala-list>
+        </koala-list>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 
 </koala-folder-page>

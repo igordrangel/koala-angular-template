@@ -11,6 +11,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
 import { KoalaAlertModule } from "@koalarx/ui/alert";
 import { ErrorListComponent } from "./error-list/error-list.component";
+import { MatTabsModule } from "@angular/material/tabs";
 
 @NgModule({
   exports: [
@@ -30,7 +31,9 @@ import { ErrorListComponent } from "./error-list/error-list.component";
     KoalaIconModule,
     MatExpansionModule,
     MatIconModule,
+    MatTabsModule,
     ListRoutingModule
   ]
 })
-export class ListModule {}
+export class ListModule {
+}

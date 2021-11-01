@@ -3,7 +3,8 @@
 .list-container .spinner-container.no-filter {top: 40px;}
 .list-container .list {display: block;height: calc(100vh - 320px);overflow-y: auto;position: relative;top: 0;width: 100%;z-index: 1;}
 .list-container .list table:not(.table-not-selection) .mat-header-cell:first-child,
-.list-container .list .mat-header-cell:last-child {width: 5%;}
+.list-container .list .mat-header-cell:last-child,
+.list-container .list .mat-header-cell.mat-column-collapseButton {width: 5%;}
 .list-container .list .mat-header-cell:last-child {text-align: center;}
 .list-container .list .mat-header-row,
 .list-container .list .mat-row,
@@ -50,6 +51,12 @@
 .list-container .content-paginator mat-paginator .mat-paginator-container .mat-paginator-page-size-select {height: 40px;margin-top: 0 !important;}
 .list-container .content-paginator mat-paginator .mat-paginator-container .mat-paginator-range-label {margin-top: 3px;}
 .list-container .content-paginator {position: relative;background: transparent !important;z-index: 2;box-shadow: -3px 1px 3px rgba(0,0,0,.3);}
+
+.list-container .item-detail {overflow: hidden;}
+.list-container tr.item-detail-row {height: 0!important;}
+.list-container tr.item-detail-row .list-container {width: 100%!important;}
+.list-container tr.item-detail-row .list-container .list {height: auto!important;max-height: 250px!important;}
+.list-container tr.item-detail-row .list-container nav.menu-list {display: none;}
 
 @media (max-width: 900px) {
   .list-container {width: 100%;box-shadow: none!important;padding: 15px 10px 15px 15px;box-sizing: border-box;}

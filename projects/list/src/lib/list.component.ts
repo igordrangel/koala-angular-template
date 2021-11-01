@@ -13,12 +13,21 @@ import { koala } from "@koalarx/utils";
 import { DeviceDetectorService } from "ngx-device-detector";
 import { KoalaListConfigInterface } from "./koala.list-config.interface";
 import { MatPaginator } from "@angular/material/paginator";
+import { KoalaListBtnCollapseSubListConfigInterface } from "./koala-list-btn-collapse-sub-list-config.interface";
+import { animate, state, style, transition, trigger } from "@angular/animations";
 
 @Component({
   selector: 'koala-list',
   templateUrl: 'list.component.html',
   styleUrls: ['list.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class ListComponent extends ListAbstract implements OnInit, AfterViewInit, OnDestroy {
   @Input() public config?: KoalaListConfigInterface;
@@ -27,6 +36,7 @@ export class ListComponent extends ListAbstract implements OnInit, AfterViewInit
   @ViewChild(MatSort, {static: false}) protected sort: MatSort;
 
   public columnsToShowInList?: string[];
+  public hidePaginator?: boolean = false;
   public columnSort?: string;
   public sortDirection: SortDirection = 'asc';
   public itemsMenuListOptions?: KoalaListItemMenuOptionInterface<any>[];
@@ -42,6 +52,9 @@ export class ListComponent extends ListAbstract implements OnInit, AfterViewInit
   public showAdvancedFilter: boolean = false;
   public qtdListResult = 0;
   public disabledCheckboxItemList?: (item: any) => boolean;
+  public expandedElement = false;
+  public btnCollapseSubListConfig?: KoalaListBtnCollapseSubListConfigInterface<any>;
+  public subListConfig?: (item: any) => KoalaListConfigInterface;
 
   constructor(
     private fb: FormBuilder,
@@ -168,5 +181,8 @@ export class ListComponent extends ListAbstract implements OnInit, AfterViewInit
     this.errorListComponent = this.config.errorListComponent;
     this.pageSize = this.config.pageSize ?? 30;
     this.disabledCheckboxItemList = this.config.disabledCheckboxItemList;
+    this.subListConfig = this.config.subListConfig;
+    this.btnCollapseSubListConfig = this.config.btnCollapseSubListConfig;
+    this.hidePaginator = this.config.hidePaginator;
   }
 }

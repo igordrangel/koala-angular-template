@@ -4,12 +4,13 @@ import { ListService } from "./list.service";
 import { ListItemInterface } from "./list-item.interface";
 import { EmptyListComponent } from "./empty-list/empty-list.component";
 import { KoalaXlsxService } from "@koalarx/ui/common";
-import { KoalaListService, KoalaListConfigInterface } from "@koalarx/ui/list";
+import { KoalaListConfigInterface, KoalaListService } from "@koalarx/ui/list";
 import { SelectionModel } from "@angular/cdk/collections";
-import { KoalaAlertService, KoalaAlertEnum } from "@koalarx/ui/alert";
+import { KoalaAlertEnum, KoalaAlertService } from "@koalarx/ui/alert";
 import { KoalaDynamicFormService } from "@koalarx/ui/form";
 import { ErrorListComponent } from "./error-list/error-list.component";
 import { maskCoin } from "@koalarx/utils/operators/number";
+import { Observable } from "rxjs";
 
 @Component({
   templateUrl: 'page-list.component.html'
@@ -44,12 +45,19 @@ export class PageListComponent extends PageAbstract {
                       .service(filter => this.listService.getList(filter.getValue()))
                       .columns([
                         'select',
+                        'collapseButton',
                         'name',
                         'qtd',
                         'value',
                         'options'
                       ])
                       .disableCheckboxItemList((item => item.qtd === 0))
+                      .defineBtnCollapseSubListConfig({
+                        icon: 'expand_more',
+                        iconColor: '#fff',
+                        backgroundColor: 'transparent',
+                        show: () => true
+                      })
                       .itemColumn({
                         label: 'Name',
                         columnDef: 'name',
@@ -97,6 +105,41 @@ export class PageListComponent extends PageAbstract {
                       })
                       .emptyListComponent(EmptyListComponent)
                       .errorListComponent(ErrorListComponent)
+                      .setSubList(item =>
+                        koalaListService.build<ListItemInterface>()
+                                        .columns([
+                                          'name',
+                                          'qtd',
+                                          'value'
+                                        ])
+                                        .itemColumn({
+                                          label: 'Name',
+                                          columnDef: 'name',
+                                          sortHeader: 'name',
+                                          itemNameProperty: item => item.name,
+                                          dblClick: item => this.edit(item),
+                                          footer: {
+                                            itemNameProperty: () => 'Total'
+                                          }
+                                        })
+                                        .itemColumn({
+                                          label: 'Qtd.',
+                                          columnDef: 'qtd',
+                                          sortHeader: 'qtd',
+                                          itemNameProperty: item => item.qtd.toString(),
+                                          dblClick: item => this.edit(item)
+                                        })
+                                        .itemColumn({
+                                          label: 'Value',
+                                          columnDef: 'value',
+                                          sortHeader: 'value',
+                                          itemNameProperty: item => maskCoin(item.value, {prefix: 'US$'}),
+                                          dblClick: item => this.edit(item)
+                                        })
+                                        .service(() => new Observable(observe => observe.next([item])))
+                                        .hidePaginator()
+                                        .getConfig()
+                      )
                       .getDataSource(dataSource => this.dataSource = dataSource)
                       .getSelectionList(selection => this.selectedItems = selection)
                       .pageSize(20)

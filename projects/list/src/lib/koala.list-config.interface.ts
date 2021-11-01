@@ -7,6 +7,7 @@ import { KoalaListFormFilterInterface } from "./koala-list-form-filter.interface
 import { KoalaDynamicComponent } from "@koalarx/ui/dynamic-component";
 import { KoalaListPageSize } from "./list.abstract";
 import { SortDirection } from "@angular/material/sort";
+import { KoalaListBtnCollapseSubListConfigInterface } from "./koala-list-btn-collapse-sub-list-config.interface";
 
 export interface KoalaListConfigInterface {
   columnsToShowInList: string[];
@@ -29,4 +30,7 @@ export interface KoalaListConfigInterface {
   getDataSource: (dataSource: any[]) => void;
   pageSize?: KoalaListPageSize;
   disabledCheckboxItemList?: (item: any) => boolean;
+  subListConfig?: (item: any) => KoalaListConfigInterface;
+  btnCollapseSubListConfig?: KoalaListBtnCollapseSubListConfigInterface<any>;
+  hidePaginator?: boolean;
 }

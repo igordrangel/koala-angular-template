@@ -66,6 +66,7 @@
       *ngIf="!emptyListComponent || (emptyListComponent && dataSource?.data?.length > 0) else emptyList"
       [dataSource]="dataSource"
       [matSortActive]="columnSort"
+      multiTemplateDataRows
       class="table-hover"
       mat-table
       matSort
@@ -87,6 +88,23 @@
         <td *matFooterCellDef mat-footer-cell></td>
       </ng-container>
 
+      <ng-container *ngIf="subListConfig && btnCollapseSubListConfig" matColumnDef="collapseButton">
+        <th *matHeaderCellDef mat-header-cell></th>
+        <td *matCellDef="let item" mat-cell>
+          <koala-button
+            *ngIf="btnCollapseSubListConfig.show(item)"
+            (click)="expandedElement = expandedElement === item ? null : item"
+            [koalaIcon]="btnCollapseSubListConfig.koalaIcon"
+            [icon]="btnCollapseSubListConfig.icon"
+            [tooltip]="btnCollapseSubListConfig.tooltip"
+            [color]="btnCollapseSubListConfig.iconColor"
+            [backgroundColor]="btnCollapseSubListConfig.backgroundColor"
+            [koalaIconSize]="22">
+          </koala-button>
+        </td>
+        <td *matFooterCellDef mat-footer-cell></td>
+      </ng-container>
+
       <ng-container *ngFor="let itemList of itemsList" [matColumnDef]="itemList.columnDef">
         <th *matHeaderCellDef [mat-sort-header]="itemList.sortHeader" [disabled]="!itemList.sortHeader" mat-header-cell>{{itemList.label}}</th>
         <td (dblclick)="itemList.dblClick(item)" *matCellDef="let item" mat-cell>
@@ -103,6 +121,16 @@
             {{itemList.footer?.itemNameProperty(responseRequest)}}
           </ng-template>
         </td>
+      </ng-container>
+
+      <ng-container *ngIf="subListConfig && btnCollapseSubListConfig" matColumnDef="koalaListDetails">
+        <th *matHeaderCellDef mat-header-cell></th>
+        <td *matCellDef="let item" [attr.colspan]="columnsToShowInList.length" mat-cell>
+          <div class="item-detail" [@detailExpand]="item == expandedElement ? 'expanded' : 'collapsed'">
+            <koala-list [config]="subListConfig(item)"></koala-list>
+          </div>
+        </td>
+        <td *matFooterCellDef mat-footer-cell></td>
       </ng-container>
 
       <ng-container matColumnDef="options">
@@ -130,8 +158,12 @@
         </td>
         <td *matFooterCellDef mat-footer-cell></td>
       </ng-container>
+
       <tr *matHeaderRowDef="columnsToShowInList; sticky: true" mat-header-row></tr>
       <tr *matRowDef="let item; columns: columnsToShowInList;" mat-row></tr>
+      <ng-container *ngIf="subListConfig && btnCollapseSubListConfig">
+        <tr mat-row *matRowDef="let row; columns: ['koalaListDetails']" class="item-detail-row"></tr>
+      </ng-container>
       <ng-container *ngIf="hasFooter()">
         <tr *matFooterRowDef="columnsToShowInList; sticky: true" mat-footer-row></tr>
       </ng-container>
@@ -143,7 +175,7 @@
       </ng-template>
     </ng-template>
   </div>
-  <div class="content-paginator">
+  <div *ngIf="!hidePaginator" class="content-paginator">
     <mat-paginator
       [length]="qtdListResult"
       [pageSizeOptions]="limitOptions"
