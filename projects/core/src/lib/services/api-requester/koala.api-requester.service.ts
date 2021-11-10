@@ -110,7 +110,7 @@ export class KoalaApiRequesterService {
   }
 
   private getUrlBase() {
-    return this.isMockup ? 'http://localhost:4200/assets/mockup' : this.apiUrl;
+    return this.isMockup ? `${location.origin}/assets/mockup` : this.apiUrl;
   }
 
   private getMethod<T>(method: ApiRequesterType, url: string, data: any | HttpParams = {}) {
