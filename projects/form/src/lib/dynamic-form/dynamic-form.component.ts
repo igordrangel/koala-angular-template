@@ -103,9 +103,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
                           )) {
                           if (newFormGroup.get('multiple').value) {
                             if (Array.isArray(value)) {
-                              for (const itemValue of value.values()) {
-                                newFormGroup.get('autocompleteSelectedValue').value.push(itemValue);
-                              }
+                              newFormGroup.get('autocompleteSelectedValue').setValue(value);
                             } else {
                               newFormGroup.get('autocompleteSelectedValue').value.push(value);
                             }
