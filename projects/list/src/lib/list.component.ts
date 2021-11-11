@@ -123,10 +123,17 @@ export class ListComponent extends ListAbstract implements OnInit, AfterViewInit
   public async filterSubmit() {
     this.showAdvancedFilter = false;
     await delay(1);
-    let dados = (this.filterFormConfig?.main?.form ? koala(this.dynamicFormService.emitData(this.filterFormConfig?.main?.form))
+    let dados = koala(
+      this.filterFormConfig?.main?.form
+      ? this.dynamicFormService.emitData(this.filterFormConfig?.main?.form)
+      : {}
+    )
       .object()
-      .merge(this.filterFormConfig?.advanced?.form ? this.dynamicFormService.emitData(this.filterFormConfig?.advanced?.form) : {})
-      .getValue() : null);
+      .merge(
+        this.filterFormConfig?.advanced?.form
+        ? this.dynamicFormService.emitData(this.filterFormConfig?.advanced?.form)
+        : {})
+      .getValue();
 
     if (this.filterFormConfig?.checkAndSearch) {
       const controlName = this.filterFormConfig.checkAndSearch.formControlName;
