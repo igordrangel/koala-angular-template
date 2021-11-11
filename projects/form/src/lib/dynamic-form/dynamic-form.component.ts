@@ -98,7 +98,6 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
                             Object.keys(value).length === 2
                           ) || (
                             Array.isArray(value) &&
-                            value.length > 0 &&
                             newFormGroup.get('multiple').value
                           )) {
                           if (newFormGroup.get('multiple').value) {
