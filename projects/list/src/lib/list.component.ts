@@ -172,14 +172,7 @@ export class ListComponent extends ListAbstract implements OnInit, AfterViewInit
       return item;
     });
     this.showAdvancedFilter = this.config.showAdvancedFilter;
-    this.filterFormConfig = (this.deviceService.isMobile() ? {
-      advanced: koala({})
-        .object()
-        .merge(this.config.filterFormConfig.main ?? {})
-        .merge(this.config.filterFormConfig.advanced ?? {})
-        .getValue() as KoalaDynamicFormConfigInterface,
-      checkAndSearch: this.config.filterFormConfig.checkAndSearch
-    } : this.config.filterFormConfig);
+    this.filterFormConfig = this.config.filterFormConfig;
     this.request = this.config.request;
     this.reload = this.config.reload;
     this.responseIndexName = this.config.responseIndexName;
