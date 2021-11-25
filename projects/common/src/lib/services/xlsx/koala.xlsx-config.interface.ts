@@ -7,4 +7,5 @@ export interface KoalaXlsxConfigInterface {
   headerFontColor?: string;
   headerBackgroundColor?: string;
   password?: string;
+  normalizeHeader?: boolean;
 }

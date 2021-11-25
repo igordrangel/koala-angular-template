@@ -14,27 +14,39 @@ export class KoalaXlsxService {
     const header = [];
 
     Object.keys(json[0]).forEach(name => {
-      header.push(koala(name).string().normalize().getValue().toUpperCase());
+      header.push((
+        config.normalizeHeader === true || config.normalizeHeader === null || config.normalizeHeader === undefined ?
+        koala(name).string().normalize().getValue().toUpperCase() :
+        name
+      ));
     });
 
     const workbook: ExcelProper.Workbook = new Excel.Workbook();
     const worksheet = workbook.addWorksheet(config.sheetName);
-    if (config.password) await worksheet.protect(config.password, {
-      selectLockedCells: false,
-      selectUnlockedCells: false,
-      scenarios: false
-    });
-
-    const titleRow = worksheet.addRow([title]);
-    titleRow.alignment = {horizontal: "center"};
-    titleRow.font = {bold: true, color: {argb: config.titleFontColor.replace('#', '')}};
-    titleRow.fill = {
-      type: 'pattern',
-      pattern: 'solid',
-      fgColor: {argb: config.titleBackgroundColor.replace('#', '')},
-      bgColor: {argb: config.titleBackgroundColor.replace('#', '')}
+    if (config.password) {
+      await worksheet.protect(config.password, {
+        selectLockedCells: false,
+        selectUnlockedCells: false,
+        scenarios: false
+      });
     }
-    worksheet.mergeCells(`A1:${worksheet.getCell(1, Object.keys(json[0]).length).address}`);
+
+    if (config.title) {
+      const titleRow = worksheet.addRow([title]);
+      titleRow.alignment = {horizontal: 'center'};
+      if (config.titleFontColor) {
+        titleRow.font = {bold: true, color: {argb: config.titleFontColor.replace('#', '')}};
+      }
+      if (config.titleBackgroundColor) {
+        titleRow.fill = {
+          type: 'pattern',
+          pattern: 'solid',
+          fgColor: {argb: config.titleBackgroundColor.replace('#', '')},
+          bgColor: {argb: config.titleBackgroundColor.replace('#', '')}
+        };
+      }
+      worksheet.mergeCells(`A1:${worksheet.getCell(1, Object.keys(json[0]).length).address}`);
+    }
 
     const headerRow = worksheet.addRow(header);
     headerRow.eachCell((cell, number) => {
@@ -56,7 +68,7 @@ export class KoalaXlsxService {
     });
 
     workbook.xlsx.writeBuffer().then((data) => {
-      let blob = new Blob([data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+      const blob = new Blob([data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
       fs.saveAs(blob, config.filename + '.xlsx');
     });
   }
