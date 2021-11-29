@@ -467,6 +467,7 @@
 		          [matAutocomplete]="auto"
 		          [matChipInputFor]="chipList"
               [tabIndex]="tabIndexStart + i"
+              autocomplete="off"
 		          formControlName="value"
 		          matInput
 		          type="text"
@@ -479,6 +480,7 @@
             [koalaAutoFocus]="propriedade.get('focus').value"
 			      [required]="propriedade.get('required').value"
             [tabIndex]="tabIndexStart + i"
+            autocomplete="off"
 			      formControlName="value"
 			      matInput
 			      placeholder="Selecione uma opção..."

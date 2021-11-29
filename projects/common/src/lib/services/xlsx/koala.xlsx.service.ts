@@ -50,15 +50,19 @@ export class KoalaXlsxService {
 
     const headerRow = worksheet.addRow(header);
     headerRow.eachCell((cell, number) => {
-      cell.fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: {argb: config.headerBackgroundColor.replace('#', '')},
-        bgColor: {argb: config.headerBackgroundColor.replace('#', '')}
-      };
-      cell.font = {
-        color: {argb: config.headerFontColor.replace('#', '')}
-      };
+      if (config.headerBackgroundColor) {
+        cell.fill = {
+          type: 'pattern',
+          pattern: 'solid',
+          fgColor: {argb: config.headerBackgroundColor.replace('#', '')},
+          bgColor: {argb: config.headerBackgroundColor.replace('#', '')}
+        };
+      }
+      if (config.headerFontColor) {
+        cell.font = {
+          color: {argb: config.headerFontColor.replace('#', '')}
+        };
+      }
     });
 
     json.forEach(item => {
