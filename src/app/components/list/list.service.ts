@@ -9,7 +9,7 @@ export class ListService {
 
   public getList(params?: KoalaListFormFilterInterface) {
     return new Observable<ListItemInterface[]>(observe => {
-      if (params.params.name === 'Test Error') {
+      if (params?.params?.name === 'Test Error') {
         observe.error(new Error('Test Error'));
       } else {
         observe.next(koala([

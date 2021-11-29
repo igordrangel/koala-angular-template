@@ -13,6 +13,7 @@ import { FormBuilder } from "@angular/forms";
 import { CustomSyncValidator } from "./validators/custom-sync.validator";
 import { CustomAsyncValidator } from "./validators/custom-async.validator";
 import { format } from "@koalarx/utils/operators/date";
+import { first } from "rxjs/operators";
 
 @Component({
   templateUrl: 'page-dynamic-form.component.html',
@@ -48,7 +49,7 @@ export class PageDynamicFormComponent extends PageAbstract {
                                     .field('Phone Field', 'phone', "phone").grid(2).generate()
                                     .autocomplete('Autocomplete All Field', 'autocompleteAll').grid(2).required()
                                     .service(new Observable<KoalaDynamicAutocompleteOptionsInterface[]>(observe => {
-                                      this.listService.getList().subscribe(list => {
+                                      this.listService.getList().pipe(first()).subscribe(list => {
                                         const options: KoalaDynamicAutocompleteOptionsInterface[] = [];
                                         list.forEach(item => options.push({
                                           value: item.value,
