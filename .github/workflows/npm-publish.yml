@@ -12,8 +12,8 @@ jobs:
 
       - name: 🔨 Build Project
         run: |
-          npm install @angular/cli
-          npm install
+          npm i @angular/cli
+          npm i
           npm run build
 
       - name: Publish npm package
