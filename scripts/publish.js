@@ -58,21 +58,16 @@ fs.writeFileSync('dist/package.json', JSON.stringify({
     "@angular/forms": ">=12.0.0",
     "@angular/material": ">=12.0.0",
     "@angular/cdk": ">=12.0.0",
-    "@koalarx/utils": ">= 1.0.88"
-  },
-  "dependencies": {
-    "tslib": "^2.0.0",
+    "@koalarx/utils": ">= 1.0.88",
     "exceljs": "^3.10.0",
     "file-saver": "^2.0.5",
     "jwt-decode": "^3.0.0",
     "jwt-encode": "^1.0.1",
-    "@koalarx/utils": "^1.0.88",
     "ng2-currency-mask": "^9.0.2",
     "ngx-device-detector": "^2.1.1",
     "ngx-mask": "^10.0.4",
     "ngx-papaparse": "^5.0.0",
     "xlsx": "^0.17.0",
-    "rxjs": "~6.6.3"
   }
 }), 'utf8');
 fs.writeFileSync('dist/README.md', fs.readFileSync('README.md').toString(), 'utf8');

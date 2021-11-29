@@ -9,6 +9,6 @@ export function AutocompleteSelectedValidator(control: AbstractControl) {
   ) {
     return null;
   }
-  
+
   return {autocompleteSelected: true};
 }
