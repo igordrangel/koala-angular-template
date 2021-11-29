@@ -58,7 +58,8 @@ fs.writeFileSync('dist/package.json', JSON.stringify({
     "@angular/forms": ">=12.0.0",
     "@angular/material": ">=12.0.0",
     "@angular/cdk": ">=12.0.0",
-    "@koalarx/utils": ">= 1.0.88"
+    "@koalarx/utils": ">= 1.0.88",
+    "ngx-device-detector": ">=2.1.1"
   },
   "dependencies": {
     "tslib": "^2.0.0",
