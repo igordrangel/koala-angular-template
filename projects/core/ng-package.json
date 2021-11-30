@@ -5,18 +5,6 @@
     "theme/koala.theme.css"
   ],
   "lib": {
-    "entryFile": "src/index.ts",
-    "umdModuleIds": {
-      "jwt-decode": "jwt",
-      "jwt-encode": "jwtEncode",
-      "ng2-currency-mask": "ng2-currency-mask",
-      "ngx-mask": "ngx-mask",
-      "ngx-papaparse": "ngx-papaparse",
-      "@koalarx/utils": "utils",
-      "@koalarx/ui/menu": "menu",
-      "@koalarx/ui/alert": "alert",
-      "@koalarx/utils/operators/delay": "delay",
-      "@koalarx/utils/operators/string": "string"
-    }
+    "entryFile": "src/index.ts"
   }
 }

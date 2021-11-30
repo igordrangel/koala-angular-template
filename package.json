@@ -1,6 +1,6 @@
 {
   "name": "koala-angular-template",
-  "version": "12.7.19",
+  "version": "13.0.0",
   "description": "Koala UI is a Design System developed in Angular whose objective is to facilitate and make your development faster and simpler, making this framework your greatest ally.",
   "scripts": {
     "ng": "ng",
@@ -35,16 +35,16 @@
   },
   "homepage": "https://github.com/igordrangel/koala-angular-template#readme",
   "dependencies": {
-    "@angular/animations": "~12.0.3",
+    "@angular/animations": "~13.0.2",
     "@angular/cdk": "^12.0.3",
-    "@angular/common": "~12.0.3",
-    "@angular/compiler": "~12.0.3",
-    "@angular/core": "~12.0.3",
-    "@angular/forms": "~12.0.3",
+    "@angular/common": "~13.0.2",
+    "@angular/compiler": "~13.0.2",
+    "@angular/core": "~13.0.2",
+    "@angular/forms": "~13.0.2",
     "@angular/material": "^12.0.3",
-    "@angular/platform-browser": "~12.0.3",
-    "@angular/platform-browser-dynamic": "~12.0.3",
-    "@angular/router": "~12.0.3",
+    "@angular/platform-browser": "~13.0.2",
+    "@angular/platform-browser-dynamic": "~13.0.2",
+    "@angular/router": "~13.0.2",
     "@koalarx/utils": "^1.0.88",
     "exceljs": "^3.10.0",
     "file-saver": "^2.0.5",
@@ -61,10 +61,10 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~12.0.3",
-    "@angular-devkit/core": "^12.0.3",
-    "@angular/cli": "~12.0.3",
-    "@angular/compiler-cli": "~12.0.3",
+    "@angular-devkit/build-angular": "~13.0.3",
+    "@angular-devkit/core": "^13.0.3",
+    "@angular/cli": "~13.0.3",
+    "@angular/compiler-cli": "~13.0.2",
     "@types/file-saver": "^2.0.1",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
@@ -77,12 +77,12 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
-    "ng-packagr": "^12.0.3",
+    "ng-packagr": "^13.0.8",
     "postcss": "^8.2.4",
     "prettier": "^2.4.1",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.2.4"
+    "typescript": "~4.4.4"
   }
 }

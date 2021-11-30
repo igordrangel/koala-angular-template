@@ -2,9 +2,6 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/icon",
   "lib": {
-    "entryFile": "src/index.ts",
-    "umdModuleIds": {
-      "@koalarx/utils": "utils"
-    }
+    "entryFile": "src/index.ts"
   }
 }
