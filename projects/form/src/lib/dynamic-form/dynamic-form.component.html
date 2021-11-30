@@ -244,9 +244,10 @@
 	      <textarea
           #textarea
 		      [koalaAutoFocus]="propriedade.get('focus').value"
-		      [mat-autosize]="true"
-		      [matAutosizeMaxRows]="8"
-		      [matAutosizeMinRows]="3"
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+		      [cdkAutosizeMaxRows]="8"
+		      [cdkAutosizeMinRows]="3"
 		      [required]="propriedade.get('required').value"
           [tabIndex]="tabIndexStart + i"
           [minLength]="propriedade.get('minLength').value"
@@ -289,9 +290,10 @@
 	      <textarea
           #textarea
 		      [koalaAutoFocus]="propriedade.get('focus').value"
-		      [mat-autosize]="true"
-		      [matAutosizeMaxRows]="8"
-		      [matAutosizeMinRows]="3"
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+		      [cdkAutosizeMaxRows]="8"
+		      [cdkAutosizeMinRows]="3"
 		      [required]="propriedade.get('required').value"
           [tabIndex]="tabIndexStart + i"
           [minLength]="propriedade.get('minLength').value"
@@ -514,7 +516,7 @@
 	      <mat-autocomplete
 		      #auto="matAutocomplete"
 		      [displayWith]="display" autoActiveFirstOption>
-		      <div *ngIf="(propriedade.get('autocompleteOptionsFiltered').value | async) as options">
+		      <div *ngIf="(getAutocompleteOptions(propriedade) | async) as options">
 		        <mat-option *ngFor="let option of options" [value]="option">
 		          {{option.name}}
 		        </mat-option>
@@ -535,7 +537,7 @@
 		  </div>
 		  <div *ngIf="
 		    propriedade.get('type').value == typeField.dynamicForm &&
-				(propriedade.get('dynamicFormConfig').value | async) as dynamicFormConfig">
+				(getDynamicFormConfig(propriedade) | async) as dynamicFormConfig">
 			  <fieldset *ngIf="propriedade.get('label').value else dynamicFormWithoutLabel">
 				  <legend>{{propriedade.get('label').value}}</legend>
 				  <koala-dynamic-form

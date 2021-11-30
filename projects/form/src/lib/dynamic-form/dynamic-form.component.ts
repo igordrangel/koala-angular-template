@@ -1,4 +1,4 @@
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { KoalaDynamicFormFieldInterface } from './interfaces/koala.dynamic-form-field.interface';
 import { DynamicFormTypeFieldEnum } from './enums/dynamic-form-type-field.enum';
 import { CpfValidator } from './validators/cpf.validator';
@@ -264,6 +264,14 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 
   public getColorChip(config: KoalaDynamicFormAutocompleteMultipleConfigInterface): ThemePalette {
     return config.color;
+  }
+
+  public getAutocompleteOptions(propriedade: AbstractControl) {
+    return propriedade.get('autocompleteOptionsFiltered').value as BehaviorSubject<any[]>;
+  }
+
+  public getDynamicFormConfig(propriedade: AbstractControl) {
+    return propriedade.get('dynamicFormConfig').value as BehaviorSubject<KoalaDynamicFormConfigInterface>;
   }
 
   private newControl(config: KoalaDynamicFormFieldInterface): FormGroup {
