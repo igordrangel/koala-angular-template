@@ -10,7 +10,6 @@
       "jwt-decode": "jwt",
       "jwt-encode": "jwtEncode",
       "ng2-currency-mask": "ng2-currency-mask",
-      "ngx-device-detector": "ngxDeviceDetector",
       "ngx-mask": "ngx-mask",
       "ngx-papaparse": "ngx-papaparse",
       "@koalarx/utils": "utils",
