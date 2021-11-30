@@ -83,7 +83,7 @@ export class DynamicFormBuilder {
       const setValues: KoalaDynamicSetValueInterface[] = [];
       Object.keys(object).forEach(indexName => {
 
-        const arrField = koala(this.config.formConfig).array<KoalaDynamicFormFieldInterface>().filter(indexName, 'name').getValue();
+        const arrField = koala(this.config.formConfig).array<KoalaDynamicFormFieldInterface>().filter(indexName, 'name', {comparator: "="}).getValue();
         if (arrField.length === 1) {
 
           const field = arrField[0] ?? null;
@@ -142,7 +142,6 @@ export class DynamicFormBuilder {
           }
         }
       });
-
       this.config?.setValues?.next(setValues);
     }
 

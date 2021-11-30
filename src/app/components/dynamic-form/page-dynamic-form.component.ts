@@ -8,7 +8,6 @@ import {
 } from "@koalarx/ui/form";
 import { ListService } from "../list/list.service";
 import { Observable } from "rxjs";
-import { koala } from "@koalarx/utils";
 import { FormBuilder } from "@angular/forms";
 import { CustomSyncValidator } from "./validators/custom-sync.validator";
 import { CustomAsyncValidator } from "./validators/custom-async.validator";
@@ -47,8 +46,7 @@ export class PageDynamicFormComponent extends PageAbstract {
                                     .field('Hours and Minutes Field', 'hoursAndMinutes', "hoursAndMinutes").grid(2).generate()
                                     .field('Password Field', 'password', "password").grid(2).generate()
                                     .field('Phone Field', 'phone', "phone").grid(2).generate()
-                                    .autocomplete('Autocomplete All Field', 'autocompleteAll').grid(2).required()
-                                    .service(new Observable<KoalaDynamicAutocompleteOptionsInterface[]>(observe => {
+                                    .autocomplete('Autocomplete All Field', 'autocompleteAll').multiple().grid(2).required().service(new Observable<KoalaDynamicAutocompleteOptionsInterface[]>(observe => {
                                       this.listService.getList().pipe(first()).subscribe(list => {
                                         const options: KoalaDynamicAutocompleteOptionsInterface[] = [];
                                         list.forEach(item => options.push({
@@ -57,14 +55,14 @@ export class PageDynamicFormComponent extends PageAbstract {
                                         }));
                                         observe.next(options);
                                       })
-                                    })).loadOptions('all').generate()
-                                    .field('Select Field', 'select', "select")
-                                    .setOptions([
+                                    })).colorChipConfig((subject) => subject.next({
+        color: 'primary'
+      })).loadOptions('all').generate()
+                                    .field('Select Field', 'select', "select").setOptions([
                                       {value: true, name: 'true'},
                                       {value: false, name: 'false'}
                                     ]).grid(2).generate()
-                                    .field('Radio Field', 'radio', "radio")
-                                    .setOptions([
+                                    .field('Radio Field', 'radio', "radio").setOptions([
                                       {value: true, name: 'true'},
                                       {value: false, name: 'false'}
                                     ]).grid(2).generate()
@@ -78,11 +76,11 @@ export class PageDynamicFormComponent extends PageAbstract {
         {value: 6, name: 'Item 6'}
       ]).required().textHint('Selecione um ou mais Items').generate()
                                     .simpleMoreItems('More Items', 'moreItems', 'Add Item', 1, 2)
-                                    .build()
-                                    .field('Text Field', 'text', "text").grid(4).maxLength(10).generate()
-                                    .field('Date Field', 'date', "date").grid(4).generate()
-                                    .field('Number Field', 'number', "number").grid(4).min(5).max(10).generate()
-                                    .field('String Number Field', 'stringNumber', "stringNumber").grid(4).maxLength(4).generate()
+                                      .build()
+                                      .field('Text Field', 'text', "text").grid(3).maxLength(10).generate()
+                                      .field('Date Field', 'date', "date").grid(3).generate()
+                                      .field('Number Field', 'number', "number").grid(3).min(5).max(10).generate()
+                                      .field('String Number Field', 'stringNumber', "stringNumber").grid(3).maxLength(4).generate()
                                     .generateMoreItems()
                                     .literalConfig({
                                       label: 'More Items',

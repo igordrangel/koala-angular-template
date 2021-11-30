@@ -103,8 +103,11 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
                           if (newFormGroup.get('multiple').value) {
                             if (Array.isArray(value)) {
                               newFormGroup.get('autocompleteSelectedValue').setValue(value);
+                              newFormGroup.get('value').setValue(value[value.length - 1], {emitEvent: false});
                             } else {
-                              newFormGroup.get('autocompleteSelectedValue').value.push(value);
+                              if (this.validateAutocompleteSelect(newFormGroup.get('autocompleteSelectedValue').value, value)) {
+                                newFormGroup.get('autocompleteSelectedValue').value.push(value);
+                              }
                             }
                             if (this.autocompleteInput?.nativeElement) {
                               this.autocompleteInput.nativeElement.value = '';
@@ -566,5 +569,18 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
         }
       }
     }
+  }
+
+  private validateAutocompleteSelect(selectedValues: KoalaDynamicAutocompleteOptionsInterface[], value: KoalaDynamicAutocompleteOptionsInterface) {
+    let isValid = true;
+
+    for (const selectedItem of selectedValues.values()) {
+      if (selectedItem.name === value.name) {
+        isValid = false;
+        break;
+      }
+    }
+
+    return isValid;
   }
 }
