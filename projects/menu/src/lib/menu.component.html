@@ -12,27 +12,27 @@
       }">
       <a *ngIf="!!module.routerLink else moduleWithoutLink" [routerLink]="module.routerLink" (click)="toogle(module)" class="module">
         <mat-icon *ngIf="module.icon && !module.koalaIcon">{{module.icon}}</mat-icon>
-        <koala-icon *ngIf="module.icon && module.koalaIcon" [icon]="module.icon"></koala-icon>
+        <koala-icon *ngIf="module.icon && module.koalaIcon" [icon]="getKoalaIcon(module)"></koala-icon>
         <h3>{{module.name}}</h3>
         <mat-icon
-	        *ngIf="module.tools?.length > 0"
+	        *ngIf="module.tools?.length ?? 0 > 0"
 	        class="state-module">{{module.expanded || module.active ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}}</mat-icon>
       </a>
       <ng-template #moduleWithoutLink>
         <div (click)="toogle(module)" class="module">
           <mat-icon *ngIf="module.icon && !module.koalaIcon">{{module.icon}}</mat-icon>
-          <koala-icon *ngIf="module.icon && module.koalaIcon" [icon]="module.icon" size="18"></koala-icon>
+          <koala-icon *ngIf="module.icon && module.koalaIcon" [icon]="getKoalaIcon(module)" [size]="18"></koala-icon>
           <h3>{{module.name}}</h3>
           <mat-icon
-	          *ngIf="module.tools?.length > 0"
+	          *ngIf="module.tools?.length ?? 0 > 0"
 	          class="state-module">{{module.expanded || module.active ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}}</mat-icon>
         </div>
       </ng-template>
-      <ul *ngIf="module.tools?.length > 0">
+      <ul *ngIf="module.tools?.length ?? 0 > 0">
         <li *ngFor="let tool of module.tools">
 		      <a [routerLink]="tool.routerLink" routerLinkActive="active">
 	          <mat-icon *ngIf="tool.icon && !tool.koalaIcon">{{tool.icon}}</mat-icon>
-            <koala-icon *ngIf="tool.icon && tool.koalaIcon" [icon]="tool.icon" size="18"></koala-icon>
+            <koala-icon *ngIf="tool.icon && tool.koalaIcon" [icon]="getKoalaIcon(tool)" [size]="18"></koala-icon>
 	          <h4>{{tool.name}}</h4>
 		      </a>
         </li>

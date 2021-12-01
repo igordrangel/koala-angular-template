@@ -1,7 +1,7 @@
 <button
 	*ngIf="text else iconButton"
 	[matTooltipDisabled]="!tooltip"
-	[matTooltip]="tooltip"
+	[matTooltip]="tooltip ?? ''"
 	[disabled]="disabled"
   [style]="style"
 	class="koala-button"
@@ -9,13 +9,13 @@
 	matTooltipPosition="above"
 	type="button">
   <mat-icon *ngIf="icon && !koalaIcon">{{icon}}</mat-icon>
-  <koala-icon [color]="color" [icon]="icon" [size]="koalaIconSize" *ngIf="icon && koalaIcon"></koala-icon>
+  <koala-icon [color]="color" [icon]="getKoalaIcon()" [size]="koalaIconSize" *ngIf="icon && koalaIcon"></koala-icon>
 	{{text}}
 </button>
 <ng-template #iconButton>
   <button
 	  [matTooltipDisabled]="!tooltip"
-	  [matTooltip]="tooltip"
+	  [matTooltip]="tooltip ?? ''"
     [style]="style"
 	  [disabled]="disabled"
 	  class="koala-icon-button"
@@ -23,6 +23,6 @@
 	  matTooltipPosition="before"
 	  type="button">
     <mat-icon *ngIf="!koalaIcon">{{icon}}</mat-icon>
-    <koala-icon [color]="color" [icon]="icon" [size]="koalaIconSize" *ngIf="koalaIcon"></koala-icon>
+    <koala-icon [color]="color" [icon]="getKoalaIcon()" [size]="koalaIconSize" *ngIf="koalaIcon"></koala-icon>
   </button>
 </ng-template>

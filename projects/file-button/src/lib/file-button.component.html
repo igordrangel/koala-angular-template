@@ -6,7 +6,7 @@
 	*ngIf="text else iconButton"
 	[disabled]="disabled"
 	[matTooltipDisabled]="!tooltip"
-	[matTooltip]="tooltip"
+	[matTooltip]="tooltip ?? ''"
   [style]="style"
 	class="koala-button"
 	mat-button
@@ -20,7 +20,7 @@
 	  (click)="open()"
 	  [disabled]="disabled"
 	  [matTooltipDisabled]="!tooltip"
-	  [matTooltip]="tooltip"
+	  [matTooltip]="tooltip ?? ''"
     [style]="style"
 	  class="koala-icon-button"
 	  mat-icon-button

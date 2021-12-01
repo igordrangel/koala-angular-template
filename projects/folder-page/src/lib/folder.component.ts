@@ -8,6 +8,7 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
+import { KoalaIconType } from '@koalarx/ui/icon';
 import { KoalaNavigateHistoryInterface } from "./koala-navigate-history.interface";
 
 @Component({
@@ -18,7 +19,7 @@ import { KoalaNavigateHistoryInterface } from "./koala-navigate-history.interfac
 })
 export class FolderComponent implements OnInit, OnChanges {
   @Input() titlePage: string = 'Title';
-  @Input() titleIcon?: string;
+  @Input() titleIcon?: string | KoalaIconType;
   @Input() koalaIcon?: boolean;
   @Input() customFolderFontColor: string = '#212121';
   @Input() customFolderBackgroudColor: string = '#FFF';
@@ -26,7 +27,6 @@ export class FolderComponent implements OnInit, OnChanges {
 
   @ViewChild('folder', {static: true}) private folder?: ElementRef;
   @ViewChild('folderTitle', {static: true}) private folderTitle?: ElementRef;
-  @ViewChild('folderIconTitle', {static: true}) private folderIconTitle?: ElementRef;
   @ViewChild('folderNavigateHistory', {static: false}) private folderNavigateHistory?: ElementRef;
 
   ngOnInit() {
@@ -37,6 +37,10 @@ export class FolderComponent implements OnInit, OnChanges {
     if (changes.customBackgroudColor || changes.customFolderFontColor) {
       this.setCustomBackgroundColor();
     }
+  }
+
+  public getKoalaIcon() {
+    return this.titleIcon as KoalaIconType;
   }
 
   private setCustomBackgroundColor() {

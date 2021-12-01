@@ -10,6 +10,7 @@ export * from './lib/services/openid/koala-oauth2-config.interface';
 export * from './lib/page/koala.user-menu-options.interface';
 export * from './lib/page/koala-page-pallet-colors.interface';
 export * from './lib/page/page.component';
+export * from './lib/page/koala.page.module';
 //#endregion
 
 //#region [ROUTER]

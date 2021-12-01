@@ -8,13 +8,13 @@ import { IconsAnimatedService } from "../../icons-animated.service";
   providers: [IconsAnimatedService]
 })
 export class LoadingIconAnimatedComponent implements OnInit {
-  @Input() size: number = 22;
-  @Input() color: string = '#000';
+  @Input() size?: number;
+  @Input() color?: string;
 
   constructor(public iconService: IconsAnimatedService) {
   }
 
   ngOnInit() {
-    this.iconService.init('loading', this.size, this.color);
+    this.iconService.init('loading', this.size ?? 22, this.color ?? '#000');
   }
 }
