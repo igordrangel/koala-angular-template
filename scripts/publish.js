@@ -20,7 +20,7 @@ const libs = [
   'list',
 ];
 
-for (const [lib] of libs.values()) {
+for (const lib of libs.values()) {
   execSync(`ng build ${lib} --configuration production`, {stdio: 'ignore'});
   console.log(`- Package ${lib} built with successfully.`);
 }
