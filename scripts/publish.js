@@ -1,6 +1,5 @@
 const fs = require("fs");
 const {execSync} = require("child_process");
-const readline = require('readline');
 const config = JSON.parse(fs.readFileSync('package.json').toString());
 const currentVersion = config.version;
 const libs = [
@@ -21,19 +20,9 @@ const libs = [
   'list',
 ];
 
-function writeLine(msg, color = 37) {
-  function colorize(color, output) {
-    return ['\033[', color, 'm', output, '\033[0m'].join('');
-  }
-
-  readline.clearLine(process.stdout, 0);
-  readline.cursorTo(process.stdout, 0);
-  process.stdout.write(colorize(color, msg));
-}
-
-for (const [index, lib] of libs.entries()) {
-  writeLine(`[${index + 1} of ${libs.length}] Building package ${lib}...`);
+for (const [lib] of libs.values()) {
   execSync(`ng build ${lib} --configuration production`, {stdio: 'ignore'});
+  console.log(`- Package ${lib} built with successfully.`);
 }
 
 fs.writeFileSync('dist/package.json', JSON.stringify({
@@ -76,4 +65,4 @@ fs.writeFileSync('dist/package.json', JSON.stringify({
 }), 'utf8');
 fs.writeFileSync('dist/README.md', fs.readFileSync('README.md').toString(), 'utf8');
 
-writeLine('Build completed');
+console.log('Build completed');
