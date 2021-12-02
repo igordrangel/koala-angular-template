@@ -12,7 +12,7 @@ jobs:
 
       - name: 🔨 Build Project
         run: |
-          npm i @angular/cli@latest
+          npm i @angular/cli@13.0.2
           npm i
           npm run build
 
