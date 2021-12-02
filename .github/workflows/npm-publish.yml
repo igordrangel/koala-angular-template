@@ -10,7 +10,7 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2.3.2
 
-      - name: 🔨 Instaling Dependencies
+      - name: 🔨 Install Dependencies
         run: npm i @angular/cli@13.0.2 --force && npm i --force
 
       - name: 🔨 Build Project
@@ -19,7 +19,7 @@ jobs:
       - name: Publish npm package
         uses: actions/setup-node@v2-beta
         with:
-          node-version: 12
+          node-version: 14
           registry-url: https://registry.npmjs.org/
       - run: cd ./dist && npm publish --access public --ignore-scripts
         env:
