@@ -20,9 +20,9 @@ const libs = [
   'list',
 ];
 
-for (const lib of libs.values()) {
+for (const [index, lib] of libs.entries()) {
   execSync(`ng build ${lib} --configuration production`, {stdio: 'ignore'});
-  console.log(`- Package ${lib} built with successfully.`);
+  console.log(`[${index + 1} of ${libs.length}] ${lib} built with successfully.`);
 }
 
 fs.writeFileSync('dist/package.json', JSON.stringify({
