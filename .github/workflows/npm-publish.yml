@@ -10,9 +10,11 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2.3.2
 
+      - name: 🔨 Instaling Angular CLI
+        run: npm i @angular/cli@13.0.2
+
       - name: 🔨 Build Project
         run: |
-          npm i @angular/cli@13.0.2
           npm i
           npm run build
 
@@ -21,8 +23,6 @@ jobs:
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
-      - run: |
-          cd ./dist
-          npm publish --access public --ignore-scripts
+      - run: cd ./dist && npm publish --access public --ignore-scripts
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
