@@ -53,11 +53,11 @@ fs.writeFileSync('dist/package.json', JSON.stringify({
   "homepage": "https://github.com/igordrangel/koala-angular-template#readme",
   "types": "./koalarx-ui.d.ts",
   "peerDependencies": {
-    "@angular/common": ">=12.0.0",
-    "@angular/core": ">=12.0.0",
-    "@angular/forms": ">=12.0.0",
-    "@angular/material": ">=12.0.0",
-    "@angular/cdk": ">=12.0.0"
+    "@angular/common": ">=13.0.2",
+    "@angular/core": ">=13.0.2",
+    "@angular/forms": ">=13.0.2",
+    "@angular/material": ">=13.0.2",
+    "@angular/cdk": ">=13.0.2"
   },
   "dependencies": {
     "tslib": "^2.2.0",
