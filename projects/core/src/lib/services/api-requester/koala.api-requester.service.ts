@@ -7,6 +7,7 @@ import { KoalaRequestHeaderHelper } from "./helpers/service/koala.request-header
 import { KoalaResponseFactory } from "./factory/koala.response.factory";
 import { first, map } from "rxjs/operators";
 import { TokenFactory } from "../token/token.factory";
+import { EventSourcePolyfill } from 'event-source-polyfill';
 
 export type ApiRequesterType = 'get' | 'post' | 'put' | 'patch' | 'delete';
 
@@ -20,6 +21,23 @@ export class KoalaApiRequesterService {
     private http: HttpClient,
     private oauth2Service: KoalaOAuth2Service
   ) {
+  }
+
+  public eventStream<T>(url: string, onmessage: (data: T[]) => void, onclose?: () => void) {
+    const hub = new URL(`${this.getUrlBase()}/${url}`);
+    const eventSource = new EventSourcePolyfill(hub.toJSON(), {
+      headers: KoalaRequestHeaderHelper.add(TokenFactory.getToken())
+    });
+    eventSource.addEventListener('message', (event) => {
+      if (typeof event.data !== 'undefined') {
+        onmessage(JSON.parse(event.data));
+      }
+    });
+    eventSource.addEventListener('close', () => {
+      if (onclose) {
+        onclose();
+      }
+    });
   }
 
   public request<T>(method: ApiRequesterType, url: string, data: any = {}): Observable<T> {
