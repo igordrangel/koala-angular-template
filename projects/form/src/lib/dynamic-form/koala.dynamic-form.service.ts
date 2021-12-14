@@ -38,7 +38,6 @@ export class KoalaDynamicFormService {
     const control = formArray.controls.find(control => control.get('name').value === name);
 
     if (control) {
-      const currentRequired = control.get('required').value;
       const currentMin = control.get('min').value;
       const currentMax = control.get('max').value;
       const validators = [];
@@ -46,7 +45,7 @@ export class KoalaDynamicFormService {
       control.get('value').clearValidators();
       control.get('value').setErrors(null);
 
-      if ((type === "required" && value) || currentRequired) {
+      if (type === "required" && value) {
         validators.push(Validators.required);
         control.get('value').setErrors({required: true});
       }
