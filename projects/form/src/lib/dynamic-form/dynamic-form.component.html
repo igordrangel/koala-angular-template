@@ -72,7 +72,7 @@
           [suffix]="propriedade.get('customMascSuffix').value"
           [prefix]="propriedade.get('customMascPrefix').value"
           separatorLimit="0"
-          autocomplete="off"
+          autocomplete="-1"
 		      formControlName="value"
 		      matInput/>
 	      <button
@@ -149,7 +149,7 @@
           [max]="propriedade.get('max').value"
           [minLength]="propriedade.get('minLength').value"
           [maxLength]="propriedade.get('maxLength').value"
-          autocomplete="off"
+          autocomplete="-1"
 		      currencyMask
 		      formControlName="value"
 		      matInput
@@ -198,7 +198,7 @@
           [max]="propriedade.get('max').value"
           [minLength]="propriedade.get('minLength').value"
           [maxLength]="propriedade.get('maxLength').value"
-          autocomplete="off"
+          autocomplete="-1"
           currencyMask
           [options]="{prefix: ''}"
           formControlName="value"
@@ -469,7 +469,7 @@
 		          [matAutocomplete]="auto"
 		          [matChipInputFor]="chipList"
               [tabIndex]="tabIndexStart + i"
-              autocomplete="off"
+              autocomplete="-1"
 		          formControlName="value"
 		          matInput
 		          type="text"
@@ -482,7 +482,7 @@
             [koalaAutoFocus]="propriedade.get('focus').value"
 			      [required]="propriedade.get('required').value"
             [tabIndex]="tabIndexStart + i"
-            autocomplete="off"
+            autocomplete="-1"
 			      formControlName="value"
 			      matInput
 			      placeholder="Selecione uma opção..."
