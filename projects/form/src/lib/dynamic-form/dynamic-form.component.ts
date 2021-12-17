@@ -21,6 +21,7 @@ import { koala } from "@koalarx/utils";
 import { DateMinValidator } from "./validators/date-min.validator";
 import { DateMaxValidator } from "./validators/date-max.validator";
 import { KoalaLanguageHelper } from "@koalarx/ui/core";
+import { randomString } from "@koalarx/utils/operators/string";
 
 @Component({
   selector: 'koala-dynamic-form',
@@ -272,6 +273,15 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
 
   public getDynamicFormConfig(propriedade: AbstractControl) {
     return propriedade.get('dynamicFormConfig').value as BehaviorSubject<KoalaDynamicFormConfigInterface>;
+  }
+
+  public getRandomString() {
+    return randomString(20, {
+      lowercase: true,
+      numbers: true,
+      specialCharacters: false,
+      uppercase: true
+    });
   }
 
   private newControl(config: KoalaDynamicFormFieldInterface): FormGroup {
