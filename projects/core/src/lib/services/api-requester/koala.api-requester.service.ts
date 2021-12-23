@@ -23,7 +23,13 @@ export class KoalaApiRequesterService {
   ) {
   }
 
-  public eventStream<T>(url: string, onmessage: (data: T[]) => void, onclose?: () => void) {
+  public eventStream<T>(
+    url: string,
+    onmessage: (data: T[]) => void,
+    onopen?: (event?: any) => void,
+    onerror?: (event?: any) => void,
+    onclose?: (event?: any) => void
+  ) {
     const hub = new URL(`${this.getUrlBase()}/${url}`);
     const eventSource = new EventSourcePolyfill(hub.toJSON(), {
       headers: KoalaRequestHeaderHelper.add(TokenFactory.getToken())
@@ -33,9 +39,19 @@ export class KoalaApiRequesterService {
         onmessage(JSON.parse(event.data));
       }
     });
-    eventSource.addEventListener('close', () => {
+    eventSource.addEventListener('open', (event) => {
+      if (onopen) {
+        onopen(event);
+      }
+    });
+    eventSource.addEventListener('close', (event) => {
       if (onclose) {
-        onclose();
+        onclose(event);
+      }
+    });
+    eventSource.addEventListener('error', (event) => {
+      if (onerror) {
+        onerror(event);
       }
     });
   }

@@ -1,6 +1,6 @@
 {
   "name": "koala-angular-template",
-  "version": "13.0.7",
+  "version": "13.0.8",
   "description": "Koala UI is a Design System developed in Angular whose objective is to facilitate and make your development faster and simpler, making this framework your greatest ally.",
   "scripts": {
     "ng": "ng",
@@ -51,9 +51,9 @@
     "file-saver": "^2.0.5",
     "jwt-decode": "^3.0.0",
     "jwt-encode": "^1.0.1",
-    "ng2-currency-mask": "^12.0.3",
-    "ngx-device-detector": "^2.2.0",
-    "ngx-mask": "^10.0.4",
+    "ng2-currency-mask": "^13.0.3",
+    "ngx-device-detector": "^3.0.0",
+    "ngx-mask": "^13.0.1",
     "ngx-papaparse": "^5.0.0",
     "rxjs": "^7.4.0",
     "stream": "0.0.2",

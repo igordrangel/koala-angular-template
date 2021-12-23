@@ -55,10 +55,10 @@ fs.writeFileSync('dist/package.json', JSON.stringify({
     "jwt-decode": "^3.0.0",
     "jwt-encode": "^1.0.1",
     "@koalarx/utils": "^1.0.88",
-    "ng2-currency-mask": "^12.0.3",
-    "ngx-device-detector": "^2.2.0",
+    "ng2-currency-mask": "^13.0.3",
+    "ngx-device-detector": "^3.0.0",
     "event-source-polyfill": "^1.0.25",
-    "ngx-mask": "^10.0.4",
+    "ngx-mask": "^13.0.1",
     "ngx-papaparse": "^5.0.0",
     "xlsx": "^0.17.0",
     "rxjs": "~7.4.0"
