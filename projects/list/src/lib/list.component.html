@@ -66,6 +66,7 @@
       *ngIf="!emptyListComponent || (emptyListComponent && dataSource?.data?.length > 0) else emptyList"
       [dataSource]="dataSource"
       [matSortActive]="columnSort"
+      [id]="tableId"
       multiTemplateDataRows
       class="table-hover"
       mat-table

@@ -10,6 +10,7 @@ import { KoalaListFormFilterInterface } from './koala-list-form-filter.interface
 import { KoalaDynamicComponent } from "@koalarx/ui/dynamic-component";
 import { delay } from "@koalarx/utils/operators/delay";
 import { KoalaListConfigInterface } from "./koala.list-config.interface";
+import { randomString } from "@koalarx/utils/operators/string";
 
 export type KoalaListPageSize = 10 | 20 | 30 | 50 | 100;
 
@@ -25,6 +26,7 @@ export abstract class ListAbstract extends FormAbstract {
   public emptyListComponent?: KoalaDynamicComponent;
   public errorListComponent?: KoalaDynamicComponent;
   public pageSize: KoalaListPageSize;
+  public tableId = randomString(20, {uppercase: true, lowercase: true});
 
   protected config?: KoalaListConfigInterface;
   protected paginator?: MatPaginator;
@@ -137,6 +139,7 @@ export abstract class ListAbstract extends FormAbstract {
         switchMap(() => this.runRequestFunction()),
         map((response) => {
           this.loading(false);
+          this.scrollTableToTop();
           return this.requestResponseFunction(response);
         })
       ).subscribe();
@@ -148,6 +151,7 @@ export abstract class ListAbstract extends FormAbstract {
         switchMap(() => this.runRequestFunction()),
         map((response) => {
           this.loading(false);
+          this.scrollTableToTop();
           return this.requestResponseFunction(response);
         })
       ).subscribe();
@@ -194,5 +198,12 @@ export abstract class ListAbstract extends FormAbstract {
         }
       })
     })
+  }
+
+  private scrollTableToTop() {
+    const table = document.getElementById(this.tableId);
+    if (table) {
+      table.scrollTop = 0;
+    }
   }
 }

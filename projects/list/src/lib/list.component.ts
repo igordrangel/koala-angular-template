@@ -4,7 +4,7 @@ import { KoalaListItemMenuOptionInterface } from './koala-list-item-menu-option.
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { KoalaListFilterInterface } from './koala-list-filter.interface';
-import { KoalaDynamicFormService, KoalaDynamicFormConfigInterface } from '@koalarx/ui/form';
+import { KoalaDynamicFormService } from '@koalarx/ui/form';
 import { KoalaListItemInterface } from './koala-list-item.interface';
 import { KoalaListFormFilterInterface } from "./koala-list-form-filter.interface";
 import { MatSort, SortDirection } from "@angular/material/sort";
@@ -15,6 +15,7 @@ import { KoalaListConfigInterface } from "./koala.list-config.interface";
 import { MatPaginator } from "@angular/material/paginator";
 import { KoalaListBtnCollapseSubListConfigInterface } from "./koala-list-btn-collapse-sub-list-config.interface";
 import { animate, state, style, transition, trigger } from "@angular/animations";
+import { randomString } from "@koalarx/utils/operators/string";
 
 @Component({
   selector: 'koala-list',
