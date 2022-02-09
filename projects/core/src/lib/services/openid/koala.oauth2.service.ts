@@ -250,7 +250,7 @@ export class KoalaOAuth2Service implements OnDestroy {
   }
 
   private getClaims() {
-    this.http.get(this.config.endpointClaims ?? this.openIdOptions.userinfo_endpoint, {
+    this.http.get((this.config.endpointClaims ?? this.openIdOptions.userinfo_endpoint), {
       headers: {
         Authorization: `Bearer ${this.getAccessToken()}`
       }

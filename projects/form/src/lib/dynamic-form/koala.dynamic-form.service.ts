@@ -82,6 +82,23 @@ export class KoalaDynamicFormService {
     }
   }
 
+  public disableFields(formGroup: FormGroup, disabled: boolean, fields: string[]) {
+    const formArray = formGroup.get('formData') as FormArray;
+
+    fields.forEach(field => {
+      const controlValue = formArray.controls.find(control => field === control.get('name').value)?.get('value');
+
+      if (controlValue && disabled) {
+        controlValue.disable();
+      } else if (controlValue && !disabled) {
+        controlValue.enable();
+      }
+
+      const controlDisabled = formArray.controls.find(control => field === control.get('name').value)?.get('disabled');
+      controlDisabled.setValue(disabled);
+    });
+  }
+
   public emitData(form: FormGroup) {
     const data = {};
     const formArray = form.get('formData') as FormArray;
