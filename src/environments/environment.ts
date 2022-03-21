@@ -2,7 +2,7 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { KoalaEnvironmentInterface } from "../../projects/core/src/lib/environments/koalaEnvironment";
+import { KoalaEnvironmentInterface } from "@koalarx/ui/core";
 
 export const environment: KoalaEnvironmentInterface = {
   production: false,
