@@ -1,4 +1,4 @@
-import { KoalaEnvironmentInterface } from "../../projects/core/src/lib/environments/koalaEnvironment";
+import { KoalaEnvironmentInterface } from "@koalarx/ui/core";
 
 export const environment: KoalaEnvironmentInterface = {
   production: true,

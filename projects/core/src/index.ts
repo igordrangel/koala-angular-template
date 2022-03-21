@@ -6,6 +6,7 @@ export * from './lib/loader/loader-bar-page.component';
 export * from './lib/page/notifications/koala.notification.interface';
 export * from './lib/page/notifications/notification.component';
 export * from './lib/page/koala-language.helper';
+export * from './lib/environments/koalaEnvironment';
 export * from './lib/services/openid/koala-oauth2-config.interface';
 export * from './lib/page/koala.user-menu-options.interface';
 export * from './lib/page/koala-page-pallet-colors.interface';
