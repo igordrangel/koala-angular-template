@@ -453,17 +453,15 @@
 	      propriedade.get('required').value ? '*' : ''}}</mat-label>
 			  <div *ngIf="propriedade.get('multiple').value else single">
 	        <mat-chip-list #chipList>
-            <ng-container *ngIf="!propriedade.get('disabled').value">
-              <mat-chip
-                (removed)="removeOptionOnAutocomplete(i, option)"
-                *ngFor="let option of propriedade.get('autocompleteSelectedValue').value"
-                [color]="getColorChip(propriedade.get('autocompleteMultipleConfig').value | async)"
-                [removable]="true"
-                [selectable]="true">
-                {{display(option)}}
-                <mat-icon matChipRemove>cancel</mat-icon>
-              </mat-chip>
-            </ng-container>
+            <mat-chip
+              (removed)="removeOptionOnAutocomplete(i, option)"
+              *ngFor="let option of propriedade.get('autocompleteSelectedValue').value"
+              [color]="getColorChip(propriedade.get('autocompleteMultipleConfig').value | async)"
+              [removable]="true"
+              [selectable]="true">
+              {{display(option)}}
+              <mat-icon *ngIf="!propriedade.get('disabled').value" matChipRemove>cancel</mat-icon>
+            </mat-chip>
 	          <input
 		          #autocompleteInput
               [koalaAutoFocus]="propriedade.get('focus').value"
