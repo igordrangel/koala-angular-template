@@ -1,4 +1,6 @@
-export const environment = {
+import { KoalaEnvironmentInterface } from "../../projects/core/src/lib/environments/koalaEnvironment";
+
+export const environment: KoalaEnvironmentInterface = {
   production: true,
   oauthConfig: [{
     name: 'google',
