@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { KoalaNotificationInterface } from './koala.notification.interface';
-import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'koala-notification-list',
@@ -15,16 +14,16 @@ export class NotificationComponent implements OnChanges {
 
   private appName: string;
 
-  constructor(private titleService: Title) {}
+  constructor() {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (!this.appName) {
-      this.appName = this.titleService.getTitle();
+      this.appName = document.title;
     }
     if (changes.notifications && this.notifications.length > 0) {
-      this.titleService.setTitle(`(${this.notifications.length}) ${this.appName}`);
+      document.title = `(${this.notifications.length}) ${this.appName}`;
     } else {
-      this.titleService.setTitle(this.appName);
+      document.title = this.appName.indexOf(') ') >= 0 ? this.appName.split(') ')[1] : this.appName;
     }
   }
 
