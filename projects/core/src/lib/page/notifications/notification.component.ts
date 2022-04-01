@@ -17,9 +17,7 @@ export class NotificationComponent implements OnChanges {
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges) {
-    if (!this.appName) {
-      this.appName = document.title;
-    }
+    this.appName = document.title;
     if (changes.notifications && this.notifications.length > 0) {
       document.title = `(${this.notifications.length}) ${this.appName}`;
     } else {
