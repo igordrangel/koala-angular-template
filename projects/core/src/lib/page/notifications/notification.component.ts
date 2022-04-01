@@ -17,11 +17,11 @@ export class NotificationComponent implements OnChanges {
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges) {
-    this.appName = document.title;
+    this.appName = document.title.indexOf(') ') >= 0 ? document.title.split(') ')[1] : document.title;
     if (changes.notifications && this.notifications.length > 0) {
       document.title = `(${this.notifications.length}) ${this.appName}`;
     } else {
-      document.title = this.appName.indexOf(') ') >= 0 ? this.appName.split(') ')[1] : this.appName;
+      document.title = this.appName;
     }
   }
 
