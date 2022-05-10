@@ -9,9 +9,10 @@ export abstract class KoalaApiRequesterBase<EntityType, GetAllType, DataType> {
   protected constructor(
     protected koalaService: KoalaApiRequesterService,
     protected endpoint: string,
+    environmentNameToEndpointApi = 'endpointApi',
     isMockup = false
   ) {
-    koalaService.apiUrl = KoalaEnvironment.environment?.endpointApi;
+    koalaService.apiUrl = KoalaEnvironment.environment?.[environmentNameToEndpointApi];
     koalaService.isMockup = isMockup;
   }
 
