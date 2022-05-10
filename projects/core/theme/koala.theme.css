@@ -98,6 +98,12 @@ koala-list .menu-list .mat-icon-button {width: 36px;height: 36px;line-height: 36
 koala-list .list-filter .mat-form-field {padding-right: 5px;box-sizing: border-box;}
 form fieldset {margin: 0 0 15px;padding-block-end: 0.625em;padding-block-start: 0.35em;padding-inline-end: 10px;padding-inline-start: 10px;}
 form fieldset legend {border: none;font-family: JosefinSans, sans-serif;font-size: 11px;font-weight: bold;margin: 0;padding: 0 10px;width: auto;}
+.mat-form-field-disabled .mat-form-field-outline {border-radius: 8px;background-color: rgba(200,200,200,.3);}
+.mat-form-field-disabled .mat-form-field-outline-start,
+.mat-form-field-disabled .mat-form-field-outline-end {border-color: #a8a8a8 !important;}
+.mat-form-field-disabled .mat-form-field-outline-start {border-style: dashed!important;border-right-style: none!important;}
+.mat-form-field-disabled .mat-form-field-outline-end {border-style: dashed!important;border-left-style: none!important;}
+.mat-form-field-disabled .mat-form-field-outline-gap {border-bottom-color: #bababa !important;border-left-style: none!important;border-right-style: none!important;border-bottom-style: dashed!important;}
 /****************************************
  ***************** GRID *****************
  ****************************************/

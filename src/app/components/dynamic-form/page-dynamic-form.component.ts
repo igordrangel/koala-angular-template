@@ -34,7 +34,7 @@ export class PageDynamicFormComponent extends PageAbstract {
                                     .field('Competence Data Field', 'competenceDate', 'competenceDate').setValue(format('now', 'MM/YYYY')).grid(3).generate()
                                     .field('Text Field', 'text', "text").addClass('field-content').addFieldClass('field-input').grid(2).generate()
                                     .field('Date Field', 'date', "date").grid(2).focus().generate()
-                                    .field('Datetime Field', 'datetime', "datetime").grid(2).generate()
+                                    .field('Datetime Field', 'datetime', "datetime").grid(2).disabled().generate()
                                     .field('Time Field', 'time', "time").grid(2).generate()
                                     .field('CPF Field', 'cpf', "cpf").grid(2).generate()
                                     .field('CNPJ Field', 'cnpj', "cnpj").grid(2).generate()
