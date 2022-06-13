@@ -15,7 +15,6 @@ import { KoalaListConfigInterface } from "./koala.list-config.interface";
 import { MatPaginator } from "@angular/material/paginator";
 import { KoalaListBtnCollapseSubListConfigInterface } from "./koala-list-btn-collapse-sub-list-config.interface";
 import { animate, state, style, transition, trigger } from "@angular/animations";
-import { randomString } from "@koalarx/utils/operators/string";
 
 @Component({
   selector: 'koala-list',

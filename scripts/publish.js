@@ -42,11 +42,11 @@ fs.writeFileSync('dist/package.json', JSON.stringify({
   "homepage": "https://github.com/igordrangel/koala-angular-template#readme",
   "types": "./koalarx-ui.d.ts",
   "peerDependencies": {
-    "@angular/common": ">=13.0.2",
-    "@angular/core": ">=13.0.2",
-    "@angular/forms": ">=13.0.2",
-    "@angular/material": ">=13.0.2",
-    "@angular/cdk": ">=13.0.2"
+    "@angular/common": ">=13.3.9",
+    "@angular/core": ">=13.3.9",
+    "@angular/forms": ">=13.3.9",
+    "@angular/material": ">=13.3.7",
+    "@angular/cdk": ">=13.3.7"
   },
   "dependencies": {
     "tslib": "^2.2.0",
@@ -54,14 +54,14 @@ fs.writeFileSync('dist/package.json', JSON.stringify({
     "file-saver": "^2.0.5",
     "jwt-decode": "^3.0.0",
     "jwt-encode": "^1.0.1",
-    "@koalarx/utils": "^1.0.88",
+    "@koalarx/utils": "^1.0.101",
     "ng2-currency-mask": "^13.0.3",
     "ngx-device-detector": "^3.0.0",
     "event-source-polyfill": "^1.0.25",
     "ngx-mask": "^13.0.1",
     "ngx-papaparse": "^5.0.0",
     "xlsx": "^0.17.0",
-    "rxjs": "~7.4.0"
+    "rxjs": "~7.5.0"
   }
 }), 'utf8');
 fs.writeFileSync('dist/README.md', fs.readFileSync('README.md').toString(), 'utf8');
