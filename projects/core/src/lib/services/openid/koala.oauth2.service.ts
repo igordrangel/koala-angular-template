@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, interval, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { koala } from "@koalarx/utils";
 import { Router } from "@angular/router";
@@ -75,7 +75,7 @@ export class KoalaOAuth2Service implements OnDestroy {
   private code?: string;
   private token?: any = {};
   private claims?: any;
-  private refreshTokenInterval?: any;
+  private refreshTokenInterval?: Subscription;
 
   constructor(
     private http: HttpClient,
@@ -86,12 +86,8 @@ export class KoalaOAuth2Service implements OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.eventSubscription) {
-      this.eventSubscription.unsubscribe();
-    }
-    if (this.refreshTokenInterval) {
-      clearInterval(this.refreshTokenInterval);
-    }
+    this.eventSubscription?.unsubscribe();
+    this.refreshTokenInterval?.unsubscribe();
   }
 
   public hasOpenIdConfig() {
@@ -197,7 +193,7 @@ export class KoalaOAuth2Service implements OnDestroy {
 
   public initRefreshTokenInterval(code: string, refreshToken: string) {
     if (!this.refreshTokenInterval) {
-      this.refreshTokenInterval = setInterval(() => {
+      this.refreshTokenInterval = interval(1000).subscribe(() => {
         const refreshTokenDate = new Date();
         refreshTokenDate.setMinutes(refreshTokenDate.getMinutes() + 1);
         const token = this.tokenService.getOAuth2Token();
@@ -209,14 +205,13 @@ export class KoalaOAuth2Service implements OnDestroy {
             }
           }
         }
-      }, 1000);
+      });
     }
   }
 
   private getToken(code: string, refreshToken?: string) {
     if (refreshToken) {
-      clearInterval(this.refreshTokenInterval);
-      this.refreshTokenInterval = null;
+      this.refreshTokenInterval?.unsubscribe();
     }
 
     const formData = new URLSearchParams();
