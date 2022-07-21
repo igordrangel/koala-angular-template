@@ -192,21 +192,20 @@ export class KoalaOAuth2Service implements OnDestroy {
   }
 
   public initRefreshTokenInterval(code: string, refreshToken: string) {
-    if (!this.refreshTokenInterval) {
-      this.refreshTokenInterval = interval(1000).subscribe(() => {
-        const refreshTokenDate = new Date();
-        refreshTokenDate.setMinutes(refreshTokenDate.getMinutes() + 1);
-        const token = this.tokenService.getOAuth2Token();
-        if (token) {
-          const expires_in = token.expired;
-          if (expires_in) {
-            if (new Date(expires_in) <= refreshTokenDate) {
-              this.getToken(code, refreshToken);
-            }
+    this.refreshTokenInterval?.unsubscribe();
+    this.refreshTokenInterval = interval(1000).subscribe(() => {
+      const refreshTokenDate = new Date();
+      refreshTokenDate.setMinutes(refreshTokenDate.getMinutes() + 1);
+      const token = this.tokenService.getOAuth2Token();
+      if (token) {
+        const expires_in = token.expired;
+        if (expires_in) {
+          if (new Date(expires_in) <= refreshTokenDate) {
+            this.getToken(code, refreshToken);
           }
         }
-      });
-    }
+      }
+    });
   }
 
   private getToken(code: string, refreshToken?: string) {
