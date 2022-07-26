@@ -201,9 +201,6 @@ export abstract class ListAbstract extends FormAbstract {
   }
 
   private scrollTableToTop() {
-    const table = document.getElementById(this.tableId);
-    if (table) {
-      table.scrollTop = 0;
-    }
+    document.getElementById(this.tableId)?.parentElement?.scrollTo({top: 0});
   }
 }
