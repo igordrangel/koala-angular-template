@@ -86,19 +86,16 @@ export abstract class KoalaApiRequesterBase<EntityType, GetAllType, DataType> {
   }
 
   public request<T>(method: ApiRequesterType, url: string, data: any = {}): Observable<T> {
-    this.startCache(url);
+    if (this.enableCache && KoalaApiRequesterCache.hasCache(url)) {
+      return KoalaApiRequesterCache.getCacheAsObservable(url);
+    }
+
+    KoalaApiRequesterCache.createCache(url);
     return this.koalaService
                .request<T>(method, url, data)
                .pipe(map(response => {
                  if (this.enableCache) KoalaApiRequesterCache.setDataInCache(url, response);
                  return response;
                }));
-  }
-
-  private startCache(endpoint: string) {
-    if (this.enableCache && KoalaApiRequesterCache.hasCache(endpoint)) {
-      return KoalaApiRequesterCache.getCacheAsObservable(endpoint);
-    }
-    KoalaApiRequesterCache.createCache(endpoint);
   }
 }
