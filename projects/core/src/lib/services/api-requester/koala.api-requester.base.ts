@@ -1,14 +1,17 @@
 import { koala } from "@koalarx/utils";
-import { BehaviorSubject } from "rxjs";
-import { KoalaApiRequesterService } from "./koala.api-requester.service";
+import { BehaviorSubject, Observable } from "rxjs";
+import { ApiRequesterType, KoalaApiRequesterService } from "./koala.api-requester.service";
 import { KoalaResponseInterface } from "./helpers/error/koala.errors.helper";
 import { KoalaEnvironment } from "../../environments/koalaEnvironment";
+import { KoalaApiRequesterCache } from "./koala.api-requester.cache";
+import { map } from "rxjs/operators";
 
 export abstract class KoalaApiRequesterBase<EntityType, GetAllType, DataType> {
 
   protected constructor(
     protected koalaService: KoalaApiRequesterService,
     protected endpoint: string,
+    protected enableCache: boolean = false,
     environmentNameToEndpointApi = 'endpointApi',
     isMockup = false
   ) {
@@ -17,15 +20,15 @@ export abstract class KoalaApiRequesterBase<EntityType, GetAllType, DataType> {
   }
 
   public getAll(filter?: BehaviorSubject<any> | any) {
-    return this.koalaService.request<GetAllType>('get', this.endpoint, this.getParams(filter));
+    return this.request<GetAllType>('get', this.endpoint, this.getParams(filter));
   }
 
   public getById(id: number) {
-    return this.koalaService.request<EntityType>('get', this.endpoint + '/' + id);
+    return this.request<EntityType>('get', this.endpoint + '/' + id);
   }
 
   public getBySomething<Type>(something: any) {
-    return this.koalaService.request<Type>('get', this.endpoint + '/' + something);
+    return this.request<Type>('get', this.endpoint + '/' + something);
   }
 
   public save(data: DataType, id?: number) {
@@ -80,5 +83,24 @@ export abstract class KoalaApiRequesterBase<EntityType, GetAllType, DataType> {
     }
 
     return filter ?? null;
+  }
+
+  public request<T>(method: ApiRequesterType, url: string, data: any = {}): Observable<T> {
+    this.startCache(url);
+    return this.koalaService
+               .request<T>(method, url, data)
+               .pipe(map(response => {
+                 if (this.enableCache) KoalaApiRequesterCache.setInCache({name: url, data: response});
+                 return response;
+               }));
+  }
+
+  private startCache(endpoint: string) {
+    if (this.enableCache && KoalaApiRequesterCache.hasCache(endpoint)) {
+      return new Observable<GetAllType>(observe => {
+        observe.next(KoalaApiRequesterCache.getCache(endpoint));
+        observe.complete();
+      });
+    }
   }
 }
