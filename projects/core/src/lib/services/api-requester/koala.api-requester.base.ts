@@ -11,7 +11,7 @@ export abstract class KoalaApiRequesterBase<EntityType, GetAllType, DataType> {
   protected constructor(
     protected koalaService: KoalaApiRequesterService,
     protected endpoint: string,
-    protected enableCache: boolean = false,
+    protected statusCache: boolean = false,
     environmentNameToEndpointApi = 'endpointApi',
     isMockup = false
   ) {
@@ -86,7 +86,7 @@ export abstract class KoalaApiRequesterBase<EntityType, GetAllType, DataType> {
   }
 
   public request<T>(method: ApiRequesterType, url: string, data: any = {}): Observable<T> {
-    if (this.enableCache) {
+    if (this.statusCache) {
       if (KoalaApiRequesterCache.hasCache(url)) {
         return KoalaApiRequesterCache.getCacheAsObservable(url);
       }
@@ -96,8 +96,16 @@ export abstract class KoalaApiRequesterBase<EntityType, GetAllType, DataType> {
     return this.koalaService
                .request<T>(method, url, data)
                .pipe(map(response => {
-                 if (this.enableCache) KoalaApiRequesterCache.setDataInCache(url, response);
+                 if (this.statusCache) KoalaApiRequesterCache.setDataInCache(url, response);
                  return response;
                }));
+  }
+
+  public enableCache() {
+    this.statusCache = true;
+  }
+
+  public disableCache() {
+    this.statusCache = false;
   }
 }
