@@ -34,4 +34,5 @@ export interface KoalaListConfigInterface {
   btnCollapseSubListConfig?: KoalaListBtnCollapseSubListConfigInterface<any>;
   hidePaginator?: boolean;
   customClass?: string;
+  limitOptions?: number[];
 }

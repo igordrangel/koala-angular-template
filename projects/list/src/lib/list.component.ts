@@ -186,5 +186,6 @@ export class ListComponent extends ListAbstract implements OnInit, AfterViewInit
     this.btnCollapseSubListConfig = this.config.btnCollapseSubListConfig;
     this.hidePaginator = this.config.hidePaginator;
     this.customClass = this.config.customClass;
+    this.limitOptions = this.config.limitOptions ?? this.limitOptions;
   }
 }

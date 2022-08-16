@@ -127,4 +127,14 @@ export class ListBuilder<DataType> {
     this.config.reload = new BehaviorSubject<boolean>(false);
     return this.config;
   }
+
+  public setLimitOptions(options: number[]) {
+    this.config.limitOptions = options;
+  }
+
+  public addLimitOption(limit: number) {
+    if (!this.config.limitOptions) this.config.limitOptions = [10, 20, 30, 50, 100];
+
+    this.config.limitOptions.push(limit);
+  }
 }
