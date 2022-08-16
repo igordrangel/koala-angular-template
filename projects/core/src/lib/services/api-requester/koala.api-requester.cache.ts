@@ -1,28 +1,48 @@
-import { koala } from "@koalarx/utils";
+import { BehaviorSubject, Observable, skipWhile } from "rxjs";
 
 export interface KoalaCacheData {
   name: string;
-  data: any;
+  data: BehaviorSubject<any>;
 }
 
 export class KoalaApiRequesterCache {
   private static cache: KoalaCacheData[] = [];
 
-  public static setInCache(cache: KoalaCacheData) {
-    const index = koala(this.cache).array().getIndex('name', cache.name);
-
-    if (index >= 0) {
-      this.cache[index] = cache;
-    } else {
-      this.cache.push(cache);
+  public static createCache(name: string) {
+    if (!this.hasCache(name)) {
+      this.cache.push({
+        name,
+        data: new BehaviorSubject<any>(undefined)
+      });
     }
   }
 
-  public static getCache<T>(name: string): T {
+  public static setDataInCache(name: string, data: any) {
+    this.getCacheSubject(name)?.next(data);
+  }
+
+  public static getCacheSubject(name: string) {
     return this.cache.find(item => item.name === name)?.data;
   }
 
+  public static getCacheAsObservable<T>(name: string) {
+    return new Observable<T>(observe => {
+      this.getCacheSubject(name)
+          .pipe(skipWhile(value => value === undefined))
+          .subscribe({
+            next: value => {
+              observe.next(value);
+              observe.complete();
+            },
+            error: err => {
+              observe.error(err);
+              observe.complete();
+            }
+          });
+    });
+  }
+
   public static hasCache(name: string) {
-    return !!this.getCache(name);
+    return !!this.getCacheSubject(name);
   }
 }

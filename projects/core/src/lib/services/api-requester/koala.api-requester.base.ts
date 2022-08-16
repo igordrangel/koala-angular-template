@@ -90,17 +90,15 @@ export abstract class KoalaApiRequesterBase<EntityType, GetAllType, DataType> {
     return this.koalaService
                .request<T>(method, url, data)
                .pipe(map(response => {
-                 if (this.enableCache) KoalaApiRequesterCache.setInCache({name: url, data: response});
+                 if (this.enableCache) KoalaApiRequesterCache.setDataInCache(url, response);
                  return response;
                }));
   }
 
   private startCache(endpoint: string) {
     if (this.enableCache && KoalaApiRequesterCache.hasCache(endpoint)) {
-      return new Observable<GetAllType>(observe => {
-        observe.next(KoalaApiRequesterCache.getCache(endpoint));
-        observe.complete();
-      });
+      return KoalaApiRequesterCache.getCacheAsObservable(endpoint);
     }
+    KoalaApiRequesterCache.createCache(endpoint);
   }
 }
