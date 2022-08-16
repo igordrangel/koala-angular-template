@@ -28,6 +28,7 @@ export * from './lib/services/api-requester/helpers/error/koala.not-found.error'
 export * from './lib/services/api-requester/helpers/error/koala.success.error';
 export * from './lib/services/api-requester/helpers/error/koala.unhautorized.error';
 export * from './lib/services/api-requester/helpers/service/koala.request-header.helper';
+export * from './lib/services/api-requester/koala.api-requester.cache';
 export * from './lib/services/request/koala.request.service';
 export * from './lib/services/loader/koala.loader.service';
 export * from './lib/services/token/koala.token.service';
