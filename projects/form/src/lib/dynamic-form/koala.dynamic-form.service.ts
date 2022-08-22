@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DynamicFormTypeFieldEnum } from './enums/dynamic-form-type-field.enum';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { KoalaDynamicSetValueInterface } from './interfaces/koala.dynamic-set-value.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { KoalaDynamicAutocompleteOptionsInterface } from './interfaces/koala.dynamic-autocomplete-options.interface';
@@ -19,7 +19,7 @@ export type KoalaDynamicFormValidatorType = 'required' | 'min' | 'max';
 export class KoalaDynamicFormService {
 
   constructor(
-    protected fb: FormBuilder,
+    protected fb: UntypedFormBuilder,
     protected deviceService: DeviceDetectorService) {
   }
 
@@ -27,14 +27,14 @@ export class KoalaDynamicFormService {
     return new DynamicFormBuilder(this.fb, this.deviceService);
   }
 
-  public updateValidator(formGroup: FormGroup, name: string, type: KoalaDynamicFormValidatorType, value: boolean | number | string) {
+  public updateValidator(formGroup: UntypedFormGroup, name: string, type: KoalaDynamicFormValidatorType, value: boolean | number | string) {
     if (type === 'required' && typeof value !== 'boolean') {
       throw new Error(`Type required cannot be a ${typeof value}`);
     } else if ((type === 'min' || type === 'max') && typeof value === "boolean") {
       throw new Error(`Type ${type} cannot be a boolean`);
     }
 
-    const formArray = formGroup.get('formData') as FormArray;
+    const formArray = formGroup.get('formData') as UntypedFormArray;
     const control = formArray.controls.find(control => control.get('name').value === name);
 
     if (control) {
@@ -82,8 +82,8 @@ export class KoalaDynamicFormService {
     }
   }
 
-  public disableFields(formGroup: FormGroup, disabled: boolean, fields: string[]) {
-    const formArray = formGroup.get('formData') as FormArray;
+  public disableFields(formGroup: UntypedFormGroup, disabled: boolean, fields: string[]) {
+    const formArray = formGroup.get('formData') as UntypedFormArray;
 
     fields.forEach(field => {
       const controlValue = formArray.controls.find(control => field === control.get('name').value)?.get('value');
@@ -99,9 +99,9 @@ export class KoalaDynamicFormService {
     });
   }
 
-  public emitData(form: FormGroup) {
+  public emitData(form: UntypedFormGroup) {
     const data = {};
-    const formArray = form.get('formData') as FormArray;
+    const formArray = form.get('formData') as UntypedFormArray;
     formArray?.controls.forEach(control => {
       if (control.get('show').value.getValue() !== false) {
         let value: any = control.get('value').value;
@@ -111,7 +111,7 @@ export class KoalaDynamicFormService {
           }
           value = koala(value).string().split().getValue();
         } else if (control.get('type').value === DynamicFormTypeFieldEnum.moreItems) {
-          const moreItems = control.get('moreItemsConfig').value as { form: FormGroup }[];
+          const moreItems = control.get('moreItemsConfig').value as { form: UntypedFormGroup }[];
           value = [];
           moreItems.forEach(item => {
             value.push(this.emitData(item.form));
@@ -149,8 +149,8 @@ export class KoalaDynamicFormService {
     return data;
   }
 
-  public resetForm(form: FormGroup) {
-    const formArray = form.get('formData') as FormArray;
+  public resetForm(form: UntypedFormGroup) {
+    const formArray = form.get('formData') as UntypedFormArray;
     formArray.controls.forEach(control => {
       if (control.get('type').value === DynamicFormTypeFieldEnum.moreItems) {
         control.get('moreItemsConfig').setValue([]);

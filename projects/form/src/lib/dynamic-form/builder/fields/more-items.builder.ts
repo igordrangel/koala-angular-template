@@ -1,5 +1,5 @@
 import { DynamicFormTypeFieldEnum } from "../../enums/dynamic-form-type-field.enum";
-import { FormBuilder } from "@angular/forms";
+import { UntypedFormBuilder } from "@angular/forms";
 import { BehaviorSubject } from "rxjs";
 import { KoalaDynamicSetValueInterface } from "../../interfaces/koala.dynamic-set-value.interface";
 import { KoalaDynamicFormFieldInterface } from "../../interfaces/koala.dynamic-form-field.interface";
@@ -17,7 +17,7 @@ export class MoreItemsBuilder {
     private min: number,
     private max: number,
     private formConfig: KoalaDynamicFormConfigInterface,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private deviceService: DeviceDetectorService,
   ) {
   }

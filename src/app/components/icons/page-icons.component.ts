@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { PageAbstract } from "../../shared/abstract/page.abstract";
 import { BehaviorSubject } from "rxjs";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup } from "@angular/forms";
 import { KoalaDynamicFormFieldInterface, DynamicFormTypeFieldEnum } from "@koalarx/ui/form";
 import { koala } from "@koalarx/utils";
 import { delay } from "@koalarx/utils/operators/delay";
@@ -122,10 +122,10 @@ export class PageIconsComponent extends PageAbstract implements OnInit {
   public groups$ = new BehaviorSubject<GroupIcon[]>([]);
   public selectedIcon$ = new BehaviorSubject<Icon>(null);
 
-  public formFilter: FormGroup;
+  public formFilter: UntypedFormGroup;
   public formFilterConfig: KoalaDynamicFormFieldInterface[];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: UntypedFormBuilder) {
     super();
   }
 

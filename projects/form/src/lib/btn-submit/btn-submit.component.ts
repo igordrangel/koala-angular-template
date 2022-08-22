@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { BehaviorSubject } from 'rxjs';
 import { KoalaLanguageHelper } from "@koalarx/ui/core";
@@ -10,7 +10,7 @@ import { KoalaLanguageHelper } from "@koalarx/ui/core";
   styleUrls: ['btn-submit.component.css']
 })
 export class BtnSubmitComponent implements OnInit, OnChanges {
-  @Input() fg: FormGroup;
+  @Input() fg: UntypedFormGroup;
   @Input() color: ThemePalette = 'primary';
   @Input() btnLabel: string = KoalaLanguageHelper.getBtnLabel();
   @Input() btnSubmitDisabled = false;

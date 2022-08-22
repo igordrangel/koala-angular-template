@@ -1,7 +1,7 @@
 import { DynamicFormTypeFieldEnum } from '../enums/dynamic-form-type-field.enum';
 import { FloatLabelType, MatFormFieldAppearance } from '@angular/material/form-field';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AsyncValidatorFn, FormGroup, ValidatorFn } from '@angular/forms';
+import { AsyncValidatorFn, UntypedFormGroup, ValidatorFn } from '@angular/forms';
 import { KoalaDynamicSetValueInterface } from './koala.dynamic-set-value.interface';
 import { KoalaDynamicAutocompleteOptionsInterface } from './koala.dynamic-autocomplete-options.interface';
 import { KoalaDynamicFormMoreItensShowFieldConfigInterface } from './koala.dynamic-form-more-itens-show-field-config.interface';
@@ -41,7 +41,7 @@ export interface KoalaDynamicFormFieldInterface {
   moreItemsIconFontColor?: string;
   moreItemsIconBackgroundColor?: string;
   moreItemsConfig?: {
-    form: FormGroup;
+    form: UntypedFormGroup;
     formConfig: KoalaDynamicFormFieldInterface[];
     setValues?: BehaviorSubject<BehaviorSubject<KoalaDynamicSetValueInterface[]>[]>;
     showFieldsConfig?: KoalaDynamicFormMoreItensShowFieldConfigInterface[];

@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { BehaviorSubject, merge, Observable, Subscription } from 'rxjs';
 import { FormAbstract } from '@koalarx/ui/form';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { debounceTime, first, map, startWith, switchMap } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { KoalaListFormFilterInterface } from './koala-list-form-filter.interface';
@@ -39,7 +39,7 @@ export abstract class ListAbstract extends FormAbstract {
   protected constructor(
     private requestFunction: () => Observable<any>,
     private requestResponseFunction: <T>(results: T[]) => void,
-    formSearch: () => FormGroup
+    formSearch: () => UntypedFormGroup
   ) {
     super(formSearch);
   }

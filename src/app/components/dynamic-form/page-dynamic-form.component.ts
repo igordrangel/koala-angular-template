@@ -8,7 +8,7 @@ import {
 } from "@koalarx/ui/form";
 import { ListService } from "../list/list.service";
 import { Observable } from "rxjs";
-import { FormBuilder } from "@angular/forms";
+import { UntypedFormBuilder } from "@angular/forms";
 import { CustomSyncValidator } from "./validators/custom-sync.validator";
 import { CustomAsyncValidator } from "./validators/custom-async.validator";
 import { format } from "@koalarx/utils/operators/date";
@@ -22,7 +22,7 @@ export class PageDynamicFormComponent extends PageAbstract {
   public config: KoalaDynamicFormConfigInterface;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private listService: ListService,
     private dynamicFormService: KoalaDynamicFormService
   ) {

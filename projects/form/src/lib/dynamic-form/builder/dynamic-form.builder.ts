@@ -1,4 +1,4 @@
-import { FormBuilder } from "@angular/forms";
+import { UntypedFormBuilder } from "@angular/forms";
 import { KoalaDynamicFormConfigInterface } from "../interfaces/koala.dynamic-form-config.interface";
 import { KoalaDynamicFormFieldInterface } from "../interfaces/koala.dynamic-form-field.interface";
 import { DynamicFormTypeFieldEnum } from "../enums/dynamic-form-type-field.enum";
@@ -17,7 +17,7 @@ export class DynamicFormBuilder {
   private readonly config: KoalaDynamicFormConfigInterface;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private deviceService: DeviceDetectorService,
     configInMemory?: KoalaDynamicFormFieldInterface[]) {
     this.config = {

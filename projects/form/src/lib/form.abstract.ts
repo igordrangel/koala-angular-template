@@ -1,5 +1,5 @@
 import { ShowInvalidFields } from './show-invalid-fields/show-invalid-fields';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 
 export abstract class FormAbstract {
@@ -9,7 +9,7 @@ export abstract class FormAbstract {
   public btnSubmitDisabled = false;
   public getData = new BehaviorSubject<boolean>(false);
 
-  protected constructor(private formAbstract: () => FormGroup) {
+  protected constructor(private formAbstract: () => UntypedFormGroup) {
   }
 
   public selecionarAutocomplete(controlName: string, obj: any, indexName?: string) {

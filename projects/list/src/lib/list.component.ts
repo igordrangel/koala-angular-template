@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ListAbstract } from './list.abstract';
 import { KoalaListItemMenuOptionInterface } from './koala-list-item-menu-option.interface';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { KoalaListFilterInterface } from './koala-list-filter.interface';
 import { KoalaDynamicFormService } from '@koalarx/ui/form';
@@ -49,7 +49,7 @@ export class ListComponent extends ListAbstract implements OnInit, AfterViewInit
   public typeRequest: 'all' | 'onDemand' = 'all'
   public filterFormConfig?: KoalaListFilterInterface;
   public reload?: BehaviorSubject<boolean>;
-  public formFilter?: FormGroup;
+  public formFilter?: UntypedFormGroup;
   public showAdvancedFilter: boolean = false;
   public qtdListResult = 0;
   public disabledCheckboxItemList?: (item: any) => boolean;
@@ -58,7 +58,7 @@ export class ListComponent extends ListAbstract implements OnInit, AfterViewInit
   public subListConfig?: (item: any) => KoalaListConfigInterface;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private dynamicFormService: KoalaDynamicFormService,
     private deviceService: DeviceDetectorService
   ) {
@@ -97,7 +97,7 @@ export class ListComponent extends ListAbstract implements OnInit, AfterViewInit
         return item;
       });
       if (this.filterFormConfig?.checkAndSearch) {
-        this.formFilter.addControl(this.filterFormConfig.checkAndSearch.formControlName, new FormControl(this.filterFormConfig.checkAndSearch.isChecked ?? false));
+        this.formFilter.addControl(this.filterFormConfig.checkAndSearch.formControlName, new UntypedFormControl(this.filterFormConfig.checkAndSearch.isChecked ?? false));
       }
     }
 

@@ -1,4 +1,4 @@
-import { FormArray, FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators, AbstractControl } from '@angular/forms';
 import { KoalaDynamicFormFieldInterface } from './interfaces/koala.dynamic-form-field.interface';
 import { DynamicFormTypeFieldEnum } from './enums/dynamic-form-type-field.enum';
 import { CpfValidator } from './validators/cpf.validator';
@@ -30,13 +30,13 @@ import { randomString } from "@koalarx/utils/operators/string";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DynamicFormComponent extends FormAbstract implements OnInit {
-  @Input() form: FormGroup;
+  @Input() form: UntypedFormGroup;
   @Input() formConfig: KoalaDynamicFormFieldInterface[];
   @Input() showFields: BehaviorSubject<KoalaDynamicFormShowFieldInterface[]>;
   @Input() showFieldsMoreItensConfig: KoalaDynamicFormMoreItensShowFieldConfigInterface[];
   @Input() setValues: BehaviorSubject<KoalaDynamicSetValueInterface[]>;
   @Input() tabIndexStart: number = 1;
-  public controls: FormArray;
+  public controls: UntypedFormArray;
   public typeField = DynamicFormTypeFieldEnum;
   public hoursAndMinutesMask = '00:000';
   public errorMessage = KoalaLanguageHelper;
@@ -44,7 +44,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
   @ViewChild('autocompleteInput') autocompleteInput: ElementRef<HTMLInputElement>;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private dynamicFormService: KoalaDynamicFormService
   ) {
     super(() => this.form);
@@ -54,7 +54,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
     if (!this.form.get('formData')) {
       this.form.addControl('formData', this.fb.array([]));
     }
-    this.controls = this.form.get('formData') as FormArray;
+    this.controls = this.form.get('formData') as UntypedFormArray;
     this.formConfig?.forEach((config, indexConfig) => {
       const newFormGroup = this.newControl(config);
       if (config.asyncValidators) {
@@ -225,7 +225,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
       this.controls.controls[propIndex].get('moreItemsExpanded').setValue(
         this.controls.controls[propIndex].get('moreItemsConfig').value.length - 1
       );
-      const formArrayMoreItems = this.controls.controls[propIndex].get('moreItemsFormGroup') as FormArray;
+      const formArrayMoreItems = this.controls.controls[propIndex].get('moreItemsFormGroup') as UntypedFormArray;
       formArrayMoreItems.push(formGroup);
     }
   }
@@ -284,7 +284,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
     });
   }
 
-  private newControl(config: KoalaDynamicFormFieldInterface): FormGroup {
+  private newControl(config: KoalaDynamicFormFieldInterface): UntypedFormGroup {
     let validators = config.syncValidators ?? [];
     let value: any = config.value ?? '';
     let valueSelectedAutocomplete: KoalaDynamicAutocompleteOptionsInterface | KoalaDynamicAutocompleteOptionsInterface[] = (
@@ -405,10 +405,10 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
     return field;
   }
 
-  private setValuesOnFields(subject: BehaviorSubject<KoalaDynamicSetValueInterface[]>, form: FormGroup) {
+  private setValuesOnFields(subject: BehaviorSubject<KoalaDynamicSetValueInterface[]>, form: UntypedFormGroup) {
     subject.subscribe(item => {
       if (item) {
-        const formArray = form.get('formData') as FormArray;
+        const formArray = form.get('formData') as UntypedFormArray;
         for (const prop of item.values()) {
           this.setValueByProp(formArray, prop);
         }
@@ -416,10 +416,10 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
     });
   }
 
-  private changeVisibilityFields(subject: BehaviorSubject<KoalaDynamicFormShowFieldInterface[]>, form: FormGroup) {
+  private changeVisibilityFields(subject: BehaviorSubject<KoalaDynamicFormShowFieldInterface[]>, form: UntypedFormGroup) {
     subject.pipe(debounceTime(5)).subscribe(item => {
       if (item) {
-        const formArray = form.get('formData') as FormArray;
+        const formArray = form.get('formData') as UntypedFormArray;
         for (const prop of item.values()) {
           for (const [indexControl, control] of formArray.controls.entries()) {
             if (control.get('name').value === prop.name) {
@@ -429,7 +429,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
                 let validators = [];
                 if (config) {
                   if (config.type === DynamicFormTypeFieldEnum.dynamicForm) {
-                    const formArrayMoreItems = control.get('dynamicFormGroup') as FormArray;
+                    const formArrayMoreItems = control.get('dynamicFormGroup') as UntypedFormArray;
                     formArrayMoreItems.push(config?.dynamicFormConfig?.form);
                   } else {
                     validators = config.syncValidators ?? [];
@@ -481,7 +481,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
                 control.get('value').updateValueAndValidity();
 
                 if (config.type === DynamicFormTypeFieldEnum.dynamicForm) {
-                  const formGroup = control as FormGroup;
+                  const formGroup = control as UntypedFormGroup;
                   formGroup.removeControl('dynamicFormGroup');
                   formGroup.addControl('dynamicFormGroup', this.fb.array([]));
                 }
@@ -516,7 +516,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
     });
   }
 
-  private setValueByProp(formArray: FormArray, prop: KoalaDynamicSetValueInterface) {
+  private setValueByProp(formArray: UntypedFormArray, prop: KoalaDynamicSetValueInterface) {
     if (formArray) {
       if (prop.name.indexOf(' > ') >= 0) {
         let dynamicFormSubject: BehaviorSubject<KoalaDynamicFormConfigInterface>;
@@ -554,7 +554,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
     }
   }
 
-  private async setConfigDynamicForm(newFormGroup: FormGroup) {
+  private async setConfigDynamicForm(newFormGroup: UntypedFormGroup) {
     if (this.showFieldsMoreItensConfig) {
       const value = newFormGroup.get('value').value;
       const configs = this.showFieldsMoreItensConfig
