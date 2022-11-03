@@ -41,7 +41,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
   public hoursAndMinutesMask = '00:000';
   public errorMessage = KoalaLanguageHelper;
 
-  @ViewChild('autocompleteInput') autocompleteInput: ElementRef<HTMLInputElement>;
+  @ViewChild('autocompleteInput', {static: false}) autocompleteInput: ElementRef<HTMLInputElement>;
 
   constructor(
     private fb: UntypedFormBuilder,

@@ -76,4 +76,71 @@ export class KoalaXlsxService {
       fs.saveAs(blob, config.filename + '.xlsx');
     });
   }
+
+  public async convertJsonToXlsxWithTabs(tabs: {
+    titleName?: string;
+    sheetName?: string;
+    json: any[]
+  }[], config: KoalaXlsxConfigInterface) {
+    const header = [];
+    const workbook: ExcelProper.Workbook = new Excel.Workbook();
+
+    tabs.forEach(tab => {
+      const title = tab?.titleName ?? config.title;
+      Object.keys(tab.json[0]).forEach(name => {
+        header.push((
+          config.normalizeHeader === true || config.normalizeHeader === null || config.normalizeHeader === undefined ?
+            koala(name).string().normalize().getValue().toUpperCase() :
+            name
+        ));
+      });
+
+      const worksheet = workbook.addWorksheet(tab?.sheetName ?? config.sheetName);
+
+      if (config.title) {
+        const titleRow = worksheet.addRow([title]);
+        titleRow.alignment = {horizontal: 'center'};
+        if (config.titleFontColor) {
+          titleRow.font = {bold: true, color: {argb: config.titleFontColor.replace('#', '')}};
+        }
+        if (config.titleBackgroundColor) {
+          titleRow.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: {argb: config.titleBackgroundColor.replace('#', '')},
+            bgColor: {argb: config.titleBackgroundColor.replace('#', '')}
+          };
+        }
+        worksheet.mergeCells(`A1:${worksheet.getCell(1, Object.keys(tab.json[0]).length).address}`);
+      }
+
+      const headerRow = worksheet.addRow(header);
+      headerRow.eachCell((cell, number) => {
+        if (config.headerBackgroundColor) {
+          cell.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: {argb: config.headerBackgroundColor.replace('#', '')},
+            bgColor: {argb: config.headerBackgroundColor.replace('#', '')}
+          };
+        }
+        if (config.headerFontColor) {
+          cell.font = {
+            color: {argb: config.headerFontColor.replace('#', '')}
+          };
+        }
+      });
+
+      tab.json.forEach(item => {
+        const data = [];
+        Object.values(item).forEach(value => data.push(value));
+        worksheet.addRow(data);
+      });
+    });
+
+    workbook.xlsx.writeBuffer().then((data) => {
+      const blob = new Blob([data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+      fs.saveAs(blob, config.filename + '.xlsx');
+    });
+  }
 }
