@@ -36,12 +36,12 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
   @Input() showFieldsMoreItensConfig: KoalaDynamicFormMoreItensShowFieldConfigInterface[];
   @Input() setValues: BehaviorSubject<KoalaDynamicSetValueInterface[]>;
   @Input() tabIndexStart: number = 1;
+
   public controls: UntypedFormArray;
   public typeField = DynamicFormTypeFieldEnum;
   public hoursAndMinutesMask = '00:000';
   public errorMessage = KoalaLanguageHelper;
-
-  @ViewChild('autocompleteInput', {static: false}) autocompleteInput: ElementRef<HTMLInputElement>;
+  public formId = randomString(25, {lowercase: true, uppercase: true, numbers: true});
 
   constructor(
     private fb: UntypedFormBuilder,
@@ -110,8 +110,10 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
                                 newFormGroup.get('autocompleteSelectedValue').value.push(value);
                               }
                             }
-                            if (this.autocompleteInput?.nativeElement) {
-                              this.autocompleteInput.nativeElement.value = '';
+
+                            const autocompleteInput = document.querySelector<HTMLInputElement>(`#${this.formId} input#autocomplete-${newFormGroup.get('name')?.value}`);
+                            if (autocompleteInput) {
+                              autocompleteInput.value = '';
                             }
                           } else {
                             newFormGroup.get('autocompleteSelectedValue').setValue(value);

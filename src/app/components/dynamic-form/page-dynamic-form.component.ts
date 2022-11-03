@@ -1,10 +1,10 @@
 import { Component } from "@angular/core";
 import { PageAbstract } from "../../shared/abstract/page.abstract";
 import {
-  KoalaDynamicFormService,
   DynamicFormTypeFieldEnum,
+  KoalaDynamicAutocompleteOptionsInterface,
   KoalaDynamicFormConfigInterface,
-  KoalaDynamicAutocompleteOptionsInterface
+  KoalaDynamicFormService
 } from "@koalarx/ui/form";
 import { ListService } from "../list/list.service";
 import { Observable } from "rxjs";
@@ -46,7 +46,7 @@ export class PageDynamicFormComponent extends PageAbstract {
                                     .field('Hours and Minutes Field', 'hoursAndMinutes', "hoursAndMinutes").grid(2).generate()
                                     .field('Password Field', 'password', "password").grid(2).generate()
                                     .field('Phone Field', 'phone', "phone").grid(2).generate()
-                                    .autocomplete('Autocomplete All Field', 'autocompleteAll').multiple().grid(2).required().service(new Observable<KoalaDynamicAutocompleteOptionsInterface[]>(observe => {
+                                    .autocomplete('Autocomplete All Field', 'autocompleteAll').multiple().grid(2).hide().required().service(new Observable<KoalaDynamicAutocompleteOptionsInterface[]>(observe => {
                                       this.listService.getList().pipe(first()).subscribe(list => {
                                         const options: KoalaDynamicAutocompleteOptionsInterface[] = [];
                                         list.forEach(item => options.push({
@@ -58,10 +58,27 @@ export class PageDynamicFormComponent extends PageAbstract {
                                     })).colorChipConfig((subject) => subject.next({
         color: 'primary'
       })).loadOptions('all').generate()
+                                    .autocomplete('Autocomplete All Field', 'autocompleteAll2').multiple().grid(2).hide().required().service(new Observable<KoalaDynamicAutocompleteOptionsInterface[]>(observe => {
+        this.listService.getList().pipe(first()).subscribe(list => {
+          const options: KoalaDynamicAutocompleteOptionsInterface[] = [];
+          list.forEach(item => options.push({
+            value: item.value,
+            name: item.name
+          }));
+          observe.next(options);
+        })
+      })).colorChipConfig((subject) => subject.next({
+        color: 'primary'
+      })).loadOptions('all').generate()
                                     .field('Select Field', 'select', "select").setOptions([
                                       {value: true, name: 'true'},
                                       {value: false, name: 'false'}
-                                    ]).grid(2).generate()
+                                    ]).valueChanges((option: boolean) => {
+                                      this.config.showFields.next([
+                                        {name: 'autocompleteAll', show: option},
+                                        {name: 'autocompleteAll2', show: option}
+                                      ])
+      }).grid(2).generate()
                                     .field('Radio Field', 'radio', "radio").setOptions([
                                       {value: true, name: 'true'},
                                       {value: false, name: 'false'}

@@ -1,4 +1,4 @@
-<div [formGroup]="form" class="p-relative w-100">
+<div [formGroup]="form" class="p-relative w-100" [id]="formId">
   <div *ngFor="let propriedade of controls?.controls; let i = index;"
        [ngClass]="(propriedade.get('show').value | async) ? propriedade.get('class').value : 'd-none'"
        formArrayName="formData">
@@ -463,7 +463,7 @@
               <mat-icon *ngIf="!propriedade.get('disabled').value" matChipRemove>cancel</mat-icon>
             </mat-chip>
 	          <input
-		          #autocompleteInput
+              [id]="'autocomplete-' + propriedade.get('name').value"
               [koalaAutoFocus]="propriedade.get('focus').value"
 		          [required]="propriedade.get('required').value"
 		          [matAutocomplete]="auto"
