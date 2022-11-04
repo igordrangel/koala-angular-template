@@ -41,7 +41,12 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
   public typeField = DynamicFormTypeFieldEnum;
   public hoursAndMinutesMask = '00:000';
   public errorMessage = KoalaLanguageHelper;
-  public formId = randomString(25, {lowercase: true, uppercase: true});
+  public formId = randomString(25, {
+    lowercase: true,
+    uppercase: true,
+    numbers: false,
+    specialCharacters: false
+  });
 
   constructor(
     private fb: UntypedFormBuilder,
