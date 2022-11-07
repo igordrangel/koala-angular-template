@@ -46,7 +46,7 @@ export class PageDynamicFormComponent extends PageAbstract {
                                     .field('Hours and Minutes Field', 'hoursAndMinutes', "hoursAndMinutes").grid(2).generate()
                                     .field('Password Field', 'password', "password").grid(2).generate()
                                     .field('Phone Field', 'phone', "phone").grid(2).generate()
-                                    .autocomplete('Autocomplete All Field', 'autocompleteAll').multiple().grid(2).hide().required().service(new Observable<KoalaDynamicAutocompleteOptionsInterface[]>(observe => {
+                                    .autocomplete('Autocomplete All Field', 'autocompleteAll').multiple().addOption().grid(2).hide().required().service(new Observable<KoalaDynamicAutocompleteOptionsInterface[]>(observe => {
                                       this.listService.getList().pipe(first()).subscribe(list => {
                                         const options: KoalaDynamicAutocompleteOptionsInterface[] = [];
                                         list.forEach(item => options.push({
@@ -58,7 +58,7 @@ export class PageDynamicFormComponent extends PageAbstract {
                                     })).colorChipConfig((subject) => subject.next({
         color: 'primary'
       })).loadOptions('all').generate()
-                                    .autocomplete('Autocomplete All Field', 'autocompleteAll2').multiple().grid(2).hide().required().service(new Observable<KoalaDynamicAutocompleteOptionsInterface[]>(observe => {
+                                    .autocomplete('Autocomplete All Field', 'autocompleteAll2').multiple().addOption().grid(2).hide().required().service(new Observable<KoalaDynamicAutocompleteOptionsInterface[]>(observe => {
         this.listService.getList().pipe(first()).subscribe(list => {
           const options: KoalaDynamicAutocompleteOptionsInterface[] = [];
           list.forEach(item => options.push({

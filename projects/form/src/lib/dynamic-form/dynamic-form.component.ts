@@ -197,6 +197,10 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
     }
   }
 
+  public isValidNewAutocompleteOption(value: any) {
+    return !!value && typeof value === 'string';
+  }
+
   public hoursAndMinutesApplyMask(index: number, event: KeyboardEvent) {
     const control = this.controls?.controls[index];
     const type = control?.get('type').value as DynamicFormTypeFieldEnum;
@@ -392,6 +396,7 @@ export class DynamicFormComponent extends FormAbstract implements OnInit {
       autocompleteMultipleConfig: [config.autocompleteMultipleConfig],
       autocompleteOptionsFiltered: [new BehaviorSubject<any>([])],
       autocompleteSelectedValue: [valueSelectedAutocomplete],
+      autocompleteAddOption: [config.autocompleteAddOption],
       textLogs: [config?.textObs],
       customMasc: [config?.customMasc],
       customMascThousandSeparator: [config?.customMascThousandSeparator ?? ''],

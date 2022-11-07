@@ -49,4 +49,9 @@ export class AutocompleteBuilder extends FieldBase {
     fn(this.fieldConfig.autocompleteMultipleConfig);
     return this;
   }
+
+  public addOption(active: boolean = true) {
+    this.fieldConfig.autocompleteAddOption = active;
+    return this;
+  }
 }

@@ -51,6 +51,7 @@ export interface KoalaDynamicFormFieldInterface {
   autocompleteOptions?: BehaviorSubject<KoalaDynamicAutocompleteOptionsInterface[]>;
   autocompleteMultipleConfig?: BehaviorSubject<KoalaDynamicFormAutocompleteMultipleConfigInterface>;
   autocompleteType?: 'all' | 'onDemand';
+  autocompleteAddOption?: boolean;
   valueChanges?: (value: any) => void;
   asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[];
   syncValidators?: ValidatorFn[],

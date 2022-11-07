@@ -516,6 +516,14 @@
 	      <mat-autocomplete
 		      #auto="matAutocomplete"
 		      [displayWith]="display" autoActiveFirstOption>
+          <mat-option
+            *ngIf="propriedade.get('autocompleteAddOption').value && isValidNewAutocompleteOption(propriedade.get('value').value)"
+            [value]="{
+              value: {id: 0, name: propriedade.get('value').value},
+              name: propriedade.get('value').value
+            }">
+            Add <b>{{propriedade.get('value').value}}</b>...
+          </mat-option>
 		      <div *ngIf="(getAutocompleteOptions(propriedade) | async) as options">
 		        <mat-option *ngFor="let option of options" [value]="option">
 		          {{option.name}}
