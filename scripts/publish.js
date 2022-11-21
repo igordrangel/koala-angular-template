@@ -56,7 +56,7 @@ fs.writeFileSync('dist/package.json', JSON.stringify({
     "jwt-encode": "^1.0.1",
     "@koalarx/utils": "^1.0.101",
     "ng2-currency-mask": "^13.0.3",
-    "ngx-device-detector": "^3.0.0",
+    "ngx-device-detector": "^4.0.1",
     "event-source-polyfill": "^1.0.25",
     "ngx-mask": "^13.0.1",
     "ngx-papaparse": "^5.0.0",
