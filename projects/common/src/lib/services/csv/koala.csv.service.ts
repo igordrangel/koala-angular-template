@@ -1,5 +1,6 @@
 import { Papa } from 'ngx-papaparse';
 import { Injectable } from '@angular/core';
+import { ArrayData } from "ngx-papaparse/lib/interfaces/unparse-data";
 
 @Injectable({providedIn: "any"})
 export class KoalaCsvService {
@@ -7,7 +8,7 @@ export class KoalaCsvService {
   constructor(private papa: Papa) {
   }
 
-  public convertJsonToCsv(json: object[], filename: string = 'export') {
+  public convertJsonToCsv(json: ArrayData, filename: string = 'export') {
     this.downloadCsv(new Blob([
       this.papa.unparse(json, {
         header: true,

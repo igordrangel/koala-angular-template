@@ -234,52 +234,64 @@ input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hov
 .menu-container,
 body {background: ${this.palletColors.bodyBackground}!important;}
 input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hover {-webkit-box-shadow: 0 0 0 1000px ${this.palletColors.firstColor} inset !important;}
-.mat-button-disabled,
+.mat-mdc-button-disabled,
 input::placeholder,
-.mat-form-field-appearance-outline .mat-form-field-outline {color: ${this.palletColors.fontColor}!important;opacity: .6;}
-.mat-hint,
+.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-outline {color: ${this.palletColors.fontColor}!important;opacity: .6;}
+.mat-mdc-form-field-hint-wrapper,
 .mat-expansion-indicator::after,
 .more-items-content .items .titleForm,
 fieldset legend,
-.mat-paginator-container,
-.mat-form-field-flex mat-icon {color: ${this.palletColors.fontColor}!important;}
-.mat-paginator-container,
-.mat-card,
+.mat-mdc-paginator-container,
+.mat-mdc-form-field-flex mat-icon,
+.mat-mdc-menu-item .mdc-list-item__primary-text,
+button:disabled,
+.mat-mdc-paginator-range-actions button {color: ${this.palletColors.fontColor}!important;}
+.mat-mdc-paginator-range-actions button svg {fill: ${this.palletColors.fontColor}!important;}
+.mat-mdc-paginator-container,
+.mat-mdc-card,
 .mat-expansion-panel,
-.mat-select-panel,
-.mat-autocomplete-panel,
-.mat-menu-panel {background: ${this.palletColors.firstColor}}
-.mat-selected {background-color: rgba(0,0,0,.3)!important;}
+.mat-mdc-select-panel,
+.mat-mdc-autocomplete-panel,
+.mat-mdc-menu-panel {background: ${this.palletColors.firstColor}}
+.mat-mdc-selected {background-color: rgba(0,0,0,.3)!important;}
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:hover {-webkit-box-shadow: 0 0 0 1000px ${this.palletColors.fontColor} inset !important;}
+.mat-mdc-progress-spinner circle {stroke: ${this.palletColors.fontColor};}
 .question p,
 .alert-message,
-.mat-action-row,
-.mat-option,
-.mat-menu-item,
-.mat-menu-item mat-icon {color: ${this.palletColors.fontColor}!important}
-.mat-select-value,
-.mat-select-arrow,
-.mat-form-field input,
-.mat-form-field textarea,
-.mat-form-field-appearance-outline:not(.mat-form-field-invalid) .mat-form-field-outline-thick,
-.mat-form-field label,
+.mat-mdc-action-row,
+.mat-mdc-option .mdc-list-item__primary-text,
+.mat-mdc-menu-item,
+.mat-mdc-menu-item mat-icon {color: ${this.palletColors.fontColor}!important}
+.mdc-notched-outline div {border-color: ${this.palletColors.fontColor}!important;}
+.mat-mdc-select-value,
+.mat-mdc-select-arrow,
+.mat-mdc-form-field input,
+.mat-mdc-form-field textarea,
+.mat-mdc-form-field-appearance-outline:not(.mat-mdc-form-field-invalid) .mat-mdc-form-field-outline-thick,
+.mat-mdc-form-field label,
 .select-multiple-native select {color: ${this.palletColors.fontColor}!important;caret-color: ${this.palletColors.fontColor}!important;}
-.mat-form-field-underline,
-.mat-form-field-appearance-fill .mat-form-field-underline::before,
-.mat-form-field-ripple {background: ${this.palletColors.fontColor}!important;}
-.mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
-.mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element {background-color: ${this.palletColors.checkboxBackground} !important;}
-.mat-checkbox-checkmark-path {stroke: ${this.palletColors.checkboxColor} !important;}
-.mat-checkbox-checkmark {fill: ${this.palletColors.checkboxColor} !important;}
-.mat-checkbox-mixedmark {background-color: ${this.palletColors.checkboxColor} !important;}
-.mat-checkbox-frame {border-color: ${this.palletColors.checkboxOutlineColor}!important;}
-.mat-checkbox-label {color: ${this.palletColors.fontColor}!important;}
-.mat-radio-outer-circle {border-color: ${this.palletColors.checkboxBackground}!important;}
-.mat-radio-ripple .mat-ripple-element, .mat-radio-inner-circle {background-color: ${this.palletColors.checkboxBackground} !important;}
-.home-list-cards .list .mat-list-item-content .mat-icon {color: ${this.palletColors.fontColor};}
-.home-list-cards .list button .mat-badge-content {background: ${this.palletColors.fontColor};}
-.koala-dialog .mat-dialog-title h2 {color: ${this.palletColors.fontColor};}
-.koala-dialog .mat-dialog-title mat-icon {color: ${this.palletColors.fontColor}!important;}
-.koala-dialog .mat-dialog-container {background: ${this.palletColors.firstColor}}
+.mat-mdc-form-field-underline,
+.mat-mdc-form-field-appearance-fill .mat-mdc-form-field-underline::before,
+.mat-mdc-form-field-ripple {background: ${this.palletColors.fontColor}!important;}
+.mat-mdc-checkbox .mdc-form-field {color: ${this.palletColors.fontColor}!important;}
+.mat-mdc-checkbox-checked.mat-accent .mat-mdc-checkbox-background, .mat-mdc-checkbox-indeterminate.mat-accent .mat-mdc-checkbox-background,
+.mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background {background-color: ${this.palletColors.checkboxBackground} !important;border-color: ${this.palletColors.checkboxOutlineColor}!important;}
+.mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__checkmark {color: ${this.palletColors.checkboxColor} !important;}
+.mat-mdc-checkbox.mat-accent .mdc-checkbox--selected~.mdc-checkbox__ripple, .mat-mdc-checkbox.mat-accent .mdc-checkbox--selected~.mdc-checkbox__ripple div {background-color: ${this.palletColors.checkboxBackground} !important;}
+.mat-mdc-checkbox-checkmark {fill: ${this.palletColors.checkboxColor} !important;}
+.mat-mdc-checkbox-mixedmark {background-color: ${this.palletColors.checkboxColor} !important;}
+.mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background {border-color: ${this.palletColors.checkboxOutlineColor}!important;}
+.mat-mdc-radio-button .mdc-form-field {color: ${this.palletColors.fontColor}!important;}
+.mat-mdc-radio-button .mdc-radio__outer-circle,
+.mat-mdc-radio-button .mdc-radio__inner-circle {border-color: ${this.palletColors.checkboxBackground}!important;}
+.mat-mdc-radio-ripple .mat-ripple-element, .mat-mdc-radio-button .mdc-radio__background::before, .mat-mdc-radio-button.mat-mdc-radio-checked .mat-ripple-element {background-color: ${this.palletColors.checkboxBackground} !important;}
+.home-list-cards .list .mat-mdc-list-item-content .mat-mdc-icon {color: ${this.palletColors.fontColor};}
+.home-list-cards .list button .mat-mdc-badge-content {background: ${this.palletColors.fontColor};}
+.koala-dialog .mat-mdc-dialog-title h2 {color: ${this.palletColors.fontColor};}
+.koala-dialog .mat-mdc-dialog-title mat-icon {color: ${this.palletColors.fontColor}!important;}
+.koala-dialog .mat-mdc-dialog-surface {background-color: ${this.palletColors.firstColor}!important;}
 .list-filter mat-icon {color: ${this.palletColors.filterIconColor}!important;}
 koala-page .menu-options {background: ${this.palletColors.menuBackground};}
 koala-page .toolbar {background: ${this.palletColors.toolbarBackground};}
@@ -326,10 +338,10 @@ koala-menu ul li li.active a koala-icon * {fill: ${this.palletColors.menuOptions
 .content {background: ${this.palletColors.listContentBackground};}
 .mat-tab-group .mat-tab-label {color: ${this.palletColors.fontColor};}
 .mat-tab-group .mat-ink-bar {background-color: ${this.palletColors.fontColor}!important;}
-.mat-table {background: ${this.palletColors.listBackground};color: ${this.palletColors.fontColor};}
-.mat-table th {color: ${this.palletColors.listTitleItemColor}!important;}
-.mat-sort-header-arrow {color: ${this.palletColors.listItemColor}!important;}
-.mat-table td {color: ${this.palletColors.listItemColor}!important;}`;
+.mat-mdc-table {background: ${this.palletColors.listBackground};color: ${this.palletColors.fontColor};}
+.mat-mdc-table th {color: ${this.palletColors.listTitleItemColor}!important;}
+.mat-mdc-sort-header-arrow {color: ${this.palletColors.listItemColor}!important;}
+.mat-mdc-table td {color: ${this.palletColors.listItemColor}!important;}`;
     const head = document.head || document.getElementsByTagName('head')[0];
     const style = document.createElement('style');
     head.appendChild(style);

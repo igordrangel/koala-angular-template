@@ -1,10 +1,10 @@
 section {display: flex;align-items: flex-start;}
-.menu {padding: 20px;box-sizing: border-box;width: 300px;background: rgba(0,0,0,.2);color: rgba(255,255,255,.8);height: calc(100vh - 130px);}
+.menu {padding: 20px;box-sizing: border-box;width: 300px;background: rgba(0,0,0,.2);color: rgba(255,255,255,.8);height: calc(100vh - 155px);}
 .menu__usage {animation: entry ease-in .3s;box-sizing: border-box;}
 .menu__usage.hide {animation: out ease-in .3s;}
 .menu__usage koala-icon-animated {display: block;margin-top: 50px;}
 .menu__usage h4 {width: 100%;padding: 10px;margin: 0;color: #fff;text-align: center;box-sizing: border-box;}
-.group {display: flex;flex-direction: column;justify-content: flex-start;box-sizing: border-box;padding: 20px;width: calc(100% - 300px);height: calc(100vh - 130px);background: rgba(0,0,0,.1);overflow: auto;}
+.group {display: flex;flex-direction: column;justify-content: flex-start;box-sizing: border-box;padding: 20px;width: calc(100% - 300px);height: calc(100vh - 155px);background: rgba(0,0,0,.1);overflow: auto;}
 .group__content {width: 100%;}
 .group__content___title {width: 100%;color: rgba(255,255,255,.6);}
 .group__content___icons {display: flex;justify-content: flex-start;align-items: center;flex-wrap: wrap;box-sizing: border-box;}
