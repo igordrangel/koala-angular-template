@@ -12,7 +12,7 @@ import { delay } from "@koalarx/utils/operators/delay";
 import { koala } from "@koalarx/utils";
 import { DeviceDetectorService } from "ngx-device-detector";
 import { KoalaListConfigInterface } from "./koala.list-config.interface";
-import { MatPaginator } from "@angular/material/paginator";
+import { MatLegacyPaginator as MatPaginator } from "@angular/material/legacy-paginator";
 import { KoalaListBtnCollapseSubListConfigInterface } from "./koala-list-btn-collapse-sub-list-config.interface";
 import { animate, state, style, transition, trigger } from "@angular/animations";
 

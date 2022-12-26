@@ -1,11 +1,11 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
 import { MatSort } from '@angular/material/sort';
 import { BehaviorSubject, merge, Observable, Subscription } from 'rxjs';
 import { FormAbstract } from '@koalarx/ui/form';
 import { UntypedFormGroup } from '@angular/forms';
 import { debounceTime, first, map, startWith, switchMap } from 'rxjs/operators';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { KoalaListFormFilterInterface } from './koala-list-form-filter.interface';
 import { KoalaDynamicComponent } from "@koalarx/ui/dynamic-component";
 import { delay } from "@koalarx/utils/operators/delay";

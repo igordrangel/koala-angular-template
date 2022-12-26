@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { KoalaDialogTemplateInterface } from './koala.dialog-template.interface';
 import { ComponentType } from '@angular/cdk/overlay';
 import { DeviceDetectorService } from "ngx-device-detector";

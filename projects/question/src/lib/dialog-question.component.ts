@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
 import { KoalaQuestionConfigInterface } from './koala-question-config.interface';
 import { KoalaLanguageHelper } from "@koalarx/ui/core";
 

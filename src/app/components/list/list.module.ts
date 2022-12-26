@@ -11,7 +11,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
 import { KoalaAlertModule } from "@koalarx/ui/alert";
 import { ErrorListComponent } from "./error-list/error-list.component";
-import { MatTabsModule } from "@angular/material/tabs";
+import { MatLegacyTabsModule as MatTabsModule } from "@angular/material/legacy-tabs";
 
 @NgModule({
   exports: [

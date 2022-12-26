@@ -7,7 +7,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
 import { KoalaButtonModule } from "@koalarx/ui/button";
 import { KoalaDialogModule } from "@koalarx/ui/dialog";
-import { MatTabsModule } from "@angular/material/tabs";
+import { MatLegacyTabsModule as MatTabsModule } from "@angular/material/legacy-tabs";
 
 @NgModule({
   exports: [

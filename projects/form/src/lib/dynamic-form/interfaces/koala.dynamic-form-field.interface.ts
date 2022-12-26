@@ -1,5 +1,5 @@
 import { DynamicFormTypeFieldEnum } from '../enums/dynamic-form-type-field.enum';
-import { FloatLabelType, MatFormFieldAppearance } from '@angular/material/form-field';
+import { LegacyFloatLabelType as FloatLabelType, MatLegacyFormFieldAppearance as MatFormFieldAppearance } from '@angular/material/legacy-form-field';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AsyncValidatorFn, UntypedFormGroup, ValidatorFn } from '@angular/forms';
 import { KoalaDynamicSetValueInterface } from './koala.dynamic-set-value.interface';

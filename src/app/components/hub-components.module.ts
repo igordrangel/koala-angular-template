@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { HubComponentsRoutingModule } from "./hub-components.routing.module";
 import { KoalaFolderPageModule } from '@koalarx/ui/folder-page';
-import { MatButtonModule } from "@angular/material/button";
+import { MatLegacyButtonModule as MatButtonModule } from "@angular/material/legacy-button";
 
 @NgModule({
   imports: [
