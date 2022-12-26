@@ -8,7 +8,7 @@ export class KoalaCsvService {
   constructor(private papa: Papa) {
   }
 
-  public convertJsonToCsv(json: ArrayData, filename: string = 'export') {
+  public convertJsonToCsv(json: any[], filename: string = 'export') {
     this.downloadCsv(new Blob([
       this.papa.unparse(json, {
         header: true,

@@ -1,11 +1,13 @@
-import { KoalaDynamicFormFieldInterface } from "../../interfaces/koala.dynamic-form-field.interface";
-import { DynamicFormTypeFieldEnum } from "../../enums/dynamic-form-type-field.enum";
-import { LegacyFloatLabelType as FloatLabelType, MatLegacyFormFieldAppearance as MatFormFieldAppearance } from "@angular/material/legacy-form-field";
 import { AsyncValidatorFn, UntypedFormBuilder, ValidatorFn } from "@angular/forms";
-import { KoalaDynamicFormConfigInterface } from "../../interfaces/koala.dynamic-form-config.interface";
 import { koala } from "@koalarx/utils";
 import { DeviceDetectorService } from "ngx-device-detector";
 import { DynamicFormBuilder } from "../dynamic-form.builder";
+import {
+  DynamicFormTypeFieldEnum,
+  KoalaDynamicFormConfigInterface,
+  KoalaDynamicFormFieldInterface
+} from "@koalarx/ui/form";
+import { FloatLabelType, MatFormFieldAppearance } from "@angular/material/form-field";
 
 export abstract class FieldBase {
   protected readonly fieldConfig: KoalaDynamicFormFieldInterface;

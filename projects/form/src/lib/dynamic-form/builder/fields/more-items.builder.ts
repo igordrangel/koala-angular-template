@@ -1,11 +1,13 @@
-import { DynamicFormTypeFieldEnum } from "../../enums/dynamic-form-type-field.enum";
 import { UntypedFormBuilder } from "@angular/forms";
 import { BehaviorSubject } from "rxjs";
-import { KoalaDynamicSetValueInterface } from "../../interfaces/koala.dynamic-set-value.interface";
-import { KoalaDynamicFormFieldInterface } from "../../interfaces/koala.dynamic-form-field.interface";
-import { KoalaDynamicFormConfigInterface } from "../../interfaces/koala.dynamic-form-config.interface";
 import { DeviceDetectorService } from "ngx-device-detector";
 import { DynamicFormBuilder } from "../dynamic-form.builder";
+import {
+  DynamicFormTypeFieldEnum,
+  KoalaDynamicFormConfigInterface,
+  KoalaDynamicFormFieldInterface,
+  KoalaDynamicSetValueInterface
+} from "@koalarx/ui/form";
 
 export class MoreItemsBuilder {
   private fieldConfig: KoalaDynamicFormFieldInterface;

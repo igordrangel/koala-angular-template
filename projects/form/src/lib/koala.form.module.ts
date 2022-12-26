@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { BtnSubmitComponent } from './btn-submit/btn-submit.component';
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
-import { NgxMaskModule } from 'ngx-mask';
 import { maskOptions } from '@koalarx/ui/common';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { KoalaButtonModule } from '@koalarx/ui/button';
@@ -19,6 +18,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatButtonModule } from "@angular/material/button";
 import { MatChipsModule } from "@angular/material/chips";
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from "ngx-mask";
 
 @NgModule({
   declarations: [
@@ -28,10 +28,11 @@ import { MatChipsModule } from "@angular/material/chips";
   ],
   imports: [
     CommonModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
     ReactiveFormsModule,
     FormsModule,
     CurrencyMaskModule,
-    NgxMaskModule.forRoot(maskOptions),
     KoalaFileButtonModule,
     MatInputModule,
     MatSelectModule,
@@ -49,7 +50,6 @@ import { MatChipsModule } from "@angular/material/chips";
     ReactiveFormsModule,
     FormsModule,
     KoalaAutofocusDirective,
-    NgxMaskModule,
     KoalaFileButtonModule,
     MatInputModule,
     MatSelectModule,
@@ -61,6 +61,9 @@ import { MatChipsModule } from "@angular/material/chips";
     MatProgressSpinnerModule,
     BtnSubmitComponent,
     DynamicFormComponent
+  ],
+  providers: [
+    provideNgxMask(maskOptions),
   ]
 })
 export class KoalaFormModule {
