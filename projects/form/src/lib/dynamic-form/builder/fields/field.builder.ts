@@ -1,7 +1,8 @@
 import { FieldBase } from "./field.base";
 import { UntypedFormBuilder } from "@angular/forms";
 import { DeviceDetectorService } from "ngx-device-detector";
-import { DynamicFormTypeFieldEnum, KoalaDynamicFormConfigInterface } from "@koalarx/ui/form";
+import { KoalaDynamicFormConfigInterface } from "../../interfaces/koala.dynamic-form-config.interface";
+import { DynamicFormTypeFieldEnum } from "../../enums/dynamic-form-type-field.enum";
 
 export class FieldBuilder extends FieldBase {
 

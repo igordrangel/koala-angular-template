@@ -452,15 +452,15 @@
 	      <mat-label>{{propriedade.get('label').value}} {{propriedade.get('multiple').value &&
 	      propriedade.get('required').value ? '*' : ''}}</mat-label>
 			  <div *ngIf="propriedade.get('multiple').value else single">
-	        <mat-chip-listbox #chipList>
-            <mat-chip-option
+	        <mat-chip-grid #chipList>
+            <mat-chip-row
               (removed)="removeOptionOnAutocomplete(i, option)"
               *ngFor="let option of propriedade.get('autocompleteSelectedValue').value"
               [color]="getColorChip(propriedade.get('autocompleteMultipleConfig').value | async)"
               [removable]="true">
               {{display(option)}}
               <mat-icon *ngIf="!propriedade.get('disabled').value" matChipRemove>cancel</mat-icon>
-            </mat-chip-option>
+            </mat-chip-row>
 	          <input
               [id]="'autocomplete-' + propriedade.get('name').value"
               [koalaAutoFocus]="propriedade.get('focus').value"
@@ -473,7 +473,7 @@
 		          matInput
 		          type="text"
 		          placeholder="Selecione um ou mais opções...">
-	        </mat-chip-listbox>
+	        </mat-chip-grid>
 	      </div>
 	      <ng-template #single>
 		      <input

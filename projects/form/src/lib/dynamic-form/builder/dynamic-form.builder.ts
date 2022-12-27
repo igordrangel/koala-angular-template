@@ -6,12 +6,10 @@ import { koala } from "@koalarx/utils";
 import { DeviceDetectorService } from "ngx-device-detector";
 import { FieldBuilder } from "./fields/field.builder";
 import { MoreItemsBuilder } from "./fields/more-items.builder";
-import {
-  DynamicFormTypeFieldEnum,
-  KoalaDynamicFormConfigInterface,
-  KoalaDynamicFormFieldInterface,
-  KoalaDynamicSetValueInterface
-} from "@koalarx/ui/form";
+import { KoalaDynamicSetValueInterface } from "../interfaces/koala.dynamic-set-value.interface";
+import { KoalaDynamicFormConfigInterface } from "../interfaces/koala.dynamic-form-config.interface";
+import { KoalaDynamicFormFieldInterface } from "../interfaces/koala.dynamic-form-field.interface";
+import { DynamicFormTypeFieldEnum } from "../enums/dynamic-form-type-field.enum";
 
 export type DynamicFormFieldType = 'text' | 'password' | 'cpf' | 'cnpj' | 'datetime' | 'email' | 'phone' | 'number' | 'stringNumber' | 'valueList' | 'textarea' | 'time' | 'hoursAndMinutes' | 'checkbox' | 'select' | 'selectMultipleNative' | 'coin' | 'percent' | 'id' | 'textLogs' | 'color' | 'date' | 'radio' | 'float' | 'month' | 'competenceDate' | 'stringWithCustomMasc';
 

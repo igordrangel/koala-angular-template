@@ -1,12 +1,11 @@
+import { KoalaDynamicFormConfigInterface } from "../../interfaces/koala.dynamic-form-config.interface";
+import { DynamicFormTypeFieldEnum } from "../../enums/dynamic-form-type-field.enum";
 import { BehaviorSubject, Observable } from "rxjs";
+import { KoalaDynamicAutocompleteOptionsInterface } from "../../interfaces/koala.dynamic-autocomplete-options.interface";
 import { UntypedFormBuilder } from "@angular/forms";
+import { KoalaDynamicFormAutocompleteMultipleConfigInterface } from "../../interfaces/koala.dynamic-form-autocomplete-multiple-config.interface";
 import { FieldBase } from "./field.base";
 import { DeviceDetectorService } from "ngx-device-detector";
-import {
-  DynamicFormTypeFieldEnum,
-  KoalaDynamicAutocompleteOptionsInterface,
-  KoalaDynamicFormAutocompleteMultipleConfigInterface, KoalaDynamicFormConfigInterface
-} from "@koalarx/ui/form";
 
 export class AutocompleteBuilder extends FieldBase {
   private service$: Observable<KoalaDynamicAutocompleteOptionsInterface[]>;
