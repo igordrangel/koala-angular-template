@@ -154,8 +154,9 @@ export class DynamicFormBuilder {
     return this;
   }
 
-  public generate() {
+  public generate(tabIndexStart = 0) {
     this.config.formConfig = this.config.formConfig.filter(config => config.name !== 'endMoreItems');
+    this.config.tabIndexStart = tabIndexStart;
     return this.config;
   }
 
