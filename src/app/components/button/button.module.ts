@@ -6,7 +6,7 @@ import { ButtonRoutingModule } from "./button.routing.module";
 import { MatIconModule } from "@angular/material/icon";
 import { KoalaFolderPageModule } from "@koalarx/ui/folder-page";
 import { KoalaButtonModule } from "@koalarx/ui/button";
-import { MatLegacyTabsModule as MatTabsModule } from "@angular/material/legacy-tabs";
+import { MatTabsModule } from "@angular/material/tabs";
 
 @NgModule({
   exports: [

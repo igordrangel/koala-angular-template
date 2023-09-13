@@ -1,9 +1,9 @@
 import { NgModule } from "@angular/core";
 import { KoalaSnackbarComponent } from "./koala.snackbar.component";
 import { MatIconModule } from "@angular/material/icon";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { KoalaSnackbarService } from "./koala.snackbar.service";
 import { MatButtonModule } from "@angular/material/button";
-import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [

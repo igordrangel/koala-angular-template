@@ -11,7 +11,7 @@ import { EventSourcePolyfill } from 'event-source-polyfill';
 
 export type ApiRequesterType = 'get' | 'post' | 'put' | 'patch' | 'delete';
 
-@Injectable({providedIn: "any"})
+@Injectable({providedIn: "root"})
 export class KoalaApiRequesterService {
   public apiUrl: string;
   public isMockup = false;

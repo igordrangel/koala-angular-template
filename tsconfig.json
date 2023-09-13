@@ -11,7 +11,7 @@
     "module": "es2020",
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "ES2022",
+    "target": "es2020",
     "lib": [
       "es2018",
       "dom"
@@ -81,8 +81,7 @@
         "dist/common/common",
         "dist/common"
       ]
-    },
-    "useDefineForClassFields": false
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { KoalaQuestionConfigInterface } from './koala-question-config.interface';
 import { KoalaLanguageHelper } from "@koalarx/ui/core";
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 @Component({
   templateUrl: 'dialog-question.component.html',

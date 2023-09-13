@@ -4,8 +4,8 @@ import { CommonModule } from "@angular/common";
 import { KoalaFolderPageModule } from "@koalarx/ui/folder-page";
 import { KoalaFormModule } from "@koalarx/ui/form";
 import { KoalaIconModule } from "@koalarx/ui/icon";
-import { MatLegacyButtonModule as MatButtonModule } from "@angular/material/legacy-button";
-import { MatLegacyTooltipModule as MatTooltipModule } from "@angular/material/legacy-tooltip";
+import { MatButtonModule } from "@angular/material/button";
+import { MatTooltipModule } from "@angular/material/tooltip";
 import { IconsRoutingModule } from "./icons.routing.module";
 
 @NgModule({

@@ -1,21 +1,19 @@
 import { SelectionModel } from '@angular/cdk/collections';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { BehaviorSubject, merge, Observable, Subscription } from 'rxjs';
 import { FormAbstract } from '@koalarx/ui/form';
 import { UntypedFormGroup } from '@angular/forms';
 import { debounceTime, first, map, startWith, switchMap } from 'rxjs/operators';
+import { MatTableDataSource } from '@angular/material/table';
 import { KoalaListFormFilterInterface } from './koala-list-form-filter.interface';
 import { KoalaDynamicComponent } from "@koalarx/ui/dynamic-component";
 import { delay } from "@koalarx/utils/operators/delay";
 import { KoalaListConfigInterface } from "./koala.list-config.interface";
 import { randomString } from "@koalarx/utils/operators/string";
-import { MatPaginator } from "@angular/material/paginator";
-import { MatTableDataSource } from "@angular/material/table";
-import { Directive } from "@angular/core";
 
 export type KoalaListPageSize = 10 | 20 | 30 | 50 | 100;
 
-@Directive()
 export abstract class ListAbstract extends FormAbstract {
   public selection = new SelectionModel<object>(true, []);
   public limitOptions: number[] = [10, 20, 30, 50, 100];

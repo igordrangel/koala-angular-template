@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { KoalaSnackbarComponent } from "./koala.snackbar.component";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { KoalaSnackbarComponent } from "./koala.snackbar.component";
 
 @Injectable()
 export class KoalaSnackbarService {

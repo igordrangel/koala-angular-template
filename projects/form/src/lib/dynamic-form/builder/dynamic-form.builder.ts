@@ -1,15 +1,15 @@
 import { UntypedFormBuilder } from "@angular/forms";
+import { KoalaDynamicFormConfigInterface } from "../interfaces/koala.dynamic-form-config.interface";
+import { KoalaDynamicFormFieldInterface } from "../interfaces/koala.dynamic-form-field.interface";
+import { DynamicFormTypeFieldEnum } from "../enums/dynamic-form-type-field.enum";
 import { AutocompleteBuilder } from "./fields/autocomplete.builder";
 import { BehaviorSubject } from "rxjs";
+import { KoalaDynamicSetValueInterface } from "../interfaces/koala.dynamic-set-value.interface";
 import { KoalaDynamicFormShowFieldInterface } from "../interfaces/koala.dynamic-form-show-field.interface";
 import { koala } from "@koalarx/utils";
 import { DeviceDetectorService } from "ngx-device-detector";
 import { FieldBuilder } from "./fields/field.builder";
 import { MoreItemsBuilder } from "./fields/more-items.builder";
-import { KoalaDynamicSetValueInterface } from "../interfaces/koala.dynamic-set-value.interface";
-import { KoalaDynamicFormConfigInterface } from "../interfaces/koala.dynamic-form-config.interface";
-import { KoalaDynamicFormFieldInterface } from "../interfaces/koala.dynamic-form-field.interface";
-import { DynamicFormTypeFieldEnum } from "../enums/dynamic-form-type-field.enum";
 
 export type DynamicFormFieldType = 'text' | 'password' | 'cpf' | 'cnpj' | 'datetime' | 'email' | 'phone' | 'number' | 'stringNumber' | 'valueList' | 'textarea' | 'time' | 'hoursAndMinutes' | 'checkbox' | 'select' | 'selectMultipleNative' | 'coin' | 'percent' | 'id' | 'textLogs' | 'color' | 'date' | 'radio' | 'float' | 'month' | 'competenceDate' | 'stringWithCustomMasc';
 
@@ -154,9 +154,8 @@ export class DynamicFormBuilder {
     return this;
   }
 
-  public generate(tabIndexStart = 0) {
+  public generate() {
     this.config.formConfig = this.config.formConfig.filter(config => config.name !== 'endMoreItems');
-    this.config.tabIndexStart = tabIndexStart;
     return this.config;
   }
 

@@ -3,7 +3,7 @@ import { KoalaDynamicFormFieldInterface } from './interfaces/koala.dynamic-form-
 import { DynamicFormTypeFieldEnum } from './enums/dynamic-form-type-field.enum';
 import { CpfValidator } from './validators/cpf.validator';
 import { CnpjValidator } from './validators/cnpj.validator';
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormAbstract } from '../form.abstract';
 import { debounceTime } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';

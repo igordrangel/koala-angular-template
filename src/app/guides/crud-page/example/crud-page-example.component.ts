@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { KoalaNavigateHistoryInterface } from "../../../../../projects/folder-page/src/lib/koala-navigate-history.interface";
 import { KoalaDialogService } from "@koalarx/ui/dialog";
 import { DialogFormItemComponent } from "./dialog/dialog-form-item.component";
 import { EmptyListComponent } from "../../../components/list/empty-list/empty-list.component";
@@ -9,7 +10,6 @@ import { ItemInterface, ItemService } from "./item.service";
 import { KoalaDynamicFormService } from "@koalarx/ui/form";
 import { KoalaQuestionService } from "@koalarx/ui/question";
 import { PageAbstract } from "../../../shared/abstract/page.abstract";
-import { KoalaNavigateHistoryInterface } from "@koalarx/ui/folder-page";
 
 @Component({
   templateUrl: 'crud-page-example.component.html'

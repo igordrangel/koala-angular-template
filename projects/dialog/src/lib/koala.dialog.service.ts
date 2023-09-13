@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { KoalaDialogTemplateInterface } from './koala.dialog-template.interface';
 import { ComponentType } from '@angular/cdk/overlay';
 import { DeviceDetectorService } from "ngx-device-detector";
 import { randomString } from "@koalarx/utils/operators/string";
-import { MatDialog } from "@angular/material/dialog";
 
 export type KoalaDialogSizeType = 'auto' | 'small' | 'normal' | 'big' | 'mobile';
 

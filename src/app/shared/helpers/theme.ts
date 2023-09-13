@@ -9,7 +9,7 @@ export const KoalaThemeColors = {
 export const KoalaTheme: KoalaPagePalletColorsInterface = {
   userPresentationUserFontColor: KoalaThemeColors.secondary,
   userPresentationUserBackground: '#fff',
-  userPresentationBackground: 'transparent',
+  userPresentationBackground: KoalaThemeColors.primary,
   userPresentationButtonColor: KoalaThemeColors.primary,
   toolbarBackground: KoalaThemeColors.primary,
   toolbarColor: '#fff',

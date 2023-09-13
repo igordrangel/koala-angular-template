@@ -2,36 +2,35 @@
 .list-container .spinner-container {position: absolute;width: 100%;height: calc(100vh - 320px);top: 100px;left: 0;background: rgba(0, 0, 0, 0.15);z-index: 2;display: flex;align-items: center;justify-content: center;}
 .list-container .spinner-container.no-filter {top: 40px;}
 .list-container .list {display: block;height: calc(100vh - 320px);overflow-y: auto;position: relative;top: 0;width: 100%;z-index: 1;}
-.list-container .list table:not(.table-not-selection) .mat-mdc-header-cell:first-child,
-.list-container .list .mat-mdc-header-cell:last-child,
-.list-container .list .mat-mdc-header-cell.mat-mdc-column-collapseButton {width: 5%;}
-.list-container .list .mat-mdc-header-cell:last-child {text-align: center;}
-.list-container .list .mat-mdc-header-row,
-.list-container .list .mat-mdc-row,
-.list-container .list .mat-mdc-footer-row {height: 35px;}
-.list-container .list .mat-mdc-row .mat-mdc-icon-button {height: 35px; line-height: 35px;width: 35px;}
+.list-container .list table:not(.table-not-selection) .mat-header-cell:first-child,
+.list-container .list .mat-header-cell:last-child,
+.list-container .list .mat-header-cell.mat-column-collapseButton {width: 5%;}
+.list-container .list .mat-header-cell:last-child {text-align: center;}
+.list-container .list .mat-header-row,
+.list-container .list .mat-row,
+.list-container .list .mat-footer-row {height: 35px;}
+.list-container .list .mat-row .mat-icon-button {height: 35px; line-height: 35px;width: 35px;}
 .list-container .list tr.detail-row:not(.expanded-row) {height: 0;}
 .list-container .list .element-detail {display: flex;overflow: hidden;}
 .list-container .list table {position: relative;width: 100%;font-family: OpenSans, sans-serif;font-size: 1em;}
 .list-container .list table.table-hover tr {cursor: pointer;transition: .2s;}
-.list-container .list table tr {height: 35px;}
 .list-container .list table th:first-child,
 .list-container .list table td:first-child {padding: 0 8px 0 20px;}
 .list-container .list table th {font-size: .7em;padding: 0 8px;font-family: 'OpenSans', sans-serif;line-height: 1em;}
 .list-container .list table td {font-size: .8em;padding: 0 8px;font-family: OpenSans, sans-serif;}
 .list-container .list table th:last-child,
 .list-container .list table td:last-child {padding: 0 20px 0 8px;}
-.list-container .list .mat-mdc-list-item-content,
-.list-container .list .mat-mdc-list-item-content .mat-mdc-list-text {padding: 0;}
+.list-container .list .mat-list-item-content,
+.list-container .list .mat-list-item-content .mat-list-text {padding: 0;}
 .list-container .list-filter {box-shadow: 0 1px 3px rgba(0, 0, 0, .3);height: 60px;position: relative;z-index: 3;}
-.list-container .list-filter .main {display: flex;justify-content: space-between;font-size: 1.05em;height: 60px;overflow: hidden;padding: 12px 2.5px 0;position: relative;width: 100%;box-sizing: border-box;}
+.list-container .list-filter .main {display: flex;justify-content: space-between;font-size: 1.05em;height: 60px;overflow: hidden;padding-left: 2.5px;position: relative;width: 100%;}
 .list-container .list-filter .main koala-dynamic-form {width: 100%;}
 .list-container .list-filter .main mat-form-field {display: inline-block;}
-.list-container .list-filter .main .mat-mdc-form-field-appearance-fill .mat-mdc-form-field-flex {background: transparent;}
-.list-container .list-filter .main .mat-mdc-form-field .mat-mdc-form-field-wrapper {padding-bottom: 0;}
-.list-container .list-filter .main .mat-mdc-form-field-underline {display: none;}
-.list-container .list-filter .main .mat-mdc-form-field-appearance-legacy .mat-mdc-form-field-subscript-wrapper {display: none}
-.list-container .list-filter .main .mat-mdc-form-field-wrapper .mat-mdc-form-field-subscript-wrapper {display: none;}
+.list-container .list-filter .main .mat-form-field-appearance-fill .mat-form-field-flex {background: transparent;}
+.list-container .list-filter .main .mat-form-field .mat-form-field-wrapper {padding-bottom: 0;}
+.list-container .list-filter .main .mat-form-field-underline {display: none;}
+.list-container .list-filter .main .mat-form-field-appearance-legacy .mat-form-field-subscript-wrapper {display: none}
+.list-container .list-filter .main .mat-form-field-wrapper .mat-form-field-subscript-wrapper {display: none;}
 .list-container .list-filter ul {display: flex;align-items: center;font-size: 0;list-style: none;margin: 0;padding: 0 15px 0 0;position: relative;text-align: right;}
 .list-container .list-filter ul li {display: inline-block;font-size: 14px;padding: 5px;position: relative;}
 .list-container .list-filter ul li.option button {transition: .2s;}
@@ -46,11 +45,11 @@
 .list-container nav.menu-list {height: 40px;margin: 0;padding: 3px 0;position: relative;transition: .2s;width: 100%;z-index: 2;box-sizing: border-box;}
 .list-container nav.menu-list ul.menu {float: left;font-size: 0;list-style: none;margin: 0;padding: 0 10px;position: relative;text-align: left;}
 .list-container nav.menu-list ul.menu li {color: #616161;display: inline-block;font-size: 16px;padding: 0 4px;}
-.list-container nav.menu-list ul.menu li button.mat-mdc-button,
+.list-container nav.menu-list ul.menu li button.mat-button,
 .list-container nav.menu-list ul.menu li button.koala-icon-button {display: inline-block;}
-.list-container .content-paginator mat-paginator .mat-mdc-paginator-container {height: 40px !important;min-height: 40px !important;}
-.list-container .content-paginator mat-paginator .mat-mdc-paginator-container .mat-mdc-paginator-page-size-select {height: 40px;margin-top: 0 !important;}
-.list-container .content-paginator mat-paginator .mat-mdc-paginator-container .mat-mdc-paginator-range-label {margin-top: 3px;}
+.list-container .content-paginator mat-paginator .mat-paginator-container {height: 40px !important;min-height: 40px !important;}
+.list-container .content-paginator mat-paginator .mat-paginator-container .mat-paginator-page-size-select {height: 40px;margin-top: 0 !important;}
+.list-container .content-paginator mat-paginator .mat-paginator-container .mat-paginator-range-label {margin-top: 3px;}
 .list-container .content-paginator {position: relative;background: transparent !important;z-index: 2;box-shadow: -3px 1px 3px rgba(0,0,0,.3);}
 
 .list-container .item-detail {overflow: hidden;}
