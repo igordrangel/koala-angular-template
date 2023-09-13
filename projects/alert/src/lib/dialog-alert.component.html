@@ -1,20 +1,20 @@
-<div class="content" mat-dialog-content>
+<mat-dialog-content class="content">
   <mat-icon *ngIf="alert.alertEnum else avatar" [ngClass]="iconColor ?? ''">{{icon}}</mat-icon>
   <ng-template #avatar>
     <koala-dynamic-component [dynamicComponent]="alert.avatar"></koala-dynamic-component>
   </ng-template>
   <p [innerHTML]="alert.message" class="w-100 alert-message text-center"></p>
-</div>
-<div align="center" mat-dialog-actions>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
 	<div *ngFor="let action of alert?.actions">
 	  <button
 		  (click)="action.action()"
 		  *ngIf="action.show"
 		  [color]="action.color"
-		  mat-dialog-close
+		  mat-dialog-close=""
 		  mat-raised-button>
 	    {{action.text}}
 	  </button>
 	</div>
-  <button color="primary" mat-dialog-close mat-raised-button>Ok</button>
-</div>
+  <button color="primary" mat-dialog-close="" mat-raised-button>Ok</button>
+</mat-dialog-actions>

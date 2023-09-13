@@ -42,11 +42,9 @@ fs.writeFileSync('dist/package.json', JSON.stringify({
   "homepage": "https://github.com/igordrangel/koala-angular-template#readme",
   "types": "./koalarx-ui.d.ts",
   "peerDependencies": {
-    "@angular/common": ">=14.1.3",
-    "@angular/core": ">=14.1.3",
-    "@angular/forms": ">=14.1.3",
-    "@angular/material": ">=14.1.3",
-    "@angular/cdk": ">=14.1.3"
+    "@angular/core": ">=15.0.4",
+    "@angular/cli": ">=15.0.4",
+    "@angular/material": ">=15.0.3"
   },
   "dependencies": {
     "tslib": "^2.2.0",
@@ -58,8 +56,8 @@ fs.writeFileSync('dist/package.json', JSON.stringify({
     "ng2-currency-mask": "^13.0.3",
     "ngx-device-detector": "^4.0.1",
     "event-source-polyfill": "^1.0.25",
-    "ngx-mask": "^13.0.1",
-    "ngx-papaparse": "^5.0.0",
+    "ngx-mask": "^15.0.2",
+    "ngx-papaparse": "^6.0.2",
     "xlsx": "^0.17.0",
     "rxjs": "~7.5.0"
   }

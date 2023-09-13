@@ -5,7 +5,7 @@ import { KoalaFolderPageModule } from "@koalarx/ui/folder-page";
 import { FolderPageRoutingModule } from "./folder-page.routing.module";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
-import { MatTabsModule } from "@angular/material/tabs";
+import { MatLegacyTabsModule as MatTabsModule } from "@angular/material/legacy-tabs";
 
 @NgModule({
   exports: [

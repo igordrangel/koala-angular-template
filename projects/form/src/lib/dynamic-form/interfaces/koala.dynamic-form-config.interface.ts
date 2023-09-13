@@ -9,4 +9,5 @@ export interface KoalaDynamicFormConfigInterface {
 	formConfig: KoalaDynamicFormFieldInterface[];
 	setValues?: BehaviorSubject<KoalaDynamicSetValueInterface[]>;
 	showFields?: BehaviorSubject<KoalaDynamicFormShowFieldInterface[]>;
+  tabIndexStart?: number;
 }
