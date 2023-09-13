@@ -7,7 +7,8 @@
           [form]="filterFormConfig.main.form"
           [formConfig]="filterFormConfig.main.formConfig"
           [setValues]="filterFormConfig.main.setValues"
-          [showFields]="filterFormConfig.main.showFields">
+          [showFields]="filterFormConfig.main.showFields"
+          [tabIndexStart]="filterFormConfig.main.tabIndexStart">
         </koala-dynamic-form>
         <ul>
           <li *ngIf="filterFormConfig.advanced" class="option">
@@ -39,7 +40,8 @@
             [form]="filterFormConfig.advanced.form"
             [formConfig]="filterFormConfig.advanced.formConfig"
             [setValues]="filterFormConfig.advanced.setValues"
-            [showFields]="filterFormConfig.advanced.showFields">
+            [showFields]="filterFormConfig.advanced.showFields"
+            [tabIndexStart]="filterFormConfig.advanced.tabIndexStart">
           </koala-dynamic-form>
         </div>
       </div>
