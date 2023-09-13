@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { KoalaAlertConfigInterface } from './koala.alert-config.interface';
 import { KoalaAlertEnum } from './koala.alert.enum';
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 @Component({
   templateUrl: 'dialog-alert.component.html',

@@ -6,7 +6,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
 import { DynamicFormRoutingModule } from "./dynamic-form.routing.module";
 import { KoalaFormModule } from "@koalarx/ui/form";
-import { MatTabsModule } from "@angular/material/tabs";
+import { MatLegacyTabsModule as MatTabsModule } from "@angular/material/legacy-tabs";
 import { KoalaButtonModule } from "@koalarx/ui/button";
 
 @NgModule({

@@ -1,9 +1,9 @@
-.mat-button.mat-primary, .mat-icon-button.mat-primary, .mat-stroked-button.mat-primary {color: #fff;}
+.mat-mdc-button.mat-primary, .mat-mdc-icon-button.mat-primary, .mat-mdc-stroked-button.mat-primary {color: #fff;}
 .menu-toolbar {background-color: #212121;border-radius: 20px;}
 .menu-toolbar a {border-radius: 0;}
-.menu-toolbar a:first-child {border-radius: 20px 0 0 20px;pointer-events: none;}
+.menu-toolbar a:first-child {border-radius: 20px 0 0 20px;pointer-events: none;color: #fff;padding: 5px 0 5px 15px;}
 .menu-toolbar a:last-child {border-radius: 0 20px 20px 0;}
-.menu-toolbar a koala-icon {display: inline-flex;padding: 7px 0;}
+.menu-toolbar a koala-icon {display: flex;padding: 7px 0 5px;}
 .p-20 {padding: 20px;}
 .text-obs {background: rgba(255,255,255,.1)!important;color: rgba(255,255,255,.6)!important;}
 p.warning {color: #FFC107;font-style: italic;}
@@ -22,7 +22,7 @@ mat-expansion-panel-header mat-panel-description {display: flex;justify-content:
 mat-radio-group {color: #fff!important;}
 .mat-tab-group .mat-tab-body,
 .mat-tab-group .mat-tab-body-content {overflow: hidden!important;}
-.mat-progress-spinner circle, .mat-spinner circle {stroke: #fff;}
+.mat-mdc-progress-spinner circle, .mat-mdc-spinner circle {stroke: #fff;}
 .btn-group {display: flex;justify-content: flex-start;align-items: center;}
 .koala-list-sublist-content .list table th:first-child,
 .koala-list-sublist-content .list table th:last-child {width: auto!important;}
